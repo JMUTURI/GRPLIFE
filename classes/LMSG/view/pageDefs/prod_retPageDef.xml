@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="prod_retPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findProdCoverTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProdCoverTypesIterator"/>
+    <methodIterator Binds="findTreatyLOV.result"
+                    DataControl="productCvtDependentsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.productCvtDependants"
+                    id="findTreatyLOVIterator"/>
+    <methodIterator Binds="findDependentsLOV.result"
+                    DataControl="productCvtDependentsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.productCvtDependants"
+                    id="findDependentsLOVIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="PROD_SHT_DESC"/>
+          <Item Value="PROD_DESC"/>
+          <Item Value="PROD_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProdCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProdCoverTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProdCoverTypes_SetupsDAO_dataProvider_findProdCoverTypes_result"/>
+    <tree IterBinding="findProdCoverTypesIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="PCT_CVT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTreatyLOV" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyLOV"
+                  IsViewObjectMethod="false"
+                  DataControl="productCvtDependentsDAO"
+                  InstanceName="productCvtDependentsDAO.dataProvider"
+                  ReturnName="productCvtDependentsDAO.methodResults.findTreatyLOV_productCvtDependentsDAO_dataProvider_findTreatyLOV_result"/>
+    <tree IterBinding="findTreatyLOVIterator" id="productCvtDependants">
+      <nodeDefinition DefName="com.turnkey.setups.productCvtDependants"
+                      Name="productCvtDependants0">
+        <AttrNames>
+          <Item Value="dtyDescription"/>
+          <Item Value="pcdMaxnoallowed"/>
+          <Item Value="pcdMinage"/>
+          <Item Value="pcdMaxage"/>
+          <Item Value="pcdMaxsumassured"/>
+          <Item Value="pcdCode"/>
+          <Item Value="pcd_default"/>
+          <Item Value="pcdMinsumassrd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findDependentsLOV" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findDependentsLOV"
+                  IsViewObjectMethod="false"
+                  DataControl="productCvtDependentsDAO"
+                  InstanceName="productCvtDependentsDAO.dataProvider"
+                  ReturnName="productCvtDependentsDAO.methodResults.findDependentsLOV_productCvtDependentsDAO_dataProvider_findDependentsLOV_result"/>
+    <tree IterBinding="findDependentsLOVIterator" id="productCvtDependants1">
+      <nodeDefinition DefName="com.turnkey.setups.productCvtDependants"
+                      Name="productCvtDependants10">
+        <AttrNames>
+          <Item Value="dtyShtDesc"/>
+          <Item Value="dtyDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

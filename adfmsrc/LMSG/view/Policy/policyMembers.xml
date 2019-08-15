@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="policyMembers" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.policyMembers" isJavaBased="true">
+  <Attribute Name="POLM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_POL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_MEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_PRINCIPAL_MEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_MREQ_MTG_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_LOADING_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_LOADING_DIV_FACT" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_WEIGHT_LOADING" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_BPRESS_LOADING" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_WEIGHT" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_HEIGHT" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_SYSTOLIC_PR" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_DIASTOLIC_PR" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_ANB" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_TOT_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_JOINT_MEMBERS" Type="java.lang.String"/>
+  <Attribute Name="POLM_MEM_NO" Type="java.lang.String"/>
+  <Attribute Name="POLM_DTY_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="MEMBER_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="POLM_LOADING_TYPE" Type="java.lang.String"/>
+  <Attribute Name="POLM_COVER_OFFERED" Type="java.lang.String"/>
+  <Attribute Name="POLM_BMI_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="CATEGORY" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.policyMembers"
+                     BeanClass="LMSG.view.Policy.policyMembers"
+                     id="policyMembers"/>
+</JavaBean>

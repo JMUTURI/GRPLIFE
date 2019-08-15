@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="pt1">
+        <f:facet name="center">
+          <af:panelGroupLayout id="pgl1">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:450.0px;">
+              <af:showDetailItem text="Group Life Reports" id="sdi1">
+                <af:panelGroupLayout id="pgl2" layout="scroll">
+                  <af:panelBox text="Select A Report To Run" id="pb1"
+                               inlineStyle="width:98.0%;">
+                    <f:facet name="toolbar"/>
+                    <af:separator id="separator1"/>
+                    <h:panelGrid columns="7" id="pg1">
+                      <h:panelGrid columns="1" id="pg2">
+                        <af:outputLabel value="Core Reports" id="ol1"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="s1"/>
+                        <af:commandLink text="Policy Transactions" id="cl1"
+                                        action="#{Links.goToProductionReports}"/>
+                        <af:commandLink text="Cover Types" id="cl2"
+                                        action="#{CoreReports.CoverTypesReports}"/>
+                        <af:commandLink text="Product Cover Types" id="cl3"
+                                        action="#{CoreReports.ProductCoverTypesList}"/>
+                        <af:commandLink text="Agencies List" id="cl4"
+                                        action="#{CoreReports.AgenciesList}"/>
+                      </h:panelGrid>
+                      <af:spacer width="60" height="10" id="s2"/>
+                      <h:panelGrid columns="1" id="pg5">
+                        <af:outputLabel value="Reinsurance Reports"
+                                        id="outputLabel2"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator3"/>
+                        <af:commandLink text="Member Basis" id="cl8"
+                                        action="#{Links.riMemberReports}"/>
+                        <af:commandLink text="Scheme Basis" id="cl9"
+                                        action="#{Links.goReinsuranceReports}"/>
+                        <af:spacer width="10" height="12" id="s3"/>
+                      </h:panelGrid>
+                      <af:spacer width="50" height="10" id="spacer1"/>
+                      <h:panelGrid columns="1" id="pg3">
+                        <af:outputLabel value="Production Reports"
+                                        id="outputLabel1"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator2"/>
+                        <af:commandLink text="Business Generated" id="cl6"
+                                        action="#{Links.goToBusinessGenerated}"/>
+                        <af:commandLink text="Group Production"
+                                        id="cl7"
+                                        action="#{Links.goToGroupProduction}"/>
+                        <af:spacer width="10" height="45" id="s4"/>
+                      </h:panelGrid>
+                      <af:spacer width="60" height="10" id="spacer2"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+                <f:facet name="toolbar">
+                  <h:panelGrid columns="2" id="pg4">
+                    <af:inputText id="it5" helpTopicId="LmsGrp_g_gtrans"
+                                  readOnly="true"/>
+                    <af:statusIndicator id="si1"/>
+                  </h:panelGrid>
+                </f:facet>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

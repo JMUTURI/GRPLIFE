@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="g_reinstPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsIterator"/>
+    <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+    <methodIterator Binds="FindReinstatePolicyCandidates.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policies"
+                    id="FindReinstatePolicyCandidatesIterator"/>
+    <searchRegion Binds="FindReinstatePolicyCandidatesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="productDetails">
+      <nodeDefinition DefName="view.product.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodshtDesc"/>
+          <Item Value="prodDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindReinstatePolicyCandidates" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="FindReinstatePolicyCandidates"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindReinstatePolicyCandidates_policiesDAO_dataProvider_FindReinstatePolicyCandidates_result"/>
+    <tree IterBinding="FindReinstatePolicyCandidatesIterator" id="policies">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="RT_pol_policy_no"/>
+          <Item Value="RT_client"/>
+          <Item Value="RT_pol_status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.56"
+          id="GenQoutCoverTypes" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.GenQoutCoverTypes" isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.quotCoverTypes"
+                  BeanClass="LMSG.view.QuotationProcessing.quotCoverTypes" id="findCoverTypes"
+                  ReturnNodeName="quotCoverTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.ProdCovers"
+                  BeanClass="LMSG.view.Policy.ProdCovers" id="findProductCovers"
+                  ReturnNodeName="ProdCovers"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.GenQoutCoverTypes"
+                     BeanClass="LMSG.view.QuotationProcessing.GenQoutCoverTypes"
+                     id="GenQoutCoverTypes"/>
+</JavaBean>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="def_typePageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findRelationTypes.result"
+                    DataControl="relationTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.relationTypes"
+                    id="findRelationTypesIterator"/>
+    <methodIterator Binds="findDependentTypes.result"
+                    DataControl="relationTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.relationTypes"
+                    id="findDependentTypesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findRelationTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRelationTypes"
+                  IsViewObjectMethod="false" DataControl="relationTypesDAO"
+                  InstanceName="relationTypesDAO.dataProvider"
+                  ReturnName="relationTypesDAO.methodResults.findRelationTypes_relationTypesDAO_dataProvider_findRelationTypes_result"/>
+    <tree IterBinding="findRelationTypesIterator" id="relationTypes">
+      <nodeDefinition DefName="com.turnkey.setups.relationTypes"
+                      Name="relationTypes0">
+        <AttrNames>
+          <Item Value="retShtDesc"/>
+          <Item Value="retDesc"/>
+          <Item Value="dobRequiredDesc"/>
+          <Item Value="retComments"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findDependentTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findDependentTypes"
+                  IsViewObjectMethod="false" DataControl="relationTypesDAO"
+                  InstanceName="relationTypesDAO.dataProvider"
+                  ReturnName="relationTypesDAO.methodResults.findDependentTypes_relationTypesDAO_dataProvider_findDependentTypes_result"/>
+    <tree IterBinding="findDependentTypesIterator" id="relationTypes1">
+      <nodeDefinition DefName="com.turnkey.setups.relationTypes"
+                      Name="relationTypes10">
+        <AttrNames>
+          <Item Value="dtyShtDesc"/>
+          <Item Value="dtyDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

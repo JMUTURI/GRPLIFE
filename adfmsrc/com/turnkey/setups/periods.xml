@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="periods" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.periods" isJavaBased="true">
+  <Attribute Name="perCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="perName" Type="java.lang.String"/>
+  <Attribute Name="perValFreq" Type="java.lang.String"/>
+  <Attribute Name="perValFreqDesc" Type="java.lang.String"/>
+  <Attribute Name="perWef" Type="java.util.Date"/>
+  <Attribute Name="perWet" Type="java.util.Date"/>
+  <Attribute Name="perId" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true" Type="com.turnkey.setups.periods"
+                     BeanClass="com.turnkey.setups.periods" id="periods"/>
+</JavaBean>

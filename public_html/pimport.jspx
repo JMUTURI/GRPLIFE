@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Import Schedule" id="d1">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}" id="pgl4">
+          <af:panelBox text="Import Members" showHeader="never" id="pb15">
+            <f:facet name="toolbar"/>
+              <h:panelGrid columns="3" id="pg93">
+                <af:commandLink text="[Download Template]" id="cl1"
+                                action="#{ImportTempBean.GenerateTemplateFile}"
+                                inlineStyle="font-weight:bold;"/>
+                <af:spacer width="50" height="0" id="spacer1"/>
+                <af:selectOneRadio label="Import File Using:"
+                                   id="selectOneRadio1" value="S"
+                                   autoSubmit="true" layout="horizontal"
+                                   binding="#{FileProcessor.templateOption}"
+                                   inlineStyle="font-weight:bold;">
+                  <af:selectItem label="Standard Template" value="S"
+                                 id="selectItem1"/>
+                  <af:selectItem label="Dynamic Template" value="D"
+                                 id="selectItem2"/>
+                </af:selectOneRadio>
+              </h:panelGrid>
+              <af:separator id="s23"/>
+              <af:spacer width="50" height="10" id="spacer6"/>
+              <af:popup id="DynaPopup">
+                <af:dialog id="d22" type="none" title="Dynamic Template Mapping"
+                           closeIconVisible="false">
+                  <af:panelBox id="panelBox3" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="4" id="pg61"
+                                 binding="#{CsvProcessor.dynamicContainer}"/>
+                    <h:panelGrid columns="2" id="pg62">
+                      <af:commandButton text="Load" id="cb88"/>
+                      <af:commandButton text="Cancel" id="commandButton60"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <h:panelGrid columns="2" id="pg2"
+                           rendered="#{sessionScope['delExistMembers']=='Y'}">
+                <af:outputLabel value="Note: "
+                                id="outputLabel2"
+                                inlineStyle="font-weight:bold; color:Red;"/>
+                <af:outputLabel value="You have selected delete all existing main benefits and import fresh data."
+                                id="outputLabel1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:spacer width="10" height="10" id="s2"/>
+              </h:panelGrid>
+            <af:inputFile label="File To Upload" autoSubmit="true"
+                          binding="#{FileProcessor.upFile}"
+                          valueChangeListener="#{FileProcessor.fileChangeTesting}"
+                          immediate="true" id="if1"/>
+          </af:panelBox>
+            <af:panelGroupLayout id="panelGroupLayout1" partialTriggers="if1">
+              <af:panelBox text="Member Statistics." id="panelBox4"
+                           showHeader="never">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="1" id="pg60">
+                  <af:spacer width="10" height="10" id="s20"/>
+                  <af:selectOneRadio label="Run As" id="sor1"
+                                     binding="#{ReportsEngine.repFormat}"
+                                     value="xls" layout="horizontal"
+                                     visible="false">
+                    <af:selectItem label="Html" value="html" id="selectItem30"/>
+                    <af:selectItem label="Pdf" value="pdf" id="selectItem31"/>
+                    <af:selectItem label="Excel" value="xls" id="selectItem32"/>
+                    <af:selectItem label="Word Document (rtf)" value="rtf"
+                                   id="selectItem33"/>
+                  </af:selectOneRadio>
+                </h:panelGrid>
+                <af:outputLabel value="Member Statistics." id="outputLabel77"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s19"/>
+                <h:panelGrid columns="8" id="pg58">
+                  <af:outputLabel value="Current Batch No:" id="outputLabel78"
+                                  inlineStyle="font-weight:bold;"/>
+                  <af:outputText id="outputText12"
+                                 inlineStyle="font-weight:bold; color:Black;"
+                                 value="#{sessionScope['templateTranSeq']}"/>
+                  <af:outputLabel value="Total Members:" id="outputLabel79"
+                                  inlineStyle="font-weight:bold;"/>
+                  <af:outputText id="outputText13"
+                                 inlineStyle="font-weight:bold; color:Red;"
+                                 value="#{sessionScope['TotalMembers']}"/>
+                  <af:outputLabel value="Valid Members:" id="outputLabel80"
+                                  inlineStyle="font-weight:bold;"/>
+                  <af:outputText id="outputText14"
+                                 inlineStyle="font-weight:bold; color:Red;"
+                                 value="#{sessionScope['ValidMembers']}"/>
+                  <af:outputLabel value="Invalid Members:" id="outputLabel81"
+                                  inlineStyle="font-weight:bold;"/>
+                  <af:outputText id="outputText15"
+                                 inlineStyle="font-weight:bold; color:Red;"
+                                 value="#{sessionScope['InValidMembers']}"/>
+                </h:panelGrid>
+                <af:spacer width="10" height="10" id="s22"/>
+                <h:panelGrid columns="9" id="pg59">
+                  <af:commandButton text="Back To Policy"
+                                    action="#{underwritingManipulation.BackToPolicy}"
+                                    immediate="true" id="commandButton61"/>
+                  <af:selectOneChoice label="Selection Criteria"
+                                      id="selectOneChoice12" value="A"
+                                      valueChangeListener="#{CsvProcessor.searchListener}"
+                                      binding="#{CsvProcessor.searchCriteria}">
+                    <af:selectItem label="All Members" value="A"
+                                   id="selectItem34"/>
+                    <af:selectItem label="Valid Members" value="V"
+                                   id="selectItem35"/>
+                    <af:selectItem label="Invalid Members" value="I"
+                                   id="selectItem36"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.lmitCode.inputValue}"
+                                      label="All Policy Batches"
+                                      required="#{bindings.lmitCode.hints.mandatory}"
+                                      shortDesc="#{bindings.lmitCode.hints.tooltip}"
+                                      id="selectOneChoice13"
+                                      binding="#{CsvProcessor.allPolicyBatches}">
+                    <f:selectItems value="#{bindings.lmitCode.items}"
+                                   id="selectItems1"/>
+                  </af:selectOneChoice>
+                  <af:commandButton id="cb87" icon="/images/find_ena.png"
+                                    action="#{CsvProcessor.ValidatePolicyData}"/>
+                  <af:commandButton text="Add Members To Policy" id="cb86"
+                                    action="#{CsvProcessor.ImportToDbase}"/>
+                  <af:spacer width="50" height="10" id="s21"/>
+                  <af:commandLink text="Export Batch Details" id="rpt1162"
+                                  inlineStyle="font-weight:bold;"
+                                  actionListener="#{ReportsEngine.GetReportDetails}"/>
+                  <af:spacer width="10" height="10" id="s1u"/>
+                  <af:commandLink text="[Export invalid records]" id="cl2u"
+                                action="#{ImportTempBean.exportInvalidMembers}"
+                                inlineStyle="font-weight:bold;"/>                 
+                </h:panelGrid>
+                <af:panelCollection id="pc1"
+                                    inlineStyle="width:100%; height:280.0px;">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.policies.collectionModel}"
+                            var="row" rows="#{bindings.policies.rangeSize}"
+                            emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.policies.rangeSize}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t1"
+                            binding="#{CsvProcessor.importedMembers}">
+                    <af:column sortProperty="LMID_MEM_NO" sortable="true"
+                               headerText="Member No." id="c11">
+                      <af:outputText value="#{row.LMID_MEM_NO}" id="ot8"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_MAIN_MEM_NO" sortable="false"
+                               headerText="Main Member No." id="c16">
+                      <af:outputText value="#{row.LMID_MAIN_MEM_NO}" id="ot17"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_MEM_SURNAME" sortable="true"
+                               headerText="Member Surname" id="c10">
+                      <af:outputText value="#{row.LMID_MEM_SURNAME}" id="ot10"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_MEM_OTHERNAMES"
+                               sortable="true" headerText="Other Names"
+                               id="c14">
+                      <af:outputText value="#{row.LMID_MEM_OTHERNAMES}"
+                                     id="ot9"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_REMARKS" sortable="true"
+                               headerText="Remarks" id="c12">
+                      <af:outputText value="#{row.LMID_REMARKS}" id="ot5"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_STATUS" sortable="true"
+                               headerText="Status" id="c7">
+                      <af:outputText value="#{row.LMID_STATUS}" id="ot14"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_MEM_DOB" sortable="true"
+                               headerText="Date of Birth" id="c2">
+                      <af:outputText value="#{row.LMID_MEM_DOB}" id="ot13">
+                        <af:convertDateTime pattern="#{bindings.policies.hints.LMID_MEM_DOB.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="LMID_MEM_ANB" sortable="true"
+                               headerText="ANB" id="c3">
+                      <af:outputText value="#{row.LMID_MEM_ANB}" id="ot11"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_DEP_TYPE" sortable="true"
+                               headerText="Type" id="c4">
+                      <af:outputText value="#{row.LMID_DEP_TYPE}" id="ot15"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_MEM_SEX" sortable="true"
+                               headerText="Sex" id="c1">
+                      <af:outputText value="#{row.LMID_MEM_SEX}" id="ot12"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_ID_NO" sortable="true"
+                               headerText="ID No." id="c5">
+                      <af:outputText value="#{row.LMID_ID_NO}" id="ot7"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_MEM_CATEGORY" sortable="true"
+                               headerText="Category" id="c13">
+                      <af:outputText value="#{row.LMID_MEM_CATEGORY}" id="ot4"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_EARNINGS" sortable="true"
+                               headerText="Earnings" id="c15">
+                      <af:outputText value="#{row.LMID_EARNINGS}" id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_MULT_EARNINGS_PRD"
+                               sortable="true" headerText="Multiple of earnings"
+                               id="c6">
+                      <af:outputText value="#{row.LMID_MULT_EARNINGS_PRD}"
+                                     id="ot6"/>
+                    </af:column>
+                    <af:column sortProperty="LMID_MEM_OCCUPATION"
+                               sortable="true" headerText="Occupation" id="c8">
+                      <af:outputText value="#{row.LMID_MEM_OCCUPATION}"
+                                     id="ot16"/>
+                    </af:column>
+                    <af:column sortProperty="LIMD_DATE_JOINED" sortable="true"
+                               headerText="Date Joined" id="c9">
+                      <af:outputText value="#{row.LIMD_DATE_JOINED}" id="ot2">
+                        <af:convertDateTime pattern="#{bindings.policies.hints.LIMD_DATE_JOINED.format}"/>
+                      </af:outputText>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="relationTypesDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.relationTypesDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.relationTypes"
+                  BeanClass="com.turnkey.setups.relationTypes"
+                  id="findRelationTypes" ReturnNodeName="relationTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.relationTypes"
+                  BeanClass="com.turnkey.setups.relationTypes"
+                  id="findDependentTypes" ReturnNodeName="relationTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.relationTypesDAO"
+                     BeanClass="com.turnkey.setups.relationTypesDAO"
+                     id="relationTypesDAO"/>
+</JavaBean>

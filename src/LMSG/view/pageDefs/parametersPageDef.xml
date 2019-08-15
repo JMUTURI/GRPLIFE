@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="parametersPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findParameters.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findParametersIterator"/>
+    <methodIterator Binds="findAllProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findAllProductsIterator"/>
+    <methodIterator Binds="findProductParameters.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductParametersIterator"/>
+    <searchRegion Binds="findProductParametersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup2Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findParameters" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findParameters"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findParameters_SetupsDAO_dataProvider_findParameters_result"/>
+    <tree IterBinding="findParametersIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="PARAM_NAME"/>
+          <Item Value="PARAM_VALUE"/>
+          <Item Value="PARAM_DESC"/>
+          <Item Value="PARAM_VALUE2"/>
+          <Item Value="CLA_CODE"/>
+          <Item Value="PARAM_PROD_SPECIFIC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAllProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAllProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="data.SetupsDAO.methodResults.findAllProducts_SetupsDAO_dataProvider_findAllProducts_result"/>
+    <tree IterBinding="findAllProductsIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+          <Item Value="PROD_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductParameters" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductParameters"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="data.SetupsDAO.methodResults.findProductParameters_SetupsDAO_dataProvider_findProductParameters_result"/>
+    <tree IterBinding="findProductParametersIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="LPP_CODE"/>
+          <Item Value="LPP_NAME"/>
+          <Item Value="LPP_VALUE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

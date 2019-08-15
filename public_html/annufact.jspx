@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+     <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+       <f:facet name="center">
+       <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:popup id="confirmDel">
+                <af:dialog id="d7" type="none" title="Delete Confirmation">
+                  <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Are you sure you want to Delete?"
+                                    id="ol86" inlineStyle="font-weight:bold;"/>
+                    <h:panelGrid columns="2" id="pg8">
+                      <af:spacer width="10" height="10" id="spacer1"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg19">
+                      <af:commandButton text="Yes" id="cb24"
+                                        action="#{agents.DeleteObject}"
+                                        partialSubmit="true"/>
+                      <af:commandButton text="No" id="commandButton9"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:panelAccordion id="pa1"
+                                 inlineStyle="width:100%; height:450.0px;">
+                <af:showDetailItem text="Annuity Factors" id="sdi1">
+                  <af:panelGroupLayout id="pgl3" layout="scroll">
+                    <af:panelSplitter id="ps1"
+                                      inlineStyle="width:100%; height:420.0px;">
+                      <f:facet name="first">
+                        <af:panelBox text="Products" id="pb1">
+                          <f:facet name="toolbar"/>
+                          <af:tree value="#{bindings.Setup1.treeModel}"
+                                   var="node"
+                                   selectionListener="#{agents.productSelected1}"
+                                   rowSelection="single" id="t4"
+                                   binding="#{agents.productsTree}">
+                            <f:facet name="nodeStamp">
+                              <af:outputText value="#{node}" id="ot12"/>
+                            </f:facet>
+                          </af:tree>
+                        </af:panelBox>
+                      </f:facet>
+                      <f:facet name="second">
+                        <af:panelBox text="Annuity Factors" id="pb2"
+                                     inlineStyle="width:100.0%;">
+                          <f:facet name="toolbar"/>
+                          <af:outputLabel value="Annuity Table Description"
+                                          id="ol2"
+                                          inlineStyle="font-weight:bold;"/>
+                          <af:separator id="s2"/>
+                          <h:panelGrid columns="3" id="pg1">
+                            <af:commandButton id="cb1"
+                                              icon="/images/field_group_plus_ena.png"
+                                              action="#{agents.CreateAnnFacDesc}"/>
+                            <af:commandButton id="cb2"
+                                              icon="/images/update_ena.png"
+                                              action="#{agents.UpdateAnnFacDesc}"/>
+                            <af:commandButton id="delAnnTableDesc" icon="/images/delete.gif"
+                                              actionListener="#{agents.DeleteListener}"/>
+                            <af:popup id="AnnFacDescPopup">
+                              <af:dialog id="d2" type="none"
+                                         title="Enter Annuity Factor Description">
+                                <h:panelGrid columns="2" id="pg2">
+                                  <af:outputLabel value="Description" id="ol3"/>
+                                  <af:inputText label="Label 1" id="it1"
+                                                simple="true"
+                                                binding="#{agents.annuityDescription}"/>
+                                  <af:outputLabel value="Interest Rate"
+                                                  id="ol4"/>
+                                  <af:inputText label="Label 2" id="it2"
+                                                simple="true"
+                                                binding="#{agents.interestRate}"/>
+                                  <h:panelGrid columns="2" id="pg6">
+                                    <af:commandButton text="OK" id="cb4"
+                                                      action="#{agents.SaveAnnuityFactorDesc}"/>
+                                    <af:commandButton text="Cancel" id="cb5"/>
+                                  </h:panelGrid>
+                                </h:panelGrid>
+                              </af:dialog>
+                            </af:popup>
+                          </h:panelGrid>
+                          <af:table value="#{bindings.annuityFacDesc.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.annuityFacDesc.rangeSize}"
+                                    emptyText="#{bindings.annuityFacDesc.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.annuityFacDesc.rangeSize}"
+                                    rowBandingInterval="0"
+                                    selectionListener="#{agents.AnnuityFactorsListener}"
+                                    rowSelection="single" id="t2"
+                                    inlineStyle="width:100%; height:100.0px; border-style:none;"
+                                    binding="#{agents.annuityFactrDescriptionLOV}">
+                            <af:column sortProperty="ANNFD_DESC" sortable="true"
+                                       headerText="Description" id="c4"
+                                       width="200">
+                              <af:outputText value="#{row.ANNFD_DESC}"
+                                             id="ot5"/>
+                            </af:column>
+                            <af:column sortProperty="ANNFD_INT_RATE"
+                                       sortable="true"
+                                       headerText="Interest Rate" id="c3"
+                                       width="200">
+                              <af:outputText value="#{row.ANNFD_INT_RATE}"
+                                             id="ot4"/>
+                            </af:column>
+                          </af:table>
+                          <af:outputLabel value="Annuity Factors" id="ol5"
+                                          inlineStyle="font-weight:bold;"/>
+                          <af:separator id="s3"/>
+                          <h:panelGrid columns="3" id="pg3">
+                            <af:commandButton id="cb6"
+                                              icon="/images/field_group_plus_ena.png"
+                                              action="#{agents.AddAnnuityFactors}"/>
+                            <af:commandButton id="cb7"
+                                              icon="/images/update_ena.png"
+                                              action="#{agents.EditAnnuityFactors}"/>
+                            <af:commandButton id="delAnnFactor" icon="/images/delete.gif"
+                                              actionListener="#{agents.DeleteListener}"/>
+                            <af:popup id="annuityFactorsPopup">
+                              <af:dialog id="d3" type="none"
+                                         title="Enter Annuity Factors Details">
+                                <h:panelGrid columns="2" id="pg4">
+                                  <af:outputLabel value="Retirement Age"
+                                                  id="ol6"/>
+                                  <af:inputText label="Label 3" id="it3"
+                                                simple="true"
+                                                binding="#{agents.retirementAge}"/>
+                                  <af:outputLabel value="Guarantee Period"
+                                                  id="ol7"/>
+                                  <af:inputText label="Label 4" id="it4"
+                                                simple="true"
+                                                binding="#{agents.guaranteePeriod}"/>
+                                  <af:outputLabel value="Male Rate" id="ol8"/>
+                                  <af:inputText label="Label 5" id="it5"
+                                                simple="true"
+                                                binding="#{agents.maleRate}"/>
+                                  <af:outputLabel value="Female Rate" id="ol9"/>
+                                  <af:inputText label="Label 6" id="it6"
+                                                simple="true"
+                                                binding="#{agents.femaleRate}"/>
+                                  <af:outputLabel value="WEF" id="ol10"/>
+                                  <af:inputDate label="Label 1" id="id1"
+                                                simple="true"
+                                                binding="#{agents.wefAnn}">
+                                     <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                  </af:inputDate>
+                                  <af:outputLabel value="WET" id="ol11"/>
+                                  <af:inputDate label="Label 2" id="id2"
+                                                simple="true"
+                                                binding="#{agents.wetDate}">
+                                     <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                  </af:inputDate>
+                                  <h:panelGrid columns="2" id="pg7">
+                                    <af:commandButton text="OK" id="cb9"
+                                                      action="#{agents.SaveAnnuityFactors}"/>
+                                    <af:commandButton text="Cancel" id="cb10"/>
+                                  </h:panelGrid>
+                                </h:panelGrid>
+                              </af:dialog>
+                            </af:popup>
+                          </h:panelGrid>
+                          <af:table value="#{bindings.annuityFacDesc1.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.annuityFacDesc1.rangeSize}"
+                                    emptyText="#{bindings.annuityFacDesc1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.annuityFacDesc1.rangeSize}"
+                                    rowBandingInterval="0"
+                                    selectionListener="#{bindings.annuityFacDesc1.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t3"
+                                    inlineStyle="width:100%; height:120.0px; border-style:none;"
+                                    binding="#{agents.annuityFactorsLOV}">
+                            <af:column sortProperty="ANNF_RETIRE_AGE"
+                                       sortable="true"
+                                       headerText="Retirement Age" id="c10">
+                              <af:outputText value="#{row.ANNF_RETIRE_AGE}"
+                                             id="ot10"/>
+                            </af:column>
+                            <af:column sortProperty="ANNF_GUAR_PRD"
+                                       sortable="true"
+                                       headerText="Guarantee Period" id="c5">
+                              <af:outputText value="#{row.ANNF_GUAR_PRD}"
+                                             id="ot6"/>
+                            </af:column>
+                            <af:column sortProperty="ANNF_MALE_RATE"
+                                       sortable="true" headerText="Male Rate"
+                                       id="c9">
+                              <af:outputText value="#{row.ANNF_MALE_RATE}"
+                                             id="ot9"/>
+                            </af:column>
+                            <af:column sortProperty="ANNF_FEMALE_RATE"
+                                       sortable="true" headerText="Female Rate"
+                                       id="c8">
+                              <af:outputText value="#{row.ANNF_FEMALE_RATE}"
+                                             id="ot11"/>
+                            </af:column>
+                            <af:column sortProperty="ANNF_WEF" sortable="true"
+                                       headerText="WEF" id="c6">
+                              <af:outputText value="#{row.ANNF_WEF}" id="ot8">
+                                <af:convertDateTime pattern="#{bindings.annuityFacDesc1.hints.ANNF_WEF.format}"/>
+                              </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="ANNF_WET" sortable="true"
+                                       headerText="WET" id="c7">
+                              <af:outputText value="#{row.ANNF_WET}" id="ot7">
+                                <af:convertDateTime pattern="#{bindings.annuityFacDesc1.hints.ANNF_WET.format}"/>
+                              </af:outputText>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                      </f:facet>
+                    </af:panelSplitter>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <h:panelGrid columns="2" id="pg5">
+                      <af:inputText id="it9" simple="false"
+                                    helpTopicId="LmsGrp_ANN_FACTR"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si1"/>
+                    </h:panelGrid>
+                  </f:facet>
+                </af:showDetailItem>
+              </af:panelAccordion>
+            </af:panelGroupLayout>
+          </af:group>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+   
+  </f:view>
+</jsp:root>

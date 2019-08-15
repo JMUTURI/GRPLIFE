@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.56"
+          id="quotationTaxes" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.quotationTaxes" isJavaBased="true">
+  <Attribute Name="quoTaxDesc" Type="java.lang.String"/>
+  <Attribute Name="quoTaxRate" Type="java.lang.Double"/>
+  <Attribute Name="quoTaxAmt" Type="java.lang.Double"/>
+  <Attribute Name="quoTaxCode" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.quotationTaxes"
+                     BeanClass="LMSG.view.QuotationProcessing.quotationTaxes" id="quotationTaxes"/>
+</JavaBean>

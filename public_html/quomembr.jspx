@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:pageTemplate viewId="/templates/pageTemplateDefs/tagDemoPortletTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout layout="scroll" id="pgl2">
+          <af:panelBox text="Quotation Members"
+                       inlineStyle="width:670px; height:300px;" id="pb1">
+            <f:facet name="toolbar"/>
+            <h:panelGrid columns="3" width="10%" id="pg1">
+              <af:commandButton text="Add Member"
+                                action="#{manipulation.ShowAddMembers}"
+                                id="cb1"/>
+              <af:commandButton text="Import Template"
+                                action="#{underwritingManipulation.ImportTemplate}"
+                                id="cb2"/>
+              <af:commandButton text="Delete Schedule" id="cb3"/>
+            </h:panelGrid>
+            <af:table value="#{bindings.QuotMembers.collectionModel}" var="row"
+                      rows="#{bindings.QuotMembers.rangeSize}"
+                      emptyText="#{bindings.QuotMembers.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.QuotMembers.rangeSize}"
+                      selectedRowKeys="#{bindings.QuotMembers.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.QuotMembers.collectionModel.makeCurrent}"
+                      rowSelection="single"
+                      inlineStyle="height:160px; width:600px;" id="t1">
+              <af:column sortProperty="quoMemNo" sortable="true"
+                         headerText="MEMBER NUMBER" id="c1">
+                <af:outputText value="#{row.quoMemNo}" id="ot2"/>
+              </af:column>
+              <af:column sortProperty="quoMemName" sortable="true"
+                         headerText="MEMBER NAME" id="c2">
+                <af:outputText value="#{row.quoMemName}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="quoDepMemType" sortable="true"
+                         headerText="DEPENDENT TYPE" id="c3">
+                <af:outputText value="#{row.quoDepMemType}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="quoMemAnb" sortable="true"
+                         headerText="ANB" id="c4">
+                <af:outputText value="#{row.quoMemAnb}" id="ot5">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.QuotMembers.hints.quoMemAnb.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="quoJointMem" sortable="true"
+                         headerText="WITH JOINT MEMBERS(Y/N)" id="c5">
+                <af:outputText value="#{row.quoJointMem}" id="ot6"/>
+              </af:column>
+              <af:column sortProperty="quoOccupation" sortable="true"
+                         headerText="OCCUPATION" id="c6">
+                <af:outputText value="#{row.quoOccupation}" id="ot7"/>
+              </af:column>
+              <af:column id="c7">
+                <af:commandButton icon="/icon_delete.gif" id="cb4"/>
+              </af:column>
+            </af:table>
+            <h:panelGrid columns="2" id="pg2">
+              <af:commandButton text="Next"
+                                action="#{manipulation.ShowCoverDetails}"
+                                id="cb5"/>
+              <af:commandButton text="Cancel" id="cb6"/>
+            </h:panelGrid>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate>
+  </f:view>
+</jsp:root>

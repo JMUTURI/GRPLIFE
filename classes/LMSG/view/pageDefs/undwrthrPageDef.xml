@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="undwrthrPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindAgents.result" DataControl="agentsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.agents"
+                    id="FindAgentsIterator"/>
+    <methodIterator Binds="FindCheckOffAgents.result"
+                    DataControl="checkOffAgentsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.checkOffAgents"
+                    id="FindCheckOffAgentsIterator"/>
+    <methodIterator Binds="findPremiumMask.result" DataControl="quotPremMaskDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotPremMask"
+                    id="findPremiumMaskIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindAgents"
+                  IsViewObjectMethod="false" DataControl="agentsDAO"
+                  InstanceName="agentsDAO.dataProvider"
+                  ReturnName="agentsDAO.methodResults.FindAgents_agentsDAO_dataProvider_FindAgents_result"/>
+    <tree IterBinding="FindAgentsIterator" id="agents">
+      <nodeDefinition DefName="view.Quot.agents" Name="agents0">
+        <AttrNames>
+          <Item Value="agent"/>
+          <Item Value="AGN_POSTAL_ADDRESS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindCheckOffAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCheckOffAgents"
+                  IsViewObjectMethod="false" DataControl="checkOffAgentsDAO"
+                  InstanceName="checkOffAgentsDAO.dataProvider"
+                  ReturnName="checkOffAgentsDAO.methodResults.FindCheckOffAgents_checkOffAgentsDAO_dataProvider_FindCheckOffAgents_result"/>
+    <tree IterBinding="FindCheckOffAgentsIterator" id="checkOffAgents">
+      <nodeDefinition DefName="view.Policy.checkOffAgents"
+                      Name="checkOffAgents0">
+        <AttrNames>
+          <Item Value="AGN_NAME"/>
+          <Item Value="AGN_AGENT_COMMISSION"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPremiumMask" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMask"
+                  IsViewObjectMethod="false" DataControl="quotPremMaskDAO"
+                  InstanceName="quotPremMaskDAO.dataProvider"
+                  ReturnName="quotPremMaskDAO.methodResults.findPremiumMask_quotPremMaskDAO_dataProvider_findPremiumMask_result"/>
+    <tree IterBinding="findPremiumMaskIterator" id="quotPremMask">
+      <nodeDefinition DefName="view.Quot.quotPremMask" Name="quotPremMask0">
+        <AttrNames>
+          <Item Value="PMAS_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

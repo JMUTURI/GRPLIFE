@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.56"
+          id="GenQuotMem" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.GenQuotMem"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.QuotMembers"
+                  BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                  id="findMembers" ReturnNodeName="QuotMembers"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.QuotMembers"
+                  BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                  id="findMemberBeneficiaries" ReturnNodeName="QuotMembers"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.QuotMembers"
+                  BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                  id="findMemberDependents" ReturnNodeName="QuotMembers"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.QuotMembers"
+                  BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                  id="findDependentsAnnuityPayments"
+                  ReturnNodeName="QuotMembers"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.GenQuotMem"
+                     BeanClass="LMSG.view.QuotationProcessing.GenQuotMem"
+                     id="GenQuotMem"/>
+</JavaBean>

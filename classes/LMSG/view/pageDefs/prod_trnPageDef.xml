@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="prod_trnPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findTransactionTypes.result"
+                    DataControl="productTransactionsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.productTransactions"
+                    id="findTransactionTypesIterator"/>
+    <methodIterator Binds="findGLAccounts.result"
+                    DataControl="productTransactionsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.productTransactions"
+                    id="findGLAccountsIterator"/>
+    <methodIterator Binds="findProductTransactions.result"
+                    DataControl="productTransactionsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.productTransactions"
+                    id="findProductTransactionsIterator"/>
+    <methodIterator Binds="findOtherProductsGLCodes.result"
+                    DataControl="productTransactionsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.productTransactions"
+                    id="findOtherProductsGLCodesIterator"/>
+    <searchRegion Binds="findGLAccountsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productTransactions5Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="PROD_CODE"/>
+          <Item Value="PROD_DESC"/>
+          <Item Value="PROD_SHT_DESC"/>
+          <Item Value="PROD_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductTransactions"
+                  IsViewObjectMethod="false"
+                  DataControl="productTransactionsDAO"
+                  InstanceName="productTransactionsDAO.dataProvider"
+                  ReturnName="productTransactionsDAO.methodResults.findProductTransactions_productTransactionsDAO_dataProvider_findProductTransactions_result"/>
+    <methodAction id="findTransactionTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTransactionTypes"
+                  IsViewObjectMethod="false"
+                  DataControl="productTransactionsDAO"
+                  InstanceName="productTransactionsDAO.dataProvider"
+                  ReturnName="productTransactionsDAO.methodResults.findTransactionTypes_productTransactionsDAO_dataProvider_findTransactionTypes_result"/>
+    <tree IterBinding="findTransactionTypesIterator" id="productTransactions1">
+      <nodeDefinition DefName="com.turnkey.setups.productTransactions"
+                      Name="productTransactions10">
+        <AttrNames>
+          <Item Value="trntCode"/>
+          <Item Value="transactionDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGLAccounts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGLAccounts"
+                  IsViewObjectMethod="false"
+                  DataControl="productTransactionsDAO"
+                  InstanceName="productTransactionsDAO.dataProvider"
+                  ReturnName="productTransactionsDAO.methodResults.findGLAccounts_productTransactionsDAO_dataProvider_findGLAccounts_result"/>
+    <tree IterBinding="findProductTransactionsIterator"
+          id="productTransactions">
+      <nodeDefinition DefName="com.turnkey.setups.productTransactions"
+                      Name="productTransactions0">
+        <AttrNames>
+          <Item Value="trntDesc"/>
+          <Item Value="trapAccno"/>
+          <Item Value="trapContraAcc"/>
+          <Item Value="trapTrntCode"/>
+          <Item Value="trntCode"/>
+          <Item Value="transactionDesc"/>
+          <Item Value="accNumber"/>
+          <Item Value="accName"/>
+          <Item Value="trapProdCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findOtherProductsGLCodes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOtherProductsGLCodes"
+                  IsViewObjectMethod="false"
+                  DataControl="productTransactionsDAO"
+                  InstanceName="productTransactionsDAO.dataProvider"
+                  ReturnName="productTransactionsDAO.methodResults.findOtherProductsGLCodes_productTransactionsDAO_dataProvider_findOtherProductsGLCodes_result"/>
+    <tree IterBinding="findOtherProductsGLCodesIterator"
+          id="productTransactions4">
+      <nodeDefinition DefName="com.turnkey.setups.productTransactions"
+                      Name="productTransactions40">
+        <AttrNames>
+          <Item Value="productDesc"/>
+          <Item Value="otherProdsGlcode"/>
+          <Item Value="otherProdsContraGlCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findGLAccountsIterator" id="productTransactions5">
+      <nodeDefinition DefName="com.turnkey.setups.productTransactions"
+                      Name="productTransactions50">
+        <AttrNames>
+          <Item Value="accNumber"/>
+          <Item Value="accName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

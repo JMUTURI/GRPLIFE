@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="Quotations" Package="LMSG.view.Quotation"
+          BeanClass="LMSG.view.Quotation.Quotations" isJavaBased="true">
+  <Attribute Name="client" Type="java.lang.String"/>
+  <Attribute Name="quoCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="quoNo" Type="java.lang.String"/>
+  <Attribute Name="quoRevNo" Type="java.math.BigDecimal"/>
+  <Attribute Name="agnshtDesc" Type="java.lang.String"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="quoType" Type="java.lang.String"/>
+  <Attribute Name="QUO_SAVINGS_RIDER" Type="java.lang.String"/>
+  <Attribute Name="QUO_GRP_LIFE_RIDER" Type="java.lang.String"/>
+  <Attribute Name="quocvtShtDesc" Type="java.lang.String"/>
+  <Attribute Name="cover_display" Type="java.lang.String"/>
+  <Attribute Name="quoQcvtSa" Type="java.math.BigDecimal"/>
+  <Attribute Name="quoButChargePrem" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_PREMIUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="quoButChargePrem2" Type="java.lang.String"/>
+  <Attribute Name="quoDependents" Type="java.lang.String"/>
+  <Attribute Name="quoMembers" Type="java.lang.Integer"/>
+  <Attribute Name="QCVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_CVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="discLoadRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_DISC_LOAD_DIV_FACT" Type="java.lang.Integer"/>
+  <Attribute Name="quoQcvtRate" Type="java.lang.Double"/>
+  <Attribute Name="quoAvganb" Type="java.lang.Double"/>
+  <Attribute Name="quoQCVTwetDate" Type="java.util.Date"/>
+  <Attribute Name="quoQcvtAvgprd" Type="java.lang.Integer"/>
+  <Attribute Name="quoSaPerMember" Type="java.lang.Double"/>
+  <Attribute Name="quoUseUnitRate" Type="java.lang.String"/>
+  <Attribute Name="QCVT_LOAD_DISC" Type="java.lang.String"/>
+  <Attribute Name="quoUnitRate" Type="java.lang.Double"/>
+  <Attribute Name="qtax_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="qtax_rate" Type="java.lang.String"/>
+  <Attribute Name="qtax_tax_amt" Type="java.math.BigDecimal"/>
+  <Attribute Name="tt_desc" Type="java.lang.String"/>
+  <Attribute Name="qtax_rate_desc" Type="java.lang.String"/>
+  <Attribute Name="catShtDesc" Type="java.lang.String"/>
+  <Attribute Name="catDesc" Type="java.lang.String"/>
+  <Attribute Name="catPeriod" Type="java.lang.String"/>
+  <Attribute Name="lcaCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_QUO_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_MAX_TYPE_ALLOWED" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_LIMIT_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="DTY_DESCRIPTION" Type="java.lang.String"/>
+  <Attribute Name="quotProvshtDesc" Type="java.lang.String"/>
+  <Attribute Name="quotProvDesc" Type="java.lang.String"/>
+  <Attribute Name="quotProvEditable" Type="java.lang.String"/>
+  <Attribute Name="qpprCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="quoMemNo" Type="java.lang.String"/>
+  <Attribute Name="quoMemName" Type="java.lang.String"/>
+  <Attribute Name="quoDepMemType" Type="java.lang.String"/>
+  <Attribute Name="quoMemAnb" Type="java.lang.Integer"/>
+  <Attribute Name="quoJointMem" Type="java.lang.String"/>
+  <Attribute Name="quoOccupation" Type="java.lang.String"/>
+  <Attribute Name="QMEM_LOADING_TYPE" Type="java.lang.String"/>
+  <Attribute Name="QMEM_DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_MEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_HEIGHT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_WEIGHT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_WEIGHT_LOADING" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_SYSTOLIC_PR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_DIASTOLIC_PR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_BPRESS_LOADING" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_LOADING_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_LOADING_DIV_FACT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_TOT_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="coverDescription" Type="java.lang.String"/>
+  <Attribute Name="prod_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="prod_display" Type="java.lang.String"/>
+  <Attribute Name="branch" Type="java.lang.String"/>
+  <Attribute Name="UWYear" Type="java.lang.String"/>
+  <Attribute Name="occupation" Type="java.lang.String"/>
+  <Attribute Name="hazard" Type="java.lang.String"/>
+  <Attribute Name="status" Type="java.lang.String"/>
+  <Attribute Name="effectDate" Type="java.util.Date"/>
+  <Attribute Name="freqofPay" Type="java.lang.String"/>
+  <Attribute Name="QCOIN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_QUO_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_AGN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="coinsurer_display" Type="java.lang.String"/>
+  <Attribute Name="QCOIN_SHARE_PCT" Type="java.lang.String"/>
+  <Attribute Name="QCOIN_ADMIN_FEE" Type="java.lang.String"/>
+  <Attribute Name="QCOIN_LEAD_FOLLOW" Type="java.lang.String"/>
+  <Attribute Name="QCOIN_COIN_LEADER_SHARE" Type="java.lang.String"/>
+  <Attribute Name="QTAX_RATE_TYPE" Type="java.lang.String"/>
+  <Attribute Name="PROP_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="qua_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="qua_agn_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="qua_agn_asgn" Type="java.lang.String"/>
+  <Attribute Name="qua_authorized" Type="java.lang.String"/>
+  <Attribute Name="freq_of_payment_disp" Type="java.lang.String"/>
+  <Attribute Name="QEXC_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QEXC_POL_QUOT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QEXC_AUTHORISED" Type="java.lang.String"/>
+  <Attribute Name="QEXC_DESC" Type="java.lang.String"/>
+  <Attribute Name="ENQ_quo_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENQ_quo_no" Type="java.lang.String"/>
+  <Attribute Name="ENQ_CLIENT" Type="java.lang.String"/>
+  <Attribute Name="ENQ_brn_name" Type="java.lang.String"/>
+  <Attribute Name="ENQ_agn_name" Type="java.lang.String"/>
+  <Attribute Name="ENQ_DATE" Type="java.util.Date"/>
+  <Attribute Name="ENQ_STATUS" Type="java.lang.String"/>
+  <Attribute Name="qua_agn_name" Type="java.lang.String"/>
+  <Attribute Name="QCVT_DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_DTY_DESCRIPTION" Type="java.lang.String"/>
+  <Attribute Name="QCVT_AVG_EARN_PER_MEM" Type="java.lang.String"/>
+  <Attribute Name="QCVT_STAFF_DESC" Type="java.lang.String"/>
+  <Attribute Name="QCVT_MULT_EARNINGS_PRD" Type="java.lang.String"/>
+  <Attribute Name="LCA_CATEG_DESC" Type="java.lang.String"/>
+  <Attribute Name="QCVT_FCL_AMT" Type="java.lang.String"/>
+  <Attribute Name="QCVT_OVERRIDE_FCL_AMT" Type="java.lang.String"/>
+  <Attribute Name="SCH_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="CVT_MAIN_COVER" Type="java.lang.String"/>
+  <Attribute Name="QCVT_MAIN_SA_PERC" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_MAIN_COVER" Type="java.lang.String"/>
+  <Attribute Name="MAIN_COVER_DESC" Type="java.lang.String"/>
+  <Attribute Name="QUO_PAY_METHOD" Type="java.lang.String"/>
+  <Attribute Name="QUO_COVER_TO_DATE" Type="java.util.Date"/>
+  <Attribute Name="QDL_DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_QCVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_PREMIUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_SRVCE_FEE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_FOLLOWER_LEADER" Type="java.lang.String"/>
+  <Attribute Name="FOLLOWER_LEADER" Type="java.lang.String"/>
+  <Attribute Name="QCVT_LOANAMT_PER_MEM" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_LOAN_RPYMT_PRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_LOANINT_PER_MEM" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_SAVINGS_PER_MEM" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_TOT_MEMBER_EARNINGS" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_TOT_ORIG_LOAN_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_AV_CVR_PER_MEMBER" Type="java.math.BigDecimal"/>
+  <Attribute Name="CTL_FEE_AMOUNT" Type="java.math.BigDecimal"/>
+  <Attribute Name="CTL_AV_STUDENTS" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_DISC" Type="java.lang.String"/>
+  <Attribute Name="QCVT_DISC_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_DISC_DIV_FACT" Type="java.math.BigDecimal"/>
+  <Attribute Name="selected" Type="boolean"/>
+  <Attribute Name="qcvt_pmas_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="qcvt_pmas_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="qcvt_rate_div_fact" Type="java.math.BigDecimal"/>
+  <Attribute Name="qcvt_use_cvr_rate" Type="java.lang.String"/>
+  <Attribute Name="coverRateDesc" Type="java.lang.String"/>
+  <Attribute Name="lca_pmas_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pmas_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="QGSUB_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QGSUB_GSUB_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GSUB_DESC" Type="java.lang.String"/>
+  <Attribute Name="QGSUB_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="QGSUB_DESC" Type="java.lang.String"/>
+  <Attribute Name="QMEMS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QUO_UMBRELLA" Type="java.lang.String"/>
+  <Attribute Name="QDL_MIN_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="qua_agn_leader_follower" Type="java.lang.String"/>
+  <Attribute Name="qua_agn_share" Type="java.lang.Integer"/>
+  <Attribute Name="lca_categ_desc" Type="java.lang.String"/>
+  <Attribute Name="client1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoCode1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="quoNo1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoRevNo1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="agnshtDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="agnName1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoType1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QUO_SAVINGS_RIDER1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="QUO_GRP_LIFE_RIDER1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="prod_sht_desc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="prod_display1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="branch1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="UWYear1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="occupation1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="hazard1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="status1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="effectDate1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="freqofPay1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PROP_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="freq_of_payment_disp1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="lca_categ_desc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCVT_TOT_MEMBER_EARNINGS1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QGSUB_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QGSUB_GSUB_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="GSUB_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QGSUB_SHT_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QGSUB_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QMEMS_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QUO_UMBRELLA1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="CTL_FEE_AMOUNT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="CTL_AV_STUDENTS1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_TOT_ORIG_LOAN_AMT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_DISC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCVT_DISC_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_DISC_DIV_FACT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="lca_pmas_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="pmas_sht_desc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QUO_PAY_METHOD1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QUO_COVER_TO_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="CVT_MAIN_COVER1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCVT_MAIN_SA_PERC1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_MAIN_COVER1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="MAIN_COVER_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCOIN_FOLLOWER_LEADER1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="FOLLOWER_LEADER1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QDL_DTY_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_QCVT_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_PREMIUM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_SRVCE_FEE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_LOANAMT_PER_MEM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_LOAN_RPYMT_PRD1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_LOANINT_PER_MEM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_SAVINGS_PER_MEM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="qcvt_pmas_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="qcvt_pmas_sht_desc1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="qcvt_rate_div_fact1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="qcvt_use_cvr_rate1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="coverRateDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCVT_AV_CVR_PER_MEMBER1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="quocvtShtDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="cover_display1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoQcvtSa1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="quoButChargePrem1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_PREMIUM1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="quoButChargePrem21" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="quoDependents1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoMembers1" IsUpdateable="0" Type="java.lang.Integer"/>
+  <Attribute Name="discLoadRate1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_CVT_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_DISC_LOAD_DIV_FACT1" IsUpdateable="0"
+             Type="java.lang.Integer"/>
+  <Attribute Name="quoQcvtRate1" IsUpdateable="0" Type="java.lang.Double"/>
+  <Attribute Name="quoAvganb1" IsUpdateable="0" Type="java.lang.Double"/>
+  <Attribute Name="quoQCVTwetDate1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="quoQcvtAvgprd1" IsUpdateable="0" Type="java.lang.Integer"/>
+  <Attribute Name="quoSaPerMember1" IsUpdateable="0" Type="java.lang.Double"/>
+  <Attribute Name="quoUseUnitRate1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCVT_LOAD_DISC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoUnitRate1" IsUpdateable="0" Type="java.lang.Double"/>
+  <Attribute Name="QCVT_DTY_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_DTY_DESCRIPTION1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="QCVT_AVG_EARN_PER_MEM1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="qtax_code1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="qtax_rate1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="qtax_tax_amt1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="tt_desc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="qtax_rate_desc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QTAX_RATE_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="catShtDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="catDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="catPeriod1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="lcaCode1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="SCH_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_QUO_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_MAX_TYPE_ALLOWED1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_LIMIT_AMT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="DTY_DESCRIPTION1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="coverDescription1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LCA_CATEG_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quotProvshtDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quotProvDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quotProvEditable1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="qpprCode1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_MIN_AMT1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_QUO_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QCOIN_AGN_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="coinsurer_display1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="QCOIN_SHARE_PCT1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCOIN_ADMIN_FEE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCOIN_LEAD_FOLLOW1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="QCOIN_COIN_LEADER_SHARE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="quoMemNo1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoMemName1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoDepMemType1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoMemAnb1" IsUpdateable="0" Type="java.lang.Integer"/>
+  <Attribute Name="quoJointMem1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="quoOccupation1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QMEM_LOADING_TYPE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="QMEM_DTY_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_MEM_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_HEIGHT1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_WEIGHT1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_WEIGHT_LOADING1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_SYSTOLIC_PR1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_DIASTOLIC_PR1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_BPRESS_LOADING1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_LOADING_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_LOADING_DIV_FACT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_TOT_SA1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="qua_code1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="qua_agn_code1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="qua_agn_asgn1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="qua_authorized1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="qua_agn_name1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="qua_agn_share1" IsUpdateable="0" Type="java.lang.Integer"/>
+  <Attribute Name="qua_agn_leader_follower1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="QEXC_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QEXC_POL_QUOT_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QEXC_AUTHORISED1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QEXC_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENQ_quo_code1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENQ_quo_no1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENQ_CLIENT1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENQ_brn_name1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENQ_agn_name1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENQ_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="ENQ_STATUS1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCVT_STAFF_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCVT_MULT_EARNINGS_PRD1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="QCVT_FCL_AMT1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QCVT_OVERRIDE_FCL_AMT1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="nofAgents" Type="java.lang.Integer"/>
+  <Attribute Name="ptx_appl_level" Type="java.lang.String"/>
+  <Attribute Name="cvt_desc" Type="java.lang.String"/>
+  <Attribute Name="QUO_LOSS_RATIO" Type="java.math.BigDecimal"/>
+  <Attribute Name="qcvt_load_age_fact" Type="java.math.BigDecimal"/>
+  <Attribute Name="quo_unit_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_BMI_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="qrmCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="qrmRemarks" Type="java.lang.String"/>
+  <Attribute Name="qrmRemarksType" Type="java.lang.String"/>
+  <Attribute Name="qrmRemarksBy" Type="java.lang.String"/>
+  <Attribute Name="qrmRemarksDesc" Type="java.lang.String"/>
+  <Attribute Name="qrmRemarksDate" Type="java.util.Date"/>
+  <Attribute Name="memSurname" Type="java.lang.String"/>
+  <Attribute Name="memOtherNames" Type="java.lang.String"/>
+  <Attribute Name="memSex" Type="java.lang.String"/>
+  <Attribute Name="memDOB" Type="java.util.Date"/>
+  <Attribute Name="QCVT_LIMIT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_AGG_PLAN" Type="java.lang.String"/>
+  <Attribute Name="tax_plan" Type="java.lang.String"/>
+  <Attribute Name="taxPremium" Type="java.math.BigDecimal"/>
+  <Attribute Name="taxSa" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_CODEFCL" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_CVT_CODEFCL" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_STAFF_DESCFCL" Type="java.lang.String"/>
+  <Attribute Name="QCVT_LIMITFCL" Type="java.math.BigDecimal"/>
+  <Attribute Name="QCVT_AGG_PLANFCL" Type="java.lang.String"/>
+  <Attribute Name="QCVT_FCL_AMTFCL" Type="java.lang.String"/>
+  <Attribute Name="QCVT_OVERRIDE_FCL_AMTFCL" Type="java.lang.String"/>
+  <Attribute Name="qcvtPctInbuilt" Type="java.lang.String"/>
+  <Attribute Name="qcvtAccelerator" Type="java.lang.String"/>
+  <Attribute Name="SBU_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="SPOKE_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="SPOKE" Type="java.lang.String"/>
+  <Attribute Name="COVERAGE_AREA_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="COVERAGE_AREA" Type="java.lang.String"/>
+  <Attribute Name="LOCATION_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LOCATION" Type="java.lang.String"/>
+  <Attribute Name="ORGANIZATION" Type="java.lang.String"/>
+  <Attribute Name="totaPremium" Type="java.math.BigDecimal"/>
+  <Attribute Name="DDP_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="DDP_NUMBER" Type="java.lang.String"/>
+  <Attribute Name="DDP_TRANS_TYPE" Type="java.lang.String"/>
+  <MethodAccessor IsCollection="false" Type="boolean" id="isSelected"
+                  ReturnNodeName="Return"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                     BeanClass="LMSG.view.Quotation.Quotations"
+                     id="Quotations"/>
+</JavaBean>

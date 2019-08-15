@@ -1,0 +1,1549 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="TurnQuest Group Life" id="d6">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                             id="pgl4">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:490.0px;">
+              <af:showDetailItem text="Commission Rates" id="sdi2">
+                <af:panelGroupLayout id="pgl2">
+                  <af:panelSplitter id="ps1"
+                                    inlineStyle="width:100.0%; height:459px;">
+                    <f:facet name="first">
+                      <af:panelBox text="Products" id="pb2">
+                        <f:facet name="toolbar"/>
+                        <af:tree value="#{bindings.Setup12.treeModel}"
+                                 var="node"
+                                 selectionListener="#{SetupBean.CommProductTreeListener}"
+                                 rowSelection="single" id="t13"
+                                 inlineStyle="width:100.0%;"
+                                 binding="#{SetupBean.productsTree}">
+                          <f:facet name="nodeStamp">
+                            <af:outputText value="#{node}" id="ot92"/>
+                          </f:facet>
+                        </af:tree>
+                      </af:panelBox>
+                    </f:facet>
+                    <f:facet name="second">
+                      <af:panelGroupLayout id="pgl3" partialTriggers="t13">
+                        <af:panelBox id="pb3"
+                                     text="Commission Rates Definition">
+                          <f:facet name="toolbar"/>
+                          <h:panelGrid columns="4" id="pg1">
+                            <af:outputLabel value="Agent ID" id="ol2"/>
+                            <h:panelGrid columns="2" id="pg2">
+                              <af:inputText label="Label 1" id="it1"
+                                            simple="true" disabled="true"
+                                            binding="#{SetupBean.agentIDesc}"/>
+                              <af:commandButton id="cb2"
+                                                icon="/images/dropdown.gif">
+                                <af:showPopupBehavior popupId="agents"/>
+                              </af:commandButton>
+                              <af:popup id="agents">
+                                <af:dialog id="d1" title="Agents" type="none">
+                                  <af:table value="#{bindings.Setup2.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.Setup2.rangeSize}"
+                                            emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.Setup2.rangeSize}"
+                                            rowBandingInterval="0"
+                                            filterModel="#{bindings.Setup2Query.queryDescriptor}"
+                                            queryListener="#{bindings.Setup2Query.processQuery}"
+                                            filterVisible="true" varStatus="vs"
+                                            selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                                            selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                                            rowSelection="single" id="t3"
+                                            binding="#{SetupBean.agentsLOV}">
+                                    <af:column sortProperty="ACT_TYPE_SHT_DESC"
+                                               filterable="true" sortable="true"
+                                               headerText="Short Desc" id="c8">
+                                      <af:outputText value="#{row.ACT_TYPE_SHT_DESC}"
+                                                     id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="ACT_ACCOUNT_TYPE"
+                                               filterable="true" sortable="true"
+                                               headerText="Account Type" id="c7"
+                                               width="200">
+                                      <af:outputText value="#{row.ACT_ACCOUNT_TYPE}"
+                                                     id="ot9"/>
+                                    </af:column>
+                                  </af:table>
+                                  <h:panelGrid columns="2" id="pg3">
+                                    <af:commandButton text="Save" id="cb1"
+                                                      action="#{SetupBean.AgentTypeSelected}"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton1"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                            <af:outputLabel value="Agent Type"
+                                            id="outputLabel3"/>
+                            <af:inputText label="Label 1" id="inputText1"
+                                          simple="true" disabled="true"
+                                          binding="#{SetupBean.agentTypeDesc}"/>
+                            <af:outputLabel value="Cover Type" id="ol1"
+                                            rendered="#{sessionScope['ProductCommCvrParam']=='Y'}"/>
+                            <h:panelGrid columns="2" id="pg20"
+                                         rendered="#{sessionScope['ProductCommCvrParam']=='Y'}">
+                              <af:inputText label="Label 27" id="it27"
+                                            disabled="true" simple="true"
+                                            binding="#{SetupBean.coverTypeShtDesc}"/>
+                              <af:commandButton id="cb16"
+                                                icon="/images/dropdown.gif">
+                                <af:showPopupBehavior popupId="coverTypePopup"/>
+                              </af:commandButton>
+                              <af:popup id="coverTypePopup">
+                                <af:dialog id="d10" type="none"
+                                           title="Product Cover Types">
+                                  <af:panelBox id="pb1">
+                                    <f:facet name="toolbar"/>
+                                    <af:table value="#{bindings.Setup.collectionModel}"
+                                              var="row"
+                                              rows="#{bindings.Setup.rangeSize}"
+                                              emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.Setup.rangeSize}"
+                                              rowBandingInterval="0"
+                                              filterModel="#{bindings.SetupQuery.queryDescriptor}"
+                                              queryListener="#{bindings.SetupQuery.processQuery}"
+                                              filterVisible="true"
+                                              varStatus="vs"
+                                              selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="t1"
+                                              binding="#{SetupBean.coverTypeTable}">
+                                      <af:column sortProperty="#{bindings.Setup.hints.PCT_CVT_SHT_DESC.name}"
+                                                 filterable="true"
+                                                 sortable="true"
+                                                 headerText="Short Desc"
+                                                 id="c2">
+                                        <af:outputText value="#{row.PCT_CVT_SHT_DESC}"
+                                                       id="ot3"/>
+                                      </af:column>
+                                      <af:column sortProperty="#{bindings.Setup.hints.PCT_CVT_DESC.name}"
+                                                 filterable="true"
+                                                 sortable="true"
+                                                 headerText="Cover Type" id="c1"
+                                                 width="200">
+                                        <af:outputText value="#{row.PCT_CVT_DESC}"
+                                                       id="ot2"/>
+                                      </af:column>
+                                    </af:table>
+                                    <h:panelGrid columns="2" id="pg21">
+                                      <af:commandButton text="OK" id="cb17"
+                                                        action="#{SetupBean.CoverTypeSelected}"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="cb18"/>
+                                    </h:panelGrid>
+                                  </af:panelBox>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                            <af:outputLabel value="Description" id="ol40"
+                                            rendered="#{sessionScope['ProductCommCvrParam']=='Y'}"/>
+                            <af:inputText label="Label 28" id="it28"
+                                          simple="true" disabled="true"
+                                          binding="#{SetupBean.coverTypeDesc}"
+                                          rendered="#{sessionScope['ProductCommCvrParam']=='Y'}"/>
+                          </h:panelGrid>
+                          <af:outputLabel value="Special Rates"
+                                          id="outputLabel4"
+                                          inlineStyle="font-weight:bold;"/>
+                          <af:spacer width="10" height="10" id="spacer5"/>
+                          <h:panelGrid columns="3" id="pg13">
+                            <af:commandButton id="cb7"
+                                              icon="/images/new_dwn.png"
+                                              text="New"
+                                              action="#{SetupBean.AddNewSpecialRate}"/>
+                            <af:commandButton text="Edit" id="cb8"
+                                              icon="/images/update_ena.png"
+                                              action="#{SetupBean.EditSpecialRate}"/>
+                            <af:commandButton text="Delete" id="cb9"
+                                              icon="/images/delete_ena.png"
+                                              action="#{SetupBean.performSpecialRateDelete}"/>
+                            <af:popup id="confirmDelete">
+                              <af:dialog id="delete_dialog"
+                                         title="Confirm Delete Action"
+                                         type="yesNo"
+                                         dialogListener="#{SetupBean.actionConfirmDelete}">
+                                <af:outputText value="Are you sure you want to delete the selected row?"
+                                               id="delete_outtxt"/>
+                              </af:dialog>
+                            </af:popup>
+                            <af:popup id="specialRatesPopup">
+                              <af:dialog id="d7" type="none"
+                                         title="Add/Edit Special Rates">
+                                <h:panelGrid columns="2" id="pg14">
+                                  <af:outputLabel value="Rate Type" id="ol7"/>
+                                  <af:selectOneChoice label="Label 6" id="soc6"
+                                                      simple="true"
+                                                      shortDesc="Rate Type"
+                                                      autoSubmit="true"
+                                                      binding="#{SetupBean.specialRateType}">
+                                    <af:selectItem label="Default" value="D"
+                                                   id="si27"/>
+                                    <af:selectItem label="Others" value="O"
+                                                   id="si28"/>
+                                  </af:selectOneChoice>
+                                  <af:outputLabel value="Rate ID" id="ol8"/>
+                                  <af:inputText label="Label 6" id="it6"
+                                                simple="true"
+                                                shortDesc="Rate Short Description"
+                                                binding="#{SetupBean.rateShtDesc}"/>
+                                  <af:outputLabel value="Description" id="ol9"/>
+                                  <af:inputText label="Label 7" id="it7"
+                                                simple="true"
+                                                shortDesc="Description"
+                                                binding="#{SetupBean.rateDescription}"/>
+                                  <af:outputLabel value="W.E.F" id="ol10"/>
+                                  <af:inputDate label="Label 3" id="id3"
+                                                simple="true"
+                                                binding="#{SetupBean.rateWEF}">
+                                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                  </af:inputDate>
+                                  <af:outputLabel value="W.E.T" id="ol11"/>
+                                  <af:inputDate label="Label 4" id="id4"
+                                                simple="true"
+                                                shortDesc="With Effect To Date"
+                                                binding="#{SetupBean.rateWet}">
+                                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                  </af:inputDate>
+                                </h:panelGrid>
+                                <h:panelGrid columns="2" id="pg19">
+                                  <af:commandButton text="OK" id="cb10"
+                                                    action="#{SetupBean.SaveSpecialRate}"/>
+                                  <af:commandButton text="Cancel" id="cb11"/>
+                                </h:panelGrid>
+                              </af:dialog>
+                            </af:popup>
+                          </h:panelGrid>
+                          <af:table value="#{bindings.Setup3.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.Setup3.rangeSize}"
+                                    emptyText="#{bindings.Setup3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.Setup3.rangeSize}"
+                                    rowBandingInterval="0"
+                                    selectionListener="#{SetupBean.SpecialRatesListener}"
+                                    rowSelection="single" id="t4"
+                                    inlineStyle="width:100%; height:100px; border-style:none;"
+                                    binding="#{SetupBean.ratesLOV}">
+                            <af:column sortProperty="ATR_TYPE_DESC"
+                                       sortable="true" headerText="Rate Type"
+                                       id="c9">
+                              <af:outputText value="#{row.ATR_TYPE_DESC}"
+                                             id="ot10"/>
+                            </af:column>
+                            <af:column sortProperty="ATR_SHT_DESC"
+                                       sortable="true" headerText="Rate ID."
+                                       id="c10">
+                              <af:outputText value="#{row.ATR_SHT_DESC}"
+                                             id="ot13"/>
+                            </af:column>
+                            <af:column sortProperty="ATR_DESC" sortable="true"
+                                       headerText="Description" id="c12">
+                              <af:outputText value="#{row.ATR_DESC}" id="ot12"/>
+                            </af:column>
+                            <af:column sortProperty="ATR_WEF" sortable="true"
+                                       headerText="W.E.F." id="c13">
+                              <af:outputText value="#{row.ATR_WEF}" id="ot14">
+                                <af:convertDateTime pattern="#{bindings.Setup3.hints.ATR_WEF.format}"/>
+                              </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="ATR_WET" sortable="true"
+                                       headerText="W.E.T." id="c11">
+                              <af:outputText value="#{row.ATR_WET}" id="ot11">
+                                <af:convertDateTime pattern="#{bindings.Setup3.hints.ATR_WET.format}"/>
+                              </af:outputText>
+                            </af:column>
+                          </af:table>
+                          <af:panelTabbed id="pt1" inlineStyle="width:100.0%;">
+                            <af:showDetailItem text="Life Commission Rates"
+                                               id="sdi1">
+                              <h:panelGrid columns="3" id="pg12">
+                                <af:commandButton id="cb19"
+                                                  icon="/images/new_dwn.png"
+                                                  text="New"
+                                                  action="#{SetupBean.AddLifeCommissionRates}"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="commandButton11"
+                                                  text="Edit"
+                                                  action="#{SetupBean.EditLifeCommissionRates}"/>
+                                <af:commandButton id="cb22"
+                                                  icon="/images/delete_ena.png"
+                                                  text="Delete"
+                                                  action="#{SetupBean.performLifeCommissionRatesDelete}"/>
+                                <af:popup id="lifeCommissionPopup">
+                                  <af:dialog id="d8" type="none"
+                                             title="Add/Edit Life Commission Rates">
+                                    <h:panelGrid columns="4" id="pg15">
+                                      <af:outputLabel value="Range From"
+                                                      id="ol12"/>
+                                      <af:inputText label="Label 8" id="it8"
+                                                    simple="true"
+                                                    shortDesc="Range From"
+                                                    binding="#{SetupBean.rangelcFrom}"/>
+                                      <af:outputLabel value="Range To"
+                                                      id="ol13"/>
+                                      <af:inputText label="Label 9" id="it9"
+                                                    simple="true"
+                                                    shortDesc="Range To"
+                                                    binding="#{SetupBean.lcRangeTo}"/>
+                                      <af:outputLabel value="Rate" id="ol14"/>
+                                      <af:inputText label="Label 10" id="it10"
+                                                    simple="true"
+                                                    shortDesc="Commission Rate "
+                                                    binding="#{SetupBean.lcRate}"/>
+                                      <af:outputLabel value="Rate Description"
+                                                      id="ol15"/>
+                                      <af:selectOneChoice label="Label 7"
+                                                          id="soc7"
+                                                          simple="true"
+                                                          shortDesc="Rate Type"
+                                                          autoSubmit="true"
+                                                          binding="#{SetupBean.ratelcType}"
+                                                          value="Percent">
+                                        <af:selectItem label="Percent"
+                                                       value="Percent"
+                                                       id="si32"/>
+                                        <af:selectItem label="Per Mille"
+                                                       value="Per Mille"
+                                                       id="si30"/>
+                                        <af:selectItem label="Amount"
+                                                       value="Amount"
+                                                       id="si31"/>
+                                        <af:selectItem label="Others"
+                                                       value="Others"
+                                                       id="si29"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="*Pay Frequency"
+                                                      id="ol16"/>
+                                      <af:selectOneChoice label="Label 8"
+                                                          id="soc8"
+                                                          simple="true"
+                                                          binding="#{SetupBean.lcPayFreq}"
+                                                          value="A">
+                                        <af:selectItem label="Monthly" value="M"
+                                                       id="si36"/>
+                                        <af:selectItem label="Quarterly"
+                                                       value="Q" id="si35"/>
+                                        <af:selectItem label="Semi-annually"
+                                                       value="S" id="si38"/>
+                                        <af:selectItem label="Anually" value="A"
+                                                       id="si33"/>
+                                        <af:selectItem label="Single Premium"
+                                                       value="F" id="si37"/>
+                                        <af:selectItem label="Capital Injection"
+                                                       value="CI" id="si34"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="*Rate Type"
+                                                      id="ol17"/>
+                                      <af:selectOneChoice label="Label 9"
+                                                          id="soc9"
+                                                          simple="true"
+                                                          shortDesc="Rate Type"
+                                                          autoSubmit="true"
+                                                          binding="#{SetupBean.lcRateType}"
+                                                          value="FXD">
+                                        <af:selectItem label="Fixed" value="FXD"
+                                                       id="si39"/>
+                                        <af:selectItem label="Recurring"
+                                                       value="RCU" id="si42"/>
+                                        <af:selectItem label="Range(Step)"
+                                                       value="SRG" id="si41"/>
+                                        <af:selectItem label="Range(Abs)"
+                                                       value="ARG" id="si40"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="*Policy Term From"
+                                                      id="ol18"/>
+                                      <af:inputText label="Label 11" id="it11"
+                                                    simple="true"
+                                                    shortDesc="Policy Term From"
+                                                    binding="#{SetupBean.polTermFrom}"/>
+                                      <af:outputLabel value="*Policy Term To"
+                                                      id="ol19"/>
+                                      <af:inputText label="Label 12" id="it12"
+                                                    simple="true"
+                                                    shortDesc="Policy Term To"
+                                                    binding="#{SetupBean.polTermTo}"/>
+                                      <af:outputLabel value="*Year No From"
+                                                      id="ol20"/>
+                                      <af:inputText label="Label 13" id="it13"
+                                                    simple="true"
+                                                    shortDesc="Year Number From"
+                                                    binding="#{SetupBean.yearNoFrom}"/>
+                                      <af:outputLabel value="*Year No To"
+                                                      id="ol21"/>
+                                      <af:inputText label="Label 14" id="it14"
+                                                    simple="true"
+                                                    shortDesc="Year Number To"
+                                                    binding="#{SetupBean.yearNumberTo}"/>
+                                      <af:outputLabel value="*WEF" id="ol22"/>
+                                      <af:inputDate label="Label 5" id="id5"
+                                                    binding="#{SetupBean.lcWET}"
+                                                    shortDesc="With Effect From Date"
+                                                    simple="true">
+                                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                      </af:inputDate>
+                                      <af:outputLabel value="WET" id="ol23"/>
+                                      <af:inputDate label="Label 6" id="id6"
+                                                    simple="true"
+                                                    shortDesc="With Effect To Date"
+                                                    binding="#{SetupBean.lcWetDate}">
+                                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                      </af:inputDate>
+                                      <af:outputLabel value="ANB From"
+                                                      id="ol24"/>
+                                      <af:inputText label="Label 15" id="it15"
+                                                    simple="true"
+                                                    shortDesc="Age Next Birthday From"
+                                                    binding="#{SetupBean.lcAnbFrom}"/>
+                                      <af:outputLabel value="ANB To" id="ol25"/>
+                                      <af:inputText label="Label 16" id="it16"
+                                                    simple="true"
+                                                    shortDesc="Age Next Birthday To"
+                                                    binding="#{SetupBean.lcAnbTo}"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" id="pg18">
+                                      <af:commandButton text="OK" id="cb12"
+                                                        action="#{SetupBean.SaveLifeCommissionRates}"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="cb13"/>
+                                    </h:panelGrid>
+                                  </af:dialog>
+                                </af:popup>
+                              </h:panelGrid>
+                              <af:popup id="p1">
+                                <af:dialog id="d2"
+                                           title="Life Commission Rates">
+                                  <h:panelGrid columns="2" id="pg4">
+                                    <af:outputLabel value="Range From"
+                                                    id="ol3"/>
+                                    <af:inputText label="Label 2" id="it2"
+                                                  simple="true"
+                                                  binding="#{SetupBean.rangeFrom}"/>
+                                    <af:outputLabel value="Range To"
+                                                    id="outputLabel5"/>
+                                    <af:inputText label="Label 2"
+                                                  id="inputText2" simple="true"
+                                                  binding="#{SetupBean.rangeTo}"/>
+                                    <af:outputLabel value="Rate"
+                                                    id="outputLabel6"/>
+                                    <af:inputText label="Label 2"
+                                                  id="inputText3" simple="true"
+                                                  binding="#{SetupBean.rate}"/>
+                                    <af:outputLabel value="Rate Desc"
+                                                    id="outputLabel7"/>
+                                    <af:selectOneChoice label="Label 1"
+                                                        id="soc1" simple="true"
+                                                        binding="#{SetupBean.rateDesc}">
+                                      <af:selectItem label="Percent"
+                                                     value="Percent" id="si3"/>
+                                      <af:selectItem label="Per Mille"
+                                                     value="Per Mille"
+                                                     id="si1"/>
+                                      <af:selectItem label="Amount"
+                                                     value="Amount" id="si4"/>
+                                      <af:selectItem label="Others"
+                                                     value="Others" id="si2"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="Div Factor"
+                                                    id="outputLabel8"/>
+                                    <af:inputText label="Label 2"
+                                                  id="inputText5" simple="true"
+                                                  binding="#{SetupBean.divFactor}"/>
+                                    <af:outputLabel value="Pay Frequency"
+                                                    id="outputLabel9"/>
+                                    <af:selectOneChoice label="Label 2"
+                                                        id="soc2" simple="true"
+                                                        binding="#{SetupBean.payFreq}">
+                                      <af:selectItem label="Monthly" value="M"
+                                                     id="si5"/>
+                                      <af:selectItem label="Quarterly" value="Q"
+                                                     id="si9"/>
+                                      <af:selectItem label="Semi-annually"
+                                                     value="S" id="si6"/>
+                                      <af:selectItem label="Annually" value="A"
+                                                     id="si8"/>
+                                      <af:selectItem label="Single Premium"
+                                                     value="F" id="si7"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="Rate Type"
+                                                    id="outputLabel10"/>
+                                    <af:selectOneChoice label="Label 3"
+                                                        id="soc3" simple="true"
+                                                        binding="#{SetupBean.rateType}">
+                                      <af:selectItem label="Fixed" value="FXD"
+                                                     id="si11"/>
+                                      <af:selectItem label="Recurring"
+                                                     value="RCU" id="si13"/>
+                                      <af:selectItem label="Range(Step)"
+                                                     value="SRG" id="si12"/>
+                                      <af:selectItem label="Range(Abs)"
+                                                     value="ARG" id="si10"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="Year From"
+                                                    id="outputLabel11"/>
+                                    <af:inputText label="Label 2"
+                                                  id="inputText4" simple="true"
+                                                  binding="#{SetupBean.yearFrom}"/>
+                                    <af:outputLabel value="WEF"
+                                                    id="outputLabel12"/>
+                                    <af:inputDate label="Label 1" id="id1"
+                                                  value="#{bindings.sysDate.inputValue}"
+                                                  binding="#{SetupBean.wef}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                    <af:outputLabel value="WET"
+                                                    id="outputLabel13"/>
+                                    <af:inputDate label="Label 1"
+                                                  id="inputDate1"
+                                                  value="#{bindings.sysDate.inputValue}"
+                                                  binding="#{SetupBean.wet}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                    <af:outputLabel value="ANB From"
+                                                    id="outputLabel14"/>
+                                    <af:inputText label="Label 2"
+                                                  id="inputText6" simple="true"
+                                                  binding="#{SetupBean.anbFrom}"/>
+                                    <af:outputLabel value="ANB To"
+                                                    id="outputLabel15"/>
+                                    <af:inputText label="Label 2"
+                                                  id="inputText7" simple="true"
+                                                  binding="#{SetupBean.anbTo}"/>
+                                    <af:outputLabel value="Maturity Age"
+                                                    id="outputLabel16"/>
+                                    <af:inputText label="Label 2"
+                                                  id="inputText8" simple="true"
+                                                  binding="#{SetupBean.maturityAge}"/>
+                                  </h:panelGrid>
+                                  <h:panelGrid columns="2" id="pg5">
+                                    <af:commandButton text="Save" id="cb3"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton24"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                              <af:table value="#{bindings.Setup4.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup4.rangeSize}"
+                                        emptyText="#{bindings.Setup4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup4.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectionListener="#{bindings.Setup4.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t5"
+                                        inlineStyle="width:100%; height:165.0px; border-style:none;"
+                                        binding="#{SetupBean.lifeCommissionLOV}">
+                                <af:column sortProperty="CRAT_RANGE_FROM"
+                                           sortable="true"
+                                           headerText="Range From" id="c22">
+                                  <af:outputText value="#{row.CRAT_RANGE_FROM}"
+                                                 id="ot23"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_RANGE_TO"
+                                           sortable="true" headerText="Range To"
+                                           id="c21">
+                                  <af:outputText value="#{row.CRAT_RANGE_TO}"
+                                                 id="ot29"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_RATE"
+                                           sortable="true" headerText="Rate"
+                                           id="c24">
+                                  <af:outputText value="#{row.CRAT_RATE}"
+                                                 id="ot19"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_RATE_DESC"
+                                           sortable="true"
+                                           headerText="Rate Desc" id="c23">
+                                  <af:outputText value="#{row.CRAT_RATE_DESC}"
+                                                 id="ot18"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_DIVISION_FACTOR"
+                                           sortable="true"
+                                           headerText="Div Factor" id="c26">
+                                  <af:outputText value="#{row.CRAT_DIVISION_FACTOR}"
+                                                 id="ot28"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_RATE_TYPE"
+                                           sortable="true"
+                                           headerText="Rate Type" id="c17">
+                                  <af:outputText value="#{row.CRAT_RATE_TYPE}"
+                                                 id="ot27"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_TERM_FROM"
+                                           sortable="true"
+                                           headerText="Term From" id="c14">
+                                  <af:outputText value="#{row.CRAT_TERM_FROM}"
+                                                 id="ot20"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_TERM_TO"
+                                           sortable="true" headerText="Term To"
+                                           id="c18">
+                                  <af:outputText value="#{row.CRAT_TERM_TO}"
+                                                 id="ot24"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_YR_NO_FROM"
+                                           sortable="true" headerText="Yr From"
+                                           id="c19">
+                                  <af:outputText value="#{row.CRAT_YR_NO_FROM}"
+                                                 id="ot25"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_YR_NO_TO"
+                                           sortable="true" headerText="Tr To"
+                                           id="c27">
+                                  <af:outputText value="#{row.CRAT_YR_NO_TO}"
+                                                 id="ot17"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_WEF_DATE"
+                                           sortable="true" headerText="WEF"
+                                           id="c25">
+                                  <af:outputText value="#{row.CRAT_WEF_DATE}"
+                                                 id="ot22">
+                                    <af:convertDateTime pattern="#{bindings.Setup4.hints.CRAT_WEF_DATE.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="CRAT_WET_DATE"
+                                           sortable="true" headerText="WET"
+                                           id="c28">
+                                  <af:outputText value="#{row.CRAT_WET_DATE}"
+                                                 id="ot15">
+                                    <af:convertDateTime pattern="#{bindings.Setup4.hints.CRAT_WET_DATE.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="CRAT_ANB_FROM"
+                                           sortable="true" headerText="ANB From"
+                                           id="c15">
+                                  <af:outputText value="#{row.CRAT_ANB_FROM}"
+                                                 id="ot16"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_ANB_TO"
+                                           sortable="true" headerText="ANB To"
+                                           id="c16">
+                                  <af:outputText value="#{row.CRAT_ANB_TO}"
+                                                 id="ot21"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_MATURITY_AGE"
+                                           sortable="true"
+                                           headerText="Maturity Age" id="c20">
+                                  <af:outputText value="#{row.CRAT_MATURITY_AGE}"
+                                                 id="ot26"/>
+                                </af:column>
+                              </af:table>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Pension Commission Rates"
+                                               id="showDetailItem1">
+                              <h:panelGrid columns="3" id="panelGrid1">
+                                <af:commandButton id="commandButton2"
+                                                  icon="/images/new_dwn.png"
+                                                  text="New"
+                                                  action="#{SetupBean.AddPensionCommissionRates}"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="commandButton3"
+                                                  text="Edit"
+                                                  action="#{SetupBean.EditPensionCommRates}"/>
+                                <af:commandButton id="commandButton4"
+                                                  icon="/images/delete_ena.png"
+                                                  text="Delete"
+                                                  action="#{SetupBean.performPensionCommRatesDelete}"/>
+                              </h:panelGrid>
+                              <af:table value="#{bindings.Setup5.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup5.rangeSize}"
+                                        emptyText="#{bindings.Setup5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup5.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectionListener="#{bindings.Setup5.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t6"
+                                        inlineStyle="width:100%; height:165.0px; border-style:none;"
+                                        binding="#{SetupBean.pensionCommissions}">
+                                <af:column sortProperty="CRAT_RANGE_FROM"
+                                           sortable="true"
+                                           headerText="Range From" id="c39">
+                                  <af:outputText value="#{row.CRAT_RANGE_FROM}"
+                                                 id="ot40"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_RANGE_TO"
+                                           sortable="true" headerText="Range To"
+                                           id="c35">
+                                  <af:outputText value="#{row.CRAT_RANGE_TO}"
+                                                 id="ot39"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_RATE"
+                                           sortable="true" headerText="Rate"
+                                           id="c41">
+                                  <af:outputText value="#{row.CRAT_RATE}"
+                                                 id="ot35"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_RATE_DESC"
+                                           sortable="true"
+                                           headerText="Rate Desc" id="c30">
+                                  <af:outputText value="#{row.CRAT_RATE_DESC}"
+                                                 id="ot38"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_DIVISION_FACTOR"
+                                           sortable="true"
+                                           headerText="Div Factor" id="c40">
+                                  <af:outputText value="#{row.CRAT_DIVISION_FACTOR}"
+                                                 id="ot44"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_RATE_TYPE"
+                                           sortable="true"
+                                           headerText="Rate Type" id="c33">
+                                  <af:outputText value="#{row.CRAT_RATE_TYPE}"
+                                                 id="ot36"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_TERM_FROM"
+                                           sortable="true"
+                                           headerText="Term From" id="c31">
+                                  <af:outputText value="#{row.CRAT_TERM_FROM}"
+                                                 id="ot32"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_TERM_TO"
+                                           sortable="true" headerText="Term To"
+                                           id="c29">
+                                  <af:outputText value="#{row.CRAT_TERM_TO}"
+                                                 id="ot41"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_YR_NO_FROM"
+                                           sortable="true" headerText="Yr From"
+                                           id="c34">
+                                  <af:outputText value="#{row.CRAT_YR_NO_FROM}"
+                                                 id="ot33"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_WEF_DATE"
+                                           sortable="true" headerText="WEF"
+                                           id="c38">
+                                  <af:outputText value="#{row.CRAT_WEF_DATE}"
+                                                 id="ot42">
+                                    <af:convertDateTime pattern="#{bindings.Setup5.hints.CRAT_WEF_DATE.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="CRAT_WET_DATE"
+                                           sortable="true" headerText="WET"
+                                           id="c37">
+                                  <af:outputText value="#{row.CRAT_WET_DATE}"
+                                                 id="ot43">
+                                    <af:convertDateTime pattern="#{bindings.Setup5.hints.CRAT_WET_DATE.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="CRAT_YR_NO_TO"
+                                           sortable="true" headerText="Yr To"
+                                           id="c43">
+                                  <af:outputText value="#{row.CRAT_YR_NO_TO}"
+                                                 id="ot37"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_ANB_FROM"
+                                           sortable="true" headerText="ANB From"
+                                           id="c36">
+                                  <af:outputText value="#{row.CRAT_ANB_FROM}"
+                                                 id="ot31"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_ANB_TO"
+                                           sortable="true" headerText="ANB To"
+                                           id="c42">
+                                  <af:outputText value="#{row.CRAT_ANB_TO}"
+                                                 id="ot34"/>
+                                </af:column>
+                                <af:column sortProperty="CRAT_MATURITY_AGE"
+                                           sortable="true"
+                                           headerText="Maturity Age" id="c32">
+                                  <af:outputText value="#{row.CRAT_MATURITY_AGE}"
+                                                 id="ot30"/>
+                                </af:column>
+                              </af:table>
+                              <af:popup id="pensionCommRatesPopup">
+                                <af:dialog id="d9" type="none"
+                                           title="Add/Edit Pension Commission Rates">
+                                  <h:panelGrid columns="2" id="pg16">
+                                    <af:outputLabel value="Range From"
+                                                    id="ol26"/>
+                                    <af:inputText label="Label 17" id="it17"
+                                                  simple="true"
+                                                  shortDesc="Range From"
+                                                  binding="#{SetupBean.pcRangeFrom}"/>
+                                    <af:outputLabel value="Range To" id="ol27"/>
+                                    <af:inputText label="Label 18" id="it18"
+                                                  simple="true"
+                                                  shortDesc="Range To"
+                                                  binding="#{SetupBean.pcRangeTo}"/>
+                                    <af:outputLabel value="Rate" id="ol28"/>
+                                    <af:inputText label="Label 19" id="it19"
+                                                  binding="#{SetupBean.pcRate}"
+                                                  simple="true"/>
+                                    <af:outputLabel value="*Rate Description"
+                                                    id="ol29"/>
+                                    <af:selectOneChoice label="Label 10"
+                                                        id="soc10" simple="true"
+                                                        shortDesc="Rate Description"
+                                                        binding="#{SetupBean.pcRateDesc}"
+                                                        autoSubmit="true">
+                                      <af:selectItem label="Percent"
+                                                     value="Percent" id="si46"/>
+                                      <af:selectItem label="Per Mille"
+                                                     value="Per Mille"
+                                                     id="si44"/>
+                                      <af:selectItem label="Amount"
+                                                     value="Amount" id="si45"/>
+                                      <af:selectItem label="Others"
+                                                     value="Others" id="si43"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="*Payment Frequency"
+                                                    id="ol30"/>
+                                    <af:selectOneChoice label="Label 11"
+                                                        id="soc11" simple="true"
+                                                        shortDesc="Payment Frequency"
+                                                        binding="#{SetupBean.pcPayFreq}"
+                                                        autoSubmit="true">
+                                      <af:selectItem label="Monthly" value="M"
+                                                     id="si48"/>
+                                      <af:selectItem label="Quarterly" value="Q"
+                                                     id="si50"/>
+                                      <af:selectItem label="Semi-annually"
+                                                     value="S" id="si52"/>
+                                      <af:selectItem label="Anually" value="A"
+                                                     id="si49"/>
+                                      <af:selectItem label="Single Premium"
+                                                     value="F" id="si47"/>
+                                      <af:selectItem label="Capital Injection"
+                                                     value="CI" id="si51"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="*Rate Type"
+                                                    id="ol31"/>
+                                    <af:selectOneChoice label="Label 12"
+                                                        id="soc12" simple="true"
+                                                        shortDesc="Rate Type"
+                                                        autoSubmit="true"
+                                                        binding="#{SetupBean.pcRateType}">
+                                      <af:selectItem label="Fixed" value="FXD"
+                                                     id="si54"/>
+                                      <af:selectItem label="Recurring"
+                                                     value="RCU" id="si55"/>
+                                      <af:selectItem label="Range(Step)"
+                                                     value="SRG" id="si53"/>
+                                      <af:selectItem label="Range(Abs)"
+                                                     value="ARG" id="si56"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="*Policy Term From"
+                                                    id="ol32"/>
+                                    <af:inputText label="Label 20" id="it20"
+                                                  simple="true"
+                                                  shortDesc="Policy Term From"
+                                                  binding="#{SetupBean.pcTermFrom}"/>
+                                    <af:outputLabel value="*Policy Term To"
+                                                    id="ol33"/>
+                                    <af:inputText label="Label 21" id="it21"
+                                                  simple="true"
+                                                  shortDesc="Policy Term To"
+                                                  binding="#{SetupBean.pcPolicyTermTo}"/>
+                                    <af:outputLabel value="*Year No From:"
+                                                    id="ol34"/>
+                                    <af:inputText label="Label 22" id="it22"
+                                                  simple="true"
+                                                  shortDesc="Year No From"
+                                                  binding="#{SetupBean.pcYearNoFrom}"/>
+                                    <af:outputLabel value="*Year Number To:"
+                                                    id="ol35"/>
+                                    <af:inputText label="Label 23" id="it23"
+                                                  simple="true"
+                                                  shortDesc="Year Number To"
+                                                  binding="#{SetupBean.pcYearNumberTo}"/>
+                                    <af:outputLabel value="*WEF" id="ol36"/>
+                                    <af:inputDate label="Label 7" id="id7"
+                                                  simple="true"
+                                                  shortDesc="With Effect From"
+                                                  binding="#{SetupBean.pcWef}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                    <af:outputLabel value="WET" id="ol37"/>
+                                    <af:inputDate label="Label 8" id="id8"
+                                                  simple="true"
+                                                  shortDesc="With Effect To"
+                                                  binding="#{SetupBean.pcWet}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                    <af:outputLabel value="ANB At Entry From"
+                                                    id="ol38"/>
+                                    <af:inputText label="Label 25" id="it25"
+                                                  simple="true"
+                                                  shortDesc="Age Next Birthday At Entry"
+                                                  binding="#{SetupBean.pcAnbAtEntry}"/>
+                                    <af:outputLabel value="ANB At Entry To"
+                                                    id="ol39"/>
+                                    <af:inputText label="Label 26" id="it26"
+                                                  simple="true"
+                                                  shortDesc="Age Next Birthday At Entry To"
+                                                  binding="#{SetupBean.pcAnbAtEntryTo}"/>
+                                    <af:commandButton text="OK" id="cb14"
+                                                      action="#{SetupBean.SavePensionCommissionrates}"/>
+                                    <af:commandButton text="Cancel" id="cb15"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Commission Annualisation Rates"
+                                               id="showDetailItem3">
+                              <h:panelGrid columns="3" id="panelGrid2">
+                                <af:commandButton id="commandButton5"
+                                                  icon="/images/new_dwn_rtl.png"
+                                                  text="New"
+                                                  action="#{SetupBean.AddAnnualCommRates}"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="commandButton6"
+                                                  text="Edit"
+                                                  action="#{SetupBean.EditAnnCommRates}"/>
+                                <af:commandButton id="commandButton7"
+                                                  icon="/images/delete_ena.png"
+                                                  text="Delete"
+                                                  action="#{SetupBean.performAnnCommRatesDelete}"/>
+                              </h:panelGrid>
+                              <af:popup id="AnnualCommissionsPopup">
+                                <af:dialog id="d3"
+                                           title="Commission Annualisation">
+                                  <h:panelGrid columns="2" id="pg6">
+                                    <af:outputLabel value="Annual Rate (%)"
+                                                    id="ol4"/>
+                                    <af:inputText label="Label 3" id="it3"
+                                                  simple="true"
+                                                  binding="#{SetupBean.annualRate}"/>
+                                    <af:outputLabel value="Annual Bal.(%)"
+                                                    id="outputLabel17"/>
+                                    <af:inputText label="Label 3"
+                                                  id="inputText9" simple="true"
+                                                  binding="#{SetupBean.annualBal}"/>
+                                    <af:outputLabel value="Duration"
+                                                    id="outputLabel18"/>
+                                    <af:inputText label="Label 3"
+                                                  id="inputText10" simple="true"
+                                                  binding="#{SetupBean.duration}"/>
+                                    <af:outputLabel value="Bal Payment Mnth"
+                                                    id="outputLabel19"/>
+                                    <af:inputText label="Label 3"
+                                                  id="inputText11" simple="true"
+                                                  binding="#{SetupBean.balPymntMnth}"/>
+                                    <af:outputLabel value="WEF"
+                                                    id="outputLabel20"/>
+                                    <af:inputDate label="Label 2" id="id2"
+                                                  simple="true"
+                                                  value="#{bindings.sysDate.inputValue}"
+                                                  binding="#{SetupBean.annWEF}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                    <af:outputLabel value="WET"
+                                                    id="outputLabel21"/>
+                                    <af:inputDate label="Label 2"
+                                                  id="inputDate2" simple="true"
+                                                  value="#{bindings.sysDate.inputValue}"
+                                                  binding="#{SetupBean.annWET}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                  </h:panelGrid>
+                                  <h:panelGrid columns="2" id="pg7">
+                                    <af:commandButton text="Save" id="cb4"
+                                                      action="#{SetupBean.SaveAnnCommRates}"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton25"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                              <af:table value="#{bindings.Setup6.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup6.rangeSize}"
+                                        emptyText="#{bindings.Setup6.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup6.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectionListener="#{bindings.Setup6.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t7"
+                                        inlineStyle="width:100%; height:165.0px; border-style:none;"
+                                        binding="#{SetupBean.annualCommissionsLOV}">
+                                <af:column sortProperty="ACR_ANN_RATE"
+                                           sortable="true"
+                                           headerText="Annual Rate(%)" id="c46">
+                                  <af:outputText value="#{row.ACR_ANN_RATE}"
+                                                 id="ot49"/>
+                                </af:column>
+                                <af:column sortProperty="ACR_ANN_BAL_RATE"
+                                           sortable="true"
+                                           headerText="Annual Bal.(%)" id="c48">
+                                  <af:outputText value="#{row.ACR_ANN_BAL_RATE}"
+                                                 id="ot48"/>
+                                </af:column>
+                                <af:column sortProperty="ACR_ANN_ANNUALISATION_DURATION"
+                                           sortable="true" headerText="Duration"
+                                           id="c47">
+                                  <af:outputText value="#{row.ACR_ANN_ANNUALISATION_DURATION}"
+                                                 id="ot50"/>
+                                </af:column>
+                                <af:column sortProperty="ACR_ANN_BAL_PYMT_MNTH"
+                                           sortable="true"
+                                           headerText="Bal Payment Mnth"
+                                           id="c44">
+                                  <af:outputText value="#{row.ACR_ANN_BAL_PYMT_MNTH}"
+                                                 id="ot47"/>
+                                </af:column>
+                                <af:column sortProperty="ACR_WEF_DATE"
+                                           sortable="true" headerText="WEF"
+                                           id="c49">
+                                  <af:outputText value="#{row.ACR_WEF_DATE}"
+                                                 id="ot46">
+                                    <af:convertDateTime pattern="#{bindings.Setup6.hints.ACR_WEF_DATE.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="ACR_WET_DATE"
+                                           sortable="true" headerText="WET"
+                                           id="c45">
+                                  <af:outputText value="#{row.ACR_WET_DATE}"
+                                                 id="ot45">
+                                    <af:convertDateTime pattern="#{bindings.Setup6.hints.ACR_WET_DATE.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                              </af:table>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Commission Clawback Rates"
+                                               id="showDetailItem2">
+                              <h:panelGrid columns="3" id="panelGrid3">
+                                <af:commandButton id="commandButton8"
+                                                  icon="/images/field_group_plus_ena.png"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="commandButton9"/>
+                                <af:commandButton id="commandButton10"
+                                                  icon="/images/delete_ena.png"/>
+                              </h:panelGrid>
+                              <af:popup id="p3">
+                                <af:dialog id="d4" title="Commission Clawback">
+                                  <h:panelGrid columns="2" id="pg8">
+                                    <af:outputLabel value="Month From"
+                                                    id="ol5"/>
+                                    <af:inputText label="Label 4" id="it4"
+                                                  simple="true"
+                                                  binding="#{SetupBean.cbMnthFrom}"/>
+                                    <af:outputLabel value="Month To"
+                                                    id="outputLabel22"/>
+                                    <af:inputText label="Label 4"
+                                                  id="inputText12" simple="true"
+                                                  binding="#{SetupBean.cbMnthTo}"/>
+                                    <af:outputLabel value="Rate"
+                                                    id="outputLabel23"/>
+                                    <af:inputText label="Label 4"
+                                                  id="inputText13" simple="true"
+                                                  binding="#{SetupBean.cbRate}"/>
+                                    <af:outputLabel value="Rate Type"
+                                                    id="outputLabel24"/>
+                                    <af:selectOneChoice label="Label 4"
+                                                        id="soc4" simple="true"
+                                                        binding="#{SetupBean.cbRateType}">
+                                      <af:selectItem label="Percentage"
+                                                     value="P" id="si14"/>
+                                      <af:selectItem label="Amount" value="A"
+                                                     id="si15"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="Div Factor"
+                                                    id="outputLabel25"/>
+                                    <af:inputText label="Label 4"
+                                                  id="inputText14" simple="true"
+                                                  value="100"
+                                                  binding="#{SetupBean.cbDivFac}"/>
+                                    <af:outputLabel value="WEF"
+                                                    id="outputLabel26"/>
+                                    <af:inputDate label="Label 2"
+                                                  id="inputDate3" simple="true"
+                                                  value="#{bindings.sysDate.inputValue}"
+                                                  binding="#{SetupBean.cbWEF}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                    <af:outputLabel value="WET"
+                                                    id="outputLabel27"/>
+                                    <af:inputDate label="Label 2"
+                                                  id="inputDate4" simple="true"
+                                                  value="#{bindings.sysDate.inputValue}"
+                                                  binding="#{SetupBean.cbWET}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                  </h:panelGrid>
+                                  <h:panelGrid columns="2" id="pg9">
+                                    <af:commandButton text="Save" id="cb5"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton26"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                              <af:table value="#{bindings.Setup7.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup7.rangeSize}"
+                                        emptyText="#{bindings.Setup7.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup7.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.Setup7.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Setup7.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t8"
+                                        inlineStyle="width:100%; height:165.0px; border-style:none;">
+                                <af:column sortProperty="CCLR_MNTH_FROM"
+                                           sortable="true"
+                                           headerText="Pol. Mnth From" id="c52">
+                                  <af:outputText value="#{row.CCLR_MNTH_FROM}"
+                                                 id="ot54"/>
+                                </af:column>
+                                <af:column sortProperty="CCLR_MNTH_TO"
+                                           sortable="true"
+                                           headerText="Pol. MnthTo" id="c55">
+                                  <af:outputText value="#{row.CCLR_MNTH_TO}"
+                                                 id="ot52"/>
+                                </af:column>
+                                <af:column sortProperty="CCLR_CLAWBCK_RATE"
+                                           sortable="true" headerText="Rate"
+                                           id="c54">
+                                  <af:outputText value="#{row.CCLR_CLAWBCK_RATE}"
+                                                 id="ot56"/>
+                                </af:column>
+                                <af:column sortProperty="CCLR_CLAWBCK_RATE_TYPE"
+                                           sortable="true"
+                                           headerText="Rate Type" id="c51">
+                                  <af:outputText value="#{row.CCLR_CLAWBCK_RATE_TYPE}"
+                                                 id="ot53"/>
+                                </af:column>
+                                <af:column sortProperty="CCLR_CLAWBCK_DIV_FACT"
+                                           sortable="true"
+                                           headerText="Div Factor" id="c50">
+                                  <af:outputText value="#{row.CCLR_CLAWBCK_DIV_FACT}"
+                                                 id="ot55"/>
+                                </af:column>
+                                <af:column sortProperty="CCLR_WET_DATE"
+                                           sortable="true" headerText="WET"
+                                           id="c53">
+                                  <af:outputText value="#{row.CCLR_WET_DATE}"
+                                                 id="ot51">
+                                    <af:convertDateTime pattern="#{bindings.Setup7.hints.CCLR_WET_DATE.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                              </af:table>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Interface Pay Elements"
+                                               id="showDetailItem4">
+                              <h:panelGrid columns="3" id="panelGrid4">
+                                <af:commandButton id="commandButton12"
+                                                  icon="/images/field_group_plus_ena.png"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="commandButton13"/>
+                                <af:commandButton id="commandButton14"
+                                                  icon="/images/delete_ena.png"/>
+                              </h:panelGrid>
+                              <af:popup id="p4">
+                                <af:dialog id="d5"
+                                           title="Interface Pay Element">
+                                  <h:panelGrid columns="2" id="pg10">
+                                    <af:outputLabel value="Pay Element"
+                                                    id="ol6"/>
+                                    <af:selectOneChoice label="Label 5"
+                                                        id="soc5"
+                                                        binding="#{SetupBean.intPayElement}">
+                                      <af:selectItem label="Commission Amt."
+                                                     value="COMM" id="si21"/>
+                                      <af:selectItem label="Withholding Tax Amt."
+                                                     value="WHTX" id="si18"/>
+                                      <af:selectItem label="Advance Amt."
+                                                     value="ADV" id="si23"/>
+                                      <af:selectItem label="Deductions"
+                                                     value="DEDC" id="si17"/>
+                                      <af:selectItem label="Negative Commission"
+                                                     value="NEGC" id="si20"/>
+                                      <af:selectItem label="Bonus Commission"
+                                                     value="BNC" id="si25"/>
+                                      <af:selectItem label="Bonus Withholding Tax Amt."
+                                                     value="BWHTX" id="si24"/>
+                                      <af:selectItem label="Over Ride Withholding Tax Amt."
+                                                     value="OVWHTX" id="si26"/>
+                                      <af:selectItem label="Over Ride Commission Amt."
+                                                     value="OVCOMM" id="si19"/>
+                                      <af:selectItem label="Savings on Commission"
+                                                     value="CAP" id="si16"/>
+                                      <af:selectItem label="Performance Incentives"
+                                                     value="PI" id="si22"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="Credit Value"
+                                                    id="outputLabel28"/>
+                                    <af:inputText label="Label 5" id="it5"
+                                                  simple="true"
+                                                  binding="#{SetupBean.intCreditVal}"/>
+                                    <af:outputLabel value="Debit Value"
+                                                    id="outputLabel29"/>
+                                    <af:inputText label="Label 5"
+                                                  id="inputText15" simple="true"
+                                                  binding="#{SetupBean.intDebitVal}"/>
+                                    <af:outputLabel value="WEF"
+                                                    id="outputLabel30"/>
+                                    <af:inputDate label="Label 2"
+                                                  id="inputDate5" simple="true"
+                                                  value="#{bindings.sysDate.inputValue}"
+                                                  binding="#{SetupBean.intWEF}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                    <af:outputLabel value="WET"
+                                                    id="outputLabel31"/>
+                                    <af:inputDate label="Label 2"
+                                                  id="inputDate6" simple="true"
+                                                  value="#{bindings.sysDate.inputValue}"
+                                                  binding="#{SetupBean.intWET}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                    <af:outputLabel value="Rate"
+                                                    id="outputLabel32"/>
+                                    <af:inputText label="Label 5"
+                                                  id="inputText16" simple="true"
+                                                  binding="#{SetupBean.intRate}"/>
+                                    <af:outputLabel value="Div Factor"
+                                                    id="outputLabel33"/>
+                                    <af:inputText label="Label 5"
+                                                  id="inputText17" simple="true"
+                                                  binding="#{SetupBean.intDivFac}"/>
+                                  </h:panelGrid>
+                                  <h:panelGrid columns="2" id="pg11">
+                                    <af:commandButton text="Save" id="cb6"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton27"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                              <af:table value="#{bindings.Setup8.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup8.rangeSize}"
+                                        emptyText="#{bindings.Setup8.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup8.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.Setup8.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Setup8.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t9"
+                                        inlineStyle="width:100%; height:165.0px; border-style:none;">
+                                <af:column sortProperty="CPE_PAY_ELEMENT"
+                                           sortable="true"
+                                           headerText="Pay Element" id="c61">
+                                  <af:outputText value="#{row.CPE_PAY_ELEMENT}"
+                                                 id="ot60"/>
+                                </af:column>
+                                <af:column sortProperty="CPE_CR" sortable="true"
+                                           headerText="Credit Value" id="c58">
+                                  <af:outputText value="#{row.CPE_CR}"
+                                                 id="ot57"/>
+                                </af:column>
+                                <af:column sortProperty="CPE_DR" sortable="true"
+                                           headerText="Debit Value" id="c56">
+                                  <af:outputText value="#{row.CPE_DR}"
+                                                 id="ot58"/>
+                                </af:column>
+                                <af:column sortProperty="CPE_WEF"
+                                           sortable="true" headerText="WEF"
+                                           id="c57">
+                                  <af:outputText value="#{row.CPE_WEF}"
+                                                 id="ot62">
+                                    <af:convertDateTime pattern="#{bindings.Setup8.hints.CPE_WEF.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="CPE_WET"
+                                           sortable="true" headerText="WET"
+                                           id="c59">
+                                  <af:outputText value="#{row.CPE_WET}"
+                                                 id="ot63">
+                                    <af:convertDateTime pattern="#{bindings.Setup8.hints.CPE_WET.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="CPE_RATE"
+                                           sortable="true" headerText="Rate"
+                                           id="c60">
+                                  <af:outputText value="#{row.CPE_RATE}"
+                                                 id="ot61"/>
+                                </af:column>
+                                <af:column sortProperty="CPE_RATE_DIV_FACTOR"
+                                           sortable="true"
+                                           headerText="Div Factor" id="c62">
+                                  <af:outputText value="#{row.CPE_RATE_DIV_FACTOR}"
+                                                 id="ot59"/>
+                                </af:column>
+                              </af:table>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Agent Persistency Bonus Rates"
+                                               id="showDetailItem5">
+                              <h:panelGrid columns="3" id="panelGrid5">
+                                <af:commandButton id="commandButton15"
+                                                  icon="/images/field_group_plus_ena.png"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="commandButton16"/>
+                                <af:commandButton id="commandButton17"
+                                                  icon="/images/delete_ena.png"/>
+                              </h:panelGrid>
+                              <af:table value="#{bindings.Setup9.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup9.rangeSize}"
+                                        emptyText="#{bindings.Setup9.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup9.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.Setup9.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Setup9.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t10"
+                                        inlineStyle="width:100%; height:165.0px; border-style:none;">
+                                <af:column sortProperty="BRAT_PERSISTENCY_FROM"
+                                           sortable="true"
+                                           headerText="Persistency From"
+                                           id="c71">
+                                  <af:outputText value="#{row.BRAT_PERSISTENCY_FROM}"
+                                                 id="ot69"/>
+                                </af:column>
+                                <af:column sortProperty="BRAT_PERSISTENCY_TO"
+                                           sortable="true"
+                                           headerText="Persistency To" id="c65">
+                                  <af:outputText value="#{row.BRAT_PERSISTENCY_TO}"
+                                                 id="ot65"/>
+                                </af:column>
+                                <af:column sortProperty="BRAT_MNTH_FROM"
+                                           sortable="true"
+                                           headerText="Month From" id="c63">
+                                  <af:outputText value="#{row.BRAT_MNTH_FROM}"
+                                                 id="ot64"/>
+                                </af:column>
+                                <af:column sortProperty="BRAT_MNTH_TO"
+                                           sortable="true" headerText="Month To"
+                                           id="c69">
+                                  <af:outputText value="#{row.BRAT_MNTH_TO}"
+                                                 id="ot72"/>
+                                </af:column>
+                                <af:column sortProperty="BRAT_CALC_PERIOD"
+                                           sortable="true"
+                                           headerText="Computation Period"
+                                           id="c67">
+                                  <af:outputText value="#{row.BRAT_CALC_PERIOD}"
+                                                 id="ot67"/>
+                                </af:column>
+                                <af:column sortProperty="BRAT_BONUS_RATE"
+                                           sortable="true"
+                                           headerText="Bonus Rate" id="c68">
+                                  <af:outputText value="#{row.BRAT_BONUS_RATE}"
+                                                 id="ot66"/>
+                                </af:column>
+                                <af:column sortProperty="BRAT_BONUS_RATE_TYPE"
+                                           sortable="true"
+                                           headerText="Rate Type" id="c70">
+                                  <af:outputText value="#{row.BRAT_BONUS_RATE_TYPE}"
+                                                 id="ot71"/>
+                                </af:column>
+                                <af:column sortProperty="BRAT_WEF_DATE"
+                                           sortable="true" headerText="WEF"
+                                           id="c66">
+                                  <af:outputText value="#{row.BRAT_WEF_DATE}"
+                                                 id="ot68">
+                                    <af:convertDateTime pattern="#{bindings.Setup9.hints.BRAT_WEF_DATE.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="BRAT_WET_DATE"
+                                           sortable="true" headerText="WET"
+                                           id="c64">
+                                  <af:outputText value="#{row.BRAT_WET_DATE}"
+                                                 id="ot70">
+                                    <af:convertDateTime pattern="#{bindings.Setup9.hints.BRAT_WET_DATE.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                              </af:table>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Agent Commission Advance Recovery Rates"
+                                               id="showDetailItem6">
+                              <h:panelGrid columns="3" id="panelGrid6">
+                                <af:commandButton id="commandButton18"
+                                                  icon="/images/field_group_plus_ena.png"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="commandButton19"/>
+                                <af:commandButton id="commandButton20"
+                                                  icon="/images/delete_ena.png"/>
+                              </h:panelGrid>
+                              <af:table value="#{bindings.Setup10.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup10.rangeSize}"
+                                        emptyText="#{bindings.Setup10.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup10.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.Setup10.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Setup10.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t11"
+                                        inlineStyle="width:100%; height:165.0px; border-style:none;">
+                                <af:column sortProperty="APR_INTEREST_RATE"
+                                           sortable="true"
+                                           headerText="Interest  Rate" id="c82">
+                                  <af:outputText value="#{row.APR_INTEREST_RATE}"
+                                                 id="ot84"/>
+                                </af:column>
+                                <af:column sortProperty="APR_INTEREST_DIV_FAC"
+                                           sortable="true"
+                                           headerText="Interest  Div Fac"
+                                           id="c83">
+                                  <af:outputText value="#{row.APR_INTEREST_DIV_FAC}"
+                                                 id="ot81"/>
+                                </af:column>
+                                <af:column sortProperty="APR_COMM_RECVRY_PECT"
+                                           sortable="true"
+                                           headerText="Comm  Recvry  Pect"
+                                           id="c72">
+                                  <af:outputText value="#{row.APR_COMM_RECVRY_PECT}"
+                                                 id="ot80"/>
+                                </af:column>
+                                <af:column sortProperty="APR_COMM_RECVRY_DIV_FAC"
+                                           sortable="true"
+                                           headerText="Comm  Recvry  Div Fac"
+                                           id="c80">
+                                  <af:outputText value="#{row.APR_COMM_RECVRY_DIV_FAC}"
+                                                 id="ot85"/>
+                                </af:column>
+                                <af:column sortProperty="APR_MIN_ADV_ALLOWED"
+                                           sortable="true"
+                                           headerText="Min Adv Allowed"
+                                           id="c79">
+                                  <af:outputText value="#{row.APR_MIN_ADV_ALLOWED}"
+                                                 id="ot77"/>
+                                </af:column>
+                                <af:column sortProperty="APR_COMM_PAYBLE_PECT"
+                                           sortable="true"
+                                           headerText="Comm  Payble Pect"
+                                           id="c74">
+                                  <af:outputText value="#{row.APR_COMM_PAYBLE_PECT}"
+                                                 id="ot74"/>
+                                </af:column>
+                                <af:column sortProperty="APR_COMM_PAYBLE_DIV_FAC"
+                                           sortable="true"
+                                           headerText="Comm  Payble Div Fac"
+                                           id="c75">
+                                  <af:outputText value="#{row.APR_COMM_PAYBLE_DIV_FAC}"
+                                                 id="ot73"/>
+                                </af:column>
+                                <af:column sortProperty="APR_ADV_CALC_RANGE_FROM"
+                                           sortable="true"
+                                           headerText="Adv Calc Range  From"
+                                           id="c76">
+                                  <af:outputText value="#{row.APR_ADV_CALC_RANGE_FROM}"
+                                                 id="ot78"/>
+                                </af:column>
+                                <af:column sortProperty="APR_ADV_CALC_RANGE_TO"
+                                           sortable="true"
+                                           headerText="Adv Calc Range To"
+                                           id="c81">
+                                  <af:outputText value="#{row.APR_ADV_CALC_RANGE_TO}"
+                                                 id="ot82"/>
+                                </af:column>
+                                <af:column sortProperty="APR_AVER_SUM_GROSS_COMM"
+                                           sortable="true"
+                                           headerText=" Gross Comm" id="c77">
+                                  <af:outputText value="#{row.APR_AVER_SUM_GROSS_COMM}"
+                                                 id="ot76"/>
+                                </af:column>
+                                <af:column sortProperty="APR_GROSS_COMM_PERIOD"
+                                           sortable="true"
+                                           headerText=" Gross Comm Period"
+                                           id="c84">
+                                  <af:outputText value="#{row.APR_GROSS_COMM_PERIOD}"
+                                                 id="ot83"/>
+                                </af:column>
+                                <af:column sortProperty="WEF" sortable="true"
+                                           headerText="WEF" id="c73">
+                                  <af:outputText value="#{row.WEF}" id="ot79">
+                                    <af:convertDateTime pattern="#{bindings.Setup10.hints.WEF.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="WET" sortable="true"
+                                           headerText="WET" id="c78">
+                                  <af:outputText value="#{row.WET}" id="ot75">
+                                    <af:convertDateTime pattern="#{bindings.Setup10.hints.WET.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                              </af:table>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Commission Allowances"
+                                               id="showDetailItem7">
+                              <h:panelGrid columns="3" id="panelGrid7">
+                                <af:commandButton id="commandButton21"
+                                                  icon="/images/field_group_plus_ena.png"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="commandButton22"/>
+                                <af:commandButton id="commandButton23"
+                                                  icon="/images/delete_ena.png"/>
+                              </h:panelGrid>
+                              <af:table value="#{bindings.Setup11.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup11.rangeSize}"
+                                        emptyText="#{bindings.Setup11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup11.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.Setup11.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Setup11.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t12"
+                                        inlineStyle="width:100%; height:165.0px; border-style:none;">
+                                <af:column sortProperty="CAL_ALLOWANCE_TYPE"
+                                           sortable="true"
+                                           headerText="Allowance Type" id="c90">
+                                  <af:outputText value="#{row.CAL_ALLOWANCE_TYPE}"
+                                                 id="ot89"/>
+                                </af:column>
+                                <af:column sortProperty="CAL_DESC"
+                                           sortable="true"
+                                           headerText="Description" id="c87">
+                                  <af:outputText value="#{row.CAL_DESC}"
+                                                 id="ot86"/>
+                                </af:column>
+                                <af:column sortProperty="CAL_ALLOWANCE_RATE"
+                                           sortable="true" headerText="Rate"
+                                           id="c85">
+                                  <af:outputText value="#{row.CAL_ALLOWANCE_RATE}"
+                                                 id="ot88"/>
+                                </af:column>
+                                <af:column sortProperty="CAL_ALLOWANCE_DIV_FAC"
+                                           sortable="true"
+                                           headerText="Rate  Div. Fac."
+                                           id="c88">
+                                  <af:outputText value="#{row.CAL_ALLOWANCE_DIV_FAC}"
+                                                 id="ot90"/>
+                                </af:column>
+                                <af:column sortProperty="CAL_WEF"
+                                           sortable="true" headerText="WEF"
+                                           id="c86">
+                                  <af:outputText value="#{row.CAL_WEF}"
+                                                 id="ot91">
+                                    <af:convertDateTime pattern="#{bindings.Setup11.hints.CAL_WEF.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="CAL_WET"
+                                           sortable="true" headerText="WET"
+                                           id="c89">
+                                  <af:outputText value="#{row.CAL_WET}"
+                                                 id="ot87">
+                                    <af:convertDateTime pattern="#{bindings.Setup11.hints.CAL_WET.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                              </af:table>
+                            </af:showDetailItem>
+                          </af:panelTabbed>
+                        </af:panelBox>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelSplitter>
+                </af:panelGroupLayout>
+                <f:facet name="toolbar">
+                  <h:panelGrid columns="2" id="pg17">
+                    <af:inputText id="it24" helpTopicId="LmsGrp_COMMRATE"
+                                  readOnly="true"/>
+                    <af:statusIndicator id="si57"/>
+                  </h:panelGrid>
+                </f:facet>
+              </af:showDetailItem>
+            </af:panelAccordion>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

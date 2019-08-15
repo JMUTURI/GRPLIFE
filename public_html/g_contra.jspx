@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Contra Transaction" id="d2">
+    <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout id="pgl2">
+          <af:panelBox text="Search Criteria" id="pb1" showHeader="never"
+                       binding="#{polTransactions.search}">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="CONTRA TRANSACTIONS" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1"/>
+            <h:panelGrid columns="2" id="pg1">
+              <af:outputLabel value="Product" id="ol2"/>
+              <h:panelGrid columns="2" id="pg2">
+                <af:inputText label="Label 1" id="it1" simple="true"
+                              disabled="true"
+                              binding="#{polTransactions.productDesc}"/>
+                <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="produ"/>
+                </af:commandButton>
+                <af:popup id="produ">
+                  <af:dialog id="d1" type="none" title="Select Product">
+                    <af:table value="#{bindings.productDetails.collectionModel}"
+                              var="row"
+                              rows="#{bindings.productDetails.rangeSize}"
+                              emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.productDetails.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                              queryListener="#{bindings.productDetailsQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t1"
+                              binding="#{polTransactions.productLOV}">
+                      <af:column sortProperty="prodshtDesc" filterable="true"
+                                 sortable="true" headerText="Sht Desc" id="c2">
+                        <af:outputText value="#{row.prodshtDesc}" id="ot3"/>
+                      </af:column>
+                      <af:column sortProperty="prodDesc" filterable="true"
+                                 sortable="true" headerText="Product" id="c1"
+                                 width="200">
+                        <af:outputText value="#{row.prodDesc}" id="ot2"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg3">
+                      <af:commandButton text="OK" id="cb2"
+                                        action="#{polTransactions.findProductSelected}"/>
+                      <af:commandButton text="Cancel" id="commandButton1"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Policy No" id="outputLabel1"/>
+              <h:panelGrid columns="2" id="panelGrid1">
+                <af:inputText label="Label 1" id="inputText1" simple="true"
+                              disabled="true"
+                              binding="#{polTransactions.policiesDesc}"/>
+                <af:commandButton id="commandButton2"
+                                  icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="pol"/>
+                </af:commandButton>
+                <af:popup id="pol">
+                  <af:dialog id="dialog1" type="none">
+                    <af:table value="#{bindings.policies.collectionModel}"
+                              var="row" rows="#{bindings.policies.rangeSize}"
+                              emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.policies.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.policiesQuery.queryDescriptor}"
+                              queryListener="#{bindings.policiesQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t2"
+                              binding="#{polTransactions.policiesLOV}">
+                      <af:column sortProperty="POL_POLICY_NO" filterable="true"
+                                 sortable="true" headerText="Policy No" id="c4">
+                        <af:outputText value="#{row.POL_POLICY_NO}" id="ot4"/>
+                      </af:column>
+                      <af:column sortProperty="CLIENT_DISPLAY" filterable="true"
+                                 sortable="true" headerText="Client" id="c3"
+                                 width="200">
+                        <af:outputText value="#{row.CLIENT_DISPLAY}" id="ot5"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="panelGrid2">
+                      <af:commandButton text="OK" id="commandButton3"
+                                        action="#{polTransactions.findPoliciesSelected}"/>
+                      <af:commandButton text="Cancel" id="commandButton4"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Policy Effective Date" id="outputLabel2"/>
+              <af:inputDate label="Label 1" id="id1" simple="true"
+                            disabled="true"
+                            binding="#{polTransactions.effDate}">
+                 <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+            </af:inputDate>               
+              <af:outputLabel value="Transaction to Contra" id="outputLabel3"/>
+              <h:panelGrid columns="2" id="panelGrid3">
+                <af:inputText label="Label 1" id="inputText2" simple="true"
+                              disabled="true"
+                              binding="#{polTransactions.transSel}"/>
+                <af:commandButton id="commandButton5"
+                                  icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="transac"/>
+                </af:commandButton>
+                <af:popup id="transac">
+                  <af:dialog id="dialog2" type="none" title="Transactions">
+                    <af:table value="#{bindings.policies1.collectionModel}"
+                              var="row" rows="#{bindings.policies1.rangeSize}"
+                              emptyText="#{bindings.policies1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.policies1.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.policies1Query.queryDescriptor}"
+                              queryListener="#{bindings.policies1Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.policies1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.policies1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t3" width="510"
+                              binding="#{polTransactions.contraTransLOV}">
+                      <af:column sortProperty="trans" filterable="true"
+                                 sortable="true" headerText="Transaction"
+                                 id="c7" width="200">
+                        <af:outputText value="#{row.trans}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="co_ltr_pol_policy_no"
+                                 filterable="true" sortable="true"
+                                 headerText="Policy No." id="c6" width="200">
+                        <af:outputText value="#{row.co_ltr_pol_policy_no}"
+                                       id="ot6"/>
+                      </af:column>
+                      <af:column sortProperty="co_endr_no" filterable="true"
+                                 sortable="true" headerText="Endr No" id="c5">
+                        <af:outputText value="#{row.co_endr_no}" id="ot8"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="panelGrid4">
+                      <af:commandButton text="OK" id="commandButton6"
+                                        action="#{polTransactions.findTransactionsSelected}"/>
+                      <af:commandButton text="Cancel" id="commandButton7"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Contra Effective Date" id="outputLabel4"/>
+              <af:inputDate label="Label 1" id="inputDate1" simple="true"
+                            binding="#{polTransactions.conEffDate}">
+                 <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+            </h:panelGrid>
+            <h:panelGrid columns="2" id="pg4">
+              <af:commandButton text="Next" id="cb3"
+                                binding="#{polTransactions.searchButton}"
+                                action="#{polTransactions.findPendingTransactions}"/>
+              <af:commandButton text="Exit" id="commandButton8"
+                                action="#{Links.goHome}"/>
+            </h:panelGrid>
+          </af:panelBox>
+          <af:panelBox text="pending Transactions" rendered="false"
+                       showHeader="never"
+                       binding="#{polTransactions.transactions}"
+                       id="pb5">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Pending Transactions"
+                            inlineStyle="font-weight:bold;" id="ol30"/>
+            <af:separator id="s9"/>
+            <af:table value="#{bindings.endorsements1.collectionModel}"
+                      var="row" rows="#{bindings.endorsements1.rangeSize}"
+                      emptyText="#{bindings.endorsements1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.endorsements1.rangeSize}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.endorsements1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.endorsements1.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t4"
+                      binding="#{polTransactions.transLOV}"
+                      inlineStyle="width:100.0%; height:200px;">
+              <af:column sortProperty="PT_ENDR_NO" sortable="true"
+                         headerText="Endorsement No." id="c11">
+                <af:outputText value="#{row.PT_ENDR_NO}" id="ot11"/>
+              </af:column>
+              <af:column sortProperty="PT_ENDR_POL_POLICY_NO" sortable="true"
+                         headerText="Policy No." id="c14">
+                <af:outputText value="#{row.PT_ENDR_POL_POLICY_NO}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="PT_client" sortable="true"
+                         headerText="Client" id="c13">
+                <af:outputText value="#{row.PT_client}" id="ot13"/>
+              </af:column>
+              <af:column sortProperty="PT_AgentName" sortable="true"
+                         headerText="Agent" id="c8">
+                <af:outputText value="#{row.PT_AgentName}" id="ot14"/>
+              </af:column>
+              <af:column sortProperty="PT_ENDR_STATUS" sortable="true"
+                         headerText="Status " id="c9">
+                <af:outputText value="#{row.PT_ENDR_STATUS}" id="ot12"/>
+              </af:column>
+              <af:column sortProperty="PT_ENDR_EFFECTIVE_DATE" sortable="true"
+                         headerText="Effective Date" id="c10">
+                <af:outputText value="#{row.PT_ENDR_EFFECTIVE_DATE}" id="ot10">
+                  <af:convertDateTime pattern="#{bindings.endorsements1.hints.PT_ENDR_EFFECTIVE_DATE.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="PT_ENDR_NO" sortable="true"
+                         id="c12">
+                <af:commandLink text="Select"
+                                action="#{polTransactions.findPendingEndorsementSelected}"
+                                id="cl1"/>
+              </af:column>
+              <af:column sortProperty="PT_ENDR_NO" sortable="true"
+                         id="column2">
+                <af:commandLink text="Delete"
+                                action="#{polTransactions.DeletePendingEndorsementSelected}"
+                                id="cl2"/>
+              </af:column>
+            </af:table>
+            <h:panelGrid columns="2" id="pg17"/>
+            <af:commandButton text="Cancel"
+                              action="#{polTransactions.CancelContra}" id="cb21"/>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

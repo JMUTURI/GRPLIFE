@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="memberDependentsDAO" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.memberDependentsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.memberDependents"
+                  BeanClass="LMSG.view.QuotationProcessing.memberDependents"
+                  id="findMemberDependents" ReturnNodeName="memberDependents"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.memberDependentsDAO"
+                     BeanClass="LMSG.view.QuotationProcessing.memberDependentsDAO"
+                     id="memberDependentsDAO"/>
+</JavaBean>

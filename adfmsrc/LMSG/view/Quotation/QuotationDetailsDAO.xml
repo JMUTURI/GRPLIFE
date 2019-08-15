@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.56"
+          id="QuotationDetailsDAO" Package="LMSG.view.Quotation"
+          BeanClass="LMSG.view.Quotation.QuotationDetailsDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.Quotation.QuotationsDetails"
+                  BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                  id="findQuotation" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.Quotation.QuotationsDetails"
+                  BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                  id="findQuotationTaxes" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.Quotation.QuotationsDetails"
+                  BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                  id="findClientClaimExp" ReturnNodeName="QuotationsDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.Quotation.QuotationsDetails"
+                  BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                  id="FindSBUDetails" ReturnNodeName="QuotationsDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.Quotation.QuotationsDetails"
+                  BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                  id="FindOrgLocationsDetails"
+                  ReturnNodeName="QuotationsDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Quotation.QuotationDetailsDAO"
+                     BeanClass="LMSG.view.Quotation.QuotationDetailsDAO"
+                     id="QuotationDetailsDAO"/>
+</JavaBean>

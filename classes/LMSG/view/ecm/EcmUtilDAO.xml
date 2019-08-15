@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.59.23"
+          id="EcmUtilDAO" Package="LMSG.view.ecm"
+          BeanClass="LMSG.view.ecm.EcmUtilDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.ecm.EcmBean"
+                  BeanClass="LMSG.view.ecm.EcmBean" id="findCommAgnDocs"
+                  ReturnNodeName="EcmBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.ecm.EcmBean"
+                  BeanClass="LMSG.view.ecm.EcmBean" id="findEnquireDocs"
+                  ReturnNodeName="EcmBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.ecm.EcmBean"
+                  BeanClass="LMSG.view.ecm.EcmBean" id="findQuoteDocs"
+                  ReturnNodeName="EcmBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.ecm.EcmBean"
+                  BeanClass="LMSG.view.ecm.EcmBean" id="findQuotationDocs"
+                  ReturnNodeName="EcmBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.ecm.EcmBean"
+                  BeanClass="LMSG.view.ecm.EcmBean" id="findPolClaimsDocs"
+                  ReturnNodeName="EcmBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.ecm.EcmBean"
+                  BeanClass="LMSG.view.ecm.EcmBean" id="findUWDocs"
+                  ReturnNodeName="EcmBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.ecm.EcmBean"
+                  BeanClass="LMSG.view.ecm.EcmBean" id="findClaimDocs"
+                  ReturnNodeName="EcmBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.ecm.EcmBean"
+                  BeanClass="LMSG.view.ecm.EcmBean" id="findMedDocs"
+                  ReturnNodeName="EcmBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.ecm.EcmUtilDAO"
+                     BeanClass="LMSG.view.ecm.EcmUtilDAO" id="EcmUtilDAO"/>
+</JavaBean>

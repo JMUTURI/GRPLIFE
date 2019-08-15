@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Core System Reports">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="height:480px; width:100.0%;">
+              <af:showDetailItem text="System Reports" id="sdi1">
+                <f:facet name="toolbar">
+                  <af:group id="g1">
+                    <h:panelGrid columns="2" id="pg23">
+                      <af:inputText id="inputText2" columns="13"
+                                    helpTopicId="GISReports" shortDesc="Help"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si1"/>
+                    </h:panelGrid>
+                  </af:group>
+                </f:facet>
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                  <af:panelBox text="Select Report" id="pb1"
+                               inlineStyle="width:98.0%;" showDisclosure="false"
+                               showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="1" id="pg6">
+                        <af:separator id="separator6"/>
+                        <af:outputLabel value="Core System Reports"
+                                        id="outputLabel3"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator7"/>
+                        <af:commandLink text="Agencies List" id="rpt33"
+                                        actionListener="#{reportParameterBean.paramReport}"/> 
+                       <af:commandLink text="Causations" id="rpt34"
+                                        actionListener="#{reportParameterBean.paramReport}"/>                     
+                        <af:commandLink text="Classes and Products" id="rpt71"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Classes of Life and Occupation" id="rpt35"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Commission Rates" id="rpt36"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Cover Types List" id="rpt72"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                         <af:commandLink text="Dependent Type"
+                                        id="rpt24"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Group Life Premium Rates" id="rpt92"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                       <af:commandLink text="Interest Rates" id="rpt37"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Medical Tests" id="rpt304"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Medical Tests Groupings" id="rpt295"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Medical Requirements" id="rpt38"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                         <af:commandLink text="Premium Masks" id="rpt25"
+                                        actionListener="#{reportParameterBean.paramReport}"/>                                        
+                        <af:commandLink text="Policy Transactions" id="cl1"
+                                        action="#{Links.goToProductionReports}"/>                      
+                       <af:commandLink text="Product Cover Types Dependants" id="rpt28"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Product Cover Types" id="rpt30"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                       <af:commandLink text="R/I Rates Table" id="rpt39"
+                                        actionListener="#{reportParameterBean.paramReport}"/> 
+                       <af:commandLink text="Tax Types" id="rpt41"
+                                        actionListener="#{reportParameterBean.paramReport}"/> 
+                       <af:commandLink text="Tax Rates By Product Tax Type" id="rpt40"
+                                        actionListener="#{reportParameterBean.paramReport}"/> 
+                      <af:commandLink text="Treaties" id="rpt42"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                       
+                        <!--<af:spacer width="10" height="13" id="spacer2"/>-->
+                      </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+            <af:popup id="paramReport">
+              <af:dialog id="d13" title="Report Parameters" type="none"
+                         closeIconVisible="false">
+                <af:panelGroupLayout id="pgl4" layout="scroll"
+                                     binding="#{reportParameterBean.dtls}">
+                  <h:panelGrid id="pg2541"
+                               binding="#{reportParameterBean.mainParent}"/>
+                  <af:selectOneRadio label="Label 1" id="selectOneRadio1"
+                                     binding="#{reportParameterBean.reportType}"
+                                     simple="true" layout="horizontal"
+                                     valueChangeListener="#{reportParameterBean.changeReportType}"
+                                     value="pdf">
+                    <af:selectItem label="Html" value="html" id="si51"/>
+                    <af:selectItem label="Pdf" value="pdf" id="si21"/>
+                    <af:selectItem label="Excel" value="xls" id="si41"/>
+                    <af:selectItem label="Word Document (rtf)" value="rtf"
+                                   id="si31"/>
+                  </af:selectOneRadio>
+                  <h:panelGrid columns="2" id="pg3">
+                    <af:commandButton text="Print" id="cb1"
+                                      action="#{reportParameterBean.genRpt}"/>
+                    <af:commandButton text="Cancel" id="cb40"
+                                      action="#{reportParameterBean.RemoveReportComponents}"/>
+                    <af:inputDate label="Label 1" id="id1"
+                                  binding="#{reportParameterBean.myTest}"
+                                  visible="false">
+                         <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                    </af:inputDate> 
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </af:dialog>
+            </af:popup>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns="urn:jbpm.org:jpdl-3.2"  name="quotationprocessdefinition">
+
+
+	<start-state name="start-quotation-process">
+		<transition name="To Quote" to="Create Quotation"></transition>
+	</start-state>
+
+
+	<node name="Create Quotation">
+		<transition name="Start Underwriting" to="Underwrite"></transition>
+	</node>
+
+	<node name="Underwriting">
+		<transition name="Dispatch Documents" to="Dispatch"></transition>
+	</node>
+
+	<node name="Dispatch">
+		<transition name="End Quote process" to="end-quotation-process"></transition>
+	</node>
+
+
+	<end-state name="end-quotation-process"></end-state>
+
+
+</process-definition>

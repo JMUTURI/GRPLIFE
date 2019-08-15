@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="dependents" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.dependents"
+          isJavaBased="true">
+  <Attribute Name="DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCD_MAX_NO_ALLOWED" Type="java.math.BigDecimal"/>
+  <Attribute Name="DTY_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="DTY_DESCRIPTION" Type="java.lang.String"/>
+  <Attribute Name="PCD_MAX_SUM_ASSURED" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCD_MIN_SUM_ASSURED" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCD_CVT_CODE" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.dependents"
+                     BeanClass="LMSG.view.QuotationProcessing.dependents"
+                     id="dependents"/>
+</JavaBean>

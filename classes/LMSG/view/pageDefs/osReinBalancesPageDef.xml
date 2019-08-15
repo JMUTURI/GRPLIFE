@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="osReinBalancesPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findOSRIRatesDesc.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findOSRIRatesDescIterator"/>
+    <methodIterator Binds="findOSRIRates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findOSRIRatesIterator"/>
+    <methodIterator Binds="FindSysDate.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSysDateIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findOSRIRatesDesc" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOSRIRatesDesc"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findOSRIRatesDesc_SetupsDAO_dataProvider_findOSRIRatesDesc_result"/>
+    <tree IterBinding="findOSRIRatesDescIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="RIOS_SHT_DESC"/>
+          <Item Value="RIOS_DESC"/>
+          <Item Value="RIOS_WEF"/>
+          <Item Value="RIOS_WET"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findOSRIRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOSRIRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findOSRIRates_SetupsDAO_dataProvider_findOSRIRates_result"/>
+    <tree IterBinding="findOSRIRatesIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="RIOT_POLICY_TERM"/>
+          <Item Value="RIOT_POLICY_TERM_TO"/>
+          <Item Value="RIOT_LAPSED_TERM"/>
+          <Item Value="RIOT_LAPSED_TERM_TO"/>
+          <Item Value="RIOT_RATE"/>
+          <Item Value="RIOT_DIVISION_FACTOR"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindSysDate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSysDate"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSysDate_SettingsDAO_dataProvider_FindSysDate_result"/>
+    <attributeValues IterBinding="FindSysDateIterator" id="sysDate">
+      <AttrNames>
+        <Item Value="sysDate"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

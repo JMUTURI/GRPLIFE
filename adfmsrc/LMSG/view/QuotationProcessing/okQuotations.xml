@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="okQuotations" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.okQuotations" isJavaBased="true">
+  <Attribute Name="QUO_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QUO_NO" Type="java.lang.String"/>
+  <Attribute Name="client" Type="java.lang.String"/>
+  <Attribute Name="QUO_EFFECTIVE_DATE" Type="java.util.Date"/>
+  <Attribute Name="uwYear" Type="java.math.BigDecimal"/>
+  <Attribute Name="prod_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="product_display" Type="java.lang.String"/>
+  <Attribute Name="branch" Type="java.lang.String"/>
+  <Attribute Name="occupation" Type="java.lang.String"/>
+  <Attribute Name="hazard" Type="java.lang.String"/>
+  <Attribute Name="paymentFreq" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.okQuotations"
+                     BeanClass="LMSG.view.QuotationProcessing.okQuotations" id="okQuotations"/>
+</JavaBean>

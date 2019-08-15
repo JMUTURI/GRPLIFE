@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="Client" Package="LMSG.view.Clients"
+          BeanClass="LMSG.view.Clients.Client" isJavaBased="true">
+  <Attribute Name="prpCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="clientName" Type="java.lang.String"/>
+  <Attribute Name="prpIDRegNo" Type="java.lang.String"/>
+  <Attribute Name="clientPayrollNo" Type="java.lang.String"/>
+  <Attribute Name="occupationCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="occupationalDesc" Type="java.lang.String"/>
+  <Attribute Name="lifeClass" Type="java.math.BigDecimal"/>
+  <Attribute Name="clientCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="PINNumber" Type="java.lang.String"/>
+  <Attribute Name="postalAddress" Type="java.lang.String"/>
+  <Attribute Name="telphoneOne" Type="java.lang.String"/>
+  <Attribute Name="othernames" Type="java.lang.String"/>
+  <Attribute Name="fullname" Type="java.lang.String"/>
+  <Attribute Name="idRegNumber" Type="java.lang.String"/>
+  <Attribute Name="shortDescription" Type="java.lang.String"/>
+  <Attribute Name="ZIPCode" Type="java.lang.String"/>
+  <Attribute Name="PRP_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GCO_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LC_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="CLIENT" Type="java.lang.String"/>
+  <Attribute Name="PRP_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PRP_ID_REG_NO" Type="java.lang.String"/>
+  <Attribute Name="PRP_DOB" Type="java.lang.String"/>
+  <Attribute Name="GCO_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="GCO_DESC" Type="java.lang.String"/>
+  <Attribute Name="hazard" Type="java.lang.String"/>
+  <Attribute Name="prp_clnt_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pctcCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pctcName" Type="java.lang.String"/>
+  <Attribute Name="pctcDob" Type="java.util.Date"/>
+  <Attribute Name="pctcPhyAddr" Type="java.lang.String"/>
+  <Attribute Name="pctcPostAddr" Type="java.lang.String"/>
+  <Attribute Name="pctcTel" Type="java.lang.String"/>
+  <Attribute Name="pctcEmail" Type="java.lang.String"/>
+  <Attribute Name="pctcWef" Type="java.util.Date"/>
+  <Attribute Name="pctcWet" Type="java.util.Date"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Clients.Client"
+                     BeanClass="LMSG.view.Clients.Client" id="Client"/>
+</JavaBean>

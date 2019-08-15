@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="annuityFacDesc" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.annuityFacDesc" isJavaBased="true">
+  <Attribute Name="ANNFD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ANNFD_INT_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ANNFD_PROD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ANNFD_DESC" Type="java.lang.String"/>
+  <Attribute Name="ANNF_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ANNF_ANNFD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ANNF_RETIRE_AGE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ANNF_GUAR_PRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="ANNF_MALE_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ANNF_FEMALE_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ANNF_WEF" Type="java.util.Date"/>
+  <Attribute Name="ANNF_WET" Type="java.util.Date"/>
+  <Attribute Name="atyCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="prodDescription" Type="java.lang.String"/>
+  <Attribute Name="atyGuaranteePeriod" Type="java.math.BigDecimal"/>
+  <Attribute Name="atyType" Type="java.lang.String"/>
+  <Attribute Name="atyOption" Type="java.lang.String"/>
+  <Attribute Name="anntrCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="annAtycode" Type="java.math.BigDecimal"/>
+  <Attribute Name="anntrAnb" Type="java.math.BigDecimal"/>
+  <Attribute Name="anntrRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="ATY_RETIREMENT_AGE" Type="java.lang.String"/>
+  <Attribute Name="anntrGender" Type="java.lang.String"/>
+  <Attribute Name="anntrGenderDesc" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.annuityFacDesc"
+                     BeanClass="com.turnkey.setups.annuityFacDesc"
+                     id="annuityFacDesc"/>
+</JavaBean>

@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelBox text="New Policy" inlineStyle="width:842px; height:289px;"
+                     id="pb1">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="3" width="90%" id="pg1">
+            <h:panelGrid columns="2" width="20%" id="pg2">
+              <af:outputText id="ot1"/>
+              <af:outputText id="ot2"/>
+              <af:outputLabel value="Frequency Of Payment"
+                              inlineStyle="width:100px;" id="ol1"/>
+              <af:selectOneChoice label="Label 1" simple="true"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetFrequencyOfPayment}"
+                                  binding="#{underwritingManipulation.frequencyOfPayment}"
+                                  id="soc1">
+                <af:selectItem label="Monthly" value="M" id="si1"/>
+                <af:selectItem label="Bi - Monthly" value="B" id="si2"/>
+                <af:selectItem label="Quarterly" value="Q" id="si3"/>
+                <af:selectItem label="Annually" value="A" id="si4"/>
+                <af:selectItem label="Semi - Annually" value="S" id="si5"/>
+              </af:selectOneChoice>
+              <af:outputLabel value="Calculation Type" id="ol2"/>
+              <af:selectOneChoice label="Label 2" simple="true"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetCalcType}"
+                                  binding="#{underwritingManipulation.calculationType}"
+                                  id="soc2">
+                <af:selectItem label="Detailed Mem Info" value="D" id="si6"/>
+                <af:selectItem label="Aggregate Mem Info" value="A" id="si7"/>
+              </af:selectOneChoice>
+              <af:outputLabel value="OS Loan Calc"
+                              rendered="#{Rendering.loansProduct}" id="ol3"/>
+              <af:selectOneChoice label="Label 10" simple="true"
+                                  binding="#{underwritingManipulation.osLoanCalculation}"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetOSLoanCalculation}"
+                                  rendered="#{Rendering.loansProduct}"
+                                  id="soc3">
+                <af:selectItem label="Ammortization" value="A" id="si8"/>
+                <af:selectItem label="Outstanding Period" value="P" id="si9"/>
+              </af:selectOneChoice>
+              <af:outputLabel value="For Member Above Retirement Age"
+                              rendered="#{Rendering.pensionproduct}" id="ol4"/>
+              <af:selectOneChoice label="Label 3" simple="true"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetAboveRetireAge}"
+                                  binding="#{underwritingManipulation.aboveRetireAge}"
+                                  rendered="#{Rendering.pensionproduct}"
+                                  id="soc4">
+                <af:selectItem label="Yes" value="Y" id="si10"/>
+                <af:selectItem label="No" value="N" id="si11"/>
+              </af:selectOneChoice>
+            </h:panelGrid>
+            <h:panelGrid columns="2" width="20%" id="pg3">
+              <af:outputText id="ot3"/>
+              <af:outputText id="ot4"/>
+              <af:outputLabel value="Policy Covers" id="ol5"/>
+              <af:selectOneChoice label="Label 4" simple="true"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetDependentsCovered}"
+                                  binding="#{underwritingManipulation.dependentsCovered}"
+                                  id="soc5">
+                <af:selectItem label="Self" value="S" id="si12"/>
+                <af:selectItem label="Self &amp; Dependants" value="D"
+                               id="si13"/>
+                <af:selectItem label="Self &amp; Joint Member" value="J"
+                               id="si14"/>
+                <af:selectItem label="Self &amp; Member Categories" value="C"
+                               id="si15"/>
+              </af:selectOneChoice>
+              <af:outputLabel value="Duration Type" id="ol6"/>
+              <af:selectOneChoice label="Label 5" autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetDurationType}"
+                                  simple="true"
+                                  binding="#{underwritingManipulation.durationType}"
+                                  id="soc6">
+                <af:selectItem label="Open" value="O" id="si16"/>
+                <af:selectItem label="Annual" value="A" id="si17"/>
+                <af:selectItem label="Semi Annual" value="S" id="si18"/>
+                <af:selectItem label="Quater Annual" value="Q" id="si19"/>
+                <af:selectItem label="Other" value="C" id="si20"/>
+              </af:selectOneChoice>
+              <af:outputLabel value="Group Life Rider"
+                              rendered="#{Rendering.pensionproduct}" id="ol7"/>
+              <af:selectOneChoice label="Label 6"
+                                  binding="#{underwritingManipulation.groupLifeRider}"
+                                  simple="true" autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetGroupLifeRider}"
+                                  rendered="#{Rendering.pensionproduct}"
+                                  id="soc7">
+                <af:selectItem label="Yes" value="Y" id="si21"/>
+                <af:selectItem label="No" value="N" id="si22"/>
+              </af:selectOneChoice>
+              <af:outputLabel value="Scheme Type" id="ol8"/>
+              <af:selectOneChoice label="Label 7" simple="true"
+                                  binding="#{underwritingManipulation.schemeeTypeDisplay}"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetSchemeType}"
+                                  id="soc8">
+                <af:selectItem label="Registered" value="R" id="si23"/>
+                <af:selectItem label="Un Registered" value="U" id="si24"/>
+              </af:selectOneChoice>
+              <af:outputLabel value="Registration Number" id="ol9"/>
+              <af:inputText label="Label 5" simple="true" columns="15"
+                            binding="#{underwritingManipulation.regNumberDisplay}"
+                            id="it1"/>
+            </h:panelGrid>
+            <h:panelGrid columns="3" width="20%" id="pg4">
+              <af:outputLabel value="Client" id="ol10"/>
+              <af:inputText label="Label 3" columns="25" simple="true"
+                            binding="#{underwritingManipulation.proposerDisplay}"
+                            id="it2"/>
+              <h:panelGrid columns="2" id="pg5">
+                <af:commandButton icon="/dropdown.gif" id="cb1">
+                  <af:showPopupBehavior popupId="clientsPopup"/>
+                </af:commandButton>
+                <af:popup id="clientsPopup">
+                  <af:dialog type="none" title="Select Proposer" id="d2">
+                    <af:table value="#{bindings.proposers.collectionModel}"
+                              var="row" rows="#{bindings.proposers.rangeSize}"
+                              emptyText="#{bindings.proposers.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.proposers.rangeSize}"
+                              selectedRowKeys="#{bindings.proposers.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.proposers.collectionModel.makeCurrent}"
+                              rowSelection="single"
+                              binding="#{underwritingManipulation.proposersLOV}"
+                              id="t1">
+                      <af:column sortProperty="CLIENT" sortable="true"
+                                 headerText="PROPOSER" id="c1">
+                        <af:outputText value="#{row.CLIENT}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="GCO_DESC" sortable="true"
+                                 headerText="OCCUPATION" id="c2">
+                        <af:outputText value="#{row.GCO_DESC}" id="ot6"/>
+                      </af:column>
+                      <af:column sortProperty="hazard" sortable="true"
+                                 headerText="HAZARDOUS" id="c3">
+                        <af:outputText value="#{row.hazard}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="PRP_SHT_DESC" sortable="true"
+                                 headerText="DESCRIPTON" id="c4">
+                        <af:outputText value="#{row.PRP_SHT_DESC}" id="ot8"/>
+                      </af:column>
+                    </af:table>
+                    <af:commandButton text="OK"
+                                      action="#{underwritingManipulation.AttachProposers}"
+                                      id="cb2"/>
+                    <af:commandButton text="Cancel" id="cb3"/>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Branch" id="ol11"/>
+              <af:inputText label="Label 4" columns="25" simple="true"
+                            binding="#{underwritingManipulation.branchesDisplay}"
+                            id="it3"/>
+              <h:panelGrid columns="2" id="pg6">
+                <af:commandButton icon="/dropdown.gif" id="cb4">
+                  <af:showPopupBehavior popupId="branchesPopup"/>
+                </af:commandButton>
+                <af:popup id="branchesPopup">
+                  <af:dialog type="none" title="Select Branch" id="d3">
+                    <af:table value="#{bindings.branches.collectionModel}"
+                              var="row" rows="#{bindings.branches.rangeSize}"
+                              emptyText="#{bindings.branches.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.branches.rangeSize}"
+                              selectedRowKeys="#{bindings.branches.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.branches.collectionModel.makeCurrent}"
+                              rowSelection="single" width="205"
+                              inlineStyle="height:219px;"
+                              binding="#{underwritingManipulation.branchesLOV}"
+                              id="t2">
+                      <af:column sortProperty="BRN_NAME" sortable="true"
+                                 headerText="BRANCH" id="c5">
+                        <af:outputText value="#{row.BRN_NAME}" id="ot9"/>
+                      </af:column>
+                    </af:table>
+                    <af:commandButton text="OK"
+                                      action="#{underwritingManipulation.AttachBranches}"
+                                      id="cb5"/>
+                    <af:commandButton text="Cancel" id="cb6"/>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Tax Compliance"
+                              rendered="#{Rendering.pensionproduct}" id="ol12"/>
+              <af:selectOneChoice label="Label 8" simple="true"
+                                  binding="#{underwritingManipulation.taxComplianceDisplay}"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetTaxCompliance}"
+                                  rendered="#{Rendering.pensionproduct}"
+                                  id="soc9">
+                <af:selectItem label="Yes" value="Y" id="si25"/>
+                <af:selectItem label="No" value="N" id="si26"/>
+              </af:selectOneChoice>
+              <af:outputText id="ot10"/>
+              <af:outputLabel value="Savings Rider"
+                              rendered="#{Rendering.loansProduct}" id="ol13"/>
+              <af:selectOneChoice label="Label 9" simple="true"
+                                  binding="#{underwritingManipulation.savingsRiderDisplay}"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{underwritingManipulation.GetSavingsRider}"
+                                  rendered="#{Rendering.loansProduct}"
+                                  id="soc10">
+                <af:selectItem label="Yes" value="Y" id="si27"/>
+                <af:selectItem label="No" value="N" id="si28"/>
+              </af:selectOneChoice>
+            </h:panelGrid>
+          </h:panelGrid>
+          <h:panelGrid columns="3" width="20%" id="pg7">
+            <af:outputLabel value="Policy Number" id="ol14"/>
+            <af:inputText simple="true" columns="16"
+                          binding="#{underwritingManipulation.policyNUmberDisplay}"
+                          id="it4"/>
+            <af:commandButton text="Generate Policy Number"
+                              action="#{underwritingManipulation.PolicyNumberGeneration}"
+                              id="cb7"/>
+          </h:panelGrid>
+          <h:panelGrid columns="2" width="10%" id="pg8">
+            <af:commandButton text="Next"
+                              action="#{underwritingManipulation.CreateNbEndorsement}"
+                              id="cb8"/>
+            <af:commandButton text="Cancel" id="cb9"/>
+          </h:panelGrid>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

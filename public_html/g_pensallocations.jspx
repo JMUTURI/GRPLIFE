@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Group Life | Pension Allocation" id="d1">
+    <af:pageTemplate id="lmsgroup"
+                     viewId="/templates/GroupTemplate2.jspx">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal"/>
+      <f:facet name="center">
+        <af:panelGroupLayout id="pgl1">
+          <af:panelBox text="Group Allocations" id="pb1" showHeader="never">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Pension Member Details" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1"/>
+            <af:panelCollection id="pc1"
+                                inlineStyle="width:100.0%; height:180px;">
+              <f:facet name="menus">
+                <af:menu text="Utilities" id="m1">
+                  <af:commandMenuItem text="Export To Excel" id="cmi1">
+                    <af:exportCollectionActionListener exportedId="pensTab"
+                                                       type="excelHTML"
+                                                       filename="PensData"
+                                                       title="PensData"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.Account.collectionModel}" var="row"
+                        rows="#{bindings.Account.rangeSize}"
+                        emptyText="#{bindings.Account.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Account.rangeSize}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.Account.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.Account.collectionModel.makeCurrent}"
+                        
+                        rowSelection="single" id="pensTab"
+                        binding="#{CsvProcessor.exportMembers}">
+               <!-- <af:column sortProperty="PMPNS_CODE" sortable="false"
+                           headerText="Code" id="c1">
+                  <af:outputText value="#{row.PMPNS_CODE}" id="ot1"/>
+                </af:column>-->
+                <af:column sortProperty="MEM_NO_DISPLAY" sortable="true"
+                           headerText="Mem No." id="c11">
+                  <af:outputText value="#{row.MEM_NO_DISPLAY}" id="ot20"/>
+                </af:column>
+                <af:column sortProperty="PEN_MEMBER_DISPLAY" sortable="true"
+                           headerText="Name" id="c21">
+                  <af:outputText value="#{row.PEN_MEMBER_DISPLAY}" id="ot22"/>
+                </af:column>
+                  <af:column sortProperty="empyr_reg_transfer" sortable="true"
+                           headerText="Emplyr Reg Transfer" id="c25">
+                  <af:outputText value="#{row.empyr_reg_transfer}" id="ot25"/>
+                </af:column>
+                  <af:column sortProperty="empyr_unreg_transfer" sortable="true"
+                           headerText="Emplyr UnReg Transfer" id="c26">
+                  <af:outputText value="#{row.empyr_unreg_transfer}" id="ot26"/>
+                </af:column> 
+                <af:column sortProperty="empye_reg_transfer" sortable="true"
+                           headerText="Empye Reg Trans" id="c10">
+                  <af:outputText value="#{row.empye_reg_transfer}" id="ot19"/>
+                </af:column>
+                <af:column sortProperty="empye_unreg_transfer" sortable="true"
+                           headerText="Empye UnReg Trans" id="c23">
+                  <af:outputText value="#{row.empye_unreg_transfer}" id="ot21"/>
+                </af:column>
+                <af:column sortProperty="v_paid_er_amt" sortable="true"
+                           headerText="Empyr Contribution" id="c19">
+                  <af:outputText value="#{row.v_paid_er_amt}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="v_paid_ee_amt" sortable="true"
+                           headerText="Empye Contribution" id="c20">
+                  <af:outputText value="#{row.v_paid_ee_amt}" id="ot23"/>
+                </af:column>
+                <af:column sortProperty="v_paid_ee_vol_amt" sortable="true"
+                           headerText="Empye Vol Contribution" id="c13">
+                  <af:outputText value="#{row.v_paid_ee_vol_amt}" id="ot12"/>
+                </af:column>
+                <af:column sortProperty="v_paid_er_vol_amt" sortable="true"
+                           headerText="Empyr Vol Contribution" id="c12">
+                  <af:outputText value="#{row.v_paid_er_vol_amt}" id="ot18"/>
+                </af:column>
+                <!--<af:column sortProperty="PMPNS_EARNINGS" sortable="true"
+                           headerText="Monthly Earnings" id="c18">
+                  <af:outputText value="#{row.PMPNS_EARNINGS}" id="ot17"/>
+                </af:column>
+                <af:column sortProperty="PMPNS_EMPLOYER_CONTR" sortable="true"
+                           headerText="Employer Contr" id="c22">
+                  <af:outputText value="#{row.PMPNS_EMPLOYER_CONTR}" id="ot13"/>
+                </af:column>-->
+                <af:column sortable="true"
+                           headerText="Tax Relief Applicable?" id="c17">
+                  <af:outputText value="Y" id="ot14"/>
+                </af:column>
+                <!--<af:column sortProperty="PNDP_CODE2" sortable="false"
+                           headerText="pndp_amt"
+                           id="c9">
+                  <af:outputText value="#{row.PNDP_CODE2}" id="ot24"/>
+                </af:column>-->
+              </af:table>
+            </af:panelCollection>
+            <h:panelGrid columns="5" id="pg1">
+              <af:commandButton text="Back" id="cb1"
+                                action="#{payments.BackToReceipts}"/>
+              <af:commandButton text="Process Pension Deposits" id="commandButton1"
+                                action="#{payments.ProcessPensToMembers}"/>
+              <af:commandButton text="Update Scheme Contribution Rates"
+                                id="commandButton2"
+                                action="#{payments.ProcessPremToMembers}"
+                                rendered="false"/>
+            </h:panelGrid>
+            <af:spacer width="10" height="20" id="s2"/>
+            <af:outputLabel value="Imported Allocations" id="outputLabel1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s3"/>
+            <af:inputFile label="Import Allocations" autoSubmit="true"
+                          binding="#{FileProcessor.upFile}"
+                          valueChangeListener="#{FileProcessor.fileChangeForPensions}"
+                          immediate="true" id="if1"/>
+            <af:separator id="separator1"/>
+            <af:panelCollection id="panelCollection1"
+                                inlineStyle="width:100.0%; height:150px;">
+              <f:facet name="menus">
+                <af:menu text="Utilities" id="menu1">
+                  <af:commandMenuItem text="Export To Excel"
+                                      id="commandMenuItem1">
+                    <af:exportCollectionActionListener exportedId="t1"
+                                                       type="excelHTML"
+                                                       filename="LaunchData"
+                                                       title="LaunchData"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.Account1.collectionModel}" var="row"
+                        rows="#{bindings.Account1.rangeSize}"
+                        emptyText="#{bindings.Account1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Account1.rangeSize}"
+                        rowBandingInterval="0" id="t1"
+                        inlineStyle="width:100.0%; height:120px;"
+                        binding="#{CsvProcessor.importedPensMem}">
+                <!--<af:column sortProperty="PMPNS_CODE" sortable="false"
+                           headerText="Code" id="c7">
+                  <af:outputText value="#{row.PMPNS_CODE}" id="ot2"/>
+                </af:column>-->
+                <af:column sortProperty="MEM_NO_DISPLAY" sortable="false"
+                           headerText="Member No." id="c6">
+                  <af:outputText value="#{row.MEM_NO_DISPLAY}" id="ot3"/>
+                </af:column>
+                  <af:column sortProperty="emyr_reg_amount" sortable="true"
+                           headerText="Emplyr Reg Trans" id="c27">
+                  <af:outputText value="#{row.emyr_reg_amount}" id="ot27"/>
+                </af:column>
+                  <af:column sortProperty="emyr_unreg_amount" sortable="true"
+                           headerText="Emplyr UnReg Trans" id="c28">
+                  <af:outputText value="#{row.emyr_unreg_amount}" id="ot28"/>
+                </af:column> 
+                 <af:column sortProperty="emye_reg_amount" sortable="false"
+                           headerText="Emplye Reg Trans" id="c8">
+                  <af:outputText value="#{row.emye_reg_amount}" id="ot8"/>
+                </af:column>
+                <af:column sortProperty="emye_unreg_amount" sortable="false"
+                           headerText="Emplye UnReg Trans" id="c4">
+                  <af:outputText value="#{row.emye_unreg_amount}" id="ot9"/>
+                </af:column>				
+                <af:column sortProperty="v_paid_er_amt" sortable="false"
+                           headerText="Empyr Amount" id="c16">
+                  <af:outputText value="#{row.v_paid_er_amt}" id="ot4"/>
+                </af:column>
+                <af:column sortProperty="v_paid_ee_amt" sortable="false"
+                           headerText="Emye Amount" id="c15">
+                  <af:outputText value="#{row.v_paid_ee_amt}" id="ot5"/>
+                </af:column>
+                <af:column sortProperty="v_paid_ee_vol_amt" sortable="false"
+                           headerText="Empye Vol Amount" id="c24">
+                  <af:outputText value="#{row.v_paid_ee_vol_amt}" id="ot6"/>
+                </af:column>
+                <af:column sortProperty="v_paid_er_vol_amt" sortable="false"
+                           headerText="empyr Vol Amount" id="c2">
+                  <af:outputText value="#{row.v_paid_er_vol_amt}" id="ot7"/>
+                </af:column>                
+                <!--<af:column sortProperty="PMPNS_EARNINGS" sortable="false"
+                           headerText="Monthly Earnings" id="c3">
+                  <af:outputText value="#{row.PMPNS_EARNINGS}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="PMPNS_EMPLOYER_CONTR" sortable="false"
+                           headerText="Empyr Contr" id="c5">
+                  <af:outputText value="#{row.PMPNS_EMPLOYER_CONTR}" id="ot15"/>
+                </af:column>
+                <af:column sortProperty="PMPNS_EMPLOYEE_CONTR" sortable="false"
+                           headerText="Empye Contri" id="c14">
+                  <af:outputText value="#{row.PMPNS_EMPLOYEE_CONTR}" id="ot16"/>
+                </af:column>-->
+              </af:table>
+            </af:panelCollection>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

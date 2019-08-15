@@ -1,0 +1,754 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Load Policies">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:460.0px;">
+              <af:showDetailItem text="Loaded Group Business Policies"
+                                 id="sdi1">
+                <af:panelGroupLayout id="pgl4" layout="scroll">
+                  <af:panelBox id="pb1" binding="#{PolicyLoad.policiesTab}"
+                               text="Policy Details" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Policies Data" id="ol1"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="s1"/>
+                    <af:spacer width="10" height="10" id="s2"/>
+                    <af:panelGroupLayout id="pgl3">
+                      <h:panelGrid columns="3" id="pg1">
+                        <af:inputFile label="File to Upload" id="if2"
+                                      binding="#{PolicyLoad.upload_policies}"
+                                      valueChangeListener="#{PolicyLoad.policyLoadChangeListener}"
+                                      immediate="true" autoSubmit="true"/>
+                      <af:commandButton text="Delete" id="cb3"
+                                         icon="/images/delete_ena.png"
+                                        action="#{PolicyLoad.deleteLoadedPolicies}"/>
+                      </h:panelGrid>
+                      <af:separator id="s4"/>
+                      <af:table value="#{bindings.Account1.collectionModel}"
+                                var="row" rows="#{bindings.Account1.rangeSize}"
+                                emptyText="#{bindings.Account1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Account1.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.Account1Query.queryDescriptor}"
+                                queryListener="#{bindings.Account1Query.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Account1.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Account1.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t1" width="100%"
+                                binding="#{PolicyLoad.policiesTable}">
+                        <af:column sortProperty="LGPL_SN" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_SN.label}"
+                                   id="c64">
+                          <af:outputFormatted value="#{row.bindings.LGPL_SN.inputValue}"
+                                              id="of3"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_CLIENT" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_CLIENT.label}"
+                                   id="c34">
+                          <af:outputFormatted value="#{row.bindings.LGPL_CLIENT.inputValue}"
+                                              id="of27"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_NO_MEM" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_NO_MEM.label}"
+                                   id="c57">
+                          <af:outputFormatted value="#{row.bindings.LGPL_NO_MEM.inputValue}"
+                                              id="of29"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_SHARE" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_SHARE.label}"
+                                   id="c3">
+                          <af:outputFormatted value="#{row.bindings.LGPL_SHARE.inputValue}"
+                                              id="of10"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_COMMENC_DT"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_COMMENC_DT.label}"
+                                   id="c49">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.LGPL_COMMENC_DT}"
+                                          id="id5"/>
+                          </f:facet>
+                          <af:outputFormatted value="#{row.bindings.LGPL_COMMENC_DT.inputValue}"
+                                              id="of36">
+                            <af:convertDateTime pattern="#{bindings.Account1.hints.LGPL_COMMENC_DT.format}"/>
+                          </af:outputFormatted>
+                        </af:column>
+                        <af:column sortProperty="LGPL_RENEW_DT"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_RENEW_DT.label}"
+                                   id="c43">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.LGPL_RENEW_DT}"
+                                          id="id6"/>
+                          </f:facet>
+                          <af:outputFormatted value="#{row.bindings.LGPL_RENEW_DT.inputValue}"
+                                              id="of28">
+                            <af:convertDateTime pattern="#{bindings.Account1.hints.LGPL_RENEW_DT.format}"/>
+                          </af:outputFormatted>
+                        </af:column>
+                        <af:column sortProperty="LGPL_NEXT_REN_DT"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_NEXT_REN_DT.label}"
+                                   id="c50">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.LGPL_NEXT_REN_DT}"
+                                          id="id1"/>
+                          </f:facet>
+                          <af:outputFormatted value="#{row.bindings.LGPL_NEXT_REN_DT.inputValue}"
+                                              id="of2">
+                            <af:convertDateTime pattern="#{bindings.Account1.hints.LGPL_NEXT_REN_DT.format}"/>
+                          </af:outputFormatted>
+                        </af:column>
+                        <af:column sortProperty="LGPL_RATES" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_RATES.label}"
+                                   id="c55">
+                          <af:outputFormatted value="#{row.bindings.LGPL_RATES.inputValue}"
+                                              id="of19"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_TOT_SA" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_TOT_SA.label}"
+                                   id="c8">
+                          <af:outputFormatted value="#{row.bindings.LGPL_TOT_SA.inputValue}"
+                                              id="of9"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_TOT_PREM"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_TOT_PREM.label}"
+                                   id="c62">
+                          <af:outputFormatted value="#{row.bindings.LGPL_TOT_PREM.inputValue}"
+                                              id="of12"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_TOT_PREM_PAID"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_TOT_PREM_PAID.label}"
+                                   id="c51">
+                          <af:outputFormatted value="#{row.bindings.LGPL_TOT_PREM_PAID.inputValue}"
+                                              id="of18"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_OUTS_PREM"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_OUTS_PREM.label}"
+                                   id="c61">
+                          <af:outputFormatted value="#{row.bindings.LGPL_OUTS_PREM.inputValue}"
+                                              id="of14"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_PROD_NAME"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_PROD_NAME.label}"
+                                   id="c52">
+                          <af:outputFormatted value="#{row.bindings.LGPL_PROD_NAME.inputValue}"
+                                              id="of8"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_AGENT_NAME"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_AGENT_NAME.label}"
+                                   id="c53">
+                          <af:outputFormatted value="#{row.bindings.LGPL_AGENT_NAME.inputValue}"
+                                              id="of16"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_AGENT" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_AGENT.label}"
+                                   id="c70">
+                          <af:outputFormatted value="#{row.bindings.LGPL_AGENT.inputValue}"
+                                              id="of34"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_POL_NO" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_POL_NO.label}"
+                                   id="c33">
+                          <af:outputFormatted value="#{row.bindings.LGPL_POL_NO.inputValue}"
+                                              id="of37"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_BRANCH" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_BRANCH.label}"
+                                   id="c71">
+                          <af:outputFormatted value="#{row.bindings.LGPL_BRANCH.inputValue}"
+                                              id="of25"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_AOI" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_AOI.label}"
+                                   id="c68">
+                          <af:outputFormatted value="#{row.bindings.LGPL_AOI.inputValue}"
+                                              id="of21"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_COMM_RATE"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_COMM_RATE.label}"
+                                   id="c69">
+                          <af:outputFormatted value="#{row.bindings.LGPL_COMM_RATE.inputValue}"
+                                              id="of26"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_OV_COMM_RATE"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_OV_COMM_RATE.label}"
+                                   id="c48">
+                          <af:outputFormatted value="#{row.bindings.LGPL_OV_COMM_RATE.inputValue}"
+                                              id="of20"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_VAT_RATE"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_VAT_RATE.label}"
+                                   id="c4">
+                          <af:outputFormatted value="#{row.bindings.LGPL_VAT_RATE.inputValue}"
+                                              id="of15"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_DURATION"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_DURATION.label}"
+                                   id="c12">
+                          <af:outputFormatted value="#{row.bindings.LGPL_DURATION.inputValue}"
+                                              id="of1"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_FREQ_OF_PAY"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_FREQ_OF_PAY.label}"
+                                   id="c44">
+                          <af:outputFormatted value="#{row.bindings.LGPL_FREQ_OF_PAY.inputValue}"
+                                              id="of39"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_POL_CATEGORY"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_POL_CATEGORY.label}"
+                                   id="c1">
+                          <af:outputFormatted value="#{row.bindings.LGPL_POL_CATEGORY.inputValue}"
+                                              id="of5"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_MULTI_EARNINGS"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_MULTI_EARNINGS.label}"
+                                   id="c66">
+                          <af:outputFormatted value="#{row.bindings.LGPL_MULTI_EARNINGS.inputValue}"
+                                              id="of4"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_FCL" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_FCL.label}"
+                                   id="c32">
+                          <af:outputFormatted value="#{row.bindings.LGPL_FCL.inputValue}"
+                                              id="of17"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_CODE" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_CODE.label}"
+                                   id="c65">
+                          <af:outputFormatted value="#{row.bindings.LGPL_CODE.inputValue}"
+                                              id="of13"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_PENS_COMM_RATE"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_PENS_COMM_RATE.label}"
+                                   id="c59">
+                          <af:outputFormatted value="#{row.bindings.LGPL_PENS_COMM_RATE.inputValue}"
+                                              id="of30"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_PENS_PAYMENT_FREQ"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_PENS_PAYMENT_FREQ.label}"
+                                   id="c58">
+                          <af:outputFormatted value="#{row.bindings.LGPL_PENS_PAYMENT_FREQ.inputValue}"
+                                              id="of22"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_REGISTERED"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_REGISTERED.label}"
+                                   id="c67">
+                          <af:outputFormatted value="#{row.bindings.LGPL_REGISTERED.inputValue}"
+                                              id="of32"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_REG_NO" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_REG_NO.label}"
+                                   id="c9">
+                          <af:outputFormatted value="#{row.bindings.LGPL_REG_NO.inputValue}"
+                                              id="of6"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_PENS_TYPE"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_PENS_TYPE.label}"
+                                   id="c47">
+                          <af:outputFormatted value="#{row.bindings.LGPL_PENS_TYPE.inputValue}"
+                                              id="of11"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_CONTRI_TYPE"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_CONTRI_TYPE.label}"
+                                   id="c56">
+                          <af:outputFormatted value="#{row.bindings.LGPL_CONTRI_TYPE.inputValue}"
+                                              id="of23"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_EMYE_CONTRI"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_EMYE_CONTRI.label}"
+                                   id="c45">
+                          <af:outputFormatted value="#{row.bindings.LGPL_EMYE_CONTRI.inputValue}"
+                                              id="of33"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_EMYR_CONTRI"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_EMYR_CONTRI.label}"
+                                   id="c60">
+                          <af:outputFormatted value="#{row.bindings.LGPL_EMYR_CONTRI.inputValue}"
+                                              id="of24"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_MALE_NRD"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_MALE_NRD.label}"
+                                   id="c2">
+                          <af:outputFormatted value="#{row.bindings.LGPL_MALE_NRD.inputValue}"
+                                              id="of35"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_FEMALE_NRD"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_FEMALE_NRD.label}"
+                                   id="c63">
+                          <af:outputFormatted value="#{row.bindings.LGPL_FEMALE_NRD.inputValue}"
+                                              id="of31"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_GRNTD_PRD"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_GRNTD_PRD.label}"
+                                   id="c54">
+                          <af:outputFormatted value="#{row.bindings.LGPL_GRNTD_PRD.inputValue}"
+                                              id="of7"/>
+                        </af:column>
+                        <af:column sortProperty="LGPL_EARNINGS_ESC"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.Account1.hints.LGPL_EARNINGS_ESC.label}"
+                                   id="c46">
+                          <af:outputFormatted value="#{row.bindings.LGPL_EARNINGS_ESC.inputValue}"
+                                              id="of38"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelGroupLayout>
+                  </af:panelBox>
+                  <af:panelBox text="Policy Member Details" id="pb2"
+                               binding="#{PolicyLoad.membersTab}"
+                               rendered="false" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Policy Members." id="outputLabel21"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="separator1"/>
+                    <h:panelGrid columns="2" id="pg6">
+                      <af:inputFile label="File To Upload" autoSubmit="true"
+                                    binding="#{PolicyLoad.upFile}" 
+                                    
+                                    immediate="true" id="if1"
+                                    valueChangeListener="#{PolicyLoad.fileForMemberDataLoading}"/>
+                      <af:commandButton id="commandButton10"
+                                        icon="/images/delete_ena.png"
+                                        text="Delete"
+                                        action="#{PolicyLoad.deleteLoadedMembers}"/>
+                    </h:panelGrid>
+                    <af:table value="#{bindings.Account6.collectionModel}"
+                              var="row" rows="#{bindings.Account6.rangeSize}"
+                              emptyText="#{bindings.Account6.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Account6.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.AccountQuery.queryDescriptor}"
+                              queryListener="#{bindings.AccountQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Account6.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Account6.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t2"
+                              binding="#{PolicyLoad.memDataTable}"
+                              width="100%">
+                      <af:column sortProperty="LGMD_SN" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_SN.label}"
+                                 id="c15">
+                        <af:outputText value="#{row.LGMD_SN}" id="ot47"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_SURNAME" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_SURNAME.label}"
+                                 id="c35">
+                        <af:outputText value="#{row.LGMD_SURNAME}" id="ot50"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_DOB" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_DOB.label}"
+                                 id="c6">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.LGMD_DOB}"
+                                        id="id2"/>
+                        </f:facet>
+                        <af:outputText value="#{row.LGMD_DOB}" id="ot37">
+                          <af:convertDateTime pattern="#{bindings.Account6.hints.LGMD_DOB.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="LGMD_ANB" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_ANB.label}"
+                                 id="c17">
+                        <af:outputText value="#{row.LGMD_ANB}" id="ot33"/>
+                      </af:column>
+                       <af:column sortProperty="LGMD_CATEGORY" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_CATEGORY.label}"
+                                 id="c41">
+                        <af:outputText value="#{row.LGMD_CATEGORY}" id="ot48"/>
+                      </af:column>
+                       <af:column sortProperty="LGMD_EARNINGS_PRD"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_EARNINGS_PRD.label}"
+                                 id="c91">
+                        <af:outputText value="#{row.LGMD_EARNINGS_PRD}"
+                                       id="ot30"/>
+                      </af:column>
+                        <af:column sortProperty="LGMD_OCCUPATION"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_OCCUPATION.label}"
+                                 id="c11">
+                        <af:outputText value="#{row.LGMD_OCCUPATION}"
+                                       id="ot32"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_BASIC" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_BASIC.label}"
+                                 id="c38">
+                        <af:outputText value="#{row.LGMD_BASIC}" id="ot38"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_HOUSING" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_HOUSING.label}"
+                                 id="c14">
+                        <af:outputText value="#{row.LGMD_HOUSING}" id="ot44"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_TRANSPORT" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_TRANSPORT.label}"
+                                 id="c90">
+                        <af:outputText value="#{row.LGMD_TRANSPORT}" id="ot49"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_MONTH_SAL" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_MONTH_SAL.label}"
+                                 id="c39">
+                        <af:outputText value="#{row.LGMD_MONTH_SAL}" id="ot46"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_TOT_EMUL" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_TOT_EMUL.label}"
+                                 id="c37">
+                        <af:outputText value="#{row.LGMD_TOT_EMUL}" id="ot36"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_SA" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_SA.label}"
+                                 id="c89">
+                        <af:outputText value="#{row.LGMD_SA}" id="ot52"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_PREM" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_PREM.label}"
+                                 id="c21">
+                        <af:outputText value="#{row.LGMD_PREM}" id="ot51"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_PREM_RATE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_PREM_RATE.label}"
+                                 id="c20">
+                        <af:outputText value="#{row.LGMD_PREM_RATE}" id="ot42"/>
+                      </af:column>
+                       <af:column sortProperty="LGMD_POL_NO" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_POL_NO.label}"
+                                 id="c5">
+                        <af:outputText value="#{row.LGMD_POL_NO}" id="ot43"/>
+                      </af:column>
+                      
+                      <af:column sortProperty="LGMD_DOJ" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_DOJ.label}"
+                                 id="c13">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.LGMD_DOJ}"
+                                        id="id3"/>
+                        </f:facet>
+                        <af:outputText value="#{row.LGMD_DOJ}" id="ot39">
+                          <af:convertDateTime pattern="#{bindings.Account6.hints.LGMD_DOJ.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="LGMD_COVER_FROM_DATE"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_COVER_FROM_DATE.label}"
+                                 id="c16">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.LGMD_COVER_FROM_DATE}"
+                                        id="id7"/>
+                        </f:facet>
+                        <af:outputText value="#{row.LGMD_COVER_FROM_DATE}"
+                                       id="ot29">
+                          <af:convertDateTime pattern="#{bindings.Account6.hints.LGMD_COVER_FROM_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="LGMD_EMYR_BAL_BF"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_EMYR_BAL_BF.label}"
+                                 id="c7">
+                        <af:outputText value="#{row.LGMD_EMYR_BAL_BF}"
+                                       id="ot54"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_EMYE_BAL_BF"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_EMYE_BAL_BF.label}"
+                                 id="c10">
+                        <af:outputText value="#{row.LGMD_EMYE_BAL_BF}"
+                                       id="ot40"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_EMPYR_CONTRI"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_EMPYR_CONTRI.label}"
+                                 id="c40">
+                        <af:outputText value="#{row.LGMD_EMPYR_CONTRI}"
+                                       id="ot53"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_EMYE_CONTRI"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_EMYE_CONTRI.label}"
+                                 id="c18">
+                        <af:outputText value="#{row.LGMD_EMYE_CONTRI}"
+                                       id="ot34"/>
+                      </af:column>
+                         <af:column sortProperty="LGMD_ORIG_LOAN_AMT"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_ORIG_LOAN_AMT.label}"
+                                 id="c42">
+                        <af:outputText value="#{row.LGMD_ORIG_LOAN_AMT}"
+                                       id="ot35"/>
+                      </af:column>                           
+                    
+                      <af:column sortProperty="LGMD_LOAN_ISSUE_DATE"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_LOAN_ISSUE_DATE.label}"
+                                 id="c36">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.LGMD_LOAN_ISSUE_DATE}"
+                                        id="id4"/>
+                        </f:facet>
+                        <af:outputText value="#{row.LGMD_LOAN_ISSUE_DATE}"
+                                       id="ot31">
+                          <af:convertDateTime pattern="#{bindings.Account6.hints.LGMD_LOAN_ISSUE_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="LGMD_ORIG_LN_PRD"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_ORIG_LN_PRD.label}"
+                                 id="c19">
+                        <af:outputText value="#{row.LGMD_ORIG_LN_PRD}"
+                                       id="ot41"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_LOAN_INT" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account6.hints.LGMD_LOAN_INT.label}"
+                                 id="c92">
+                        <af:outputText value="#{row.LGMD_LOAN_INT}" id="ot45"/>
+                      </af:column>                   
+                     
+                    </af:table>
+                  </af:panelBox>
+                  <af:panelBox text="Coinsurer/Rider Details" id="pb4"
+                               rendered="false" showHeader="never"
+                               binding="#{PolicyLoad.coinsRiderPanel}">
+                    <f:facet name="toolbar"/>
+                                           
+                    <af:outputLabel value="Policy Member Riders."
+                                    id="outputLabel23"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="separator3"/>
+                    <h:panelGrid columns="2" id="panelGrid8">
+                      <af:inputFile label="File To Upload" autoSubmit="true"
+                                    immediate="true" id="inputFile1"
+                                    binding="#{PolicyLoad.upFile2}"
+                                    valueChangeListener="#{PolicyLoad.fileChangeForRiderLoading}"/>
+                      <af:commandButton id="commandButton13"
+                                        icon="/images/delete_ena.png"
+                                        text="Delete"
+                                        action="#{PolicyLoad.DeleteMembersRiders}"/>
+                    </h:panelGrid>
+                    
+                    <af:table value="#{bindings.Account2.collectionModel}"
+                              var="row" rows="#{bindings.Account2.rangeSize}"
+                              emptyText="#{bindings.Account2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Account2.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Account2Query.queryDescriptor}"
+                              queryListener="#{bindings.Account2Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Account2.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Account2.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t3"
+                              width="100%" binding="#{PolicyLoad.ridersTable}">
+                      <af:column sortProperty="LGRA_POL_NO" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account2.hints.LGRA_POL_NO.label}"
+                                 id="c23">
+                        <af:outputText value="#{row.LGRA_POL_NO}" id="ot4"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_MEM_NO" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account2.hints.LGRA_MEM_NO.label}"
+                                 id="c24">
+                        <af:outputText value="#{row.LGRA_MEM_NO}" id="ot2"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_SA" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account2.hints.LGRA_SA.label}"
+                                 id="c26">
+                        <af:outputText value="#{row.LGRA_SA}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_CODE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account2.hints.LGRA_BEN_CODE.label}"
+                                 id="c28">
+                        <af:outputText value="#{row.LGRA_BEN_CODE}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_TYPE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account2.hints.LGRA_BEN_TYPE.label}"
+                                 id="c27">
+                        <af:outputText value="#{row.LGRA_BEN_TYPE}" id="ot3"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_SA" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account2.hints.LGRA_BEN_SA.label}"
+                                 id="c29">
+                        <af:outputText value="#{row.LGRA_BEN_SA}" id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_RATE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account2.hints.LGRA_BEN_RATE.label}"
+                                 id="c22">
+                        <af:outputText value="#{row.LGRA_BEN_RATE}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_PREM" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account2.hints.LGRA_BEN_PREM.label}"
+                                 id="c25">
+                        <af:outputText value="#{row.LGRA_BEN_PREM}" id="ot6"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelBox>
+                  
+                  <af:panelBox text="Coinsurers Details" rendered="false" showHeader="never"
+                               id="pb5" binding="#{PolicyLoad.coinsurerTab}">
+                               
+                     <af:outputLabel value="Policy Coinsurers"
+                                    id="ol2"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="s5"/>
+                    <h:panelGrid columns="2" id="pg2">
+                      <af:inputFile label="File To Upload" autoSubmit="true"
+                                    immediate="true" id="if3"
+                                    valueChangeListener="#{PolicyLoad.upProcessorForCoin}"
+                                    binding="#{PolicyLoad.upFileCoin}"/>
+                      <af:commandButton id="cb1"
+                                        icon="/images/delete_ena.png"
+                                        text="Delete"/>
+                    </h:panelGrid>
+                    <af:table value="#{bindings.Account5.collectionModel}"
+                              var="row" rows="#{bindings.Account5.rangeSize}"
+                              emptyText="#{bindings.Account5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Account5.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Account5Query.queryDescriptor}"
+                              queryListener="#{bindings.Account5Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Account5.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Account5.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t5"
+                              width="100%"
+                              binding="#{PolicyLoad.coinsurersTable}">
+                      <af:column sortProperty="LGCA_SCHEME" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account5.hints.LGCA_SCHEME.label}"
+                                 id="c86"
+                                 width="200px">
+                        <af:outputText value="#{row.LGCA_SCHEME}" id="ot24"/>
+                      </af:column>
+                      <af:column sortProperty="LGCA_CO_SHARE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account5.hints.LGCA_CO_SHARE.label}"
+                                 id="c88">
+                        <af:outputText value="#{row.LGCA_CO_SHARE}" id="ot28"/>
+                      </af:column>
+                      <af:column sortProperty="LGCA_COINSURER" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account5.hints.LGCA_COINSURER.label}"
+                                 id="c84"
+                                 width="200px">
+                        <af:outputText value="#{row.LGCA_COINSURER}" id="ot27"/>
+                      </af:column>
+                      <af:column sortProperty="LGCA_COIN_SHARE"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account5.hints.LGCA_COIN_SHARE.label}"
+                                 id="c85">
+                        <af:outputText value="#{row.LGCA_COIN_SHARE}"
+                                       id="ot26"/>
+                      </af:column>
+                      <af:column sortProperty="LGCA_POL_NO" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account5.hints.LGCA_POL_NO.label}"
+                                 id="c87">
+                        <af:outputText value="#{row.LGCA_POL_NO}" id="ot25"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelBox>
+                  <af:panelBox text="PanelBox6" id="pb3" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="6" id="pg4">
+                      <af:commandButton text="Previous" id="commandButton11"
+                                        binding="#{PolicyLoad.prevButton}"                                        
+                                        inlineStyle="width:100.0px;"
+                                        action="#{PolicyLoad.previousAction}"/>
+                      <af:commandButton text="Next" id="cb2"
+                                        binding="#{PolicyLoad.nextButton}"
+                                        inlineStyle="width:100.0px;"
+                                        action="#{PolicyLoad.nextAction}"/>
+                      <af:spacer width="600" height="10" id="s3"/>
+                      <af:commandButton text="Load Policies" id="commandButton12"
+                                        inlineStyle="width:100.0px;"
+                                        disabled="true"
+                                        binding="#{PolicyLoad.loadPolicy}"
+                                        action="#{PolicyLoad.loadAllPolicies}"/>
+                      <af:commandButton text="Delete Policy" id="commandButton5"
+                                        inlineStyle="width:100.0px;"
+                                        disabled="true"
+                                        binding="#{PolicyLoad.deletePolicy}"
+                                        action="#{PolicyLoad.DeletePolicy}"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

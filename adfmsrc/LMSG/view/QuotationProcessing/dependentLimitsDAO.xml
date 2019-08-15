@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="dependentLimitsDAO" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.dependentLimitsDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.dependentLimits"
+                  BeanClass="LMSG.view.QuotationProcessing.dependentLimits"
+                  id="FindDependentsLimits" ReturnNodeName="dependentLimits"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.dependentLimitsDAO"
+                     BeanClass="LMSG.view.QuotationProcessing.dependentLimitsDAO"
+                     id="dependentLimitsDAO"/>
+</JavaBean>

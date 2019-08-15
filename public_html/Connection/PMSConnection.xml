@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<application>
+	<connection>
+		<jdblUrl>http://172.20.90.116:8080/PaymentManagementService/PaymentManagement</jdblUrl>
+    	</connection>
+</application>

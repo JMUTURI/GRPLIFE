@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="memcoversPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="findMembers.result" DataControl="GenQuotMem"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                    id="findMembersIterator"/>
+    <methodIterator Binds="findMemberCoverTypes.result"
+                    DataControl="memCoverTypesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.memCoverTypes"
+                    id="findMemberCoverTypesIterator"/>
+    <methodIterator Binds="findQuotation.result" DataControl="QuotationDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                    id="findQuotationIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+  </executables>
+  <bindings>
+    <methodAction id="findMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMembers"
+                  IsViewObjectMethod="false" DataControl="GenQuotMem"
+                  InstanceName="GenQuotMem.dataProvider"
+                  ReturnName="GenQuotMem.methodResults.findMembers_GenQuotMem_dataProvider_findMembers_result"/>
+    <methodAction id="findQuotation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotation"
+                  IsViewObjectMethod="false" DataControl="QuotationDAO"
+                  InstanceName="QuotationDAO.dataProvider"
+                  ReturnName="QuotationDAO.methodResults.findQuotation_QuotationDAO_dataProvider_findQuotation_result"/>
+    <methodAction id="findMemberCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMemberCoverTypes"
+                  IsViewObjectMethod="false" DataControl="memCoverTypesDAO"
+                  InstanceName="memCoverTypesDAO.dataProvider"
+                  ReturnName="memCoverTypesDAO.methodResults.findMemberCoverTypes_memCoverTypesDAO_dataProvider_findMemberCoverTypes_result"/>
+    <methodAction id="findMembers1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMembers"
+                  IsViewObjectMethod="false" DataControl="JointMembers"
+                  InstanceName="JointMembers.dataProvider"
+                  ReturnName="JointMembers.methodResults.findMembers_JointMembers_dataProvider_findMembers_result"/>
+    <tree IterBinding="findMembersIterator" id="QuotMembers">
+      <nodeDefinition DefName="view.Quot.QuotMembers" Name="QuotMembers0">
+        <AttrNames>
+          <Item Value="quoMemNo"/>
+          <Item Value="quoMemName"/>
+          <Item Value="QMEM_TOT_SA"/>
+          <Item Value="QMEM_HEIGHT"/>
+          <Item Value="QMEM_WEIGHT"/>
+          <Item Value="QMEM_WEIGHT_LOADING"/>
+          <Item Value="QMEM_SYSTOLIC_PR"/>
+          <Item Value="QMEM_DIASTOLIC_PR"/>
+          <Item Value="QMEM_BPRESS_LOADING"/>
+          <Item Value="QMEM_LOADING_TYPE"/>
+          <Item Value="QMEM_LOADING_RATE"/>
+          <Item Value="QMEM_LOADING_DIV_FACT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findMemberCoverTypesIterator" id="memCoverTypes">
+      <nodeDefinition DefName="view.Quot.memCoverTypes" Name="memCoverTypes0">
+        <AttrNames>
+          <Item Value="cover_display"/>
+          <Item Value="QCM_COVER_WEF_DATE"/>
+          <Item Value="QCM_COVER_WET_DATE"/>
+          <Item Value="QCM_SA"/>
+          <Item Value="QCM_LOAD_DISC_PREM"/>
+          <Item Value="QCM_PREMIUM"/>
+          <Item Value="QCM_ORIGINAL_LOAN_AMT"/>
+          <Item Value="QCM_LOAN_ISSUE_DATE"/>
+          <Item Value="QCM_ORIG_LOAN_REPAYMENT_PRD"/>
+          <Item Value="QCM_SAVING_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuotationIterator" id="quoNo">
+      <AttrNames>
+        <Item Value="quoNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="client">
+      <AttrNames>
+        <Item Value="client"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="agnName">
+      <AttrNames>
+        <Item Value="agnName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="QUO_CLA_SHT_DESC">
+      <AttrNames>
+        <Item Value="QUO_CLA_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="QUO_PROD_SHT_DESC">
+      <AttrNames>
+        <Item Value="QUO_PROD_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="BRN_NAME">
+      <AttrNames>
+        <Item Value="BRN_NAME"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+  </bindings>
+</pageDefinition>

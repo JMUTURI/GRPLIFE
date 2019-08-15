@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Treaty Types" id="d2">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                                 id="pgl4">
+              <af:panelAccordion id="pa1"
+                                 inlineStyle="width:100%; height:400.0px;">
+                <af:showDetailItem text="Treaty Types And Groups" id="sdi3">
+                  <f:facet name="toolbar">
+                    <h:panelGrid columns="2" id="pg3">
+                      <af:inputText id="it2" helpTopicId="LmsgGrp_treatyTypes"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si1"/>
+                    </h:panelGrid>
+                  </f:facet>
+                  <af:panelSplitter id="ps1"
+                                    inlineStyle="width:100%; height:370.0px;">
+                    <f:facet name="first">
+                      <af:panelBox text="Treaty Types &amp; Groups" id="pb1">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="3" id="pg12">
+                          <af:commandButton id="cb19"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{SetupBean.AddTreatyGroup}"/>
+                          <af:commandButton icon="/images/update_ena.png"
+                                            id="commandButton11"
+                                            action="#{SetupBean.EditTreatyGroup}"/>
+                          <af:commandButton id="cb22"
+                                            icon="/images/delete_ena.png"
+                                            action="#{SetupBean.DeleteTreatyGroup}"/>
+                        </h:panelGrid>
+                        <af:popup id="treatyGrp">
+                          <af:dialog id="d1" type="none" title="Treaty Types">
+                            <h:panelGrid columns="2" id="pg1">
+                              <af:outputLabel value="Id." id="ol2"/>
+                              <af:inputText label="Label 1" id="it1"
+                                            simple="true"
+                                            binding="#{SetupBean.shortDesc}"/>
+                              <af:outputLabel value="Description"
+                                              id="outputLabel2"/>
+                              <af:inputText label="Label 1" id="inputText1"
+                                            simple="true"
+                                            binding="#{SetupBean.desc}"/>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" id="pg2">
+                              <af:commandButton text="Save" id="cb1"
+                                                action="#{SetupBean.SaveTreatyGroup}"/>
+                              <af:commandButton text="Cancel"
+                                                id="commandButton1"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                        <af:tree value="#{bindings.Setup3.treeModel}" var="node"
+                                 selectionListener="#{SetupBean.TreatiesListenerTree}"
+                                 rowSelection="single" id="t4"
+                                 binding="#{SetupBean.trtGrpsLOV}">
+                          <f:facet name="nodeStamp">
+                            <af:outputText value="#{node}" id="ot9"/>
+                          </f:facet>
+                        </af:tree>
+                      </af:panelBox>
+                    </f:facet>
+                    <f:facet name="second">
+                      <af:panelBox text="Treaties" id="pb2">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="3" id="panelGrid1">
+                          <af:commandButton id="commandButton2"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{SetupBean.AddTreaty}"/>
+                          <af:commandButton icon="/images/update_ena.png"
+                                            id="commandButton3"
+                                            action="#{SetupBean.EditTreaty}"/>
+                          <af:commandButton id="commandButton4"
+                                            icon="/images/delete_ena.png"
+                                            action="#{SetupBean.DeleteTreaty}"/>
+                        </h:panelGrid>
+                        <af:popup id="treaty">
+                          <af:dialog id="dialog1" type="none" title="Treaties">
+                            <h:panelGrid columns="2" id="panelGrid2">
+                              <af:outputLabel value="Id." id="outputLabel1"/>
+                              <af:inputText label="Label 1" id="inputText2"
+                                            simple="true"
+                                            binding="#{SetupBean.trtShortDesc}"/>
+                              <af:outputLabel value="Description"
+                                              id="outputLabel3"/>
+                              <af:inputText label="Label 1" id="inputText3"
+                                            simple="true"
+                                            binding="#{SetupBean.trtDesc}"/>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" id="panelGrid3">
+                              <af:commandButton text="Save" id="commandButton5"
+                                                action="#{SetupBean.SaveTreaty}"/>
+                              <af:commandButton text="Cancel"
+                                                id="commandButton6"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                        <af:table value="#{bindings.Setup2.collectionModel}"
+                                  var="row" rows="#{bindings.Setup2.rangeSize}"
+                                  emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.Setup2.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t3"
+                                  inlineStyle="width:100%; height:150px; border-style:none;"
+                                  binding="#{SetupBean.treatiesLOV}">
+                          <af:column sortProperty="TRS_SHT_DESC" sortable="true"
+                                     headerText="Id." id="c5">
+                            <af:outputText value="#{row.TRS_SHT_DESC}"
+                                           id="ot7"/>
+                          </af:column>
+                          <af:column sortProperty="TRS_NAME" sortable="true"
+                                     headerText="Treaty Name" id="c7"
+                                     width="200">
+                            <af:outputText value="#{row.TRS_NAME}" id="ot8"/>
+                          </af:column>
+                          <af:column sortProperty="TRS_TRTG_SHT_DESC"
+                                     sortable="true" headerText="Group Id."
+                                     id="c6">
+                            <af:outputText value="#{row.TRS_TRTG_SHT_DESC}"
+                                           id="ot6"/>
+                          </af:column>
+                        </af:table>
+                      </af:panelBox>
+                    </f:facet>
+                  </af:panelSplitter>
+                </af:showDetailItem>
+              </af:panelAccordion>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

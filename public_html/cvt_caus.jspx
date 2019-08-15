@@ -1,0 +1,581 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Causations And Causes Definition">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                             id="pgl4">
+            <af:inputText id="it1"
+                          helpTopicId="LmsGrp_CVT_CAUS" readOnly="true"/>
+            <af:popup id="confirmDel">
+              <af:dialog id="d7" type="none" title="Delete Confirmation">
+                <af:panelBox text="PanelBox1" id="panelBox1" showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <af:outputLabel value="Are you sure you want to Delete?"
+                                  id="ol86" inlineStyle="font-weight:bold;"/>
+                  <h:panelGrid columns="2" id="panelGrid1">
+                    <af:spacer width="10" height="10" id="spacer1"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg19">
+                    <af:commandButton text="Yes" id="cb24"
+                                      action="#{cauastionsManipulation.DeleteObject}"
+                                      partialSubmit="true"/>
+                    <af:commandButton text="No" id="commandButton9"/>
+                  </h:panelGrid>
+                </af:panelBox>
+              </af:dialog>
+            </af:popup>
+            <af:outputLabel value="CAUSATIONS AND CAUSES DEFINITION" id="ol22"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s2"/>
+            <af:panelTabbed id="pt1" inlineStyle="width:100.0%;">
+              <af:showDetailItem text="Causation Types" id="sdi1">
+                <h:panelGrid columns="3" id="pg1">
+                  <af:commandButton id="cb1"
+                                    icon="/images/field_group_plus_ena.png"
+                                    action="#{cauastionsManipulation.addCausation}"/>
+                  <af:commandButton id="cb2" icon="/images/update_ena.png"
+                                    action="#{cauastionsManipulation.editCausation}"/>
+                  <af:commandButton id="delCauseType" icon="/images/delete_ena.png"
+                                    actionListener="#{cauastionsManipulation.DeleteListener}"/>
+                  <af:popup id="causationsPopup">
+                    <af:dialog id="d2" type="none" title="Add/Edit Causations">
+                      <af:panelBox text="PanelBox1" id="pb1" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="2" id="pg2">
+                          <af:outputLabel value="ID" id="ol1"
+                                          showRequired="true"/>
+                          <af:inputText label="Label 1" id="it2" simple="true"
+                                        shortDesc="Causation ID"
+                                        binding="#{cauastionsManipulation.causationID}"/>
+                          <af:outputLabel value="Description" id="ol2"
+                                          showRequired="true"/>
+                          <af:inputText label="Label 2" id="it3" simple="true"
+                                        shortDesc="Description"
+                                        binding="#{cauastionsManipulation.causeDesc}"/>
+                          <af:outputLabel value="Causation Type" id="ol3"
+                                          showRequired="true"/>
+                          <af:selectOneChoice label="Label 1" id="soc1"
+                                              simple="true" autoSubmit="true"
+                                              shortDesc="Causation Type"
+                                              binding="#{cauastionsManipulation.causationType}">
+                            <af:selectItem label="Death" value="DTH" id="si3"/>
+                            <af:selectItem label="Disability" value="DIS"
+                                           id="si2"/>
+                            <af:selectItem label="Withdrawal" value="WIT"
+                                           id="si1"/>
+                            <af:selectItem label=" Retirement" value="RTE"
+                                           id="selectItem1"/>
+                            <af:selectItem label="Ill Health" value="ILL"
+                                           id="selectItem2"/>
+                            <af:selectItem label="Immigration" value="IMG"
+                                           id="selectItem3"/>
+                            <af:selectItem label="Hospitalization"
+                                           value="HSP"
+                                            id="si21"/>
+                          </af:selectOneChoice>
+                          <af:outputLabel value="Withhold Employer Fund"
+                                          id="ol4" showRequired="true"/>
+                          <af:selectOneChoice label="Label 2" id="soc2"
+                                              simple="true"
+                                              shortDesc="Withhold Employer Fund(For Pensions)"
+                                              autoSubmit="true"
+                                              binding="#{cauastionsManipulation.withEmpyrFund}">
+                            <af:selectItem label="Yes" value="Y" id="si5"/>
+                            <af:selectItem label="No" value="N" id="si4"/>
+                          </af:selectOneChoice>
+                          <af:outputLabel value="Withhold Employee Fund"
+                                          id="outputLabel1"
+                                          showRequired="true"/>
+                          <af:selectOneChoice label="Label 2"
+                                              id="selectOneChoice1"
+                                              simple="true"
+                                              shortDesc="Withhold Employer Fund(For Pensions)"
+                                              autoSubmit="true"
+                                              binding="#{cauastionsManipulation.withEmpyeFund}"
+                                              value="N">
+                            <af:selectItem label="Yes" value="Y"
+                                           id="selectItem4"/>
+                            <af:selectItem label="No" value="N"
+                                           id="selectItem5"/>
+                          </af:selectOneChoice>
+                          <af:outputLabel value="Age From"
+                                          id="outputLabel2"/>
+                          <af:inputText label="Label 3" id="inputText1"
+                                        simple="true"
+                                        shortDesc="Claim Number Prefix"
+                                        binding="#{cauastionsManipulation.ageFrom}"/>
+                          <af:outputLabel value="Age To"
+                                          id="outputLabel3"/>
+                          <af:inputText label="Label 3" id="inputText2"
+                                        simple="true"
+                                        shortDesc="Claim Number Prefix"
+                                        binding="#{cauastionsManipulation.ageTo}"/>
+                          <af:outputLabel value="Claim Number Prefix"
+                                          id="ol5" showRequired="true"/>
+                          <af:inputText label="Label 3" id="it4" simple="true"
+                                        shortDesc="Claim Number Prefix"
+                                        binding="#{cauastionsManipulation.clmNoPrefix}"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="pg10">
+                          <af:commandButton text="OK" id="cb4"
+                                            action="#{cauastionsManipulation.SaveCausation}"
+                                            partialSubmit="true"/>
+                          <af:commandButton text="Cancel" id="cb5"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:table value="#{bindings.causations.collectionModel}"
+                          var="row" rows="#{bindings.causations.rangeSize}"
+                          emptyText="#{bindings.causations.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.causations.rangeSize}"
+                          rowBandingInterval="0"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:100%; height:200.0px; border-style:none;"
+                          binding="#{cauastionsManipulation.causationsLOV}">
+                  <af:column sortProperty="causCode" sortable="true"
+                             headerText="#{bindings.causations.hints.causCode.label}"
+                             id="c2" visible="false">
+                    <af:outputText value="#{row.causCode}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="causShtdesc" sortable="true"
+                             headerText="Id." id="c5">
+                    <af:outputText value="#{row.causShtdesc}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="causDesc" sortable="true"
+                             headerText="Causation" id="c1" width="200">
+                    <af:outputText value="#{row.causDesc}" id="ot5"/>
+                  </af:column>
+                  <af:column sortProperty="causType" sortable="true"
+                             headerText="Causation Type" id="c3">
+                    <af:outputText value="#{row.causType}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="causWthld_emplr_fnd" sortable="true"
+                             headerText="Emplyr WithHeld?" id="c6">
+                    <af:outputText value="#{row.causWthld_emplr_fnd}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="caus_wthld_emple_fnd"
+                             sortable="false" headerText="Emplye WithHeld?"
+                             id="c34">
+                    <af:outputText value="#{row.caus_wthld_emple_fnd}"
+                                   id="ot35"/>
+                  </af:column>
+                  <af:column sortProperty="caus_age_from" sortable="false"
+                             headerText="Age From" id="c35">
+                    <af:outputText value="#{row.caus_age_from}" id="ot37"/>
+                  </af:column>
+                  <af:column sortProperty="caus_age_to" sortable="false"
+                             headerText="Age To" id="c36">
+                    <af:outputText value="#{row.caus_age_to}" id="ot36"/>
+                  </af:column>
+                  <af:column sortProperty="causClm_prefix" sortable="true"
+                             headerText="Claim No. Prefix" id="c4">
+                    <af:outputText value="#{row.causClm_prefix}" id="ot7"/>
+                  </af:column>
+                </af:table>
+              </af:showDetailItem>
+              <af:showDetailItem text="Death/Disability Causes" id="sdi2">
+                <h:panelGrid columns="3" id="pg3">
+                  <af:commandButton id="cb6"
+                                    icon="/images/field_group_plus_ena.png"
+                                    action="#{cauastionsManipulation.AddDeathCausation}"/>
+                  <af:commandButton id="cb7" icon="/images/update_ena.png"
+                                    action="#{cauastionsManipulation.EditCausation}"/>
+                  <af:commandButton id="delDeathCause" icon="/images/delete_ena.png"
+                                    actionListener="#{agents.DeleteListener}"/>
+                  <af:popup id="deathDisCausesPopup">
+                    <af:dialog id="d3" type="none"
+                               title="Add/Edit Death Disability Causes">
+                      <af:panelBox text="PanelBox4" id="pb4" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="2" id="pg4">
+                          <af:outputLabel value="Id." id="ol6"
+                                          showRequired="true"/>
+                          <af:inputText label="Label 4" id="it5" simple="true"
+                                        shortDesc="death disability cause ID"
+                                        binding="#{cauastionsManipulation.deathID}"/>
+                          <af:outputLabel value="Description" id="ol7"
+                                          showRequired="true"/>
+                          <af:inputText label="Label 5" id="it6" simple="true"
+                                        shortDesc="Description"
+                                        binding="#{cauastionsManipulation.deathDesc}"/>
+                          <af:outputLabel value="Causation Class" id="ol8"
+                                          showRequired="true"/>
+                          <af:selectOneChoice label="Label 3" id="soc3"
+                                              simple="true"
+                                              helpTopicId="Causation Class"
+                                              autoSubmit="true"
+                                              binding="#{cauastionsManipulation.causationClass}">
+                            <af:selectItem label="HIV" value="H" id="si13"/>
+                            <af:selectItem label="Critical Illness" value="C"
+                                           id="si8"/>
+                            <af:selectItem label="Natural " value="N"
+                                           id="si14"/>
+                            <af:selectItem label="War" value="W" id="si9"/>
+                            <af:selectItem label="Suicide" value="S" id="si10"/>
+                            <af:selectItem label="Atomic/Nuclear" value="A"
+                                           id="si6"/>
+                            <af:selectItem label="Aviation" value="V" id="si7"/>
+                            <af:selectItem label="Rock Climbing" value="R"
+                                           id="si12"/>
+                            <af:selectItem label="Alcoholism" value="L"
+                                           id="si11"/>
+                          </af:selectOneChoice>
+                          <af:outputLabel value="Waiting Period(6 Months)"
+                                          id="ol9"/>
+                          <af:inputText label="Label 6" id="it7" simple="true"
+                                        shortDesc="Waiting Period(Months)"
+                                        binding="#{cauastionsManipulation.waitingPeriod}"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="pg13">
+                          <af:commandButton text="OK" id="cb9"
+                                            action="#{cauastionsManipulation.SaveDeathDisability}"
+                                            partialSubmit="true"/>
+                          <af:commandButton text="Cancel" id="cb10"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:table value="#{bindings.causations1.collectionModel}"
+                          var="row" rows="#{bindings.causations1.rangeSize}"
+                          emptyText="#{bindings.causations1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.causations1.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.causations1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.causations1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t2"
+                          inlineStyle="width:100%; height:200.0px; border-style:none;"
+                          binding="#{cauastionsManipulation.deathDisabilityLOV}">
+                  <af:column sortProperty="ddcCode" sortable="true"
+                             headerText="#{bindings.causations1.hints.ddcCode.label}"
+                             id="c9" visible="false">
+                    <af:outputText value="#{row.ddcCode}" id="ot12"/>
+                  </af:column>
+                  <af:column sortProperty="ddcShtDesc" sortable="true"
+                             headerText="Id." id="c8">
+                    <af:outputText value="#{row.ddcShtDesc}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="ddcDesc" sortable="true"
+                             headerText="Description" id="c7">
+                    <af:outputText value="#{row.ddcDesc}" id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="ddcHivDesc" sortable="true"
+                             headerText="Causation Class" id="c11" width="120">
+                    <af:outputText value="#{row.ddcHivDesc}" id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="ddcWaitingPrd" sortable="true"
+                             headerText="Waiting Period (Mnths)" id="c10"
+                             width="120">
+                    <af:outputText value="#{row.ddcWaitingPrd}" id="ot8"/>
+                  </af:column>
+                </af:table>
+              </af:showDetailItem>
+              <af:showDetailItem text="Causations Causes" id="sdi3">
+                <af:table value="#{bindings.causations2.collectionModel}"
+                          var="row" rows="#{bindings.causations2.rangeSize}"
+                          emptyText="#{bindings.causations2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.causations2.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.causations2.collectionModel.selectedRow}"
+                          selectionListener="#{cauastionsManipulation.causationsListner}"
+                          rowSelection="single" id="t3"
+                          inlineStyle="width:100%; height:100px; border-style:none;"
+                          binding="#{cauastionsManipulation.causationsCauseLOV}">
+                  <af:column sortProperty="causCode" sortable="true"
+                             headerText="#{bindings.causations2.hints.causCode.label}"
+                             id="c15" visible="false">
+                    <af:outputText value="#{row.causCode}" id="ot13"/>
+                  </af:column>
+                  <af:column sortProperty="causShtdesc" sortable="true"
+                             headerText="Id." id="c13">
+                    <af:outputText value="#{row.causShtdesc}" id="ot16"/>
+                  </af:column>
+                  <af:column sortProperty="causDesc" sortable="true"
+                             headerText="Causation Description" id="c12"
+                             width="200">
+                    <af:outputText value="#{row.causDesc}" id="ot14"/>
+                  </af:column>
+                  <af:column sortProperty="causType" sortable="true"
+                             headerText="Causation Type" id="c14">
+                    <af:outputText value="#{row.causType}" id="ot15"/>
+                  </af:column>
+                </af:table>
+                <af:outputLabel value="Causation Causes" id="ol10"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s1"/>
+                <h:panelGrid columns="3" id="pg5">
+                  <af:commandButton id="cb11"
+                                    icon="/images/field_group_plus_ena.png"
+                                    action="#{cauastionsManipulation.AddCausationCause}"/>
+                  <af:commandButton id="cb12" icon="/images/update_ena.png"
+                                    action="#{cauastionsManipulation.EditCausationCause}"/>
+                  <af:commandButton id="delCausaCause" icon="/images/delete_ena.png"
+                                    actionListener="#{agents.DeleteListener}"/>
+                  <af:popup id="addCausationsPOPUP">
+                    <af:dialog id="d5" type="none"
+                               title="Death/Disability Causes">
+                      <af:table value="#{bindings.causations4.collectionModel}"
+                                var="row"
+                                rows="#{bindings.causations4.rangeSize}"
+                                emptyText="#{bindings.causations4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.causations4.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.causations4Query.queryDescriptor}"
+                                queryListener="#{bindings.causations4Query.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.causations4.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.causations4.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t5"
+                                binding="#{cauastionsManipulation.addCausationsLOV}">
+                        <af:column sortProperty="ddcCode" filterable="true"
+                                   sortable="true" headerText="code" id="c25"
+                                   visible="false">
+                          <af:outputText value="#{row.ddcCode}" id="ot24"/>
+                        </af:column>
+                        <af:column sortProperty="ddcShtDesc" filterable="true"
+                                   sortable="true"
+                                   headerText="short Description" id="c24">
+                          <af:outputText value="#{row.ddcShtDesc}" id="ot26"/>
+                        </af:column>
+                        <af:column sortProperty="ddcDesc" filterable="true"
+                                   sortable="true" headerText="Cause" id="c23"
+                                   width="200">
+                          <af:outputText value="#{row.ddcDesc}" id="ot25"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg14">
+                        <af:commandButton text="OK" id="cb15"
+                                          action="#{cauastionsManipulation.AssignCaustionsCause}"
+                                          partialSubmit="true"/>
+                        <af:commandButton text="Cancel" id="cb16"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                  <af:popup id="causationCausePopup">
+                    <af:dialog id="d4" type="none"
+                               title="Add/Edit Causation Causes">
+                      <af:panelBox text="PanelBox2" id="pb2" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="2" id="pg6">
+                          <af:outputLabel value="ID" id="ol11"
+                                          showRequired="true"/>
+                          <h:panelGrid columns="2" id="pg7">
+                            <af:inputText label="Label 7" id="it8" simple="true"
+                                          binding="#{cauastionsManipulation.causID}"/>
+                            <af:commandButton id="cb14"
+                                              icon="/images/dropdown.gif">
+                              <af:showPopupBehavior popupId="addCausationsPOPUP"/>
+                            </af:commandButton>
+                          </h:panelGrid>
+                          <af:outputLabel value="Description" id="ol14"
+                                          showRequired="true"/>
+                          <af:inputText label="Label 9" id="it10" simple="true"
+                                        binding="#{cauastionsManipulation.causDescription}"/>
+                          <af:outputLabel value="Gender" id="ol12"
+                                          showRequired="true"/>
+                          <af:selectOneChoice label="Label 4" id="soc4"
+                                              simple="true" autoSubmit="true"
+                                              binding="#{cauastionsManipulation.causationGender}">
+                            <af:selectItem label="Male" value="M" id="si15"/>
+                            <af:selectItem label="Female" value="F" id="si16"/>
+                            <af:selectItem label="Both" id="si20" value="B"/>
+                          </af:selectOneChoice>
+                          <af:outputLabel value="Min Claimable(Months)"
+                                          id="ol13"/>
+                          <af:inputText label="Label 8" id="it9" simple="true"
+                                        shortDesc="Minimum Claimable Months"
+                                        binding="#{cauastionsManipulation.minClaimablePeriod}"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="pg11">
+                          <af:commandButton text="OK" id="cb17"
+                                            action="#{cauastionsManipulation.SaveCausationCause}"
+                                            partialSubmit="true"/>
+                          <af:commandButton text="Cancel" id="cb18"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:table value="#{bindings.causations3.collectionModel}"
+                          var="row" rows="#{bindings.causations3.rangeSize}"
+                          emptyText="#{bindings.causations3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.causations3.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{bindings.causations3.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t4"
+                          inlineStyle="width:100%; height:100px; border-style:none;"
+                          binding="#{cauastionsManipulation.causationsCausesLOV}">
+                  <af:column sortProperty="ddsShtDesc" sortable="true"
+                             headerText="Id." id="c18">
+                    <af:outputText value="#{row.ddsShtDesc}" id="ot23"/>
+                  </af:column>
+                  <af:column sortProperty="ddsDesc" sortable="true"
+                             headerText="Description" id="c20">
+                    <af:outputText value="#{row.ddsDesc}" id="ot22"/>
+                  </af:column>
+                  <af:column sortProperty="cscSex" sortable="true"
+                             headerText="Sex" id="c22">
+                    <af:outputText value="#{row.cscSex}" id="ot20"/>
+                  </af:column>
+                  <af:column sortProperty="cscMinClaimableprd" sortable="true"
+                             headerText="Min Claimable (Mnths)" id="c21"
+                             width="120">
+                    <af:outputText value="#{row.cscMinClaimableprd}" id="ot21"/>
+                  </af:column>
+                  <af:column sortProperty="cscCode" sortable="true"
+                             headerText="#{bindings.causations3.hints.cscCode.label}"
+                             id="c19" visible="false">
+                    <af:outputText value="#{row.cscCode}" id="ot17"/>
+                  </af:column>
+                  <af:column sortProperty="cscDdcCode" sortable="true"
+                             headerText="#{bindings.causations3.hints.cscDdcCode.label}"
+                             id="c17" visible="false">
+                    <af:outputText value="#{row.cscDdcCode}" id="ot18"/>
+                  </af:column>
+                  <af:column sortProperty="cscCausCode" sortable="true"
+                             headerText="#{bindings.causations3.hints.cscCausCode.label}"
+                             id="c16" visible="false">
+                    <af:outputText value="#{row.cscCausCode}" id="ot19"/>
+                  </af:column>
+                </af:table>
+              </af:showDetailItem>
+              <af:showDetailItem text="Non Medical Claims SA" id="sdi4">
+                <h:panelGrid columns="3" id="pg8">
+                  <af:commandButton id="cb19"
+                                    icon="/images/field_group_plus_ena.png"
+                                    action="#{cauastionsManipulation.AddNonMedicalClaim}"/>
+                  <af:commandButton id="cb20" icon="/images/update_ena.png"
+                                    action="#{cauastionsManipulation.EditNonMedicalClaim}"/>
+                  <af:commandButton id="delNonMedClaim" icon="/images/delete_ena.png"
+                                    actionListener="#{agents.DeleteListener}"/>
+                  <af:popup id="nonMedicalPopup">
+                    <af:dialog id="d6" type="none"
+                               title="Add/Edit Non Medical Claims SA">
+                      <af:panelBox text="PanelBox3" id="pb3" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="2" id="pg9">
+                          <af:outputLabel value="Year From" id="ol15"
+                                          showRequired="true"/>
+                          <af:inputText label="Label 10" id="it11" simple="true"
+                                        shortDesc="Year From"
+                                        binding="#{cauastionsManipulation.yearFrom}"/>
+                          <af:outputLabel value="Year To" id="ol16"
+                                          showRequired="true"/>
+                          <af:inputText label="Label 11" id="it12" simple="true"
+                                        shortDesc="Year To"
+                                        binding="#{cauastionsManipulation.yearTo}"/>
+                          <af:outputLabel value="Rate" id="ol17"
+                                          showRequired="true"/>
+                          <af:inputText label="Label 12" id="it13" simple="true"
+                                        binding="#{cauastionsManipulation.nmsRate}"/>
+                          <af:outputLabel value="Division Factor" id="ol18"/>
+                          <af:selectOneChoice label="Label 5" id="soc5"
+                                              simple="true" autoSubmit="true"
+                                              binding="#{cauastionsManipulation.nmsDivFact}">
+                            <af:selectItem label="Percent" value="100"
+                                           id="si18"/>
+                            <af:selectItem label="Amount" value="1" id="si17"/>
+                            <af:selectItem label="Per Mille" value="1000"
+                                           id="si19"/>
+                          </af:selectOneChoice>
+                          <af:outputLabel value="Maximum Amount" id="ol19"/>
+                          <af:inputText label="Label 13" id="it14"
+                                        binding="#{cauastionsManipulation.nmsMaximumAmt}"
+                                        simple="true"
+                                        shortDesc="Maximum Amount"/>
+                          <af:outputLabel value="WEF" id="ol20"
+                                          showRequired="true"/>
+                          <af:inputDate label="Label 1" id="id1" simple="true"
+                                        shortDesc="With Effect From"
+                                        binding="#{cauastionsManipulation.nmsWEF}">
+                             <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                          <af:outputLabel value="WET" id="ol21"
+                                          showRequired="true"/>
+                          <af:inputDate label="Label 2" id="id2" simple="true"
+                                        binding="#{cauastionsManipulation.nmsWet}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                         </af:inputDate>                
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="pg12">
+                          <af:commandButton text="OK" id="cb22"
+                                            action="#{cauastionsManipulation.saveNonMedicalClaims}"
+                                            partialSubmit="true"/>
+                          <af:commandButton text="Cancel" id="cb23"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:table value="#{bindings.causations5.collectionModel}"
+                          var="row" rows="#{bindings.causations5.rangeSize}"
+                          emptyText="#{bindings.causations5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.causations5.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.causations5.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.causations5.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t6"
+                          inlineStyle="width:100%; height:100px; border-style:none;"
+                          binding="#{cauastionsManipulation.nonMedicalsClaimsLOV}">
+                  <af:column sortProperty="nmsCode" sortable="true"
+                             headerText="#{bindings.causations5.hints.nmsCode.label}"
+                             id="c29" visible="false">
+                    <af:outputText value="#{row.nmsCode}" id="ot31"/>
+                  </af:column>
+                  <af:column sortProperty="mmsYearFrom" sortable="true"
+                             headerText="Year From" id="c28">
+                    <af:outputText value="#{row.mmsYearFrom}" id="ot32"/>
+                  </af:column>
+                  <af:column sortProperty="nmsYearTo" sortable="true"
+                             headerText="Year To" id="c33">
+                    <af:outputText value="#{row.nmsYearTo}" id="ot27"/>
+                  </af:column>
+                  <af:column sortProperty="nmsRate" sortable="true"
+                             headerText="Rate" id="c31">
+                    <af:outputText value="#{row.nmsRate}" id="ot28"/>
+                  </af:column>
+                  <af:column sortProperty="nmsMaxAmt" sortable="true"
+                             headerText="Maxium Amount" id="c26">
+                    <af:outputText value="#{row.nmsMaxAmt}" id="ot33"/>
+                  </af:column>
+                  <af:column sortProperty="nmsDivFact" sortable="true"
+                             headerText="Division Factor" id="c30">
+                    <af:outputText value="#{row.nmsDivFact}" id="ot34"/>
+                  </af:column>
+                  <af:column sortProperty="nmsWef" sortable="true"
+                             headerText="WEF" id="c32">
+                    <af:outputText value="#{row.nmsWef}" id="ot30">
+                      <af:convertDateTime pattern="#{bindings.causations5.hints.nmsWef.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="nmsWet" sortable="true"
+                             headerText="WET" id="c27">
+                    <af:outputText value="#{row.nmsWet}" id="ot29">
+                      <af:convertDateTime pattern="#{bindings.causations5.hints.nmsWet.format}"/>
+                    </af:outputText>
+                  </af:column>
+                </af:table>
+              </af:showDetailItem>
+            </af:panelTabbed>
+          </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Reinsurance Reports By Scheme Basis">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:outputLabel value="Reinsurance Reports By Scheme Basis" id="ol3"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1"/>
+            <h:panelGrid columns="3" id="pg1">
+              <af:outputLabel value="Product" id="ol1"/>
+              <af:inputText label="Label 1" id="it1" simple="true"
+                            binding="#{CoreReports.productsDesc}"/>
+              <h:panelGrid columns="2" id="pg2">
+                <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="productsPopup"/>
+                </af:commandButton>
+                <af:popup id="productsPopup">
+                  <af:dialog id="d2" type="none" title="Select Product">
+                    <af:table value="#{bindings.Setup.collectionModel}"
+                              var="row" rows="#{bindings.Setup.rangeSize}"
+                              emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t1"
+                              binding="#{CoreReports.productsLOV}">
+                      <af:column sortProperty="PROD_SHT_DESC" sortable="true"
+                                 headerText="ID" id="c1">
+                        <af:outputText value="#{row.PROD_SHT_DESC}" id="ot3"/>
+                      </af:column>
+                      <af:column sortProperty="PROD_DESC" sortable="true"
+                                 headerText="PRODUCT" id="c3">
+                        <af:outputText value="#{row.PROD_DESC}" id="ot4"/>
+                      </af:column>
+                      <af:column sortProperty="PROD_TYPE" sortable="true"
+                                 headerText="TYPE" id="c2">
+                        <af:outputText value="#{row.PROD_TYPE}" id="ot2"/>
+                      </af:column>
+                    </af:table>
+                    <af:commandButton text="OK" id="cb2"
+                                      action="#{CoreReports.AssignProducts}"/>
+                    <af:commandButton text="Cancel" id="cb3"/>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Transaction" id="ol2"/>
+              <af:inputText label="Label 2" id="it2" simple="true"
+                            binding="#{CoreReports.endrDescription}"/>
+              <h:panelGrid columns="2" id="pg3">
+                <af:commandButton id="cb4" icon="/images/dropdown.gif"
+                                  action="#{CoreReports.ShowTransactiontypes}"/>
+                <af:popup id="transactionsPopup">
+                  <af:dialog id="d3" type="none"
+                             title="Select Endorsement Type">
+                    <af:table value="#{bindings.Setup1.collectionModel}"
+                              var="row" rows="#{bindings.Setup1.rangeSize}"
+                              emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup1.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.Setup1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Setup1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t2"
+                              binding="#{CoreReports.endosrsementsLOV}">
+                      <af:column sortProperty="BTR_TRANS_CODE" sortable="true"
+                                 headerText="TYPE" id="c5">
+                        <af:outputText value="#{row.BTR_TRANS_CODE}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="BTR_TRANS_TYPE" sortable="true"
+                                 headerText="DESCRIPTION" id="c4">
+                        <af:outputText value="#{row.BTR_TRANS_TYPE}" id="ot6"/>
+                      </af:column>
+                    </af:table>
+                    <af:commandButton text="OK" id="cb5"
+                                      action="#{CoreReports.AssignTransTypes}"/>
+                    <af:commandButton text="Cancel" id="cb6"/>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Date From" id="ol4"/>
+              <af:inputDate label="Label 1" id="id1" simple="true"
+                            binding="#{CoreReports.dateFrom}">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:inputDate>
+              <af:outputText id="ot7"/>
+              <af:outputLabel value="Date To" id="ol5"/>
+              <af:inputDate label="Label 2" id="id2" simple="true"
+                            binding="#{CoreReports.dateTo}">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:inputDate>
+              <af:outputText id="ot8"/>
+              <af:commandButton text="Run Report" id="cb7"
+                                action="#{CoreReports.RunRiSchemeReport}"/>
+            </h:panelGrid>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

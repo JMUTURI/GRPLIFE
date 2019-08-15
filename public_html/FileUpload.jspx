@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces"
+          xmlns:afh="http://xmlns.oracle.com/adf/faces/html">
+    <jsp:output omit-xml-declaration="true" doctype-root-element="HTML"
+              doctype-system="http://www.w3.org/TR/html4/loose.dtd"
+              doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"/>
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <pageTemplate viewId="/templates/pageTemplateDefs/tagDemoPortletTemplate2.jspx"
+                  xmlns="http://xmlns.oracle.com/adf/faces/rich" id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <panelGroupLayout layout="scroll" id="pgl1">
+          <outputText value="Global Layer" id="ot1"/>
+        </panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <tr:form usesUpload="true" id="f1">
+          <tr:panelPage id="pp1">
+            <tr:spacer width="10" height="25" id="s1"/>
+            <tr:inputFile label="File to Upload" columns="90"
+                          value="#{FileProcessor.uploadedFile}" id="if1"/>
+            <tr:spacer width="10" height="15" id="s2"/>
+            <tr:commandButton text="Start Upload" id="cb1"/>
+            <tr:commandButton text="Attach Members To Policy"
+                              action="#{Import.ImportToDbase}"
+                              immediate="true" rendered="#{Rendering.policy}"
+                              id="cb2"/>
+            <tr:commandButton text="Attach Members To Quotations"
+                              action="#{Import.ImportQuotation}"
+                              immediate="true"
+                              rendered="#{Rendering.quotation}" id="cb3"/>
+            <tr:commandButton text="Members Page"
+                              action="#{Import.BackToMembers}" id="cb4"/>
+            <tr:commandButton id="cb5">
+              <commandButton text="Back"
+                             xmlns="http://xmlns.oracle.com/adf/faces/rich"
+                             action="#{underwritingManipulation.ShowMembers}"
+                             id="cb6"/>
+            </tr:commandButton>
+            <tr:spacer width="10" height="25" id="s3"/>
+            <tr:separator id="s4"/>
+            <tr:panelBox id="pb1">
+              <tr:panelFormLayout id="pfl1">
+                <tr:inputText label="File Name"
+                              value="#{FileProcessor.filename}"
+                              readOnly="true" id="it1"/>
+                <tr:inputText label="File Size"
+                              value="#{FileProcessor.filesize}"
+                              readOnly="true" id="it2"/>
+                <tr:inputText label="File Type"
+                              value="#{FileProcessor.filetype}"
+                              readOnly="true" id="it3"/>
+                <tr:selectBooleanCheckbox id="useFirstAsHeader"
+                                          label="Use first row values as Headers"
+                                          autoSubmit="true"
+                                          value="#{CsvProcessor.useFirstRowAsHeaders}"
+                                          selected="true"/>
+              </tr:panelFormLayout>
+            </tr:panelBox>
+            <tr:spacer width="10" height="25" id="s5"/>
+            <tr:table value="#{CsvProcessor.rows}" var="row"
+                      varStatus="rowStatus" binding="#{CsvProcessor.table}"
+                      partialTriggers="useFirstAsHeader" immediate="true"
+                      id="t1">
+              <!-- <f:facet name="header">
+                <tr:outputText value="Contents Extracted from CSV file"/>
+              </f:facet>-->
+            </tr:table>
+            <!--<f:facet name="footer"/>
+            <f:facet name="branding">-->
+            <tr:outputText value="Upload and Process CSV File" id="ot2"/>
+            <!-- </f:facet>-->
+          </tr:panelPage>
+        </tr:form>
+      </f:facet>
+    </pageTemplate>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="quomembrPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="findMembers.result" DataControl="GenQuotMem"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                    id="findMembersIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMembers"
+                  IsViewObjectMethod="false" DataControl="GenQuotMem"
+                  InstanceName="GenQuotMem.dataProvider"
+                  ReturnName="GenQuotMem.methodResults.findMembers_GenQuotMem_dataProvider_findMembers_result"/>
+    <tree IterBinding="findMembersIterator" id="QuotMembers">
+      <nodeDefinition DefName="view.Quot.QuotMembers" Name="QuotMembers0">
+        <AttrNames>
+          <Item Value="quoMemNo"/>
+          <Item Value="quoMemName"/>
+          <Item Value="quoDepMemType"/>
+          <Item Value="quoMemAnb"/>
+          <Item Value="quoJointMem"/>
+          <Item Value="quoOccupation"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

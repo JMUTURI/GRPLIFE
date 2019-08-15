@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="prodTaxesDAO" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.prodTaxesDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.prodTaxes"
+                  BeanClass="LMSG.view.QuotationProcessing.prodTaxes" id="findProductTaxes"
+                  ReturnNodeName="prodTaxes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.prodTaxesDAO"
+                     BeanClass="LMSG.view.QuotationProcessing.prodTaxesDAO" id="prodTaxesDAO"/>
+</JavaBean>

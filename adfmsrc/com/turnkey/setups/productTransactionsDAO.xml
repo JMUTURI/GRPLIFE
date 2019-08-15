@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="productTransactionsDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.productTransactionsDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.productTransactions"
+                  BeanClass="com.turnkey.setups.productTransactions"
+                  id="findProductTransactions"
+                  ReturnNodeName="productTransactions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.productTransactions"
+                  BeanClass="com.turnkey.setups.productTransactions"
+                  id="findTransactionTypes" ReturnNodeName="productTransactions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.productTransactions"
+                  BeanClass="com.turnkey.setups.productTransactions"
+                  id="findGLAccounts" ReturnNodeName="productTransactions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.productTransactions"
+                  BeanClass="com.turnkey.setups.productTransactions"
+                  id="findOtherProductsGLCodes"
+                  ReturnNodeName="productTransactions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.productTransactions"
+                  BeanClass="com.turnkey.setups.productTransactions"
+                  id="findTransTypes" ReturnNodeName="productTransactions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.productTransactionsDAO"
+                     BeanClass="com.turnkey.setups.productTransactionsDAO"
+                     id="productTransactionsDAO"/>
+</JavaBean>

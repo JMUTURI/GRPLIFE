@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="quotPremMask" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.quotPremMask" isJavaBased="true">
+  <Attribute Name="PMAS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMAS_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PMAS_DESC" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.quotPremMask"
+                     BeanClass="LMSG.view.QuotationProcessing.quotPremMask" id="quotPremMask"/>
+</JavaBean>

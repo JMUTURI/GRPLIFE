@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="SettingsDAO" Package="LMSG.view.Base"
+          BeanClass="LMSG.view.Base.SettingsDAO" isJavaBased="true">
+  <Attribute Name="subDivCode" Type="java.math.BigDecimal"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindDependantTypes"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindOccupations"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindTaxes"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindFacilitators"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindActivities"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindSysDate"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindBranches"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindAgents"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindCoinsurers"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings"
+                  id="FindMedicalFacilitators" ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindDeductions"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="findCountries"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="findTowns"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="findSectors"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindPayees"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindSystemUsers"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindStates"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindGovtAgents"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindGroupSubdivisions"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindServiceProviders"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings"
+                  id="FindPolicyServiceProviders" ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindPureRateLoadings"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings"
+                  id="FindQuoPremRateLoadings" ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings"
+                  id="FindProductCoverLoadings" ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindEmailDetails"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindSBUDetails"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings"
+                  id="FindOrgLocationsDetails" ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Base.SettingsDAO"
+                     BeanClass="LMSG.view.Base.SettingsDAO" id="SettingsDAO"/>
+</JavaBean>

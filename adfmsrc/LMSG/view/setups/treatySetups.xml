@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="treatySetups" Package="LMSG.view.setups"
+          BeanClass="LMSG.view.setups.treatySetups" isJavaBased="true">
+  <Attribute Name="REI_TRS_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="REI_RATE_TYPE" Type="java.lang.String"/>
+  <Attribute Name="CUR_DESCN" Type="java.lang.String"/>
+  <Attribute Name="REI_GEN_CONDITIONS" Type="java.lang.String"/>
+  <Attribute Name="REI_EXCLUSIONS" Type="java.lang.String"/>
+  <Attribute Name="REI_INFORMATION" Type="java.lang.String"/>
+  <Attribute Name="REI_WORDING" Type="java.lang.String"/>
+  <Attribute Name="REI_WARRANTY" Type="java.lang.String"/>
+  <Attribute Name="REI_TRS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_TRT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_UW_YEAR" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_PREM_RESV_INT" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_CEDE_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_AOFREINS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_PROFIT_COMM" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_MGT_FEE" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_CASH_LOSS" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_PREM_PORTFOLIO" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_LOSS_PORTFOLIO" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_COMM_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_PRD_LOSSES_CARRIED_FRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_QUAKE_LIMIT" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_SI_START_FROM" Type="java.math.BigDecimal"/>
+  <Attribute Name="REI_WEF_DT" Type="java.util.Date"/>
+  <Attribute Name="REI_WET_DT" Type="java.util.Date"/>
+  <Attribute Name="REI_ACCOUNTS" Type="java.lang.String"/>
+  <Attribute Name="REI_ACCOUNTS_DESC" Type="java.lang.String"/>
+  <Attribute Name="REI_TRT_SHT_DESC" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.setups.treatySetups"
+                     BeanClass="LMSG.view.setups.treatySetups" id="treatySetups"/>
+</JavaBean>

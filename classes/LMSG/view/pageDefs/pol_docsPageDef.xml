@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="pol_docsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findPolicyDocuments.result"
+                    DataControl="causationsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.causations"
+                    id="findPolicyDocumentsIterator"/>
+    <methodIterator Binds="findProductReuiredDocs.result"
+                    DataControl="causationsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.causations"
+                    id="findProductReuiredDocsIterator"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findPolicyDocuments" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolicyDocuments"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findPolicyDocuments_causationsDAO_dataProvider_findPolicyDocuments_result"/>
+    <tree IterBinding="findPolicyDocumentsIterator" id="causations">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations0">
+        <AttrNames>
+          <Item Value="rdShtDesc"/>
+          <Item Value="rdDesc"/>
+          <Item Value="rdByProdDesc"/>
+          <Item Value="rdPolDocDesc"/>
+          <Item Value="rdDthClmdocDesc"/>
+          <Item Value="rdDisClmDocDesc"/>
+          <Item Value="rdWthrClmDocDesc"/>
+          <Item Value="rdClaCode"/>
+          <Item Value="rdCode"/>
+          <Item Value="rdByProd"/>
+          <Item Value="rdPolDoc"/>
+          <Item Value="rdDthClmdoc"/>
+          <Item Value="rdDisClmDoc"/>
+          <Item Value="rdWthrClmDoc"/>
+          <Item Value="causCode"/>
+          <Item Value="RD_MATURITY_DOC_DESC"/>
+          <Item Value="causShtdesc"/>
+          <Item Value="RD_MATURITY_DOC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductReuiredDocs" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductReuiredDocs"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findProductReuiredDocs_causationsDAO_dataProvider_findProductReuiredDocs_result"/>
+    <tree IterBinding="findProductReuiredDocsIterator" id="causations1">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations10">
+        <AttrNames>
+          <Item Value="productDisplay"/>
+          <Item Value="rdpRdCode"/>
+          <Item Value="rdpProdCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="PROD_CODE"/>
+          <Item Value="PROD_SHT_DESC"/>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

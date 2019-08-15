@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="endorsementsDAO" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.endorsementsDAO" isJavaBased="true">
+  <Attribute Name="templateTranSeq" Type="int"/>
+  <Attribute Name="templateType" Type="java.lang.String"/>
+  <Attribute Name="templayeTypeInt" Type="int"/>
+  <Attribute Name="quotationNo" Type="java.lang.String"/>
+  <Attribute Name="emailCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="UWYear" Type="java.lang.String"/>
+  <Attribute Name="prpDesc" Type="java.lang.String"/>
+  <Attribute Name="gcoDesc" Type="java.lang.String"/>
+  <Attribute Name="policyNumberSel" Type="java.lang.String"/>
+  <Attribute Name="taskselName" Type="java.lang.String"/>
+  <Attribute Name="taskselAssignee" Type="java.lang.String"/>
+  <Attribute Name="taskselDueDate" Type="java.util.Date"/>
+  <Attribute Name="taskselID" Type="java.lang.String"/>
+  <Attribute Name="taskselCreateDate" Type="java.util.Date"/>
+  <Attribute Name="pmasCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pmasshtdesc" Type="java.lang.String"/>
+  <Attribute Name="brnName" Type="java.lang.String"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="taskActivityName" Type="java.lang.String"/>
+  <Attribute Name="loanCalcType" Type="java.lang.String"/>
+  <Attribute Name="dependantNo" Type="java.lang.String"/>
+  <Attribute Name="beneficiaryNo" Type="java.lang.String"/>
+  <Attribute Name="locName" Type="java.lang.String"/>
+  <Attribute Name="coverageArea" Type="java.lang.String"/>
+  <Attribute Name="jointMemberNo" Type="java.lang.String"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindEndorsements" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindFreeAdjLimits" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindPendingTransactions" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String" id="parseDate"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="somedate" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindReuseTransactions" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindOldTransactions" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindGovernmentAuthorities" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindPrevAuthTransactions" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindEndorsementJointAgents" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="findPolicySubdivisions" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="findPolicyMemberSubdivisions"
+                  ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindPensionTrustees" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String"
+                  id="postUnderwritingReinsurance" ReturnNodeName="Return"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                  BeanClass="LMSG.view.Policy.endorsements"
+                  id="FindPolicyRemarks" ReturnNodeName="endorsements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String"
+                  id="findPolMemberNo" ReturnNodeName="Return">
+    <ParameterInfo id="type" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings" id="FindSBUDetails"
+                  ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Base.Settings"
+                  BeanClass="LMSG.view.Base.Settings"
+                  id="FindOrgLocationsDetails" ReturnNodeName="Settings"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.endorsementsDAO"
+                     BeanClass="LMSG.view.Policy.endorsementsDAO"
+                     id="endorsementsDAO"/>
+</JavaBean>

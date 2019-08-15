@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:facet name="center">
+          <af:panelBox id="pb1" showHeader="never">
+            <f:facet name="toolbar"/>
+            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+              <tr>
+                <td width="50%">
+                  <af:inputText id="it1" simple="false" readOnly="true"
+                                helpTopicId="LMSOrdOverrideCommRates"/>
+                </td>
+                <td width="50%" align="right">
+                  <af:statusIndicator id="si1"/>
+                </td>
+              </tr>
+            </table>
+            <h:panelGrid columns="1" id="pg1">
+              <af:outputLabel value="Override Commission Rates" id="ol1"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator id="s1"/>
+            </h:panelGrid>
+            <af:panelSplitter id="ps1" inlineStyle="width:99%; height:500.0px;"
+                              splitterPosition="201">
+              <f:facet name="first">
+                <af:panelGroupLayout layout="scroll"
+                                     xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                     id="pgl1">
+                  <af:panelCollection id="pc2"
+                                      inlineStyle="width:99%; height:470.0px;">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="statusbar"/>
+                    <af:table value="#{bindings.Account.collectionModel}"
+                              var="row" rows="#{bindings.Account.rangeSize}"
+                              emptyText="#{bindings.Account.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Account.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.AccountQuery.queryDescriptor}"
+                              queryListener="#{bindings.AccountQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectionListener="#{otherSetups.accountTypeListener}"
+                              rowSelection="single" id="t1"
+                              binding="#{otherSetups.accountsLOV}">
+                      <af:column sortProperty="ACT_CODE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account.hints.ACT_CODE.label}"
+                                 visible="false" id="c2">
+                        <af:outputText value="#{row.ACT_CODE}" id="ot1"/>
+                      </af:column>
+                      <af:column sortProperty="ACT_ACCOUNT_TYPE"
+                                 filterable="true" sortable="true"
+                                 headerText="Account Type" width="190px"
+                                 id="c1">
+                        <af:outputText value="#{row.ACT_ACCOUNT_TYPE}"
+                                       id="ot2"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="second">
+                <af:panelGroupLayout xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                     id="pgl2">
+                <af:popup id="confirmDel">
+                <af:dialog id="d7" type="none" title="Delete Confirmation">
+                  <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Are you sure you want to Delete?"
+                                    id="ol86" inlineStyle="font-weight:bold;"/>
+                    <h:panelGrid columns="2" id="panelGrid2">
+                      <af:spacer width="10" height="10" id="s3"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg19">
+                      <af:commandButton text="Yes" id="cb24"
+                                        action="#{otherSetups.deleteAction}"
+                                        partialSubmit="true"/>
+                      <af:commandButton text="No" id="commandButton9"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+                  <af:panelBox text="PanelBox1" id="pb2" showHeader="never">
+                    <af:outputText value="Override Commission Rate" id="ot3"
+                                   inlineStyle="font-weight:bold"/>
+                    <af:spacer width="10" height="10" id="s2"/>
+                    <h:panelGrid columns="5" id="pg2">
+                      <af:commandButton text="New" id="cb1"
+                                        icon="/images/new_dwn.png"
+                                        action="#{otherSetups.addOvrComm}"
+                                        partialSubmit="true" immediate="true"/>
+                      <af:commandButton text="Edit" id="cb2"
+                                        icon="/images/update_ena.png"
+                                        action="#{otherSetups.editOvrRates}"
+                                        partialSubmit="true" immediate="true"/>
+                      <af:commandButton text="Delete" id="delOvCommRates"
+                                        icon="/images/delete_ena.png"
+                                        actionListener="#{SetupBean.DeleteListener}"
+                                        partialSubmit="true" immediate="true"/>
+                      <af:selectOneChoice required="#{bindings.CommRatesDef2.hints.mandatory}"
+                                          shortDesc="#{bindings.CommRatesDef2.hints.tooltip}"
+                                          id="soc11"
+                                          unselectedLabel="--Select Product--"
+                                          autoSubmit="true" simple="true"
+                                          binding="#{otherSetups.ovProdCode}"
+                                          valueChangeListener="#{otherSetups.getSelectedProduct}"
+                                          label="Product">
+                        <f:selectItems value="#{bindings.CommRatesDef2.items}"
+                                       id="si8"/>
+                      </af:selectOneChoice>
+                      <af:popup id="commRatePopUp"
+                                binding="#{otherSetups.commPopup}">
+                        <af:dialog id="d2" type="none"
+                                   title="Override Commission Rate">
+                          <af:panelBox id="pb3" showHeader="never"  binding="#{otherSetups.commPnl}">
+                            <f:facet name="toolbar"/>
+                            <h:panelGrid columns="2" id="pg4"  binding="#{otherSetups.commGrid}">
+                              <af:outputLabel value="Code" id="ol3"
+                                              visible="false"/>
+                              <af:inputNumberSpinbox label="Label 1" id="ins1"
+                                                     simple="true"
+                                                     visible="false"
+                                                     binding="#{otherSetups.cratCode}"/>
+                              <af:outputLabel value="At Code" id="ol4"
+                                              visible="false"/>
+                              <af:inputNumberSpinbox label="Label 2" id="ins2"
+                                                     simple="true"
+                                                     visible="false"
+                                                     binding="#{otherSetups.cratAtCode}"/>
+                              <af:outputLabel value="Rate" id="ol5"/>
+                              <af:inputNumberSpinbox label="Label 3" id="ins3"
+                                                     simple="true" columns="15"
+                                                     binding="#{otherSetups.cratRate}"/>
+                              <af:outputLabel value="Division Factor"
+                                              id="ol15"/>
+                              <af:inputNumberSpinbox label="Label 11" id="ins11"
+                                                     simple="true" columns="15"
+                                                     binding="#{otherSetups.cratDivFactor}"/>
+                              <af:outputLabel value="Year No From" id="ol10"/>
+                              <af:inputNumberSpinbox label="Label 6" id="ins6"
+                                                     simple="true" columns="15"
+                                                     binding="#{otherSetups.cratYrNoFrom}"/>
+                              <af:outputLabel value="Year No To" id="ol11"/>
+                              <af:inputNumberSpinbox label="Label 7" id="ins7"
+                                                     simple="true" columns="15"
+                                                     binding="#{otherSetups.cratYrNoTo}"/>
+                              <af:outputLabel value="Term From" id="ol12"
+                                              visible="true"/>
+                              <af:inputNumberSpinbox label="Label 8" id="ins8"
+                                                     simple="true" columns="15"
+                                                     visible="true"
+                                                     binding="#{otherSetups.cratTermFrom}"/>
+                              <af:outputLabel value="Term To" id="ol13"
+                                              visible="true"/>
+                              <af:inputNumberSpinbox label="Label 9" id="ins9"
+                                                     simple="true" columns="15"
+                                                     visible="true"
+                                                     binding="#{otherSetups.cratTermTo}"/>
+                              <af:outputLabel value="WEF Date" id="ol6"/>
+                              <af:inputDate label="Label 1" id="id3"
+                                            simple="true" columns="15"
+                                            binding="#{otherSetups.cratWefDate}">
+                                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                              </af:inputDate>
+                              <af:outputLabel value="WET Date" id="ol7"/>
+                              <af:inputDate label="Label 2" id="id4"
+                                            simple="true" columns="15"
+                                            binding="#{otherSetups.cratWetDate}">
+                                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                              </af:inputDate>
+                              <af:outputLabel value="Range From" id="ol8"
+                                              visible="false"/>
+                              <af:inputNumberSpinbox label="Label 4" id="ins4"
+                                                     simple="true" columns="15"
+                                                     visible="false"
+                                                     binding="#{otherSetups.cratRangeFrom}"/>
+                              <af:outputLabel value="Range To" id="ol9"
+                                              visible="false"/>
+                              <af:inputNumberSpinbox label="Label 5" id="ins5"
+                                                     simple="true" columns="15"
+                                                     visible="false"
+                                                     binding="#{otherSetups.cratRangeTo}"/>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" id="pg5">
+                              <af:commandButton text="Save" id="cb4"
+                                                partialSubmit="true"
+                                                action="#{otherSetups.saveOverrideCommRate}"/>
+                              <af:commandButton text="Cancel" id="cb5"
+                                action="#{otherSetups.cancelOverrideCommRate}" 
+                                                    partialSubmit="true"/>
+                            </h:panelGrid>
+                          </af:panelBox>
+                        </af:dialog>
+                      </af:popup>
+                    </h:panelGrid>
+                    <af:table value="#{bindings.Setup.collectionModel}"
+                              var="row" rows="#{bindings.Setup.rangeSize}"
+                              emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.SetupQuery.queryDescriptor}"
+                              queryListener="#{bindings.SetupQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                              inlineStyle="width:99%; height:400.0px;"
+                              rowSelection="single" id="t2"
+                              binding="#{otherSetups.ovcommRatesTab}">
+                      <af:column sortProperty="cratCode" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Setup.hints.cratCode.label}"
+                                 visible="false" id="c22">
+                        <af:outputText value="#{row.cratCode}" id="ot6"/>
+                      </af:column>
+                      <af:column sortProperty="cratRate" filterable="true"
+                                 sortable="true" headerText="Rate" id="c16">
+                        <af:outputText value="#{row.cratRate}" id="ot26"/>
+                      </af:column>
+                      <af:column sortProperty="cratDivFactor" filterable="true"
+                                 sortable="true" headerText="Div Factor"
+                                 id="c19">
+                        <af:outputText value="#{row.cratDivFactor}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="cratRateDesc" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Setup.hints.cratRateDesc.label}"
+                                 id="c6" visible="false">
+                        <af:outputText value="#{row.cratRateDesc}" id="ot11"/>
+                      </af:column>
+                      <af:column sortProperty="cratYrNoFrom" filterable="true"
+                                 sortable="true" headerText="Year No From"
+                                 id="c25">
+                        <af:outputText value="#{row.cratYrNoFrom}" id="ot24"/>
+                      </af:column>
+                      <af:column sortProperty="cratYrNoTo" filterable="true"
+                                 sortable="true" headerText="Year No To"
+                                 id="c3">
+                        <af:outputText value="#{row.cratYrNoTo}" id="ot25"/>
+                      </af:column>
+                      <af:column sortProperty="cratWefDate" filterable="true"
+                                 sortable="true" headerText="WEF Date" id="c5">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.cratWefDate}"
+                                        id="id2"/>
+                        </f:facet>
+                        <af:outputText value="#{row.cratWefDate}" id="ot17">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="cratWetDate" filterable="true"
+                                 sortable="true" headerText="WET Date" id="c9">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.cratWetDate}"
+                                        id="id1"/>
+                        </f:facet>
+                        <af:outputText value="#{row.cratWetDate}" id="ot20">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="cratAtCode" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Setup.hints.cratAtCode.label}"
+                                 id="c13" visible="false">
+                        <af:outputText value="#{row.cratAtCode}" id="ot12"/>
+                      </af:column>
+                      <af:column sortProperty="cratAtShortDesc"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Setup.hints.cratAtShortDesc.label}"
+                                 id="c20" visible="false">
+                        <af:outputText value="#{row.cratAtShortDesc}"
+                                       id="ot10"/>
+                      </af:column>
+                      <af:column sortProperty="cratRateType" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Setup.hints.cratRateType.label}"
+                                 id="c15" visible="false">
+                        <af:outputText value="#{row.cratRateType}" id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="cratRangeFrom" filterable="true"
+                                 sortable="true" headerText="Range From"
+                                 visible="false" id="c11">
+                        <af:outputText value="#{row.cratRangeFrom}" id="ot14"/>
+                      </af:column>
+                      <af:column sortProperty="cratRangeTo" filterable="true"
+                                 sortable="true" headerText="Range To"
+                                 visible="false" id="c17">
+                        <af:outputText value="#{row.cratRangeTo}" id="ot15"/>
+                      </af:column>
+                      <af:column sortProperty="cratTermFrom" filterable="true"
+                                 sortable="true" headerText="Term From" id="c7">
+                        <af:outputText value="#{row.cratTermFrom}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="cratTermTo" filterable="true"
+                                 sortable="true" headerText="Term To" id="c18">
+                        <af:outputText value="#{row.cratTermTo}" id="ot4"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelSplitter>
+          </af:panelBox>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

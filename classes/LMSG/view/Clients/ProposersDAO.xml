@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="ProposersDAO" Package="LMSG.view.Clients"
+          BeanClass="LMSG.view.Clients.ProposersDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Clients.Proposer"
+                  BeanClass="LMSG.view.Clients.Proposer" id="findProposers"
+                  ReturnNodeName="Proposer"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Clients.ProposersDAO"
+                     BeanClass="LMSG.view.Clients.ProposersDAO" id="ProposersDAO"/>
+</JavaBean>

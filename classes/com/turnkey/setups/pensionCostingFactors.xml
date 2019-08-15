@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="pensionCostingFactors" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.pensionCostingFactors"
+          isJavaBased="true">
+  <Attribute Name="pcfsCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcfsEsca" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcfsInterest" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcfsWithRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcfsRateType" Type="java.lang.String"/>
+  <Attribute Name="pcfsRateTypeDesc" Type="java.lang.String"/>
+  <Attribute Name="pcfsDivFact" Type="java.math.BigDecimal"/>
+  <Attribute Name="peirCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="peirCntrTaxExempt" Type="java.math.BigDecimal"/>
+  <Attribute Name="peirTaxExempt" Type="java.math.BigDecimal"/>
+  <Attribute Name="peirMaxTaxExempt" Type="java.math.BigDecimal"/>
+  <Attribute Name="peirIntRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="peirTaxRelief" Type="java.math.BigDecimal"/>
+  <Attribute Name="peirUndwConvFactor" Type="java.math.BigDecimal"/>
+  <Attribute Name="peirDirConvFactor" Type="java.math.BigDecimal"/>
+  <Attribute Name="peirFactorType" Type="java.lang.String"/>
+  <Attribute Name="peirFactorTypeDesc" Type="java.lang.String"/>
+  <Attribute Name="peirWef" Type="java.util.Date"/>
+  <Attribute Name="peirWet" Type="java.util.Date"/>
+  <Attribute Name="retCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="retAge" Type="java.math.BigDecimal"/>
+  <Attribute Name="retSex" Type="java.lang.String"/>
+  <Attribute Name="retSexDesc" Type="java.lang.String"/>
+  <Attribute Name="retProdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="emverCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="emverAnb" Type="java.math.BigDecimal"/>
+  <Attribute Name="emverBasicSa" Type="java.math.BigDecimal"/>
+  <Attribute Name="emverBasicPrem" Type="java.math.BigDecimal"/>
+  <Attribute Name="emverEmvValue" Type="java.math.BigDecimal"/>
+  <Attribute Name="emverProdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="emverRetCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="emveeCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="emveeTerm" Type="java.math.BigDecimal"/>
+  <Attribute Name="emveeBasicPrem" Type="java.math.BigDecimal"/>
+  <Attribute Name="emveeBasicSa" Type="java.math.BigDecimal"/>
+  <Attribute Name="emveeProdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="emveeEmv" Type="java.math.BigDecimal"/>
+  <Attribute Name="grapCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="grapProdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="grapServiceYrs" Type="java.math.BigDecimal"/>
+  <Attribute Name="grapGratPct" Type="java.math.BigDecimal"/>
+  <Attribute Name="grapPensionPct" Type="java.math.BigDecimal"/>
+  <Attribute Name="peir_int_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCFR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCFR_TERM_FROM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCFR_TERM_TO" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCFR_BENE_DISC_FACT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCFR_CONTR_FACT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PVGS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PVGS_YRS_FROM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PVGS_YRS_TO" Type="java.math.BigDecimal"/>
+  <Attribute Name="PVGS_EMYR_PCT_ENT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PVGS_EMYE_PCT_ENT" Type="java.math.BigDecimal"/>
+  <Attribute Name="peir_empyr_lump_tax_exmpt" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.pensionCostingFactors"
+                     BeanClass="com.turnkey.setups.pensionCostingFactors"
+                     id="pensionCostingFactors"/>
+</JavaBean>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="g_contraPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsIterator"/>
+    <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+    <searchRegion Binds="FindPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+    <methodIterator Binds="FindContraPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindContraPoliciesIterator"/>
+    <searchRegion Binds="FindContraPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policies1Query"/>
+    <methodIterator Binds="FindPendingTransactions.result"
+                    DataControl="endorsementsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.endorsements"
+                    id="FindPendingTransactionsIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="productDetails">
+      <nodeDefinition DefName="view.product.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodshtDesc"/>
+          <Item Value="prodDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <tree IterBinding="FindPoliciesIterator" id="policies">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="CLIENT_DISPLAY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindContraPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindContraPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindContraPolicies_policiesDAO_dataProvider_FindContraPolicies_result"/>
+    <tree IterBinding="FindContraPoliciesIterator" id="policies1">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies10">
+        <AttrNames>
+          <Item Value="trans"/>
+          <Item Value="co_ltr_pol_policy_no"/>
+          <Item Value="co_endr_no"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindEndorsements" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindEndorsements"
+                  IsViewObjectMethod="false" DataControl="endorsementsDAO"
+                  InstanceName="endorsementsDAO.dataProvider"
+                  ReturnName="endorsementsDAO.methodResults.FindEndorsements_endorsementsDAO_dataProvider_FindEndorsements_result"/>
+    <methodAction id="FindPendingTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPendingTransactions"
+                  IsViewObjectMethod="false" DataControl="endorsementsDAO"
+                  InstanceName="endorsementsDAO.dataProvider"
+                  ReturnName="endorsementsDAO.methodResults.FindPendingTransactions_endorsementsDAO_dataProvider_FindPendingTransactions_result"/>
+    <tree IterBinding="FindPendingTransactionsIterator" id="endorsements1">
+      <nodeDefinition DefName="view.Policy.endorsements" Name="endorsements10">
+        <AttrNames>
+          <Item Value="PT_ENDR_NO"/>
+          <Item Value="PT_ENDR_POL_POLICY_NO"/>
+          <Item Value="PT_client"/>
+          <Item Value="PT_AgentName"/>
+          <Item Value="PT_ENDR_STATUS"/>
+          <Item Value="PT_ENDR_EFFECTIVE_DATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Product Transactions">
+    
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:inputText id="it1"
+                            helpTopicId="LmsGrp_PROD_TRN" readOnly="true"/>
+              <af:outputLabel value="PRODUCT TRANSACTIONS" id="ol1"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator id="s1"/>
+              <af:panelBox text="PanelBox1" id="pb1" showHeader="never"
+                           inlineStyle="width:100.0%;">
+                <f:facet name="toolbar"/>
+                <af:panelSplitter id="ps1" inlineStyle="width:100.0%;">
+                  <f:facet name="first">
+                    <af:tree value="#{bindings.Setup.treeModel}" var="node"
+                             selectionListener="#{agents.ProductTransactionSelected}"
+                             rowSelection="single" id="t1"
+                             binding="#{agents.productTransactionsTree}">
+                      <f:facet name="nodeStamp">
+                        <af:outputText value="#{node.PROD_DESC}" id="ot2"/>
+                      </f:facet>
+                    </af:tree>
+                  </f:facet>
+                  <f:facet name="second">
+                    <af:panelTabbed id="pt1" inlineStyle="width:100.0%;">
+                      <af:showDetailItem text="Transactions Set Up" id="sdi1"
+                                         inlineStyle="width:100.0%;">
+                        <h:panelGrid columns="4" id="pg1">
+                          <af:commandButton id="cb1"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{agents.AddProductTransactions}"/>
+                          <af:commandButton id="cb2"
+                                            icon="/images/update_ena.png"
+                                            action="#{agents.EditProductTransactions}"/>
+                          <af:commandButton id="cb3"
+                                            icon="/images/delete_ena.png"
+                                            action="#{agents.DeleteProductTransactions}"/>
+                          <af:commandButton text="Populate Revenue Items"
+                                            id="cb15"
+                                            action="#{agents.PopulateRevenutItems}"/>
+                          <af:popup id="prodTransactionsPopup">
+                            <af:dialog id="d2" type="none"
+                                       title="Add/Edit Product Transaction Accounts">
+                              <h:panelGrid columns="2" id="pg2">
+                                <af:outputLabel value="ID" id="ol2"
+                                                showRequired="true"/>
+                                <af:inputText label="Label 1" id="it2"
+                                              simple="true"
+                                              shortDesc="Transaxction ID"
+                                              binding="#{agents.prodTrnID}"/>
+                                <af:outputLabel value="Transaction Type" id="ol3"
+                                                showRequired="true"/>
+                                <h:panelGrid columns="2" id="pg3">
+                                  <af:inputText label="Label 2" id="it3"
+                                                simple="true"
+                                                shortDesc="Transaction Display"
+                                                binding="#{agents.transactionDisplay}"/>
+                                  <af:commandButton
+                                                    id="cb4"
+                                                    icon="/images/dropdown.gif">
+                                    <af:showPopupBehavior popupId="transactionsPopup"/>
+                                  </af:commandButton>
+                                  <af:popup id="transactionsPopup">
+                                    <af:dialog id="d3" type="none"
+                                               title="Select Transaction Type">
+                                      <af:panelBox text="PanelBox2" id="pb2"
+                                                   showHeader="never">
+                                        <f:facet name="toolbar"/>
+                                        <af:table value="#{bindings.productTransactions1.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.productTransactions1.rangeSize}"
+                                                  emptyText="#{bindings.productTransactions1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.productTransactions1.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.productTransactions1.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.productTransactions1.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t3"
+                                                  binding="#{agents.transactionsLOV}">
+                                          <af:column sortProperty="trntCode"
+                                                     sortable="true"
+                                                     headerText="ID" id="c7">
+                                            <af:outputText value="#{row.trntCode}"
+                                                           id="ot8"/>
+                                          </af:column>
+                                          <af:column sortProperty="transactionDesc"
+                                                     sortable="true"
+                                                     headerText="Transaction"
+                                                     id="c6" width="200">
+                                            <af:outputText value="#{row.transactionDesc}"
+                                                           id="ot9"/>
+                                          </af:column>
+                                        </af:table>
+                                      </af:panelBox>
+                                      <h:panelGrid columns="2" id="pg8">
+                                        <af:commandButton text="OK" id="cb5"
+                                                          action="#{agents.AssignTransactionType}"/>
+                                        <af:commandButton text="Cancel"
+                                                          id="cb6"/>
+                                      </h:panelGrid>
+                                    </af:dialog>
+                                  </af:popup>
+                                </h:panelGrid>
+                                <af:outputLabel value="GL Account Code" id="ol4"/>
+                                <h:panelGrid columns="2" id="pg4">
+                                  <af:inputText label="Label 3" id="it4"
+                                                simple="true"
+                                                shortDesc="GL Account Code"
+                                                binding="#{agents.glAccountCode}"/>
+                                  <af:commandButton
+                                                    id="cb7"
+                                                    icon="/images/dropdown.gif">
+                                    <af:showPopupBehavior popupId="glAccountsPopup"/>
+                                  </af:commandButton>
+                                  <af:popup id="glAccountsPopup">
+                                    <af:dialog id="d4" type="none"
+                                               title="Select General Ledger Acc Code">
+                                      <af:panelBox text="PanelBox3" id="pb3"
+                                                   showHeader="never">
+                                        <f:facet name="toolbar"/>
+                                        <af:table value="#{bindings.productTransactions5.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.productTransactions5.rangeSize}"
+                                                  emptyText="#{bindings.productTransactions5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.productTransactions5.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  filterModel="#{bindings.productTransactions5Query.queryDescriptor}"
+                                                  queryListener="#{bindings.productTransactions5Query.processQuery}"
+                                                  filterVisible="true"
+                                                  varStatus="vs"
+                                                  selectedRowKeys="#{bindings.productTransactions5.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.productTransactions5.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t7"
+                                                  binding="#{agents.glAccountsLOV}">
+                                          <af:column sortProperty="accNumber"
+                                                     filterable="true"
+                                                     sortable="true"
+                                                     headerText="Account Number"
+                                                     id="c17">
+                                            <af:outputText value="#{row.accNumber}"
+                                                           id="ot18"/>
+                                          </af:column>
+                                          <af:column sortProperty="accName"
+                                                     filterable="true"
+                                                     sortable="true"
+                                                     headerText="Account Name"
+                                                     id="c16" width="200">
+                                            <af:outputText value="#{row.accName}"
+                                                           id="ot19"/>
+                                          </af:column>
+                                        </af:table>
+                                      </af:panelBox>
+                                      <h:panelGrid columns="2" id="pg7">
+                                        <af:commandButton text="OK" id="cb8"
+                                                          action="#{agents.AssignGlCode}"/>
+                                        <af:commandButton text="Cancel"
+                                                          id="cb9"/>
+                                      </h:panelGrid>
+                                    </af:dialog>
+                                  </af:popup>
+                                </h:panelGrid>
+                                <af:outputLabel value="Contra Account" id="ol5"/>
+                                <h:panelGrid columns="2" id="pg5">
+                                  <af:inputText label="Label 4" id="it5"
+                                                simple="true"
+                                                binding="#{agents.contraAccNumber}"/>
+                                  <af:commandButton
+                                                    id="cb10"
+                                                    icon="/images/dropdown.gif">
+                                    <af:showPopupBehavior popupId="contraGLPopup"/>
+                                  </af:commandButton>
+                                  <af:popup id="contraGLPopup">
+                                    <af:dialog id="d5" type="none"
+                                               title="Select Contra GL Accounts">
+                                      <af:panelBox text="PanelBox4" id="pb4"
+                                                   showHeader="never">
+                                        <f:facet name="toolbar"/>
+                                        <af:table value="#{bindings.productTransactions5.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.productTransactions5.rangeSize}"
+                                                  emptyText="#{bindings.productTransactions5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.productTransactions5.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  filterModel="#{bindings.productTransactions5Query.queryDescriptor}"
+                                                  queryListener="#{bindings.productTransactions5Query.processQuery}"
+                                                  filterVisible="true"
+                                                  varStatus="vs"
+                                                  selectedRowKeys="#{bindings.productTransactions5.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.productTransactions5.collectionModel.makeCurrent}"
+                                                  rowSelection="single"
+                                                  id="table1"
+                                                  binding="#{agents.contraGlLov}">
+                                          <af:column sortProperty="accNumber"
+                                                     filterable="true"
+                                                     sortable="true"
+                                                     headerText="Account Number"
+                                                     id="column1">
+                                            <af:outputText value="#{row.accNumber}"
+                                                           id="outputText1"/>
+                                          </af:column>
+                                          <af:column sortProperty="accName"
+                                                     filterable="true"
+                                                     sortable="true"
+                                                     headerText="Account Name"
+                                                     id="column2" width="200">
+                                            <af:outputText value="#{row.accName}"
+                                                           id="outputText2"/>
+                                          </af:column>
+                                        </af:table>
+                                      </af:panelBox>
+                                      <h:panelGrid columns="2" id="pg6">
+                                        <af:commandButton text="OK" id="cb11"
+                                                          action="#{agents.AssignContraAccounts}"/>
+                                        <af:commandButton text="Cancel"
+                                                          id="cb12"/>
+                                      </h:panelGrid>
+                                    </af:dialog>
+                                  </af:popup>
+                                </h:panelGrid>
+                              </h:panelGrid>
+                              <h:panelGrid columns="2" id="pg9">
+                                <af:commandButton text="Save" id="cb13"
+                                                  action="#{agents.SaveProductTransactionType}"/>
+                                <af:commandButton text="Cancel" id="cb14"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.productTransactions.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.productTransactions.rangeSize}"
+                                  emptyText="#{bindings.productTransactions.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.productTransactions.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.productTransactions.collectionModel.selectedRow}"
+                                  selectionListener="#{agents.prodTransListener}"
+                                  rowSelection="single" id="t2"
+                                  inlineStyle="width:100%; border-style:none; height:150.0px;"
+                                  binding="#{agents.productTransactionsLOV}">
+                          <af:column sortProperty="trntDesc" sortable="true"
+                                     headerText="Description" id="c2"
+                                     width="200">
+                            <af:outputText value="#{row.trntDesc}" id="ot16"/>
+                          </af:column>
+                          <af:column sortProperty="trapAccno" sortable="true"
+                                     headerText="GL Code" id="c5">
+                            <af:outputText value="#{row.trapAccno}" id="ot7"/>
+                          </af:column>
+                          <af:column sortProperty="trapContraAcc"
+                                     sortable="true"
+                                     headerText="Contra GL Code" id="c1">
+                            <af:outputText value="#{row.trapContraAcc}"
+                                           id="ot5"/>
+                          </af:column>
+                          <af:column sortProperty="trapTrntCode" sortable="true"
+                                     headerText="#{bindings.productTransactions.hints.trapTrntCode.label}"
+                                     id="c15" visible="false">
+                            <af:outputText value="#{row.trapTrntCode}"
+                                           id="ot15"/>
+                          </af:column>
+                          <af:column sortProperty="trntCode" sortable="true"
+                                     headerText="#{bindings.productTransactions.hints.trntCode.label}"
+                                     id="c13" visible="false">
+                            <af:outputText value="#{row.trntCode}" id="ot17"/>
+                          </af:column>
+                          <af:column sortProperty="trapProdCode" sortable="true"
+                                     headerText="#{bindings.productTransactions.hints.trapProdCode.label}"
+                                     id="c4" visible="false">
+                            <af:outputText value="#{row.trapProdCode}"
+                                           id="ot14"/>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Similar Code-for other products" id="sdi2"
+                                         inlineStyle="width:100.0%;">
+                        <af:table value="#{bindings.productTransactions4.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.productTransactions4.rangeSize}"
+                                  emptyText="#{bindings.productTransactions4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.productTransactions4.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectionListener="#{bindings.productTransactions4.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t6"
+                                  inlineStyle="width:100%; height:100px; border-style:none;"
+                                  binding="#{agents.otherProdsTransLOV}">
+                          <af:column sortProperty="productDesc" sortable="true"
+                                     headerText="PRODUCT" id="c12">
+                            <af:outputText value="#{row.productDesc}" id="ot6"/>
+                          </af:column>
+                          <af:column sortProperty="otherProdsGlcode"
+                                     sortable="true"
+                                     headerText="GL ACCOUNT CODE" id="c14">
+                            <af:outputText value="#{row.otherProdsGlcode}"
+                                           id="ot3"/>
+                          </af:column>
+                          <af:column sortProperty="otherProdsContraGlCode"
+                                     sortable="true"
+                                     headerText="CONTRA GL ACCOUNT CODE"
+                                     id="c3">
+                            <af:outputText value="#{row.otherProdsContraGlCode}"
+                                           id="ot4"/>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                    </af:panelTabbed>
+                  </f:facet>
+                </af:panelSplitter>
+              </af:panelBox>
+            </af:panelGroupLayout>
+        </af:group>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

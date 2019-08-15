@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process xmlns="http://jbpm.org/4.0/jpdl"  name="EndorsementsProcess">
+	<start g="16,108,80,40">
+		<transition g="-48,-19" name="Start Underwriting" to="Underwrite Policy"></transition>
+	</start>
+	
+	 <task g="16,108,80,40" name="Underwrite Policy" 
+        assignee="#{order}">
+     <transition g="-48,-19" name="Determine Transition" to="Next Transition"></transition>
+    </task>
+	
+	<decision g="16,108,80,40" name="Next Transition" expr="#{NextTrans}">
+	    <transition g="-48,-19" name="A" to="Reinsurance Medical Underwriting"/>
+	    <transition g="-48,-19" name="N" to="Authorise Policy"/>
+		<transition g="-48,-19" name="M" to="Medical Underwriting"/>
+		<transition g="-48,-19" name="R" to="Perform Reinsurance"/>
+	</decision>
+	
+	<!-- commented out on 08112009 by Jim Gitau to await procedures for payment processing and Exceptions-->
+	
+	<!--<decision name="Exceptions For Authorisation" expr="#{UWStart}">
+	    <transition name="Yes" to="Authorise Exceptions"/>
+	    <transition name="No" to="Make Ready for Authorisation"/>
+	</decision>
+	
+	<task name="Authorise Exceptions" 
+        assignee="#{order}">
+     <transition name="Make Ready" to="Make Ready for Authorisation"></transition>
+    </task> 
+	
+	<task name="Make Ready for Authorisation" 
+        assignee="#{order}">
+		<transition name="credit" to="Credit Terms"></transition>
+    </task>
+	
+	
+	<decision name="Credit Terms" expr="#{Credit}">
+	    <transition name="Yes" to="Reinsurance Medical Underwriting"/>
+	    <transition name="No" to="Wait for Payment"/>
+	</decision>
+	
+	<task name="Wait for Payment" 
+        assignee="#{order}">
+     <transition name="Continue Policy" to="Reinsurance Medical Underwriting"></transition>
+    </task>-->
+	
+	<fork g="16,108,80,40" name="Reinsurance Medical Underwriting">
+      <transition g="-48,-19" name="Reinsure" to="Perform Reinsurance" />
+      <transition g="-48,-19" name="Medicals" to="Medical Underwriting"/>
+   </fork>
+	
+	<task g="16,108,80,40" name="Perform Reinsurance" 
+        assignee="#{order}">
+     <transition g="-48,-19" name="Complete Process" to="Policy Join"></transition>
+    </task>
+	
+	<task g="16,108,80,40" name="Medical Underwriting" 
+        assignee="#{order}">
+      <transition g="-48,-19" name="Complete Process" to="Policy Join"></transition>
+    </task>
+	
+	<join g="16,108,80,40" name="Policy Join" >
+      <transition g="-48,-19" name="auth Policy" to="Authorise Policy" />
+   </join> 
+	
+	<task g="16,108,80,40" name="Authorise Policy" 
+        assignee="#{order}">
+     <transition g="-48,-19" name="disp Documents" to="Dispatch Policy Documents"></transition>
+    </task>
+	
+	<task g="16,108,80,40" name="Dispatch Policy Documents" 
+        assignee="#{order}">
+     <transition g="-48,-19" name="end Policy" to="End-Endorsement-Process"></transition>
+    </task>
+	  
+	<end g="16,108,80,40" name="End-Endorsement-Process"></end>
+</process>

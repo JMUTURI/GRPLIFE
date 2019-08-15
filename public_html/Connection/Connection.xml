@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<application>
+
+	<connection>
+		<jdblUrl>jdbc:oracle:thin:@10.176.18.128:1521:leadway</jdblUrl>
+		<userid>TQ_LMS</userid>
+        <password>TQ_LMS</password>
+    	</connection>
+</application>

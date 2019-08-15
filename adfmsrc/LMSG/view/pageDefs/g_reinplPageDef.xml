@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="g_reinplPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+    <methodIterator Binds="FindEndorsements.result"
+                    DataControl="endorsementsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.endorsements"
+                    id="FindEndorsementsIterator"/>
+    <methodIterator Binds="FindRiDetails.result" DataControl="ri_detailsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.ri_details"
+                    id="FindRiDetailsIterator"/>
+    <methodIterator Binds="FindRiTrtDetails.result" DataControl="ri_detailsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                    id="FindRiTrtDetailsIterator"/>
+    <methodIterator Binds="FindPolicyMembers.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPolicyMembersIterator"/>
+    <methodIterator Binds="findRITreaties.result" DataControl="RiTreatyDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.RiTreaty"
+                    id="findRITreatiesIterator"/>
+    <searchRegion Binds="findRITreatiesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="RiTreatyQuery"/>
+    <methodIterator Binds="FindRiTrtCessions.result" DataControl="ri_detailsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                    id="FindRiTrtCessionsIterator"/>
+    <methodIterator Binds="findTicketAssignee.result" DataControl="workflowDAO"
+                    RangeSize="25" BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketAssigneeIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="findFulcatativePlacements.result"
+                    DataControl="ri_detailsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                    id="findFulcatativePlacementsIterator"/>
+    <methodIterator Binds="findRiCompanies.result" DataControl="ri_detailsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                    id="findRiCompaniesIterator"/>
+    <searchRegion Binds="findRiCompaniesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="memRiTrtDetails3Query"/>
+    <methodIterator Binds="findSchemeFacrePlacements.result"
+                    DataControl="ri_detailsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                    id="findSchemeFacrePlacementsIterator"/>
+    <methodIterator Binds="findTotalMemberRiExcess.result"
+                    DataControl="ri_detailsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                    id="findTotalMemberRiExcessIterator"/>
+    <methodIterator Binds="findPremiumMask.result" DataControl="quotPremMaskDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotPremMask"
+                    id="findPremiumMaskIterator"/>
+    <searchRegion Binds="findPremiumMaskIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="quotPremMaskQuery"/>
+    <methodIterator Binds="FindPolicyMemberAtCovers.result"
+                    DataControl="policyMembersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policyMembers"
+                    id="FindPolicyMemberAtCoversIterator"/>
+    <searchRegion Binds="FindPolicyMemberAtCoversIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policyMembers1Query"/>
+    <methodIterator Binds="FindAALMem.result" DataControl="ri_detailsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                    id="FindAALMemIterator"/>
+    <searchRegion Binds="FindAALMemIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="memRiTrtDetails5Query"/>
+    <methodIterator Binds="FindCoverTypes.result"
+                    DataControl="policyCoverTypesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policyCoverTypes"
+                    id="FindCoverTypesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_PROD_SHT_DESC">
+      <AttrNames>
+        <Item Value="POL_PROD_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="BRANCH_DISPLAY">
+      <AttrNames>
+        <Item Value="BRANCH_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindEndorsements" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindEndorsements"
+                  IsViewObjectMethod="false" DataControl="endorsementsDAO"
+                  InstanceName="endorsementsDAO.dataProvider"
+                  ReturnName="endorsementsDAO.methodResults.FindEndorsements_endorsementsDAO_dataProvider_FindEndorsements_result"/>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_NO">
+      <AttrNames>
+        <Item Value="ENDR_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_EFFECTIVE_DATE">
+      <AttrNames>
+        <Item Value="ENDR_EFFECTIVE_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="AGENT_DISPLAY">
+      <AttrNames>
+        <Item Value="AGENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="MASK_DISPLAY">
+      <AttrNames>
+        <Item Value="MASK_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_TOT_SA">
+      <AttrNames>
+        <Item Value="ENDR_TOT_SA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_TOT_PREMIUM">
+      <AttrNames>
+        <Item Value="ENDR_TOT_PREMIUM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_COMM_AMT">
+      <AttrNames>
+        <Item Value="ENDR_COMM_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindRiDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindRiDetails"
+                  IsViewObjectMethod="false" DataControl="ri_detailsDAO"
+                  InstanceName="ri_detailsDAO.dataProvider"
+                  ReturnName="ri_detailsDAO.methodResults.FindRiDetails_ri_detailsDAO_dataProvider_FindRiDetails_result"/>
+    <tree IterBinding="FindRiDetailsIterator" id="ri_details">
+      <nodeDefinition DefName="LMSG.view.Policy.ri_details" Name="ri_details0">
+        <AttrNames>
+          <Item Value="COVER_DISPLAY"/>
+          <Item Value="PMRID_PREV_SA"/>
+          <Item Value="PMRID_TOT_SA"/>
+          <Item Value="PMRID_ENDR_PREM"/>
+          <Item Value="PMRID_GROSS_RETENTION"/>
+          <Item Value="PMRID_NET_RETENTION"/>
+          <Item Value="PMRID_NET_RETENTION_RATE"/>
+          <Item Value="PMRID_EXCESS_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindRiTrtDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindRiTrtDetails"
+                  IsViewObjectMethod="false" DataControl="ri_detailsDAO"
+                  InstanceName="ri_detailsDAO.dataProvider"
+                  ReturnName="ri_detailsDAO.methodResults.FindRiTrtDetails_ri_detailsDAO_dataProvider_FindRiTrtDetails_result"/>
+    <tree IterBinding="FindRiTrtDetailsIterator" id="memRiTrtDetails">
+      <nodeDefinition DefName="LMSG.view.Policy.memRiTrtDetails"
+                      Name="memRiTrtDetails0">
+        <AttrNames>
+          <Item Value="COVER_DISPLAY"/>
+          <Item Value="REI_TRS_SHT_DESC"/>
+          <Item Value="PMRITD_PREV_TRT_SA"/>
+          <Item Value="PMRITD_TRT_SA"/>
+          <Item Value="PMRITD_CESSION_RATE"/>
+          <Item Value="PMRITD_TRT_PREM"/>
+          <Item Value="PMRITD_TRT_COMM"/>
+          <Item Value="PMRITD_STAMP_DUTY"/>
+          <Item Value="PMRITD_remarks"/>
+          <Item Value="PMRITD_RATE"/>
+          <Item Value="PMRITD_RATE_DIV_FACTOR"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindPoliciesIterator" id="CLIENT_DISPLAY">
+      <AttrNames>
+        <Item Value="CLIENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_POLICY_NO">
+      <AttrNames>
+        <Item Value="POL_POLICY_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMembers"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindMembers_membersDAO_dataProvider_FindMembers_result"/>
+    <methodAction id="FindPolicyMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyMembers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyMembers_policiesDAO_dataProvider_FindPolicyMembers_result"/>
+    <tree IterBinding="FindPolicyMembersIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="POLM_MEM_NO"/>
+          <Item Value="POLM_client"/>
+          <Item Value="POL_CODE"/>
+          <Item Value="POLM_DTY_DESCRIPTION"/>
+          <Item Value="UW_YEAR"/>
+          <Item Value="POLM_ANB"/>
+          <Item Value="POL_EFFECTIVE_DATE"/>
+          <Item Value="POLM_MEM_STATUS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findRITreaties" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRITreaties"
+                  IsViewObjectMethod="false" DataControl="RiTreatyDAO"
+                  InstanceName="RiTreatyDAO.dataProvider"
+                  ReturnName="RiTreatyDAO.methodResults.findRITreaties_RiTreatyDAO_dataProvider_findRITreaties_result"/>
+    <tree IterBinding="findRITreatiesIterator" id="RiTreaty">
+      <nodeDefinition DefName="LMSG.view.Policy.RiTreaty" Name="RiTreaty0">
+        <AttrNames>
+          <Item Value="TA_SHT_DESC"/>
+          <Item Value="TA_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindRiTrtCessions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindRiTrtCessions"
+                  IsViewObjectMethod="false" DataControl="ri_detailsDAO"
+                  InstanceName="ri_detailsDAO.dataProvider"
+                  ReturnName="ri_detailsDAO.methodResults.FindRiTrtCessions_ri_detailsDAO_dataProvider_FindRiTrtCessions_result"/>
+    <tree IterBinding="FindRiTrtCessionsIterator" id="memRiTrtDetails1">
+      <nodeDefinition DefName="LMSG.view.Policy.memRiTrtDetails"
+                      Name="memRiTrtDetails10">
+        <AttrNames>
+          <Item Value="CVT_SHT_DESC"/>
+          <Item Value="GTRIC_AGN_SHT_DESC"/>
+          <Item Value="GTRIC_TRS_SHT_DESC"/>
+          <Item Value="GTRIC_TRT_SHT_DESC"/>
+          <Item Value="GTRIC_CEDE_RATE"/>
+          <Item Value="GTRIC_SI_AMT_PCUR"/>
+          <Item Value="GTRIC_PREM_AMT_PCUR"/>
+          <Item Value="GTRIC_COMM_AMT_PCUR"/>
+          <Item Value="GTRIC_STAMP_DUTY"/>
+          <Item Value="GTRIC_RPREM_TAX_PCUR"/>
+          <Item Value="GTRIC_PREM_TAX_PCUR"/>
+          <Item Value="GTRIC_UWYR"/>
+          <Item Value="GTRIC_REFUND_PREM"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTicketAssignee" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketAssignee"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketAssignee_workflowDAO_dataProvider_findTicketAssignee_result"/>
+    <tree IterBinding="findTicketAssigneeIterator" id="workflow">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow0">
+        <AttrNames>
+          <Item Value="taskUserID"/>
+          <Item Value="taskUserShtDesc"/>
+          <Item Value="taskUserDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyMembers1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyMembers"
+                  IsViewObjectMethod="false" DataControl="policyMembersDAO"
+                  InstanceName="policyMembersDAO.dataProvider"
+                  ReturnName="policyMembersDAO.methodResults.FindPolicyMembers_policyMembersDAO_dataProvider_FindPolicyMembers_result"/>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="TA_DESC">
+      <AttrNames>
+        <Item Value="TA_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="findFulcatativePlacements" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findFulcatativePlacements"
+                  IsViewObjectMethod="false" DataControl="ri_detailsDAO"
+                  InstanceName="ri_detailsDAO.dataProvider"
+                  ReturnName="ri_detailsDAO.methodResults.findFulcatativePlacements_ri_detailsDAO_dataProvider_findFulcatativePlacements_result"/>
+    <methodAction id="findRiCompanies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRiCompanies"
+                  IsViewObjectMethod="false" DataControl="ri_detailsDAO"
+                  InstanceName="ri_detailsDAO.dataProvider"
+                  ReturnName="ri_detailsDAO.methodResults.findRiCompanies_ri_detailsDAO_dataProvider_findRiCompanies_result"/>
+    <tree IterBinding="findRiCompaniesIterator" id="memRiTrtDetails3">
+      <nodeDefinition DefName="LMSG.view.Policy.memRiTrtDetails"
+                      Name="memRiTrtDetails30">
+        <AttrNames>
+          <Item Value="agnShtDesc"/>
+          <Item Value="agnName"/>
+          <Item Value="agnCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findFulcatativePlacementsIterator" id="memRiTrtDetails4">
+      <nodeDefinition DefName="LMSG.view.Policy.memRiTrtDetails"
+                      Name="memRiTrtDetails40">
+        <AttrNames>
+          <Item Value="gfcCode"/>
+          <Item Value="gfcAgnDesc"/>
+          <Item Value="gfcAmtOrRate"/>
+          <Item Value="gfcRate"/>
+          <Item Value="gfcExcessRate"/>
+          <Item Value="gfcPremRate"/>
+          <Item Value="gfcPremDivFactor"/>
+          <Item Value="gfcPremAmt"/>
+          <Item Value="gfcCommRate"/>
+          <Item Value="gfcCommAmt"/>
+          <Item Value="gfcWef"/>
+          <Item Value="gfcAgnCode"/>
+          <Item Value="COVER_DISPLAY"/>
+          <Item Value="gfcAmt"/>
+         <Item Value="cvtDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSchemeFacrePlacements" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSchemeFacrePlacements"
+                  IsViewObjectMethod="false" DataControl="ri_detailsDAO"
+                  InstanceName="ri_detailsDAO.dataProvider"
+                  ReturnName="ri_detailsDAO.methodResults.findSchemeFacrePlacements_ri_detailsDAO_dataProvider_findSchemeFacrePlacements_result"/>
+    <tree IterBinding="findSchemeFacrePlacementsIterator" id="memRiTrtDetails2">
+      <nodeDefinition DefName="LMSG.view.Policy.memRiTrtDetails"
+                      Name="memRiTrtDetails20">
+        <AttrNames>
+          <Item Value="gfcCode"/>
+          <Item Value="gfcAgnDesc"/>
+          <Item Value="gfcAmtOrRate"/>
+          <Item Value="gfcRate"/>
+          <Item Value="gfcExcessRate"/>
+          <Item Value="gfcPremRate"/>
+          <Item Value="gfcPremDivFactor"/>
+          <Item Value="gfcPremAmt"/>
+          <Item Value="gfcCommRate"/>
+          <Item Value="gfcCommAmt"/>
+          <Item Value="gfcWef"/>
+          <Item Value="gfcAgnCode"/>
+          <Item Value="COVER_DISPLAY"/>
+          <Item Value="gfcAmt"/>
+          <Item Value="cvtDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_FACRE_CEDING">
+      <AttrNames>
+        <Item Value="ENDR_FACRE_CEDING"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findTotalMemberRiExcess" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTotalMemberRiExcess"
+                  IsViewObjectMethod="false" DataControl="ri_detailsDAO"
+                  InstanceName="ri_detailsDAO.dataProvider"
+                  ReturnName="ri_detailsDAO.methodResults.findTotalMemberRiExcess_ri_detailsDAO_dataProvider_findTotalMemberRiExcess_result"/>
+    <attributeValues IterBinding="findTotalMemberRiExcessIterator" id="tot_sa">
+      <AttrNames>
+        <Item Value="tot_sa"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTotalMemberRiExcessIterator" id="tot_ret">
+      <AttrNames>
+        <Item Value="tot_ret"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTotalMemberRiExcessIterator"
+                     id="tot_excess">
+      <AttrNames>
+        <Item Value="tot_excess"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_FACRE_RATE_TYPE">
+      <AttrNames>
+        <Item Value="ENDR_FACRE_RATE_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findPremiumMask" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMask"
+                  IsViewObjectMethod="false" DataControl="quotPremMaskDAO"
+                  InstanceName="quotPremMaskDAO.dataProvider"
+                  ReturnName="quotPremMaskDAO.methodResults.findPremiumMask_quotPremMaskDAO_dataProvider_findPremiumMask_result"/>
+    <tree IterBinding="findPremiumMaskIterator" id="quotPremMask">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.quotPremMask"
+                      Name="quotPremMask0">
+        <AttrNames>
+          <Item Value="PMAS_SHT_DESC"/>
+          <Item Value="PMAS_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_REIN_PMAS_SHT_DESC">
+      <AttrNames>
+        <Item Value="ENDR_REIN_PMAS_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_COIN_FAC_SHARE">
+      <AttrNames>
+        <Item Value="ENDR_COIN_FAC_SHARE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindPolicyMemberAtCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyMemberAtCovers"
+                  IsViewObjectMethod="false" DataControl="policyMembersDAO"
+                  InstanceName="policyMembersDAO.dataProvider"
+                  ReturnName="data.policyMembersDAO.methodResults.FindPolicyMemberAtCovers_policyMembersDAO_dataProvider_FindPolicyMemberAtCovers_result"/>
+    <tree IterBinding="FindPolicyMemberAtCoversIterator" id="policyMembers1">
+      <nodeDefinition DefName="LMSG.view.Policy.policyMembers"
+                      Name="policyMembers10">
+        <AttrNames>
+          <Item Value="POLM_MEM_NO"/>
+          <Item Value="MEMBER_DISPLAY"/>
+          <Item Value="POLM_DTY_SHT_DESC"/>
+          <Item Value="POLM_ANB"/>
+          <Item Value="POLM_TOT_SA"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindAALMem" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindAALMem"
+                  IsViewObjectMethod="false" DataControl="ri_detailsDAO"
+                  InstanceName="ri_detailsDAO.dataProvider"
+                  ReturnName="ri_detailsDAO.methodResults.FindAALMem_ri_detailsDAO_dataProvider_FindAALMem_result"/>
+    <tree IterBinding="FindAALMemIterator" id="memRiTrtDetails5">
+      <nodeDefinition DefName="LMSG.view.Policy.memRiTrtDetails"
+                      Name="memRiTrtDetails50">
+        <AttrNames>
+          <Item Value="COVER_DISPLAY"/>
+          <Item Value="memName"/>
+          <Item Value="rmal_amt_reassured"/>
+          <Item Value="rmal_tct_aal"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCoverTypes"
+                  IsViewObjectMethod="false" DataControl="policyCoverTypesDAO"
+                  InstanceName="policyCoverTypesDAO.dataProvider"
+                  ReturnName="policyCoverTypesDAO.methodResults.FindCoverTypes_policyCoverTypesDAO_dataProvider_FindCoverTypes_result"/>
+    <list IterBinding="FindCoverTypesIterator" ListOperMode="navigation"
+          ListIter="FindCoverTypesIterator" id="policyCoverTypes"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="PCVT_CVT_SHT_DESC"/>
+      </AttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

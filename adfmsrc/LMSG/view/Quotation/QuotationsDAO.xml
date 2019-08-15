@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="QuotationsDAO" Package="LMSG.view.Quotation"
+          BeanClass="LMSG.view.Quotation.QuotationsDAO" isJavaBased="true">
+  <Attribute Name="quoteCategoryShtDesc" Type="java.lang.String"/>
+  <Attribute Name="coverTypeCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="lcaCode" Type="java.math.BigDecimal"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations" id="findQuotation"
+                  ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteCoverTypes" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuotationTaxes" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteCategories" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteDependantLimits" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteProvisions" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteMembers" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteCoinsurers" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteAgencies" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteExceptions" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findAllQuotations" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuotationsEnquiry" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteSubdivisions" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteMemberSubdivisions" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteRemarks" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteForFcl" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findQuoteForFclNew" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Quotation.Quotations"
+                  BeanClass="LMSG.view.Quotation.Quotations"
+                  id="findDMSProcessDocs" ReturnNodeName="Quotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Quotation.QuotationsDAO"
+                     BeanClass="LMSG.view.Quotation.QuotationsDAO"
+                     id="QuotationsDAO"/>
+</JavaBean>

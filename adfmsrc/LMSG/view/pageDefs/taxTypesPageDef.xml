@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="taxTypesPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findTaxTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findTaxTypesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findTaxTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTaxTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTaxTypes_SetupsDAO_dataProvider_findTaxTypes_result"/>
+    <tree IterBinding="findTaxTypesIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="TT_SHT_DESC"/>
+          <Item Value="TT_DESC"/>
+          <Item Value="TT_TYPE_DESC"/>
+          <Item Value="TT_APPLICABLE_DESC"/>
+          <Item Value="TT_RENEWAL_ENDOS_DESC"/>
+          <Item Value="TT_APPLICATION_LEVEL_DESC"/>
+          <Item Value="TT_REFUND_ON_CANC_DESC"/>
+          <Item Value="TT_ACC_NO"/>
+          <Item Value="TT_CONTRA_ACC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,870 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Transaction Allocations" id="d1">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout id="pgl2">
+          <af:panelBox text="Transaction Allocations" id="pb1"
+                       showHeader="never"
+                       binding="#{transAlloc.transAllocPanel}">
+            <f:facet name="toolbar"/>
+            <h:panelGrid columns="3">
+            <af:outputLabel value="Transaction Allocation" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+               <af:selectBooleanRadio text="Allocate on Policy"
+                                       group="account_radio"
+                                       label="Label 1" id="sbr1" 
+                                       simple="true"
+                                       value="P" selected="true"
+                                       autoSubmit="true"
+                                       valueChangeListener="#{transAlloc.policyRadioEvent}"
+                                       binding="#{transAlloc.policyRadio}"/>
+                <af:selectBooleanRadio text="Allocate on Account"
+                                       group="account_radio"
+                                       label="Label 2" id="sbr2" 
+                                       simple="true"
+                                       autoSubmit="true"
+                                       value="A"
+                                       binding="#{transAlloc.accountRadio}"
+                                       valueChangeListener="#{transAlloc.accountRadioEvent}"/>             
+             </h:panelGrid>
+            <af:popup id="policies">
+              <af:dialog id="dialog1" type="none" title="Policies">
+                <af:table value="#{bindings.Account6.collectionModel}" var="row"
+                          rows="#{bindings.Account6.rangeSize}"
+                          emptyText="#{bindings.Account6.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Account6.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.Account6Query.queryDescriptor}"
+                          queryListener="#{bindings.Account6Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.Account6.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.Account6.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t1" width="410"
+                          binding="#{transAlloc.policiesLOV}">
+                  <af:column sortProperty="POL_POLICY_NO" filterable="true"
+                             sortable="true" headerText="Policy Number" id="c1"
+                             width="200">
+                    <af:outputText value="#{row.POL_POLICY_NO}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="PRP_NAME" filterable="true"
+                             sortable="true" headerText="Client" id="c2"
+                             width="200">
+                    <af:outputText value="#{row.PRP_NAME}" id="ot2"/>
+                  </af:column>
+                </af:table>
+                <h:panelGrid columns="2" id="panelGrid2">
+                  <af:commandButton text="OK" id="commandButton3"
+                                    action="#{transAlloc.findPoliciesSelected}"/>
+                  <af:commandButton text="Cancel" id="commandButton4"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+              <af:popup id="Account_Type">
+              <af:dialog id="d3" type="none" title="Account Types">
+                  <af:table value="#{bindings.Account8.collectionModel}"
+                            var="row" rows="#{bindings.Account8.rangeSize}"
+                            emptyText="#{bindings.Account8.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.Account8.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.Account8Query.queryDescriptor}"
+                            queryListener="#{bindings.Account8Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.Account8.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.Account8.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t10"
+                            binding="#{transAlloc.accountsLOV}">
+                    <af:column sortProperty="ACT_CODE" filterable="true"
+                               sortable="true"
+                               visible="false"
+                               headerText="#{bindings.Account8.hints.ACT_CODE.label}"
+                               id="c83">
+                      <af:outputFormatted value="#{row.bindings.ACT_CODE.inputValue}"
+                                          id="of2"/>
+                    </af:column>
+                    <af:column sortProperty="ACT_ACCOUNT_TYPE" filterable="true"
+                               sortable="true"
+                               width="280px"
+                               headerText="#{bindings.Account8.hints.ACT_ACCOUNT_TYPE.label}"
+                               id="c82">
+                      <af:outputFormatted value="#{row.bindings.ACT_ACCOUNT_TYPE.inputValue}"
+                                          id="of1"/>
+                    </af:column>
+                  </af:table>
+                  <h:panelGrid columns="2" id="pg8">
+                    <af:commandButton text="OK" id="cb5"
+                                      action="#{transAlloc.selectAccount}"/>
+                    <af:commandButton text="CANCEL" id="cb6"/>
+                  </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+              <af:popup id="accounts">
+                <af:dialog id="d4" type="none" title="Accounts">
+                  <af:table value="#{bindings.Account10.collectionModel}"
+                            var="row" rows="#{bindings.Account10.rangeSize}"
+                            emptyText="#{bindings.Account10.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.Account10.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.Account9Query.queryDescriptor}"
+                            queryListener="#{bindings.Account9Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.Account10.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.Account10.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t11"
+                            binding="#{transAlloc.agentsLOV}">
+                    <af:column sortProperty="AGN_CODE" filterable="true"
+                               sortable="true"
+                               headerText="Agent Code"
+                               id="c85">
+                      <af:outputFormatted value="#{row.bindings.AGN_CODE.inputValue}"
+                                          id="of4"/>
+                    </af:column>
+                    <af:column sortProperty="AGN_NAME" filterable="true"
+                               sortable="true"
+                               width="180px"
+                               headerText="Agent Name"
+                               id="c84">
+                      <af:outputFormatted value="#{row.bindings.AGN_NAME.inputValue}"
+                                          id="of3"/>
+                    </af:column>
+                  </af:table>
+                  <h:panelGrid columns="2" id="pg9">
+                    <af:commandButton text="OK" id="cb8"
+                    action="#{transAlloc.agentSelection}"/>
+                  
+                    <af:commandButton text="CANCEL" id="cb9"/>
+                  </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            
+              <af:separator id="s4"/>
+              <h:panelGrid columns="2" id="pg1">              
+               <af:outputLabel value="Account Type" id="ol3" rendered="false"
+                               binding="#{transAlloc.accTypeLab}"/>           
+                <h:panelGrid columns="2" id="pg6" rendered="false"
+                             binding="#{transAlloc.accTypeGrid}">
+                  <af:inputText label="Label 1" id="it1" simple="true"
+                                binding="#{transAlloc.accountDisplay}"/>
+                  <af:commandButton id="commandButton2"
+                                  icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="Account_Type"/>
+                </af:commandButton>
+                </h:panelGrid>
+                <af:outputLabel value="Account" id="ol4" rendered="false"
+                                binding="#{transAlloc.accLabel}"/>
+                <h:panelGrid columns="2" id="pg7" rendered="false"
+                             binding="#{transAlloc.accGrid}">
+                  <af:inputText label="Account" id="it2" simple="true"
+                                binding="#{transAlloc.agenDisplay}"/>
+                  <af:commandButton id="cb7"
+                                  icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="accounts"/>
+                </af:commandButton>
+                </h:panelGrid>
+                <af:commandButton text="Search" 
+                      icon="/images/search.gif"
+                id="cb10" action="#{transAlloc.searchAction}" rendered="false"
+                                  binding="#{transAlloc.accSearchBtn}"/>
+                
+             <af:outputLabel value="Select Policy" id="outputLabel1"
+                             binding="#{transAlloc.polSelectionLab}"/>
+              <h:panelGrid columns="2" id="panelGrid1"
+                           binding="#{transAlloc.polGrid}">
+                <af:inputText label="Label 1" id="inputText1" simple="true"
+                              disabled="true"
+                              binding="#{transAlloc.policiesDesc}"/>
+                <af:commandButton id="cb11"
+                                  icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="policies"/>
+                </af:commandButton>
+              </h:panelGrid>
+            </h:panelGrid>
+          </af:panelBox>
+          <af:panelBox text="Transaction Allocation" id="pb2" rendered="false"
+                       binding="#{transAlloc.results}" showHeader="never">
+            <f:facet name="toolbar"/>
+            <af:panelTabbed id="pt2"
+                            inlineStyle="width:100.0%; height:200px;">
+              <af:showDetailItem text="Credit Transactions" id="sdi1">
+                <af:table value="#{bindings.Account.collectionModel}" var="row"
+                          rows="#{bindings.Account.rangeSize}"
+                          emptyText="#{bindings.Account.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Account.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.Account.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.Account.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t3"
+                          inlineStyle="width:100.0%; height:150px; border-style:none;"
+                          binding="#{transAlloc.crdtTransLOV}">
+                  <af:column sortProperty="MTRAN_REF_NO" sortable="true"
+                             headerText="Ref No." id="c12">
+                    <af:outputText value="#{row.MTRAN_REF_NO}" id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_DATE" sortable="true"
+                             headerText="Date" id="c5">
+                    <af:outputText value="#{row.MTRAN_DATE}" id="ot8">
+                      <af:convertDateTime pattern="#{bindings.Account.hints.MTRAN_DATE.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_POL_POLCY_NO" sortable="true"
+                             headerText="Policy No." id="c86">
+                    <af:outputText value="#{row.MTRAN_POL_POLCY_NO}" id="ot82"/>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_TRAN_TYPE" sortable="false"
+                             headerText="Trans Type" id="c53" width="70"
+                             minimumWidth="12">
+                    <af:outputText value="#{row.MTRAN_TRAN_TYPE}" id="ot54"/>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_DC" sortable="true"
+                             headerText="D/C" id="c8" width="50">
+                    <af:outputText value="#{row.MTRAN_DC}" id="ot12"/>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_AMOUNT" sortable="true"
+                             headerText="Rcpt Amount" id="c11">
+                    <af:outputText value="#{row.MTRAN_AMOUNT}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_COMMISSION" sortable="true"
+                             headerText="Comm Due" id="c7">
+                    <af:outputText value="#{row.MTRAN_COMMISSION}" id="ot13"/>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_COMM_PAID" sortable="true"
+                             headerText="Comm Paid" id="c9">
+                    <af:outputText value="#{row.MTRAN_COMM_PAID}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_COMM_PAYABLE" sortable="true"
+                             headerText="Comm Payable" id="c6">
+                    <af:outputText value="#{row.MTRAN_COMM_PAYABLE}" id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_BALANCE" sortable="true"
+                             headerText="Balance" id="c10">
+                    <af:outputText value="#{row.MTRAN_BALANCE}" id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="amount" sortable="true"
+                             headerText="Amount" id="c13">
+                    <af:outputText value="#{row.amount}" id="ot14"/>
+                  </af:column>
+                </af:table>
+              </af:showDetailItem>
+              <af:showDetailItem text="Credits To Allocate"
+                                 id="showDetailItem1">
+                  <af:panelGroupLayout id="pgl3">
+                    <af:panelBox text="PanelBox1" id="pb3" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <af:popup id="p1">
+                        <af:dialog id="d2" type="none"
+                                   title="Alter Allocation Mode">
+                          <af:panelBox id="pb7" showHeader="never">
+                            <f:facet name="toolbar"/>
+                            <h:panelGrid columns="2" id="pg3">
+                              <af:outputLabel value="Reference No."
+                                              id="outputLabel2"/>
+                              <af:outputText id="ot61"
+                                             inlineStyle="font-weight:bold;"
+                                             binding="#{transAlloc.refNo}"/>
+                              <af:outputLabel value="Payment Mode" id="ol2"/>
+                              <af:selectOneChoice label="Label 1" id="soc1"
+                                                  simple="true" value="N"
+                                                  binding="#{transAlloc.allocMode}">
+                                <af:selectItem label="Manual" value="N"
+                                               id="si2"/>
+                                <af:selectItem label="Automatic" value="C"
+                                               id="si1"/>
+                              </af:selectOneChoice>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" id="pg4">
+                              <af:commandButton text="Save" id="cb3"
+                                                action="#{transAlloc.SaveAllocationMode}"/>
+                              <af:commandButton text="Cancel"
+                                                id="commandButton6"/>
+                            </h:panelGrid>
+                          </af:panelBox>
+                        </af:dialog>
+                      </af:popup>
+                      <h:panelGrid columns="2" id="pg2">
+                        <af:commandButton text="Edit" id="cb2"
+                                          icon="/images/update_ena.png"
+                                          action="#{transAlloc.AlterAllocationMode}"
+                                          rendered="#{sessionScope['CoinsPolicy']=='Y'}"/>
+                        <af:commandButton text="Allocate Credit" id="cb1"
+                                          action="#{transAlloc.AllocateCredits}"/>
+                      </h:panelGrid>
+                      <af:table value="#{bindings.Account1.collectionModel}"
+                                var="row" rows="#{bindings.Account1.rangeSize}"
+                                emptyText="#{bindings.Account1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Account1.rangeSize}"
+                                rowBandingInterval="0"
+                                selectionListener="#{transAlloc.GetSelectedCreditToAlloc}"
+                                rowSelection="single" id="t4"
+                                inlineStyle="width:100%; height:120.0px; border-style:none;"
+                                binding="#{transAlloc.crdtAllocLOV}">
+                        <af:column sortProperty="CRA_MTRAN_REF_NO"
+                                   sortable="true" headerText="Ref No." id="c20"
+                                   width="70">
+                          <af:outputText value="#{row.CRA_MTRAN_REF_NO}"
+                                         id="ot16"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_DATE" sortable="true"
+                                   headerText="Date" id="c16" width="70">
+                          <af:outputText value="#{row.CRA_MTRAN_DATE}"
+                                         id="ot20">
+                            <af:convertDateTime pattern="#{bindings.Account1.hints.CRA_MTRAN_DATE.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_TRAN_TYPE"
+                                   sortable="false" headerText="Trans Type"
+                                   id="c54" width="80">
+                          <af:outputText value="#{row.CRA_MTRAN_TRAN_TYPE}"
+                                         id="ot55"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_DC" sortable="true"
+                                   headerText="D/C" id="c21" width="60">
+                          <af:outputText value="#{row.CRA_MTRAN_DC}" id="ot18"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_AMOUNT"
+                                   sortable="true" headerText="Receipt Amt"
+                                   id="c19">
+                          <af:outputText value="#{row.CRA_MTRAN_AMOUNT}"
+                                         id="ot17"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_COMMISSION"
+                                   sortable="true" headerText="Comm Due."
+                                   id="c14" visible="false">
+                          <af:outputText value="#{row.CRA_MTRAN_COMMISSION}"
+                                         id="ot21"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_COMM_PAID"
+                                   sortable="true" headerText="Comm Paid"
+                                   id="c18" visible="false">
+                          <af:outputText value="#{row.CRA_MTRAN_COMM_PAID}"
+                                         id="ot22"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_COMM_PAYABLE"
+                                   sortable="true" headerText="Comm Payable"
+                                   id="c15" visible="false">
+                          <af:outputText value="#{row.CRA_MTRAN_COMM_PAYABLE}"
+                                         id="ot19"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_BALANCE"
+                                   sortable="true" headerText="Balance"
+                                   id="c17">
+                          <af:outputText value="#{row.CRA_MTRAN_BALANCE}"
+                                         id="ot15"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_amount" sortable="false"
+                                   headerText="Amount" id="c4" width="70">
+                          <af:outputText value="#{row.CRA_amount}" id="ot4"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_CODE" sortable="false"
+                                   headerText="code"
+                                   id="c57" visible="false">
+                          <af:outputText value="#{row.CRA_MTRAN_CODE}"
+                                         id="ot5"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_ALLOC_MODE_DESC" sortable="false"
+                                   headerText="Payment Mode"
+                                   id="c59"
+                                   rendered="#{sessionScope['CoinsPolicy']=='Y'}">
+                          <af:outputText value="#{row.CRA_MTRAN_ALLOC_MODE_DESC}"
+                                         id="ot60"/>
+                        </af:column>
+                        <af:column sortProperty="CRA_MTRAN_ALLOC_MODE" sortable="false"
+                                   headerText="#{bindings.Account1.hints.CRA_MTRAN_ALLOC_MODE.label}"
+                                   id="c60" visible="false">
+                          <af:outputText value="#{row.CRA_MTRAN_ALLOC_MODE}"
+                                         id="ot59"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelTabbed>
+            <af:spacer width="10" height="15" id="s1"/>
+            <af:panelTabbed id="panelTabbed1"
+                            inlineStyle="width:100.0%; height:200px;">
+              <af:showDetailItem text="Debit Transactions"
+                                 id="showDetailItem2">
+                <af:table value="#{bindings.Account2.collectionModel}" var="row"
+                          rows="#{bindings.Account2.rangeSize}"
+                          emptyText="#{bindings.Account2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Account2.rangeSize}"
+                          rowBandingInterval="0" id="t5"
+                          inlineStyle="width:100.0%; height:150px; border-style:none;"
+                          binding="#{transAlloc.dbtTransLOV}">
+                  <af:column sortProperty="DBT_MTRAN_REF_NO" sortable="false"
+                             headerText="Ref No." id="c30">
+                    <af:outputText value="#{row.DBT_MTRAN_REF_NO}" id="ot25"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_MTRAN_DATE" sortable="false"
+                             headerText="Date" id="c23" width="70">
+                    <af:outputText value="#{row.DBT_MTRAN_DATE}" id="ot31">
+                      <af:convertDateTime pattern="#{bindings.Account2.hints.DBT_MTRAN_DATE.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="MTRAN_POL_POLCY_NO" sortable="true"
+                             headerText="Policy No" id="c55" width="70">
+                    <af:outputText value="#{row.MTRAN_POL_POLCY_NO}"
+                                   id="ot56"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_MTRAN_TRAN_TYPE" sortable="false"
+                             headerText="Trans Type" id="c87" width="70">
+                    <af:outputText value="#{row.DBT_MTRAN_TRAN_TYPE}"
+                                   id="ot83"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_MTRAN_DC" sortable="false"
+                             headerText="D/C" id="c31" width="50">
+                    <af:outputText value="#{row.DBT_MTRAN_DC}" id="ot30"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_GROSS_AMOUNT" sortable="false"
+                             headerText="Gross Amount" id="c28" width="80">
+                    <af:outputText value="#{row.DBT_GROSS_AMOUNT}" id="ot23"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_NET_AMOUNT" sortable="false"
+                             headerText="Net Amount" id="c25" width="80">
+                    <af:outputText value="#{row.DBT_NET_AMOUNT}" id="ot24"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_MTRAN_SETTLED_AMT"
+                             sortable="false" headerText="Settlements" id="c24">
+                    <af:outputText value="#{row.DBT_MTRAN_SETTLED_AMT}"
+                                   id="ot26"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_MTRAN_BALANCE" sortable="false"
+                             headerText="Balance" id="c29" width="70">
+                    <af:outputText value="#{row.DBT_MTRAN_BALANCE}" id="ot28"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_MTRAN_COMMISSION"
+                             sortable="false" headerText="Comm Due." id="c22">
+                    <af:outputText value="#{row.DBT_MTRAN_COMMISSION}"
+                                   id="ot29"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_MTRAN_COMM_PAID" sortable="false"
+                             headerText="Comm Paid" id="c27">
+                    <af:outputText value="#{row.DBT_MTRAN_COMM_PAID}"
+                                   id="ot32"/>
+                  </af:column>
+                  <af:column sortProperty="DBT_MTRAN_COMM_PAYABLE"
+                             sortable="false" headerText="Comm Payable"
+                             id="c26">
+                    <af:outputText value="#{row.DBT_MTRAN_COMM_PAYABLE}"
+                                   id="ot27"/>
+                  </af:column>
+                </af:table>
+              </af:showDetailItem>
+              <af:showDetailItem text="Debit Allocation"
+                                 id="showDetailItem3"
+                                 disclosureListener="#{transAlloc.DebitAllocationListener}">
+                  <af:panelGroupLayout id="pgl4">
+                    <af:panelBox text="PanelBox2" id="pb4" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <af:table value="#{bindings.Account3.collectionModel}"
+                                var="row" rows="#{bindings.Account3.rangeSize}"
+                                emptyText="#{bindings.Account3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Account3.rangeSize}"
+                                rowBandingInterval="0" rowSelection="single"
+                                id="t6"
+                                inlineStyle="width:100.0%; height:150px; border-style:none;"
+                                binding="#{transAlloc.dbtAllocLOV}">
+                        <af:column sortProperty="DBA_MTRAN_REF_NO"
+                                   sortable="true" headerText="Ref No."
+                                   id="c40">
+                          <af:outputText value="#{row.DBA_MTRAN_REF_NO}"
+                                         id="ot38"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_MTRAN_DATE" sortable="true"
+                                   headerText="Date" id="c39" width="50">
+                          <af:outputText value="#{row.DBA_MTRAN_DATE}"
+                                         id="ot39">
+                            <af:convertDateTime pattern="#{bindings.Account3.hints.DBA_MTRAN_DATE.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="MTRAN_POL_POLCY_NO"
+                                   sortable="false" headerText="Policy No."
+                                   id="c56" width="70">
+                          <af:outputText value="#{row.MTRAN_POL_POLCY_NO}"
+                                         id="ot57"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_MTRAN_TRAN_TYPE"
+                                   sortable="false" headerText="Trans Type"
+                                   id="c88" width="70">
+                          <af:outputText value="#{row.DBA_MTRAN_TRAN_TYPE}"
+                                         id="ot84"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_MTRAN_DC" sortable="true"
+                                   headerText="D/C" id="c36" width="50">
+                          <af:outputText value="#{row.DBA_MTRAN_DC}" id="ot40"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_GROSS_AMOUNT"
+                                   sortable="true" headerText="Gross Amount"
+                                   id="c38" width="70">
+                          <af:outputText value="#{row.DBA_GROSS_AMOUNT}"
+                                         id="ot33"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_NET_AMOUNT" sortable="true"
+                                   headerText="Net Amount" id="c41" width="70">
+                          <af:outputText value="#{row.DBA_NET_AMOUNT}"
+                                         id="ot34"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_MTRAN_SETTLED_AMT"
+                                   sortable="true" headerText="Settlements"
+                                   id="c34">
+                          <af:outputText value="#{row.DBA_MTRAN_SETTLED_AMT}"
+                                         id="ot36"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_MTRAN_BALANCE"
+                                   sortable="true" headerText="Balance" id="c32"
+                                   width="70">
+                          <af:outputText value="#{row.DBA_MTRAN_BALANCE}"
+                                         id="ot35"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_MTRAN_COMMISSION"
+                                   sortable="true" headerText="Comm Due."
+                                   id="c33" width="70">
+                          <af:outputText value="#{row.DBA_MTRAN_COMMISSION}"
+                                         id="ot41"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_MTRAN_COMM_PAID"
+                                   sortable="true" headerText="Comm Paid"
+                                   id="c37" width="70">
+                          <af:outputText value="#{row.DBA_MTRAN_COMM_PAID}"
+                                         id="ot42"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_MTRAN_COMM_PAYABLE"
+                                   sortable="true" headerText="Comm Payable"
+                                   id="c35">
+                          <af:outputText value="#{row.DBA_MTRAN_COMM_PAYABLE}"
+                                         id="ot37"/>
+                        </af:column>
+                        <af:column sortProperty="MTRAN_REF_NO" sortable="false"
+                                   headerText="Knock off?" id="c3" width="70">
+                          <af:selectBooleanCheckbox id="sbc1" simple="true"
+                                                    autoSubmit="true"
+                                                    valueChangeListener="#{transAlloc.knockoffListener}"
+                                                    binding="#{transAlloc.knockCbox}"
+                                                    value="#{row.selected}"/>
+                        </af:column>
+                        <af:column sortProperty="DBA_MTRAN_CODE" sortable="false"
+                                   headerText="code"
+                                   id="c58" visible="false">
+                          <af:outputText value="#{row.DBA_MTRAN_CODE}"
+                                         id="ot58"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </af:showDetailItem>
+                <af:showDetailItem text="Coinsurance Allocation" id="sdi2"
+                                   rendered="#{sessionScope['CoinsPolicy']=='Y'}"
+                                   disclosureListener="#{transAlloc.coinsAllocationListener}">
+                  <af:panelGroupLayout id="pgl7">
+                    <af:panelBox id="pb8">
+                      <f:facet name="toolbar"/>
+                      <af:table value="#{bindings.policies.collectionModel}"
+                                var="row" rows="#{bindings.policies.rangeSize}"
+                                emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.policies.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.policiesQuery.queryDescriptor}"
+                                queryListener="#{bindings.policiesQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t9"
+                                inlineStyle="width:100.0%; height:150px; border-style:none;"
+                                binding="#{transAlloc.coinsAlloc}">
+                        <af:column sortProperty="btr_trans_type"
+                                   filterable="true" sortable="true"
+                                   headerText="Transaction" id="c65">
+                          <af:outputText value="#{row.btr_trans_type}"
+                                         id="ot70"/>
+                        </af:column>
+                        <af:column sortProperty="coinsurer_display"
+                                   filterable="true" sortable="true"
+                                   headerText="Coinsurer" id="c73">
+                          <af:outputText value="#{row.coinsurer_display}"
+                                         id="ot65"/>
+                        </af:column>
+                        <af:column sortProperty="POL_COIN_SHARE_PCT"
+                                   filterable="true" sortable="true"
+                                   headerText="Share %" id="c72">
+                          <af:outputText value="#{row.POL_COIN_SHARE_PCT}"
+                                         id="ot67"/>
+                        </af:column>
+                        <af:column sortProperty="pol_coin_admin_fee"
+                                   filterable="true" sortable="true"
+                                   headerText="Admin Fee" id="c71">
+                          <af:outputText value="#{row.pol_coin_admin_fee}"
+                                         id="ot71"/>
+                        </af:column>
+                        <af:column sortProperty="POL_COIN_PREMIUM"
+                                   filterable="true" sortable="true"
+                                   headerText="Gross Premium" id="c69">
+                          <af:outputText value="#{row.POL_COIN_PREMIUM}"
+                                         id="ot72"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="pol_coin_comm_amt"
+                                   filterable="true" sortable="true"
+                                   headerText="Comm Amt" id="c70">
+                          <af:outputText value="#{row.pol_coin_comm_amt}"
+                                         id="ot69"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="POL_COIN_SRVCE_FEE"
+                                   filterable="true" sortable="true"
+                                   headerText="Service Fee" id="c67">
+                          <af:outputText value="#{row.POL_COIN_SRVCE_FEE}"
+                                         id="ot68"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="pol_coin_settled"
+                                   filterable="true" sortable="true"
+                                   headerText="Settled Amt" id="c68">
+                          <af:outputText value="#{row.pol_coin_settled}"
+                                         id="ot73"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="pol_coin_balance"
+                                   filterable="true" sortable="true"
+                                   headerText="Balance" id="c66">
+                          <af:outputText value="#{row.pol_coin_balance}"
+                                         id="ot66"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="selected" sortable="false"
+                                   headerText="Knock off?"
+                                   id="c61" width="70">
+                          <af:selectBooleanCheckbox
+                                                    label="Label 1" id="sbc2"
+                                                    value="#{row.selected}"
+                                                    simple="true"
+                                                    disabled="#{row.fully_settled=='Y'}"
+                                                    binding="#{transAlloc.cknockCbox}"
+                                                    autoSubmit="true"
+                                                    valueChangeListener="#{transAlloc.CoinknockoffListener}"/>
+                        </af:column>
+                        <af:column sortProperty="fully_settled" sortable="false"
+                                   headerText="#{bindings.policies.hints.fully_settled.label}"
+                                   id="c62" visible="false">
+                          <af:outputText value="#{row.fully_settled}"
+                                         id="ot62"/>
+                        </af:column>
+                        <af:column sortProperty="pol_coin_code" sortable="false"
+                                   headerText="#{bindings.policies.hints.pol_coin_code.label}"
+                                   id="c63" visible="false">
+                          <af:outputText value="#{row.pol_coin_code}"
+                                         id="ot63"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </af:showDetailItem>
+                <af:showDetailItem text="Coinsurance Refunds" id="sdi3"
+                                   rendered="#{sessionScope['CoinsPolicy']=='Y'}">
+                  <af:panelGroupLayout id="pgl8">
+                    <af:panelBox id="pb9" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <h:panelGrid columns="2" id="pg5">
+                        <af:commandButton text="Authorise" id="cb4"
+                                          action="#{transAlloc.AuthoriseRefunds}"/>
+                        <af:commandButton text="Undo Allocation"
+                                          id="commandButton8"
+                                          action="#{transAlloc.UndoRefundsTransaction}"/>
+                      </h:panelGrid>
+                      <af:table value="#{bindings.Account7.collectionModel}"
+                                var="row" rows="#{bindings.Account7.rangeSize}"
+                                emptyText="#{bindings.Account7.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Account7.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.Account7Query.queryDescriptor}"
+                                queryListener="#{bindings.Account7Query.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Account7.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Account7.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t2"
+                                inlineStyle="width:100.0%; height:150px; border-style:none;"
+                                binding="#{transAlloc.refundsAlloc}">
+                        <af:column sortProperty="LPR_CODE" filterable="true"
+                                   sortable="true" headerText="code" id="c78"
+                                   visible="false">
+                          <af:outputText value="#{row.LPR_CODE}" id="ot77"/>
+                        </af:column>
+                        <af:column sortProperty="LPR_VOUCHER_NO"
+                                   filterable="true" sortable="true"
+                                   headerText="Voucher No." id="c74">
+                          <af:outputText value="#{row.LPR_VOUCHER_NO}"
+                                         id="ot81"/>
+                        </af:column>
+                        <af:column sortProperty="AGN_NAME" filterable="true"
+                                   sortable="true" headerText="Payee" id="c75">
+                          <af:outputText value="#{row.AGN_NAME}" id="ot74"/>
+                        </af:column>
+                        <af:column sortProperty="LPR_AMOUNT_TO_PAY"
+                                   filterable="true" sortable="true"
+                                   headerText="Amount to Pay" id="c77">
+                          <af:outputText value="#{row.LPR_AMOUNT_TO_PAY}"
+                                         id="ot75"/>
+                        </af:column>
+                        <af:column sortProperty="LPR_RAISED_BY"
+                                   filterable="true" sortable="true"
+                                   headerText="Raised By" id="c79">
+                          <af:outputText value="#{row.LPR_RAISED_BY}"
+                                         id="ot80"/>
+                        </af:column>
+                        <af:column sortProperty="LPR_DATE_DONE"
+                                   filterable="true" sortable="true"
+                                   headerText="Date Done" id="c80">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.LPR_DATE_DONE}"
+                                          id="id2"/>
+                          </f:facet>
+                          <af:outputText value="#{row.LPR_DATE_DONE}" id="ot78">
+                            <af:convertDateTime pattern="#{bindings.Account7.hints.LPR_DATE_DONE.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="LPR_PAID" filterable="true"
+                                   sortable="true" headerText="Paid?" id="c64">
+                          <af:outputText value="#{row.LPR_PAID}" id="ot64"/>
+                        </af:column>
+                        <af:column sortProperty="LPR_AUTHORISED_BY"
+                                   filterable="true" sortable="true"
+                                   headerText="Authorised By" id="c76">
+                          <af:outputText value="#{row.LPR_AUTHORISED_BY}"
+                                         id="ot76"/>
+                        </af:column>
+                        <af:column sortProperty="LPR_AUTHORISED_DATE"
+                                   filterable="true" sortable="true"
+                                   headerText="Authorised Date" id="c81">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.LPR_AUTHORISED_DATE}"
+                                          id="id1"/>
+                          </f:facet>
+                          <af:outputText value="#{row.LPR_AUTHORISED_DATE}"
+                                         id="ot79">
+                            <af:convertDateTime pattern="#{bindings.Account7.hints.LPR_AUTHORISED_DATE.format}"/>
+                          </af:outputText>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </af:showDetailItem>
+                <af:showDetailItem text="Transactions Settled" id="showDetailItem4">
+                  <af:panelGroupLayout id="pgl5">
+                    <af:panelBox text="PanelBox3" id="pb5" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <af:commandButton text="Undo Transaction"
+                                        id="commandButton1"
+                                        action="#{transAlloc.UndoTransactionSettled}"/>
+                      <af:table value="#{bindings.Account4.collectionModel}"
+                                var="row" rows="#{bindings.Account4.rangeSize}"
+                                emptyText="#{bindings.Account4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Account4.rangeSize}"
+                                rowBandingInterval="0"
+                                selectedRowKeys="#{bindings.Account4.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Account4.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t7"
+                                inlineStyle="width:100%; height:120.0px; border-style:none;"
+                                binding="#{transAlloc.transSettledLOV}">
+                        <af:column sortProperty="TMAP_DR_MTRAN_REF_NO"
+                                   sortable="true"
+                                   headerText="Debit Settled Ref No." id="c43"
+                                   width="200">
+                          <af:outputText value="#{row.TMAP_DR_MTRAN_REF_NO}"
+                                         id="ot43"/>
+                        </af:column>
+                        <af:column sortProperty="TMAP_AMOUNT" sortable="true"
+                                   headerText="Amount Settled" id="c42"
+                                   width="200" minimumWidth="12">
+                          <af:outputText value="#{row.TMAP_AMOUNT}" id="ot44"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+              </af:showDetailItem>
+              <af:showDetailItem text="Commissions"
+                                 id="showDetailItem5">
+                  <af:panelGroupLayout id="pgl6">
+                    <af:panelBox text="PanelBox4" id="pb6" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <af:commandButton text="Authorise Payments"
+                                        id="commandButton5"
+                                        action="#{transAlloc.AuthorisePayments}"/>
+                      <af:table value="#{bindings.Account5.collectionModel}"
+                                var="row" rows="#{bindings.Account5.rangeSize}"
+                                emptyText="#{bindings.Account5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Account5.rangeSize}"
+                                rowBandingInterval="0"
+                                selectedRowKeys="#{bindings.Account5.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Account5.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t8"
+                                inlineStyle="width:100%; height:120.0px; border-style:none;"
+                                binding="#{transAlloc.commLOV}">
+                        <af:column sortProperty="AGENT_DISPLAY" sortable="true"
+                                   headerText="Agent Name" id="c48">
+                          <af:outputText value="#{row.AGENT_DISPLAY}"
+                                         id="ot51"/>
+                        </af:column>
+                        <af:column sortProperty="PCP_AGN_UNIT_MGR"
+                                   sortable="true" headerText="Unit Mngr"
+                                   id="c50">
+                          <af:outputText value="#{row.PCP_AGN_UNIT_MGR}"
+                                         id="ot47"/>
+                        </af:column>
+                        <af:column sortProperty="BRANCH_DISPLAY" sortable="true"
+                                   headerText="Branch Name" id="c51">
+                          <af:outputText value="#{row.BRANCH_DISPLAY}"
+                                         id="ot46"/>
+                        </af:column>
+                        <af:column sortProperty="PCP_COMM_AMT" sortable="true"
+                                   headerText="Total Comm Amt" id="c44">
+                          <af:outputText value="#{row.PCP_COMM_AMT}" id="ot49"/>
+                        </af:column>
+                        <af:column sortProperty="PCP_WHDTAX_AMT" sortable="true"
+                                   headerText="Witholding Tax" id="c45">
+                          <af:outputText value="#{row.PCP_WHDTAX_AMT}"
+                                         id="ot52"/>
+                        </af:column>
+                        <af:column sortProperty="PCP_OVRIDE_COMM_AMT"
+                                   sortable="true"
+                                   headerText="Override Comm. Amt" id="c52">
+                          <af:outputText value="#{row.PCP_OVRIDE_COMM_AMT}"
+                                         id="ot45"/>
+                        </af:column>
+                        <af:column sortProperty="PCP_OVRIDE_WHDTAX_AMT"
+                                   sortable="true"
+                                   headerText="Override WhdTax Amt" id="c47"
+                                   width="120">
+                          <af:outputText value="#{row.PCP_OVRIDE_WHDTAX_AMT}"
+                                         id="ot50"/>
+                        </af:column>
+                        <af:column sortProperty="PCP_NET_COMM" sortable="true"
+                                   headerText="Net Comm Amt" id="c49">
+                          <af:outputText value="#{row.PCP_NET_COMM}" id="ot53"/>
+                        </af:column>
+                        <af:column sortProperty="PCP_PAID" sortable="true"
+                                   headerText="Paid" id="c46">
+                          <af:outputText value="#{row.PCP_PAID}" id="ot48"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </af:showDetailItem>
+            </af:panelTabbed>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

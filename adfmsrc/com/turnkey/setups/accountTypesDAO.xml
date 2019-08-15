@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="accountTypesDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.accountTypesDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.accountTypes"
+                  BeanClass="com.turnkey.setups.accountTypes"
+                  id="findAccountTypes" ReturnNodeName="accountTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.agencies"
+                  BeanClass="com.turnkey.setups.agencies" id="findAgencies"
+                  ReturnNodeName="agencies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.accountTypes"
+                  BeanClass="com.turnkey.setups.accountTypes"
+                  id="findBankBranches" ReturnNodeName="accountTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.accountTypes"
+                  BeanClass="com.turnkey.setups.accountTypes"
+                  id="findCommissionRates" ReturnNodeName="accountTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.accountTypes"
+                  BeanClass="com.turnkey.setups.accountTypes" id="findBranches"
+                  ReturnNodeName="accountTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.accountTypes"
+                  BeanClass="com.turnkey.setups.accountTypes"
+                  id="findContactPersons" ReturnNodeName="accountTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.accountTypes"
+                  BeanClass="com.turnkey.setups.accountTypes" id="findNewAgents"
+                  ReturnNodeName="accountTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.accountTypesDAO"
+                     BeanClass="com.turnkey.setups.accountTypesDAO"
+                     id="accountTypesDAO"/>
+</JavaBean>

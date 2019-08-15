@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="prodcausPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findProdCoverTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProdCoverTypesIterator"/>
+    <methodIterator Binds="findCoverTypeCausations.result"
+                    DataControl="causationsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.causations"
+                    id="findCoverTypeCausationsIterator"/>
+    <methodIterator Binds="findCausations.result" DataControl="causationsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.causations"
+                    id="findCausationsIterator"/>
+    <methodIterator Binds="findDisabilityLosses.result"
+                    DataControl="causationsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.causations"
+                    id="findDisabilityLossesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="PROD_CODE"/>
+          <Item Value="PROD_DESC"/>
+          <Item Value="PROD_SHT_DESC"/>
+          <Item Value="PROD_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProdCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProdCoverTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProdCoverTypes_SetupsDAO_dataProvider_findProdCoverTypes_result"/>
+    <tree IterBinding="findProdCoverTypesIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="PCT_CODE"/>
+          <Item Value="PCT_CVT_CODE"/>
+          <Item Value="PCT_PROD_CODE"/>
+          <Item Value="PCT_CVT_SHT_DESC"/>
+          <Item Value="PCT_CVT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCoverTypeCausations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCoverTypeCausations"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findCoverTypeCausations_causationsDAO_dataProvider_findCoverTypeCausations_result"/>
+    <tree IterBinding="findCoverTypeCausationsIterator" id="causations">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations0">
+        <AttrNames>
+          <Item Value="cvtcCausShtDesc"/>
+          <Item Value="cvtcCausDesc"/>
+          <Item Value="cvtcCode"/>
+          <Item Value="cvtcCvtCode"/>
+          <Item Value="cvtcCauseCode"/>
+          <Item Value="cvtcProdCode"/>
+          <Item Value="cvtcProdShtDesc"/>
+          <Item Value="cvtcMinDaysClaimable"/>
+           <Item Value="cvtcMaxDaysClaimable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCausations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCausations"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findCausations_causationsDAO_dataProvider_findCausations_result"/>
+    <tree IterBinding="findCausationsIterator" id="causations1">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations10">
+        <AttrNames>
+          <Item Value="causCode"/>
+          <Item Value="causShtdesc"/>
+          <Item Value="causDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findCoverTypeCausationsIterator" id="causations2">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations20">
+        <AttrNames>
+          <Item Value="cvtcCausShtDesc"/>
+          <Item Value="cvtcCausDesc"/>
+          <Item Value="cvtcCode"/>
+          <Item Value="cvtcCvtCode"/>
+          <Item Value="cvtcCauseCode"/>
+          <Item Value="cvtcProdCode"/>
+          <Item Value="cvtcProdShtDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findDisabilityLosses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findDisabilityLosses"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findDisabilityLosses_causationsDAO_dataProvider_findDisabilityLosses_result"/>
+    <tree IterBinding="findDisabilityLossesIterator" id="causations3">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations30">
+        <AttrNames>
+          <Item Value="ldlDesc"/>
+          <Item Value="ldlPerc"/>
+          <Item Value="ldlClosePolDesc"/>
+          <Item Value="ldlWklIndemnityDesc"/>
+          <Item Value="ldlCode"/>
+          <Item Value="ldlPctCode"/>
+          <Item Value="ldlCvtCode"/>
+          <Item Value="ldlCvtcCode"/>
+          <Item Value="ldlClosePol"/>
+          <Item Value="ldlWklIndemnity"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

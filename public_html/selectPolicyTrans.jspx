@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="pt1">
+        <f:facet name="center">
+            <af:panelGroupLayout id="pgl1">
+              <af:panelAccordion id="pa1" inlineStyle="width:100.0%;">
+                <af:showDetailItem text="Policy Transactions" id="sdi1">
+                <af:panelGroupLayout id="pgl2" layout="scroll">
+                  <af:panelBox text="Select A Policy Transaction" id="pb1">
+                    <f:facet name="toolbar"/>
+                    <af:separator id="separator1"/>
+                    <h:panelGrid columns="3" id="pg1">
+                      <af:outputLabel value="New Business Transaction" id="ol1"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio id="sbr1" simple="true"
+                                             group="PT" selected="true"
+                                             binding="#{searchBean.newBusiness}"/>
+                      <af:spacer width="10" height="20" id="s1"/>
+                      <af:outputLabel value="Policy Enquiry"
+                                      id="outputLabel1"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio id="selectBooleanRadio1"
+                                             simple="true" group="PT"
+                                             binding="#{searchBean.policyEnquiry}"/>
+                      <af:spacer width="10" height="20" id="spacer1"/>
+                      <af:outputLabel value="Edit Transaction"
+                                      id="outputLabel2"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio id="selectBooleanRadio2"
+                                             simple="true" group="PT"
+                                             binding="#{searchBean.editTransaction}"/>
+                      <af:spacer width="10" height="20" id="spacer2"/>
+                      <af:outputLabel value="Endorsements"
+                                      id="outputLabel3"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio id="selectBooleanRadio4"
+                                             simple="true" group="PT"
+                                             binding="#{searchBean.endorsements}"/>
+                      <af:spacer width="10" height="20" id="spacer3"/>
+                      <af:outputLabel value="Lapsation"
+                                      id="outputLabel4"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio id="selectBooleanRadio3"
+                                             simple="true" group="PT"
+                                             binding="#{searchBean.lapsation}"/>
+                      <af:spacer width="10" height="20" id="spacer4"/>
+                      <af:outputLabel value="Reinstatement"
+                                      id="outputLabel5"
+                                      inlineStyle="font-weight:bold;"
+                                      binding="#{SetupBean.reinstatement}"/>
+                      <af:selectBooleanRadio id="selectBooleanRadio5"
+                                             simple="true" group="PT"
+                                             binding="#{searchBean.reinstatement}"/>
+                      <af:spacer width="10" height="20" id="spacer5"/>
+                      <af:outputLabel value="Contra Transactions" id="outputLabel6"
+                                      inlineStyle="font-weight:bold;"
+                                      rendered="false"/>
+                      <af:selectBooleanRadio id="selectBooleanRadio6"
+                                             simple="true" group="PT"
+                                             binding="#{searchBean.contraTransaction}"
+                                             rendered="false"/>
+                      <af:spacer width="10" height="20" id="spacer6"
+                                 rendered="false"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1" id="pg3">
+                      <af:spacer width="10" height="10" id="s2"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg2">
+                      <af:commandButton text="Next" id="cb1"
+                                        action="#{searchBean.RedirectPolicyTrans}"/>
+                      <af:commandButton text="Cancel" id="commandButton1"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+                <f:facet name="toolbar">
+                  <h:panelGrid columns="2" id="pg4">
+                    <af:inputText id="it5" helpTopicId="LmsGrp_g_gtrans"
+                                  readOnly="true"/>
+                    <af:statusIndicator id="si1"/>
+                  </h:panelGrid>
+                </f:facet>
+              </af:showDetailItem>
+              </af:panelAccordion>
+            </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

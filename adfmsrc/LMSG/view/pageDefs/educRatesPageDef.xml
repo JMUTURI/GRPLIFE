@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="educRatesPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findAllProductsAndSchClasses.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findAllProductsAndSchClassesIterator"/>
+    <methodIterator Binds="findSchoolLevels.result" DataControl="SetupsDAO"
+                    RangeSize="-1" BeanClass="com.turnkey.setups.Setup"
+                    id="findSchoolLevelsIterator"/>
+    <iterator Binds="root" RangeSize="25" DataControl="SetupsDAO"
+              id="SetupsDAOIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <methodAction id="findAllProductsAndSchClasses" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findAllProductsAndSchClasses"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findAllProductsAndSchClasses_SetupsDAO_dataProvider_findAllProductsAndSchClasses_result"/>
+    <tree IterBinding="findAllProductsAndSchClassesIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="schClassItem"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.turnkey.setups.SchoolClassItems"
+                      Name="Setup11">
+        <AttrNames>
+          <Item Value="SCH_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSchoolLevels" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSchoolLevels"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findSchoolLevels_SetupsDAO_dataProvider_findSchoolLevels_result"/>
+    <tree IterBinding="findSchoolLevelsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="SLVL_SHT_DESC"/>
+          <Item Value="SLVL_DESC"/>
+          <Item Value="SLVL_PERIOD"/>
+          <Item Value="CLA_CODE"/>
+          <Item Value="SLVL_CODE"/>
+          <Item Value="SLVL_NO_TERMS"/>
+          <Item Value="SLVL_TERM_DURATION"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="SetupsDAOIterator" id="classSchLevel"
+          DTSupportsMRU="true" StaticList="false"
+          ListIter="findSchoolLevelsIterator">
+      <AttrNames>
+        <Item Value="classSchLevel"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="SLVL_CODE"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="SLVL_DESC"/>
+      </ListDisplayAttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

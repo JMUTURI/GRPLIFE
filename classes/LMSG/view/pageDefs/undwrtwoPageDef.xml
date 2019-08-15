@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="undwrtwoPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="findProposers.result" DataControl="proposerDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.proposers"
+                    id="findProposersIterator"/>
+    <methodIterator Binds="findBranches.result" DataControl="branchesDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.branches"
+                    id="findBranchesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProposers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProposers"
+                  IsViewObjectMethod="false" DataControl="proposerDAO"
+                  InstanceName="proposerDAO.dataProvider"
+                  ReturnName="proposerDAO.methodResults.findProposers_proposerDAO_dataProvider_findProposers_result"/>
+    <tree IterBinding="findProposersIterator" id="proposers">
+      <nodeDefinition DefName="view.Quot.proposers" Name="proposers0">
+        <AttrNames>
+          <Item Value="CLIENT"/>
+          <Item Value="GCO_DESC"/>
+          <Item Value="hazard"/>
+          <Item Value="PRP_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBranches"
+                  IsViewObjectMethod="false" DataControl="branchesDAO"
+                  InstanceName="branchesDAO.dataProvider"
+                  ReturnName="branchesDAO.methodResults.findBranches_branchesDAO_dataProvider_findBranches_result"/>
+    <tree IterBinding="findBranchesIterator" id="branches">
+      <nodeDefinition DefName="view.Quot.branches" Name="branches0">
+        <AttrNames>
+          <Item Value="BRN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

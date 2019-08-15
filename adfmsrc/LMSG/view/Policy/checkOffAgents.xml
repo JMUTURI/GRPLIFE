@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="checkOffAgents" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.checkOffAgents" isJavaBased="true">
+  <Attribute Name="AGN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_AGENT_COMMISSION" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_AGENT_WHT_TAX" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_NAME" Type="java.lang.String"/>
+  <Attribute Name="AGN_SHT_DESC" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.checkOffAgents"
+                     BeanClass="LMSG.view.Policy.checkOffAgents"
+                     id="checkOffAgents"/>
+</JavaBean>

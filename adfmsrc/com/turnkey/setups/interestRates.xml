@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="interestRates" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.interestRates" isJavaBased="true">
+  <Attribute Name="rirCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="rirProdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="rirProdshtdesc" Type="java.lang.String"/>
+  <Attribute Name="rirRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="rirWef" Type="java.util.Date"/>
+  <Attribute Name="rirWet" Type="java.util.Date"/>
+  <Attribute Name="lirCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="lirProdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="lirProdShtDesc" Type="java.lang.String"/>
+  <Attribute Name="lirWef" Type="java.util.Date"/>
+  <Attribute Name="lirWet" Type="java.util.Date"/>
+  <Attribute Name="lirRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="serviceCharge" Type="java.math.BigDecimal"/>
+  <Attribute Name="serviceChargeDivFact" Type="java.math.BigDecimal"/>
+  <Attribute Name="lgrCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="lgrProdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="lgrType" Type="java.lang.String"/>
+  <Attribute Name="lgrApplicationType" Type="java.lang.String"/>
+  <Attribute Name="lgrDivFactor" Type="java.math.BigDecimal"/>
+  <Attribute Name="lgrDependsonFreq" Type="java.lang.String"/>
+  <Attribute Name="lgrWef" Type="java.util.Date"/>
+  <Attribute Name="lgrWet" Type="java.util.Date"/>
+  <Attribute Name="lgrRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="typeDesc" Type="java.lang.String"/>
+  <Attribute Name="freqDesc" Type="java.lang.String"/>
+  <Attribute Name="applicTypeDesc" Type="java.lang.String"/>
+  <Attribute Name="LPNT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LPNT_DESC" Type="java.lang.String"/>
+  <Attribute Name="LPNT_POL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="LPNT_DEFAULT" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="com.turnkey.setups.interestRates"
+                     BeanClass="com.turnkey.setups.interestRates"
+                     id="interestRates"/>
+</JavaBean>

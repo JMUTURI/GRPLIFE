@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="medicalPaymentsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="FindMedicalPaymentsQuery.result"
+                    DataControl="medicalsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Medicals.medical"
+                    id="FindMedicalPaymentsQueryIterator"/>
+    <searchRegion Binds="FindMedicalPaymentsQueryIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="medicalQuery"/>
+    <methodIterator Binds="FindMedicalPayments.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="FindMedicalPaymentsIterator"/>
+    <methodIterator Binds="FindFacilitatorPayments.result"
+                    DataControl="medicalsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Medicals.medical"
+                    id="FindFacilitatorPaymentsIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindMedicalPaymentsQuery" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMedicalPaymentsQuery"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindMedicalPaymentsQuery_medicalsDAO_dataProvider_FindMedicalPaymentsQuery_result"/>
+    <tree IterBinding="FindMedicalPaymentsQueryIterator" id="medical">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical0">
+        <AttrNames>
+          <Item Value="searchDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMedicalPayments" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMedicalPayments"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindMedicalPayments_medicalsDAO_dataProvider_FindMedicalPayments_result"/>
+    <tree IterBinding="FindMedicalPaymentsIterator" id="medical1">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical10">
+        <AttrNames>
+          <Item Value="MP_CML_RAISED_BY"/>
+          <Item Value="MP_CML_ID_NO"/>
+          <Item Value="MP_PROPOSAL_NO"/>
+          <Item Value="MP_MED_TEST_DISPLAY"/>
+          <Item Value="MP_CML_RECEIVED"/>
+          <Item Value="MP_CML_PAYABLE_AMT"/>
+          <Item Value="MP_CML_PAID"/>
+          <Item Value="MP_FACILITATOR_DISPLAY"/>
+          <Item Value="MP_CLIENT"/>
+          <Item Value="CMI_CODE"/>
+          <Item Value="MP_CML_CODE"/>
+          <Item Value="CMI_PRP_CODE"/>
+          <Item Value="selected"/>
+          <Item Value="SPR_CODE"/>
+          <Item Value="curSymbol"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindFacilitatorPayments" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindFacilitatorPayments"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindFacilitatorPayments_medicalsDAO_dataProvider_FindFacilitatorPayments_result"/>
+    <tree IterBinding="FindFacilitatorPaymentsIterator" id="medical2">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical20">
+        <AttrNames>
+          <Item Value="FP_facilitator_display"/>
+          <Item Value="FP_branch_display"/>
+          <Item Value="FP_fpmt_amount"/>
+          <Item Value="FP_fpmt_vat_rate"/>
+          <Item Value="FP_fpmt_vat_amt"/>
+          <Item Value="FP_fpmt_net_amount"/>
+          <Item Value="FP_fpmt_pymt_type"/>
+	  <Item Value="FPMT_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+  </bindings>
+</pageDefinition>

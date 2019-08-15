@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="medicalsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="FindSysDate.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSysDateIterator"/>
+    <methodIterator Binds="FindPolicyMemberMedicals.result"
+                    DataControl="medicalsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Medicals.medical"
+                    id="FindPolicyMemberMedicalsIterator"/>
+    <searchRegion Binds="FindPolicyMemberMedicalsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="medicalQuery"/>
+    <methodIterator Binds="FindMedicalPolicies.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="FindMedicalPoliciesIterator"/>
+    <searchRegion Binds="FindMedicalPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="medical1Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <methodAction id="FindPolicyMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyMembers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyMembers_policiesDAO_dataProvider_FindPolicyMembers_result"/>
+    <methodAction id="FindSysDate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSysDate"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSysDate_SettingsDAO_dataProvider_FindSysDate_result"/>
+    <attributeValues IterBinding="FindSysDateIterator" id="sysDate">
+      <AttrNames>
+        <Item Value="sysDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindPolicyMemberMedicals" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyMemberMedicals"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindPolicyMemberMedicals_medicalsDAO_dataProvider_FindPolicyMemberMedicals_result"/>
+    <tree IterBinding="FindPolicyMemberMedicalsIterator" id="medical">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical0">
+        <AttrNames>
+          <Item Value="POLM_CODE"/>
+          <Item Value="MEM_CODE"/>
+          <Item Value="MEM_NO"/>
+          <Item Value="MEM_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMedicalPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMedicalPolicies"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="data.medicalsDAO.methodResults.FindMedicalPolicies_medicalsDAO_dataProvider_FindMedicalPolicies_result"/>
+    <tree IterBinding="FindMedicalPoliciesIterator" id="medical1">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical10">
+        <AttrNames>
+          <Item Value="pol_code"/>
+          <Item Value="pol_current_endr_code"/>
+          <Item Value="pol_policy_no"/>
+          <Item Value="client"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" version="1.2"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <f:view>
+    <af:pageTemplate id="demoTemplate"
+                     viewId="/templates/pageTemplateDefs/tagDemoPortletTemplate2.jspx">
+      <f:attribute name="documentTitle" value="TurnQuest Group Life"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout layout="scroll" id="pgl2">
+          <af:commandButton text="commandButton 1"
+                            action="#{manipulation.doNext}" id="cb1"/>
+          <af:panelGroupLayout binding="#{manipulation.membersImport}"
+                               rendered="false" id="pgl3">
+            <af:panelBox text="PanelBox1" immediate="true"
+                         binding="#{manipulation.memberUpload2}" id="pb1">
+              <f:facet name="toolbar"/>
+              <af:inputFile label="File To Upload" autoSubmit="true"
+                            binding="#{FileProcessor.upFile}"
+                            valueChangeListener="#{FileProcessor.fileChange}"
+                            immediate="true" id="if1"/>
+              <h:panelGrid columns="3" id="pg1">
+                <af:commandButton text="Attach Member To Quotation"
+                                  action="#{Import.ImportQuotation}"
+                                  partialSubmit="true" immediate="true"
+                                  id="cb2"/>
+                <af:commandButton text="Back To Members"
+                                  action="#{Import.BackToMembers}"
+                                  partialSubmit="true" immediate="true"
+                                  id="cb3"/>
+              </h:panelGrid>
+              <tr:panelPage id="pp1">
+                <tr:spacer width="10" height="25" id="s1"/>
+                <tr:inputFile label="File to Upload" columns="90"
+                              value="#{FileProcessor.uploadedFile}"
+                              rendered="false" immediate="true" id="if2"/>
+                <tr:spacer width="10" height="15" id="s2"/>
+                <h:panelGrid columns="4" id="pg2">
+                  <tr:commandButton text="Start Upload" immediate="true"
+                                    rendered="false" id="cb4"/>
+                  <tr:commandButton text="Attach Members To Policy"
+                                    action="#{Import.ImportToDbase}"
+                                    immediate="true" rendered="false" id="cb5"/>
+                  <tr:commandButton text="Attach Members To Quotations"
+                                    action="#{Import.ImportQuotation}"
+                                    immediate="true" rendered="false" id="cb6"/>
+                  <tr:commandButton text="Back to Members"
+                                    action="#{Import.BackToMembers}"
+                                    immediate="true" rendered="false" id="cb7"/>
+                </h:panelGrid>
+                <tr:spacer width="10" height="25" id="s3"/>
+                <tr:separator id="s4"/>
+                <tr:panelBox id="pb2">
+                  <tr:panelFormLayout id="pfl1">
+                    <tr:inputText label="File Name"
+                                  value="#{FileProcessor.filename}"
+                                  readOnly="true" id="it1"/>
+                    <tr:inputText label="File Size"
+                                  value="#{FileProcessor.filesize}"
+                                  readOnly="true" id="it2"/>
+                    <tr:inputText label="File Type"
+                                  value="#{FileProcessor.filetype}"
+                                  readOnly="true" id="it3"/>
+                    <tr:selectBooleanCheckbox id="useFirstAsHeader"
+                                              label="Use first row values as Headers"
+                                              autoSubmit="true"
+                                              value="#{CsvProcessor.useFirstRowAsHeaders}"
+                                              selected="true"/>
+                  </tr:panelFormLayout>
+                </tr:panelBox>
+                <tr:spacer width="10" height="25" id="s5"/>
+                <tr:table value="#{CsvProcessor.rows}" var="row"
+                          varStatus="rowStatus" binding="#{CsvProcessor.table}"
+                          partialTriggers="useFirstAsHeader" immediate="true"
+                          id="t1">
+                  <!-- <f:facet name="header">
+                <tr:outputText value="Contents Extracted from CSV file"/>
+              </f:facet>-->
+                </tr:table>
+                <!--<f:facet name="footer"/>
+            <f:facet name="branding">-->
+                <tr:outputText value="Upload and Process CSV File" id="ot2"/>
+                <!-- </f:facet>-->
+              </tr:panelPage>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+</f:facet>
+      
+    </af:pageTemplate>
+  </f:view>
+</jsp:root>

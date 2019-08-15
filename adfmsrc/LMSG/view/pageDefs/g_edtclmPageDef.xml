@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="g_edtclmPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+    <searchRegion Binds="FindPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+    <methodIterator Binds="FindClaimTransactions.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimTransactionsIterator"/>
+    <searchRegion Binds="FindClaimTransactionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ClaimQuery"/>
+    <methodIterator Binds="findTicketDetailsByUser.result"
+                    DataControl="workflowDAO" RangeSize="25"
+                    BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketDetailsByUserIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="findProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsIterator"/>
+    <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <tree IterBinding="FindPoliciesIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="CLIENT_DISPLAY"/>
+          <Item Value="AGN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClaimTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimTransactions"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimTransactions_ClaimsDAO_dataProvider_FindClaimTransactions_result"/>
+    <tree IterBinding="FindClaimTransactionsIterator" id="Claim">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim0">
+        <AttrNames>
+          <Item Value="LTR_CLM_NO"/>
+          <Item Value="LTR_TRANS_NO"/>
+          <Item Value="LTR_BTR_TRANS_CODE"/>
+          <Item Value="POL_CODE"/>
+          <Item Value="LTR_MEMBER_DISP"/>
+          <Item Value="LTR_MEM_NO"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="LTR_CLIENT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindClaimTransactionsIterator"
+                     id="LTR_POL_POLICY_NO">
+      <AttrNames>
+        <Item Value="LTR_POL_POLICY_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimTransactionsIterator"
+                     id="LTR_TRANS_NO">
+      <AttrNames>
+        <Item Value="LTR_TRANS_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findTicketDetailsByUser" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketDetailsByUser"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketDetailsByUser_workflowDAO_dataProvider_findTicketDetailsByUser_result"/>
+    <tree IterBinding="findTicketDetailsByUserIterator" id="workflow1">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow10">
+        <AttrNames>
+          <Item Value="taskID"/>
+          <Item Value="taskActivityName"/>
+          <Item Value="taskAssignee"/>
+          <Item Value="taskDuedate"/>
+          <Item Value="taskCreateDate"/>
+          <Item Value="TCKT_CODE"/>
+          <Item Value="USRSYSTEM"/>
+          <Item Value="SYSMODULE"/>
+          <Item Value="TCKT_CLNT_CODE"/>
+          <Item Value="CLIENT"/>
+          <Item Value="TCKT_AGN_CODE"/>
+          <Item Value="AGENT"/>
+          <Item Value="TCKT_POL_CODE"/>
+          <Item Value="TCKT_POL_NO"/>
+          <Item Value="TCKT_CLM_NO"/>
+          <Item Value="TCKT_QUOT_CODE"/>
+          <Item Value="QUO_NO"/>
+          <Item Value="TCKT_DATE"/>
+          <Item Value="TCKT_BY"/>
+          <Item Value="TCKT_PROCESS_ID"/>
+          <Item Value="TCKT_SYS_MODULE_CODE"/>
+          <Item Value="TCKT_ENDR_CODE"/>
+          <Item Value="taskUserID"/>
+          <Item Value="taskUserShtDesc"/>
+          <Item Value="taskUserDesc"/>
+          <Item Value="TCKT_PROD_TYPE"/>
+          <Item Value="TCKT_TO"/>
+          <Item Value="TCKT_REMARKS"/>
+          <Item Value="TCKT_NAME"/>
+          <Item Value="TCKT_DUE_DATE"/>
+          <Item Value="TCKT_CDE"/>
+          <Item Value="TCKT_ENDORSEMENT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="productDetails">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodshtDesc"/>
+          <Item Value="prodDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

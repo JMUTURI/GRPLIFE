@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="undwrproPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindProdProvision.result"
+                    DataControl="policyProvisionsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.productProvisions"
+                    id="FindProdProvisionIterator"/>
+    <methodIterator Binds="FindCoverTypes.result"
+                    DataControl="policyCoverTypesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policyCoverTypes"
+                    id="FindCoverTypesIterator"/>
+    <methodIterator Binds="FindProdProvision1.result"
+                    DataControl="coverProvisionsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.productProvisions"
+                    id="FindProdProvision1Iterator"/>
+    <methodIterator Binds="FindProdProvision2.result"
+                    DataControl="polCvtProvisionsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.productProvisions"
+                    id="FindProdProvision2Iterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindProdProvision" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProdProvision"
+                  IsViewObjectMethod="false" DataControl="policyProvisionsDAO"
+                  InstanceName="policyProvisionsDAO.dataProvider"
+                  ReturnName="policyProvisionsDAO.methodResults.FindProdProvision_policyProvisionsDAO_dataProvider_FindProdProvision_result"/>
+    <tree IterBinding="FindProdProvisionIterator" id="productProvisions">
+      <nodeDefinition DefName="view.Quot.productProvisions"
+                      Name="productProvisions0">
+        <AttrNames>
+          <Item Value="PROV_SHT_DESC"/>
+          <Item Value="PROV_DESC"/>
+          <Item Value="PPROV_EDITABLE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCoverTypes"
+                  IsViewObjectMethod="false" DataControl="policyCoverTypesDAO"
+                  InstanceName="policyCoverTypesDAO.dataProvider"
+                  ReturnName="policyCoverTypesDAO.methodResults.FindCoverTypes_policyCoverTypesDAO_dataProvider_FindCoverTypes_result"/>
+    <tree IterBinding="FindCoverTypesIterator" id="policyCoverTypes">
+      <nodeDefinition DefName="view.Policy.policyCoverTypes"
+                      Name="policyCoverTypes0">
+        <AttrNames>
+          <Item Value="PCVT_CVT_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindProdProvision1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProdProvision"
+                  IsViewObjectMethod="false" DataControl="coverProvisionsDAO"
+                  InstanceName="coverProvisionsDAO.dataProvider"
+                  ReturnName="coverProvisionsDAO.methodResults.FindProdProvision_coverProvisionsDAO_dataProvider_FindProdProvision_result"/>
+    <tree IterBinding="FindProdProvision1Iterator" id="productProvisions1">
+      <nodeDefinition DefName="view.Quot.productProvisions"
+                      Name="productProvisions10">
+        <AttrNames>
+          <Item Value="PROV_SHT_DESC"/>
+          <Item Value="PROV_DESC"/>
+          <Item Value="PPROV_EDITABLE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindProdProvision2" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProdProvision"
+                  IsViewObjectMethod="false" DataControl="polCvtProvisionsDAO"
+                  InstanceName="polCvtProvisionsDAO.dataProvider"
+                  ReturnName="polCvtProvisionsDAO.methodResults.FindProdProvision_polCvtProvisionsDAO_dataProvider_FindProdProvision_result"/>
+    <tree IterBinding="FindProdProvision2Iterator" id="productProvisions2">
+      <nodeDefinition DefName="view.Quot.productProvisions"
+                      Name="productProvisions20">
+        <AttrNames>
+          <Item Value="PROV_SHT_DESC"/>
+          <Item Value="PROV_DESC"/>
+          <Item Value="PPROV_EDITABLE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

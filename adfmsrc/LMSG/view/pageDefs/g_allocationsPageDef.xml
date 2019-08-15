@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="g_allocationsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findPremiumMemberCovers.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findPremiumMemberCoversIterator"/>
+    <methodIterator Binds="findImportPremiumMemberCovers.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findImportPremiumMemberCoversIterator"/>
+    <methodIterator Binds="findAllocPremiumMemberCovers.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findAllocPremiumMemberCoversIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+  </executables>
+  <bindings>
+    <methodAction id="findPremiumMemberCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMemberCovers"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPremiumMemberCovers_AccountDAO_dataProvider_findPremiumMemberCovers_result"/>
+    <tree IterBinding="findPremiumMemberCoversIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="MEM_NO"/>
+          <Item Value="MEMBER_DISPLAY"/>
+          <Item Value="PCM_EARNINGS"/>
+          <Item Value="PCM_PREMIUM"/>
+          <Item Value="PCM_PAID_AMOUNT"/>
+          <Item Value="MTRAN_REF_NO"/>
+          <Item Value="PCM_CODE"/>
+          <Item Value="PCM_ALLOCATED_PREMIUM"/>
+          <Item Value="PCM_ENDR_CODE"/>
+          <Item Value="PCM_POLM_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findImportPremiumMemberCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findImportPremiumMemberCovers"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findImportPremiumMemberCovers_AccountDAO_dataProvider_findImportPremiumMemberCovers_result"/>
+    <tree IterBinding="findImportPremiumMemberCoversIterator" id="Account1">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account10">
+        <AttrNames>
+          <Item Value="MIP_MEM_NO"/>
+          <Item Value="MIP_MEMBER_NAME"/>
+          <Item Value="MIP_PCM_EARNINGS"/>
+          <Item Value="MIP_PCM_PREMIUM"/>
+          <Item Value="MIP_PCM_ALLOCATED_AMT"/>
+          <Item Value="MIP_BATCH_NO"/>
+          <Item Value="MTRAN_REF_NO"/>
+          <Item Value="MIP_PCM_CODE"/>
+          <Item Value="PCM_ENDR_CODE"/>
+          <Item Value="PCM_POLM_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAllocPremiumMemberCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findAllocPremiumMemberCovers"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findAllocPremiumMemberCovers_AccountDAO_dataProvider_findAllocPremiumMemberCovers_result"/>
+    <tree IterBinding="findAllocPremiumMemberCoversIterator" id="Account2">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account20">
+        <AttrNames>
+          <Item Value="PCM_CODE"/>
+          <Item Value="MEM_NO"/>
+          <Item Value="MEMBER_DISPLAY"/>
+          <Item Value="PCM_EARNINGS"/>
+          <Item Value="PCM_PREMIUM"/>
+          <Item Value="PCM_ALLOCATED_PREMIUM"/>
+          <Item Value="PCM_PAID_AMOUNT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+  </bindings>
+</pageDefinition>

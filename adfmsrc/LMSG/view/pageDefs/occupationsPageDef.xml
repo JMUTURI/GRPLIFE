@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="occupationsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findLifeClasses.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findLifeClassesIterator"/>
+    <methodIterator Binds="findGroupOccupations.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findGroupOccupationsIterator"/>
+    <methodIterator Binds="findGroupOccupationsCategories.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findGroupOccupationsCategoriesIterator"/>
+    <searchRegion Binds="findGroupOccupationsCategoriesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup2Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findLifeClasses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findLifeClasses"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findLifeClasses_SetupsDAO_dataProvider_findLifeClasses_result"/>
+    <tree IterBinding="findLifeClassesIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="LC_SHT_DESC"/>
+          <Item Value="LC_DESC"/>
+          <Item Value="LC_HAZAROUS_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGroupOccupations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGroupOccupations"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findGroupOccupations_SetupsDAO_dataProvider_findGroupOccupations_result"/>
+    <tree IterBinding="findGroupOccupationsIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="LC_SHT_DESC"/>
+          <Item Value="LC_DESC"/>
+          <Item Value="LC_HAZAROUS_DESC"/>
+           <Item Value="LC_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGroupOccupationsCategories" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findGroupOccupationsCategories"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findGroupOccupationsCategories_SetupsDAO_dataProvider_findGroupOccupationsCategories_result"/>
+    <tree IterBinding="findGroupOccupationsCategoriesIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="GOC_CODE"/>
+          <Item Value="GOC_CLASS"/>
+          <Item Value="GOC_CATEGORY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

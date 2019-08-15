@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process xmlns="http://jbpm.org/4.0/jpdl"  name="EndorsementsProcess">
+	<start>
+		<transition name="Start Underwriting" to="Underwrite Policy"></transition>
+	</start>
+	
+	 <task name="Underwrite Policy" 
+        assignee="#{order}">
+     <transition name="Determine Transition" to="Next Transition"></transition>
+    </task>
+	
+	<decision name="Next Transition" expr="#{NextTrans}">
+	    <transition name="A" to="Reinsurance Medical Underwriting"/>
+	    <transition name="N" to="Authorise Policy"/>
+		<transition name="M" to="Medical Underwriting"/>
+		<transition name="R" to="Perform Reinsurance"/>
+	</decision>
+	
+	<!-- commented out on 08112009 by Jim Gitau to await procedures for payment processing and Exceptions-->
+	
+	<!--<decision name="Exceptions For Authorisation" expr="#{UWStart}">
+	    <transition name="Yes" to="Authorise Exceptions"/>
+	    <transition name="No" to="Make Ready for Authorisation"/>
+	</decision>
+	
+	<task name="Authorise Exceptions" 
+        assignee="#{order}">
+     <transition name="Make Ready" to="Make Ready for Authorisation"></transition>
+    </task> 
+	
+	<task name="Make Ready for Authorisation" 
+        assignee="#{order}">
+		<transition name="credit" to="Credit Terms"></transition>
+    </task>
+	
+	
+	<decision name="Credit Terms" expr="#{Credit}">
+	    <transition name="Yes" to="Reinsurance Medical Underwriting"/>
+	    <transition name="No" to="Wait for Payment"/>
+	</decision>
+	
+	<task name="Wait for Payment" 
+        assignee="#{order}">
+     <transition name="Continue Policy" to="Reinsurance Medical Underwriting"></transition>
+    </task>-->
+	
+	<fork name="Reinsurance Medical Underwriting">
+      <transition name="Reinsure" to="Perform Reinsurance" />
+      <transition name="Medicals" to="Medical Underwriting"/>
+   </fork>
+	
+	<task name="Perform Reinsurance" 
+        assignee="#{order}">
+     <transition name="Ri medicals" to="Reinsurer Medicals"></transition>
+    </task>
+	<decision name="Reinsurer Medicals" expr="#{riMedicals}">
+	    <transition name="Y" to="Refer to Reinsurer"/>
+	    <transition name="N" to="Policy Join"/>
+	</decision>
+	<task name="Refer to Reinsurer" 
+        assignee="#{order}">
+      <transition name="Complete Process" to="Policy Join"></transition>
+    </task>
+	
+	<task name="Medical Underwriting" 
+        assignee="#{order}">
+      <transition name="Complete Process" to="Policy Join"></transition>
+    </task>
+	
+	<join name="Policy Join" >
+      <transition name="auth Policy" to="Authorise Policy" />
+   </join> 
+	
+	<task name="Authorise Policy" 
+        assignee="#{order}">
+     <transition name="disp Documents" to="Dispatch Policy Documents"></transition>
+    </task>
+	
+	<task name="Dispatch Policy Documents" 
+        assignee="#{order}">
+     <transition name="end Policy" to="End-Endorsement-Process"></transition>
+    </task>
+	  
+	<end name="End-Endorsement-Process"></end>
+</process>

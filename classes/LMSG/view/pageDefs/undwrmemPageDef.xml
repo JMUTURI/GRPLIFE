@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="undwrmemPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindPolicyMembers.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPolicyMembersIterator"/>
+    <methodIterator Binds="findRITreaties.result" DataControl="RiTreatyDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.RiTreaty"
+                    id="findRITreatiesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicyMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyMembers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyMembers_policiesDAO_dataProvider_FindPolicyMembers_result"/>
+    <tree IterBinding="FindPolicyMembersIterator" id="policies">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="POLM_MEM_NO"/>
+          <Item Value="POLM_client"/>
+          <Item Value="POLM_ANB"/>
+          <Item Value="POLM_JOINT_MEMBERS"/>
+          <Item Value="OCCUPATION_DISPLAY"/>
+          <Item Value="POLM_MEM_STATUS"/>
+          <Item Value="POLM_MEM_SCHEDULE_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findRITreaties" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRITreaties"
+                  IsViewObjectMethod="false" DataControl="RiTreatyDAO"
+                  InstanceName="RiTreatyDAO.dataProvider"
+                  ReturnName="RiTreatyDAO.methodResults.findRITreaties_RiTreatyDAO_dataProvider_findRITreaties_result"/>
+    <tree IterBinding="findRITreatiesIterator" id="RiTreaty">
+      <nodeDefinition DefName="view.Policy.RiTreaty" Name="RiTreaty0">
+        <AttrNames>
+          <Item Value="TA_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

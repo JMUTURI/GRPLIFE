@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Group Life | Required Documents">
+     <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:panelBox id="pb1">
+                <f:facet name="toolbar"/>
+                <af:inputText id="it1" helpTopicId="LmsGrp_POL_DOCS"
+                              readOnly="true"/>
+                <af:outputLabel value="Policy Documents" id="ol1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s1"/>
+                <h:panelGrid columns="3" id="pg1">
+                  <af:commandButton id="cb1"
+                                    icon="/images/field_group_plus_ena.png"
+                                    action="#{cauastionsManipulation.AddPolicyDocument}"/>
+                  <af:commandButton id="cb2" icon="/images/update_ena.png"
+                                    action="#{cauastionsManipulation.EditPolicyDocument}"/>
+                  <af:commandButton id="cb3" icon="/images/delete_ena.png"
+                                    action="#{cauastionsManipulation.DeletePolDocument}"/>
+                  <af:popup id="polDocsPopup">
+                    <af:dialog id="d2" type="none"
+                               title="Edit/Add Required Policy Document">
+                      <h:panelGrid columns="2" id="pg2">
+                        <af:outputLabel value="*ID" id="ol2"/>
+                        <af:inputText label="Label 1" id="it2" simple="true"
+                                      shortDesc="ID"
+                                      binding="#{cauastionsManipulation.rdShtDesc}"/>
+                        <af:outputLabel value="*Description" id="ol3"/>
+                        <af:inputText label="Label 2" id="it3" simple="true"
+                                      shortDesc="Description"
+                                      binding="#{cauastionsManipulation.rdDesc}"/>
+                        <af:outputLabel value="Product Level" id="ol4"/>
+                        <af:selectOneChoice label="Label 1" id="soc1"
+                                            simple="true" autoSubmit="true"
+                                            shortDesc="Applicable For Specific Product?"
+                                            binding="#{cauastionsManipulation.productLevel}">
+                          <af:selectItem label="Yes" value="Y" id="si1"/>
+                          <af:selectItem label="No" value="N" id="si2"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="U/W Document" id="ol5"/>
+                        <af:selectOneChoice label="Label 2" id="soc2"
+                                            simple="true"
+                                            shortDesc="Document Used At Underwriting?"
+                                            autoSubmit="true"
+                                            binding="#{cauastionsManipulation.uwDocument}">
+                          <af:selectItem label="Yes" value="Y" id="si3"/>
+                          <af:selectItem label="No" value="N" id="si4"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Death Claim Docs" id="ol6"/>
+                        <af:selectOneChoice label="Label 3" id="soc3"
+                                            simple="true" autoSubmit="true"
+                                            binding="#{cauastionsManipulation.deathClaimDocs}"
+                                            shortDesc="Document Used In processing Death Claim?">
+                          <af:selectItem label="Yes" value="Y" id="si6"/>
+                          <af:selectItem label="No" value="N" id="si5"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Disability Claim Docs" id="ol7"/>
+                        <af:selectOneChoice label="Label 4" id="soc4"
+                                            simple="true" autoSubmit="true"
+                                            binding="#{cauastionsManipulation.disabilityClaimDocs}"
+                                            shortDesc="Document Used In Processing Disability Claim?">
+                          <af:selectItem label="Yes" value="Y" id="si7"/>
+                          <af:selectItem label="No" value="N" id="si8"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Withdrawal Claim Docs" id="ol8"/>
+                        <af:selectOneChoice label="Label 5" id="soc5"
+                                            simple="true"
+                                            shortDesc="Document Used In Processing Withdrawal Claim"
+                                            autoSubmit="true"
+                                            binding="#{cauastionsManipulation.withClaimDocs}">
+                          <af:selectItem label="Yes" value="Y" id="si10"/>
+                          <af:selectItem label="No" value="N" id="si9"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Maturities Docs"
+                                        id="outputLabel1"/>
+                        <af:selectOneChoice label="Label 5"
+                                            id="selectOneChoice1" simple="true"
+                                            shortDesc="Document Used In Processing Withdrawal Claim"
+                                            autoSubmit="true"
+                                            binding="#{cauastionsManipulation.maturityDocs}"
+                                            value="N">
+                          <af:selectItem label="Yes" value="Y"
+                                         id="selectItem1"/>
+                          <af:selectItem label="No" value="N" id="selectItem2"/>
+                        </af:selectOneChoice>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg6">
+                        <af:commandButton text="OK" id="cb4"
+                                          action="#{cauastionsManipulation.SavePolicyDocument}"/>
+                        <af:commandButton text="Cancel" id="cb5"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:table value="#{bindings.causations.collectionModel}"
+                          var="row" rows="#{bindings.causations.rangeSize}"
+                          emptyText="#{bindings.causations.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.causations.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{cauastionsManipulation.documentsListener}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:100%; height:150.0px; border-style:none;"
+                          binding="#{cauastionsManipulation.policyDocumentsLOV}">
+                  <af:column sortProperty="rdShtDesc" sortable="true"
+                             headerText="Id." id="c14">
+                    <af:outputText value="#{row.rdShtDesc}" id="ot14"/>
+                  </af:column>
+                  <af:column sortProperty="rdDesc" sortable="true"
+                             headerText="Description" id="c6">
+                    <af:outputText value="#{row.rdDesc}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="rdByProdDesc" sortable="true"
+                             headerText="Product Level" id="c11">
+                    <af:outputText value="#{row.rdByProdDesc}" id="ot12"/>
+                  </af:column>
+                  <af:column sortProperty="rdPolDocDesc" sortable="true"
+                             headerText="U/W Docs" id="c10">
+                    <af:outputText value="#{row.rdPolDocDesc}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="rdDthClmdocDesc" sortable="true"
+                             headerText="Death Claim Docs" id="c13">
+                    <af:outputText value="#{row.rdDthClmdocDesc}" id="ot8"/>
+                  </af:column>
+                  <af:column sortProperty="rdDisClmDocDesc" sortable="true"
+                             headerText="Disability Claim Docs." id="c3">
+                    <af:outputText value="#{row.rdDisClmDocDesc}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="rdWthrClmDocDesc" sortable="true"
+                             headerText="Withdrawal Claim Docs." id="c4"
+                             width="120">
+                    <af:outputText value="#{row.rdWthrClmDocDesc}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="RD_MATURITY_DOC_DESC"
+                             sortable="false"
+                             headerText="Maturities Docs."
+                             id="c21">
+                    <af:outputText value="#{row.RD_MATURITY_DOC_DESC}"
+                                   id="ot22"/>
+                  </af:column>
+                  <af:column sortProperty="rdClaCode" sortable="true"
+                             headerText="#{bindings.causations.hints.rdClaCode.label}"
+                             id="c5" visible="false">
+                    <af:outputText value="#{row.rdClaCode}" id="ot5"/>
+                  </af:column>
+                  <af:column sortProperty="rdCode" sortable="true"
+                             headerText="#{bindings.causations.hints.rdCode.label}"
+                             id="c1" visible="false">
+                    <af:outputText value="#{row.rdCode}" id="ot15"/>
+                  </af:column>
+                  <af:column sortProperty="rdByProd" sortable="true"
+                             headerText="#{bindings.causations.hints.rdByProd.label}"
+                             id="c2" visible="false">
+                    <af:outputText value="#{row.rdByProd}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="rdPolDoc" sortable="true"
+                             headerText="#{bindings.causations.hints.rdPolDoc.label}"
+                             id="c9" visible="false">
+                    <af:outputText value="#{row.rdPolDoc}" id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="rdDthClmdoc" sortable="true"
+                             headerText="#{bindings.causations.hints.rdDthClmdoc.label}"
+                             id="c8" visible="false">
+                    <af:outputText value="#{row.rdDthClmdoc}" id="ot13"/>
+                  </af:column>
+                  <af:column sortProperty="rdDisClmDoc" sortable="true"
+                             headerText="#{bindings.causations.hints.rdDisClmDoc.label}"
+                             id="c7" visible="false">
+                    <af:outputText value="#{row.rdDisClmDoc}" id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="rdWthrClmDoc" sortable="true"
+                             headerText="#{bindings.causations.hints.rdWthrClmDoc.label}"
+                             id="c12" visible="false">
+                    <af:outputText value="#{row.rdWthrClmDoc}" id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="RD_MATURITY_DOC" sortable="false"
+                             headerText="#{bindings.causations.hints.RD_MATURITY_DOC.label}"
+                             id="c22" visible="false">
+                    <af:outputText value="#{row.RD_MATURITY_DOC}" id="ot23"/>
+                  </af:column>
+                </af:table>
+                <af:outputLabel value="Documents Products" id="ol9"
+                                inlineStyle="font-weight:bold;"/>
+                <h:panelGrid columns="3" id="pg3">
+                  <af:commandButton id="cb6"
+                                    icon="/images/field_group_plus_ena.png"
+                                    action="#{cauastionsManipulation.AddProductDocument}"/>
+                  <af:commandButton id="cb7" icon="/images/update_ena.png"
+                                    action="#{cauastionsManipulation.EditProductDocument}"/>
+                  <af:commandButton id="cb8" icon="/images/delete_ena.png"
+                                    action="#{cauastionsManipulation.deleteProductDocument}"/>
+                  <af:popup id="prodDocsPopup">
+                    <af:dialog id="d3" type="none"
+                               title="Add/Edit Product Documents">
+                      <h:panelGrid columns="2" id="pg4">
+                        <af:outputLabel value="Product" id="ol10"/>
+                        <h:panelGrid columns="2" id="pg5">
+                          <af:inputText label="Label 3" id="it4" simple="true"
+                                        shortDesc="Product"
+                                        binding="#{cauastionsManipulation.productDisp}"/>
+                          <af:commandButton id="cb9"
+                                            icon="/images/dropdown.gif">
+                            <af:showPopupBehavior popupId="products"/>
+                          </af:commandButton>
+                          <af:popup id="products">
+                            <af:dialog id="d4" type="none"
+                                       title="Select Product">
+                              <af:table value="#{bindings.Setup.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup.rangeSize}"
+                                        emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t3"
+                                        binding="#{cauastionsManipulation.productsLOV}">
+                                <af:column sortProperty="PROD_CODE"
+                                           sortable="true"
+                                           headerText="#{bindings.Setup.hints.PROD_CODE.label}"
+                                           id="c18" visible="false">
+                                  <af:outputText value="#{row.PROD_CODE}"
+                                                 id="ot19"/>
+                                </af:column>
+                                <af:column sortProperty="PROD_SHT_DESC"
+                                           sortable="true" headerText="ID"
+                                           id="c20">
+                                  <af:outputText value="#{row.PROD_SHT_DESC}"
+                                                 id="ot21"/>
+                                </af:column>
+                                <af:column sortProperty="PROD_DESC"
+                                           sortable="true" headerText="PRODUCT"
+                                           id="c19">
+                                  <af:outputText value="#{row.PROD_DESC}"
+                                                 id="ot20"/>
+                                </af:column>
+                              </af:table>
+                              <af:commandButton text="OK" id="cb10"
+                                                action="#{cauastionsManipulation.AssignProducts}"/>
+                              <af:commandButton text="Cancel" id="cb11"/>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:commandButton text="OK" id="cb12"
+                                          action="#{cauastionsManipulation.SaveProductDocument}"/>
+                        <af:commandButton id="cb13" text="Cancel"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:table value="#{bindings.causations1.collectionModel}"
+                          var="row" rows="#{bindings.causations1.rangeSize}"
+                          emptyText="#{bindings.causations1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.causations1.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{bindings.causations1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t2"
+                          inlineStyle="width:100%; height:130.0px; border-style:none;"
+                          binding="#{cauastionsManipulation.productDocumentsLOV}">
+                  <af:column sortProperty="productDisplay" sortable="true"
+                             headerText="Product" id="c16" width="300">
+                    <af:outputText value="#{row.productDisplay}" id="ot16"/>
+                  </af:column>
+                  <af:column sortProperty="rdpRdCode" sortable="true"
+                             headerText="#{bindings.causations1.hints.rdpRdCode.label}"
+                             id="c17" visible="false">
+                    <af:outputText value="#{row.rdpRdCode}" id="ot18"/>
+                  </af:column>
+                  <af:column sortProperty="rdpProdCode" sortable="true"
+                             headerText="#{bindings.causations1.hints.rdpProdCode.label}"
+                             id="c15" visible="false">
+                    <af:outputText value="#{row.rdpProdCode}" id="ot17"/>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+            </af:panelGroupLayout>
+            </af:group>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

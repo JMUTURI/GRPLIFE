@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="memRiTrtDetails" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.memRiTrtDetails" isJavaBased="true">
+  <Attribute Name="COVER_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="REI_TRS_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PMRITD_remarks" Type="java.lang.String"/>
+  <Attribute Name="PMRITD_PREV_TRT_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRITD_TRT_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRITD_CESSION_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRITD_TRT_PREM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRITD_TRT_COMM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRITD_STAMP_DUTY" Type="java.math.BigDecimal"/>
+  <Attribute Name="CVT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_AGN_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_TRS_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_TRT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_CEDE_RATE" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_SI_AMT_PCUR" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_PREM_AMT_PCUR" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_COMM_AMT_PCUR" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_STAMP_DUTY" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_RPREM_TAX_PCUR" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_PREM_TAX_PCUR" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_UWYR" Type="java.lang.String"/>
+  <Attribute Name="GTRIC_REFUND_PREM" Type="java.lang.String"/>
+  <Attribute Name="PMRITD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcAgnDesc" Type="java.lang.String"/>
+  <Attribute Name="gfcAmtOrRate" Type="java.lang.String"/>
+  <Attribute Name="gfcRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcExcessRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcPremRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcPremDivFactor" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcPremAmt" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcCommRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcCommAmt" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcWef" Type="java.util.Date"/>
+  <Attribute Name="gfcAgnCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="agnShtDesc" Type="java.lang.String"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="agnCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="gfcAmt" Type="java.math.BigDecimal"/>
+  <Attribute Name="tot_sa" Type="java.math.BigDecimal"/>
+  <Attribute Name="tot_ret" Type="java.math.BigDecimal"/>
+  <Attribute Name="tot_excess" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRITD_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRITD_RATE_DIV_FACTOR" Type="java.math.BigDecimal"/>
+  <Attribute Name="memName" Type="java.lang.String"/>
+  <Attribute Name="rmal_amt_reassured" Type="java.math.BigDecimal"/>
+  <Attribute Name="rmal_tct_aal" Type="java.math.BigDecimal"/>
+  <Attribute Name="cvtCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="cvtDesc" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.memRiTrtDetails"
+                     BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                     id="memRiTrtDetails"/>
+</JavaBean>

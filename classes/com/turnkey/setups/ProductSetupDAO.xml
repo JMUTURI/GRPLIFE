@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="ProductSetupDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.ProductSetupDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.ProductSetup"
+                  BeanClass="com.turnkey.setups.ProductSetup"
+                  id="findGroupProducts" ReturnNodeName="ProductSetup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.ProductSetup"
+                  BeanClass="com.turnkey.setups.ProductSetup"
+                  id="findGroupDeathAcceptable" ReturnNodeName="ProductSetup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.ProductSetup"
+                  BeanClass="com.turnkey.setups.ProductSetup"
+                  id="findGroupPremiumFractions" ReturnNodeName="ProductSetup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.ProductSetup"
+                  BeanClass="com.turnkey.setups.ProductSetup"
+                  id="findGroupScheduleReports" ReturnNodeName="ProductSetup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.ProductSetup"
+                  BeanClass="com.turnkey.setups.ProductSetup" id="findLapsation"
+                  ReturnNodeName="ProductSetup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.ProductSetup"
+                  BeanClass="com.turnkey.setups.ProductSetup"
+                  id="findPolicyDocuments" ReturnNodeName="ProductSetup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.ProductSetup"
+                  BeanClass="com.turnkey.setups.ProductSetup"
+                  id="findProductExceptions" ReturnNodeName="ProductSetup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.ProductSetupDAO"
+                     BeanClass="com.turnkey.setups.ProductSetupDAO"
+                     id="ProductSetupDAO"/>
+</JavaBean>

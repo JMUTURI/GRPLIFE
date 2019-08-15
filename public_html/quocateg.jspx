@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelBox text="Enter Quotation Category Details"
+                     inlineStyle="width:640px; height:150px;" id="pb1">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="3" width="10%" id="pg1">
+            <af:commandButton text="Add Category" id="cb1">
+              <af:showPopupBehavior popupId="AddCategPopup"/>
+            </af:commandButton>
+            <af:commandButton text="Edit Category" id="cb2">
+              <af:showPopupBehavior popupId="AddCategPopup"/>
+            </af:commandButton>
+            <af:popup id="AddCategPopup">
+              <af:dialog type="none" title="Add/Edit Category" id="d2">
+                <h:panelGrid columns="2" width="10%" id="pg2">
+                  <af:outputLabel value="ID" id="ol1"/>
+                  <af:inputText label="Label 1" simple="true" columns="20"
+                                binding="#{manipulation.categID}" id="it1"/>
+                  <af:outputLabel value="Description" id="ol2"/>
+                  <af:inputText label="Label 2" simple="true" columns="20"
+                                binding="#{manipulation.categDescription}"
+                                id="it2"/>
+                  <af:outputLabel value="Period" id="ol3"/>
+                  <af:inputText label="Label 3" simple="true" columns="20"
+                                binding="#{manipulation.categoryPeriod}"
+                                id="it3"/>
+                  <af:commandButton text="Save/Edit"
+                                    action="#{manipulation.SaveQuotCategories}"
+                                    id="cb3"/>
+                  <af:commandButton text="Cancel" id="cb4"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+          </h:panelGrid>
+          <h:panelGrid columns="1" width="10%" id="pg3">
+            <af:table value="#{bindings.quotCategory1.collectionModel}"
+                      var="row" rows="#{bindings.quotCategory1.rangeSize}"
+                      emptyText="#{bindings.quotCategory1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.quotCategory1.rangeSize}"
+                      selectedRowKeys="#{bindings.quotCategory1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.quotCategory1.collectionModel.makeCurrent}"
+                      rowSelection="single"
+                      inlineStyle="height:99px; width:600px;"
+                      binding="#{manipulation.quotCategoriesLOV}" id="t1">
+              <af:column sortProperty="catShtDesc" sortable="true"
+                         headerText="ID" id="c1">
+                <af:outputText value="#{row.catShtDesc}" id="ot1"/>
+              </af:column>
+              <af:column sortProperty="catDesc" sortable="true"
+                         headerText="DESCRIPTION" id="c2">
+                <af:outputText value="#{row.catDesc}" id="ot2"/>
+              </af:column>
+              <af:column sortProperty="catPeriod" sortable="true"
+                         headerText="PERIOD" id="c3">
+                <af:outputText value="#{row.catPeriod}" id="ot3"/>
+              </af:column>
+              <af:column id="c4">
+                <af:commandButton icon="/icon_delete.gif"
+                                  action="#{manipulation.deleteQuotationCategory}"
+                                  id="cb5"/>
+              </af:column>
+            </af:table>
+          </h:panelGrid>
+          <h:panelGrid columns="2" width="10%" id="pg4">
+            <h:panelGrid columns="1" id="pg5">
+              <af:table value="#{bindings.quotCoverTypes.collectionModel}"
+                        var="row" rows="#{bindings.quotCoverTypes.rangeSize}"
+                        emptyText="#{bindings.quotCoverTypes.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.quotCoverTypes.rangeSize}"
+                        selectedRowKeys="#{bindings.quotCoverTypes.collectionModel.selectedRow}"
+                        selectionListener="#{manipulation.GetCoverTypeCode}"
+                        rowSelection="single" inlineStyle="height:100px;"
+                        binding="#{manipulation.dependentCoverTypes}" id="t2">
+                <af:column sortProperty="quocvtShtDesc" sortable="true"
+                           headerText="COVER ID" id="c5">
+                  <af:outputText value="#{row.quocvtShtDesc}" id="ot4"/>
+                </af:column>
+                <af:column sortProperty="cover_display" sortable="true"
+                           headerText="COVER" width="180" id="c6">
+                  <af:outputText value="#{row.cover_display}" id="ot5"/>
+                </af:column>
+              </af:table>
+            </h:panelGrid>
+          </h:panelGrid>
+          <h:panelGrid columns="3" width="10%" id="pg6">
+            <af:commandButton text="Add" id="cb6">
+              <af:showPopupBehavior popupId="AddDependent"/>
+            </af:commandButton>
+            <af:commandButton text="Edit"
+                              action="#{manipulation.EditQuotDependentLimit}"
+                              id="cb7">
+              <af:showPopupBehavior popupId="AddDependent"/>
+            </af:commandButton>
+            <af:popup id="AddDependent">
+              <af:dialog type="none" title="Add Dependent Type" id="d3">
+                <h:panelGrid columns="3" id="pg7">
+                  <af:outputLabel value="Category" id="ol4"/>
+                  <af:inputText label="Category" columns="15"
+                                binding="#{manipulation.dependentCategory}"
+                                simple="true" id="it4"/>
+                  <h:panelGrid columns="2" width="20%" id="pg8">
+                    <af:commandButton icon="/dropdown.gif" id="cb8">
+                      <af:showPopupBehavior popupId="CategPopup"/>
+                    </af:commandButton>
+                    <af:popup id="CategPopup">
+                      <af:dialog type="none" title="Select Category" id="d4">
+                        <af:table value="#{bindings.quotCategory2.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.quotCategory2.rangeSize}"
+                                  emptyText="#{bindings.quotCategory2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.quotCategory2.rangeSize}"
+                                  selectedRowKeys="#{bindings.quotCategory2.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.quotCategory2.collectionModel.makeCurrent}"
+                                  rowSelection="single"
+                                  inlineStyle="height:83px;"
+                                  binding="#{manipulation.dpdCategLOV}"
+                                  width="213" id="t3">
+                          <af:column sortProperty="catShtDesc" sortable="true"
+                                     headerText="DESCRIPTION" id="c7">
+                            <af:outputText value="#{row.catShtDesc}" id="ot6"/>
+                          </af:column>
+                          <af:column sortProperty="catDesc" sortable="true"
+                                     headerText="CATEGORY" id="c8">
+                            <af:outputText value="#{row.catDesc}" id="ot7"/>
+                          </af:column>
+                        </af:table>
+                        <af:commandButton text="OK"
+                                          action="#{manipulation.AssignCategoryDpds}"
+                                          id="cb9"/>
+                        <af:commandButton text="Cancel" id="cb10"/>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:outputLabel value="Dependent Type" id="ol5"/>
+                  <af:inputText label="Label 4" columns="15" simple="true"
+                                binding="#{manipulation.dependentType}"
+                                id="it5"/>
+                  <af:commandButton icon="/dropdown.gif" id="cb11">
+                    <af:showPopupBehavior popupId="DependentPopup"/>
+                  </af:commandButton>
+                  <af:outputLabel value="Limit Amount"
+                                  inlineStyle="text-align:left;" id="ol6"/>
+                  <af:inputText label="Label 5" simple="true" columns="15"
+                                binding="#{manipulation.dpdLimitAmount}"
+                                id="it6"/>
+                  <af:popup id="DependentPopup">
+                    <af:dialog type="none" title="Choose Dependent Type"
+                               id="d5">
+                      <af:table value="#{bindings.prodDependents.collectionModel}"
+                                var="row"
+                                rows="#{bindings.prodDependents.rangeSize}"
+                                emptyText="#{bindings.prodDependents.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.prodDependents.rangeSize}"
+                                selectedRowKeys="#{bindings.prodDependents.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.prodDependents.collectionModel.makeCurrent}"
+                                rowSelection="single"
+                                inlineStyle="height:207px;" width="215"
+                                binding="#{manipulation.dependentTypesLOV}"
+                                id="t4">
+                        <af:column sortProperty="DTY_DESCRIPTION"
+                                   sortable="true" headerText="DESCRIPTION"
+                                   width="150" id="c9">
+                          <af:outputText value="#{row.DTY_DESCRIPTION}"
+                                         id="ot8"/>
+                        </af:column>
+                        <af:column sortProperty="max_allowed" sortable="true"
+                                   headerText="MAX ALLOWED" width="150"
+                                   id="c10">
+                          <af:outputText value="#{row.max_allowed}" id="ot9"/>
+                        </af:column>
+                      </af:table>
+                      <af:commandButton text="OK"
+                                        action="#{manipulation.AssignDependentTypes}"
+                                        id="cb12"/>
+                      <af:commandButton text="Cancel" id="cb13"/>
+                    </af:dialog>
+                  </af:popup>
+                  <af:outputLabel value="ANB" id="ol7"/>
+                  <af:inputText label="Label 6" simple="true" columns="15"
+                                binding="#{manipulation.dependentANB}"
+                                id="it7"/>
+                  <af:outputText id="ot10"/>
+                  <af:outputLabel value="Monthly Income" id="ol8"/>
+                  <af:inputText label="Label 7" columns="15" simple="true"
+                                binding="#{manipulation.dpdMonthlyIncome}"
+                                id="it8"/>
+                </h:panelGrid>
+                <af:commandButton text="Save"
+                                  action="#{manipulation.SaveDependentType}"
+                                  id="cb14"/>
+                <af:commandButton text="Cancel" id="cb15"/>
+              </af:dialog>
+            </af:popup>
+          </h:panelGrid>
+          <h:panelGrid columns="1" width="10%" id="pg9">
+            <af:table value="#{bindings.dependentLimits.collectionModel}"
+                      var="row" rows="#{bindings.dependentLimits.rangeSize}"
+                      emptyText="#{bindings.dependentLimits.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.dependentLimits.rangeSize}"
+                      selectedRowKeys="#{bindings.dependentLimits.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.dependentLimits.collectionModel.makeCurrent}"
+                      rowSelection="single"
+                      binding="#{manipulation.quotationDependentsLOV}"
+                      width="531" inlineStyle="height:120px;" id="t5">
+              <af:column sortProperty="DTY_DESCRIPTION" sortable="true"
+                         headerText="Dependent Type" id="c11">
+                <af:outputText value="#{row.DTY_DESCRIPTION}" id="ot11"/>
+              </af:column>
+              <af:column sortProperty="QDL_MAX_TYPE_ALLOWED" sortable="true"
+                         headerText="Max Type Number" id="c12">
+                <af:outputText value="#{row.QDL_MAX_TYPE_ALLOWED}" id="ot12"/>
+              </af:column>
+              <af:column sortProperty="QDL_LIMIT_AMT" sortable="true"
+                         headerText="Limit Amount" id="c13">
+                <af:outputText value="#{row.QDL_LIMIT_AMT}" id="ot13"/>
+              </af:column>
+              <af:column id="c14">
+                <af:commandButton icon="/icon_delete.gif"
+                                  action="#{manipulation.DeleteDependentLimit}"
+                                  id="cb16"/>
+              </af:column>
+            </af:table>
+          </h:panelGrid>
+          <h:panelGrid columns="2" width="10%" id="pg10">
+            <af:commandButton text="Next"
+                              action="#{manipulation.ShowProvisions}"
+                              rendered="false" id="cb17"/>
+            <af:commandButton text="Back"
+                              action="#{manipulation.BackToLangingScreen}"
+                              id="cb18"/>
+          </h:panelGrid>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

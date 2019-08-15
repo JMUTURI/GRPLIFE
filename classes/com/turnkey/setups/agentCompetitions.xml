@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.59.23"
+          id="agentCompetitions" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.agentCompetitions" isJavaBased="true">
+  <Attribute Name="agcpCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="agcpTotalPolicies" Type="java.math.BigDecimal"/>
+  <Attribute Name="agcpTotalPremium" Type="java.math.BigDecimal"/>
+  <Attribute Name="agcpWef" Type="java.util.Date"/>
+  <Attribute Name="agcpWet" Type="java.util.Date"/>
+  <Attribute Name="agcpRewardAmnt" Type="java.math.BigDecimal"/>
+  <Attribute Name="agcpProdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="agcpBrnCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="agcpCompetitionDesc" Type="java.lang.String"/>
+  <Attribute Name="agcpCodeTrans" Type="java.math.BigDecimal"/>
+  <Attribute Name="agcpCompetitionDescTrans" Type="java.lang.String"/>
+  <Attribute Name="agnCodeComp" Type="java.math.BigDecimal"/>
+  <Attribute Name="agnShtDescComp" Type="java.lang.String"/>
+  <Attribute Name="amtCollectedComp" Type="java.math.BigDecimal"/>
+  <Attribute Name="policyCntComp" Type="java.math.BigDecimal"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="dateFrom" Type="java.lang.String"/>
+  <Attribute Name="dateTo" Type="java.lang.String"/>
+  <Attribute Name="agnChecked" Type="java.lang.String"/>
+  <Attribute Name="select" Type="boolean"/>
+  <Attribute Name="agcpProddesc" Type="java.lang.String"/>
+  <Attribute Name="agcpLevel" Type="java.lang.String"/>
+  <Attribute Name="agcpPersitency" Type="java.math.BigDecimal"/>
+  <Attribute Name="persistency" Type="java.math.BigDecimal"/>
+  <Attribute Name="agcpPersitencyParam" Type="java.math.BigDecimal"/>
+  <Attribute Name="agcpBrnName" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.agentCompetitions"
+                     BeanClass="com.turnkey.setups.agentCompetitions"
+                     id="agentCompetitions"/>
+</JavaBean>

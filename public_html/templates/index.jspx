@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"  version="1.2">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <f:view>
+    <af:pageTemplate
+      id="template"
+      viewId="/templates/pageTemplateDefs/demoIndexTemplate.jspx">
+      <f:attribute name="documentTitle" value="Sample Page Templates"/>
+      <f:attribute name="mode" value="templates"/>
+      <f:facet name="center1">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:panelHeader text="Sample Page Templates" id="ph1">
+            <af:panelList id="pl1">
+              <af:panelGroupLayout id="pgl2">
+                <af:goLink text="fileExplorer" destination="fileExplorerUsage.jspx"
+                           id="gl1"/>
+                <af:outputText value=" - simple layout with small number of facets"
+                               id="ot1"/>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout id="pgl3">
+                <af:goLink text="panelPage" destination="panelPageUsage.jspx"
+                           id="gl2"/>
+                <af:outputText value=" - very complex layout with large number of facets"
+                               id="ot2"/>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout id="pgl4">
+                <af:goLink text="tablet" destination="tabletUsage.jspx"
+                           id="gl3"/>
+                <af:outputText value=" - slightly less complex layout with reduced number of facets"
+                               id="ot3"/>
+              </af:panelGroupLayout>
+            </af:panelList>
+          </af:panelHeader>
+          <af:separator id="s1"/>
+          <af:panelGroupLayout layout="vertical" id="pgl5">
+            <af:outputText value="See also:" id="ot4"/>
+            <af:navigationPane hint="list" id="np1">
+              <af:commandNavigationItem immediate="true" text="af:pageTemplate"
+                destination="../components/pageTemplate.jspx" id="cni1"/>
+            </af:navigationPane>
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate>
+  </f:view>
+</jsp:root>

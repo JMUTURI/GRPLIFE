@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="g_pensallocationsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findPensionAllocations.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findPensionAllocationsIterator"/>
+    <methodIterator Binds="findImportedPensionAllocations.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findImportedPensionAllocationsIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+  </executables>
+  <bindings>
+    <methodAction id="findPensionAllocations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionAllocations"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPensionAllocations_AccountDAO_dataProvider_findPensionAllocations_result"/>
+    <tree IterBinding="findPensionAllocationsIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="MEM_NO_DISPLAY"/>
+          <Item Value="PEN_MEMBER_DISPLAY"/>
+          <Item Value="empyr_reg_transfer"/>
+          <Item Value="empyr_unreg_transfer"/>
+          <Item Value="empye_reg_transfer"/>
+          <Item Value="empye_unreg_transfer"/>
+          <Item Value="v_paid_er_amt"/>
+          <Item Value="v_paid_ee_amt"/>          
+          <Item Value="v_paid_ee_vol_amt"/>
+          <Item Value="v_paid_er_vol_amt"/>
+          <Item Value="ALLOCATED_AMOUNT"/>
+          <Item Value="PAID_AMOUNT"/>
+          <Item Value="PMPNS_EARNINGS"/>
+          <Item Value="PMPNS_EMPLOYER_CONTR"/>
+          <Item Value="PMPNS_EMPLOYEE_CONTR"/>
+          <Item Value="MTRAN_REF_NO"/>
+          <Item Value="PMPNS_CODE"/>
+          <Item Value="PNDP_CODE2"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findImportedPensionAllocations" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findImportedPensionAllocations"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findImportedPensionAllocations_AccountDAO_dataProvider_findImportedPensionAllocations_result"/>
+    <tree IterBinding="findImportedPensionAllocationsIterator" id="Account1">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account10">
+        <AttrNames>
+          <Item Value="PMPNS_CODE"/>
+          <Item Value="MEM_NO_DISPLAY"/>
+          <Item Value="v_paid_er_bf_amt"/>
+          <Item Value="v_paid_ee_bf_amt"/>
+          <Item Value="v_paid_er_amt"/>
+          <Item Value="v_paid_ee_amt"/>
+          <Item Value="v_paid_ee_vol_amt"/>
+          <Item Value="v_paid_er_vol_amt"/>
+          <Item Value="ALLOCATED_AMOUNT"/>
+          <Item Value="PAID_AMOUNT"/>
+          <Item Value="PMPNS_EARNINGS"/>
+          <Item Value="PMPNS_EMPLOYER_CONTR"/>
+          <Item Value="PMPNS_EMPLOYEE_CONTR"/>
+          <Item Value="PCM_ALLOCATED_PREMIUM"/>
+          <Item Value="emyr_reg_amount"/>
+          <Item Value="emyr_unreg_amount"/>
+           <Item Value="emye_reg_amount"/>
+          <Item Value="emye_unreg_amount"/>
+          <Item Value="PCM_ALLOCATED_PREMIUM"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+  </bindings>
+</pageDefinition>

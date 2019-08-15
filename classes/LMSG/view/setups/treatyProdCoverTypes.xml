@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="treatyProdCoverTypes" Package="LMSG.view.setups"
+          BeanClass="LMSG.view.setups.treatyProdCoverTypes" isJavaBased="true">
+  <Attribute Name="TCT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_TPRD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_TA_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_TA_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TCT_PROD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_AS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_PCT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_CVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_CVT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="CVT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TCT_RETENTION_LIMIT" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_MULTI_LIFE_RETN_LIMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_CESSION_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_OVER_LIMIT_TOCEDE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_RIOS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_REDUCE_BAL" Type="java.lang.String"/>
+  <Attribute Name="TCT_OS_BAL_METHOD" Type="java.lang.String"/>
+  <Attribute Name="RIOS_DESC" Type="java.lang.String"/>
+  <Attribute Name="TCT_RATE_TYPE" Type="java.lang.String"/>
+  <Attribute Name="TCT_OS_BAL_METHOD_DESC" Type="java.lang.String"/>
+  <Attribute Name="TCT_AAL" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.setups.treatyProdCoverTypes"
+                     BeanClass="LMSG.view.setups.treatyProdCoverTypes"
+                     id="treatyProdCoverTypes"/>
+</JavaBean>

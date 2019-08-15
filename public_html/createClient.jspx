@@ -1,0 +1,1239 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" version="1.2"
+          xmlns:h="http://java.sun.com/jsf/html">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <f:view>
+    <af:document title="Client Processing" id="d5">
+      <af:messages id="m1"/>
+      <!-- <link type="text/css" rel="stylesheet" href="styles/custom.css"/> -->
+    <af:pageTemplate id="demoTemplate"
+                     viewId="/templates/GroupTemplate2.jspx">
+      <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll">
+          <af:outputText value="Global Layer"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout layout="scroll">
+            <af:panelAccordion id="pa2"
+                               inlineStyle="width:100%; height:550.0px;">
+              <af:showDetailItem text="Client Processing" id="sdi1">
+                <f:facet name="toolbar">
+                  <h:panelGrid columns="2" id="pg15">
+                    <af:statusIndicator id="si22"/>
+                    <af:inputText id="it6" helpTopicId="LmsGrp_createClient"
+                                  readOnly="true"/>
+                  </h:panelGrid>
+                </f:facet>
+                <af:panelGroupLayout id="pgl12" layout="scroll">
+                  <af:panelBox text="Client Task"
+                               binding="#{ClientsAddDetails.clientTask}"
+                               showHeader="never" id="pb1">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Client Management"
+                                    inlineStyle="font-weight:bold;" id="ol11"/>
+                    <af:spacer width="10" height="20" id="s2"/>
+                    <h:panelGrid columns="2" id="pg16">
+                      <h:panelGrid columns="2" id="pg4">
+                        <af:outputLabel value="Select Transaction" id="ol2"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg5">
+                        <af:selectOneChoice label="Label 5" id="soc1"
+                                            simple="true"
+                                            binding="#{ClientsAddDetails.transType}"
+                                            valueChangeListener="#{ClientsAddDetails.transactionListener}"
+                                            autoSubmit="true" value="C">
+                          <af:selectItem label="Create New Client" value="C"
+                                         id="si1"/>
+                          <af:selectItem label="Edit Client" value="E"
+                                         id="si2"/>
+                          <af:selectItem label="View Client" value="V"
+                                         id="si3"/>
+                        </af:selectOneChoice>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg6">
+                        <af:panelGroupLayout id="pgl2" partialTriggers="soc1">
+                          <h:panelGrid columns="1" id="pg1"
+                                       binding="#{ClientsAddDetails.clientsLabel}"
+                                       rendered="false">
+                            <af:outputLabel value="Select Client"
+                                            id="outputLabel1"/>
+                          </h:panelGrid>
+                        </af:panelGroupLayout>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg7">
+                        <af:panelGroupLayout id="pgl1" partialTriggers="soc1">
+                          <h:panelGrid columns="2" id="pg2"
+                                       binding="#{ClientsAddDetails.clientsPanel}"
+                                       rendered="false">
+                            <af:inputText label="Label 11" id="it1"
+                                          simple="true" disabled="true"
+                                          binding="#{ClientsAddDetails.allClientDesc}"/>
+                            <af:commandButton id="cb1"
+                                              icon="/images/dropdown.gif">
+                              <af:showPopupBehavior popupId="allclient"/>
+                            </af:commandButton>
+                            <af:popup id="allclient">
+                              <af:dialog id="d1" type="none"
+                                         title="All Clients">
+                                <af:table value="#{bindings.Client2.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.Client2.rangeSize}"
+                                          emptyText="#{bindings.Client2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Client2.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.Client2Query.queryDescriptor}"
+                                          queryListener="#{bindings.Client2Query.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.Client2.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.Client2.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t2"
+                                          binding="#{ClientsAddDetails.searchClients}"
+                                          inlineStyle="width:inherit; height:200.0px;"
+                                          width="550">
+                                  <af:column sortProperty="clientCode"
+                                             filterable="true" sortable="true"
+                                             headerText="Code" id="c18"
+                                             visible="false">
+                                    <af:outputText value="#{row.clientCode}"
+                                                   id="ot13"/>
+                                  </af:column>
+                                  <af:column sortProperty="othernames"
+                                             filterable="true" sortable="true"
+                                             headerText="Other Names" id="c14"
+                                             visible="false">
+                                    <af:outputText value="#{row.othernames}"
+                                                   id="ot16"/>
+                                  </af:column>
+                                  <af:column sortProperty="fullname"
+                                             filterable="true" sortable="true"
+                                             headerText="Name" id="c13"
+                                             width="200">
+                                    <af:outputText value="#{row.fullname}"
+                                                   id="ot17"/>
+                                  </af:column>
+                                  <af:column sortProperty="postalAddress"
+                                             filterable="true" sortable="true"
+                                             headerText="Address" id="c11">
+                                    <af:outputText value="#{row.postalAddress}"
+                                                   id="ot18"/>
+                                  </af:column>
+                                  <af:column sortProperty="PINNumber"
+                                             filterable="true" sortable="true"
+                                             headerText="PIN Number" id="c19"
+                                             visible="#{!Rendering.expressVisible}">
+                                    <af:outputText value="#{row.PINNumber}"
+                                                   id="ot15"/>
+                                  </af:column>
+                                  <af:column sortProperty="PINNumber"
+                                             filterable="true" sortable="true"
+                                             headerText="TIN Number" id="c33"
+                                            visible="#{Rendering.expressVisible}">
+                                    <af:outputText value="#{row.PINNumber}"
+                                                   id="ot33"/>
+                                  </af:column>
+                                  <af:column sortProperty="telphoneOne"
+                                             filterable="true" sortable="true"
+                                             headerText="Telephone" id="c12">
+                                    <af:outputText value="#{row.telphoneOne}"
+                                                   id="ot11"/>
+                                  </af:column>
+                                  <af:column sortProperty="idRegNumber"
+                                             filterable="true" sortable="true"
+                                             headerText="Registration No."
+                                             id="c17" visible="false">
+                                    <af:outputText value="#{row.idRegNumber}"
+                                                   id="ot19"/>
+                                  </af:column>
+                                  <af:column sortProperty="ZIPCode"
+                                             filterable="true" sortable="true"
+                                             headerText="ZIP Code" id="c15"
+                                             visible="false">
+                                    <af:outputText value="#{row.ZIPCode}"
+                                                   id="ot12"/>
+                                  </af:column>
+                                  <af:column sortProperty="btrTransCode"
+                                             sortable="false"
+                                             headerText="Action" id="c10"
+                                             visible="false">
+                                    <af:commandLink text="Edit"
+                                                    action="#{ClientsAddDetails.findClientDetails}"
+                                                    id="cl1"/>
+                                  </af:column>
+                                </af:table>
+                                <h:panelGrid columns="2" id="pg3">
+                                  <af:commandButton text="OK" id="cb2"
+                                                    action="#{ClientsAddDetails.findClientDetails}"/>
+                                  <af:commandButton text="Cancel"
+                                                    id="commandButton1"/>
+                                </h:panelGrid>
+                              </af:dialog>
+                            </af:popup>
+                          </h:panelGrid>
+                        </af:panelGroupLayout>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                  </af:panelBox>
+                  <af:panelTabbed id="pt2" inlineStyle="width:100%;height:500px"
+                                  binding="#{ClientsAddDetails.clientTabbedPanel}"
+                                  rendered="false">
+                    <af:showDetailItem text="Client Details" id="sdi2">
+                       <af:panelBox text="Add Client Details" showHeader="never"
+                               rendered="false"
+                               binding="#{ClientsAddDetails.addClientDetails}">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="9">
+                      <af:outputLabel value="Client Type" id="ol9"
+                                      showRequired="true"/>
+                      <af:selectOneChoice label="Label 6" id="soc3"
+                                          simple="true" value="I"
+                                          valueChangeListener="#{ClientsAddDetails.clientTypeListener}"
+                                          binding="#{ClientsAddDetails.clientType}"
+                                          autoSubmit="true">
+                        <af:selectItem label="Individual Client" value="I"
+                                       id="si15"/>
+                        <af:selectItem label="Corporate Client" value="C"
+                                       id="si16"/>
+                      </af:selectOneChoice>
+                      <af:selectBooleanRadio label="Label 1" simple="true"
+                                             selected="true" autoSubmit="true"
+                                             group="TypeofClient"
+                                             binding="#{ClientsAddDetails.rdIndividual}"
+                                             id="rd2" rendered="false"/>
+                      <af:outputLabel value="Individual Client"
+                                      rendered="false"/>
+                      <af:selectBooleanRadio simple="true" autoSubmit="true"
+                                             group="TypeofClient"
+                                             binding="#{ClientsAddDetails.rdCorporate}"
+                                             id="rd1" rendered="false"/>
+                      <af:outputLabel value="Corporate Client"
+                                      rendered="false"/>
+                      <af:spacer width="30" height="10"/>
+                      <af:outputLabel value="Date Created"/>
+                      <af:inputDate simple="true"
+                                    binding="#{ClientsAddDetails.dateCreated}"
+                                    disabled="true"
+                                    value="#{bindings.sysDate.inputValue}">
+                        <f:validator binding="#{bindings.sysDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.sysDate.format}"/>
+                      </af:inputDate>
+                      <af:outputLabel value="Created By"/>
+                      <af:inputText simple="true"
+                                    binding="#{ClientsAddDetails.createdBy}"
+                                    disabled="true"
+                                    value="#{currUser.username}"/>
+                    </h:panelGrid>
+                    <af:spacer width="10" height="10"/>
+                    <af:outputText value="Client Details"
+                                   inlineStyle="font-family:''Franklin Gothic Heavy''; font-family:'Times New Roman', 'Arial Black', times, Serif; font-weight:bold;"/>
+                    <af:separator/>
+                    <h:panelGrid columns="6">
+                      <af:outputLabel value="Direct Client?"
+                                      showRequired="true"/>
+                      <af:selectOneChoice simple="true"
+                                          binding="#{ClientsAddDetails.direct}"
+                                          valueChangeListener="#{ClientsAddDetails.directListener}"
+                                          helpTopicId="Specify Direct Client"
+                                          requiredMessageDetail="Enter a Direct Client"
+                                          autoSubmit="true" value="N">
+                        <af:selectItem label="No" value="N"/>
+                        <af:selectItem label="Yes" value="Y"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Postal Address"/>
+                      <af:inputText label="Label 3" simple="true"
+                                    value="P.O BOX"
+                                    binding="#{ClientsAddDetails.postalAddress}"
+                                    rows="2"
+                                    autoSubmit="true"
+                                    attributeChangeListener="#{ClientsAddDetails.postalAddress}"
+                                    valueChangeListener="#{ClientsAddDetails.postallistener}"/>
+                      <af:outputLabel value="Status"/>
+                      <af:selectOneChoice label="Label 3" simple="true"
+                                          binding="#{ClientsAddDetails.status}"
+                                          autoSubmit="true" required="true"
+                                          value="A">
+                        <af:selectItem label="Active" value="A"/>
+                        <af:selectItem label="Prospect" value="P"/>
+                        <af:selectItem label="Inactive" value="I"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Account No."/>
+                      <af:inputText label="Label 3" simple="true"
+                                    binding="#{ClientsAddDetails.accNo}"
+                                    autoSubmit="true" required="false"
+                                    requiredMessageDetail="Account No"
+                                    shortDesc="Enter an Account Number"
+                                    disabled="true"/>
+                      <af:outputLabel value="E-Mail Address"/>
+                      <af:inputText label="Label 3" simple="true"
+                                    binding="#{ClientsAddDetails.emailAddress}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{ClientsAddDetails.emailListener}"/>
+                      <af:outputLabel value="Run off Account?"/>
+                      <af:selectOneChoice label="Label 2" simple="true"
+                                          binding="#{ClientsAddDetails.runOff}"
+                                          autoSubmit="true" required="true"
+                                          value="N">
+                        <af:selectItem label="No" value="N"/>
+                        <af:selectItem label="Yes" value="Y"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Id"/>
+                      <af:inputText label="Label 3" simple="true"
+                                    autoSubmit="true"
+                                    binding="#{ClientsAddDetails.id}"
+                                    valueChangeListener="#{ClientsAddDetails.idListener}"
+                                    requiredMessageDetail="Enter an ID Number"
+                                    disabled="true"/>
+                      <af:outputLabel value="Telephone No."/>
+                      <af:inputText label="Label 6" simple="true"
+                                    binding="#{ClientsAddDetails.telephone}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{ClientsAddDetails.telephonelistener}"/>
+                      <af:outputLabel value="Holding Company" id="ol23"/>
+                      <af:selectOneChoice label="Label 2" simple="true"
+                                          autoSubmit="true"
+                                          binding="#{ClientsAddDetails.holdingCompany}"
+                                          required="true" value="N" id="soc5">
+                        <af:selectItem label="No" value="N" id="si4"/>
+                        <af:selectItem label="Yes" value="Y" id="si23"/>
+                      </af:selectOneChoice>
+                      <af:panelGroupLayout id="pgl3" partialTriggers="soc3">
+                        <af:outputLabel value="Title" id="ol4"
+                                        binding="#{ClientsAddDetails.titleLabel}"/>
+                      </af:panelGroupLayout>
+                      <af:panelGroupLayout id="pgl4" partialTriggers="soc3">
+                        <af:selectOneChoice label="Label 1" simple="true"
+                                            binding="#{ClientsAddDetails.title}"
+                                            autoSubmit="true"
+                                            valueChangeListener="#{ClientsAddDetails.titleListener}"
+                                            value="Mr." id="soc2">
+                          <af:selectItem label="Mr." value="Mr." id="si8"/>
+                          <af:selectItem label="Mrs." value="Mrs." id="si14"/>
+                          <af:selectItem label="Mr. &amp; Mrs."
+                                         value="Mr. &amp; Mrs." id="si5"/>
+                          <af:selectItem label="Miss." value="Miss." id="si7"/>
+                          <af:selectItem label="Ms." value="Ms." id="si13"/>
+                          <af:selectItem label="Dr." value="Dr." id="si10"/>
+                          <af:selectItem label="Prof." value="Prof." id="si11"/>
+                          <af:selectItem label="Lt Col." value="Lt Col."
+                                         id="si12"/>
+                          <af:selectItem label="Col." value="Col." id="si9"/>
+                          <af:selectItem label="Gen." value="Gen." id="si6"/>
+                        </af:selectOneChoice>
+                      </af:panelGroupLayout>
+                      <af:outputLabel value="SMS No."/>
+                      <af:inputText label="Label 6" simple="true"
+                                    binding="#{ClientsAddDetails.smsNo}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{ClientsAddDetails.smslistener}"/>
+                      <af:outputLabel value="i)...required Special Terms?"
+                                      inlineStyle="font-style:italic;"/>
+                      <af:selectOneChoice label="Label 2" simple="true"
+                                          binding="#{ClientsAddDetails.specialTerms}"
+                                          autoSubmit="true" value="N">
+                        <af:selectItem label="No" value="N"/>
+                        <af:selectItem label="Yes" value="Y"/>
+                      </af:selectOneChoice>
+                      <af:panelGroupLayout id="pgl5" partialTriggers="soc3">
+                        <af:outputLabel value="FirstName"
+                                        binding="#{ClientsAddDetails.firstnameLabel}"
+                                        id="ol5"/>
+                      </af:panelGroupLayout>
+                      <af:panelGroupLayout id="pgl6" partialTriggers="soc3">
+                        <af:inputText label="Label 3" simple="true"
+                                      binding="#{ClientsAddDetails.firstName}"
+                                      autoSubmit="true"
+                                      attributeChangeListener="#{ClientsAddDetails.firstNameListener}"
+                                      valueChangeListener="#{ClientsAddDetails.firstnameListener}"
+                                      requiredMessageDetail="Enter a First Name"
+                                      id="it4"/>
+                      </af:panelGroupLayout>
+                      <af:outputLabel value="Fax Number"/>
+                      <af:inputText label="Label 6" simple="true"
+                                    binding="#{ClientsAddDetails.fax}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{ClientsAddDetails.faxListener}"/>
+                      <af:outputLabel value="ii)...cancelled Policy?"
+                                      inlineStyle="font-style:italic;"/>
+                      <af:selectOneChoice label="Label 2" simple="true"
+                                          binding="#{ClientsAddDetails.cancelledPolicy}"
+                                          autoSubmit="true" required="true"
+                                          value="N">
+                        <af:selectItem label="No" value="N"/>
+                        <af:selectItem label="Yes" value="Y"/>
+                      </af:selectOneChoice>
+                      <af:panelGroupLayout id="pgl7" partialTriggers="soc3">
+                        <af:outputLabel value="MiddleName"
+                                        binding="#{ClientsAddDetails.middleNameLabel}"
+                                        id="ol6"/>
+                      </af:panelGroupLayout>
+                      <af:panelGroupLayout id="pgl8" partialTriggers="soc3">
+                        <af:inputText label="Label 3" simple="true"
+                                      binding="#{ClientsAddDetails.middleName}"
+                                      attributeChangeListener="#{ClientsAddDetails.middlenamelistener}"
+                                      autoSubmit="true"
+                                      valueChangeListener="#{ClientsAddDetails.middlenamelistener}"
+                                      id="it5"/>
+                      </af:panelGroupLayout>
+                      <af:outputLabel value="Id/Registration No."/>
+                      <af:inputText label="Label 6" simple="true"
+                                    binding="#{ClientsAddDetails.idRegNo}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{ClientsAddDetails.regListener}"
+                                    required="false"
+                                    requiredMessageDetail="Registration Number"/>
+                      <af:outputLabel value="iii)...had to increase premium?"
+                                      inlineStyle="font-style:italic;"/>
+                      <af:selectOneChoice label="Label 2" simple="true"
+                                          binding="#{ClientsAddDetails.increasedPremium}"
+                                          autoSubmit="true" required="true"
+                                          value="N">
+                        <af:selectItem label="No" value="N"/>
+                        <af:selectItem label="Yes" value="Y"/>
+                      </af:selectOneChoice>
+                      <af:panelGroupLayout id="pgl9" partialTriggers="soc3">
+                        <af:outputLabel value="Surname" id="ol7"
+                                        binding="#{ClientsAddDetails.surnameLabel}"
+                                        showRequired="true"/>
+                      </af:panelGroupLayout>
+                      <af:inputText label="Label 3" simple="true"
+                                    binding="#{ClientsAddDetails.surname}"
+                                    attributeChangeListener="#{ClientsAddDetails.surnamelistener}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{ClientsAddDetails.lastnamelistener}"
+                                    requiredMessageDetail="Enter a Surname"/>
+                      <af:outputLabel value="PIN Number" id="ol13"
+                                      rendered="#{!Rendering.expressVisible}"/>
+                      <af:outputLabel value="TIN Number" id="ol14"
+                                      rendered="#{Rendering.expressVisible}"/>
+                      <af:inputText label="Label 6" simple="true"
+                                    binding="#{ClientsAddDetails.piNNumber}"
+                                    autoSubmit="true"
+                                    attributeChangeListener="#{ClientsAddDetails.pinnumberlistener}"
+                                    valueChangeListener="#{ClientsAddDetails.pinlistener}"/>
+                      <af:outputLabel value="iv)...declined proposal?"
+                                      inlineStyle="font-style:italic;"/>
+                      <af:selectOneChoice label="Label 2" simple="true"
+                                          binding="#{ClientsAddDetails.declinedProposal}"
+                                          autoSubmit="true" required="true"
+                                          value="N">
+                        <af:selectItem label="No" value="N"/>
+                        <af:selectItem label="Yes" value="Y"/>
+                      </af:selectOneChoice>
+                       <af:outputLabel value="Physical Address" id="ol24"/>
+                         <af:inputText label="Label 3" simple="true"
+                                    binding="#{ClientsAddDetails.physicalAddress}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{ClientsAddDetails.physicalAddressListener}"/>
+                      <af:outputLabel value="WEF Date" showRequired="true"/>
+                      <af:inputDate label="Label 2" simple="true"
+                                    binding="#{ClientsAddDetails.wef}"
+                                    valueChangeListener="#{ClientsAddDetails.WefListener}"
+                                    helpTopicId="WEF Date"
+                                    requiredMessageDetail="Enter a WEF Date">
+                         <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                       </af:inputDate>               
+                      <af:outputLabel value="WET Date"/>
+                      <af:inputDate label="Label 3" simple="true"
+                                    binding="#{ClientsAddDetails.wet}"
+                                    valueChangeListener="#{ClientsAddDetails.wetlistener}">
+                         <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                      </af:inputDate>               
+                      <af:panelGroupLayout id="pgl10" partialTriggers="soc3">
+                        <af:outputLabel value="Date of Birth" id="ol8"
+                                        binding="#{ClientsAddDetails.dobLabel}"/>
+                      </af:panelGroupLayout>
+                      <af:panelGroupLayout id="pgl11" partialTriggers="soc3">
+                        <af:inputDate label="Label 1" simple="true"
+                                      binding="#{ClientsAddDetails.doB}"
+                                      valueChangeListener="#{ClientsAddDetails.dobListener}"
+                                      id="id1">
+                         <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                       </af:inputDate>                 
+                      </af:panelGroupLayout>
+                      <af:outputLabel value="Remarks"/>
+                      <af:inputText label="Label 8" simple="true"
+                                    binding="#{ClientsAddDetails.remarks}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{ClientsAddDetails.remarksListener}"/>
+                      <af:outputLabel value="Withdrawal Reason"/>
+                      <af:inputText label="Label 8" simple="true"
+                                    binding="#{ClientsAddDetails.withdrawalReason}"
+                                    autoSubmit="true"/>
+                      <af:outputLabel value="FullName." rendered="false"
+                                      binding="#{ClientsAddDetails.fullnameLabel}"/>
+                      <af:inputText label="Label 3" simple="true"
+                                    binding="#{ClientsAddDetails.fullName}"
+                                    autoSubmit="true" rendered="false"/>
+                      <h:panelGrid columns="1" id="pg8">
+                        <af:outputLabel value="Country" id="ol1" showRequired="true"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg9">
+                        <af:inputText label="Label 4" simple="true"
+                                      binding="#{ClientsAddDetails.countryDesc}"
+                                      disabled="true" id="it2"/>
+                        <af:commandButton icon="/images/dropdown.gif"
+                                          binding="#{ClientsAddDetails.countryButton}"
+                                          id="cb4">
+                          <af:showPopupBehavior popupId="countryLOV"/>
+                        </af:commandButton>
+                        <af:popup id="countryLOV">
+                          <af:dialog type="none" id="d2">
+                            <af:table value="#{bindings.Settings.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Settings.rangeSize}"
+                                      emptyText="#{bindings.Settings.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Settings.rangeSize}"
+                                      filterModel="#{bindings.SettingsQuery.queryDescriptor}"
+                                      queryListener="#{bindings.SettingsQuery.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                      rowSelection="single"
+                                      binding="#{ClientsAddDetails.countriesLOV}"
+                                      id="t3">
+                              <af:column sortProperty="countryCode"
+                                         filterable="true" sortable="true"
+                                         headerText="Code" visible="false"
+                                         id="c21">
+                                <af:outputText value="#{row.countryCode}"
+                                               id="ot20"/>
+                              </af:column>
+                              <af:column sortProperty="countryShtDesc"
+                                         filterable="true" sortable="true"
+                                         headerText="Sht Desc" visible="false"
+                                         id="c20">
+                                <af:outputText value="#{row.countryShtDesc}"
+                                               id="ot10"/>
+                              </af:column>
+                              <af:column sortProperty="countryName"
+                                         filterable="true" sortable="true"
+                                         headerText="Name" width="275" id="c16">
+                                <af:outputText value="#{row.countryName}"
+                                               id="ot14"/>
+                              </af:column>
+                            </af:table>
+                            <h:panelGrid columns="2" id="pg13">
+                              <af:commandButton text="OK"
+                                                action="#{ClientsAddDetails.CountrySelected}"
+                                                id="cb5"/>
+                              <af:commandButton text="Cancel" id="cb3"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                      </h:panelGrid>
+                      <h:panelGrid columns="1" id="panelGrid2">
+                        <af:outputLabel value="State" id="outputLabel2"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="panelGrid3">
+                        <af:inputText label="Label 5" simple="true"
+                                      binding="#{ClientsAddDetails.stateDesc}"
+                                      disabled="true" id="inputText1"/>
+                        <af:commandButton icon="/images/dropdown.gif"
+                                          id="commandButton3">
+                          <af:showPopupBehavior popupId="states"/>
+                        </af:commandButton>
+                        <af:popup id="states">
+                          <af:dialog type="none" id="dialog1"
+                                     title="Country States">
+                            <af:table value="#{bindings.Settings2.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Settings2.rangeSize}"
+                                      emptyText="#{bindings.Settings2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Settings2.rangeSize}"
+                                      rowBandingInterval="0"
+                                      filterModel="#{bindings.Settings2Query.queryDescriptor}"
+                                      queryListener="#{bindings.Settings2Query.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.Settings2.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.Settings2.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t5"
+                                      binding="#{ClientsAddDetails.statesLOV}">
+                              <af:column sortProperty="STS_SHT_DESC"
+                                         filterable="true" sortable="true"
+                                         headerText="Short Desc" id="c28">
+                                <af:outputText value="#{row.STS_SHT_DESC}"
+                                               id="ot27"/>
+                              </af:column>
+                              <af:column sortProperty="STS_NAME"
+                                         filterable="true" sortable="true"
+                                         headerText="State" id="c27"
+                                         width="200">
+                                <af:outputText value="#{row.STS_NAME}"
+                                               id="ot28"/>
+                              </af:column>
+                            </af:table>
+                            <h:panelGrid columns="2" id="panelGrid4">
+                              <af:commandButton text="OK"
+                                                action="#{ClientsAddDetails.StatesSelected}"
+                                                id="commandButton4"/>
+                              <af:commandButton text="Cancel"
+                                                id="commandButton5"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                      </h:panelGrid>
+                      <h:panelGrid columns="1" id="pg10">
+                        <af:outputLabel value="Town" id="ol3"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg11">
+                        <af:inputText label="Label 5" simple="true"
+                                      binding="#{ClientsAddDetails.townDesc}"
+                                      disabled="true" id="it3"/>
+                        <af:commandButton icon="/images/dropdown.gif"
+                                          binding="#{ClientsAddDetails.townButton}"
+                                          id="cb8">
+                          <af:showPopupBehavior popupId="TownsLOV"/>
+                        </af:commandButton>
+                        <af:popup id="TownsLOV">
+                          <af:dialog type="none" id="d3">
+                            <af:table value="#{bindings.Settings1.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Settings1.rangeSize}"
+                                      emptyText="#{bindings.Settings1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Settings1.rangeSize}"
+                                      filterModel="#{bindings.Settings1Query.queryDescriptor}"
+                                      queryListener="#{bindings.Settings1Query.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectionListener="#{bindings.Settings1.collectionModel.makeCurrent}"
+                                      rowSelection="single"
+                                      binding="#{ClientsAddDetails.townLOV}"
+                                      id="t4">
+                              <af:column sortProperty="townCode"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.Settings1.hints.townCode.label}"
+                                         visible="false" id="c22">
+                                <af:outputText value="#{row.townCode}"
+                                               id="ot22"/>
+                              </af:column>
+                              <af:column sortProperty="postalDesc"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.Settings1.hints.postalDesc.label}"
+                                         visible="false" id="c26">
+                                <af:outputText value="#{row.postalDesc}"
+                                               id="ot23"/>
+                              </af:column>
+                              <af:column sortProperty="townShtDesc"
+                                         filterable="true" sortable="true"
+                                         headerText="Short Desc" id="c25"
+                                         width="100" visible="false">
+                                <af:outputText value="#{row.townShtDesc}"
+                                               id="ot24"/>
+                              </af:column>
+                              <af:column sortProperty="townName"
+                                         filterable="true" sortable="true"
+                                         headerText="Name" width="275" id="c23">
+                                <af:outputText value="#{row.townName}"
+                                               id="ot25"/>
+                              </af:column>
+                              <af:column sortProperty="postalZIPCode"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.Settings1.hints.postalZIPCode.label}"
+                                         id="c24" visible="false">
+                                <af:outputText value="#{row.postalZIPCode}"
+                                               id="ot21"/>
+                              </af:column>
+                            </af:table>
+                            <h:panelGrid columns="2" id="pg12">
+                              <af:commandButton text="OK"
+                                                action="#{ClientsAddDetails.TownSelected}"
+                                                id="cb7"/>
+                              <af:commandButton text="Cancel" id="cb6"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                      </h:panelGrid>
+                      <h:panelGrid columns="1">
+                        <af:outputLabel value="Occupation" showRequired="true"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2">
+                        <af:inputText label="Label 1" simple="true"
+                                      disabled="true"
+                                      binding="#{ClientsAddDetails.objOccupationDesc}"
+                                      columns="#{Rendering.inputTextSize}"/>
+                        <af:commandButton icon="/images/dropdown.gif"
+                                          rendered="#{Rendering.enQuiryModeRendered}">
+                          <af:showPopupBehavior popupId="occupation"/>
+                        </af:commandButton>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg17">
+                        <af:outputLabel value="Branch" showRequired="true"
+                                        id="ol12"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg18">
+                        <af:inputText label="Label 1" simple="true"
+                                      disabled="true"
+                                      binding="#{ClientsAddDetails.branchDesc}"
+                                      columns="#{Rendering.inputTextSize}"
+                                      id="it7"/>
+                        <af:commandButton icon="/images/dropdown.gif"
+                                          rendered="#{Rendering.enQuiryModeRendered}"
+                                          id="cb10">
+                          <af:showPopupBehavior popupId="branches"/>
+                        </af:commandButton>
+                        <af:popup id="branches">
+                          <af:dialog id="d6" type="none" title="Branches">
+                            <af:table value="#{bindings.Settings3.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Settings3.rangeSize}"
+                                      emptyText="#{bindings.Settings3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Settings3.rangeSize}"
+                                      rowBandingInterval="0"
+                                      filterModel="#{bindings.Settings3Query.queryDescriptor}"
+                                      queryListener="#{bindings.Settings3Query.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.Settings3.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.Settings3.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t6"
+                                      binding="#{ClientsAddDetails.branchesTable}">
+                              <af:column sortProperty="BRN_CODE"
+                                         filterable="true" sortable="true"
+                                         headerText="Code" id="c29"
+                                         visible="false">
+                                <af:outputText value="#{row.BRN_CODE}"
+                                               id="ot29"/>
+                              </af:column>
+                              <af:column sortProperty="BRN_SHT_DESC"
+                                         filterable="true" sortable="true"
+                                         headerText="Short Desc" id="c31">
+                                <af:outputText value="#{row.BRN_SHT_DESC}"
+                                               id="ot30"/>
+                              </af:column>
+                              <af:column sortProperty="BRN_NAME"
+                                         filterable="true" sortable="true"
+                                         headerText="Branch Name" id="c30"
+                                         width="200">
+                                <af:outputText value="#{row.BRN_NAME}"
+                                               id="ot31"/>
+                              </af:column>
+                            </af:table>
+                            <h:panelGrid columns="2" id="pg19">
+                              <af:commandButton text="OK"
+                                                id="cb12"
+                                                action="#{ClientsAddDetails.BranchesSelected}"/>
+                              <af:commandButton text="Cancel" id="commandButton6"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                      </h:panelGrid>
+                      <af:outputLabel value="Search Criteria" id="ol10"
+                                      binding="#{ClientsAddDetails.searchCriteriaLbl}"/>
+                      <af:selectOneChoice label="Label 4"
+                                          binding="#{ClientsAddDetails.searchCriteria}"
+                                          simple="true" autoSubmit="true"
+                                          attributeChangeListener="#{ClientsAddDetails.searchlistener}"
+                                          valueChangeListener="#{ClientsAddDetails.searchlistener}"
+                                          value="FSE" id="soc4">
+                        <af:selectItem label="All Names Exist" value="ALL"
+                                       id="si21"/>
+                        <af:selectItem label="First Name &amp; Surname Exists"
+                                       value="FSE" id="si18"/>
+                        <af:selectItem label="Surname Exists" value="SNE"
+                                       id="si20"/>
+                        <af:selectItem label="Any Name Exists" value="ANE"
+                                       id="si17"/>
+                        <af:selectItem label="Don't Search" id="si19"/>
+                      </af:selectOneChoice>
+                       <af:outputLabel value="Abbreviations" id="ol25"/>
+                       <af:inputText label="Label 17" id="it13" simple="true"
+                                     binding="#{ClientsAddDetails.clientAbbreviation}"/>
+                    </h:panelGrid>
+                    <af:spacer width="10" height="10"/>
+                    <af:panelGroupLayout rendered="false">
+                      <table cellspacing="2" cellpadding="3" border="0"
+                             width="60%">
+                        <tr>
+                          <td width="25%"> </td>
+                          <td width="25%"> </td>
+                          <td width="25%"> </td>
+                          <td width="25%"> </td>
+                        </tr>
+                         
+                        <tr>
+                          <td width="25%">
+                            <af:outputLabel value="Sectors"/>
+                          </td>
+                          <td width="25%">
+                            <h:panelGrid columns="2">
+                              <af:inputText label="Label 7" simple="true"
+                                            binding="#{ClientsAddDetails.sectorDesc}"
+                                            disabled="true"/>
+                              <af:commandButton icon="/images/dropdown.gif"
+                                                binding="#{ClientsAddDetails.sectorButton}">
+                                <af:showPopupBehavior popupId="sectorLOV"/>
+                              </af:commandButton>
+                              <af:popup id="sectorLOV">
+                                <af:dialog type="none">
+                                  <af:table value="#{bindings.Settings2.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.Settings2.rangeSize}"
+                                            emptyText="#{bindings.Settings2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.Settings2.rangeSize}"
+                                            filterModel="#{bindings.Settings2Query.queryDescriptor}"
+                                            queryListener="#{bindings.Settings2Query.processQuery}"
+                                            filterVisible="true" varStatus="vs"
+                                            selectionListener="#{bindings.Settings2.collectionModel.makeCurrent}"
+                                            rowSelection="single"
+                                            binding="#{ClientsAddDetails.sectorLOV}">
+                                    <af:column sortProperty="sectorShtDesc"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Settings2.hints.sectorShtDesc.label}">
+                                      <af:outputText value="#{row.sectorShtDesc}"/>
+                                    </af:column>
+                                    <af:column sortProperty="sectorName"
+                                               filterable="true" sortable="true"
+                                               headerText="Name" width="200">
+                                      <af:outputText value="#{row.sectorName}"/>
+                                    </af:column>
+                                    <af:column sortProperty="sectorCode"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Settings2.hints.sectorCode.label}">
+                                      <af:outputText value="#{row.sectorCode}"/>
+                                    </af:column>
+                                  </af:table>
+                                  <af:commandButton text="OK"
+                                                    action="#{ClientsAddDetails.SectorSelected}"/>
+                                  <af:commandButton text="Cancel"/>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                          </td>
+                          <td width="25%">
+                            <af:outputLabel value="Domicile Countries"/>
+                          </td>
+                          <td width="25%">
+                            <h:panelGrid columns="2">
+                              <af:inputText label="Label 4" simple="true"
+                                            binding="#{ClientsAddDetails.domicileCountry}"
+                                            disabled="true"/>
+                              <af:commandButton icon="/images/dropdown.gif"
+                                                binding="#{ClientsAddDetails.domicileButton}">
+                                <af:showPopupBehavior popupId="domicilecountryLOV"/>
+                              </af:commandButton>
+                              <af:popup id="domicilecountryLOV">
+                                <af:dialog type="none">
+                                  <af:table value="#{bindings.AppSettings3.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.AppSettings3.rangeSize}"
+                                            emptyText="#{bindings.AppSettings3.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.AppSettings3.rangeSize}"
+                                            filterModel="#{bindings.AppSettingsQuery.queryDescriptor}"
+                                            queryListener="#{bindings.AppSettingsQuery.processQuery}"
+                                            filterVisible="true" varStatus="vs"
+                                            selectedRowKeys="#{bindings.AppSettings3.collectionModel.selectedRow}"
+                                            selectionListener="#{bindings.AppSettings3.collectionModel.makeCurrent}"
+                                            rowSelection="single"
+                                            binding="#{ClientsAddDetails.domicilecountryLOV}">
+                                    <af:column sortProperty="countryCode"
+                                               filterable="true" sortable="true"
+                                               headerText="Code">
+                                      <af:outputText value="#{row.countryCode}"/>
+                                    </af:column>
+                                    <af:column sortProperty="countryShtDesc"
+                                               filterable="true" sortable="true"
+                                               headerText="Short Description">
+                                      <af:outputText value="#{row.countryShtDesc}"/>
+                                    </af:column>
+                                    <af:column sortProperty="countryName"
+                                               filterable="true" sortable="true"
+                                               headerText="Name">
+                                      <af:outputText value="#{row.countryName}"/>
+                                    </af:column>
+                                  </af:table>
+                                  <af:commandButton text="OK"
+                                                    action="#{ClientsAddDetails.DomicileCountrySelected}"/>
+                                  <af:commandButton text="Cancel"/>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                          </td>
+                        </tr>
+                         
+                        <tr>
+                          <td width="25%">
+                            <af:outputLabel value="Branch "/>
+                          </td>
+                          <td width="25%">
+                            <h:panelGrid columns="2">
+                              <af:inputText label="Label 9" simple="true"
+                                            binding="#{ClientsAddDetails.bankDesc}"
+                                            disabled="true"/>
+                              <af:commandButton icon="/images/dropdown.gif"
+                                                binding="#{ClientsAddDetails.branchButton}">
+                                <af:showPopupBehavior popupId="banksLOV"/>
+                              </af:commandButton>
+                              <af:popup id="banksLOV">
+                                <af:dialog type="none">
+                                  <af:table value="#{bindings.AppSettings4.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.AppSettings4.rangeSize}"
+                                            emptyText="#{bindings.AppSettings4.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.AppSettings4.rangeSize}"
+                                            filterModel="#{bindings.AppSettings4Query.queryDescriptor}"
+                                            queryListener="#{bindings.AppSettings4Query.processQuery}"
+                                            filterVisible="true" varStatus="vs"
+                                            selectedRowKeys="#{bindings.AppSettings4.collectionModel.selectedRow}"
+                                            selectionListener="#{bindings.AppSettings4.collectionModel.makeCurrent}"
+                                            rowSelection="single"
+                                            binding="#{ClientsAddDetails.banksLOV}">
+                                    <af:column sortProperty="bankName"
+                                               filterable="true" sortable="true"
+                                               headerText="Bank Name">
+                                      <af:outputText value="#{row.bankName}"/>
+                                    </af:column>
+                                    <af:column sortProperty="branchName"
+                                               filterable="true" sortable="true"
+                                               headerText="Branch Name">
+                                      <af:outputText value="#{row.branchName}"/>
+                                    </af:column>
+                                    <af:column sortProperty="bankBranchCode"
+                                               filterable="true" sortable="true"
+                                               headerText="Brabch Code">
+                                      <af:outputText value="#{row.bankBranchCode}"/>
+                                    </af:column>
+                                  </af:table>
+                                  <af:commandButton text="OK"
+                                                    action="#{ClientsAddDetails.BankBranchSelected}"/>
+                                  <af:commandButton text="Cancel"/>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                          </td>
+                          <td width="25%">
+                            <af:outputLabel value="Bank Acc No."/>
+                          </td>
+                          <td width="25%">
+                            <af:inputText label="Label 10" simple="true"
+                                          binding="#{ClientsAddDetails.bankAccount}"
+                                          valueChangeListener="#{ClientsAddDetails.bankListener}"/>
+                          </td>
+                        </tr>
+                      </table>
+                    </af:panelGroupLayout>
+                    <h:panelGrid columns="1" id="pg14" rendered="false"
+                                 binding="#{ClientsAddDetails.similarClientsPanel}">
+                      <af:outputText value="Similar Clients"
+                                     inlineStyle="font-family:''Franklin Gothic Heavy''; font-family:'Times New Roman', 'Arial Black', times, Serif; font-weight:bold;"
+                                     id="ot26"/>
+                      <af:separator id="s1"/>
+                      <af:table value="#{bindings.Client1.collectionModel}"
+                                var="row" rows="#{bindings.Client1.rangeSize}"
+                                emptyText="#{bindings.Client1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Client1.rangeSize}"
+                                rowBandingInterval="0"
+                                selectedRowKeys="#{bindings.Client1.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Client1.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t1"
+                                binding="#{ClientsAddDetails.existingClients}"
+                                inlineStyle="width:100.0%; height:120px; border-style:none;">
+                        <af:column sortProperty="clientCode" sortable="true"
+                                   headerText="Code" id="c8" visible="false">
+                          <af:outputText value="#{row.clientCode}" id="ot6"/>
+                        </af:column>
+                        <af:column sortProperty="PINNumber" sortable="true"
+                                   headerText="PIN Number" id="c1"
+                                   rendered="#{!Rendering.expressVisible}">
+                          <af:outputText value="#{row.PINNumber}" id="ot4"/>
+                        </af:column>
+                         <af:column sortProperty="PINNumber" sortable="true"
+                                   headerText="TIN Number" id="c32"
+                                   visible="#{Rendering.expressVisible}">
+                          <af:outputText value="#{row.PINNumber}" id="ot32"/>
+                        </af:column>
+                        <af:column sortProperty="postalAddress" sortable="true"
+                                   headerText="Postal Address" id="c5">
+                          <af:outputText value="#{row.postalAddress}" id="ot8"/>
+                        </af:column>
+                        <af:column sortProperty="telphoneOne" sortable="true"
+                                   headerText="Telephone" id="c6">
+                          <af:outputText value="#{row.telphoneOne}" id="ot5"/>
+                        </af:column>
+                        <af:column sortProperty="othernames" sortable="true"
+                                   headerText="Other Names" id="c7">
+                          <af:outputText value="#{row.othernames}" id="ot3"/>
+                        </af:column>
+                        <af:column sortProperty="fullname" sortable="true"
+                                   headerText="Full Name" id="c3">
+                          <af:outputText value="#{row.fullname}" id="ot9"/>
+                        </af:column>
+                        <af:column sortProperty="idRegNumber" sortable="true"
+                                   headerText="ID/PP Number" id="c9">
+                          <af:outputText value="#{row.idRegNumber}" id="ot1"/>
+                        </af:column>
+                        <af:column sortProperty="shortDescription"
+                                   sortable="true"
+                                   headerText="Short Description" id="c4">
+                          <af:outputText value="#{row.shortDescription}"
+                                         id="ot2"/>
+                        </af:column>
+                        <af:column sortProperty="ZIPCode" sortable="true"
+                                   headerText="ZIP Code" id="c2">
+                          <af:outputText value="#{row.ZIPCode}" id="ot7"/>
+                        </af:column>
+                      </af:table>
+                    </h:panelGrid>
+                  </af:panelBox>
+                  <af:panelBox text="Confirm Client" showHeader="never"
+                               binding="#{ClientsAddDetails.confirmClientDetails}"
+                               rendered="false">
+                    <f:facet name="toolbar"/>
+                  </af:panelBox>                  
+                    </af:showDetailItem>
+                    <af:showDetailItem text="Client Contact Persons" id="sdi3">
+                      <af:panelBox text="PanelBox1" id="pb2" showHeader="never">
+                       <h:panelGrid id="pg20" columns="3">
+                        <af:commandButton text="ADD" id="cb13"
+                                          action="#{ClientsAddDetails.showClientAddPop}"/>
+                        <af:commandButton text="EDIT" id="cb14"
+                                          action="#{ClientsAddDetails.editContactPerson}"/>
+                        <af:commandButton text="DELETE" id="cb15"
+                                          action="#{ClientsAddDetails.deleteContactPerson}"/>
+                      </h:panelGrid>
+                      <af:popup id="p1">
+                        <af:dialog id="d7" type="none" title="Contact Person">
+                        <h:panelGrid id="pg21" columns="2">
+                            <af:outputLabel value="Name" id="ol15"/>
+                            <af:inputText label="Label 12" id="it8" simple="true"
+                                          binding="#{ClientsAddDetails.contPerName}"/>
+                            <af:outputLabel value="DOB" id="ol16"/>
+                            <af:inputDate label="Label 4" id="id2" simple="true"
+                                          binding="#{ClientsAddDetails.contPerDOB}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>      
+                            </af:inputDate>
+                            <af:outputLabel value="Physical Address" id="ol17"/>
+                            <af:inputText label="Label 13" id="it9" rows="3" simple="true"
+                                          binding="#{ClientsAddDetails.contPerPhyAddr}"/>
+                            <af:outputLabel value="Postal Address" id="ol18"/>
+                            <af:inputText label="Label 14" id="it10" rows="3" simple="true"
+                                          binding="#{ClientsAddDetails.contPerPostAddr}"/>
+                            <af:outputLabel value="Telephone" id="ol19"/>
+                            <af:inputText label="Label 15" id="it11" simple="true"
+                                          binding="#{ClientsAddDetails.contPerTel}"/>
+                            <af:outputLabel value="Email Address" id="ol20"/>
+                            <af:inputText label="Label 16" id="it12" simple="true"
+                                          binding="#{ClientsAddDetails.contPerEmail}"/>
+                            <af:outputLabel value="WEF" id="ol21"/>
+                            <af:inputDate label="Label 4" id="id3" simple="true"
+                                          binding="#{ClientsAddDetails.contPerWEF}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>      
+                            </af:inputDate>
+                             <af:outputLabel value="WET" id="ol22"/>
+                            <af:inputDate label="Label 4" id="id4" simple="true"
+                                          binding="#{ClientsAddDetails.contPerWET}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>      
+                            </af:inputDate>
+                            <h:panelGrid id="pg22" columns="2">
+                              <af:commandButton text="SAVE"
+                                                id="cb16"
+                                                action="#{ClientsAddDetails.saveContactDetails}"/>
+                              <af:commandButton text="CANCEL"
+                                                id="cb17"/>
+                            </h:panelGrid>
+                          </h:panelGrid>
+                        </af:dialog>
+                      </af:popup>
+                        <af:table value="#{bindings.Client3.collectionModel}"
+                                  var="row" rows="#{bindings.Client3.rangeSize}"
+                                  emptyText="#{bindings.Client3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.Client3.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.Client3Query.queryDescriptor}"
+                                  queryListener="#{bindings.Client3Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.Client3.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.Client3.collectionModel.makeCurrent}"
+                                  inlineStyle="width:100%"
+                                  rowSelection="single" id="t7"
+                                  binding="#{ClientsAddDetails.contactPerLOV}">
+                          <af:column sortProperty="pctcCode" filterable="true"
+                                     sortable="true"
+                                     headerText="#{bindings.Client3.hints.pctcCode.label}"
+                                     visible="false"
+                                     id="c35">
+                            <af:outputText value="#{row.pctcCode}" id="ot41"/>
+                          </af:column>
+                          <af:column sortProperty="pctcName" filterable="true"
+                                     sortable="true"
+                                     headerText="Name"
+                                     id="c38">
+                            <af:outputText value="#{row.pctcName}" id="ot42"/>
+                          </af:column>
+                          <af:column sortProperty="pctcDob" filterable="true"
+                                     sortable="true"
+                                     headerText="DOB"
+                                     id="c39">
+                            <f:facet name="filter">
+                              <af:inputDate value="#{vs.filterCriteria.pctcDob}"
+                                            id="id5">
+                                <af:convertDateTime pattern="dd-MMM-yyyy"/>             
+                               </af:inputDate>             
+                            </f:facet>
+                            <af:outputText value="#{row.pctcDob}" id="ot37">
+                               <af:convertDateTime pattern="dd-MMM-yyyy"/>   
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="pctcPhyAddr"
+                                     filterable="true" sortable="true"
+                                     headerText="Physical Address"
+                                     id="c34">
+                            <af:outputText value="#{row.pctcPhyAddr}"
+                                           id="ot36"/>
+                          </af:column>
+                          <af:column sortProperty="pctcPostAddr"
+                                     filterable="true" sortable="true"
+                                     headerText="Postal Address"
+                                     id="c41">
+                            <af:outputText value="#{row.pctcPostAddr}"
+                                           id="ot34"/>
+                          </af:column>
+                          <af:column sortProperty="pctcTel" filterable="true"
+                                     sortable="true"
+                                     headerText="Telephone"
+                                     id="c37">
+                            <af:outputText value="#{row.pctcTel}" id="ot35"/>
+                          </af:column>
+                          <af:column sortProperty="pctcEmail" filterable="true"
+                                     sortable="true"
+                                     headerText="Email"
+                                     id="c36">
+                            <af:outputText value="#{row.pctcEmail}" id="ot39"/>
+                          </af:column>
+                          <af:column sortProperty="pctcWef" filterable="true"
+                                     sortable="true"
+                                     headerText="WEF"
+                                     id="c40">
+                            <f:facet name="filter">
+                              <af:inputDate value="#{vs.filterCriteria.pctcWef}"
+                                            id="id6">
+                               <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                               </af:inputDate>             
+                            </f:facet>
+                            <af:outputText value="#{row.pctcWef}" id="ot40">
+                               <af:convertDateTime pattern="dd-MMM-yyyy"/>   
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="pctcWet" filterable="true"
+                                     sortable="true"
+                                     headerText="WET"
+                                     id="c42">
+                            <f:facet name="filter">
+                              <af:inputDate value="#{vs.filterCriteria.pctcWet}"
+                                            id="id7">
+                                <af:convertDateTime pattern="dd-MMM-yyyy"/>              
+                               </af:inputDate>             
+                            </f:facet>
+                            <af:outputText value="#{row.pctcWet}" id="ot38">
+                               <af:convertDateTime pattern="dd-MMM-yyyy"/>   
+                            </af:outputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelBox> 
+                      
+                    </af:showDetailItem>
+                  </af:panelTabbed>
+               <h:panelGrid columns="3">
+                    <af:commandButton text="Previous" rendered="false"
+                                      action="#{ClientsAddDetails.cmdPrevious}"
+                                      binding="#{ClientsAddDetails.prevButton}"/>
+                    <af:commandButton text="Next"
+                                      action="#{ClientsAddDetails.cmdNext}"
+                                      binding="#{ClientsAddDetails.nextButton}"/>
+                    <af:commandButton text="Next"
+                                      binding="#{ClientsAddDetails.saveButton}"
+                                      action="#{ClientsAddDetails.CheckSimilarClients}"
+                                      rendered="false"/>
+                    <af:commandButton text="Cancel"
+                                      binding="#{ClientsAddDetails.cancelButton}"
+                                      id="cb9"
+                                      action="#{ClientsAddDetails.cancelClient}"/>
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          <af:popup id="users">
+            <af:dialog id="d4" type="none" title="Users To Assign the Task">
+              <af:table value="#{bindings.workflow.collectionModel}" var="row"
+                        rows="#{bindings.workflow.rangeSize}"
+                        emptyText="#{bindings.workflow.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.workflow.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.workflowQuery.queryDescriptor}"
+                        queryListener="#{bindings.workflowQuery.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.workflow.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.workflow.collectionModel.makeCurrent}"
+                        rowSelection="single" id="table1" width="410"
+                        binding="#{ClientsAddDetails.usersLOV}">
+                <af:column sortProperty="taskUserID" filterable="true"
+                           sortable="true" headerText="ID" id="column1">
+                  <af:outputText value="#{row.taskUserID}" id="outputText1"/>
+                </af:column>
+                <af:column sortProperty="taskUserShtDesc" filterable="true"
+                           sortable="true" headerText="User Short Desc"
+                           id="column2">
+                  <af:outputText value="#{row.taskUserShtDesc}"
+                                 id="outputText2"/>
+                </af:column>
+                <af:column sortProperty="taskUserDesc" filterable="true"
+                           sortable="true" headerText="User Name" id="column3"
+                           width="200">
+                  <af:outputText value="#{row.taskUserDesc}" id="outputText3"/>
+                </af:column>
+              </af:table>
+              <h:panelGrid columns="2" id="panelGrid1">
+                <af:commandButton text="OK" id="cb11"
+                                  action="#{ClientsAddDetails.AssignTask}"/>
+                <af:commandButton text="Cancel" id="commandButton2"
+                                  action="#{ClientsAddDetails.GetAssignee}"/>
+              </h:panelGrid>
+            </af:dialog>
+          </af:popup>
+            <af:popup id="occupation" contentDelivery="lazyUncached">
+              <af:dialog type="none" title="Select Occupation">
+                <af:panelGroupLayout>
+                  <h:panelGrid columns="1">
+                    <af:table value="#{bindings.Client.collectionModel}"
+                              var="row" rows="#{bindings.Client.rangeSize}"
+                              emptyText="#{bindings.Client.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Client.rangeSize}"
+                              filterModel="#{bindings.ClientQuery.queryDescriptor}"
+                              queryListener="#{bindings.ClientQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Client.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Client.collectionModel.makeCurrent}"
+                              rowSelection="single" inlineStyle="width:225px;"
+                              binding="#{ClientsAddDetails.occupation}">
+                      <af:column sortProperty="occupationCode" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Client.hints.occupationCode.label}"
+                                 visible="false">
+                        <af:outputText value="#{row.occupationCode}"/>
+                      </af:column>
+                      <af:column sortProperty="occupationalDesc"
+                                 filterable="true" sortable="true"
+                                 headerText="Occupation" width="200">
+                        <af:outputText value="#{row.occupationalDesc}"/>
+                      </af:column>
+                      <af:column sortProperty="lifeClass" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Client.hints.lifeClass.label}"
+                                 visible="false">
+                        <af:outputText value="#{row.lifeClass}"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2">
+                      <af:commandButton text="OK"
+                                        action="#{ClientsAddDetails.occupationSelected}"/>
+                      <af:commandButton text="Cancel" immediate="true"/>
+                    </h:panelGrid>
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </af:dialog>
+            </af:popup>
+          </af:panelGroupLayout>
+</f:facet>
+      
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

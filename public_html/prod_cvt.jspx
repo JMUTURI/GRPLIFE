@@ -1,0 +1,729 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Product Cover Types Definition" id="d8">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:panelAccordion id="pa1"
+                                 inlineStyle="width:100%; height:400.0px;">
+                <af:showDetailItem text="Product Cover Types" id="sdi1">
+                  <af:panelGroupLayout id="pgl3">
+                    <af:panelSplitter id="ps1"
+                                      inlineStyle="width:100%; height:370.0px;">
+                      <f:facet name="first">
+                        <af:panelBox id="pb1" text="Products">
+                          <f:facet name="toolbar"/>
+                          <af:tree value="#{bindings.Setup4.treeModel}"
+                                   var="node"
+                                   selectionListener="#{otherSetups.CoverTypesProductsListenerII}"
+                                   rowSelection="single" id="t5"
+                                   binding="#{otherSetups.productTree}">
+                            <f:facet name="nodeStamp">
+                              <af:outputText value="#{node}" id="ot20"/>
+                            </f:facet>
+                          </af:tree>
+                        </af:panelBox>
+                      </f:facet>
+                      <f:facet name="second">
+                        <af:panelGroupLayout layout="scroll"
+                                             xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                             id="pgl5" partialTriggers="t5">
+                          <af:panelBox text="Cover Types" id="pb2">
+                            <f:facet name="toolbar"/>
+                            <h:panelGrid columns="4" id="pg5">
+                              <af:commandButton id="cb1"
+                                                icon="/images/field_group_plus_dwn.png"
+                                                action="#{otherSetups.ReinitializeVariables}"/>
+                              <af:commandButton id="cb2"
+                                                icon="/images/update_ena.png"
+                                                action="#{otherSetups.UpdateProductCoverTypes}"/>
+                              <af:commandButton id="cb3"
+                                                icon="/images/delete_ena.png"
+                                                action="#{otherSetups.DeleteProductCoverType}"/>
+                              <af:popup id="AddProductCover">
+                                <af:dialog id="d1" type="none"
+                                           title="Add/Edit Cover Type">
+                                  <af:panelBox id="pb4" showHeader="never">
+                                    <f:facet name="toolbar"/>
+                                    <h:panelGrid columns="4" id="pg10">
+                                      <af:outputLabel value="Cover Type"
+                                                      id="ol3"/>
+                                      <h:panelGrid columns="2" id="pg8">
+                                        <af:inputText label="Label 1" id="it1"
+                                                      simple="true"
+                                                      binding="#{otherSetups.coverTypeDesc}"
+                                                      shortDesc="Cover Type Description"
+                                                      disabled="true"/>
+                                        <af:commandButton id="cb4"
+                                                          icon="/dropdown.gif">
+                                          <af:showPopupBehavior popupId="SelectCoverTypesPopup"/>
+                                        </af:commandButton>
+                                        <af:popup id="SelectCoverTypesPopup">
+                                          <af:dialog id="d2" type="none"
+                                                     title="Select Cover Type">
+                                            <af:panelBox text="PanelBox1"
+                                                         id="pb3"
+                                                         showHeader="never">
+                                              <f:facet name="toolbar"/>
+                                              <af:table value="#{bindings.Setup3.collectionModel}"
+                                                        var="row"
+                                                        rows="#{bindings.Setup3.rangeSize}"
+                                                        emptyText="#{bindings.Setup3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                        fetchSize="#{bindings.Setup3.rangeSize}"
+                                                        rowBandingInterval="0"
+                                                        selectedRowKeys="#{bindings.Setup3.collectionModel.selectedRow}"
+                                                        selectionListener="#{bindings.Setup3.collectionModel.makeCurrent}"
+                                                        rowSelection="single"
+                                                        id="t4"
+                                                        binding="#{otherSetups.prodCoversLOV}">
+                                                <af:column sortProperty="CVT_SHT_DESC"
+                                                           sortable="true"
+                                                           headerText="Id."
+                                                           id="c18">
+                                                  <af:outputText value="#{row.CVT_SHT_DESC}"
+                                                                 id="ot19"/>
+                                                </af:column>
+                                                <af:column sortProperty="CVT_DESCRIPTION"
+                                                           sortable="true"
+                                                           headerText="Cover"
+                                                           id="c17" width="200">
+                                                  <af:outputText value="#{row.CVT_DESCRIPTION}"
+                                                                 id="ot18"/>
+                                                </af:column>
+                                              </af:table>
+                                              <h:panelGrid columns="2" id="pg3">
+                                                <af:commandButton text="OK"
+                                                                  id="cb5"
+                                                                  action="#{otherSetups.AssignProductCoverType}"/>
+                                                <af:commandButton text="Cancel"
+                                                                  id="cb6"/>
+                                              </h:panelGrid>
+                                            </af:panelBox>
+                                          </af:dialog>
+                                        </af:popup>
+                                      </h:panelGrid>
+                                      <af:outputLabel value="Max Assureds"
+                                                      id="ol4"/>
+                                      <af:inputText label="Label 2" id="it2"
+                                                    simple="true"
+                                                    binding="#{otherSetups.maxAssureds}"
+                                                    shortDesc="Maximum number of lives assured"/>
+                                      <af:outputLabel value="Max Age" id="ol5"/>
+                                      <af:inputText label="Label 3" id="it3"
+                                                    simple="true"
+                                                    binding="#{otherSetups.covermaximumAge}"
+                                                    shortDesc="Maximum Age of Life Assured"/>
+                                      <af:outputLabel value="Formula" id="ol6"/>
+                                      <af:selectOneChoice label="Label 1"
+                                                          id="soc1"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{otherSetups.coverFormula}"
+                                                          shortDesc="Formula used to compute premium at underwriting">
+                                        <af:selectItem label="FORMULAR 1"
+                                                       value="MEPIP" id="si3"/>
+                                        <af:selectItem label="FORMULAR 2"
+                                                       value="LG" id="si5"/>
+                                        <af:selectItem label="RIDERS 1"
+                                                       value="RIDER" id="si2"/>
+                                        <af:selectItem label="GROUP LIFE"
+                                                       value="EGL" id="si6"/>
+                                        <af:selectItem label="MICROFINANCE"
+                                                       value="MF" id="si4"/>
+                                        <af:selectItem label="RIDER 2"
+                                                       value="LGR" id="si8"/>
+                                        <af:selectItem label="DEFAULT"
+                                                       value="DEFAULT"
+                                                       id="si1"/>
+                                        <af:selectItem label="MICROFINANCE II"
+                                                       value="MFII" id="si7"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Refund Formula"
+                                                      id="ol7"/>
+                                      <af:selectOneChoice label="Label 1"
+                                                          id="selectOneChoice1"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{otherSetups.coverRefundFormula}"
+                                                          shortDesc="Formula used to compute premium during refund of premium">
+                                        <af:selectItem label="FORMULAR 1"
+                                                       value="MEPIP"
+                                                       id="selectItem1"/>
+                                        <af:selectItem label="FORMULAR 2"
+                                                       value="LG"
+                                                       id="selectItem2"/>
+                                        <af:selectItem label="RIDERS 1"
+                                                       value="RIDER"
+                                                       id="selectItem3"/>
+                                        <af:selectItem label="GROUP LIFE"
+                                                       value="EGL"
+                                                       id="selectItem4"/>
+                                        <af:selectItem label="MICROFINANCE"
+                                                       value="MF"
+                                                       id="selectItem5"/>
+                                        <af:selectItem label="RIDER 2"
+                                                       value="LGR"
+                                                       id="selectItem6"/>
+                                        <af:selectItem label="DEFAULT"
+                                                       value="DEFAULT"
+                                                       id="selectItem7"/>
+                                        <af:selectItem label="MICROFINANCE II"
+                                                       value="MFII"
+                                                       id="selectItem8"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="% of  Main/Yr Earn"
+                                                      id="ol8" rendered="false"
+                                                      binding="#{otherSetups.coverMainPercLbl}"/>
+                                      <af:inputText label="Label 4" id="it4"
+                                                    simple="true"
+                                                    binding="#{otherSetups.coverMainSAPerc}"
+                                                    shortDesc="Percentage of Sum of Assured"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="Max SA" id="ol9"/>
+                                      <af:inputText label="Label 5" id="it5"
+                                                    simple="true"
+                                                    binding="#{otherSetups.coverMaximumSA}"
+                                                    shortDesc="Maximum Sum Assured"/>
+                                      <af:outputLabel value="Extra Mortality(EM) %"
+                                                      id="ol2"
+                                                      rendered="false"/>
+                                      <af:inputText label="Label 6" id="it7"
+                                                    simple="true"
+                                                    binding="#{otherSetups.errorMarginTF}"
+                                                    shortDesc="Error Margin"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="Profit Margin %"
+                                                      id="ol15"
+                                                      rendered="false"/>
+                                      <af:inputText label="Label 7" id="it8"
+                                                    simple="true"
+                                                    binding="#{otherSetups.profitMarginTF}"
+                                                    shortDesc="Profit Margin"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="Management Expense %"
+                                                      id="ol16"
+                                                      rendered="false"/>
+                                      <af:inputText label="Label 8" id="it9"
+                                                    simple="true"
+                                                    binding="#{otherSetups.mngtExpenseTF}"
+                                                    shortDesc="Management Expense"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="PHCF %" id="ol17"
+                                                      rendered="false"/>
+                                      <af:inputText label="Label 9" id="it10"
+                                                    simple="true"
+                                                    binding="#{otherSetups.phcfTF}"
+                                                    shortDesc="PHCF"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="Medical Cost %"
+                                                      id="ol20"
+                                                      rendered="false"/>
+                                      <af:inputText label="Label 12" id="it13"
+                                                    simple="true"
+                                                    binding="#{otherSetups.medicalCost}"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="Stamp Duty %"
+                                                      id="ol21"
+                                                      rendered="false"/>
+                                      <af:inputText label="Label 13" id="it14"
+                                                    simple="true"
+                                                    shortDesc="Stamp Duty"
+                                                    binding="#{otherSetups.stampDuty}"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="Commission Rate %"
+                                                      id="ol22"
+                                                      rendered="false"/>
+                                      <af:inputText label="Label 14" id="it15"
+                                                    simple="true"
+                                                    shortDesc="Commission Rate"
+                                                    binding="#{otherSetups.pureCommRate}"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="Accidental Death Rate"
+                                                      id="ol18"
+                                                      rendered="false"/>
+                                      <af:inputText label="Label 10" id="it11"
+                                                    simple="true"
+                                                    binding="#{otherSetups.adrRateTF}"
+                                                    shortDesc="Accidental Death Rate"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="Accidental Death Div Fac"
+                                                      id="ol19"
+                                                      rendered="false"/>
+                                      <af:inputText label="Label 11" id="it12"
+                                                    simple="true"
+                                                    binding="#{otherSetups.adrRateDivFactor}"
+                                                    shortDesc="Accidental Death Div Fac"
+                                                    rendered="false"/>
+                                      <af:outputLabel value="SA Depends on Limit Amount?"
+                                                      id="outputLabel1"/>
+                                      <af:selectOneChoice label="Label 7"
+                                                          id="soc7"
+                                                          simple="true"
+                                                          value="N"
+                                                          binding="#{otherSetups.saDependLimit}">
+                                        <af:selectItem label="Yes" value="Y"
+                                                       id="si21"/>
+                                        <af:selectItem label="No" value="N"
+                                                       id="si20"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Rates Depend  on Class of  Life?"
+                                                      id="ol10"/>
+                                      <af:selectOneChoice label="Label 2"
+                                                          id="soc2"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{otherSetups.coverRatesDependOnLifeClass}"
+                                                          shortDesc="Premium Rates dependent on class of life?">
+                                        <af:selectItem label="Yes" value="Y"
+                                                       id="si10"/>
+                                        <af:selectItem label="No" value="N"
+                                                       id="si9"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Accelerator"
+                                                      id="ol11"/>
+                                      <af:selectOneChoice label="Label 3"
+                                                          id="soc3"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{otherSetups.coverAccelerator}"
+                                                          shortDesc="Accelerator Cover">
+                                        <af:selectItem label="Yes" value="Y"
+                                                       id="si12"/>
+                                        <af:selectItem label="No" value="N"
+                                                       id="si11"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Mandatory"
+                                                      id="ol12"/>
+                                      <af:selectOneChoice label="Label 4"
+                                                          id="soc4"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{otherSetups.coverMandatory}"
+                                                          shortDesc="Is Cover Mandatory">
+                                        <af:selectItem label="Yes" value="Y"
+                                                       id="si13"/>
+                                        <af:selectItem label="No" value="N"
+                                                       id="si14"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Group/Single Rate"
+                                                      id="ol13"/>
+                                      <af:selectOneChoice label="Label 5"
+                                                          id="soc5"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{otherSetups.coverGroupSingle}"
+                                                          shortDesc="Group/Single Rates">
+                                        <af:selectItem label="Single" value="S"
+                                                       id="si16"/>
+                                        <af:selectItem label="Group" value="G"
+                                                       id="si15"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Built In?"
+                                                      id="ol14"/>
+                                      <af:selectOneChoice label="Label 6"
+                                                          id="soc6"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{otherSetups.coverInbuilt}"
+                                                          shortDesc="Built In covers do not fetch premium">
+                                        <af:selectItem label="Yes" value="Y"
+                                                       id="si18"/>
+                                        <af:selectItem label="No" value="N"
+                                                       id="si17"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Apply 13th Month"
+                                                      id="ol1"/>
+                                      <af:selectOneChoice label="Label 6"
+                                                          id="soc8"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          shortDesc="Multiple of earnings based on 13th month"
+                                                          binding="#{otherSetups.thirteenthMonth}">
+                                        <af:selectItem label="Yes" value="Y"
+                                                       id="si22"/>
+                                        <af:selectItem label="No" value="N"
+                                                       id="si23"/>
+                                      </af:selectOneChoice>
+                                      <!-- <af:outputLabel value="Load Age"
+                                                      id="ol2"/>
+                                      <af:selectOneChoice label="Label 6"
+                                                          id="soc9"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          shortDesc="Apply age loading"
+                                                          value="N"
+                                                          binding="#{otherSetups.loadAvgAge}">
+                                        <af:selectItem label="Yes" value="Y"
+                                                       id="si24"/>
+                                        <af:selectItem label="No" value="N"
+                                                       id="si25"/>
+                                      </af:selectOneChoice>-->
+                                      <af:outputLabel value="Default Prem. Structure"
+                                                      id="ol23"/>
+                                     <h:panelGrid id="pg7" columns="2"> 
+                                     <af:inputText label="Label 18" id="it19" simple="true"
+                                                   binding="#{otherSetups.maskDisplay}" disabled="true"/>
+                                        <af:commandButton icon="/dropdown.gif" id="cb14" >
+                                        <af:showPopupBehavior popupId="p2"/>
+                                        </af:commandButton>
+                                        <af:popup id="p2">
+                                        <af:dialog type="none" title="Premium Structure"
+                                                   id="d4">
+                                            <af:table value="#{bindings.quotPremMask.collectionModel}"
+                                                      var="row"
+                                                      rows="#{bindings.quotPremMask.rangeSize}"
+                                                      emptyText="#{bindings.quotPremMask.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.quotPremMask.rangeSize}"
+                                                      rowBandingInterval="0"
+                                                      filterModel="#{bindings.quotPremMaskQuery.queryDescriptor}"
+                                                      queryListener="#{bindings.quotPremMaskQuery.processQuery}"
+                                                      filterVisible="true"
+                                                      varStatus="vs"
+                                                      selectionListener="#{bindings.quotPremMask.collectionModel.makeCurrent}"
+                                                      rowSelection="single"
+                                                      id="t2"
+                                                      binding="#{otherSetups.masksLOV}">
+                                              <af:column sortProperty="PMAS_CODE"
+                                                         filterable="true"
+                                                         sortable="true"
+                                                         headerText="Mask Code"
+                                                         visible="false"
+                                                         id="c26">
+                                                <af:outputText value="#{row.PMAS_CODE}"
+                                                               id="ot34"/>
+                                              </af:column>
+                                              <af:column sortProperty="PMAS_SHT_DESC"
+                                                         filterable="true"
+                                                         sortable="true"
+                                                         headerText="Mask Short Desc"
+                                                         id="c24">
+                                                <af:outputText value="#{row.PMAS_SHT_DESC}"
+                                                               id="ot33"/>
+                                              </af:column>
+                                              <af:column sortProperty="PMAS_DESC"
+                                                         filterable="true"
+                                                         sortable="true"
+                                                         headerText="Premium Mask"
+                                                         id="c25" width="180px">
+                                                <af:outputText value="#{row.PMAS_DESC}"
+                                                               id="ot32"/>
+                                              </af:column>
+                                            </af:table>
+                                            <h:panelGrid columns="2" id="pg11">
+                                              <af:commandButton text="OK"
+                                                                id="cb15"
+                                                                partialSubmit="true"
+                                                                action="#{otherSetups.selectPremMask}"/>
+                                              <af:commandButton text="CANCEL"
+                                                                id="cb16"/>
+                                            </h:panelGrid>
+                                          </af:dialog>
+                                        </af:popup>
+                                      </h:panelGrid>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" id="pg2">
+                                      <af:commandButton text="Save" id="cb7"
+                                                        action="#{otherSetups.SaveProductCover}"
+                                                        partialSubmit="true"/>
+                                      <af:commandButton text="Cancel" id="cb8"/>
+                                    </h:panelGrid>
+                                  </af:panelBox>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                            <af:table value="#{bindings.Setup2.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Setup2.rangeSize}"
+                                      emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Setup2.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectionListener="#{otherSetups.productCoverListener}"
+                                      rowSelection="single" id="t3"
+                                      binding="#{otherSetups.productCoverTypesLOV}"
+                                      inlineStyle="width:100%; height:150px; border-style:none;">
+                              <af:column sortProperty="PCT_CVT_DESC"
+                                         sortable="true" headerText="Cover Type"
+                                         id="c6">
+                                <af:outputText value="#{row.PCT_CVT_DESC}"
+                                               id="ot14"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_MAX_ASSUREDS"
+                                         sortable="true"
+                                         headerText="Max.  Assureds" id="c7">
+                                <af:outputText value="#{row.PCT_MAX_ASSUREDS}"
+                                               id="ot15"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_MAX_AGE"
+                                         sortable="true" headerText="Max.  Age"
+                                         id="c10">
+                                <af:outputText value="#{row.PCT_MAX_AGE}"
+                                               id="ot13"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_FORMULAR_DESC"
+                                         sortable="true" headerText="Formulae"
+                                         id="c12">
+                                <af:outputText value="#{row.PCT_FORMULAR_DESC}"
+                                               id="ot12"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_REFUND_FORMULAR_DESC"
+                                         sortable="true"
+                                         headerText="Refund  Formulae" id="c11">
+                                <af:outputText value="#{row.PCT_REFUND_FORMULAR_DESC}"
+                                               id="ot11"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_MAIN_SA_PERC"
+                                         sortable="true"
+                                         headerText="% of  Main/Yr Earn"
+                                         id="c16">
+                                <af:outputText value="#{row.PCT_MAIN_SA_PERC}"
+                                               id="ot8"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_MAX_SA"
+                                         sortable="true" headerText="Max. SA"
+                                         id="c13">
+                                <af:outputText value="#{row.PCT_MAX_SA}"
+                                               id="ot17"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_SA_DEPEND_ON_LIMIT_DESC"
+                                         sortable="false"
+                                         headerText="SA Depend on Limit?"
+                                         id="c1">
+                                <af:outputText value="#{row.PCT_SA_DEPEND_ON_LIMIT_DESC}"
+                                               id="ot2"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_RATE_DEPEND_ON_CLASS_DESC"
+                                         sortable="true"
+                                         headerText="Rates Depend  on Class of  Life?"
+                                         id="c8">
+                                <af:outputText value="#{row.PCT_RATE_DEPEND_ON_CLASS_DESC}"
+                                               id="ot10"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_INBUILT_DESC"
+                                         sortable="true" headerText="Built In?"
+                                         id="c14">
+                                <af:outputText value="#{row.PCT_INBUILT_DESC}"
+                                               id="ot6"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_ACCELERATOR_DESC"
+                                         sortable="true"
+                                         headerText="Accelerator" id="c9">
+                                <af:outputText value="#{row.PCT_ACCELERATOR_DESC}"
+                                               id="ot16"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_MANDATORY_DESC"
+                                         sortable="true" headerText="Mandatory"
+                                         id="c5">
+                                <af:outputText value="#{row.PCT_MANDATORY_DESC}"
+                                               id="ot9"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_GRP_OR_SINGLE_RATES_DESC"
+                                         sortable="true"
+                                         headerText="Group/Single Rate ?"
+                                         id="c15">
+                                <af:outputText value="#{row.PCT_GRP_OR_SINGLE_RATES_DESC}"
+                                               id="ot7"/>
+                              </af:column>
+                              <af:column sortProperty="PCT_THIRTEEN_MONTH"
+                                         sortable="true"
+                                         headerText="Apply Thirteen Months"
+                                         id="c2">
+                                <af:outputText value="#{row.PCT_THIRTEEN_MONTH}"
+                                               id="ot3"/>
+                              </af:column>
+                               <af:column sortProperty="PMAS_SHT_DESC"
+                                         sortable="true"
+                                         headerText="Default Mask"
+                                         id="c27">
+                                <af:outputText value="#{row.PMAS_SHT_DESC}"
+                                               id="ot35"/>
+                              </af:column>
+                            </af:table>
+                            <af:panelBox text="PanelBox2" id="pb5"
+                                         showHeader="never">
+                              <f:facet name="toolbar"/>
+                              <af:outputText value="Product Cover Type Loadings"
+                                             id="ot4"
+                                             inlineStyle="font-weight:bold"/>
+                              <h:panelGrid columns="3" id="pg6">
+                                <af:commandButton icon="/images/field_group_plus_dwn.png"
+                                                  id="cb9"
+                                                  action="#{otherSetups.addProdCoverLoading}"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="cb10"
+                                                  action="#{otherSetups.editProdCoverLoading}"/>
+                                <af:commandButton icon="/images/delete_ena.png"
+                                                  id="cb11"
+                                                  action="#{otherSetups.deleteProdCvrLoadings}"/>
+                              </h:panelGrid>
+                              <af:popup id="p1">
+                                <af:dialog id="d3"
+                                           title="Product Cover Type Loadings" cancelVisible="false" okVisible="false">
+                                  <af:panelBox text="PanelBox3" id="pb6"
+                                               showHeader="never">
+                                    <f:facet name="toolbar"/>
+                                    <h:panelGrid columns="2" id="pg4">
+                                      <af:outputText value="Name" id="ot5"/>
+                                      <af:inputText label="Label 15" id="it16"
+                                                    simple="true"
+                                                    binding="#{otherSetups.prodLoadingNameTF}"/>
+                                      <af:outputText value="Loading Rate Type"
+                                                     id="ot21"/>
+                                      <af:selectOneChoice label="Label 8"
+                                                          id="soc9"
+                                                          simple="true"
+                                                          binding="#{otherSetups.rateTypeCB}">
+                                        <af:selectItem label="Extra Mortality"
+                                                       value="EM" id="si24"/>
+                                        <af:selectItem label="Profit Margin"
+                                                       value="PM" id="si27"/>
+                                        <af:selectItem label="Management Expense"
+                                                       value="ME" id="si30"/>
+                                        <af:selectItem label="Stamp Duty"
+                                                       value="SD" id="si31"/>
+                                        <af:selectItem label="Commission Rate"
+                                                       value="COMM" id="si29"/>
+                                        <af:selectItem label="Accidental Death Rate"
+                                                       value="ADR" id="si26"/>
+                                        <af:selectItem label="PHCF" value="PHCF"
+                                                       id="si28"/>
+                                        <af:selectItem label="Medical Cost "
+                                                       value="MC" id="si25"/>
+                                        <af:selectItem label="Base Mortality Rate"
+                                                       id="BMR" value="BMR"/>
+                                        <af:selectItem label="Industrial Salary Loading(Non AIDS)"
+                                                       id="ISLNA" value="ISLNA"/>
+                                        <af:selectItem label="Industrial Salary Loading(AIDS)"
+                                                       id="ISLA" value="ISLA"/>
+                                        <af:selectItem label="AIDS"
+                                                       id="AIDS" value="AIDS"/>
+                                        <af:selectItem label="Office Expense"
+                                                       id="OFE" value="OFE"/>
+                                      </af:selectOneChoice>
+                                      <af:outputText value="Loading Method"
+                                                     id="ot29"/>
+                                      <af:selectOneChoice label="Label 9"
+                                                          id="soc10" simple="true" value="I"
+                                                          autoSubmit="true"
+                                                          valueChangeListener="#{otherSetups.rateTypeChangeListener}"
+                                                          binding="#{otherSetups.rateTypeSelect}">
+                                        <af:selectItem label="Input Rate"
+                                                       value="I" id="si32"/>
+                                        <af:selectItem label="Template"
+                                                       value="T" id="si33"/>
+                                      </af:selectOneChoice>
+                                      <af:outputText value="Loading Rate"
+                                                     id="ot22"/>
+                                      <af:inputText label="Label 16" id="it17"
+                                                    simple="true"
+                                                    binding="#{otherSetups.loadingRateTF}"/>
+                                      <af:outputText value="Loading Div Fact"
+                                                     id="ot23"/>
+                                      <af:inputText label="Label 17" id="it18"
+                                                    simple="true"
+                                                    binding="#{otherSetups.loadingRateDivFactTF}"/>
+                                      <af:spacer width="10" height="10"
+                                                 id="s1"/>
+                                      <h:panelGrid columns="2" id="pg9">
+                                      
+                                      <af:commandButton text="Save" id="cb12"
+                                                        action="#{otherSetups.updateProdLoading}"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="cb13"/>
+                                      </h:panelGrid>
+                                    </h:panelGrid>
+                                  </af:panelBox>
+                                </af:dialog>
+                              </af:popup>
+                              <af:table value="#{bindings.Settings.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Settings.rangeSize}"
+                                        emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Settings.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t1"
+                                        binding="#{otherSetups.prodCoverLoadingLOV}"
+                                        inlineStyle="width:100%; height:100px; border-style:none;">
+                                <af:column sortProperty="pctl_code"
+                                           sortable="true"
+                                           headerText="#{bindings.Settings.hints.pctl_code.label}"
+                                           id="c21" visible="false">
+                                  <af:outputText value="#{row.pctl_code}"
+                                                 id="ot27"/>
+                                </af:column>
+                                <af:column sortProperty="pctl_name"
+                                           sortable="true" headerText="Name"
+                                           id="c3">
+                                  <af:outputText value="#{row.pctl_name}"
+                                                 id="ot25"/>
+                                </af:column>
+                                 <af:column sortProperty="pctl_load_method"
+                                           sortable="true" headerText="Name"
+                                           id="c22" visible="false">
+                                  <af:outputText value="#{row.pctl_load_method}"
+                                                 id="ot30"/>
+                                </af:column>
+                                 <af:column sortProperty="pctl_load_desc"
+                                           sortable="true" headerText="Load Method"
+                                           id="c23">
+                                  <af:outputText value="#{row.pctl_load_desc}"
+                                                 id="ot31"/>
+                                </af:column>
+                                
+                                <af:column sortProperty="pctl_rate_type"
+                                           sortable="true"
+                                           headerText="Rate Type" id="c20">
+                                  <af:outputText value="#{row.pctl_rate_type}"
+                                                 id="ot24"/>
+                                </af:column>
+                                <af:column sortProperty="pctl_rate"
+                                           sortable="true" headerText="Rate"
+                                           id="c19">
+                                  <af:outputText value="#{row.pctl_rate}"
+                                                 id="ot26"/>
+                                </af:column>
+                                <af:column sortProperty="pctl_rate_div_factor"
+                                           sortable="true"
+                                           headerText="Rate Div Fact" id="c4">
+                                  <af:outputText value="#{row.pctl_rate_div_factor}"
+                                                 id="ot28"/>
+                                </af:column>
+                              </af:table>
+                            </af:panelBox>
+                          </af:panelBox>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                    </af:panelSplitter>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <h:panelGrid columns="2" id="pg1">
+                      <af:inputText id="it6" simple="false"
+                                    helpTopicId="LmsGrp_prod_cvt"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si19"/>
+                    </h:panelGrid>
+                  </f:facet>
+                </af:showDetailItem>
+              </af:panelAccordion>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

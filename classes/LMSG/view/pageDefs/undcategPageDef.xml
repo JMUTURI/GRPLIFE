@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="undcategPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="findCategory.result"
+                    DataControl="GenPolicyCategories" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotCategory"
+                    id="findCategoryIterator"/>
+    <methodIterator Binds="FindCoverTypes.result"
+                    DataControl="policyCoverTypesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policyCoverTypes"
+                    id="FindCoverTypesIterator"/>
+    <methodIterator Binds="FindDependentsLimits.result"
+                    DataControl="PolDependentLimits" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.dependentLimits"
+                    id="FindDependentsLimitsIterator"/>
+    <methodIterator Binds="FindDependents.result" DataControl="dependentsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.dependents"
+                    id="FindDependentsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findCategory" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCategory"
+                  IsViewObjectMethod="false" DataControl="GenPolicyCategories"
+                  InstanceName="GenPolicyCategories.dataProvider"
+                  ReturnName="GenPolicyCategories.methodResults.findCategory_GenPolicyCategories_dataProvider_findCategory_result"/>
+    <tree IterBinding="findCategoryIterator" id="quotCategory">
+      <nodeDefinition DefName="view.Quot.quotCategory" Name="quotCategory0">
+        <AttrNames>
+          <Item Value="catShtDesc"/>
+          <Item Value="catDesc"/>
+          <Item Value="catPeriod"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCoverTypes"
+                  IsViewObjectMethod="false" DataControl="policyCoverTypesDAO"
+                  InstanceName="policyCoverTypesDAO.dataProvider"
+                  ReturnName="policyCoverTypesDAO.methodResults.FindCoverTypes_policyCoverTypesDAO_dataProvider_FindCoverTypes_result"/>
+    <tree IterBinding="FindCoverTypesIterator" id="policyCoverTypes">
+      <nodeDefinition DefName="view.Policy.policyCoverTypes"
+                      Name="policyCoverTypes0">
+        <AttrNames>
+          <Item Value="PCVT_CVT_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindDependentsLimits" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindDependentsLimits"
+                  IsViewObjectMethod="false" DataControl="PolDependentLimits"
+                  InstanceName="PolDependentLimits.dataProvider"
+                  ReturnName="PolDependentLimits.methodResults.FindDependentsLimits_PolDependentLimits_dataProvider_FindDependentsLimits_result"/>
+    <tree IterBinding="FindDependentsLimitsIterator" id="dependentLimits">
+      <nodeDefinition DefName="view.Quot.dependentLimits"
+                      Name="dependentLimits0">
+        <AttrNames>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="QDL_MAX_TYPE_ALLOWED"/>
+          <Item Value="QDL_LIMIT_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindDependents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindDependents"
+                  IsViewObjectMethod="false" DataControl="dependentsDAO"
+                  InstanceName="dependentsDAO.dataProvider"
+                  ReturnName="dependentsDAO.methodResults.FindDependents_dependentsDAO_dataProvider_FindDependents_result"/>
+    <tree IterBinding="FindDependentsIterator" id="dependents">
+      <nodeDefinition DefName="view.Quot.dependents" Name="dependents0">
+        <AttrNames>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="PCD_MAX_NO_ALLOWED"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findCategoryIterator" id="quotCategory1">
+      <nodeDefinition DefName="view.Quot.quotCategory" Name="quotCategory10">
+        <AttrNames>
+          <Item Value="catDesc"/>
+          <Item Value="catPeriod"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

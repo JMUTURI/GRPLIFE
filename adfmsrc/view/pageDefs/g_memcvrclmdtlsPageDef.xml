@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="g_memcvrclmdtlsPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="FindPolicyProposers.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPolicyProposersIterator" StateValidation="false"/>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+    <methodIterator Binds="FindPolicyMem.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPolicyMemIterator"/>
+    <searchRegion Binds="FindPolicyMemIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policies1Query"/>
+    <methodIterator Binds="FindMemberCoverDetails.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindMemberCoverDetailsIterator"/>
+    <searchRegion Binds="FindMemberCoverDetailsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="members1Query"/>
+    <searchRegion Binds="FindPolicyProposersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+    <methodIterator Binds="findProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsIterator"/>
+    <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicyProposers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyProposers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyProposers_policiesDAO_dataProvider_FindPolicyProposers_result"/>
+    <tree IterBinding="FindPolicyProposersIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="POL_CODE"/>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="CLIENT_DISPLAY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_POLICY_NO">
+      <AttrNames>
+        <Item Value="POL_POLICY_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="CLIENT_DISPLAY">
+      <AttrNames>
+        <Item Value="CLIENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="PRO_DESC">
+      <AttrNames>
+        <Item Value="PRO_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="BRANCH_DISPLAY">
+      <AttrNames>
+        <Item Value="BRANCH_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator"
+                     id="pol_freq_of_payment_disp">
+      <AttrNames>
+        <Item Value="pol_freq_of_payment_disp"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_EFFECTIVE_DATE">
+      <AttrNames>
+        <Item Value="POL_EFFECTIVE_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator"
+                     id="pol_dependt_covered_disp">
+      <AttrNames>
+        <Item Value="pol_dependt_covered_disp"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="pol_status_disp">
+      <AttrNames>
+        <Item Value="pol_status_disp"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="UW_YEAR">
+      <AttrNames>
+        <Item Value="UW_YEAR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="OCCUPATION_DISPLAY">
+      <AttrNames>
+        <Item Value="OCCUPATION_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_INCEPTION_DATE">
+      <AttrNames>
+        <Item Value="POL_INCEPTION_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="LPAG_DESC">
+      <AttrNames>
+        <Item Value="LPAG_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_UMBRELLADESC">
+      <AttrNames>
+        <Item Value="POL_UMBRELLADESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator"
+                     id="pol_pens_category_disp">
+      <AttrNames>
+        <Item Value="pol_pens_category_disp"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator"
+                     id="pol_savings_rider_disp">
+      <AttrNames>
+        <Item Value="pol_savings_rider_disp"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator"
+                     id="pol_os_loan_calc_disp">
+      <AttrNames>
+        <Item Value="pol_os_loan_calc_disp"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindPolicyMem" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyMem"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyMem_policiesDAO_dataProvider_FindPolicyMem_result"/>
+    <tree IterBinding="FindPolicyMemIterator" id="policies1">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies10">
+        <AttrNames>
+          <Item Value="OCCUPATION_DISPLAY"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="POLM_MEM_NO"/>
+          <Item Value="POLM_DTY_DESCRIPTION"/>
+          <Item Value="POLM_ANB"/>
+          <Item Value="MEMBER_DISPLAY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMemberCoverDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMemberCoverDetails"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindMemberCoverDetails_membersDAO_dataProvider_FindMemberCoverDetails_result"/>
+    <tree IterBinding="FindMemberCoverDetailsIterator" id="members1">
+      <nodeDefinition DefName="LMSG.view.Members.members1" Name="members10">
+        <AttrNames>
+          <Item Value="CVT_DESC"/>
+          <Item Value="PCM_COVER_WEF_DATE"/>
+          <Item Value="PCM_COVER_WET_DATE"/>
+          <Item Value="PCM_SA"/>
+          <Item Value="PCM_ADD_REF_PREM"/>
+          <Item Value="PCM_EARNINGS"/>
+          <Item Value="PCM_MULT_EARNINGS_PRD"/>
+          <Item Value="endType"/>
+          <Item Value="pcmPremium"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyProposers1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyProposers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyProposers_policiesDAO_dataProvider_FindPolicyProposers_result"/>
+    <tree IterBinding="FindPolicyProposersIterator" id="policiesdetails">
+      <nodeDefinition DefName="LMSG.view.Policy.policies"
+                      Name="policiesdetails0">
+        <AttrNames>
+          <Item Value="POL_CODE"/>
+          <Item Value="CLIENT_DISPLAY"/>
+          <Item Value="POL_POLICY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <tree IterBinding="findProductsIterator" id="productDetails">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodCode"/>
+          <Item Value="prodDesc"/>
+          <Item Value="prodshtDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

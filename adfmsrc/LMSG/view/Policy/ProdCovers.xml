@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="ProdCovers" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.ProdCovers" isJavaBased="true">
+  <Attribute Name="cvt_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pct_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="cvt_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="cvt_desc" Type="java.lang.String"/>
+  <Attribute Name="cvt_main_cover" Type="java.lang.String"/>
+  <Attribute Name="pct_formular" Type="java.lang.String"/>
+  <Attribute Name="pct_refund_formular" Type="java.lang.String"/>
+  <Attribute Name="cvt_duration_type" Type="java.lang.String"/>
+  <Attribute Name="pct_main_sa_perc" Type="java.math.BigDecimal"/>
+  <Attribute Name="pctInbuilt" Type="java.lang.String"/>
+  <Attribute Name="pctAccelerator" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.ProdCovers"
+                     BeanClass="LMSG.view.Policy.ProdCovers" id="ProdCovers"/>
+</JavaBean>

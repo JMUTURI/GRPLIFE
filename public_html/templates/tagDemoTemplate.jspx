@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>
+          tagDemoTemplate
+        </display-name>
+        <facet>
+          <facet-name>
+            center
+          </facet-name>
+        </facet>
+      </component>
+    </af:xmlContent>
+    <af:document title="TurnQuest Group Life">
+      <af:form id="pt_f1" usesUpload="true">
+        <af:panelStretchLayout startWidth="190px" id="pt_psl1">
+          <f:facet name="start">
+            <af:panelGroupLayout layout="scroll"
+                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                 id="pt_pgl2">
+              <af:activeImage source="/images/LEADWAYLOGO.gif" id="pt_ai2"/>
+              <af:panelGroupLayout id="pt_pgl6">
+                <table cellspacing="1" cellpadding="1" border="0" width="100%"
+                       align="left">
+                  <tr>
+                    <td width="15%" valign="top">
+                      <style>
+  
+ul.cssMenu ul{display:none}
+ul.cssMenu li:hover&gt;ul{display:block}
+ul.cssMenu ul{position: absolute;left:98%;top:-1px;}
+ul.cssMenu ul ul{position: absolute;left:98%;top:-2px;}
+ul.cssMenu,ul.cssMenu ul {
+	margin:0px;
+	list-style:none;
+	padding:0px 1px 1px 0px;
+	background-color:#ffffff;
+	background-repeat:repeat;
+	border-style:none;
+        height:30px;
+}
+
+ul.cssMenu {
+	display:inline;
+	float: left;
+}
+ul.cssMenu ul{
+	width:140.70000000000002px;
+        height:30px;
+}
+ul.cssMenu li{
+	font-size:0px;
+}
+ul.cssMenu a:active, ul.cssMenu a:focus {
+outline-style:none;
+}
+ul.cssMenu a, ul.cssMenu li.dis a:hover, ul.cssMenu li.sep a:hover {
+	display:block;
+	vertical-align:middle;
+	border-width:1px;
+	border-color:#ffffff;
+	border-style:solid;
+	text-align:left;
+	text-decoration:none;
+	padding:4px;
+	padding-left:0;
+	font:normal 11px Tahoma;
+	color: #000000;
+	text-decoration:none;
+	cursor:default;
+        height:30px;
+}
+ul.cssMenu span{
+	overflow:hidden;
+}
+ul.cssMenu ul li {
+	float:none;
+}
+ul.cssMenu ul a {
+	text-align:left;
+	white-space:nowrap;
+}
+ul.cssMenu li.sep{
+	text-align:left;
+	padding:0px;
+	line-height:0;
+}
+ul.cssMenu li.sep span{
+	float:none;	padding-right:0;
+        width:163px;
+	height:30px;
+	display:inline-block;
+	background-color:#EEEEEE #777777 #666666 #C9C9C9;	background-image:none;}
+ul.cssMenu li:hover{
+	position:relative;
+}
+ul.cssMenu li:hover&gt;a{
+	background-color:#FFFFFF;
+	border-color:#7D7D7D;
+	border-style:solid;
+	font:normal 11px Tahoma;
+	color: #000000;
+	text-decoration:none;
+}
+ul.cssMenu li a:hover{
+	position:relative;
+	background-color:#FFFFFF;
+	border-color:#7D7D7D;
+	border-style:solid;
+	font:normal 11px Tahoma;
+	color: #000000;
+	text-decoration:none;
+}
+ul.cssMenu li.dis a {
+	color: #AAAAAA !important;
+}
+
+ul.cssMenu a:hover ul,ul.cssMenu a:hover a:hover ul,ul.cssMenu a:hover a:hover a:hover ul{display:block}
+ul.cssMenu a:hover ul ul,ul.cssMenu a:hover a:hover ul ul{display:none}
+ul.cssMenu span{
+	display:block;
+   padding-right:12px;}
+
+</style>
+                      <div align="left" style="position: relative; z-index: 2;">
+                        <ul class="cssMenu cssMenum">
+                          <li class=" cssMenui">
+                            <af:commandImageLink id="cil1"
+                                                 icon="/images/HomeBar.gif"
+                                                 inlineStyle="width:163.0px; height:31px;"
+                                                 action="#{navigation.goHome}"/>
+                          </li>
+                           
+                          <li class=" cssMenui">
+                            <af:commandImageLink id="cil3"
+                                                 inlineStyle="width:163.0px; height:31px;"
+                                                 icon="/images/Quotations1.gif"/>
+                            <ul class=" cssMenum">
+                              <li class=" cssMenui">
+                                <af:commandImageLink id="ci21"
+                                                     icon="/images/QuoteProcessing.gif"
+                                                     inlineStyle="width:163.0px; height:31px;"
+                                                     action="#{Links.getQuotations}"/>
+                              </li>
+                               
+                              <li class=" cssMenui">
+                                <af:commandImageLink id="ci22"
+                                                     icon="/images/QuoteProcessing.gif"
+                                                     inlineStyle="width:163.0px; height:31px;"
+                                                     action="#{Links.goToQuotationEnquiry}"/>
+                              </li>
+                            </ul>
+                          </li>
+                                  
+                        </ul>
+                      </div>
+                       
+                    </td>
+                  </tr>
+                </table>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="center">
+            <af:panelStretchLayout topHeight="80px" id="pt_psl2">
+              <f:facet name="top">
+                <af:panelGroupLayout xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                     id="pt_pgl4" valign="middle">
+                  <h:panelGrid columns="2" id="pt_pg3">
+                    <af:image source="../images/Group Life Banner.png"
+                              id="pt_i1"/>
+                    <h:panelGrid columns="2" id="panelGrid3">
+                      <af:outputLabel value="Logged In As:" id="outputLabel2"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:outputText value="#{currUser.username}" id="outputText1"
+                                     inlineStyle="font-weight:bold;"/>
+                      <af:outputLabel value="Logged Into:" id="outputLabel4"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:outputText value="Group Life " id="outputText3"
+                                     inlineStyle="font-weight:bold;"/>
+                      <af:outputLabel value="Last Login:" id="outputLabel3"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:outputText value="#{currUser.loginDate}" id="outputText2"
+                                     inlineStyle="font-weight:bold;"/>
+                      <af:spacer width="10" height="10" id="pt_s4"/>
+                    </h:panelGrid>
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="center">
+                <af:panelGroupLayout id="pt_pgl1" layout="vertical">
+                  <af:panelSplitter id="pt_ps1"
+                                    inlineStyle="width:100%; border-style:hidden; height:600px;"
+                                    positionedFromEnd="true"
+                                    splitterPosition="240">
+                    <f:facet name="first">
+                      <af:panelGroupLayout layout="scroll"
+                                           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                           id="pt_pgl5">
+                        <af:facetRef facetName="center"/>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="second">
+                      <af:panelGroupLayout layout="scroll"
+                                           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                           id="pt_pgl3">
+                        <af:spacer width="10" height="10" id="spacer3"/>
+                        <af:activeImage source="/images/MyCalendar.gif"
+                                        id="pt_ai1"/>
+                        <af:chooseDate id="pt_cd1"
+                                       styleClass="OraBGColorLight"/>
+                        <af:spacer width="10" height="10" id="pt_s1"/>
+                        <af:activeImage source="/images/MyTickets.gif"
+                                        id="activeImage1"/>
+                        <af:spacer width="10" height="10" id="pt_s2"/>
+                        <af:panelCollection id="pt_pc1"
+                                            inlineStyle="width:99.0%; height:100.0px;">
+                          <f:facet name="menus">
+                            <af:menu text="Ticket Manipulation" id="pt_m5"/>
+                          </f:facet>
+                          <f:facet name="toolbar"/>
+                          <f:facet name="statusbar"/>
+                          <af:table var="row" rowBandingInterval="0" id="pt_t1">
+                            <af:column sortable="false" headerText="Ticket Desc"
+                                       id="pt_c3" width="120" minimumWidth="12">
+                              <af:outputText value="#{row.col1}" id="pt_ot3"/>
+                            </af:column>
+                            <af:column sortable="false" headerText="Module"
+                                       id="pt_c2" width="100">
+                              <af:outputText value="#{row.col2}" id="pt_ot2"/>
+                            </af:column>
+                            <af:column sortable="false"
+                                       headerText="Date Assigned" id="pt_c4"
+                                       visible="false">
+                              <af:outputText value="#{row.col3}" id="pt_ot4"/>
+                            </af:column>
+                            <af:column sortable="false" headerText="Priority"
+                                       id="pt_c1" visible="false">
+                              <af:outputText value="#{row.col4}" id="pt_ot1"/>
+                            </af:column>
+                          </af:table>
+                        </af:panelCollection>
+                        <af:spacer width="10" height="10" id="spacer6"/>
+                        <af:activeImage source="/images/Chat.gif"
+                                        id="activeImage2"/>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelSplitter>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </af:pageTemplateDef>
+</jsp:root>

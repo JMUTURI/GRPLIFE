@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:inputText id="it4"
+                            helpTopicId="LmsGrp_DEF_TYPE" readOnly="true"/>
+              <af:outputLabel value="RELATION TYPES" id="ol5"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator id="s1"/>
+              <af:panelTabbed id="pt1" inlineStyle="width:100.0%;">
+                <af:showDetailItem text="Relation Types" id="sdi1">
+                  <h:panelGrid columns="3" id="pg1">
+                    <af:commandButton id="cb1"
+                                      icon="/images/field_group_plus_ena.png"
+                                      action="#{agents.AddNewRelationType}"/>
+                    <af:commandButton id="cb2" icon="/images/update.gif"
+                                      action="#{agents.EditRelationType}"/>
+                    <af:commandButton id="cb3" icon="/images/delete.gif"
+                                      action="#{agents.DeleteRelationType}"/>
+                    <af:popup id="RelationTypesPopup">
+                      <af:dialog id="d2" type="none"
+                                 title="Enter Relation Types">
+                        <h:panelGrid columns="2" id="pg2">
+                          <af:outputLabel value="*ID" id="ol1"/>
+                          <af:inputText label="Label 1" id="it1" simple="true"
+                                        shortDesc="Relation ID"
+                                        binding="#{agents.realtionId}"/>
+                          <af:outputLabel value="*Description" id="ol2"/>
+                          <af:inputText label="Label 2" id="it2" simple="true"
+                                        shortDesc="Relation Description"
+                                        binding="#{agents.relationDescription}"/>
+                          <af:outputLabel value="D.O.B Required" id="ol3"/>
+                          <af:selectOneChoice label="Label 1" id="soc1"
+                                              simple="true"
+                                              shortDesc="Date Of Birth required"
+                                              autoSubmit="true"
+                                              binding="#{agents.relationDOBRequired}">
+                            <af:selectItem label="Yes" value="Y" id="si2"/>
+                            <af:selectItem label="No" value="N" id="si1"/>
+                          </af:selectOneChoice>
+                          <af:outputLabel value="Comments" id="ol4"/>
+                          <af:inputText label="Label 3" id="it3" simple="true"
+                                        shortDesc="Commecnt"
+                                        binding="#{agents.relationComments}"/>
+                          <h:panelGrid columns="2" id="pg5">
+                            <af:commandButton text="OK" id="cb4"
+                                              action="#{agents.SaveRelationType}"/>
+                            <af:commandButton text="Cancel" id="cb5"/>
+                          </h:panelGrid>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:table value="#{bindings.relationTypes.collectionModel}"
+                            var="row" rows="#{bindings.relationTypes.rangeSize}"
+                            emptyText="#{bindings.relationTypes.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.relationTypes.rangeSize}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.relationTypes.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.relationTypes.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t1"
+                            inlineStyle="width:100%; height:200.0px; border-style:none;"
+                            binding="#{agents.relationTypesLOV}">
+                    <af:column sortProperty="retShtDesc" sortable="true"
+                               headerText="ID" id="c2">
+                      <af:outputText value="#{row.retShtDesc}" id="ot2"/>
+                    </af:column>
+                    <af:column sortProperty="retDesc" sortable="true"
+                               headerText="DESCRIPTION" id="c3">
+                      <af:outputText value="#{row.retDesc}" id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="dobRequiredDesc" sortable="true"
+                               headerText="D.O.B REQUIRED" id="c1">
+                      <af:outputText value="#{row.dobRequiredDesc}" id="ot5"/>
+                    </af:column>
+                    <af:column sortProperty="retComments" sortable="true"
+                               headerText="COMMENTS" id="c4">
+                      <af:outputText value="#{row.retComments}" id="ot4"/>
+                    </af:column>
+                  </af:table>
+                </af:showDetailItem>
+                <af:showDetailItem text="Dependent Types" id="sdi2">
+                  <h:panelGrid columns="3" id="pg3">
+                    <af:commandButton id="cb6"
+                                      icon="/images/field_group_plus_ena.png"
+                                      action="#{agents.AddNewDependent}"/>
+                    <af:commandButton id="cb7" icon="/images/update_ena.png"
+                                      action="#{agents.EditNewDependentType}"/>
+                    <af:commandButton id="cb8" icon="/images/delete_ena.png"
+                                      action="#{agents.DeleteNewDependentType}"/>
+                    <af:popup id="DependentTypesPopup">
+                      <af:dialog id="d3" type="none"
+                                 title="Enter Dependent Type Details">
+                        <h:panelGrid columns="2" id="pg4">
+                          <af:outputLabel value="*ID" id="ol6"/>
+                          <af:inputText label="Label 4" id="it5" simple="true"
+                                        shortDesc="Dependent Type ID"
+                                        binding="#{agents.dtyShtDesc}"/>
+                          <af:outputLabel value="*Description" id="ol7"/>
+                          <af:inputText label="Label 5" id="it6" simple="true"
+                                        shortDesc="Description"
+                                        binding="#{agents.dtyDescription}"/>
+                          <af:commandButton text="OK" id="cb9"
+                                            action="#{agents.SaveNewDependentType}"/>
+                          <af:commandButton text="Cancel" id="cb10"/>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:table value="#{bindings.relationTypes1.collectionModel}"
+                            var="row"
+                            rows="#{bindings.relationTypes1.rangeSize}"
+                            emptyText="#{bindings.relationTypes1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.relationTypes1.rangeSize}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.relationTypes1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.relationTypes1.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t2"
+                            inlineStyle="width:100%; border-style:none; height:200.0px;"
+                            binding="#{agents.dependentTypesLOV}">
+                    <af:column sortProperty="dtyShtDesc" sortable="true"
+                               headerText="ID" id="c6">
+                      <af:outputText value="#{row.dtyShtDesc}" id="ot7"/>
+                    </af:column>
+                    <af:column sortProperty="dtyDesc" sortable="true"
+                               headerText="DESCRIPTION" id="c5">
+                      <af:outputText value="#{row.dtyDesc}" id="ot6"/>
+                    </af:column>
+                  </af:table>
+                </af:showDetailItem>
+              </af:panelTabbed>
+            </af:panelGroupLayout>
+        </af:group>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Import Member Earnings" id="d1">
+    <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                             id="pgl4">
+          <af:panelBox text="Import Members" showHeader="never" id="pb15">
+            <f:facet name="toolbar"/>
+            <af:inputFile label="File To Upload" autoSubmit="true"
+                          binding="#{FileProcessor.upFile}"
+                          valueChangeListener="#{FileProcessor.fileChangeForMemberImport}"
+                          immediate="true" id="if1"/>
+            <h:panelGrid columns="3" id="pg67">
+              <af:commandButton text="Attach Member To Quotation"
+                                partialSubmit="true" immediate="true"
+                                rendered="false" id="cb109"/>
+              <af:commandButton text="Back"
+                                action="#{polManipulation.ShowCoverDetails}"
+                                immediate="true" id="cb110"/>
+            </h:panelGrid>
+            <af:table value="#{bindings.importDetails.collectionModel}"
+                      var="row" rows="#{bindings.importDetails.rangeSize}"
+                      emptyText="#{bindings.importDetails.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.importDetails.rangeSize}"
+                      selectedRowKeys="#{bindings.importDetails.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.importDetails.collectionModel.makeCurrent}"
+                      rowSelection="single" binding="#{Import.importedMembers}"
+                      inlineStyle="width:inherit;" id="t28" rendered="false">
+              <af:column sortProperty="LMID_CODE" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_CODE.label}"
+                         id="c99">
+                <af:outputText value="#{row.LMID_CODE}" id="ot94"/>
+              </af:column>
+              <af:column sortProperty="LMID_LMIT_CODE" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_LMIT_CODE.label}"
+                         id="c100">
+                <af:outputText value="#{row.LMID_LMIT_CODE}" id="ot95"/>
+              </af:column>
+              <af:column sortProperty="LMID_MEM_ANB" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_MEM_ANB.label}"
+                         id="c101">
+                <af:outputText value="#{row.LMID_MEM_ANB}" id="ot96"/>
+              </af:column>
+              <af:column sortProperty="LMID_EARNINGS" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_EARNINGS.label}"
+                         id="c102">
+                <af:outputText value="#{row.LMID_EARNINGS}" id="ot97"/>
+              </af:column>
+              <af:column sortProperty="LMID_MULT_EARNINGS_PRD" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_MULT_EARNINGS_PRD.label}"
+                         id="c103">
+                <af:outputText value="#{row.LMID_MULT_EARNINGS_PRD}" id="ot98"/>
+              </af:column>
+              <af:column sortProperty="LMID_ORIGINAL_LOAN_AMT" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_ORIGINAL_LOAN_AMT.label}"
+                         id="c104">
+                <af:outputText value="#{row.LMID_ORIGINAL_LOAN_AMT}" id="ot99"/>
+              </af:column>
+              <af:column sortProperty="LMID_MEM_NO" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_MEM_NO.label}"
+                         id="c105">
+                <af:outputText value="#{row.LMID_MEM_NO}" id="ot100"/>
+              </af:column>
+              <af:column sortProperty="LMID_MAIN_MEM_NO" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_MAIN_MEM_NO.label}"
+                         id="c106">
+                <af:outputText value="#{row.LMID_MAIN_MEM_NO}" id="ot101"/>
+              </af:column>
+              <af:column sortProperty="LMID_MEM_SURNAME" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_MEM_SURNAME.label}"
+                         id="c107">
+                <af:outputText value="#{row.LMID_MEM_SURNAME}" id="ot102"/>
+              </af:column>
+              <af:column sortProperty="LMID_MEM_OTHERNAMES" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_MEM_OTHERNAMES.label}"
+                         id="c108">
+                <af:outputText value="#{row.LMID_MEM_OTHERNAMES}" id="ot103"/>
+              </af:column>
+              <af:column sortProperty="LMID_MEM_SEX" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_MEM_SEX.label}"
+                         id="c109">
+                <af:outputText value="#{row.LMID_MEM_SEX}" id="ot104"/>
+              </af:column>
+              <af:column sortProperty="LMID_DEP_TYPE" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_DEP_TYPE.label}"
+                         id="c110">
+                <af:outputText value="#{row.LMID_DEP_TYPE}" id="ot105"/>
+              </af:column>
+              <af:column sortProperty="LMID_ID_NO" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_ID_NO.label}"
+                         id="c111">
+                <af:outputText value="#{row.LMID_ID_NO}" id="ot106"/>
+              </af:column>
+              <af:column sortProperty="LMID_MEM_CATEGORY" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_MEM_CATEGORY.label}"
+                         id="c112">
+                <af:outputText value="#{row.LMID_MEM_CATEGORY}" id="ot107"/>
+              </af:column>
+              <af:column sortProperty="LMID_ORIG_LOAN_REPAYMENT_PRD"
+                         sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_ORIG_LOAN_REPAYMENT_PRD.label}"
+                         id="c113">
+                <af:outputText value="#{row.LMID_ORIG_LOAN_REPAYMENT_PRD}"
+                               id="ot108"/>
+              </af:column>
+              <af:column sortProperty="LMID_GRP_LIFE_RIDER" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_GRP_LIFE_RIDER.label}"
+                         id="c114">
+                <af:outputText value="#{row.LMID_GRP_LIFE_RIDER}" id="ot109"/>
+              </af:column>
+              <af:column sortProperty="LMID_SAVING_AMT" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_SAVING_AMT.label}"
+                         id="c115">
+                <af:outputText value="#{row.LMID_SAVING_AMT}" id="ot110"/>
+              </af:column>
+              <af:column sortProperty="LMID_LOAN_INT" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_LOAN_INT.label}"
+                         id="c116">
+                <af:outputText value="#{row.LMID_LOAN_INT}" id="ot111"/>
+              </af:column>
+              <af:column sortProperty="LMID_VOL_CONT" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_VOL_CONT.label}"
+                         id="c117">
+                <af:outputText value="#{row.LMID_VOL_CONT}" id="ot112"/>
+              </af:column>
+              <af:column sortProperty="LMID_EMPLYE_VOLU_CONTR" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_EMPLYE_VOLU_CONTR.label}"
+                         id="c118">
+                <af:outputText value="#{row.LMID_EMPLYE_VOLU_CONTR}"
+                               id="ot113"/>
+              </af:column>
+              <af:column sortProperty="LMID_EMPLYR_VOLU_CONTR" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_EMPLYR_VOLU_CONTR.label}"
+                         id="c119">
+                <af:outputText value="#{row.LMID_EMPLYR_VOLU_CONTR}"
+                               id="ot114"/>
+              </af:column>
+              <af:column sortProperty="LMID_EMPLYE_SINGLE_PREM" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_EMPLYE_SINGLE_PREM.label}"
+                         id="c120">
+                <af:outputText value="#{row.LMID_EMPLYE_SINGLE_PREM}"
+                               id="ot115"/>
+              </af:column>
+              <af:column sortProperty="LMID_EMPLYR_SINGLE_PREM" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_EMPLYR_SINGLE_PREM.label}"
+                         id="c121">
+                <af:outputText value="#{row.LMID_EMPLYR_SINGLE_PREM}"
+                               id="ot116"/>
+              </af:column>
+              <af:column sortProperty="LMID_MEM_DOB" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_MEM_DOB.label}"
+                         id="c122">
+                <af:outputText value="#{row.LMID_MEM_DOB}" id="ot117">
+                  <af:convertDateTime pattern="#{bindings.importDetails.hints.LMID_MEM_DOB.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="LMID_LOAN_ISSUE_DATE" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LMID_LOAN_ISSUE_DATE.label}"
+                         id="c123">
+                <af:outputText value="#{row.LMID_LOAN_ISSUE_DATE}" id="ot118">
+                  <af:convertDateTime pattern="#{bindings.importDetails.hints.LMID_LOAN_ISSUE_DATE.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="LIMD_DATE_JOINED" sortable="true"
+                         headerText="#{bindings.importDetails.hints.LIMD_DATE_JOINED.label}"
+                         id="c124">
+                <af:outputText value="#{row.LIMD_DATE_JOINED}" id="ot119">
+                  <af:convertDateTime pattern="#{bindings.importDetails.hints.LIMD_DATE_JOINED.format}"/>
+                </af:outputText>
+              </af:column>
+            </af:table>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

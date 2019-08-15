@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Emass Valuation">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl3" layout="scroll">
+              <af:panelBox id="pb1" showHeader="never">
+                <f:facet name="toolbar"/>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tr>
+                    <td width="50%">
+                      <af:statusIndicator id="si1"/>
+                    </td>
+                    <td width="50%" align="right">
+                      <af:inputText id="it1" helpTopicId="LmsGrp_PROD_TRN"
+                                    readOnly="true"/>
+                    </td>
+                  </tr>
+                </table>
+                <af:outputLabel value="Emass Valuation" id="ol1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s1"/>
+                <h:panelGrid columns="2" id="pg1">
+                  <af:outputLabel value="Select A Product:" id="ol2"/>
+                  <h:panelGrid columns="2" id="pg2">
+                    <af:inputText label="Label 1" id="it2" simple="true"
+                                  disabled="true"
+                                  binding="#{pens.productsDesc}"/>
+                    <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                      <af:showPopupBehavior popupId="p1"/>
+                    </af:commandButton>
+                    <af:popup id="p1">
+                      <af:dialog id="d2" type="none" title="Products">
+                        <af:table value="#{bindings.productDetails.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.productDetails.rangeSize}"
+                                  emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.productDetails.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                  queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t1"
+                                  binding="#{pens.productsLOV}">
+                          <af:column sortProperty="prodshtDesc"
+                                     filterable="true" sortable="true"
+                                     headerText="Short Desc" id="c1">
+                            <af:outputText value="#{row.prodshtDesc}" id="ot3"/>
+                          </af:column>
+                          <af:column sortProperty="prodDesc" filterable="true"
+                                     sortable="true" headerText="Product"
+                                     id="c2" width="200">
+                            <af:outputText value="#{row.prodDesc}" id="ot2"/>
+                          </af:column>
+                        </af:table>
+                        <h:panelGrid columns="2" id="pg3">
+                          <af:commandButton text="OK" id="cb2"
+                                            action="#{pens.findProductsSelectedII}"/>
+                          <af:commandButton text="Cancel" id="commandButton1"/>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:outputLabel value="Select A Year:" id="outputLabel3"/>
+                  <af:inputDate label="Label 1" id="inputDate2" simple="true"
+                                binding="#{pens.wefDate}" autoSubmit="true">
+                    <af:convertDateTime pattern="yyyy"/>
+                  </af:inputDate>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg4">
+                  <af:commandButton text="Search" id="cb3"
+                                    action="#{pens.SearchResults}"/>
+                  <af:commandButton text="Clear" id="commandButton2"
+                                    action="#{pens.ClearSearch}"/>
+                </h:panelGrid>
+                <af:spacer width="10" height="10" id="spacer1"/>
+                <af:panelBox id="pb2" showHeader="never" rendered="false"
+                             binding="#{pens.searchTab}">
+                  <f:facet name="toolbar"/>
+                  <af:outputLabel value="Search Results" id="outputLabel1"
+                                  inlineStyle="font-weight:bold;"/>
+                  <af:separator id="separator1"/>
+                  <h:panelGrid columns="4" id="pg5">
+                    <af:commandButton text="Select All" id="commandButton4"
+                                      action="#{pens.SelectAll}"
+                                      inlineStyle="width:120.0px;"/>
+                    <af:commandButton text="Un-Select All" id="commandButton5"
+                                      action="#{pens.UnSelectAll}"
+                                      inlineStyle="width:120.0px;"/>
+                    <af:commandButton text="Prepare Valuations" id="cb4"
+                                      action="#{pens.PrepareEmassValuations}"/>
+                    <af:commandButton text="Authorise Valuations"
+                                      id="commandButton3"
+                                      action="#{pens.AuthoriseEmassValuations}"/>
+                  </h:panelGrid>
+                  <af:panelCollection id="pc1"
+                                      inlineStyle="width:100%; height:300.0px;">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="statusbar"/>
+                    <af:table value="#{bindings.pension2.collectionModel}"
+                              var="row" rows="#{bindings.pension2.rangeSize}"
+                              emptyText="#{bindings.pension2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.pension2.rangeSize}"
+                              rowBandingInterval="0"
+                              rowSelection="single" id="t4"
+                              binding="#{pens.balancesLOV}">
+                      <af:column sortProperty="selected" sortable="false"
+                                 id="c9" width="60">
+                        <af:selectBooleanCheckbox
+                                                  label="Label 1" id="sbc1"
+                                                  value="#{row.selected}"
+                                                  simple="true"
+                                                  binding="#{pens.knockCbox}"
+                                                  autoSubmit="true"
+                                                  valueChangeListener="#{pens.ValuationListener}"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_YEAR" sortable="true"
+                                 headerText="Year" id="c13">
+                        <af:outputText value="#{row.PNBAL_YEAR}" id="ot41"/>
+                      </af:column>
+                      <af:column sortProperty="POL_POLICY_NO" sortable="false"
+                                 headerText="Policy No." id="c3">
+                        <af:outputText value="#{row.POL_POLICY_NO}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="POL_INCEPTION_DATE"
+                                 sortable="false" headerText="Inception Date"
+                                 id="c4">
+                        <af:outputText value="#{row.POL_INCEPTION_DATE}"
+                                       id="ot4">
+                          <af:convertDateTime pattern="#{bindings.pension2.hints.POL_INCEPTION_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_PERIOD" sortable="false"
+                                 headerText="Valuation Period" id="c139">
+                        <af:outputText value="#{row.PNBAL_PERIOD}" id="ot165"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_VALUA_DATE" sortable="true"
+                                 headerText="Valuation Date" id="c12">
+                        <af:outputText value="#{row.PNBAL_VALUA_DATE}"
+                                       id="ot39">
+                          <af:convertDateTime pattern="#{bindings.pension2.hints.PNBAL_VALUA_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_INTEREST_RATE"
+                                 sortable="true" headerText="Interest Rate"
+                                 id="c16" visible="false">
+                        <af:outputText value="#{row.PNBAL_INTEREST_RATE}"
+                                       id="ot38"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_EMPYE_BAL_BF"
+                                 sortable="false" headerText="Employee Bal BF"
+                                 id="c5">
+                        <af:outputText value="#{row.PNBAL_EMPYE_BAL_BF}"
+                                       id="ot6"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_EMPYR_BAL_BF"
+                                 sortable="false" headerText="Employer Bal BF"
+                                 id="c6">
+                        <af:outputText value="#{row.PNBAL_EMPYR_BAL_BF}"
+                                       id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_EMPYE_AMT" sortable="false"
+                                 headerText="Employee Contribution" id="c7">
+                        <af:outputText value="#{row.PNBAL_EMPYE_AMT}" id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_EMPYR_AMT" sortable="false"
+                                 headerText="Employer Contribution" id="c8">
+                        <af:outputText value="#{row.PNBAL_EMPYR_AMT}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_EMPYE_BAL_CF"
+                                 sortable="false" headerText="Employee Bal CF"
+                                 id="c10">
+                        <af:outputText value="#{row.PNBAL_EMPYE_BAL_CF}"
+                                       id="ot11"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_EMPYR_BAL_CF"
+                                 sortable="false" headerText="Employer Bal CF"
+                                 id="c11">
+                        <af:outputText value="#{row.PNBAL_EMPYR_BAL_CF}"
+                                       id="ot10"/>
+                      </af:column>
+                      <af:column sortProperty="STATUS" sortable="true"
+                                 headerText="Status" id="c15">
+                        <af:outputText value="#{row.STATUS}" id="ot37"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_AUTHORISED_BY"
+                                 sortable="false" headerText="Authorised By"
+                                 id="c140">
+                        <af:outputText value="#{row.PNBAL_AUTHORISED_BY}"
+                                       id="ot40"/>
+                      </af:column>
+                      <af:column sortProperty="PNBAL_AUTHORISED_DATE"
+                                 sortable="true" headerText="Authorise Date"
+                                 id="c14">
+                        <af:outputText value="#{row.PNBAL_AUTHORISED_DATE}"
+                                       id="ot166">
+                          <af:convertDateTime pattern="#{bindings.pension2.hints.PNBAL_AUTHORISED_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelBox>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

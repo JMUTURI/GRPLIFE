@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="SetupsDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.SetupsDAO" isJavaBased="true">
+  <Attribute Name="classSchLevel" Type="java.math.BigDecimal"/>
+  <Attribute Name="currSymbol" Type="java.lang.String"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findClassesofBusiness" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findSequenceTypes"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findSequenceTemplates" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findProductSeqTemplates" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findProducts"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findAccountTypes"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findAccountRates"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findCommissionRates"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findPensionCommissionRates" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findCommissionAnnualisation" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findClawBackRates"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findinterfacePayElements" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findAgentBonusRates"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findAgentRecoveryRates" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findCommissionAllowances" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findPremiumMasks"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findParameters"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findFCLFactors"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findBusinessTransactions" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findTaxTypes"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findTaxRates"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findAllProducts"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findMedicalTests"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findFacilitators"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findFacilitatorTests"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findLifeClasses"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findProductDependants" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findPremiumRateTerms"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findPremiumInterestRates" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findPremiumRates"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findMedTestGroups"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findMedTestGroupTests" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findTreatyTypes"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findTreatyTypeGroups"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findTreaties"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findMedicalANB"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findMedRequirements"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findRenMedicalRatings" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findGroupOccupations"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findRIRatesDescription" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findRIRates"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findOSRIRatesDesc"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findOSRIRates"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findTreatyProducts"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findInterMedGroups"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findCreditCriterion"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findIntermediary"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findCreditActions"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findCpverTypes"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findProdCoverTypes"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findCoverTypesLOV"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findProductCoverTypesLOV" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findTaxTypesbyAppLevel" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findAllProductsAndMasks" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findProvisions"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findProdCoverProvisions" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findAllProductsAndSchClasses" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findSchClasses"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findSchoolLevels"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findTreatyTypesAndGroups" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findQuotePolClasses"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findAccessGroups"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findPolicyAccessGroups" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findAccessGroupsForPolicy" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findUserAccessGroups"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findImportTemplateProducts" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findAllProductsAndCoverTypes" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findImportLoadingTemplate" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findImportLoadingRates" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findGroupOccupationsCategories" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findProvisionsLimit"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findProductProvisions" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findOrgCurrencies"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findOverrideCommRates" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findOtherOverrideCommRates" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findBudgetTypes"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findProdBudgetTypes"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup"
+                  id="findOccupationCategory" ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.Setup"
+                  BeanClass="com.turnkey.setups.Setup" id="findProductPlans"
+                  ReturnNodeName="Setup"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="com.turnkey.setups.SetupsDAO"
+                     BeanClass="com.turnkey.setups.SetupsDAO" id="SetupsDAO"/>
+</JavaBean>

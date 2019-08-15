@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="checkOffAgentsDAO" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.checkOffAgentsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.checkOffAgents"
+                  BeanClass="LMSG.view.Policy.checkOffAgents" id="FindCheckOffAgents"
+                  ReturnNodeName="checkOffAgents"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Policy.checkOffAgentsDAO"
+                     BeanClass="LMSG.view.Policy.checkOffAgentsDAO"
+                     id="checkOffAgentsDAO"/>
+</JavaBean>

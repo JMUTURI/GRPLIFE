@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="accountTypes" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.accountTypes" isJavaBased="true">
+  <Attribute Name="ACT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ACT_ACCOUNT_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ACT_TYPE_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="bbrCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="bbrDescription" Type="java.lang.String"/>
+  <Attribute Name="atrCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="atrDesc" Type="java.lang.String"/>
+  <Attribute Name="brnCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="brnShtDesc" Type="java.lang.String"/>
+  <Attribute Name="brnName" Type="java.lang.String"/>
+  <Attribute Name="lacCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="lacContactTitle" Type="java.lang.String"/>
+  <Attribute Name="lacContactPerson" Type="java.lang.String"/>
+  <Attribute Name="lacAgnCode" Type="java.lang.String"/>
+  <Attribute Name="agnCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="agnStatus" Type="java.lang.String"/>
+  <Attribute Name="lac_telephone" Type="java.lang.String"/>
+  <Attribute Name="lac_sex" Type="java.lang.String"/>
+  <Attribute Name="lac_address" Type="java.lang.String"/>
+  <Attribute Name="lac_contact_name" Type="java.lang.String"/>
+  <Attribute Name="lac_contact_email" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="com.turnkey.setups.accountTypes"
+                     BeanClass="com.turnkey.setups.accountTypes"
+                     id="accountTypes"/>
+</JavaBean>

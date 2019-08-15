@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:afh="http://myfaces.apache.org/trinidad/html" version="1.2">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <description>This template is for the main index pages of the demo.</description>
+        <facet>
+          <description><![CDATA[Content to be rendered as meta data inside the 
+            "head" section.]]></description>
+          <facet-name>metaContainer</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[This location typically contains tabs for the secondary layer.]]>
+          </description>
+          <facet-name>navigation2</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The primary center content.]]>
+          </description>
+          <facet-name>center1</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The secondary center content.]]>
+          </description>
+          <facet-name>center2</facet-name>
+        </facet>
+        <attribute>
+          <description>Display mode</description>
+          <attribute-name>mode</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>guide</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the navigation1 content should
+                       consume.</description>
+          <attribute-name>navigation1Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>26</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the navigation2 content should
+                       consume.</description>
+          <attribute-name>navigation2Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>26</default-value>
+        </attribute>
+        <attribute>
+          <description>The title of the HTML document</description>
+          <attribute-name>documentTitle</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>If true, the margin and padding are set to 0px.</description>
+          <attribute-name>maximized</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <description>the id attribute of the command button inside the form whose action should 
+            be invoked by default, when the enter key is pressed with focus inside the form.  
+            Identifiers are relative to the form component, and must account for NamingContainers. 
+            You can use a single colon to start the search from the root.</description>
+          <attribute-name>defaultCommand</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>the id of the component to which you want the focus to be when the 
+            full page renders. The accessibility-mode must not be set to "screenReader" for 
+            this feature to be on.</description>
+          <attribute-name>initialFocusId</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>whether the form supports file upload.</description>
+          <attribute-name>usesUpload</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+      </component>
+    </af:xmlContent>
+    <af:document inlineStyle="width:100%; height:100%;"
+                 title="TurnQuest LMS" theme="dark" id="pt_d1">
+      <f:facet name="metaContainer">
+        <af:group id="pt_g1">
+          <h:outputText
+            escape="false"
+            value="&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;#{facesContext.externalContext.requestContextPath}/images/favicon.png&quot;>"
+                        id="pt_ot1"/>
+          <h:outputText
+            escape="false"
+            value="&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;#{facesContext.externalContext.requestContextPath}/images/touchicon.png&quot;>"
+                        id="pt_ot2"/>
+          <![CDATA[
+          <style type="text/css">
+          .DemoIndexNavigationGlobal {
+            text-align: right;
+            padding-left: 0px;
+            padding-right: 10px;
+            white-space: nowrap;
+          }
+          HTML[dir=rtl] .DemoIndexNavigationGlobal {
+            text-align: left;
+            padding-left: 10px;
+            padding-right: 0px;
+          }
+          </style>
+          ]]>
+          <af:facetRef facetName="metaContainer"/>
+        </af:group>
+      </f:facet>
+      <af:form id="pt_f1">
+        <af:panelSplitter
+          orientation="vertical"
+          splitterPosition="65"
+          styleClass="AFVisualRoot" collapsed="true" id="pt_ps1">
+          <f:facet name="first">
+            <af:panelGroupLayout layout="vertical" id="pt_pgl1">
+              <afh:tableLayout width="100%" id="pt_tl1">
+                <afh:rowLayout id="pt_rl1">
+                  <afh:cellFormat styleClass="AFBranding" id="pt_cf1">
+                    <af:panelGroupLayout layout="horizontal" shortDesc="branding"
+                                         id="pt_pgl2">
+                      <af:icon shortDesc="Turnkey Africa" id="pt_i1"/>
+                      <af:image source="/images/logo.gif"
+                                inlineStyle="background-color:InfoBackground;"
+                                id="pt_i2"/>
+                      <af:spacer width="20" height="10" id="pt_s1"/>
+                    </af:panelGroupLayout>
+                  </afh:cellFormat>
+                  <afh:cellFormat id="pt_cf2">
+                    <af:outputText value=" " id="pt_ot3"/>
+                  </afh:cellFormat>
+                  <afh:cellFormat styleClass="DemoIndexNavigationGlobal"
+                                  id="pt_cf3">
+                    <af:navigationPane hint="buttons" id="pt_np1"/>
+                  </afh:cellFormat>
+                  <afh:cellFormat width="30" id="pt_cf4">
+                    <af:panelGroupLayout layout="vertical" id="pt_pgl3">
+                       <af:spacer height="3" id="pt_s2"/>
+                       <af:statusIndicator visible="false" id="pt_si1"/>
+                    </af:panelGroupLayout>
+                  </afh:cellFormat>
+                </afh:rowLayout>
+              </afh:tableLayout>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="second">
+            <!-- start of primary decoration -->
+            <af:decorativeBox
+              topHeight="#{attrs.navigation1Size}"
+              theme="#{attrs.mode=='guide'?'medium':'light'}" id="pt_db1">
+              <f:facet name="top">
+                <af:panelStretchLayout
+                  startWidth="5" endWidth="5" id="pt_psl1">
+                  <f:facet name="start">
+                    <af:spacer id="pt_s3"/>
+                  </f:facet>
+                  <f:facet name="center"/>
+                </af:panelStretchLayout>
+              </f:facet>
+              <f:facet name="center">
+                <af:panelSplitter orientation="horizontal"
+                                  splitterPosition="300" id="pt_ps2">
+                  <f:facet name="first">
+                    <af:switcher facetName="#{attrs.mode=='guide'?'secondaryLayer':'primaryLayer'}"
+                                 id="pt_s4">
+                      <f:facet name="primaryLayer">
+                        <af:panelStretchLayout startWidth="3"
+                                               topHeight="50px" endWidth="50px"
+                                               bottomHeight="50px" id="pt_psl2">
+                          <f:facet name="start">
+                            <af:spacer id="pt_s5"/>
+                          </f:facet>
+                          <f:facet name="center">
+                            <af:decorativeBox theme="default" id="pt_db2">
+                              <f:facet name="center">
+                                <af:facetRef facetName="center1"/>
+                              </f:facet>
+                            </af:decorativeBox>
+                          </f:facet>
+                        </af:panelStretchLayout>
+                      </f:facet>
+                      <f:facet name="secondaryLayer">
+                        <af:decorativeBox topHeight="#{attrs.navigation2Size}"
+                                          theme="light" id="pt_db3">
+                          <f:facet name="top">
+                            <af:panelStretchLayout startWidth="4" id="pt_psl3">
+                              <f:facet name="start">
+                                <af:spacer id="pt_s6"/>
+                              </f:facet>
+                              <f:facet name="center">
+                                <af:facetRef facetName="navigation2"/>
+                              </f:facet>
+                            </af:panelStretchLayout>
+                          </f:facet>
+                          <f:facet name="center">
+                            <af:panelStretchLayout startWidth="3" id="pt_psl4">
+                              <f:facet name="start">
+                                <af:spacer id="pt_s7"/>
+                              </f:facet>
+                              <f:facet name="center">
+                                <af:decorativeBox theme="default" id="pt_db4">
+                                  <f:facet name="center">
+                                    <af:facetRef facetName="center2"/>
+                                  </f:facet>
+                                </af:decorativeBox>
+                              </f:facet>
+                            </af:panelStretchLayout>
+                          </f:facet>
+                        </af:decorativeBox>
+                        <!-- end of secondary decoration -->
+                      </f:facet>
+                    </af:switcher>
+                  </f:facet>
+                  <f:facet name="second">
+                    <af:group id="pt_g2">
+                      <af:panelGroupLayout layout="scroll" id="pt_pgl4">
+                        <af:panelHeader text=" "
+                                        inlineStyle="#{attrs.mode=='guide'?'padding-top: 5px':''}; padding:2%;"
+                                        id="pt_ph1">
+                          <h:panelGrid columns="1" cellspacing="10"
+                                       id="pt_pg1"/>
+                        </af:panelHeader>
+                      </af:panelGroupLayout>
+                    </af:group>
+                  </f:facet>
+                </af:panelSplitter>
+                <!-- end of primary auxiliary splitter -->
+              </f:facet>
+            </af:decorativeBox>
+            <!-- end of primary decoration -->
+          </f:facet>
+        </af:panelSplitter>
+        <!-- end of global top splitter -->
+      </af:form>
+    </af:document>
+  </af:pageTemplateDef>
+</jsp:root>

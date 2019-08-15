@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="productProvisions" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.productProvisions" isJavaBased="true">
+  <Attribute Name="PPROV_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PROV_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PROV_DESC" Type="java.lang.String"/>
+  <Attribute Name="PPROV_EDITABLE" Type="java.lang.String"/>
+  <Attribute Name="PPROV_PROD_CODE" Type="java.lang.Integer"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.productProvisions"
+                     BeanClass="LMSG.view.QuotationProcessing.productProvisions"
+                     id="productProvisions"/>
+</JavaBean>

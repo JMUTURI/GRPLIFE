@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelBox text="Policy Cover Type Details"
+                     inlineStyle="height:186px; width:800px;" id="pb1">
+          <f:facet name="toolbar"/>
+          <af:commandButton text="Add Cover" id="cb1">
+            <af:showPopupBehavior popupId="AddCoversPopup"/>
+          </af:commandButton>
+          <af:popup id="AddCoversPopup">
+            <af:dialog type="none" title="Select Product Cover Type" id="d2">
+              <h:panelGrid columns="3" id="pg1">
+                <af:outputLabel value="Cover" id="ol1"/>
+                <af:inputText label="Label 2" simple="true" columns="15"
+                              binding="#{underwritingManipulation.coverDescDisplay}"
+                              id="it1"/>
+                <h:panelGrid columns="2" id="pg2">
+                  <af:commandButton icon="/dropdown.gif" id="cb2">
+                    <af:showPopupBehavior popupId="prodCoversPopup"/>
+                  </af:commandButton>
+                  <af:popup id="prodCoversPopup">
+                    <af:dialog type="none" title="Select Product Cover Type"
+                               id="d3">
+                      <af:table value="#{bindings.ProdCovers.collectionModel}"
+                                var="row"
+                                rows="#{bindings.ProdCovers.rangeSize}"
+                                emptyText="#{bindings.ProdCovers.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.ProdCovers.rangeSize}"
+                                selectedRowKeys="#{bindings.ProdCovers.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.ProdCovers.collectionModel.makeCurrent}"
+                                rowSelection="single"
+                                binding="#{underwritingManipulation.productCoverTypesLOV}"
+                                id="t1">
+                        <af:column sortProperty="cvt_sht_desc" sortable="true"
+                                   headerText="DESCRIPTION" id="c1">
+                          <af:outputText value="#{row.cvt_sht_desc}" id="ot1"/>
+                        </af:column>
+                        <af:column sortProperty="cvt_desc" sortable="true"
+                                   headerText="COVER" id="c2">
+                          <af:outputText value="#{row.cvt_desc}" id="ot2"/>
+                        </af:column>
+                        <af:column sortProperty="cvt_main_cover" sortable="true"
+                                   headerText="MAIN COVER" id="c3">
+                          <af:outputText value="#{row.cvt_main_cover}"
+                                         id="ot3"/>
+                        </af:column>
+                        <af:column sortProperty="cvt_duration_type"
+                                   sortable="true" headerText="DURATION TYPE"
+                                   id="c4">
+                          <af:outputText value="#{row.cvt_duration_type}"
+                                         id="ot4"/>
+                        </af:column>
+                      </af:table>
+                      <af:commandButton text="OK" immediate="false"
+                                        action="#{underwritingManipulation.AttachProductCoverType}"
+                                        id="cb3"/>
+                      <af:commandButton text="Cancel" id="cb4"/>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Override Premium" id="ol2"/>
+                <af:inputText label="Label 3" simple="true" columns="15"
+                              binding="#{underwritingManipulation.overridePremDisplay}"
+                              id="it2"/>
+                <af:outputText id="ot5"/>
+                <af:outputLabel value="Sum Assured" id="ol3"/>
+                <af:inputText label="Label 5" simple="true" columns="15"
+                              binding="#{underwritingManipulation.sumAssuredDisplay}"
+                              id="it3"/>
+                <af:outputText id="ot6"/>
+                <af:outputLabel value="Loading Type" id="ol4"/>
+                <af:selectOneChoice label="Label 1" simple="true"
+                                    binding="#{underwritingManipulation.loadingTypeSelect}"
+                                    valueChangeListener="#{underwritingManipulation.GetLoadingType}"
+                                    id="soc1">
+                  <af:selectItem label="None" value="N" id="si1"/>
+                  <af:selectItem label="Loading" value="L" id="si2"/>
+                  <af:selectItem label="Discount" value="D" id="si3"/>
+                </af:selectOneChoice>
+                <af:outputText id="ot7"/>
+                <af:outputLabel value="Discount/Loading Rate" id="ol5"/>
+                <af:inputText label="Label 4" simple="true" columns="15"
+                              binding="#{underwritingManipulation.discLoadRateDisplay}"
+                              id="it4"/>
+                <af:outputText id="ot8"/>
+                <af:commandButton text="Save"
+                                  action="#{underwritingManipulation.SaveProductCoverTypes}"
+                                  id="cb5"/>
+                <af:commandButton text="Cancel" id="cb6"/>
+              </h:panelGrid>
+            </af:dialog>
+          </af:popup>
+          <af:table value="#{bindings.policyCoverTypes.collectionModel}"
+                    var="row" rows="#{bindings.policyCoverTypes.rangeSize}"
+                    emptyText="#{bindings.policyCoverTypes.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.policyCoverTypes.rangeSize}"
+                    selectedRowKeys="#{bindings.policyCoverTypes.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.policyCoverTypes.collectionModel.makeCurrent}"
+                    rowSelection="single" inlineStyle="height:158px;"
+                    width="800"
+                    binding="#{underwritingManipulation.policyCoverTypesLOV}"
+                    id="t2">
+            <af:column sortProperty="PCVT_CVT_SHT_DESC" sortable="true"
+                       headerText="COVER" id="c5">
+              <af:outputText value="#{row.PCVT_CVT_SHT_DESC}" id="ot9"/>
+            </af:column>
+            <af:column sortProperty="PCVT_SA" sortable="true" headerText="S.A"
+                       id="c6">
+              <af:outputText value="#{row.PCVT_SA}" id="ot10"/>
+            </af:column>
+            <af:column sortProperty="PCVT_PREMIUM" sortable="true"
+                       headerText="PREMIUM" id="c7">
+              <af:outputText value="#{row.PCVT_PREMIUM}" id="ot11"/>
+            </af:column>
+            <af:column sortProperty="PCVT_BUT_CHARGE_PREMIUM" sortable="true"
+                       headerText="OVERRIDE PREMIUM" id="c8">
+              <af:outputText value="#{row.PCVT_BUT_CHARGE_PREMIUM}" id="ot12"/>
+            </af:column>
+            <af:column sortProperty="CVT_DEPEND_DISP" sortable="true"
+                       headerText="DEPENDENT TYPE" id="c9">
+              <af:outputText value="#{row.CVT_DEPEND_DISP}" id="ot13"/>
+            </af:column>
+            <af:column sortProperty="PCVT_TOT_MEMBERS" sortable="true"
+                       headerText="AVG/MEMBERS" id="c10">
+              <af:outputText value="#{row.PCVT_TOT_MEMBERS}" id="ot14"/>
+            </af:column>
+            <af:column sortProperty="PCVT_LOAD_DISC" sortable="true"
+                       headerText="LOAD/DISC" id="c11">
+              <af:outputText value="#{row.PCVT_LOAD_DISC}" id="ot15"/>
+            </af:column>
+            <af:column sortProperty="PCVT_DISC_LOAD_RATE" sortable="true"
+                       headerText="LOAD/DISC RATE" id="c12">
+              <af:outputText value="#{row.PCVT_DISC_LOAD_RATE}" id="ot16"/>
+            </af:column>
+            <af:column sortProperty="PCVT_SA_PER_MEMBER" sortable="true"
+                       headerText="S.A PER MEMBER" id="c13">
+              <af:outputText value="#{row.PCVT_SA_PER_MEMBER}" id="ot17"/>
+            </af:column>
+            <af:column sortProperty="PCVT_UNIT_RATE" sortable="true"
+                       headerText="UNIT RATE" id="c14">
+              <af:outputText value="#{row.PCVT_UNIT_RATE}" id="ot18"/>
+            </af:column>
+            <af:column id="c15">
+              <af:commandButton text="Update Members"
+                                action="#{underwritingManipulation.UpdateFuneralCash}"
+                                id="cb7">
+                <af:showPopupBehavior popupId="updateANB"/>
+              </af:commandButton>
+              <af:popup id="updateANB">
+                <af:dialog type="none" title="Enter New Rider Amount" id="d4">
+                  <h:panelGrid columns="2" id="pg3">
+                    <af:outputLabel value="New Amount" id="ol6"/>
+                    <af:inputText label="Label 1" simple="true" columns="15"
+                                  binding="#{underwritingManipulation.newRiderAmountDisplay}"
+                                  id="it5"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg4">
+                    <af:selectBooleanRadio text="All Members (with or without rider)"
+                                           label="Label 1" simple="true"
+                                           value="A"
+                                           valueChangeListener="#{underwritingManipulation.GetMembersToUpdate}"
+                                           group="FuneralRiders"
+                                           binding="#{underwritingManipulation.membersRiders}"
+                                           id="sbr1"/>
+                    <af:selectBooleanRadio text="Only Members with Rider"
+                                           label="Label 2" simple="true"
+                                           value="W" group="FuneralRiders"
+                                           valueChangeListener="#{underwritingManipulation.GetMemsWithRiders}"
+                                           binding="#{underwritingManipulation.membersWithRiders}"
+                                           id="sbr2"/>
+                    <af:selectBooleanRadio text="Only Members without Rider"
+                                           label="Label 3" simple="true"
+                                           value="O" group="FuneralRiders"
+                                           valueChangeListener="#{underwritingManipulation.GetMemsWithoutRiders}"
+                                           binding="#{underwritingManipulation.memwithoutRiders}"
+                                           id="sbr3"/>
+                  </h:panelGrid>
+                  <af:commandButton text="OK"
+                                    action="#{underwritingManipulation.UpdateFuneralRiders}"
+                                    id="cb8"/>
+                  <af:commandButton text="Cancel" id="cb9"/>
+                </af:dialog>
+              </af:popup>
+            </af:column>
+            <af:column id="c16">
+              <af:commandButton icon="/icon_delete.gif"
+                                action="#{underwritingManipulation.DeletePolicyCoverType}"
+                                id="cb10"/>
+            </af:column>
+          </af:table>
+          <af:commandButton text="Next"
+                            action="#{underwritingManipulation.ShowPolicyTaxes}"
+                            id="cb11"/>
+          <af:commandButton text="Finish" id="cb12"/>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

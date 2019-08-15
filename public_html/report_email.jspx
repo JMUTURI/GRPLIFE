@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Home">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:facet name="center">
+         <af:group id="g1">
+          <af:panelBox text="PanelBox1" id="pb1" showHeader="never" inlineStyle="width:100%;height:600px">
+          <h:panelGrid id="pg1" columns="3">
+                <af:commandButton text="" id="cb1" icon="/images/field_group_plus_ena.png" shortDesc="Add Email Recepient"
+                                  action="#{otherSetups.recepientEmail}"/>
+                <af:commandButton text="" id="cb8" icon="/images/update_ena.png"
+                                  action="#{otherSetups.editEmailDetails}"/>
+                <af:commandButton text="" id="cb2" icon="/images/delete_ena.png" shortDesc="Delete Email Recepient"
+                                  action="#{otherSetups.deleteEmailDetails}"/>
+                <af:popup id="p1">
+                  <af:dialog id="d2" type="none" >
+                  <h:panelGrid id="pg2" columns="2" width="100%"
+                               binding="#{otherSetups.emailPG}">
+                      <af:outputText value="Email Recepient" id="ot12"/>
+                      <af:selectOneChoice  id="soc1" label="Email Recepient"
+                              simple="true" unselectedLabel="Select Recepient"
+                                            autoSubmit="true"
+                                            binding="#{otherSetups.emailRecepients}"
+                                            valueChangeListener="#{otherSetups.emailRecepientListener}">
+                        <af:selectItem label="Client" value="C" id="si1"/>
+                        <af:selectItem label="User" value="U" id="si2"/>
+                        <af:selectItem label="Service Provider"  value="S" id="si3"/>
+                        <af:selectItem label="Agent"  value="A" id="si3A"/>
+                        <af:selectItem label="Treaty Participants" id="si9" value="P"/>
+                        <af:selectItem label="Custom Email Address" id="CE" value="CE"/>
+                      </af:selectOneChoice>  
+                       <af:outputText value="Email Recepient Name" id="ot2"
+                                     binding="#{otherSetups.emailusrnameLab}"
+                                     rendered="false"/>
+                      <h:panelGrid id="pg3" columns="2"
+                                   binding="#{otherSetups.emailusrnamePG}"
+                                   rendered="false">
+                        <af:inputText label="Label 3" id="it4" simple="true"
+                                      binding="#{otherSetups.emailReportUser}"
+                                      disabled="true"/>
+                        <af:commandButton id="cb3" icon="/dropdown.gif">
+                        <af:showPopupBehavior popupId="p2" />
+                        </af:commandButton>
+                        <af:popup id="p2">
+                          <af:dialog id="d3" type="none" title="Users">
+                            <af:table value="#{bindings.Settings.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Settings.rangeSize}"
+                                      emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Settings.rangeSize}"
+                                      rowBandingInterval="0"
+                                      filterModel="#{bindings.SettingsQuery.queryDescriptor}"
+                                      queryListener="#{bindings.SettingsQuery.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t1"
+                                      binding="#{otherSetups.sysUsersLOV}"
+                                      inlineStyle="width:300px">
+                              <af:column sortProperty="USR_CODE"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.Settings.hints.USR_CODE.label}"
+                                         visible="false" id="c1">
+                                <af:outputText value="#{row.USR_CODE}"
+                                               id="ot4"/>
+                              </af:column>
+                              <af:column sortProperty="USR_NAME"
+                                         filterable="true" sortable="true"
+                                         headerText="User Description" id="c2" width="150px">
+                                <af:outputText value="#{row.USR_NAME}"
+                                               id="ot3"/>
+                              </af:column>
+                              <af:column sortProperty="USR_USERNAME"
+                                         filterable="true" sortable="true"
+                                         headerText="User Name" id="c3">
+                                <af:outputText value="#{row.USR_USERNAME}"
+                                               id="ot5"/>
+                              </af:column>
+                            </af:table>
+                            
+                            <h:panelGrid id="pg4" columns="2">
+                              <af:commandButton text="OK"
+                                                id="cb4"
+                                                action="#{otherSetups.getSelectedUser}"
+                                                partialSubmit="true"/>
+                              <af:commandButton text="Cancel"
+                                                id="cb5"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                       
+                      </h:panelGrid>
+                      <af:outputLabel value="Email Address" id="ol1" rendered="false"
+                                      binding="#{otherSetups.emailAddrLab}"/>
+                      <af:inputText label="Label 4" id="it2" simple="true"
+                                        binding="#{otherSetups.emailAddressTF}" rendered="false"/>
+                      <af:outputText value="Report Name" id="ot6"/>
+                      <af:inputText label="Report Name" id="it1"
+                                    binding="#{otherSetups.emailReportName}" simple="true"/>
+                      <af:outputText value="Email Body" id="ot1"/>
+                      <af:inputText label="Email Body" id="it3" rows="10" columns="30" simple="true"
+                                    binding="#{otherSetups.emailReportTemp}"/>                     
+                     <af:outputText value="Email At" id="ol2"/>
+                    <af:selectOneChoice label="Email At" id="soc2" simple="true" unselectedLabel="--select--"
+                                        binding="#{otherSetups.emailAt}">
+                      <af:selectItem label="Policy Authorization"
+                                     value="POLAUTH" id="si6"/>
+                      <af:selectItem label="Quotation Authorization"
+                                     value="QUOAUTH" id="si8"/>
+                      <af:selectItem label="Medicals(View Medicals)" value="MED" id="si4"/>  
+                      <af:selectItem label="Medical(Completion)" id="MEDCOMP" value="MEDCOMP"/>
+                      <af:selectItem label="Reinsurance" value="REIN" id="si7" />
+                      <af:selectItem label="Claim Authorization" id="si5" value="CLMAUTH"/>
+                      </af:selectOneChoice>                      
+                      <af:outputText value="Product" id="ot13"/>
+                      <h:panelGrid id="pg6" columns="2">
+                      <af:inputText label="Label 5" id="it5" simple="true" disabled="true"
+                                    binding="#{otherSetups.prodDescTF}"/>
+                      <af:commandButton id="cb9" icon="/dropdown.gif">
+                      <af:showPopupBehavior popupId="p3" />
+                      </af:commandButton>
+                        <af:popup id="p3">
+                          <af:dialog id="d4" type="none" title="Products">
+                            <af:table value="#{bindings.productDetails.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.productDetails.rangeSize}"
+                                      emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.productDetails.rangeSize}"
+                                      rowBandingInterval="0"
+                                      filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                      queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      id="t3"                                      
+                                      inlineStyle="width:100%"
+                                      rowSelection="single"
+                                      binding="#{otherSetups.productLOV}">
+                              <af:column sortProperty="prodCode"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.productDetails.hints.prodCode.label}"
+                                         id="c10"
+                                         visible="false">
+                                <af:outputText value="#{row.prodCode}"
+                                               id="ot14"/>
+                              </af:column>
+                              <af:column sortProperty="prodDesc"
+                                         filterable="true" sortable="true"
+                                         headerText="Product Name"
+                                         id="c9"
+                                         width="200px">
+                                <af:outputText value="#{row.prodDesc}"
+                                               id="ot15"/>
+                              </af:column>
+                            </af:table>
+                            <h:panelGrid id="pg7" columns="2">
+                              <af:commandButton text="Ok"
+                                                id="cb10"
+                                                action="#{otherSetups.selectRptProduct}"
+                                                partialSubmit="true"/>
+                              <af:commandButton text="Cancel"
+                                                id="cb11"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                     
+                      
+                    <h:panelGrid id="pg5" columns="2">
+                          <af:commandButton text="SAVE" id="cb6"
+                                            action="#{otherSetups.saveEmailDetails}"/>
+                          <af:commandButton text="Cancel" id="cb7"/>
+                      </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:table value="#{bindings.Settings1.collectionModel}" var="row"
+                        rows="#{bindings.Settings1.rangeSize}"
+                        emptyText="#{bindings.Settings1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Settings1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.Settings1Query.queryDescriptor}"
+                        queryListener="#{bindings.Settings1Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectionListener="#{bindings.Settings1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t2"
+                        inlineStyle="width:100%;height:300px"
+                        binding="#{otherSetups.emailDetailsLOV}">
+                <af:column sortProperty="emd_code" filterable="true"
+                           sortable="true"
+                           headerText="#{bindings.Settings1.hints.emd_code.label}"
+                           id="c6" visible="false">
+                  <af:outputText value="#{row.emd_code}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="emd_rpt_name" filterable="true"
+                           sortable="true"
+                           width="150px"
+                           headerText="Report Name"
+                           id="c7">
+                  <af:outputText value="#{row.emd_rpt_name}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="emd_msgt_narr" filterable="true"
+                           sortable="true"
+                           headerText="Email Body"
+                           width="200px"
+                           id="c8">
+                  <af:outputText value="#{row.emd_msgt_narr}" id="ot9"/>
+                </af:column>
+                <af:column sortProperty="USR_NAME" filterable="true"
+                           sortable="true"
+                           headerText="Email Recepient Name"
+                           width="150px"
+                           id="c4">
+                  <af:outputText value="#{row.USR_NAME}" id="ot7"/>
+                </af:column>
+                <af:column sortProperty="usr_email" filterable="true"
+                           sortable="true"
+                           headerText="Email Address"
+                           width="200px"
+                           id="c5">
+                  <af:outputText value="#{row.usr_email}" id="ot8"/>
+                </af:column>   
+                  <af:column sortProperty="prodDesc" filterable="true"
+                           sortable="true"
+                           headerText="Product"
+                           width="200px"
+                           id="c11">
+                  <af:outputText value="#{row.prodDesc}" id="ot16"/>
+                </af:column> 
+              </af:table>
+            </af:panelBox>
+        </af:group>
+      </f:facet>
+     
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

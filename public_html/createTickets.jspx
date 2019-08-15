@@ -1,0 +1,368 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Ticketing">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelBox id="pb1" showHeader="never">
+              <f:facet name="toolbar"/>
+              <af:popup id="p1">
+                <af:dialog id="d2" type="none" title="Quotations">
+                  <af:panelBox id="pb3" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:table value="#{bindings.Tickets.collectionModel}"
+                              var="row" rows="#{bindings.Tickets.rangeSize}"
+                              emptyText="#{bindings.Tickets.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Tickets.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.TicketsQuery.queryDescriptor}"
+                              queryListener="#{bindings.TicketsQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Tickets.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Tickets.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t2"
+                              binding="#{TicketsBean.quotationsTable}"
+                              width="320">
+                      <af:column sortProperty="quoNo" filterable="true"
+                                 sortable="true" headerText="Quotation No."
+                                 id="c4">
+                        <af:outputText value="#{row.quoNo}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="client" filterable="true"
+                                 sortable="true" headerText="Client" id="c3"
+                                 width="200">
+                        <af:outputText value="#{row.client}" id="ot4"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg4">
+                      <af:commandButton text="OK" id="cb2"
+                                        action="#{TicketsBean.findQuotationSelected}"/>
+                      <af:commandButton text="Cancel" id="commandButton1"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="popup1">
+                <af:dialog id="dialog1" type="none" title="Policies">
+                  <af:panelBox id="panelBox1" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:table value="#{bindings.Tickets1.collectionModel}"
+                              var="row" rows="#{bindings.Tickets1.rangeSize}"
+                              emptyText="#{bindings.Tickets1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Tickets1.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Tickets1Query.queryDescriptor}"
+                              queryListener="#{bindings.Tickets1Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Tickets1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Tickets1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t3" width="530"
+                              binding="#{TicketsBean.policiesTable}">
+                      <af:column sortProperty="ENDR_POL_POLICY_NO"
+                                 filterable="true" sortable="true"
+                                 headerText="Policy Number" id="c5">
+                        <af:outputText value="#{row.ENDR_POL_POLICY_NO}"
+                                       id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="BTR_TRANS_TYPE" filterable="true"
+                                 sortable="true" headerText="Transaction"
+                                 id="c6">
+                        <af:outputText value="#{row.BTR_TRANS_TYPE}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="CLIENT" filterable="true"
+                                 sortable="true" headerText="Client" id="c8"
+                                 width="200">
+                        <af:outputText value="#{row.CLIENT}" id="ot6"/>
+                      </af:column>
+                      <af:column sortProperty="ENDR_EFFECTIVE_DATE"
+                                 filterable="true" sortable="true"
+                                 headerText="Effective Date" id="c7">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.ENDR_EFFECTIVE_DATE}"
+                                        id="id1"/>
+                        </f:facet>
+                        <af:outputText value="#{row.ENDR_EFFECTIVE_DATE}"
+                                       id="ot8">
+                          <af:convertDateTime pattern="#{bindings.Tickets1.hints.ENDR_EFFECTIVE_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="panelGrid2">
+                      <af:commandButton text="OK" id="commandButton3"
+                                        action="#{TicketsBean.findPolicySelected}"/>
+                      <af:commandButton text="Cancel" id="commandButton4"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:panelBox id="pb2"
+                           text="Transaction Details.">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="2" id="pg1">
+                  <af:outputLabel value="Select An Activity to Perform:" id="ol1"/>
+                  <af:selectOneChoice label="Label 1" id="soc1" value="A"
+                                      simple="true"
+                                      binding="#{TicketsBean.activity}">
+                    <af:selectItem label="Attach Ticket To Existing Process Flow"
+                                   id="si1" value="A"/>
+                  </af:selectOneChoice>
+                  <af:outputLabel value="Select A System Module:"
+                                  id="outputLabel1"/>
+                  <af:selectOneChoice label="Label 2" id="soc2" simple="true"
+                                      binding="#{TicketsBean.systemModule}"
+                                      autoSubmit="true"
+                                      valueChangeListener="#{TicketsBean.SystemModuleListener}"
+                                      value="P">
+                    <af:selectItem label="Quotations Module" value="Q"
+                                   id="si4" disabled="true"/>
+                    <af:selectItem label="New Business Module" value="P" id="si5"/>
+                    <af:selectItem label="Endorsements Module" value="E"
+                                   id="si2"/>
+                    <af:selectItem label="Claims Module" value="C" id="si3"
+                                   disabled="true"/>
+                  </af:selectOneChoice>
+                </h:panelGrid>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:panelGroupLayout id="pgl3" partialTriggers="soc2">
+                  <af:panelBox text="Select Parameters" id="pb4">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="2" id="pg2">
+                      <af:outputLabel value="Select A Product:"
+                                      id="outputLabel5"/>
+                      <h:panelGrid columns="2" id="panelGrid5">
+                        <af:inputText label="Label 1" id="inputText3"
+                                      simple="true" disabled="true"
+                                      binding="#{TicketsBean.prodDesc}"/>
+                        <af:commandButton id="commandButton8"
+                                          icon="/images/dropdown.gif">
+                          <af:showPopupBehavior popupId="popup3"/>
+                        </af:commandButton>
+                        <af:popup id="popup3">
+                          <af:dialog id="dialog3" type="none" title="Products">
+                            <af:panelBox id="panelBox3" showHeader="never">
+                              <f:facet name="toolbar"/>
+                              <af:table value="#{bindings.productDetails.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.productDetails.rangeSize}"
+                                        emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.productDetails.rangeSize}"
+                                        rowBandingInterval="0"
+                                        filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                        queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                        filterVisible="true" varStatus="vs"
+                                        selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t1"
+                                        binding="#{TicketsBean.productsTable}">
+                                <af:column sortProperty="prodshtDesc"
+                                           filterable="true" sortable="true"
+                                           headerText="Short Description"
+                                           id="c2">
+                                  <af:outputText value="#{row.prodshtDesc}"
+                                                 id="ot2"/>
+                                </af:column>
+                                <af:column sortProperty="prodDesc"
+                                           filterable="true" sortable="true"
+                                           headerText="Description" id="c1"
+                                           width="200">
+                                  <af:outputText value="#{row.prodDesc}"
+                                                 id="ot3"/>
+                                </af:column>
+                              </af:table>
+                              <h:panelGrid columns="2" id="panelGrid6">
+                                <af:commandButton text="OK" id="commandButton9"
+                                                  action="#{TicketsBean.findProductSelected}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="commandButton10"/>
+                              </h:panelGrid>
+                            </af:panelBox>
+                          </af:dialog>
+                        </af:popup>
+                      </h:panelGrid>
+                      <af:outputLabel value="Select A Quote:" id="outputLabel2"
+                                      binding="#{TicketsBean.quoteLabel}"
+                                      rendered="false"/>
+                      <h:panelGrid columns="2" id="pg3"
+                                   binding="#{TicketsBean.quotePanel}"
+                                   rendered="false">
+                        <af:inputText label="Label 1" id="it1" simple="true"
+                                      disabled="true"
+                                      binding="#{TicketsBean.quoteDesc}"/>
+                        <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                          <af:showPopupBehavior popupId="p1"/>
+                        </af:commandButton>
+                      </h:panelGrid>
+                      <af:outputLabel value="Select A Policy:"
+                                      id="outputLabel3"
+                                      binding="#{TicketsBean.policyLabel}"/>
+                      <h:panelGrid columns="2" id="panelGrid1"
+                                   binding="#{TicketsBean.policyPanel}">
+                        <af:inputText label="Label 1" id="inputText1"
+                                      simple="true" disabled="true"
+                                      binding="#{TicketsBean.policyDesc}"/>
+                        <af:commandButton id="commandButton2"
+                                          icon="/images/dropdown.gif">
+                          <af:showPopupBehavior popupId="popup1"/>
+                        </af:commandButton>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+                <af:spacer width="10" height="10" id="spacer1"/>
+                <h:panelGrid columns="2" id="pg5">
+                  <af:commandButton text="Next" id="cb3"
+                                    action="#{TicketsBean.NextTransition}"/>
+                  <af:commandButton text="Cancel" id="commandButton5"
+                                    action="#{TicketsBean.CancelTransaction}"/>
+                </h:panelGrid>
+              </af:panelBox>
+              <af:panelBox text="Attach Ticket to Transaction" id="pb5"
+                           binding="#{TicketsBean.attachTicketPanel}"
+                           rendered="false">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="11" id="pg6">
+                  <af:outputLabel id="ol2" binding="#{TicketsBean.label1}"
+                                  inlineStyle="text-decoration:underline;"/>
+                  <af:outputText id="ot10" binding="#{TicketsBean.output1}"
+                                 inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="s2"/>
+                  <af:outputLabel id="outputLabel4"
+                                  binding="#{TicketsBean.label2}"
+                                  inlineStyle="text-decoration:underline;"/>
+                  <af:outputText id="outputText1"
+                                 binding="#{TicketsBean.output2}"
+                                 inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="spacer2"/>
+                  <af:outputLabel id="outputLabel6"
+                                  binding="#{TicketsBean.label3}"
+                                  inlineStyle="text-decoration:underline;"/>
+                  <af:outputText id="outputText2"
+                                 binding="#{TicketsBean.output3}"
+                                 inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="spacer3"/>
+                  <af:outputLabel id="outputLabel7"
+                                  binding="#{TicketsBean.label4}"
+                                  inlineStyle="text-decoration:underline;"/>
+                  <af:outputText id="outputText3"
+                                 binding="#{TicketsBean.output4}"
+                                 inlineStyle="font-weight:bold;"/>
+                </h:panelGrid>
+                <af:separator id="s3"/>
+                <h:panelGrid columns="2" id="pg7">
+                  <af:outputLabel value="Select A Task:" id="ol3"/>
+                  <h:panelGrid columns="2" id="pg8">
+                    <af:inputText id="it2" simple="true" disabled="true"
+                                  binding="#{TicketsBean.taskDesc}"/>
+                    <af:commandButton id="cb4" icon="/images/dropdown.gif">
+                      <af:showPopupBehavior popupId="p2"/>
+                    </af:commandButton>
+                    <af:popup id="p2">
+                      <af:dialog id="d3" type="none" title="Applicable Tasks">
+                        <af:panelBox id="pb6"
+                                     showHeader="never">
+                          <f:facet name="toolbar"/>
+                          <af:table value="#{bindings.Tickets2.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.Tickets2.rangeSize}"
+                                    emptyText="#{bindings.Tickets2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.Tickets2.rangeSize}"
+                                    rowBandingInterval="0"
+                                    filterModel="#{bindings.Tickets2Query.queryDescriptor}"
+                                    queryListener="#{bindings.Tickets2Query.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.Tickets2.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.Tickets2.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t4"
+                                    binding="#{TicketsBean.tasksTable}"
+                                    width="275">
+                            <af:column sortProperty="taskName" filterable="true"
+                                       sortable="true" headerText="Task"
+                                       id="c9" width="250">
+                              <af:outputText value="#{row.taskName}" id="ot11"/>
+                            </af:column>
+                          </af:table>
+                          <h:panelGrid columns="2" id="pg9">
+                            <af:commandButton text="OK" id="cb5"
+                                              action="#{TicketsBean.findTaskSelected}"/>
+                            <af:commandButton text="Cancel" id="commandButton6"/>
+                          </h:panelGrid>
+                        </af:panelBox>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:outputLabel value="Select A User to Assign:" id="outputLabel8"/>
+                  <h:panelGrid columns="2" id="panelGrid3">
+                    <af:inputText id="inputText2" simple="true"
+                                  disabled="true"
+                                  binding="#{TicketsBean.usersDesc}"/>
+                    <af:commandButton id="commandButton7"
+                                      icon="/images/dropdown.gif">
+                      <af:showPopupBehavior popupId="popup2"/>
+                    </af:commandButton>
+                    <af:popup id="popup2">
+                      <af:dialog id="dialog2" type="none"
+                                 title="Users">
+                        <af:panelBox id="panelBox2" showHeader="never">
+                          <af:table value="#{bindings.Settings.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.Settings.rangeSize}"
+                                    emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.Settings.rangeSize}"
+                                    rowBandingInterval="0"
+                                    filterModel="#{bindings.SettingsQuery.queryDescriptor}"
+                                    queryListener="#{bindings.SettingsQuery.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t5" width="400"
+                                    binding="#{TicketsBean.usersTable}">
+                            <af:column sortProperty="USR_USERNAME"
+                                       filterable="true" sortable="true"
+                                       headerText="UserName" id="c11"
+                                       width="150">
+                              <af:outputText value="#{row.USR_USERNAME}"
+                                             id="ot12"/>
+                            </af:column>
+                            <af:column sortProperty="USR_NAME" filterable="true"
+                                       sortable="true" headerText="Full Name"
+                                       id="c10" width="200">
+                              <af:outputText value="#{row.USR_NAME}" id="ot13"/>
+                            </af:column>
+                          </af:table>
+                          <f:facet name="toolbar"/>
+                          <h:panelGrid columns="2" id="panelGrid4">
+                            <af:commandButton text="OK" id="commandButton11"
+                                              action="#{TicketsBean.findUserSelected}"/>
+                            <af:commandButton text="Cancel"
+                                              id="commandButton12"/>
+                          </h:panelGrid>
+                        </af:panelBox>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg10">
+                  <af:commandButton text="Attach Ticket" id="cb6"
+                                    action="#{TicketsBean.AttachTicket}"/>
+                </h:panelGrid>
+              </af:panelBox>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

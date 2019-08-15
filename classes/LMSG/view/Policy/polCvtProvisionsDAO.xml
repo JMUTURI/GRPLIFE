@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="polCvtProvisionsDAO" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.polCvtProvisionsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.productProvisions"
+                  BeanClass="LMSG.view.QuotationProcessing.productProvisions" id="FindProdProvision"
+                  ReturnNodeName="productProvisions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Policy.polCvtProvisionsDAO"
+                     BeanClass="LMSG.view.Policy.polCvtProvisionsDAO"
+                     id="polCvtProvisionsDAO"/>
+</JavaBean>

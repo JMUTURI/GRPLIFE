@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="documents" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.documents" isJavaBased="true">
+  <Attribute Name="RD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="RD_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="RD_DESC" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.documents"
+                     BeanClass="LMSG.view.Policy.documents" id="documents"/>
+</JavaBean>

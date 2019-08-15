@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="ClaimsProcessing" xmlns="http://jbpm.org/4.0/jpdl">
+
+   <start g="115,0,78,69" name="start">
+      <transition g="-76,-19" name="claim access" to="claims Access"/>
+   </start>
+   <decision g="115,65,48,48" name="claims Access">
+	<handler class="view.jbpm.AccessEvaluation" />
+      <transition g="-22,-19" name="No" to="end1"/>
+      <transition g="-111,-1" name="Yes" to="Input Claim Data"/>
+   </decision>
+   <end g="279,66,48,48" name="end1"/>
+   <task g="89,131,109,52" name="Input Claim Data">
+    <assignment-handler class="view.jbpm.ClaimsAssignTask">
+    </assignment-handler>
+      <transition g="-198,-8" name="to Dispatch Acknowledgement Letter" to="Dispatch Acknowledgement Letter"/>
+   </task>
+   <task g="55,218,177,52" name="Dispatch Acknowledgement Letter">
+    <assignment-handler class="view.jbpm.ClaimsAssignTask">
+	</assignment-handler>
+      <transition g="-68,-24" name="to Waiting for Document Task" to="Waiting for Document Task"/>
+   </task>
+   <task g="421,218,141,52" name="Waiting for Document Task">
+   <assignment-handler class="view.jbpm.ClaimsAssignTask">
+	</assignment-handler>
+      <transition g="-150,-19" name="to All Documents Provided" to="All Documents Provided"/>
+   </task>
+   <task g="53,299,172,52" name="Raise Payment Voucher">
+    <assignment-handler class="view.jbpm.ClaimsAssignTask">
+	</assignment-handler>
+      <transition g="10,-6" name="to Make Voucher Ready" to="Make Voucher Ready"/>
+   </task>
+   <decision expr="#{DocsSubmitted}" g="468,300,48,48" name="All Documents Provided">
+      <transition g="-82,-19" name="Yes" to="Raise Payment Voucher"/>
+	  <transition  name="No" to="Waiting for Document Task"/>
+   </decision>
+   <task g="168,374,161,52" name="Make Voucher Ready">
+    <assignment-handler class="view.jbpm.ClaimsAssignTask">
+	</assignment-handler>
+      <transition g="53,-15" name="to Client Acceptance" to="Client Acceptance"/>
+   </task>
+   <decision g="15,452,48,48" name="Client Acceptance" expr="#{clientDecision}">
+      <transition g="-66,-19" name="Accept" to="Authorise Voucher"/>
+      <transition g="-85,-17" name="Reject" to="Raise Payment Voucher"/>
+   </decision>
+   <task g="280,454,109,52" name="Authorise Voucher">
+    <assignment-handler class="view.jbpm.ClaimsAssignTask">
+	</assignment-handler>
+      <transition g="-63,-30" name="to Dispatch Cheque" to="Dispatch Cheque"/>
+   </task>
+   <task g="447,452,109,52" name="Dispatch Cheque">
+    <assignment-handler class="view.jbpm.ClaimsAssignTask">
+	</assignment-handler>
+      <transition g="-27,-29" name="to end2" to="end2"/>
+   </task>
+   <end g="591,455,48,48" name="end2"/>
+</process>

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="policyMedicalsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="FindPolicyMembers.result"
+                    DataControl="policyMembersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policyMembers"
+                    id="FindPolicyMembersIterator"/>
+    <methodIterator Binds="FindExistingPoliciesView.result"
+                    DataControl="medicalsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Medicals.medical"
+                    id="FindExistingPoliciesViewIterator"/>
+    <methodIterator Binds="FindClientMedicals.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="FindClientMedicalsIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="FindPolicyServiceProviders.result"
+                    DataControl="SettingsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Base.Settings"
+                    id="FindPolicyServiceProvidersIterator"/>
+    <searchRegion Binds="FindPolicyServiceProvidersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+    <methodIterator Binds="FindFacilitators.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindFacilitatorsIterator"/>
+    <searchRegion Binds="FindFacilitatorsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings1Query"/>
+    <methodIterator Binds="FindMedicalFacilitators.result"
+                    DataControl="SettingsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Base.Settings"
+                    id="FindMedicalFacilitatorsIterator"/>
+    <searchRegion Binds="FindMedicalFacilitatorsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery1"/>
+    <methodIterator Binds="findMedTest.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="findMedTestIterator"/>
+    <searchRegion Binds="findMedTestIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="medical1Query"/>
+    <methodIterator Binds="FindMedQuestionnaires.result"
+                    DataControl="medicalsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Medicals.medical"
+                    id="FindMedQuestionnairesIterator"/>
+    <methodIterator Binds="FindOccupation.result" DataControl="documentsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.documents"
+                    id="FindOccupationIterator"/>
+    <methodIterator Binds="findMedDocs.result" DataControl="EcmUtilDAO"
+                    RangeSize="25" BeanClass="LMSG.view.ecm.EcmBean"
+                    id="findMedDocsIterator"/>
+    <searchRegion Binds="findMedDocsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="EcmBeanQuery"/>
+    <methodIterator Binds="FindPolicyFCLMembers.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policies"
+                    id="FindPolicyFCLMembersIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicyMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyMembers"
+                  IsViewObjectMethod="false" DataControl="policyMembersDAO"
+                  InstanceName="policyMembersDAO.dataProvider"
+                  ReturnName="policyMembersDAO.methodResults.FindPolicyMembers_policyMembersDAO_dataProvider_FindPolicyMembers_result"/>
+    <tree IterBinding="FindPolicyMembersIterator" id="policyMembers">
+      <nodeDefinition DefName="LMSG.view.Policy.policyMembers"
+                      Name="policyMembers0">
+        <AttrNames>
+          <Item Value="POLM_MEM_CODE"/>
+          <Item Value="POLM_MEM_NO"/>
+          <Item Value="MEMBER_DISPLAY"/>
+          <Item Value="POLM_TOT_SA"/>
+          <Item Value="POLM_ANB"/>
+          <Item Value="POLM_HEIGHT"/>
+          <Item Value="POLM_WEIGHT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindExistingPoliciesView" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindExistingPoliciesView"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindExistingPoliciesView_medicalsDAO_dataProvider_FindExistingPoliciesView_result"/>
+    <tree IterBinding="FindExistingPoliciesViewIterator" id="medical">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical0">
+        <AttrNames>
+          <Item Value="PROPOSAL_NO"/>
+          <Item Value="POLICY_NO"/>
+          <Item Value="TOT_SA"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClientMedicals" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClientMedicals"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindClientMedicals_medicalsDAO_dataProvider_FindClientMedicals_result"/>
+    <tree IterBinding="FindClientMedicalsIterator" id="medical2">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical20">
+        <AttrNames>
+          <Item Value="MTG_DESC"/>
+          <Item Value="CML_LIMIT_AMT"/>
+          <Item Value="CML_REQUEST_DATE"/>
+          <Item Value="SPR_NAME"/>
+          <Item Value="CML_CLAIM_AMT"/>
+          <Item Value="CML_PAYABLE_AMT"/>
+          <Item Value="MTL_DESC"/>
+          <Item Value="CML_DATE_RECEIVED"/>
+          <Item Value="CML_RESULT_DATE"/>
+          <Item Value="medDetails"/>
+          <Item Value="CML_INVCE_NO"/>
+          <Item Value="CML_INVCE_DATE"/>
+          <Item Value="CML_RECEIVED"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="FindFacilitators" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindFacilitators"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindFacilitators_SettingsDAO_dataProvider_FindFacilitators_result"/>
+    <tree IterBinding="FindFacilitatorsIterator" id="Settings1">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings10">
+        <AttrNames>
+          <Item Value="FAC_CODE"/>
+          <Item Value="FAC_NAME"/>
+          <Item Value="FAC_COUNTRY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMedicalFacilitators" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMedicalFacilitators"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindMedicalFacilitators_SettingsDAO_dataProvider_FindMedicalFacilitators_result"/>
+    <tree IterBinding="FindMedicalFacilitatorsIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="SPR_CODE"/>
+          <Item Value="SPR_SHT_DESC"/>
+          <Item Value="SPR_NAME"/>
+          <Item Value="SPR_SPT_CODE"/>
+          <Item Value="TWN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findMedTest" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMedTest"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.findMedTest_medicalsDAO_dataProvider_findMedTest_result"/>
+    <tree IterBinding="findMedTestIterator" id="medical1">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical10">
+        <AttrNames>
+          <Item Value="medicalTestDescription"/>
+          <Item Value="MTLCode"/>
+          <Item Value="MTLFees"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMedQuestionnaires" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMedQuestionnaires"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="data.medicalsDAO.methodResults.FindMedQuestionnaires_medicalsDAO_dataProvider_FindMedQuestionnaires_result"/>
+    <list IterBinding="FindMedQuestionnairesIterator" ListOperMode="navigation"
+          ListIter="FindMedQuestionnairesIterator" id="medical3"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="CMI_CODE"/>
+        <Item Value="CMI_PRP_CODE"/>
+        <Item Value="CMI_ID_NO"/>
+        <Item Value="PROPOSAL_NO"/>
+        <Item Value="POLICY_NO"/>
+        <Item Value="TOT_SA"/>
+        <Item Value="CML_CODE"/>
+        <Item Value="CML_LIMIT_AMT"/>
+        <Item Value="CML_REQUEST_DATE"/>
+        <Item Value="SPR_NAME"/>
+        <Item Value="CML_CLAIM_AMT"/>
+        <Item Value="CML_PAYABLE_AMT"/>
+        <Item Value="CML_RECEIVED"/>
+        <Item Value="CML_DATE_RECEIVED"/>
+        <Item Value="CML_INVCE_DATE"/>
+        <Item Value="CML_INVCE_NO"/>
+        <Item Value="CML_CHEQUE_NO"/>
+        <Item Value="CML_CHEQUE_DATE"/>
+        <Item Value="CML_MED_LOADING"/>
+        <Item Value="POL_PROPOSAL_NO"/>
+        <Item Value="CML_REMARKS"/>
+        <Item Value="FC_SPR_NAME"/>
+        <Item Value="FC_LIMIT_AMT"/>
+        <Item Value="FC_CLAIM_AMT"/>
+        <Item Value="FC_PAYABLE_AMT"/>
+        <Item Value="PUD_CODE"/>
+        <Item Value="UD_DESC"/>
+        <Item Value="MTG_SHT_DESC"/>
+        <Item Value="MTG_DESC"/>
+        <Item Value="POLM_MED_TOT_SA"/>
+        <Item Value="MTL_DESC"/>
+        <Item Value="searchCode"/>
+        <Item Value="searchDesc"/>
+        <Item Value="MP_CML_CODE"/>
+        <Item Value="MP_CML_ID_NO"/>
+        <Item Value="MP_PROPOSAL_NO"/>
+        <Item Value="MP_MED_TEST_DISPLAY"/>
+        <Item Value="MP_CML_RECEIVED"/>
+        <Item Value="MP_CML_PAYABLE_AMT"/>
+        <Item Value="MP_CML_PAID"/>
+        <Item Value="MP_FACILITATOR_DISPLAY"/>
+        <Item Value="MP_CML_RAISED_BY"/>
+        <Item Value="MP_CLIENT"/>
+        <Item Value="FP_facilitator_display"/>
+        <Item Value="FP_branch_display"/>
+        <Item Value="FP_fpmt_amount"/>
+        <Item Value="FP_fpmt_vat_rate"/>
+        <Item Value="FP_fpmt_vat_amt"/>
+        <Item Value="FP_fpmt_net_amount"/>
+        <Item Value="FP_fpmt_pymt_type"/>
+        <Item Value="MEM_PUD_CODE"/>
+        <Item Value="MEM_UD_DESC"/>
+        <Item Value="selected"/>
+        <Item Value="SPR_CODE"/>
+        <Item Value="POLM_CODE"/>
+        <Item Value="MEM_CODE"/>
+        <Item Value="MEM_NO"/>
+        <Item Value="MEM_NAME"/>
+        <Item Value="pol_code"/>
+        <Item Value="pol_policy_no"/>
+        <Item Value="pol_current_endr_code"/>
+        <Item Value="client"/>
+        <Item Value="medicalTestDescription"/>
+        <Item Value="MTLCode"/>
+        <Item Value="MTLFees"/>
+        <Item Value="CML_RESULT_DATE"/>
+        <Item Value="medDetails"/>
+        <Item Value="medqCode"/>
+        <Item Value="medqDesc"/>
+      </AttrNames>
+    </list>
+    <methodAction id="FindOccupation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindOccupation"
+                  IsViewObjectMethod="false" DataControl="documentsDAO"
+                  InstanceName="documentsDAO.dataProvider"
+                  ReturnName="data.documentsDAO.methodResults.FindOccupation_documentsDAO_dataProvider_FindOccupation_result"/>
+    <list IterBinding="FindOccupationIterator" ListOperMode="navigation"
+          ListIter="FindOccupationIterator" id="documents" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="RD_DESC"/>
+      </AttrNames>
+    </list>
+    <methodAction id="findMedDocs" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMedDocs"
+                  IsViewObjectMethod="false" DataControl="EcmUtilDAO"
+                  InstanceName="EcmUtilDAO.dataProvider"
+                  ReturnName="data.EcmUtilDAO.methodResults.findMedDocs_EcmUtilDAO_dataProvider_findMedDocs_result"/>
+    <tree IterBinding="findMedDocsIterator" id="EcmBean">
+      <nodeDefinition DefName="LMSG.view.ecm.EcmBean" Name="EcmBean0">
+        <AttrNames>
+          <Item Value="actualName"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="versionLabel"/>
+          <Item Value="id"/>
+          <Item Value="mimeType"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyFCLMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyFCLMembers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="data.policiesDAO.methodResults.FindPolicyFCLMembers_policiesDAO_dataProvider_FindPolicyFCLMembers_result"/>
+    <tree IterBinding="FindPolicyFCLMembersIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="POLM_MEM_NO"/>
+          <Item Value="MEMBER_DISPLAY"/>
+          <Item Value="POLMA_ANB"/>
+          <Item Value="POLM_HEIGHT"/>
+          <Item Value="POLM_WEIGHT"/>
+          <Item Value="POL_CODE"/>
+          <Item Value="pcmSA"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="UW_YEAR"/>
+          <Item Value="POLM_MEM_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

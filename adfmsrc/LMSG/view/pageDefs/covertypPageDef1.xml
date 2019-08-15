@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="covertypPageDef1"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findCpverTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findCpverTypesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findCpverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCpverTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findCpverTypes_SetupsDAO_dataProvider_findCpverTypes_result"/>
+    <tree IterBinding="findCpverTypesIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="CVT_SHT_DESC"/>
+          <Item Value="CVT_DESCRIPTION"/>
+          <Item Value="CVT_MAIN_COVER_DESC"/>
+          <Item Value="CVT_DURATION_TYPE_DESC"/>
+          <Item Value="CVT_MAX_AGE"/>
+          <Item Value="CVT_MULTIPLIER"/>
+          <Item Value="CVT_MULT_DIV_FACT"/>
+          <Item Value="CVT_READ_FROM_DESC"/>
+          <Item Value="CVT_RATE_TYPE_DESC"/>
+          <Item Value="CVT_REPORT_NAME"/>
+          <Item Value="CVT_REMARKS"/>
+          <Item Value="CVT_RATES_FREQ_OF_PYMT_DESC"/>
+          <Item Value="CLA_CODE"/>
+          <Item Value="CVT_PAY_BEN_DESC"/>
+          <Item Value="CLA_SHT_DESC"/>
+          <Item Value="CVT_PAY_BEN"/>
+          <Item Value="CVT_MAX_INST_NO"/>
+          <Item Value="CVT_WAITING_PRD"/>
+          <Item Value="CVT_RETIRE_AGE"/>
+          <Item Value="CVT_FIXED_SA"/>
+          <Item Value="CVT_FIXED_SA_AMT"/>
+          <Item Value="CVT_NOTIFICATION_PRD"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <managed-bean>
+    <managed-bean-name>QuoteTrans</managed-bean-name>
+    <managed-bean-class>LMSG.view.QuotationProcessing.quoteTransactions</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>claim</managed-bean-name>
+    <managed-bean-class>LMSG.view.Claims.ClaimManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>login</managed-bean-name>
+    <managed-bean-class>LMSG.view.Login.Index</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>currUser</managed-bean-name>
+    <managed-bean-class>LMSG.view.Base.CurrentUser</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>reportingBean</managed-bean-name>
+    <managed-bean-class>LMSG.view.Reports.Reporting</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>LOVC</managed-bean-name>
+    <managed-bean-class>LMSG.view.Base.LOVCC</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>viewQuotes</managed-bean-name>
+    <managed-bean-class>LMSG.view.QuotationProcessing.viewQuotations</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>quoteConv</managed-bean-name>
+    <managed-bean-class>LMSG.view.Quotation.QuotationsProcessing</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>lapsation</managed-bean-name>
+    <managed-bean-class>LMSG.view.Lapsation.PolicyLapsation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>polTransactions</managed-bean-name>
+    <managed-bean-class>LMSG.view.Policy.PolicyTransactions</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>med</managed-bean-name>
+    <managed-bean-class>LMSG.view.Medicals.medicalsManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>Correspondence</managed-bean-name>
+    <managed-bean-class>LMSG.view.Correspondents.CorrespondenceManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>systems</managed-bean-name>
+    <managed-bean-class>LMSG.view.utilities.systemsManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>pens</managed-bean-name>
+    <managed-bean-class>LMSG.view.Pensions.pensionsManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>payments</managed-bean-name>
+    <managed-bean-class>LMSG.view.Accounts.paymentProcessing</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ClientsAddDetails</managed-bean-name>
+    <managed-bean-class>LMSG.view.Clients.ClientAddDetails</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>LOVCCBean</managed-bean-name>
+    <managed-bean-class>LMSG.view.Base.LOVCC</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>bpm</managed-bean-name>
+    <managed-bean-class>view.jbpm.SimpleProcessTest</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>workflowBean</managed-bean-name>
+    <managed-bean-class>LMSG.view.BPM.workflowProcessing</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>quoteReports</managed-bean-name>
+    <managed-bean-class>LMSG.view.Reports.quotationReports</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>polVal</managed-bean-name>
+    <managed-bean-class>LMSG.view.Policy.PolicyValues</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>transAlloc</managed-bean-name>
+    <managed-bean-class>LMSG.view.Accounts.TransactionAlloc</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>quoteEnq</managed-bean-name>
+    <managed-bean-class>LMSG.view.Quotation.QuotationsEnquiry</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>receipt</managed-bean-name>
+    <managed-bean-class>LMSG.view.Accounts.receipting</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>poreports</managed-bean-name>
+    <managed-bean-class>LMSG.view.Reports.policyReports</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>policyMembersMan</managed-bean-name>
+    <managed-bean-class>LMSG.view.Members.PolicyMemManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>renManip</managed-bean-name>
+    <managed-bean-class>LMSG.view.Renewals.RenewalManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>PolicyDocs</managed-bean-name>
+    <managed-bean-class>LMSG.view.utilities.word.policyDocuments</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>SetupBean</managed-bean-name>
+    <managed-bean-class>com.turnkey.setups.setupManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>otherSetups</managed-bean-name>
+    <managed-bean-class>com.turnkey.setups.otherSetupsManip</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>CoreReports</managed-bean-name>
+    <managed-bean-class>LMSG.view.Reports.ProductionReports</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>agentsManipulation</managed-bean-name>
+    <managed-bean-class>AgentsManipu</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>agents</managed-bean-name>
+    <managed-bean-class>com.turnkey.setups.AgentsManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>GlobalCC</managed-bean-name>
+    <managed-bean-class>LMSG.view.Base.GlobalCC</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>cauastionsManipulation</managed-bean-name>
+    <managed-bean-class>com.turnkey.setups.causationsManipulation</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>Deployment</managed-bean-name>
+    <managed-bean-class>LMSG.view.BPM.Deployment</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__2">
+    <managed-bean-name id="__1">searchBean</managed-bean-name>
+    <managed-bean-class id="__4">LMSG.view.Endorsements.searchManipulation</managed-bean-class>
+    <managed-bean-scope id="__3">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__6">
+    <managed-bean-name id="__5">calendarBean</managed-bean-name>
+    <managed-bean-class id="__8">com.turnkey.Calendars.DemoCalendarBean</managed-bean-class>
+    <managed-bean-scope id="__7">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__9">
+    <managed-bean-name id="__10">editor</managed-bean-name>
+    <managed-bean-class id="__11">com.turnkey.Calendars.ComponentEditorHandler</managed-bean-class>
+    <managed-bean-scope id="__12">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__13">
+    <managed-bean-name id="__16">CalModel</managed-bean-name>
+    <managed-bean-class id="__15">LMSG.view.Calendar.CalendarModelBean</managed-bean-class>
+    <managed-bean-scope id="__14">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__20">
+    <managed-bean-name id="__19">coreSetups</managed-bean-name>
+    <managed-bean-class id="__17">com.turnkey.setups.CoreSetupsManipulation</managed-bean-class>
+    <managed-bean-scope id="__18">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__21">
+    <managed-bean-name id="__24">endorseBean</managed-bean-name>
+    <managed-bean-class id="__23">LMSG.view.Endorsements.EndorseManipulation</managed-bean-class>
+    <managed-bean-scope id="__22">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__27">
+    <managed-bean-name id="__25">ReportsEngine</managed-bean-name>
+    <managed-bean-class id="__26">LMSG.view.Reports.ReportEngine</managed-bean-class>
+    <managed-bean-scope id="__28">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__30">
+    <managed-bean-name id="__32">reportParameterBean</managed-bean-name>
+    <managed-bean-class id="__29">LMSG.view.Reports.ReportQuery</managed-bean-class>
+    <managed-bean-scope id="__31">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__36">
+    <managed-bean-name id="__33">PolicyLoad</managed-bean-name>
+    <managed-bean-class id="__35">LMSG.view.Accounts.LoadPoliciesManip</managed-bean-class>
+    <managed-bean-scope id="__34">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__38">
+    <managed-bean-name id="__40">ImportTempBean</managed-bean-name>
+    <managed-bean-class id="__39">LMSG.view.setups.ImportTemplateManip</managed-bean-class>
+    <managed-bean-scope id="__37">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__43">
+    <managed-bean-name id="__44">TicketsBean</managed-bean-name>
+    <managed-bean-class id="__41">LMSG.view.BPM.TicketProcessing</managed-bean-class>
+    <managed-bean-scope id="__42">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__45">
+    <managed-bean-name id="__48">MemCoverClaim</managed-bean-name>
+    <managed-bean-class id="__46">LMSG.view.Policy.MemCoverClaim</managed-bean-class>
+    <managed-bean-scope id="__47">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__51">
+    <managed-bean-name id="__52">ClaimsAuthorisationManipulation</managed-bean-name>
+    <managed-bean-class id="__50">LMSG.view.Claims.ClaimsAuthorisation</managed-bean-class>
+    <managed-bean-scope id="__49">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__54">
+    <managed-bean-name id="__56">ecm</managed-bean-name>
+    <managed-bean-class id="__55">LMSG.view.ecm.EcmTrans</managed-bean-class>
+    <managed-bean-scope id="__53">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__65">
+    <managed-bean-name id="__68">portfolio</managed-bean-name>
+    <managed-bean-class id="__66">LMSG.view.Accounts.PortfolioBean</managed-bean-class>
+    <managed-bean-scope id="__67">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__59">
+    <managed-bean-name id="__57">uprBacking</managed-bean-name>
+    <managed-bean-class id="__58">LMSG.view.Accounts.UprBacking</managed-bean-class>
+    <managed-bean-scope id="__60">request</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

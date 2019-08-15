@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="quocategPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="findCategory.result" DataControl="GenQuotCat"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotCategory"
+                    id="findCategoryIterator"/>
+    <methodIterator Binds="findCoverTypes.result"
+                    DataControl="GenQoutCoverTypes" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotCoverTypes"
+                    id="findCoverTypesIterator"/>
+    <methodIterator Binds="FindDependentsLimits.result"
+                    DataControl="dependentLimitsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.dependentLimits"
+                    id="FindDependentsLimitsIterator"/>
+    <methodIterator Binds="findProdDependents.result"
+                    DataControl="prodDependentsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.prodDependents"
+                    id="findProdDependentsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findCategory" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCategory"
+                  IsViewObjectMethod="false" DataControl="GenQuotCat"
+                  InstanceName="GenQuotCat.dataProvider"
+                  ReturnName="GenQuotCat.methodResults.findCategory_GenQuotCat_dataProvider_findCategory_result"/>
+    <tree IterBinding="findCategoryIterator" id="quotCategory">
+      <nodeDefinition DefName="view.Quot.quotCategory" Name="quotCategory0">
+        <AttrNames>
+          <Item Value="catShtDesc"/>
+          <Item Value="catDesc"/>
+          <Item Value="catPeriod"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findCategoryIterator" id="quotCategory1">
+      <nodeDefinition DefName="view.Quot.quotCategory" Name="quotCategory10">
+        <AttrNames>
+          <Item Value="catShtDesc"/>
+          <Item Value="catDesc"/>
+          <Item Value="catPeriod"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCoverTypes"
+                  IsViewObjectMethod="false" DataControl="GenQoutCoverTypes"
+                  InstanceName="GenQoutCoverTypes.dataProvider"
+                  ReturnName="GenQoutCoverTypes.methodResults.findCoverTypes_GenQoutCoverTypes_dataProvider_findCoverTypes_result"/>
+    <tree IterBinding="findCoverTypesIterator" id="quotCoverTypes">
+      <nodeDefinition DefName="view.Quot.quotCoverTypes" Name="quotCoverTypes0">
+        <AttrNames>
+          <Item Value="quocvtShtDesc"/>
+          <Item Value="cover_display"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findCategoryIterator" id="quotCategory2">
+      <nodeDefinition DefName="view.Quot.quotCategory" Name="quotCategory20">
+        <AttrNames>
+          <Item Value="catShtDesc"/>
+          <Item Value="catDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindDependentsLimits" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindDependentsLimits"
+                  IsViewObjectMethod="false" DataControl="dependentLimitsDAO"
+                  InstanceName="dependentLimitsDAO.dataProvider"
+                  ReturnName="dependentLimitsDAO.methodResults.FindDependentsLimits_dependentLimitsDAO_dataProvider_FindDependentsLimits_result"/>
+    <tree IterBinding="FindDependentsLimitsIterator" id="dependentLimits">
+      <nodeDefinition DefName="view.Quot.dependentLimits"
+                      Name="dependentLimits0">
+        <AttrNames>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="QDL_MAX_TYPE_ALLOWED"/>
+          <Item Value="QDL_LIMIT_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProdDependents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProdDependents"
+                  IsViewObjectMethod="false" DataControl="prodDependentsDAO"
+                  InstanceName="prodDependentsDAO.dataProvider"
+                  ReturnName="prodDependentsDAO.methodResults.findProdDependents_prodDependentsDAO_dataProvider_findProdDependents_result"/>
+    <tree IterBinding="findProdDependentsIterator" id="prodDependents">
+      <nodeDefinition DefName="view.Quot.prodDependents" Name="prodDependents0">
+        <AttrNames>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="max_allowed"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

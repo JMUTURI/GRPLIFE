@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="CorrespondenceDAO" Package="LMSG.view.Correspondents"
+          BeanClass="LMSG.view.Correspondents.CorrespondenceDAO"
+          isJavaBased="true">
+  <Attribute Name="templateTranSeq" Type="int"/>
+  <Attribute Name="templateType" Type="java.lang.String"/>
+  <Attribute Name="templayeTypeInt" Type="int"/>
+  <Attribute Name="quotationNo" Type="java.lang.String"/>
+  <Attribute Name="msgTempCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="msgTempShtDesc" Type="java.lang.String"/>
+  <Attribute Name="msgTempDesc" Type="java.lang.String"/>
+  <Attribute Name="smsCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="emailCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="agentCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="UWYear" Type="java.lang.String"/>
+  <Attribute Name="prpDesc" Type="java.lang.String"/>
+  <Attribute Name="gcoDesc" Type="java.lang.String"/>
+  <Attribute Name="policyNumberSel" Type="java.lang.String"/>
+  <Attribute Name="userSelected" Type="java.lang.String"/>
+  <Attribute Name="taskselName" Type="java.lang.String"/>
+  <Attribute Name="taskselAssignee" Type="java.lang.String"/>
+  <Attribute Name="taskselDueDate" Type="java.util.Date"/>
+  <Attribute Name="taskselID" Type="java.lang.String"/>
+  <Attribute Name="taskselCreateDate" Type="java.util.Date"/>
+  <Attribute Name="pmasCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pmasshtdesc" Type="java.lang.String"/>
+  <Attribute Name="depCovered" Type="java.lang.String"/>
+  <Attribute Name="brnName" Type="java.lang.String"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="taskActivityName" Type="java.lang.String"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.Correspondents.Correspondence"
+                  BeanClass="LMSG.view.Correspondents.Correspondence"
+                  id="findMessageTemplates" ReturnNodeName="Correspondence"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String" id="parseDate"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="somedate" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.Correspondents.Correspondence"
+                  BeanClass="LMSG.view.Correspondents.Correspondence"
+                  id="findMessageValues" ReturnNodeName="Correspondence"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Correspondents.CorrespondenceDAO"
+                     BeanClass="LMSG.view.Correspondents.CorrespondenceDAO"
+                     id="CorrespondenceDAO"/>
+</JavaBean>

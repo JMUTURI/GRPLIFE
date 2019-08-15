@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.51.88" id="undwrdocPageDef"
+                Package="LMSG.view.Policy">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="FindOccupation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindOccupation"
+                  IsViewObjectMethod="false" DataControl="documentsDAO"
+                  InstanceName="documentsDAO.dataProvider"
+                  ReturnName="documentsDAO.methodResults.FindOccupation_documentsDAO_dataProvider_FindOccupation_result"/>
+    <methodAction id="FindPolicyDocs" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyDocs"
+                  IsViewObjectMethod="false" DataControl="groupPolicyDocsDAO"
+                  InstanceName="groupPolicyDocsDAO.dataProvider"
+                  ReturnName="groupPolicyDocsDAO.methodResults.FindPolicyDocs_groupPolicyDocsDAO_dataProvider_FindPolicyDocs_result"/>
+  </bindings>
+</pageDefinition>

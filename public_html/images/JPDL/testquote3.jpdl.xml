@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process xmlns="http://jbpm.org/4.0/jpdl"  name="testquote3">
+	<start>
+		<transition name="To Client" to="Client Exists"></transition>
+	</start>
+	
+	<decision name="Client Exists" expr="#{content}">
+	    <transition name="Yes" to="Quotation Data Entry"/>
+	    <transition name="No" to="Create Quotation Client"/>
+	</decision>
+
+	
+	<task name="Create Quotation Client" 
+        assignee="#{order}">
+     <transition name="To Quote" to="Create Quotation"></transition>
+    </task>
+
+    <task name="Create Quotation" 
+        assignee="#{order}">
+     <transition name="Data Entry" to="Quotation Data Entry"></transition>
+    </task>
+	
+	<task name="Quotation Data Entry" 
+        assignee="#{order}">
+     <transition name="Start Underwriting" to="Underwrite Quotation"></transition>
+    </task>
+	
+	 <task name="Underwrite Quotation" 
+        assignee="#{order}">
+     <transition name="Authorise Quote" to="Authorise Quotation"></transition>
+    </task>
+	
+	<task name="Authorise Quotation" 
+        assignee="#{order}">
+     <transition name="Dispatch Document" to="Dispatch Quotation Documents"></transition>
+    </task>
+	
+
+	<task name="Dispatch Quotation Documents" 
+        assignee="#{order}">
+     <transition name="end quote" to="end-quotation-process" />
+    </task>
+	 
+
+	<end name="end-quotation-process"></end>
+</process>

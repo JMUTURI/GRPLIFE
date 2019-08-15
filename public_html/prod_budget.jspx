@@ -1,0 +1,635 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Group Life | Product Budgets">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl1">
+              <af:panelTabbed id="pt1" inlineStyle="width:100%;height:540px">
+                <af:showDetailItem text="Budget Types" id="sdi1">
+                  <af:panelGroupLayout id="pgl4">
+                    <af:panelBox text="Budget Types" id="pb4">
+                      <h:panelGrid columns="3" id="pg3">
+                        <af:commandButton text="Add" id="cb1" shortDesc="Add budget type" icon="/images/field_group_plus_ena.png"
+                                          action="#{otherSetups.showBudgetPopup}"/>
+                        <af:commandButton text="Edit" id="cb2" shortDesc="Edit budget type" icon="/images/update_ena.png"
+                                          action="#{otherSetups.showEditPopup}"/>
+                        <af:commandButton text="Delete" id="cb3" shortDesc="Delete budget type" icon="/images/delete_ena.png"
+                                          binding="#{otherSetups.deleteBudgetTypes}"
+                                          action="#{otherSetups.deleteBudgetAction}"/>
+                        </h:panelGrid>
+                      <af:popup id="p3">
+                        <af:dialog id="d4" type="none">
+                          <af:panelBox text="PanelBox5" id="pb5" showHeader="never">
+                           <h:panelGrid id="pg9" columns="2">
+                             <af:outputLabel value="Budget Name" id="ol33"/>                             
+                             <af:inputText label="Label 5" id="it5" simple="true"
+                                           binding="#{otherSetups.budgetName}"/>
+                              <af:outputLabel value="Description" id="ol34"/>
+                              <af:inputText label="Label 3" id="it3" simple="true"
+                                            binding="#{otherSetups.budgetDesc}"/>
+                              <af:outputLabel value="UW YR" id="ol35"/>
+                              <af:inputText label="Label 4" id="it4" simple="true"
+                                            binding="#{otherSetups.budgetUW_YR}"/>
+                              <af:outputLabel value="Policy Effective From Date" id="ol36"/>
+                              <af:inputDate label="Label 1" id="id1" simple="true"
+                                            binding="#{otherSetups.budgetEffDate}">
+                              <af:convertDateTime pattern="dd-MMM-yyyy"/>  
+                              </af:inputDate>
+                              <h:panelGrid id="pg10" columns="2">
+                                <af:commandButton text="Save"
+                                                  id="cb13"
+                                                  action="#{otherSetups.addEditBudgetTypes}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="cb14"/>
+                              </h:panelGrid>
+                            </h:panelGrid>
+                          </af:panelBox>
+                        </af:dialog>
+                      </af:popup>
+                      <af:table value="#{bindings.Setup.collectionModel}"
+                                var="row" rows="#{bindings.Setup.rangeSize}"
+                                emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Setup.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.SetupQuery.queryDescriptor}"
+                                queryListener="#{bindings.SetupQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t3"
+                                inlineStyle="width:50%;height:540px;border:none"                                
+                                binding="#{otherSetups.budgetTypeLOV}">
+                        <af:column sortProperty="btsCode" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Setup.hints.btsCode.label}"
+                                   visible="false"
+                                   id="c10">
+                          <af:outputText value="#{row.btsCode}" id="ot10"/>
+                        </af:column>
+                          <af:column sortProperty="btsName" filterable="true"
+                                   sortable="true"
+                                   headerText="Budget Name"
+                                   id="c11">
+                          <af:outputText value="#{row.btsName}" id="ot8"/>
+                        </af:column>                        
+                      
+                        <af:column sortProperty="btsDesc" filterable="true"
+                                   sortable="true"
+                                   headerText="Budget Description"
+                                   id="c8">
+                          <af:outputText value="#{row.btsDesc}" id="ot12"/>
+                        </af:column>
+                        <af:column sortProperty="btsUwYr" filterable="true"
+                                   sortable="true"
+                                   headerText="Underwriting Year"
+                                   id="c9">
+                          <af:outputText value="#{row.btsUwYr}" id="ot9"/>
+                        </af:column>
+                        <af:column sortProperty="btsPolEffDate"
+                                   filterable="true" sortable="true"
+                                   headerText="Effective Date"
+                                   id="c12">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.btsPolEffDate}"
+                                          id="id2"/>
+                          </f:facet>
+                          <af:outputText value="#{row.btsPolEffDate}" id="ot11">
+                            <af:convertDateTime pattern="#{bindings.Setup.hints.btsPolEffDate.format}"/>
+                          </af:outputText>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </af:showDetailItem>
+                <af:showDetailItem text="Product Budgets" id="sdi2">
+                
+              <af:panelBox text="PanelBox1" id="pb1" showHeader="never">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="8" id="pg1">
+                <af:outputLabel value="Product" id="ol1"/>
+                <h:panelGrid columns="2" id="pg4">
+                 <af:inputText label="Label 1" id="it1" simple="true"
+                               binding="#{otherSetups.budgProdDesc}"
+                               disabled="true"/>
+                  <af:commandButton  id="cb4"  icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="p1"/>
+                  </af:commandButton>
+                  </h:panelGrid>
+                  <af:outputLabel value="Branch" id="ol2"/>
+                  <h:panelGrid columns="2" id="pg5">
+                  <af:inputText label="Label 2" id="it2" simple="true"
+                                binding="#{otherSetups.budgBranchDesc}"
+                                disabled="true"/>
+                  <af:commandButton  id="cb5"  icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="p2"/>
+                  </af:commandButton>
+                  </h:panelGrid>
+                   <af:outputLabel value="Budget Types" id="ol37"/>
+                   <h:panelGrid columns="2" id="pg11">
+                   <af:inputText label="Label 19" id="it6" simple="true"
+                                 binding="#{otherSetups.budgetNameTF}"
+                                 disabled="true"/>
+                    <af:commandButton id="cb15" icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="p4"/>
+                    </af:commandButton>
+                      </h:panelGrid>
+                      <af:popup id="p1">
+                      <af:dialog id="d2" type="none" title="Select Product">
+                        <af:table value="#{bindings.productDetails.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.productDetails.rangeSize}"
+                                  emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.productDetails.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                  queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t1"
+                                  width="425"
+                                  binding="#{otherSetups.productLOV}">
+                          <af:column sortProperty="prodCode" filterable="true"
+                                     sortable="true"
+                                     headerText="#{bindings.productDetails.hints.prodCode.label}"
+                                     visible="false"
+                                     id="c1">
+                            <af:outputText value="#{row.prodCode}" id="ot3"/>
+                          </af:column>
+                          <af:column sortProperty="Short Desc"
+                                     filterable="true" sortable="true"
+                                     headerText="#{bindings.productDetails.hints.prodshtDesc.label}"
+                                     id="c2">
+                            <af:outputText value="#{row.prodshtDesc}" id="ot1"/>
+                          </af:column>
+                          <af:column sortProperty="Product" filterable="true"
+                                     sortable="true"
+                                     headerText="#{bindings.productDetails.hints.prodDesc.label}"
+                                     id="c3" width="200">
+                            <af:outputText value="#{row.prodDesc}" id="ot2"/>
+                          </af:column>
+                          
+                          <af:column sortProperty="Product Type" filterable="true"
+                                     sortable="true"
+                                     headerText="#{bindings.productDetails.hints.prodType.label}"
+                                     id="c4">
+                            <af:outputText value="#{row.prodType}" id="ot4"/>
+                          </af:column>
+                        </af:table>
+                        <h:panelGrid columns="2" id="pg6">
+                        <af:commandButton text="Ok" id="cb6"
+                                          action="#{otherSetups.getSelectedProduct}"/>
+                        <af:commandButton text="Cancel" id="cb7"/>
+                      </h:panelGrid>
+                      </af:dialog>
+                      
+                    </af:popup>
+                    
+                    <af:popup id="p2">
+                      <af:dialog id="d3" title="Select Branch" type="none">
+                        <af:table value="#{bindings.branches1.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.branches1.rangeSize}"
+                                  emptyText="#{bindings.branches1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.branches1.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.branches1Query.queryDescriptor}"
+                                  queryListener="#{bindings.branches1Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.branches1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.branches1.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t2"
+                                  width="370"
+                                  binding="#{otherSetups.branchLOV}">
+                          <af:column sortProperty="BRN_CODE" filterable="true"
+                                     sortable="true"
+                                     headerText="#{bindings.branches1.hints.BRN_CODE.label}"
+                                     id="c7"
+                                     visible="false">
+                            <af:outputText value="#{row.BRN_CODE}" id="ot6"/>
+                          </af:column>
+                          <af:column sortProperty="BRN_SHT_DESC"
+                                     filterable="true" sortable="true"
+                                     headerText="Short Desc"
+                                     id="c5">
+                            <af:outputText value="#{row.BRN_SHT_DESC}"
+                                           id="ot5"/>
+                          </af:column>
+                          <af:column sortProperty="BRN_NAME" filterable="true"
+                                     sortable="true"
+                                     headerText="Branch Name"
+                                     id="c6" width="230">
+                            <af:outputText value="#{row.BRN_NAME}" id="ot7"/>
+                          </af:column>
+                        </af:table>
+                        <h:panelGrid id="pg7" columns="2">
+                          <af:commandButton text="Ok" id="cb8"
+                                            action="#{otherSetups.getSelectedBranch}"/>
+                          <af:commandButton text="Cancel" id="cb9"/>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                    
+                        <af:popup id="p4">
+                          <af:dialog id="d5" type="none" title="Budget Type">
+                          <af:table value="#{bindings.Setup1.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.Setup1.rangeSize}"
+                                    emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.Setup1.rangeSize}"
+                                    rowBandingInterval="0"
+                                    filterModel="#{bindings.SetupQuery.queryDescriptor}"
+                                    queryListener="#{bindings.SetupQuery.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectionListener="#{bindings.Setup1.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t4"
+                                    binding="#{otherSetups.prodBudgetLOV}">
+                            <af:column sortProperty="btsCode" filterable="true"
+                                       sortable="true"
+                                       headerText="#{bindings.Setup1.hints.btsCode.label}"
+                                       visible="false"
+                                       id="c15">
+                              <af:outputText value="#{row.btsCode}" id="ot14"/>
+                            </af:column>
+                            <af:column sortProperty="btsName" filterable="true"
+                                       sortable="true"
+                                       headerText="Budget Name"
+                                       width="220px"
+                                       id="c13">
+                              <af:outputText value="#{row.btsName}" id="ot15"/>
+                            </af:column>
+                            
+                            <af:column sortProperty="btsUwYr" filterable="true"
+                                       sortable="true"
+                                       headerText="Uw Year"
+                                       id="c14">
+                              <af:outputText value="#{row.btsUwYr}" id="ot13"/>
+                            </af:column>
+                          </af:table>
+                          <h:panelGrid columns="2" id="pg12">
+                            <af:commandButton text="Ok" id="cb16"
+                                              action="#{otherSetups.selectBudgetType}"/>
+                            <af:commandButton text="Cancel" id="cb17"/>
+                          </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                </h:panelGrid>
+                <af:separator id="s1"/>                
+              </af:panelBox>
+              
+              <af:panelSplitter id="ps1" inlineStyle="width:100%;height:300px" splitterPosition="250">
+                <f:facet name="first">
+                  <af:panelGroupLayout layout="scroll"
+                                       xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                       id="pgl2">                    
+                    <af:panelBox text="PanelBox3" id="pb3" showHeader="never" inlineStyle="width:100%;height:400px">
+                          <af:table value="#{bindings.Setup2.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.Setup2.rangeSize}"
+                                    emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.Setup2.rangeSize}"
+                                    rowBandingInterval="0"
+                                    filterModel="#{bindings.Setup2Query.queryDescriptor}"
+                                    queryListener="#{bindings.Setup2Query.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    rowSelection="single" id="t5"
+                                    binding="#{otherSetups.budgetNamesLOV}" 
+                                    selectionListener="#{otherSetups.populateBudgetMonths}">
+                            <af:column sortProperty="btsName" filterable="true"
+                                       sortable="true"
+                                       headerText="Product Budget Type"                                       
+                                       width="220px"
+                                       id="c30">
+                              <af:outputText value="#{row.btsName}" id="ot17"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtJanRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtJanRenAmt.label}"
+                                       visible="false"
+                                       id="c24">
+                              <af:outputText value="#{row.pbgtJanRenAmt}"
+                                             id="ot27"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtFebRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtFebRenAmt.label}"
+                                       visible="false"
+                                       id="c28">
+                              <af:outputText value="#{row.pbgtFebRenAmt}"
+                                             id="ot21"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtMarRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtMarRenAmt.label}"
+                                       visible="false"
+                                       id="c23">
+                              <af:outputText value="#{row.pbgtMarRenAmt}"
+                                             id="ot18"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtAprRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtAprRenAmt.label}"
+                                       visible="false"
+                                       id="c34">
+                              <af:outputText value="#{row.pbgtAprRenAmt}"
+                                             id="ot34"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtMayRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtMayRenAmt.label}"
+                                       visible="false"
+                                       id="c29">
+                              <af:outputText value="#{row.pbgtMayRenAmt}"
+                                             id="ot28"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtJunRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtJunRenAmt.label}"
+                                       visible="false"
+                                       id="c31">
+                              <af:outputText value="#{row.pbgtJunRenAmt}"
+                                             id="ot40"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtJulRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtJulRenAmt.label}"
+                                       visible="false"
+                                       id="c39">
+                              <af:outputText value="#{row.pbgtJulRenAmt}"
+                                             id="ot23"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtAugRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtAugRenAmt.label}"
+                                       visible="false"
+                                       id="c35">
+                              <af:outputText value="#{row.pbgtAugRenAmt}"
+                                             id="ot20"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtSepRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtSepRenAmt.label}"
+                                       visible="false"
+                                       id="c37">
+                              <af:outputText value="#{row.pbgtSepRenAmt}"
+                                             id="ot26"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtOctRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtOctRenAmt.label}"
+                                       visible="false"
+                                       id="c33">
+                              <af:outputText value="#{row.pbgtOctRenAmt}"
+                                             id="ot37"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtNovRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtNovRenAmt.label}"
+                                       visible="false"
+                                       id="c25">
+                              <af:outputText value="#{row.pbgtNovRenAmt}"
+                                             id="ot19"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtDecRenAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtDecRenAmt.label}"
+                                       visible="false"
+                                       id="c32">
+                              <af:outputText value="#{row.pbgtDecRenAmt}"
+                                             id="ot33"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtJanNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtJanNBAmt.label}"
+                                       visible="false"
+                                       id="c27">
+                              <af:outputText value="#{row.pbgtJanNBAmt}"
+                                             id="ot29"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtFebNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtFebNBAmt.label}"
+                                       visible="false"
+                                       id="c36">
+                              <af:outputText value="#{row.pbgtFebNBAmt}"
+                                             id="ot39"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtMarNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtMarNBAmt.label}"
+                                       visible="false"
+                                       id="c16">
+                              <af:outputText value="#{row.pbgtMarNBAmt}"
+                                             id="ot35"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtAprNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtAprNBAmt.label}"
+                                       visible="false"
+                                       id="c20">
+                              <af:outputText value="#{row.pbgtAprNBAmt}"
+                                             id="ot25"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtMayNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtMayNBAmt.label}"
+                                       visible="false"
+                                       id="c38">
+                              <af:outputText value="#{row.pbgtMayNBAmt}"
+                                             id="ot32"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtJunNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtJunNBAmt.label}"
+                                       visible="false"
+                                       id="c26">
+                              <af:outputText value="#{row.pbgtJunNBAmt}"
+                                             id="ot16"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtJulNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtJulNBAmt.label}"
+                                       visible="false"
+                                       id="c40">
+                              <af:outputText value="#{row.pbgtJulNBAmt}"
+                                             id="ot24"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtAugNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtAugNBAmt.label}"
+                                       visible="false"
+                                       id="c18">
+                              <af:outputText value="#{row.pbgtAugNBAmt}"
+                                             id="ot31"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtSepNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtSepNBAmt.label}"
+                                       visible="false"
+                                       id="c19">
+                              <af:outputText value="#{row.pbgtSepNBAmt}"
+                                             id="ot30"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtOctNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtOctNBAmt.label}"
+                                       visible="false"
+                                       id="c22">
+                              <af:outputText value="#{row.pbgtOctNBAmt}"
+                                             id="ot22"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtNovNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtNovNBAmt.label}"
+                                       visible="false"
+                                       id="c17">
+                              <af:outputText value="#{row.pbgtNovNBAmt}"
+                                             id="ot38"/>
+                            </af:column>
+                            <af:column sortProperty="pbgtDecNBAmt"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.Setup2.hints.pbgtDecNBAmt.label}"
+                                       visible="false"
+                                       id="c21">
+                              <af:outputText value="#{row.pbgtDecNBAmt}"
+                                             id="ot36"/>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                  </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="second">
+                  <af:panelGroupLayout layout="scroll"
+                                       xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                       id="pgl3">
+                    <af:panelBox text="PanelBox4" id="pb2" showHeader="never" inlineStyle="width:100%;height:300px">
+                      <f:facet name="toolbar"/>
+                      <h:panelGrid columns="3" id="pg8">
+                        <af:commandButton text="Add/Edit" id="cb10" shortDesc="Add /Edit Budget" icon="/images/save.gif"
+                                          action="#{otherSetups.addProdBudget}"/>
+                        <af:commandButton text="Delete" id="cb12" shortDesc="Delete budget" icon="/images/delete_ena.png"
+                                          action="#{otherSetups.deleteProdBudget}"/>
+                      </h:panelGrid>
+                      <af:spacer width="10" height="20" id="s3"/>
+                      <af:separator id="s2"/>
+                      <table>
+                      <tr>
+                      <td><!--New Business -->
+                      <h:panelGrid id="pg2" columns="12">
+                             <af:spacer width="10" height="10" id="s4"/>
+                              <af:outputLabel value="Renewal" id="ol15" inlineStyle="font-weight:bold"/>
+                               <af:spacer width="10" height="10" id="s5"/>
+                              <af:outputLabel value="NB" id="ol16" inlineStyle="font-weight:bold"/>
+                              <af:spacer width="10" height="10" id="s6"/>
+                              <af:outputLabel value="Renewal" id="ol17" inlineStyle="font-weight:bold"/>
+                               <af:spacer width="10" height="10" id="s7"/>
+                              <af:outputLabel value="NB" id="ol18" inlineStyle="font-weight:bold"/>
+                             <af:spacer width="10" height="10" id="s8"/>
+                              <af:outputLabel value="Renewal" id="ol19" inlineStyle="font-weight:bold"/>
+                              <af:spacer width="10" height="10" id="s9"/>
+                              <af:outputLabel value="NB" id="ol20" inlineStyle="font-weight:bold"/>
+                              <!-- Start of the input text-->
+                              <af:outputLabel value="Jan" id="ol3"/>
+                              <af:inputText label="Label 7" id="it7" simple="true" columns="20"
+                                            binding="#{otherSetups.renJanBudget}"/>
+                              <af:outputLabel value="Jan" id="ol4"/>
+                              <af:inputText label="Label 8" id="it8" simple="true" columns="20"
+                                            binding="#{otherSetups.nbJanBudget}"/>                              
+                              <af:outputLabel value="Feb" id="ol5"/>
+                              <af:inputText label="Label 9" id="it9" simple="true" columns="20"
+                                            binding="#{otherSetups.renFebBudget}"/>
+                              <af:outputLabel value="Feb" id="ol6"/>
+                              <af:inputText label="Label 10" id="it10" simple="true" columns="20"
+                                            binding="#{otherSetups.nbFebBudget}"/>
+                                            
+                              <af:outputLabel value="Mar" id="ol7"/>
+                              <af:inputText label="Label 11" id="it11" simple="true" columns="20"
+                                            binding="#{otherSetups.renMarBudget}"/>
+                              <af:outputLabel value="Mar" id="ol8"/>
+                              <af:inputText label="Label 12" id="it12" simple="true" columns="20"
+                                            binding="#{otherSetups.nbMarBudget}"/>
+                              <af:outputLabel value="Apr" id="ol9"/>
+                              <af:inputText label="Label 13" id="it13" simple="true" columns="20"
+                                            binding="#{otherSetups.renAprBudget}"/>
+                              <af:outputLabel value="Apr" id="ol10"/>
+                              <af:inputText label="Label 14" id="it14" simple="true" columns="20"
+                                            binding="#{otherSetups.nbAprBudget}"/>
+                              <af:outputLabel value="May" id="ol11"/>
+                              <af:inputText label="Label 15" id="it15" simple="true" columns="20"
+                                            binding="#{otherSetups.renMayBudget}"/>
+                              <af:outputLabel value="May" id="ol12"/>
+                              <af:inputText label="Label 16" id="it16" simple="true" columns="20"
+                                            binding="#{otherSetups.nbMayBudget}"/>
+                              <af:outputLabel value="Jun" id="ol13"/>
+                              <af:inputText label="Label 17" id="it17" simple="true" columns="20"
+                                            binding="#{otherSetups.renJunBudget}"/>
+                              <af:outputLabel value="Jun" id="ol14"/>
+                              <af:inputText label="Label 18" id="it18" simple="true" columns="20"
+                                            binding="#{otherSetups.nbJunBudget}"/>
+                               <af:outputLabel value="Jul" id="ol21"/>
+                              <af:inputText label="Label 7" id="it19" simple="true" columns="20"
+                                            binding="#{otherSetups.renJulBudget}"/>
+                              <af:outputLabel value="Jul" id="ol22"/>
+                              <af:inputText label="Label 8" id="it20" simple="true" columns="20"
+                                            binding="#{otherSetups.nbJulBudget}"/>                              
+                              <af:outputLabel value="Aug" id="ol23"/>
+                              <af:inputText label="Label 9" id="it21" simple="true" columns="20"
+                                            binding="#{otherSetups.renAugBudget}"/>
+                              <af:outputLabel value="Aug" id="ol25"/>
+                              <af:inputText label="Label 10" id="it22" simple="true" columns="20"
+                                            binding="#{otherSetups.nbAugBudget}"/>
+                                            
+                              <af:outputLabel value="Sep" id="ol24"/>
+                              <af:inputText label="Label 11" id="it23" simple="true" columns="20"
+                                            binding="#{otherSetups.renSepBudget}"/>
+                              <af:outputLabel value="Sep" id="ol26"/>
+                              <af:inputText label="Label 12" id="it24" simple="true" columns="20"
+                                            binding="#{otherSetups.nbSepBudget}"/>
+                              
+                              <af:outputLabel value="Oct" id="ol27"/>
+                              <af:inputText label="Label 13" id="it25" simple="true" columns="20"
+                                            binding="#{otherSetups.renOctBudget}"/>
+                              <af:outputLabel value="Oct" id="ol28"/>
+                              <af:inputText label="Label 14" id="it26" simple="true" columns="20"
+                                            binding="#{otherSetups.nbOctBudget}"/>
+                              
+                              <af:outputLabel value="Nov" id="ol29"/>
+                              <af:inputText label="Label 15" id="it27" simple="true" columns="20"
+                                            binding="#{otherSetups.renNovBudget}"/>
+                              
+                              <af:outputLabel value="Nov" id="ol31"/>
+                              <af:inputText label="Label 16" id="it28" simple="true" columns="20"
+                                            binding="#{otherSetups.nbNovBudget}"/>
+                              
+                              <af:outputLabel value="Dec" id="ol30"/>
+                              <af:inputText label="Label 17" id="it29" simple="true" columns="20"
+                                            binding="#{otherSetups.renDecBudget}"/>
+                              <af:outputLabel value="Dec" id="ol32"/>
+                              <af:inputText label="Label 18" id="it30" simple="true" columns="20"
+                                            binding="#{otherSetups.nbDecBudget}"/>
+                            </h:panelGrid>
+                      </td>
+                      <td>
+                      </td>
+                      </tr>
+                      </table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelSplitter>
+                </af:showDetailItem>
+              </af:panelTabbed>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

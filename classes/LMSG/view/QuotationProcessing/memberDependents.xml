@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="memberDependents" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.memberDependents" isJavaBased="true">
+  <Attribute Name="MEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="MEM_MAIN_MEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="MEM_DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="MEM_PRP_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="MEM_IDENTITY_NO" Type="java.math.BigDecimal"/>
+  <Attribute Name="MEM_PDL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="MEM_NO" Type="java.lang.String"/>
+  <Attribute Name="MEM_SURNAME" Type="java.lang.String"/>
+  <Attribute Name="MEM_OTHER_NAMES" Type="java.lang.String"/>
+  <Attribute Name="MEM_SEX" Type="java.lang.String"/>
+  <Attribute Name="MEM_DTY_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="MEM_TELEPHONE" Type="java.lang.String"/>
+  <Attribute Name="MEM_ADDRESS" Type="java.lang.String"/>
+  <Attribute Name="MEM_PRP_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="MEM_DTY_NO" Type="java.lang.String"/>
+  <Attribute Name="MEM_SCHEDULE_NO" Type="java.lang.String"/>
+  <Attribute Name="MEM_CURRENT_SCH_NO" Type="java.lang.String"/>
+  <Attribute Name="MEM_DOB" Type="java.util.Date"/>
+  <Attribute Name="MEM_SACCO_JOIN_DATE" Type="java.util.Date"/>
+  <Attribute Name="MEM_EMPLOYMENT_DATE" Type="java.util.Date"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.memberDependents"
+                     BeanClass="LMSG.view.QuotationProcessing.memberDependents"
+                     id="memberDependents"/>
+</JavaBean>

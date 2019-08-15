@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="groupPolicyDocs" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.groupPolicyDocs" isJavaBased="true">
+  <Attribute Name="GPD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GPD_RD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GPD_RD_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="DOCUMENT_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="DOCUMENT_SUBMITTED" Type="java.lang.String"/>
+  <Attribute Name="dateGiven" Type="java.util.Date"/>
+  <Attribute Name="GPD_DOC_NO" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.groupPolicyDocs"
+                     BeanClass="LMSG.view.Policy.groupPolicyDocs"
+                     id="groupPolicyDocs"/>
+</JavaBean>

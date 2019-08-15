@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="TreatyParticipants" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.TreatyParticipants" isJavaBased="true">
+  <Attribute Name="trpa_agen_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="trpa_rei_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="trpa_uw_year" Type="java.math.BigDecimal"/>
+  <Attribute Name="trpa_comp_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="trpa_trs_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="trpa_agen_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_name" Type="java.lang.String"/>
+  <Attribute Name="trpa_gl_ctrl_account" Type="java.lang.String"/>
+  <Attribute Name="trpa_trs_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="trpa_rei_prem_taxable" Type="java.lang.String"/>
+  <Attribute Name="AGEN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGEN_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="AGEN_NAME" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.TreatyParticipants"
+                     BeanClass="com.turnkey.setups.TreatyParticipants"
+                     id="TreatyParticipants"/>
+</JavaBean>

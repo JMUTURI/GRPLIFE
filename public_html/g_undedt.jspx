@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Edit Transaction" id="d3">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="pt1">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout id="pgl2" layout="scroll">
+            <af:panelBox text="Select Quotation" showHeader="never"
+                         binding="#{manipulation.searchQuote}" id="pb1">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Select a Policy to Edit"
+                              inlineStyle="font-weight:bold;" id="ol1"
+                              rendered="#{Rendering.policyEditOnly}"/>
+              <af:outputLabel value="Select a Policy to View"
+                              inlineStyle="font-weight:bold;" id="outputLabel2"
+                              rendered="#{Rendering.policyViewOnly}"/>
+              <af:separator inlineStyle="width:inherit;" id="s1"/>
+              <h:panelGrid columns="2" id="pg1">
+                <af:outputLabel value="Product ID" id="ol2"
+                                showRequired="true"/>
+                <h:panelGrid columns="2" id="pg2">
+                  <af:inputText label="Label 1" simple="true"
+                                binding="#{viewPolicy.productDesc}"
+                                disabled="true" id="it1"/>
+                  <af:commandButton icon="/dropdown.gif" id="cb1">
+                    <af:showPopupBehavior popupId="productsPopup"/>
+                  </af:commandButton>
+                  <af:popup id="productsPopup">
+                    <af:dialog type="none" title="Select Product" id="d1">
+                      <af:table value="#{bindings.productDetails.collectionModel}"
+                                var="row"
+                                rows="#{bindings.productDetails.rangeSize}"
+                                emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.productDetails.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t6"
+                                binding="#{viewPolicy.productsLOV}">
+                        <af:column sortProperty="prodshtDesc" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Short Desc"
+                                   id="c20">
+                          <af:outputText value="#{row.prodshtDesc}" id="ot15"/>
+                        </af:column>
+                        <af:column sortProperty="prodDesc" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Product" id="c19"
+                                   width="200">
+                          <af:outputText value="#{row.prodDesc}" id="ot16"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg3">
+                        <af:commandButton text="OK"
+                                          action="#{viewPolicy.findProductSelected}"
+                                          id="cb2"/>
+                        <af:commandButton text="Cancel" id="cb3"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputText binding="#{manipulation.conProdDescDisplay}"
+                               inlineStyle="width:25%;" rendered="false"
+                               id="ot4"/>
+                <af:outputLabel value="Client/Scheme" id="outputLabel3"/>
+                <h:panelGrid columns="2" id="panelGrid1">
+                  <af:inputText label="Label 1" simple="true"
+                                binding="#{viewPolicy.clientDesc}"
+                                disabled="true" id="inputText1"/>
+                  <af:commandButton icon="/dropdown.gif" id="commandButton1">
+                    <af:showPopupBehavior popupId="client"/>
+                  </af:commandButton>
+                  <af:popup id="client">
+                    <af:dialog type="none" title="Select Client" id="dialog1">
+                      <af:table value="#{bindings.proposers.collectionModel}"
+                                var="row" rows="#{bindings.proposers.rangeSize}"
+                                emptyText="#{bindings.proposers.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.proposers.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.proposersQuery.queryDescriptor}"
+                                queryListener="#{bindings.proposersQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.proposers.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.proposers.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t4" width="360"
+                                binding="#{viewPolicy.clientLOV}">
+                        <af:column sortProperty="CLIENT" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Client" id="c10"
+                                   width="210">
+                          <af:outputText value="#{row.CLIENT}" id="ot14"/>
+                        </af:column>
+                        <af:column sortProperty="GCO_DESC" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Occupation"
+                                   id="c11" width="150">
+                          <af:outputText value="#{row.GCO_DESC}" id="ot13"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="panelGrid2">
+                        <af:commandButton text="OK"
+                                          action="#{viewPolicy.findClientsSelected}"
+                                          id="commandButton2"/>
+                        <af:commandButton text="Cancel" id="commandButton3"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputText inlineStyle="width:25%;" rendered="false"
+                               id="outputText9"/>
+                <af:outputLabel value="Policy No." id="ol3"/>
+                <h:panelGrid columns="2" id="pg4">
+                  <af:inputText label="Label 2" simple="true"
+                                binding="#{viewPolicy.policiesDesc}"
+                                disabled="true" id="it2"/>
+                  <af:commandButton icon="/dropdown.gif" id="cb4">
+                    <af:showPopupBehavior popupId="policies"/>
+                  </af:commandButton>
+                  <af:popup id="policies">
+                    <af:dialog type="none" title="Select Policy" id="d2">
+                      <af:table value="#{bindings.policies2.collectionModel}"
+                                var="row" rows="#{bindings.policies2.rangeSize}"
+                                emptyText="#{bindings.policies2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.policies2.rangeSize}"
+                                filterModel="#{bindings.policies2Query.queryDescriptor}"
+                                queryListener="#{bindings.policies2Query.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.policies2.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.policies2.collectionModel.makeCurrent}"
+                                rowSelection="single"
+                                binding="#{viewPolicy.policiesLOV}" id="t2"
+                                width="400">
+                        <af:column sortProperty="LTR_POL_POLICY_NO"
+                                   filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Policy No."
+                                   width="200" id="c4">
+                          <af:outputText value="#{row.LTR_POL_POLICY_NO}"
+                                         id="ot6"/>
+                        </af:column>
+                        <af:column sortProperty="LTR_BUSN_TYPE" sortable="true"
+                                   headerText="Transaction" id="c3" width="200"
+                                   filterable="true"
+                                   filterFeatures="caseInsensitive">
+                          <af:outputText value="#{row.LTR_BUSN_TYPE}" id="ot5"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg6">
+                        <af:commandButton text="OK"
+                                          action="#{viewPolicy.findPoliciesSelected}"
+                                          id="cb5"/>
+                        <af:commandButton text="Cancel" id="cb6"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputText binding="#{manipulation.conClientDisplay}"
+                               rendered="false" id="ot7"/>
+              </h:panelGrid>
+              <h:panelGrid columns="3" width="10%" id="pg5">
+                <af:commandButton text="Search"
+                                  action="#{viewPolicy.SearchPolicies}"
+                                  id="cb7"/>
+                <af:commandButton text="Exit" action="#{Links.goHome}"
+                                  id="cb8"/>
+              </h:panelGrid>
+            </af:panelBox>
+            <af:spacer width="10" height="20" id="s2"/>
+            <af:panelBox text="Search Results" showHeader="never"
+                         rendered="false" binding="#{viewPolicy.searchResults}"
+                         id="pb2" inlineStyle="height:120.0px;">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Search Results"
+                              inlineStyle="font-weight:bold;" id="ol4"/>
+              <af:separator inlineStyle="width:inherit;" id="s3"/>
+              <af:table value="#{bindings.policies.collectionModel}" var="row"
+                        rows="#{bindings.policies.rangeSize}"
+                        emptyText="#{bindings.policies.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.policies.rangeSize}"
+                        selectionListener="#{viewPolicy.searchListener}"
+                        rowSelection="single"
+                        inlineStyle="width:100%; height:100.0px; border-style:none;"
+                        binding="#{viewPolicy.transactions}" id="t3">
+                <af:column sortProperty="LTR_POL_POLICY_NO" sortable="true"
+                           headerText="Policy Number" width="170" id="c6">
+                  <af:outputText value="#{row.LTR_POL_POLICY_NO}" id="ot9"/>
+                </af:column>
+                <af:column sortProperty="LTR_Client" sortable="true"
+                           headerText="Client" width="200" id="c8">
+                  <af:outputText value="#{row.LTR_Client}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="LTR_BUSN_TYPE" sortable="true"
+                           headerText="Transaction" id="c5" width="200">
+                  <af:outputText value="#{row.LTR_BUSN_TYPE}" id="ot8"/>
+                </af:column>
+                <af:column sortProperty="LTR_TRANS_NO" sortable="true"
+                           headerText="Transaction No." id="c7">
+                  <af:outputText value="#{row.LTR_TRANS_NO}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="LTR_TRANS_AUTHORISED" sortable="true"
+                           id="c9">
+                  <af:commandLink text="View" id="cl1"
+                                  rendered="#{row.LTR_TRANS_AUTHORISED == 'A'}"
+                                  action="#{viewPolicy.ViewPolicyDetails}"/>
+                  <af:outputText value="#{row.LTR_TRANS_AUTHORISED}" id="ot12"
+                                 visible="false"/>
+                </af:column>
+              </af:table>
+            </af:panelBox>
+            <af:spacer width="10" height="10" id="spacer1"/>
+            <af:panelGroupLayout id="pgl3" partialTriggers="t3">
+              <af:panelBox text="My Tickets" id="pb3"
+                           binding="#{viewPolicy.myTickets}" rendered="false"
+                           showHeader="never">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Policy Tickets"
+                                inlineStyle="font-weight:bold;"
+                                id="outputLabel1"/>
+                <af:separator inlineStyle="width:inherit;" id="separator1"/>
+                <af:table value="#{bindings.workflow1.collectionModel}"
+                          var="row" rows="#{bindings.workflow1.rangeSize}"
+                          emptyText="#{bindings.workflow1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.workflow1.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.workflow1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.workflow1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t5"
+                          binding="#{viewPolicy.resultsLOV}"
+                          inlineStyle="width:100.0%; height:130px; border-style:none;">
+                  <af:column sortProperty="TCKT_CODE" sortable="true"
+                             headerText="Ticket Id." id="c12">
+                    <af:outputText value="#{row.TCKT_CODE}" id="outputText2"/>
+                  </af:column>
+                  <af:column sortProperty="TCKT_NAME" sortable="true"
+                             headerText="Ticket Name" id="c15" width="200">
+                    <af:outputText value="#{row.TCKT_NAME}" id="outputText3"/>
+                  </af:column>
+                  <af:column sortProperty="TCKT_TO" sortable="true"
+                             headerText="Ticket Assignee" id="c17" width="140">
+                    <af:outputText value="#{row.TCKT_TO}" id="outputText4"/>
+                  </af:column>
+                  <af:column sortProperty="TCKT_BY" sortable="true"
+                             headerText="Ticket From." id="c16">
+                    <af:outputText value="#{row.TCKT_BY}" id="outputText5"/>
+                  </af:column>
+                  <af:column sortProperty="TCKT_DATE" sortable="true"
+                             headerText="Ticket Created On." id="c14">
+                    <af:outputText value="#{row.TCKT_DATE}" id="outputText6">
+                      <af:convertDateTime pattern="#{bindings.workflow1.hints.TCKT_DATE.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="TCKT_REMARKS" sortable="true"
+                             headerText="Ticket Remarks." id="c13" width="200">
+                    <af:outputText value="#{row.TCKT_REMARKS}"
+                                   id="outputText7"/>
+                  </af:column>
+                  <af:column sortProperty="taskID" sortable="false" id="c18">
+                    <af:commandLink text="Process" id="commandLink2"
+                                    action="#{viewPolicy.findTicket2Selected}"
+                                    rendered="#{row.TCKT_TO == currUser.username}"/>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

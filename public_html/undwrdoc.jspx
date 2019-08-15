@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelBox text="Submit Policy Documents"
+                     inlineStyle="width:724px; height:220px;" id="pb1">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="4" width="40%" id="pg1">
+            <af:outputLabel value="Description" id="ol1"/>
+            <af:outputLabel value="Is Document Submitted(Y/N)?" id="ol2"/>
+            <af:outputLabel value="Date Sumitted" id="ol3"/>
+            <af:outputLabel value="Document Number" id="ol4"/>
+            <h:panelGrid columns="2" id="pg2">
+              <af:inputText label="Label 1" columns="25" simple="true"
+                            binding="#{underwritingManipulation.documentNameDisplay}"
+                            id="it1"/>
+              <af:commandButton icon="/dropdown.gif" id="cb1">
+                <af:showPopupBehavior popupId="documentsPopup"/>
+              </af:commandButton>
+              <af:popup id="documentsPopup">
+                <af:dialog type="none" title="Select Required Document" id="d2">
+                  <af:table value="#{bindings.documents.collectionModel}"
+                            var="row" rows="#{bindings.documents.rangeSize}"
+                            emptyText="#{bindings.documents.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.documents.rangeSize}"
+                            selectedRowKeys="#{bindings.documents.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.documents.collectionModel.makeCurrent}"
+                            rowSelection="single" width="270"
+                            inlineStyle="height:269px;"
+                            binding="#{underwritingManipulation.documentsLOV}"
+                            id="t1">
+                    <af:column sortProperty="RD_SHT_DESC" sortable="true"
+                               headerText="ID" width="150" id="c1">
+                      <af:outputText value="#{row.RD_SHT_DESC}" id="ot1"/>
+                    </af:column>
+                    <af:column sortProperty="RD_DESC" sortable="true"
+                               headerText="DESCRIPTION" width="200" id="c2">
+                      <af:outputText value="#{row.RD_DESC}" id="ot2"/>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{underwritingManipulation.AttachDocuments}"
+                                    id="cb2"/>
+                  <af:commandButton text="Cancel" id="cb3"/>
+                </af:dialog>
+              </af:popup>
+            </h:panelGrid>
+            <af:selectOneChoice label="Label 1" simple="true" autoSubmit="true"
+                                valueChangeListener="#{underwritingManipulation.GetDocumentSubmission}"
+                                binding="#{underwritingManipulation.documentSubmitted}"
+                                id="soc1">
+              <af:selectItem label="Yes" value="Y" id="si1"/>
+              <af:selectItem label="No" value="N" id="si2"/>
+            </af:selectOneChoice>
+            <af:inputDate label="Label 1" columns="10" simple="true"
+                          binding="#{underwritingManipulation.documentDateDisplay}"
+                          id="id1">
+               <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+            <af:inputText label="Label 2"
+                          binding="#{underwritingManipulation.documentNoDisplay}"
+                          columns="15" simple="true" id="it2"/>
+            <h:panelGrid columns="2" width="10%" id="pg3">
+              <af:commandButton text="Add"
+                                action="#{underwritingManipulation.SavePolicyDocuments}"
+                                id="cb4"/>
+              <af:commandButton text="Edit" id="cb5"/>
+            </h:panelGrid>
+          </h:panelGrid>
+          <h:panelGrid columns="1" width="10%" id="pg4">
+            <af:table value="#{bindings.groupPolicyDocs.collectionModel}"
+                      var="row" rows="#{bindings.groupPolicyDocs.rangeSize}"
+                      emptyText="#{bindings.groupPolicyDocs.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.groupPolicyDocs.rangeSize}"
+                      selectedRowKeys="#{bindings.groupPolicyDocs.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.groupPolicyDocs.collectionModel.makeCurrent}"
+                      rowSelection="single"
+                      inlineStyle="height:126px; width:585px;"
+                      binding="#{underwritingManipulation.groupPolicyDocsLOV}"
+                      id="t2">
+              <af:column sortProperty="GPD_RD_SHT_DESC" sortable="true"
+                         headerText="ID" id="c3">
+                <af:outputText value="#{row.GPD_RD_SHT_DESC}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="DOCUMENT_DISPLAY" sortable="true"
+                         headerText="DOCUMENT" id="c4">
+                <af:outputText value="#{row.DOCUMENT_DISPLAY}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="DOCUMENT_SUBMITTED" sortable="true"
+                         headerText="DOCUMENT SUBMITTED?" id="c5">
+                <af:outputText value="#{row.DOCUMENT_SUBMITTED}" id="ot5"/>
+              </af:column>
+              <af:column sortProperty="dateGiven" sortable="true"
+                         headerText="DATE SUBMITTED" id="c6">
+                <af:outputText value="#{row.dateGiven}" id="ot6">
+                  <af:convertDateTime pattern="#{bindings.groupPolicyDocs.hints.dateGiven.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="GPD_DOC_NO" sortable="true"
+                         headerText="DOCUMENT NO" id="c7">
+                <af:outputText value="#{row.GPD_DOC_NO}" id="ot7"/>
+              </af:column>
+              <af:column id="c8">
+                <af:commandButton icon="/icon_delete.gif"
+                                  action="#{underwritingManipulation.DeletePolicyDocuments}"
+                                  id="cb6"/>
+              </af:column>
+            </af:table>
+          </h:panelGrid>
+          <af:commandButton text="Next"
+                            action="#{underwritingManipulation.ShowMembers}"
+                            id="cb7"/>
+          <af:commandButton text="Back" id="cb8"/>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

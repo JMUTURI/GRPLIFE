@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="g_undwrtPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+    <methodIterator Binds="FindEndorsements.result"
+                    DataControl="endorsementsDAO" RangeSize="25"
+                    BeanClass="view.Policy.endorsements"
+                    id="FindEndorsementsIterator"/>
+    <methodIterator Binds="FindAgents.result" DataControl="agentsDAO"
+                    RangeSize="25" BeanClass="view.Quot.agents"
+                    id="FindAgentsIterator"/>
+    <methodIterator Binds="findPremiumMask.result" DataControl="quotPremMaskDAO"
+                    RangeSize="25" BeanClass="view.Quot.quotPremMask"
+                    id="findPremiumMaskIterator"/>
+    <methodIterator Binds="FindCheckOffAgents.result"
+                    DataControl="checkOffAgentsDAO" RangeSize="25"
+                    BeanClass="view.Policy.checkOffAgents"
+                    id="FindCheckOffAgentsIterator"/>
+    <methodIterator Binds="FindCoverTypes.result"
+                    DataControl="policyCoverTypesDAO" RangeSize="25"
+                    BeanClass="view.Policy.policyCoverTypes"
+                    id="FindCoverTypesIterator"/>
+    <methodIterator Binds="FindPolicyTaxes.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="view.Policy.policies"
+                    id="FindPolicyTaxesIterator"/>
+    <methodIterator Binds="FindPolicyCategories.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="view.Policy.policies"
+                    id="FindPolicyCategoriesIterator"/>
+    <methodIterator Binds="FindPolicyDependantTypes.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="view.Policy.policies"
+                    id="FindPolicyDependantTypesIterator"/>
+    <methodIterator Binds="FindPolicyMembers.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="view.Policy.policies"
+                    id="FindPolicyMembersIterator"/>
+    <methodIterator Binds="FindTaxes.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="view.Base.Settings"
+                    id="FindTaxesIterator"/>
+    <searchRegion Binds="FindTaxesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+    <methodIterator Binds="FindDependentsLimits.result"
+                    DataControl="PolDependentLimits" RangeSize="25"
+                    BeanClass="view.Quot.dependentLimits"
+                    id="FindDependentsLimitsIterator"/>
+    <methodIterator Binds="FindMemberDependants.result" DataControl="membersDAO"
+                    RangeSize="25" BeanClass="view.members.members1"
+                    id="FindMemberDependantsIterator"/>
+    <methodIterator Binds="FindMemberCoverTypes.result" DataControl="membersDAO"
+                    RangeSize="25" BeanClass="view.members.members1"
+                    id="FindMemberCoverTypesIterator"/>
+    <methodIterator Binds="FindMembers.result" DataControl="membersDAO"
+                    RangeSize="25" BeanClass="view.members.members1"
+                    id="FindMembersIterator"/>
+    <methodIterator Binds="FindDependantTypes.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="view.Base.Settings"
+                    id="FindDependantTypesIterator"/>
+    <searchRegion Binds="FindDependantTypesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings1Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_POLICY_NO">
+      <AttrNames>
+        <Item Value="POL_POLICY_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="CLIENT_DISPLAY">
+      <AttrNames>
+        <Item Value="CLIENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findProposers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProposers"
+                  IsViewObjectMethod="false" DataControl="proposerDAO"
+                  InstanceName="proposerDAO.dataProvider"
+                  ReturnName="proposerDAO.methodResults.findProposers_proposerDAO_dataProvider_findProposers_result"/>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_PROD_SHT_DESC">
+      <AttrNames>
+        <Item Value="POL_PROD_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBranches"
+                  IsViewObjectMethod="false" DataControl="branchesDAO"
+                  InstanceName="branchesDAO.dataProvider"
+                  ReturnName="branchesDAO.methodResults.findBranches_branchesDAO_dataProvider_findBranches_result"/>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_EFFECTIVE_DATE">
+      <AttrNames>
+        <Item Value="POL_EFFECTIVE_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="UW_YEAR">
+      <AttrNames>
+        <Item Value="UW_YEAR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="OCCUPATION_DISPLAY">
+      <AttrNames>
+        <Item Value="OCCUPATION_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="HARZARD_DISPLAY">
+      <AttrNames>
+        <Item Value="HARZARD_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_INCEPTION_DATE">
+      <AttrNames>
+        <Item Value="POL_INCEPTION_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_OS_LOAN_CALC">
+      <AttrNames>
+        <Item Value="POL_OS_LOAN_CALC"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindEndorsements" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindEndorsements"
+                  IsViewObjectMethod="false" DataControl="endorsementsDAO"
+                  InstanceName="endorsementsDAO.dataProvider"
+                  ReturnName="endorsementsDAO.methodResults.FindEndorsements_endorsementsDAO_dataProvider_FindEndorsements_result"/>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_NO">
+      <AttrNames>
+        <Item Value="ENDR_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="AGENT_DISPLAY">
+      <AttrNames>
+        <Item Value="AGENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindAgents"
+                  IsViewObjectMethod="false" DataControl="agentsDAO"
+                  InstanceName="agentsDAO.dataProvider"
+                  ReturnName="agentsDAO.methodResults.FindAgents_agentsDAO_dataProvider_FindAgents_result"/>
+    <tree IterBinding="FindAgentsIterator" id="agents">
+      <nodeDefinition DefName="view.Quot.agents" Name="agents0">
+        <AttrNames>
+          <Item Value="AGN_NAME"/>
+          <Item Value="AGN_SHT_DESC"/>
+          <Item Value="AGN_POSTAL_ADDRESS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPremiumMask" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMask"
+                  IsViewObjectMethod="false" DataControl="quotPremMaskDAO"
+                  InstanceName="quotPremMaskDAO.dataProvider"
+                  ReturnName="quotPremMaskDAO.methodResults.findPremiumMask_quotPremMaskDAO_dataProvider_findPremiumMask_result"/>
+    <tree IterBinding="findPremiumMaskIterator" id="quotPremMask">
+      <nodeDefinition DefName="view.Quot.quotPremMask" Name="quotPremMask0">
+        <AttrNames>
+          <Item Value="PMAS_DESC"/>
+          <Item Value="PMAS_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="MASK_DISPLAY">
+      <AttrNames>
+        <Item Value="MASK_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="CHECK_AGENT_DISPLAY">
+      <AttrNames>
+        <Item Value="CHECK_AGENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindCheckOffAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCheckOffAgents"
+                  IsViewObjectMethod="false" DataControl="checkOffAgentsDAO"
+                  InstanceName="checkOffAgentsDAO.dataProvider"
+                  ReturnName="checkOffAgentsDAO.methodResults.FindCheckOffAgents_checkOffAgentsDAO_dataProvider_FindCheckOffAgents_result"/>
+    <tree IterBinding="FindCheckOffAgentsIterator" id="checkOffAgents">
+      <nodeDefinition DefName="view.Policy.checkOffAgents"
+                      Name="checkOffAgents0">
+        <AttrNames>
+          <Item Value="AGN_SHT_DESC"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="AGN_AGENT_WHT_TAX"/>
+          <Item Value="AGN_AGENT_COMMISSION"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_EFFECTIVE_DATE">
+      <AttrNames>
+        <Item Value="ENDR_EFFECTIVE_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_COVER_TO_DATE">
+      <AttrNames>
+        <Item Value="ENDR_COVER_TO_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_CHECKOFF_RATE">
+      <AttrNames>
+        <Item Value="ENDR_CHECKOFF_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_NOF_MEMBERS">
+      <AttrNames>
+        <Item Value="ENDR_NOF_MEMBERS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_TOT_SA">
+      <AttrNames>
+        <Item Value="ENDR_TOT_SA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_PREV_SA">
+      <AttrNames>
+        <Item Value="ENDR_PREV_SA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_PREV_PREM">
+      <AttrNames>
+        <Item Value="ENDR_PREV_PREM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_ADD_REF_PERC_VARIANCE">
+      <AttrNames>
+        <Item Value="ENDR_ADD_REF_PERC_VARIANCE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_INST_PREM">
+      <AttrNames>
+        <Item Value="ENDR_INST_PREM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_TOT_PREMIUM">
+      <AttrNames>
+        <Item Value="ENDR_TOT_PREMIUM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_MALE_NRD">
+      <AttrNames>
+        <Item Value="ENDR_MALE_NRD"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_COMM_RATE">
+      <AttrNames>
+        <Item Value="ENDR_COMM_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="BRANCH_DISPLAY">
+      <AttrNames>
+        <Item Value="BRANCH_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator"
+                     id="POL_FREQ_OF_PAYMENT">
+      <AttrNames>
+        <Item Value="POL_FREQ_OF_PAYMENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator"
+                     id="POL_DEPENDT_COVERED">
+      <AttrNames>
+        <Item Value="POL_DEPENDT_COVERED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_STATUS">
+      <AttrNames>
+        <Item Value="POL_STATUS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_PENS_CATEGORY">
+      <AttrNames>
+        <Item Value="POL_PENS_CATEGORY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_TYPE">
+      <AttrNames>
+        <Item Value="ENDR_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_CALC_TYPE">
+      <AttrNames>
+        <Item Value="ENDR_CALC_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_DURATION_TYPE">
+      <AttrNames>
+        <Item Value="ENDR_DURATION_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_FREQ_OF_PAYMENT">
+      <AttrNames>
+        <Item Value="ENDR_FREQ_OF_PAYMENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_PAY_METHOD">
+      <AttrNames>
+        <Item Value="ENDR_PAY_METHOD"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCoverTypes"
+                  IsViewObjectMethod="false" DataControl="policyCoverTypesDAO"
+                  InstanceName="policyCoverTypesDAO.dataProvider"
+                  ReturnName="policyCoverTypesDAO.methodResults.FindCoverTypes_policyCoverTypesDAO_dataProvider_FindCoverTypes_result"/>
+    <tree IterBinding="FindCoverTypesIterator" id="policyCoverTypes">
+      <nodeDefinition DefName="view.Policy.policyCoverTypes"
+                      Name="policyCoverTypes0">
+        <AttrNames>
+          <Item Value="PCVT_CVT_SHT_DESC"/>
+          <Item Value="PCVT_SA"/>
+          <Item Value="PCVT_PREMIUM"/>
+          <Item Value="PCVT_BUT_CHARGE_PREMIUM"/>
+          <Item Value="CVT_DEPEND_DISP"/>
+          <Item Value="PCVT_TOT_MEMBERS"/>
+          <Item Value="PCVT_LOAD_DISC"/>
+          <Item Value="PCVT_DISC_LOAD_RATE"/>
+          <Item Value="PCVT_DISC_LOAD_DIV_FACT"/>
+          <Item Value="PCVT_AVERAGE_PERIOD"/>
+          <Item Value="PCVT_SA_PER_MEMBER"/>
+          <Item Value="PCVT_USE_UNIT_RATE"/>
+          <Item Value="PCVT_UNIT_RATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_COMM_AMT">
+      <AttrNames>
+        <Item Value="ENDR_COMM_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_SAVINGS_RIDER">
+      <AttrNames>
+        <Item Value="POL_SAVINGS_RIDER"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_ADD_REF_PREM">
+      <AttrNames>
+        <Item Value="ENDR_ADD_REF_PREM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_PENS_TYPE">
+      <AttrNames>
+        <Item Value="ENDR_PENS_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_SCHEME_TYPE">
+      <AttrNames>
+        <Item Value="ENDR_SCHEME_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_GUARANT_PRD">
+      <AttrNames>
+        <Item Value="ENDR_GUARANT_PRD"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_PENS_ESC">
+      <AttrNames>
+        <Item Value="ENDR_PENS_ESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_PENS_PAY_FREQ">
+      <AttrNames>
+        <Item Value="ENDR_PENS_PAY_FREQ"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_EMPYE_PENS_BF">
+      <AttrNames>
+        <Item Value="ENDR_EMPYE_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_EARN_ESCALATION">
+      <AttrNames>
+        <Item Value="ENDR_EARN_ESCALATION"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_CONTRIBTN_TYPE">
+      <AttrNames>
+        <Item Value="ENDR_CONTRIBTN_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_EMPYR_PENS_BF">
+      <AttrNames>
+        <Item Value="ENDR_EMPYR_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_REG_NO">
+      <AttrNames>
+        <Item Value="ENDR_REG_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_NSSF_INCLUDE">
+      <AttrNames>
+        <Item Value="ENDR_NSSF_INCLUDE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_EMPYER_CONTR_RATE">
+      <AttrNames>
+        <Item Value="ENDR_EMPYER_CONTR_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_TOT_PENS_BF">
+      <AttrNames>
+        <Item Value="ENDR_TOT_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_REG_DATE">
+      <AttrNames>
+        <Item Value="ENDR_REG_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_NSSF_AMOUNT">
+      <AttrNames>
+        <Item Value="ENDR_NSSF_AMOUNT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_EMPYEE_CONTR_RATE">
+      <AttrNames>
+        <Item Value="ENDR_EMPYEE_CONTR_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_SCHEME_TRUSTEES">
+      <AttrNames>
+        <Item Value="ENDR_SCHEME_TRUSTEES"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_PENS_TAX_COMPLIA">
+      <AttrNames>
+        <Item Value="ENDR_PENS_TAX_COMPLIA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_PENS_ADMIN_FEE">
+      <AttrNames>
+        <Item Value="ENDR_PENS_ADMIN_FEE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_FNDING_RATE">
+      <AttrNames>
+        <Item Value="ENDR_FNDING_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindPolicyTaxes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyTaxes"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyTaxes_policiesDAO_dataProvider_FindPolicyTaxes_result"/>
+    <tree IterBinding="FindPolicyTaxesIterator" id="policies">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="PTX_CODE"/>
+          <Item Value="TAX_DISPLAY"/>
+          <Item Value="PTX_APPL_LEVEL"/>
+          <Item Value="PTX_RATE"/>
+          <Item Value="PTX_TAX_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyCategories" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyCategories"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyCategories_policiesDAO_dataProvider_FindPolicyCategories_result"/>
+    <tree IterBinding="FindPolicyCategoriesIterator" id="policies1">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies10">
+        <AttrNames>
+          <Item Value="PCA_CODE"/>
+          <Item Value="PCA_SHT_DESC"/>
+          <Item Value="PCA_CATEG_DESC"/>
+          <Item Value="PCA_PERIOD"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="FindCoverTypesIterator" id="policyCoverTypes1">
+      <nodeDefinition DefName="view.Policy.policyCoverTypes"
+                      Name="policyCoverTypes10">
+        <AttrNames>
+          <Item Value="PCVT_CVT_SHT_DESC"/>
+          <Item Value="CVT_DEPEND_DISP"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="FindPolicyCategoriesIterator" id="policies2">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies20">
+        <AttrNames>
+          <Item Value="PCA_CATEG_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyDependantTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyDependantTypes"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyDependantTypes_policiesDAO_dataProvider_FindPolicyDependantTypes_result"/>
+    <tree IterBinding="FindPolicyDependantTypesIterator" id="policies3">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies30">
+        <AttrNames>
+          <Item Value="DTY_SHT_DESC"/>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="PCD_MAX_NO_ALLOWED"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyMembers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyMembers_policiesDAO_dataProvider_FindPolicyMembers_result"/>
+    <tree IterBinding="FindPolicyMembersIterator" id="policies4">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies40">
+        <AttrNames>
+          <Item Value="POLM_CODE"/>
+          <Item Value="POLM_MEM_NO"/>
+          <Item Value="POLM_client"/>
+          <Item Value="POLM_DTY_DESCRIPTION"/>
+          <Item Value="POLM_ANB"/>
+          <Item Value="POLM_JOINT_MEMBERS"/>
+          <Item Value="GCO_DESC"/>
+          <Item Value="POLM_MEM_STATUS"/>
+          <Item Value="POLM_MEM_SCHEDULE_NO"/>
+          <Item Value="POL_CODE"/>
+          <Item Value="POLM_CODE2"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindTaxes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindTaxes"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindTaxes_SettingsDAO_dataProvider_FindTaxes_result"/>
+    <tree IterBinding="FindTaxesIterator" id="Settings">
+      <nodeDefinition DefName="view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="TT_SHT_DESC"/>
+          <Item Value="TT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindDependentsLimits" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindDependentsLimits"
+                  IsViewObjectMethod="false" DataControl="PolDependentLimits"
+                  InstanceName="PolDependentLimits.dataProvider"
+                  ReturnName="PolDependentLimits.methodResults.FindDependentsLimits_PolDependentLimits_dataProvider_FindDependentsLimits_result"/>
+    <tree IterBinding="FindDependentsLimitsIterator" id="dependentLimits">
+      <nodeDefinition DefName="view.Quot.dependentLimits"
+                      Name="dependentLimits0">
+        <AttrNames>
+          <Item Value="QDL_CODE"/>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="QDL_MAX_TYPE_ALLOWED"/>
+          <Item Value="QDL_LIMIT_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMemberDependants" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMemberDependants"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindMemberDependants_membersDAO_dataProvider_FindMemberDependants_result"/>
+    <tree IterBinding="FindMemberDependantsIterator" id="members1">
+      <nodeDefinition DefName="view.members.members1" Name="members10">
+        <AttrNames>
+          <Item Value="POLM_CODE"/>
+          <Item Value="MEM_SURNAME"/>
+          <Item Value="MEM_OTHER_NAMES"/>
+          <Item Value="MEM_DOB"/>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="MEM_NO"/>
+          <Item Value="MEM_SEX"/>
+          <Item Value="MEM_IDENTITY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMemberCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMemberCoverTypes"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindMemberCoverTypes_membersDAO_dataProvider_FindMemberCoverTypes_result"/>
+    <tree IterBinding="FindMemberCoverTypesIterator" id="members11">
+      <nodeDefinition DefName="view.members.members1" Name="members110">
+        <AttrNames>
+          <Item Value="CVT_DESC"/>
+          <Item Value="PCM_COVER_WEF_DATE"/>
+          <Item Value="PCM_COVER_WET_DATE"/>
+          <Item Value="PCM_SA"/>
+          <Item Value="PCM_PREMIUM"/>
+          <Item Value="PCM_ORIGINAL_LOAN_AMT"/>
+          <Item Value="PCM_ORIG_LOAN_REPAYMENT_PRD"/>
+          <Item Value="PCM_LOAN_INT"/>
+          <Item Value="PCM_SAVING_AMT"/>
+          <Item Value="PCM_LOAN_ISSUE_DATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMembers"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindMembers_membersDAO_dataProvider_FindMembers_result"/>
+    <attributeValues IterBinding="FindMembersIterator" id="m_fullName">
+      <AttrNames>
+        <Item Value="m_fullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindMembersIterator" id="m_MEM_NO">
+      <AttrNames>
+        <Item Value="m_MEM_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindDependantTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindDependantTypes"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindDependantTypes_SettingsDAO_dataProvider_FindDependantTypes_result"/>
+    <tree IterBinding="FindDependantTypesIterator" id="Settings1">
+      <nodeDefinition DefName="view.Base.Settings" Name="Settings10">
+        <AttrNames>
+          <Item Value="DTY_SHT_DESC"/>
+          <Item Value="DTY_DESCRIPTION"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

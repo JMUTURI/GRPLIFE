@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="branches" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.branches" isJavaBased="true">
+  <Attribute Name="BRN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="BRN_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="BRN_NAME" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.branches"
+                     BeanClass="LMSG.view.QuotationProcessing.branches"
+                     id="branches"/>
+</JavaBean>

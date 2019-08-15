@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="treatiesDAO" Package="LMSG.view.setups"
+          BeanClass="LMSG.view.setups.treatiesDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.setups.treaties"
+                  BeanClass="LMSG.view.setups.treaties" id="findTreatyLOV"
+                  ReturnNodeName="treaties"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.setups.treatiesDAO"
+                     BeanClass="LMSG.view.setups.treatiesDAO" id="treatiesDAO"/>
+</JavaBean>

@@ -1,0 +1,16 @@
+DECLARE
+v_endr_code NUMBER;
+
+BEGIN
+
+    BEGIN
+    SELECT ENDR_CODE 
+    INTO v_endr_code
+    FROM LMS_POLICY_ENDORSEMENTS
+    WHERE ENDR_POL_POLICY_NO='GL/2012/88'
+    AND ENDR_TYPE='NB';
+    END;
+
+LMS_GRP_LOAD_DATA.load_member_riders(v_endr_code,'ACCPTD');
+
+END;

@@ -1,0 +1,17 @@
+update the following files to classes\LMSG\view\Accounts
+files:
+
+Account.class
+Account.xml
+AccountDAO.class
+AccounDAO.xml
+PortfolioBean.class
+
+classes\LMSG\view\Navigation:
+Links.class
+
+classes\LMSG\view\root
+DataBindings.cpx
+
+classes\view\pageDefs:
+portfolioTransPageDef.xml

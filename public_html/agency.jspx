@@ -1,0 +1,754 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+     <af:document id="d1" title="TurnQuest Group Life">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+     <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+       <f:facet name="center">
+       <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:panelAccordion id="pa1"
+                                 inlineStyle="width:99%; height:610.0px;">
+                <af:showDetailItem text="Agencies Definition" id="sdi2">
+                  <af:panelGroupLayout id="pgl6">
+                    <af:panelBox text="Select An Account Type" id="pb3">
+                      <f:facet name="toolbar"/>
+                      <h:panelGrid columns="4" id="pg1">
+                        <af:outputLabel value="Short Description" id="ol2"/>
+                        <h:panelGrid columns="2" id="pg2">
+                          <af:inputText label="Label 1" id="it1" simple="true"
+                                        binding="#{agents.actType}"
+                                        disabled="true"/>
+                          <af:commandButton id="cb1" icon="/dropdown.gif">
+                            <af:showPopupBehavior popupId="actTypesPopup"/>
+                          </af:commandButton>
+                          <af:popup id="actTypesPopup">
+                            <af:dialog id="d2" type="none"
+                                       title="Select Account Type">
+                              <af:table value="#{bindings.accountTypes.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.accountTypes.rangeSize}"
+                                        emptyText="#{bindings.accountTypes.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.accountTypes.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.accountTypes.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.accountTypes.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t1"
+                                        binding="#{agents.accountTypeLOV}">
+                                <af:column sortProperty="ACT_TYPE_SHT_DESC"
+                                           sortable="true"
+                                           headerText="Short Desc" id="c1">
+                                  <af:outputText value="#{row.ACT_TYPE_SHT_DESC}"
+                                                 id="ot2"/>
+                                </af:column>
+                                <af:column sortProperty="ACT_ACCOUNT_TYPE"
+                                           sortable="true"
+                                           headerText="Description" id="c2"
+                                           width="200">
+                                  <af:outputText value="#{row.ACT_ACCOUNT_TYPE}"
+                                                 id="ot3"/>
+                                </af:column>
+                              </af:table>
+                              <h:panelGrid columns="2" id="pg4">
+                                <af:commandButton text="OK" id="cb2"
+                                                  action="#{agents.AssignAccountType}"/>
+                                <af:commandButton text="Cancel" id="cb3"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:outputLabel value="Description" id="ol3"/>
+                        <af:inputText label="Label 2" id="it2" simple="true"
+                                      binding="#{agents.actDescription}"
+                                      disabled="true"/>
+                      </h:panelGrid>
+                      <af:panelSplitter id="ps1" splitterPosition="250"
+                                        inlineStyle="width:100%; height:540.0px;">
+                        <f:facet name="first">
+                          <af:panelGroupLayout layout="scroll"
+                                               xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                               id="pgl3">
+                            <af:panelBox text="Agencies" id="pb1"
+                                         inlineStyle="width:100%;">
+                              <f:facet name="toolbar"/>
+                              <h:panelGrid columns="2" id="pg18">
+                                <af:inputText label="Search" id="it24"
+                                              columns="25" autoSubmit="true"
+                                              binding="#{agents.searchAgent}"/>
+                                <af:commandButton
+                                                  id="cb23"
+                                                  icon="/images/find_ena.png"
+                                                  action="#{agents.SearchAgent}"/>
+                              </h:panelGrid>
+                              <af:separator id="s1"/>
+                              <af:tree value="#{bindings.agencies.treeModel}"
+                                       var="node"
+                                       selectionListener="#{agents.agentsSelected}"
+                                       rowSelection="single" id="t2"
+                                       binding="#{agents.agentsTree}"
+                                       inlineStyle="width:100%; height:420.0px;">
+                                <f:facet name="nodeStamp">
+                                  <af:group id="g2">
+                                    <af:outputText value="#{node.agn_name}"
+                                                   id="ot4"/>
+                                  </af:group>
+                                </f:facet>
+                              </af:tree>
+                            </af:panelBox>
+                          </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="second">
+                          <af:panelGroupLayout id="pgl4"
+                                               binding="#{agents.agentsPanGrp}"
+                                               layout="scroll">
+                            <af:panelBox text="Agency Information" id="pb5"
+                                         showHeader="never">
+                              <f:facet name="toolbar"/>
+                              <af:panelTabbed id="pt2"
+                                              inlineStyle="width:100%; height:510.0px;">
+                                <af:showDetailItem text="Agency Details"
+                                                   id="sdi3">
+                                  <af:panelGroupLayout id="pgl7">
+                                    <af:panelBox text="Agency Information" id="pb2">
+                                      <f:facet name="toolbar"/>
+                                      <h:panelGrid columns="3" id="pg6">
+                                        <af:commandButton id="cb13"
+                                                          icon="/images/field_group_plus_ena.png"
+                                                          text="Add"
+                                                          action="#{agents.AddAgent}"/>
+                                        <af:commandButton id="cb14"
+                                                          icon="/images/save.gif"
+                                                          action="#{agents.SaveAgent}"
+                                                          text="Save"/>
+                                         <af:commandButton id="cbb1144"
+                                                          icon="/images/delete.gif"
+                                                          action="#{agents.DeleteAgent}"
+                                                          text="Delete"/>
+                                      </h:panelGrid>
+                                      <h:panelGrid columns="4" id="pg5">
+                                        <af:outputLabel value="Short Desc" id="ol4"/>
+                                        <h:panelGrid columns="2" id="pg12">
+                                          <af:inputText label="Label 3" id="it3"
+                                                        simple="true"
+                                                        binding="#{agents.agentID}"/>
+                                          <af:commandButton id="cb15"
+                                                            icon="/images/dropdown.gif"
+                                                            action="#{agents.ShowNewAgents}"/>
+                                          <af:popup id="NewAgentsPopup">
+                                            <af:dialog id="d6" type="none"
+                                                       title="New Agents">
+                                              <af:table value="#{bindings.accountTypes4.collectionModel}"
+                                                        var="row"
+                                                        rows="#{bindings.accountTypes4.rangeSize}"
+                                                        emptyText="#{bindings.accountTypes4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                        fetchSize="#{bindings.accountTypes4.rangeSize}"
+                                                        rowBandingInterval="0"
+                                                        filterModel="#{bindings.accountTypes4Query.queryDescriptor}"
+                                                        queryListener="#{bindings.accountTypes4Query.processQuery}"
+                                                        filterVisible="true"
+                                                        varStatus="vs"
+                                                        selectedRowKeys="#{bindings.accountTypes4.collectionModel.selectedRow}"
+                                                        selectionListener="#{bindings.accountTypes4.collectionModel.makeCurrent}"
+                                                        rowSelection="single"
+                                                        id="t6"
+                                                        binding="#{agents.newAgentsLOV}">
+                                                <af:column sortProperty="agnName"
+                                                           filterable="true" filterFeatures="caseInsensitive"
+                                                           sortable="true"
+                                                           headerText="Agent Name"
+                                                           id="c7" width="200">
+                                                  <af:outputText value="#{row.agnName}"
+                                                                 id="ot10"/>
+                                                </af:column>
+                                                <af:column sortProperty="agnStatus"
+                                                           filterable="true" filterFeatures="caseInsensitive"
+                                                           sortable="true"
+                                                           headerText="Agent Status"
+                                                           id="c8">
+                                                  <af:outputText value="#{row.agnStatus}"
+                                                                 id="ot9"/>
+                                                </af:column>
+                                              </af:table>
+                                              <h:panelGrid columns="2" id="pg3">
+                                                <af:commandButton text="OK"
+                                                                  id="cb16"
+                                                                  action="#{agents.AssignNewAgents}"/>
+                                                <af:commandButton text="Cancel"
+                                                                  id="cb17"/>
+                                              </h:panelGrid>
+                                            </af:dialog>
+                                          </af:popup>
+                                        </h:panelGrid>
+                                        <af:outputLabel value="Name" id="ol5"/>
+                                        <af:inputText label="Label 7" id="it7"
+                                                      simple="true"
+                                                      shortDesc="Agent's Name"
+                                                      binding="#{agents.agentName}"/>
+                                        <af:outputLabel value="Identity No"
+                                                        id="ol6"/>
+                                        <af:inputText label="Label 4" id="it4"
+                                                      simple="true"
+                                                      binding="#{agents.agnIdentityNo}"/>
+                                        <af:outputLabel value="Phone No"
+                                                        id="ol7"/>
+                                        <af:inputText label="Label 5" id="it5"
+                                                      simple="true"
+                                                      binding="#{agents.agnPhoneNo}"/>
+                                        <af:outputLabel value="Pin No"
+                                                        id="ol8"/>
+                                        <af:inputText label="Label 6" id="it6"
+                                                      simple="true"
+                                                      binding="#{agents.pinNUmber}"
+                                                      shortDesc="Agent Pin Number"/>
+                                        <af:outputLabel value="Financing Type"
+                                                        id="ol9"/>
+                                        <af:selectOneChoice label="Label 1"
+                                                            id="soc1"
+                                                            autoSubmit="true"
+                                                            simple="true"
+                                                            binding="#{agents.financingType}"
+                                                            shortDesc="Commission Allowed">
+                                          <af:selectItem label="Financed"
+                                                         value="Y" id="si2"/>
+                                          <af:selectItem label="Payroll"
+                                                         value="N" id="si1"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel value="Contract Status"
+                                                        id="ol10"/>
+                                        <af:selectOneChoice label="Label 2"
+                                                            id="soc2"
+                                                            simple="true"
+                                                            autoSubmit="true"
+                                                            binding="#{agents.contractStatus}"
+                                                            shortDesc="Agent's Contract Status">
+                                          <af:selectItem label="Contracted"
+                                                         value="Y" id="si3"/>
+                                          <af:selectItem label="Not Contracted"
+                                                         value="N" id="si4"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel value="Prof Cert No"
+                                                        id="ol11"/>
+                                        <af:inputText label="Label 8" id="it8"
+                                                      simple="true"
+                                                      binding="#{agents.profCertNo}"
+                                                      shortDesc="Professional Certification No"/>
+                                        <af:outputLabel value="Contract Date"
+                                                        id="ol12"/>
+                                        <af:inputDate label="Label 1" id="id1"
+                                                      simple="true"
+                                                      binding="#{agents.contractDate}"
+                                                      shortDesc="Agent's Contract Date">
+                                           <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                        </af:inputDate>
+                                        <af:outputLabel value="Date Joined"
+                                                        id="ol13"/>
+                                        <af:inputDate label="Label 2" id="id2"
+                                                      simple="true"
+                                                      binding="#{agents.agnDateJoined}"
+                                                      shortDesc="Date Agent Joined">
+                                           <af:convertDateTime pattern="dd-MMM-yyyy"/>  
+                                         </af:inputDate>
+                                        <af:outputLabel value="Date Terminated"
+                                                        id="ol14"/>
+                                        <af:inputDate label="Label 3" id="id3"
+                                                      simple="true"
+                                                      binding="#{agents.agnDateTerminated}">
+                                          <af:convertDateTime pattern="dd-MMM-yyyy"/>                
+                                        </af:inputDate>
+                                        <af:outputLabel value="Bank" id="ol15"/>
+                                        <h:panelGrid columns="2" id="pg7">
+                                          <af:inputText label="Label 9" id="it9"
+                                                        binding="#{agents.agnBank}"
+                                                        shortDesc="Agent's Bank Branch"
+                                                        simple="true"
+                                                        disabled="true"/>
+                                          <af:commandButton id="cb4"
+                                                            icon="/dropdown.gif">
+                                            <af:showPopupBehavior popupId="banksPopup"/>
+                                          </af:commandButton>
+                                          <af:popup id="banksPopup">
+                                            <af:dialog id="d3" type="none"
+                                                       title="Select Bank">
+                                              <af:table value="#{bindings.accountTypes1.collectionModel}"
+                                                        var="row"
+                                                        rows="#{bindings.accountTypes1.rangeSize}"
+                                                        emptyText="#{bindings.accountTypes1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                        fetchSize="#{bindings.accountTypes1.rangeSize}"
+                                                        rowBandingInterval="0"
+                                                        selectedRowKeys="#{bindings.accountTypes1.collectionModel.selectedRow}"
+                                                        selectionListener="#{bindings.accountTypes1.collectionModel.makeCurrent}"
+                                                        rowSelection="single"
+                                                        id="t3"
+                                                        inlineStyle="width:200px; height:200.0px;"
+                                                        binding="#{agents.banksLOV}">
+                                                <af:column sortProperty="bbrDescription"
+                                                           sortable="true"
+                                                           headerText="Bank"
+                                                           id="c3" width="295">
+                                                  <af:outputText value="#{row.bbrDescription}"
+                                                                 id="ot5"/>
+                                                </af:column>
+                                              </af:table>
+                                              <h:panelGrid columns="2"
+                                                           id="pg16">
+                                                <af:commandButton text="OK"
+                                                                  id="cb5"
+                                                                  action="#{agents.AssignBank}"/>
+                                                <af:commandButton text="Cancel"
+                                                                  id="cb6"/>
+                                              </h:panelGrid>
+                                            </af:dialog>
+                                          </af:popup>
+                                        </h:panelGrid>
+                                        <af:outputLabel value="Bank Acc No"
+                                                        id="ol16"/>
+                                        <af:inputText label="Label 10" id="it10"
+                                                      simple="true"
+                                                      binding="#{agents.agnBankAccNo}"/>
+                                        <af:outputLabel value="SMS No"
+                                                        id="ol17"/>
+                                        <af:inputText label="Label 11" id="it11"
+                                                      simple="true"
+                                                      binding="#{agents.agnSmsNo}"
+                                                      shortDesc="Agent's SMS Number"/>
+                                        <af:outputLabel value="Reference No"
+                                                        id="ol18"/>
+                                        <af:inputText label="Label 12" id="it12"
+                                                      simple="true"
+                                                      binding="#{agents.referenceNo}"
+                                                      shortDesc="Agent's Reference No"/>
+                                        <af:outputLabel value="Post Level"
+                                                        id="ol19"/>
+                                        <af:selectOneChoice label="Label 3"
+                                                            id="soc3"
+                                                            simple="true"
+                                                            autoSubmit="true"
+                                                            binding="#{agents.agnPostLevel}">
+                                          <af:selectItem label="Normal"
+                                                         value="N" id="si5"/>
+                                          <af:selectItem label="Senior"
+                                                         value="S" id="si6"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel value="Email Address"
+                                                        id="ol20"/>
+                                        <af:inputText label="Label 13" id="it13"
+                                                      simple="true"
+                                                      binding="#{agents.agnEmailAddress}"
+                                                      shortDesc="Agent Email Address"/>
+                                        <af:outputLabel value="Reinsurer"
+                                                        id="ol21"/>
+                                        <af:selectOneChoice label="Label 4"
+                                                            id="soc4"
+                                                            autoSubmit="true"
+                                                            simple="true"
+                                                            binding="#{agents.agnReinsurer}"
+                                                            shortDesc="Is Reinsurer">
+                                          <af:selectItem label="Yes" value="Y"
+                                                         id="si7"/>
+                                          <af:selectItem label="No" value="N"
+                                                         id="si8"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel id="ol22"
+                                                        value="GL Account NO"/>
+                                        <af:inputText label="Label 14" id="it14"
+                                                      simple="true"
+                                                      binding="#{agents.agnGLAccountNo}"
+                                                      shortDesc="General Ledger Account No"/>
+                                        <af:outputLabel value="Credit Allowed(Y/N)"
+                                                        id="ol23"/>
+                                        <af:selectOneChoice label="Label 5"
+                                                            id="soc5"
+                                                            simple="true"
+                                                            autoSubmit="true"
+                                                            binding="#{agents.agnCreditAllowed}"
+                                                            shortDesc="Credit Allowed">
+                                          <af:selectItem label="Yes" value="Y"
+                                                         id="si9"/>
+                                          <af:selectItem label="No" value="N"
+                                                         id="si10"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel value="Agent Withholding Tax(%)"
+                                                        id="ol24"/>
+                                        <af:inputText label="Label 15" id="it15"
+                                                      simple="true"
+                                                      binding="#{agents.agnWthTax}"
+                                                      shortDesc="Withholding Tax % For Agent"/>
+                                        <af:outputLabel value="R/I Debit Note Required"
+                                                        id="ol25"/>
+                                        <af:selectOneChoice label="Label 6"
+                                                            id="soc6"
+                                                            autoSubmit="true"
+                                                            simple="true"
+                                                            binding="#{agents.riDebitNote}"
+                                                            shortDesc="Reinsurance Debit Note Required">
+                                          <af:selectItem label="Yes" value="Y"
+                                                         id="si12"/>
+                                          <af:selectItem label="No" value="N"
+                                                         id="si11"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel value="Agent Status"
+                                                        id="ol26"/>
+                                        <af:selectOneChoice label="Label 7"
+                                                            id="soc7"
+                                                            autoSubmit="true"
+                                                            binding="#{agents.agnStatus}"
+                                                            simple="true">
+                                          <af:selectItem label="Active"
+                                                         value="ACTIVE"
+                                                         id="si14"/>
+                                          <af:selectItem label="Inactive"
+                                                         value="INACTIVE"
+                                                         id="si13"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel value="Agent Reg Status"
+                                                        id="ol27"/>
+                                        <af:selectOneChoice label="Label 8"
+                                                            id="soc8"
+                                                            simple="true"
+                                                            autoSubmit="true"
+                                                            binding="#{agents.agnRegStatus}"
+                                                            shortDesc="Agent's Registration Status">
+                                          <af:selectItem label="REGISTERED"
+                                                         value="RG" id="si16"/>
+                                          <af:selectItem label="NOT REGISTERED"
+                                                         value="NRG" id="si15"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel value="Agen Reg Number"
+                                                        id="ol28"/>
+                                        <af:inputText label="Label 16" id="it16"
+                                                      shortDesc="Agent's Registration Number"
+                                                      binding="#{agents.agnRegNumber}"
+                                                      simple="true"/>
+                                        <af:outputLabel value="Commission Payroll"
+                                                        id="ol29"/>
+                                        <af:selectOneChoice label="Label 9"
+                                                            id="soc9"
+                                                            simple="true"
+                                                            autoSubmit="true"
+                                                            shortDesc="Commission Payroll"
+                                                            binding="#{agents.commissionPayroll}">
+                                          <af:selectItem label="Enabled"
+                                                         value="Y" id="si18"/>
+                                          <af:selectItem label="Disabled"
+                                                         value="N" id="si17"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel value="Commission Payment Method"
+                                                        id="ol30"/>
+                                        <af:selectOneChoice label="Label 10"
+                                                            id="soc10"
+                                                            simple="true"
+                                                            autoSubmit="true"
+                                                            shortDesc="Commission Payment Method"
+                                                            binding="#{agents.commPaymentMethod}">
+                                          <af:selectItem label="Normal"
+                                                         value="NORM"
+                                                         id="si20"/>
+                                          <af:selectItem label="Annualized"
+                                                         value="ANNU"
+                                                         id="si19"/>
+                                        </af:selectOneChoice>
+                                        <af:outputLabel value="Commission Rate"
+                                                        id="ol31"/>
+                                        <h:panelGrid columns="2" id="pg10">
+                                          <af:inputText label="Label 17"
+                                                        id="it17" simple="true"
+                                                        shortDesc="Commission Rates Tables"
+                                                        binding="#{agents.commissionRates}"
+                                                        disabled="true"/>
+                                          <af:commandButton id="cb7"
+                                                            icon="/dropdown.gif">
+                                            <af:showPopupBehavior popupId="commRatesPopup"/>
+                                          </af:commandButton>
+                                          <af:popup id="commRatesPopup">
+                                            <af:dialog id="d4" type="none"
+                                                       title="Select Commission Rates">
+                                              <af:table value="#{bindings.accountTypes2.collectionModel}"
+                                                        var="row"
+                                                        rows="#{bindings.accountTypes2.rangeSize}"
+                                                        emptyText="#{bindings.accountTypes2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                        fetchSize="#{bindings.accountTypes2.rangeSize}"
+                                                        rowBandingInterval="0"
+                                                        selectedRowKeys="#{bindings.accountTypes2.collectionModel.selectedRow}"
+                                                        selectionListener="#{bindings.accountTypes2.collectionModel.makeCurrent}"
+                                                        rowSelection="single"
+                                                        id="t4"
+                                                        binding="#{agents.commRatesLOV}">
+                                                <af:column sortProperty="atrDesc"
+                                                           sortable="true"
+                                                           headerText="Commission Rates"
+                                                           id="c4" width="295">
+                                                  <af:outputText value="#{row.atrDesc}"
+                                                                 id="ot6"/>
+                                                </af:column>
+                                              </af:table>
+                                              <h:panelGrid columns="2" id="pg9">
+                                                <af:commandButton text="OK"
+                                                                  id="cb8"
+                                                                  action="#{agents.AssignCommissionRates}"/>
+                                                <af:commandButton text="Cancel"
+                                                                  id="cb9"/>
+                                              </h:panelGrid>
+                                            </af:dialog>
+                                          </af:popup>
+                                        </h:panelGrid>
+                                        <af:outputLabel value="Branch"
+                                                        id="ol32"/>
+                                        <h:panelGrid columns="2" id="pg11">
+                                          <af:inputText label="Label 18"
+                                                        id="it18" simple="true"
+                                                        shortDesc="Agent's Branch"
+                                                        binding="#{agents.agentsBranch}"
+                                                        disabled="true"/>
+                                          <af:commandButton id="cb10"
+                                                            icon="/dropdown.gif">
+                                            <af:showPopupBehavior popupId="agnBranchPopup"/>
+                                          </af:commandButton>
+                                          <af:popup id="agnBranchPopup">
+                                            <af:dialog id="d5" type="none"
+                                                       title="Select Branch">
+                                              <af:table value="#{bindings.accountTypes3.collectionModel}"
+                                                        var="row"
+                                                        rows="#{bindings.accountTypes3.rangeSize}"
+                                                        emptyText="#{bindings.accountTypes3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                        fetchSize="#{bindings.accountTypes3.rangeSize}"
+                                                        rowBandingInterval="0"
+                                                        selectedRowKeys="#{bindings.accountTypes3.collectionModel.selectedRow}"
+                                                        selectionListener="#{bindings.accountTypes3.collectionModel.makeCurrent}"
+                                                        rowSelection="single"
+                                                        id="t5"
+                                                        binding="#{agents.branchesLOV}">
+                                                <af:column sortProperty="brnShtDesc"
+                                                           sortable="true"
+                                                           headerText="Id."
+                                                           id="c5">
+                                                  <af:outputText value="#{row.brnShtDesc}"
+                                                                 id="ot7"/>
+                                                </af:column>
+                                                <af:column sortProperty="brnName"
+                                                           sortable="true"
+                                                           headerText="Branch"
+                                                           id="c6">
+                                                  <af:outputText value="#{row.brnName}"
+                                                                 id="ot8"/>
+                                                </af:column>
+                                              </af:table>
+                                              <h:panelGrid columns="2" id="pg8">
+                                                <af:commandButton text="OK"
+                                                                  id="cb11"
+                                                                  action="#{agents.AssignBranch}"/>
+                                                <af:commandButton text="Cancel"
+                                                                  id="cb12"/>
+                                              </h:panelGrid>
+                                            </af:dialog>
+                                          </af:popup>
+                                        </h:panelGrid>
+                                      <af:outputLabel value="Postal Address"
+                                                          id="ol38"/>
+                                        <af:inputText label="Label 23"
+                                                      id="it25" simple="true"
+                                                      binding="#{agents.postalAddress}"/>
+                                       <af:outputLabel value="Retain Witholding Tax?"
+                                                        id="ol39"/>
+                                        <af:selectOneChoice label="Label 13"
+                                                            id="soc13"
+                                                            simple="true"
+                                                            value="N"
+                                                            binding="#{agents.whtRetained}">
+                                          <af:selectItem label="Yes" value="Y"
+                                                         id="si27"/>
+                                          <af:selectItem label="No" value="N"
+                                                         id="si26"/>
+                                        </af:selectOneChoice>
+                                      </h:panelGrid>
+                                    </af:panelBox>
+                                  </af:panelGroupLayout>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="Agency Contact Details"
+                                                   id="sdi4">
+                                  <af:panelGroupLayout id="pgl5">
+                                    <af:panelBox text="PanelBox1" id="pb4"
+                                                 showHeader="never">
+                                      <f:facet name="toolbar"/>
+                                      <h:panelGrid columns="3" id="pg13">
+                                        <af:commandButton id="cb18"
+                                                          icon="/images/field_group_plus_ena.png"
+                                                          action="#{agents.CreateContactPerson}"/>
+                                        <af:commandButton id="cb19"
+                                                          icon="/images/update_ena.png"
+                                                          action="#{agents.EditContactPerson}"/>
+                                        <af:commandButton id="cb20"
+                                                          icon="/images/delete.gif"
+                                                          action="#{agents.DeleteContactPerson}"/>
+                                        <af:popup id="ContactsPopup">
+                                          <af:dialog id="d7" type="none"
+                                                     title="Enter Contact's Persons Details">
+                                            <h:panelGrid columns="2" id="pg14">
+                                              <af:outputLabel value="Contact Person"
+                                                              id="ol35"/>
+                                              <af:selectOneChoice label="Label 11"
+                                                                  id="soc11"
+                                                                  simple="true"
+                                                                  binding="#{agents.contactPerson}"
+                                                                  value="Next of Kin">
+                                                <af:selectItem label="Next of Kin"
+                                                               value="Next of Kin"
+                                                               id="si22"/>
+                                                <af:selectItem label="Beneficiary"
+                                                               value="Beneficiary"
+                                                               id="si23"/>
+                                              </af:selectOneChoice>
+                                              <af:outputLabel value="Title"
+                                                              id="ol34"/>
+                                              <af:inputText label="Label 19"
+                                                            id="it20"
+                                                            simple="true"
+                                                            binding="#{agents.contactTitle}"/>
+                                              <af:outputLabel value="Name"
+                                                              id="ol1"/>
+                                              <af:inputText label="Label 20"
+                                                            id="it21"
+                                                            simple="true"
+                                                            binding="#{agents.contactName}"/>
+                                              <af:outputLabel value="Sex"
+                                                              id="ol36"/>
+                                              <af:selectOneChoice label="Label 12"
+                                                                  id="soc12"
+                                                                  simple="true"
+                                                                  binding="#{agents.contactSex}"
+                                                                  value="M">
+                                                <af:selectItem label="Male"
+                                                               value="M"
+                                                               id="si25"/>
+                                                <af:selectItem label="Female"
+                                                               value="F"
+                                                               id="si24"/>
+                                              </af:selectOneChoice>
+                                              <af:outputLabel value="Telephone"
+                                                              id="ol33"/>
+                                              <af:inputText label="Label 21"
+                                                            id="it22"
+                                                            simple="true"
+                                                            binding="#{agents.contactTelephone}"/>
+                                              <af:outputLabel value="Address"
+                                                              id="ol37"/>
+                                              <af:inputText label="Label 22"
+                                                            id="it23"
+                                                            simple="true"
+                                                            binding="#{agents.contactAddress}"/>
+                                              <af:outputLabel value="Email Address"
+                                                              id="outputLabel1"/>
+                                              <af:inputText label="Label 22"
+                                                            id="inputText1"
+                                                            simple="true"
+                                                            binding="#{agents.contactEmail}"/>
+                                              <h:panelGrid columns="2"
+                                                           id="pg17">
+                                                <af:commandButton text="OK"
+                                                                  id="cb21"
+                                                                  action="#{agents.SaveContactPerson}"/>
+                                                <af:commandButton text="Cancel"
+                                                                  id="cb22"/>
+                                              </h:panelGrid>
+                                            </h:panelGrid>
+                                          </af:dialog>
+                                        </af:popup>
+                                      </h:panelGrid>
+                                      <af:table value="#{bindings.accountTypes6.collectionModel}"
+                                                var="row"
+                                                rows="#{bindings.accountTypes6.rangeSize}"
+                                                emptyText="#{bindings.accountTypes6.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                fetchSize="#{bindings.accountTypes6.rangeSize}"
+                                                rowBandingInterval="0"
+                                                selectedRowKeys="#{bindings.accountTypes6.collectionModel.selectedRow}"
+                                                selectionListener="#{bindings.accountTypes6.collectionModel.makeCurrent}"
+                                                rowSelection="single" id="t8"
+                                                inlineStyle="width:100%; height:200.0px; border-style:none;"
+                                                binding="#{agents.contactsLOV}">
+                                        <af:column sortProperty="lacContactPerson"
+                                                   sortable="true"
+                                                   headerText="Contact Person"
+                                                   id="c15">
+                                          <af:outputText value="#{row.lacContactPerson}"
+                                                         id="ot18"/>
+                                        </af:column>
+                                        <af:column sortProperty="lacContactTitle"
+                                                   sortable="true"
+                                                   headerText="Relationship"
+                                                   id="c12">
+                                          <af:outputText value="#{row.lacContactTitle}"
+                                                         id="ot17"/>
+                                        </af:column>
+                                        <af:column sortProperty="lac_contact_name"
+                                                   sortable="true"
+                                                   headerText="Contact Name"
+                                                   id="c13" width="150">
+                                          <af:outputText value="#{row.lac_contact_name}"
+                                                         id="ot16"/>
+                                        </af:column>
+                                        <af:column sortProperty="lac_telephone"
+                                                   sortable="true"
+                                                   headerText="Telephone"
+                                                   id="c16">
+                                          <af:outputText value="#{row.lac_telephone}"
+                                                         id="ot14"/>
+                                        </af:column>
+                                        <af:column sortProperty="lac_sex"
+                                                   sortable="true"
+                                                   headerText="Sex" id="c14">
+                                          <af:outputText value="#{row.lac_sex}"
+                                                         id="ot13"/>
+                                        </af:column>
+                                        <af:column sortProperty="lac_address"
+                                                   sortable="true"
+                                                   headerText="Address"
+                                                   id="c11">
+                                          <af:outputText value="#{row.lac_address}"
+                                                         id="ot15"/>
+                                        </af:column>
+                                        <af:column sortProperty="lac_contact_email"
+                                                   sortable="true"
+                                                   headerText="Email" id="c17">
+                                          <af:outputText value="#{row.lac_contact_email}"
+                                                         id="ot19"/>
+                                        </af:column>
+                                      </af:table>
+                                    </af:panelBox>
+                                  </af:panelGroupLayout>
+                                </af:showDetailItem>
+                              </af:panelTabbed>
+                            </af:panelBox>
+                          </af:panelGroupLayout>
+                        </f:facet>
+                      </af:panelSplitter>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <h:panelGrid columns="2" id="pg15">
+                      <af:inputText id="it19" disabled="true"
+                                    helpTopicId="LmsGrpAgency" readOnly="true"
+                                    simple="false"/>
+                      <af:statusIndicator id="si21"/>
+                    </h:panelGrid>
+                  </f:facet>
+                </af:showDetailItem>
+              </af:panelAccordion>
+            </af:panelGroupLayout>
+          </af:group>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+ 
+</jsp:root>

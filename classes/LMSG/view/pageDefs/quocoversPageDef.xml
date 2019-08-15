@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="quocoversPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="findCoverTypes.result"
+                    DataControl="GenQoutCoverTypes" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotCoverTypes"
+                    id="findCoverTypesIterator"/>
+    <methodIterator Binds="findProductCovers.result"
+                    DataControl="GenQoutCoverTypes" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.ProdCovers"
+                    id="findProductCoversIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCoverTypes"
+                  IsViewObjectMethod="false" DataControl="GenQoutCoverTypes"
+                  InstanceName="GenQoutCoverTypes.dataProvider"
+                  ReturnName="GenQoutCoverTypes.methodResults.findCoverTypes_GenQoutCoverTypes_dataProvider_findCoverTypes_result"/>
+    <tree IterBinding="findCoverTypesIterator" id="quotCoverTypes">
+      <nodeDefinition DefName="view.Quot.quotCoverTypes" Name="quotCoverTypes0">
+        <AttrNames>
+          <Item Value="quocvtShtDesc"/>
+          <Item Value="quoQcvtSa"/>
+          <Item Value="QCVT_PREMIUM"/>
+          <Item Value="quoButChargePrem"/>
+          <Item Value="quoMembers"/>
+          <Item Value="QCVT_LOAD_DISC"/>
+          <Item Value="discLoadRate"/>
+          <Item Value="QCVT_DISC_LOAD_DIV_FACT"/>
+          <Item Value="quoQcvtRate"/>
+          <Item Value="cover_display"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductCovers"
+                  IsViewObjectMethod="false" DataControl="GenQoutCoverTypes"
+                  InstanceName="GenQoutCoverTypes.dataProvider"
+                  ReturnName="GenQoutCoverTypes.methodResults.findProductCovers_GenQoutCoverTypes_dataProvider_findProductCovers_result"/>
+    <tree IterBinding="findProductCoversIterator" id="ProdCovers">
+      <nodeDefinition DefName="view.Policy.ProdCovers" Name="ProdCovers0">
+        <AttrNames>
+          <Item Value="cvt_sht_desc"/>
+          <Item Value="cvt_desc"/>
+          <Item Value="cvt_main_cover"/>
+          <Item Value="cvt_duration_type"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

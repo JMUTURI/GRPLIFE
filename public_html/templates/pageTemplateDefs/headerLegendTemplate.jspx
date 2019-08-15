@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:afh="http://myfaces.apache.org/trinidad/html"
+          version="1.2">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+<component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+  <description>
+  This component displays a sample header legend.
+  </description>
+  
+  <attribute>
+    <attribute-name>pageStampType</attribute-name>
+    <description>Specifies the type of page stamp (userStamp or taskStamp) to include in the panelHeader legend facet.</description>
+    <required>true</required>
+    <default-value>userStamp</default-value>
+    <attribute-class>java.lang.String</attribute-class>
+  </attribute>
+</component>
+  </af:xmlContent>
+  <af:group id="pt_g1">  
+    <![CDATA[
+      <style type="text/css">
+
+        .UserStampTextLabel {
+          white-space: nowrap;
+          margin: 0px 4px;
+        }
+        
+        .UserStampTextValue {
+          white-space: nowrap;
+          font-weight: bold;
+          margin: 0px 4px;
+        }
+        
+        .UserStampSeparator {
+          margin: 0px 4px;
+        }
+        
+        .UserStampSwitcher {
+          margin: 0px 0px 0px 4px;
+        }
+        
+        .p_AFDark .TaskStampTextLabel {
+          color: white;
+        }  
+        
+        .p_AFDark .TaskStampTextLabel,
+        .p_AFLight .TaskStampTextLabel,
+        .p_AFDefault .TaskStampTextLabel,
+        .TaskStampTextLabel {
+          white-space: nowrap;
+          margin: 0px 4px;
+        }
+        
+        .p_AFLight .TaskStampTextLabel,
+        .p_AFDefault .TaskStampTextLabel,
+        .TaskStampTextLabel {
+          color: #247275;
+        }
+        
+        .p_AFDark .TaskStampTextValue {
+          color: white;
+        }  
+
+        .p_AFMedium .TaskStampTextValue,
+        .p_AFLight .TaskStampTextValue,
+        .p_AFDefault .TaskStampTextValue,
+        .TaskStampTextValue {
+          white-space: nowrap;
+          font-weight: bold;
+          margin: 0px 0px 0px 4px;
+          color: #247275;
+        }
+      </style>
+    ]]>
+
+    <!-- User Stamp (Horizontal) Display -->
+  
+    <af:panelGroupLayout valign="top" layout="horizontal" rendered="#{attrs.pageStampType == 'userStamp'}"
+                         id="pt_pgl1">
+      <f:facet name="separator">
+        <af:outputText value="|"             styleClass="UserStampSeparator"
+                       id="pt_ot1"/>
+      </f:facet>
+      <af:panelGroupLayout layout="horizontal" id="pt_pgl2">
+        <af:outputText value="User Name"     styleClass="UserStampTextLabel"
+                       id="pt_ot2"/>
+        <af:outputText value="Marsha Briggs" styleClass="UserStampTextValue"
+                       id="pt_ot3"/>
+      </af:panelGroupLayout>
+      <af:panelGroupLayout layout="horizontal" id="pt_pgl3">
+        <af:outputText value="Logged In As"  styleClass="UserStampTextLabel"
+                       id="pt_ot4"/>
+        <af:outputText value="mbriggs"       styleClass="UserStampTextValue"
+                       id="pt_ot5"/>
+      </af:panelGroupLayout>
+      <!-- Add stuff here for testing user stamp wrapping -->                     
+      <af:panelGroupLayout layout="horizontal" id="pt_pgl4"> <!-- last item has the switcher (navPane choice) -->
+        <af:outputText value="Connected As"  styleClass="UserStampTextLabel"
+                       id="pt_ot6"/>
+        <af:outputText value="SYS"           styleClass="UserStampTextValue"
+                       id="pt_ot7"/>
+        <af:navigationPane hint="choice"     styleClass="UserStampSwitcher"
+                           id="pt_np1">
+          <af:commandNavigationItem text="item 1" partialSubmit="true"
+                                    id="pt_cni1"/>
+          <af:commandNavigationItem text="item 2" partialSubmit="true"
+                                    id="pt_cni2"/>
+          <af:commandNavigationItem text="item 3" partialSubmit="true"
+                                    id="pt_cni3"/>
+        </af:navigationPane>  
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+        
+  
+    <!-- Task Stamp (Vertical) Display -->
+    <af:panelGroupLayout layout="vertical" valign="top" rendered="#{attrs.pageStampType == 'taskStamp'}"
+                         id="pt_pgl5">
+      <af:panelGroupLayout layout="horizontal" halign="right" id="pt_pgl6">                                    
+          <af:outputText value="Last Updated" styleClass="TaskStampTextLabel"
+                         id="pt_ot8"/>
+          <af:outputText value="08-Nov-2007" styleClass="TaskStampTextValue"
+                         id="pt_ot9"/>
+      </af:panelGroupLayout>
+      <af:panelGroupLayout layout="horizontal" halign="right" id="pt_pgl7">                                    
+          <af:outputText value="Budget Remaining" styleClass="TaskStampTextLabel"
+                         id="pt_ot10"/>
+          <af:outputText value="$20,000.00" styleClass="TaskStampTextValue"
+                         id="pt_ot11"/>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>    
+
+    </af:group>
+  </af:pageTemplateDef>
+</jsp:root>

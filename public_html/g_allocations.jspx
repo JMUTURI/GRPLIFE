@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:tr="http://myfaces.apache.org/trinidad">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Premium Allocation To Members" id="d2">
+    <af:pageTemplate id="lmsgroup"
+                     viewId="/templates/GroupTemplate2.jspx">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal"/>
+      <f:facet name="center">
+        <af:panelGroupLayout id="pgl1" layout="scroll">
+          <af:panelBox text="Group Allocations" id="pb1" showHeader="never">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Premium Allocations" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1"/>
+              <af:panelCollection id="pc1"
+                                  inlineStyle="width:99%; height:170.0px;">
+                <f:facet name="menus">
+                  <af:menu text="Utilities" id="m1">
+                    <af:commandMenuItem text="Export To Excel" id="cmi1">
+                      <af:exportCollectionActionListener exportedId="launTab2"
+                                                         type="excelHTML"
+                                                         filename="LaunchData"
+                                                         title="LaunchData"/>
+                    </af:commandMenuItem>
+                  </af:menu>
+                </f:facet>
+                <f:facet name="toolbar"/>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.Account.collectionModel}" var="row"
+                          rows="#{bindings.Account.rangeSize}"
+                          emptyText="#{bindings.Account.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Account.rangeSize}"
+                          rowBandingInterval="0" id="launTab2"
+                          binding="#{payments.unallocMembers}"
+                          rowSelection="multiple">
+                  <af:column sortProperty="MTRAN_REF_NO" sortable="false"
+                             headerText="Select" id="c11" width="40"
+                             rendered="false">
+                    <af:selectBooleanCheckbox id="sbc1" simple="true"/>
+                  </af:column>
+                  <af:column sortProperty="PCM_ENDR_CODE" sortable="false"
+                             headerText="Code" id="c3">
+                    <af:outputText value="#{row.PCM_ENDR_CODE}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="PCM_POLM_CODE" sortable="false"
+                             headerText="Member Code"
+                             id="c23">
+                    <af:outputText value="#{row.PCM_POLM_CODE}" id="ot22"/>
+                  </af:column>
+                  <af:column sortProperty="MEM_NO" sortable="true"
+                             headerText="Member No." id="c14" width="170">
+                    <af:outputText value="#{row.MEM_NO}" id="ot1"/>
+                  </af:column>
+                  <af:column sortProperty="MEMBER_DISPLAY" sortable="true"
+                             headerText="Member" id="c2" width="180">
+                    <af:outputText value="#{row.MEMBER_DISPLAY}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="PCM_EARNINGS" sortable="true"
+                             headerText="Member Sum Assured" id="c15" width="120">
+                    <af:outputText value="#{row.PCM_EARNINGS}" id="ot16"/>
+                  </af:column>
+                  <af:column sortProperty="PCM_PREMIUM" sortable="true"
+                             headerText="Debited Premium" id="c1" width="120">
+                    <af:outputText value="#{row.PCM_PREMIUM}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="PCM_ALLOCATED_PREMIUM"
+                             sortable="false" headerText="Allocated Amount"
+                             id="c10">
+                    <af:outputText value="#{row.PCM_ALLOCATED_PREMIUM}"
+                                   id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="PCM_PAID_AMOUNT" sortable="true"
+                             headerText="Balance Amount" id="c16" width="80">
+                    <af:outputText value="#{row.PCM_PAID_AMOUNT}" id="ot15"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            <h:panelGrid columns="3" id="pg1">
+              <af:commandButton text="Back" id="cb1"
+                                action="#{payments.BackToReceipts}"/>
+              <af:commandButton text="Allocate To Members" id="commandButton2"
+                                action="#{payments.AllocateToMembers}"
+                                rendered="false"/>
+              <af:commandButton text="Process Payments" id="commandButton1"
+                                action="#{payments.ProcessPremToMembers}"/>
+            </h:panelGrid>
+            <af:popup id="p1">
+                <af:dialog id="d1" type="none"
+                         title="Selected Members For Allocation"
+                         inlineStyle="height:200.0px;">
+                  <af:table value="#{bindings.Account2.collectionModel}"
+                            var="row" rows="#{bindings.Account2.rangeSize}"
+                            emptyText="#{bindings.Account2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.Account2.rangeSize}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.Account2.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.Account2.collectionModel.makeCurrent}"
+                            rowSelection="single" id="launTab" width="1000"
+                            binding="#{payments.selMembersLOV}">
+                    <af:column sortProperty="PCM_CODE" sortable="true"
+                               headerText="Code" id="c12">
+                      <af:outputText value="#{row.PCM_CODE}" id="ot17"/>
+                    </af:column>
+                    <af:column sortProperty="MEM_NO" sortable="true"
+                               headerText="Member No." id="c21">
+                      <af:outputText value="#{row.MEM_NO}" id="ot14"/>
+                    </af:column>
+                    <af:column sortProperty="MEMBER_DISPLAY" sortable="true"
+                               headerText="Member Name" id="c17">
+                      <af:outputText value="#{row.MEMBER_DISPLAY}" id="ot18"/>
+                    </af:column>
+                    <af:column sortProperty="PCM_EARNINGS" sortable="true"
+                               headerText="Member Salary" id="c13">
+                      <af:outputText value="#{row.PCM_EARNINGS}" id="ot13"/>
+                    </af:column>
+                    <af:column sortProperty="PCM_PREMIUM" sortable="true"
+                               headerText="Debited Premium" id="c20">
+                      <af:outputText value="#{row.PCM_PREMIUM}" id="ot12"/>
+                    </af:column>
+                    <af:column sortProperty="PCM_ALLOCATED_PREMIUM"
+                               sortable="true" headerText="Allocated Amt"
+                               id="c19">
+                      <af:outputText value="#{row.PCM_ALLOCATED_PREMIUM}"
+                                     id="ot19"/>
+                    </af:column>
+                    <af:column sortProperty="PCM_PAID_AMOUNT" sortable="true"
+                               headerText="Balance Amt" id="c18" width="90">
+                      <af:outputText value="#{row.PCM_PAID_AMOUNT}" id="ot20"/>
+                    </af:column>
+                  </af:table>
+                </af:dialog>
+            </af:popup>
+            <af:spacer width="10" height="20" id="s2"/>
+            <af:outputLabel value="Imported Allocations" id="outputLabel1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s3"/>
+            <af:inputFile label="Import Member Earnings" autoSubmit="true"
+                          binding="#{FileProcessor.upFile}"
+                          valueChangeListener="#{FileProcessor.fileChangeForPayment}"
+                          immediate="true" id="if1"/>
+            <af:separator id="separator1"/>
+            <af:panelCollection id="panelCollection1"
+                                inlineStyle="width:99%; height:170.0px;">
+              <f:facet name="menus">
+                <af:menu text="Utilities" id="menu1">
+                  <af:commandMenuItem text="Export To Excel"
+                                      id="commandMenuItem1">
+                    <af:exportCollectionActionListener exportedId="t1"
+                                                       type="excelHTML"
+                                                       filename="LaunchData"
+                                                       title="LaunchData"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.Account1.collectionModel}" var="row"
+                        rows="#{bindings.Account1.rangeSize}"
+                        emptyText="#{bindings.Account1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Account1.rangeSize}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.Account1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.Account1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t1"
+                        binding="#{CsvProcessor.importedPrem}">
+                  <af:column sortProperty="PCM_ENDR_CODE" sortable="false"
+                             headerText="Code" id="c22">
+                    <af:outputText value="#{row.PCM_ENDR_CODE}" id="ot21"/>
+                  </af:column>
+                  <af:column sortProperty="PCM_POLM_CODE" sortable="false"
+                             headerText="Member Code" id="c24">
+                    <af:outputText value="#{row.PCM_POLM_CODE}" id="ot23"/>
+                  </af:column>
+                  <af:column sortProperty="MIP_MEM_NO" sortable="true"
+                           headerText="Member No." id="c5" width="100">
+                  <af:outputText value="#{row.MIP_MEM_NO}" id="ot6"/>
+                </af:column>
+                <af:column sortProperty="MIP_MEMBER_NAME" sortable="true"
+                           headerText="Member Name" id="c6" width="200">
+                  <af:outputText value="#{row.MIP_MEMBER_NAME}" id="ot8"/>
+                </af:column>
+                <af:column sortProperty="MIP_PCM_EARNINGS" sortable="true"
+                           headerText="Member Salary" id="c8" width="150">
+                  <af:outputText value="#{row.MIP_PCM_EARNINGS}" id="ot5"
+                                 converter="javax.faces.Number"/>
+                </af:column>
+                <af:column sortProperty="MIP_PCM_PREMIUM" sortable="true"
+                           headerText="Debited Premium" id="c7" width="150">
+                  <af:outputText value="#{row.MIP_PCM_PREMIUM}" id="ot9"
+                                 converter="javax.faces.Number"/>
+                </af:column>
+                <af:column sortProperty="MIP_PCM_ALLOCATED_AMT" sortable="true"
+                           headerText="Allocated Amount" id="c4" width="145">
+                  <af:outputText value="#{row.MIP_PCM_ALLOCATED_AMT}" id="ot7"
+                                 converter="javax.faces.Number"/>
+                </af:column>
+                  <af:column sortProperty="MIP_BATCH_NO" sortable="true"
+                           headerText="Batch No." id="c9" width="80">
+                  <af:outputText value="#{row.MIP_BATCH_NO}" id="ot10"/>
+                </af:column>
+                </af:table>
+            </af:panelCollection>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

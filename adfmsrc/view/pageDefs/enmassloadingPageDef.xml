@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="enmassloadingPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findPolToLoad.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolToLoadIterator"/>
+    <searchRegion Binds="findPolToLoadIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account1Query"/>
+    <methodIterator Binds="findPolMembersToLoad.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolMembersToLoadIterator"/>
+    <searchRegion Binds="findPolMembersToLoadIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AccountQuery"/>
+    <methodIterator Binds="findPolRidersToLoad.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolRidersToLoadIterator"/>
+    <searchRegion Binds="findPolRidersToLoadIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account2Query"/>
+    <methodIterator Binds="findPolClientToLoad.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolClientToLoadIterator"/>
+    <searchRegion Binds="findPolClientToLoadIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account3Query"/>
+    <methodIterator Binds="findPolCoinsurersToLoad.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolCoinsurersToLoadIterator"/>
+    <searchRegion Binds="findPolCoinsurersToLoadIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account4Query"/>
+    <methodIterator Binds="findPolCoinsurersToLoad1.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolCoinsurersToLoad1Iterator"/>
+    <searchRegion Binds="findPolCoinsurersToLoad1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account5Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findPolToLoad" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolToLoad_AccountDAO_dataProvider_findPolToLoad_result"/>
+    <tree IterBinding="findPolToLoadIterator" id="Account1">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account10">
+        <AttrNames>
+          <Item Value="LGPL_SN"/>
+          <Item Value="LGPL_CLIENT"/>
+          <Item Value="LGPL_NO_MEM"/>
+          <Item Value="LGPL_SHARE"/>
+          <Item Value="LGPL_COMMENC_DT"/>
+          <Item Value="LGPL_RENEW_DT"/>
+          <Item Value="LGPL_NEXT_REN_DT"/>
+          <Item Value="LGPL_RATES"/>
+          <Item Value="LGPL_TOT_SA"/>
+          <Item Value="LGPL_TOT_PREM"/>
+          <Item Value="LGPL_TOT_PREM_PAID"/>
+          <Item Value="LGPL_OUTS_PREM"/>
+          <Item Value="LGPL_PROD_NAME"/>
+          <Item Value="LGPL_AGENT_NAME"/>
+          <Item Value="LGPL_AGENT"/>
+          <Item Value="LGPL_POL_NO"/>
+          <Item Value="LGPL_BRANCH"/>
+          <Item Value="LGPL_AOI"/>
+          <Item Value="LGPL_COMM_RATE"/>
+          <Item Value="LGPL_OV_COMM_RATE"/>
+          <Item Value="LGPL_VAT_RATE"/>
+          <Item Value="LGPL_DURATION"/>
+          <Item Value="LGPL_FREQ_OF_PAY"/>
+          <Item Value="LGPL_POL_CATEGORY"/>
+          <Item Value="LGPL_MULTI_EARNINGS"/>
+          <Item Value="LGPL_FCL"/>
+          <Item Value="LGPL_CODE"/>
+          <Item Value="LGPL_PENS_COMM_RATE"/>
+          <Item Value="LGPL_PENS_PAYMENT_FREQ"/>
+          <Item Value="LGPL_REGISTERED"/>
+          <Item Value="LGPL_REG_NO"/>
+          <Item Value="LGPL_PENS_TYPE"/>
+          <Item Value="LGPL_CONTRI_TYPE"/>
+          <Item Value="LGPL_EMYE_CONTRI"/>
+          <Item Value="LGPL_EMYR_CONTRI"/>
+          <Item Value="LGPL_MALE_NRD"/>
+          <Item Value="LGPL_FEMALE_NRD"/>
+          <Item Value="LGPL_GRNTD_PRD"/>
+          <Item Value="LGPL_EARNINGS_ESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolMembersToLoad" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolMembersToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolMembersToLoad_AccountDAO_dataProvider_findPolMembersToLoad_result"/>
+    <tree IterBinding="findPolMembersToLoadIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="LGMD_SN"/>
+          <Item Value="LGMD_SURNAME"/>
+          <Item Value="LGMD_DOB"/>
+          <Item Value="LGMD_ANB"/>
+          <Item Value="LGMD_BASIC"/>
+          <Item Value="LGMD_HOUSING"/>
+          <Item Value="LGMD_TRANSPORT"/>
+          <Item Value="LGMD_MONTH_SAL"/>
+          <Item Value="LGMD_TOT_EMUL"/>
+          <Item Value="LGMD_SA"/>
+          <Item Value="LGMD_PREM"/>
+          <Item Value="LGMD_PREM_RATE"/>
+          <Item Value="LGMD_DOJ"/>
+          <Item Value="LGMD_COVER_FROM_DATE"/>
+          <Item Value="LGMD_EMYR_BAL_BF"/>
+          <Item Value="LGMD_EMYE_BAL_BF"/>
+          <Item Value="LGMD_EMPYR_CONTRI"/>
+          <Item Value="LGMD_EMYE_CONTRI"/>
+          <Item Value="LGMD_LOAN_ISSUE_DATE"/>
+          <Item Value="LGMD_ORIG_LN_PRD"/>
+          <Item Value="LGMD_LOAN_INT"/>
+          <Item Value="LGMD_ORIG_LOAN_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolRidersToLoad" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolRidersToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolRidersToLoad_AccountDAO_dataProvider_findPolRidersToLoad_result"/>
+    <tree IterBinding="findPolRidersToLoadIterator" id="Account2">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account20">
+        <AttrNames>
+          <Item Value="LGRA_POL_NO"/>
+          <Item Value="LGRA_MEM_NO"/>
+          <Item Value="LGRA_SA"/>
+          <Item Value="LGRA_BEN_CODE"/>
+          <Item Value="LGRA_BEN_TYPE"/>
+          <Item Value="LGRA_BEN_SA"/>
+          <Item Value="LGRA_BEN_RATE"/>
+          <Item Value="LGRA_BEN_PREM"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolClientToLoad" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolClientToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolClientToLoad_AccountDAO_dataProvider_findPolClientToLoad_result"/>
+    <tree IterBinding="findPolClientToLoadIterator" id="Account3">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account30">
+        <AttrNames>
+          <Item Value="LGCD_BANK_BRANCH"/>
+          <Item Value="LGCD_SN"/>
+          <Item Value="LGCD_CLIENT_BANK_NAME"/>
+          <Item Value="LGCD_OCCUPATION"/>
+          <Item Value="LGCD_CLIENT_FAX"/>
+          <Item Value="LGCD_AGENT_TEL"/>
+          <Item Value="LGCD_CLIENT_TEL"/>
+          <Item Value="LGCD_CLIENT_COUNTRY"/>
+          <Item Value="LGCD_CLIENT_TOWN"/>
+          <Item Value="LGCD_AGENT_ADDRESS"/>
+          <Item Value="LGCD_CLIENT_ADDRESS"/>
+          <Item Value="LGCD_NAME"/>
+          <Item Value="LGCD_CLIENT_ID"/>
+          <Item Value="LGCD_ACC_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolCoinsurersToLoad" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolCoinsToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolCoinsurersToLoad_AccountDAO_dataProvider_findPolCoinsurersToLoad_result"/>
+    <tree IterBinding="findPolCoinsurersToLoadIterator" id="Account4">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account40">
+        <AttrNames>
+          <Item Value="LGCA_COINSURER"/>
+          <Item Value="LGCA_COIN_SHARE"/>
+          <Item Value="LGCA_POL_NO"/>
+          <Item Value="LGCA_AGN_CODE"/>
+          <Item Value="LGCA_CODE"/>
+          <Item Value="LGRA_POL_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolCoinsurersToLoad1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolCoinsurersToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolCoinsurersToLoad_AccountDAO_dataProvider_findPolCoinsurersToLoad_result"/>
+    <tree IterBinding="findPolCoinsurersToLoad1Iterator" id="Account5">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account50">
+        <AttrNames>
+          <Item Value="LGCA_SCHEME"/>
+          <Item Value="LGCA_CO_SHARE"/>
+          <Item Value="LGCA_COINSURER"/>
+          <Item Value="LGCA_COIN_SHARE"/>
+          <Item Value="LGCA_POL_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findPolMembersToLoadIterator" id="Account6">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account60">
+        <AttrNames>
+          <Item Value="LGMD_SN"/>
+          <Item Value="LGMD_SURNAME"/>
+          <Item Value="LGMD_DOB"/>
+          <Item Value="LGMD_ANB"/>
+          <Item Value="LGMD_BASIC"/>
+          <Item Value="LGMD_HOUSING"/>
+          <Item Value="LGMD_TRANSPORT"/>
+          <Item Value="LGMD_MONTH_SAL"/>
+          <Item Value="LGMD_TOT_EMUL"/>
+          <Item Value="LGMD_SA"/>
+          <Item Value="LGMD_PREM"/>
+          <Item Value="LGMD_PREM_RATE"/>
+          <Item Value="LGMD_DOJ"/>
+          <Item Value="LGMD_COVER_FROM_DATE"/>
+          <Item Value="LGMD_EMYR_BAL_BF"/>
+          <Item Value="LGMD_EMYE_BAL_BF"/>
+          <Item Value="LGMD_EMPYR_CONTRI"/>
+          <Item Value="LGMD_EMYE_CONTRI"/>
+          <Item Value="LGMD_LOAN_ISSUE_DATE"/>
+          <Item Value="LGMD_ORIG_LN_PRD"/>
+          <Item Value="LGMD_LOAN_INT"/>
+          <Item Value="LGMD_ORIG_LOAN_AMT"/>
+          <Item Value="LGMD_CATEGORY"/>
+          <Item Value="LGMD_EARNINGS_PRD"/>
+          <Item Value="LGMD_OCCUPATION"/>
+          <Item Value="LGMD_POL_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

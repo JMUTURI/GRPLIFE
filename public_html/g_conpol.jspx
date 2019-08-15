@@ -1,0 +1,453 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Group Life | Convert Quotation" id="d3">
+      <af:messages id="m1"/>
+     <af:pageTemplate
+                     viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout id="pgl2" layout="scroll">
+          <af:popup id="users">
+            <af:dialog id="dialog4" type="none"
+                       title="Users To Assign the Task">
+              <af:table value="#{bindings.workflow.collectionModel}" var="row"
+                        rows="#{bindings.workflow.rangeSize}"
+                        emptyText="#{bindings.workflow.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.workflow.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.workflowQuery.queryDescriptor}"
+                        queryListener="#{bindings.workflowQuery.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.workflow.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.workflow.collectionModel.makeCurrent}"
+                        rowSelection="single" id="table2" width="410"
+                        binding="#{quoteConv.usersLOV}">
+                <af:column sortProperty="taskUserID" filterable="true"
+                           sortable="true" headerText="ID" id="column2">
+                  <af:outputText value="#{row.taskUserID}" id="outputText43"/>
+                </af:column>
+                <af:column sortProperty="taskUserShtDesc" filterable="true"
+                           sortable="true" headerText="User Short Desc"
+                           id="column3">
+                  <af:outputText value="#{row.taskUserShtDesc}"
+                                 id="outputText44"/>
+                </af:column>
+                <af:column sortProperty="taskUserDesc" filterable="true"
+                           sortable="true" headerText="User Name" id="column4"
+                           width="200">
+                  <af:outputText value="#{row.taskUserDesc}" id="outputText45"/>
+                </af:column>
+              </af:table>
+              <h:panelGrid columns="2" id="panelGrid7">
+                <af:commandButton text="OK" id="commandButton11"
+                                  action="#{quoteConv.AssignTask}"/>
+                <af:commandButton text="Cancel" id="commandButton22"
+                                  action="#{manipulation.GetAssignee}"/>
+              </h:panelGrid>
+            </af:dialog>
+          </af:popup>
+          <af:panelBox text="Select Quotation" showHeader="never"
+                       binding="#{quoteConv.searchQuote}" id="pb1"
+                       rendered="#{Rendering.convertPolicy}">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Select a Quotation To Convert to Policy"
+                            inlineStyle="font-weight:bold;" id="ol1"/>
+            <af:separator inlineStyle="width:inherit;" id="s1"/>
+            <h:panelGrid columns="2" id="pg1">
+              <af:outputLabel value="Product ID" id="ol2"/>
+              <h:panelGrid columns="2" id="pg2">
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{quoteConv.conProductDisplay}"
+                              disabled="true" id="it1"/>
+                <af:commandButton icon="/dropdown.gif" id="cb1">
+                  <af:showPopupBehavior popupId="productsPopup"/>
+                </af:commandButton>
+                <af:popup id="productsPopup">
+                  <af:dialog type="none" title="Select Product" id="d1">
+                    <af:table value="#{bindings.productDetails.collectionModel}"
+                              var="row"
+                              rows="#{bindings.productDetails.rangeSize}"
+                              emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.productDetails.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                              queryListener="#{bindings.productDetailsQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t3"
+                              binding="#{quoteConv.conProductsLOV}" width="325">
+                      <af:column sortProperty="prodshtDesc" filterable="true"
+                                 sortable="true" headerText="Product" id="c6"
+                                 width="100">
+                        <af:outputText value="#{row.prodshtDesc}" id="ot21"/>
+                      </af:column>
+                      <af:column sortProperty="prodDesc" filterable="true"
+                                 sortable="true" headerText="Description"
+                                 id="c7" width="200">
+                        <af:outputText value="#{row.prodDesc}" id="ot20"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg3">
+                      <af:commandButton text="OK"
+                                        action="#{quoteConv.AssignQuotationProducts}"
+                                        id="cb2"/>
+                      <af:commandButton text="Cancel" id="cb3"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputText binding="#{manipulation.conProdDescDisplay}"
+                             inlineStyle="width:25%;" rendered="false"
+                             id="ot4"/>
+              <af:outputLabel value="Quotation No" id="ol3"/>
+              <h:panelGrid columns="2" id="pg4">
+                <af:inputText label="Label 2" simple="true"
+                              binding="#{quoteConv.conQuotationNoDispl}"
+                              disabled="true" id="it2"/>
+                <af:commandButton icon="/dropdown.gif" id="cb4">
+                  <af:showPopupBehavior popupId="quotationsPopup"/>
+                </af:commandButton>
+                <af:popup id="quotationsPopup">
+                  <af:dialog type="none" title="Select Quotations To Convert"
+                             id="d2">
+                    <af:table value="#{bindings.Quotations.collectionModel}"
+                              var="row" rows="#{bindings.Quotations.rangeSize}"
+                              emptyText="#{bindings.Quotations.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Quotations.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.QuotationsQuery.queryDescriptor}"
+                              queryListener="#{bindings.QuotationsQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Quotations.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Quotations.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t1" width="325"
+                              binding="#{quoteConv.quotationsTable}">
+                      <af:column sortProperty="quoNo" filterable="true"
+                                 sortable="true" headerText="Quotation No."
+                                 id="c1">
+                        <af:outputText value="#{row.quoNo}" id="ot2"/>
+                      </af:column>
+                      <af:column sortProperty="client" filterable="true"
+                                 sortable="true" headerText="Client" id="c2"
+                                 width="200">
+                        <af:outputText value="#{row.client}" id="ot3"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg9">
+                      <af:commandButton text="OK"
+                                        action="#{quoteConv.findQuotNumber}"
+                                        id="cb5"/>
+                      <af:commandButton text="Cancel" id="cb6"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputText binding="#{manipulation.conClientDisplay}"
+                             rendered="false" id="ot8"/>
+              <af:outputLabel value="Document Ref No." id="ol4"/>
+              <af:inputText label="Label 3" simple="true" id="it3"/>
+            </h:panelGrid>
+            <h:panelGrid columns="3" width="10%" id="pg5">
+              <af:commandButton text="Search"
+                                action="#{quoteConv.SearchResults}"
+                                id="cb7" binding="#{quoteConv.searchButton}"/>
+              <af:commandButton text="Exit" action="#{Links.goHome}" id="cb8"/>
+            </h:panelGrid>
+          </af:panelBox>
+          <af:spacer width="10" height="10" id="s2"/>
+          <af:panelBox text="Search Results" showHeader="never"
+                       rendered="#{Rendering.taskConvertPolicy}" binding="#{quoteConv.searchResults}"
+                       id="pb2">
+            <f:facet name="toolbar"/>
+              <af:panelTabbed id="pt1" inlineStyle="width:100.0%;">
+                <af:showDetailItem text="Convert Quotation To Policy" id="sdi1">
+                  <af:panelGroupLayout id="pgl4">
+                    <af:panelBox id="pb4" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <af:outputLabel value="Convert Proposal To Policy"
+                                      inlineStyle="font-weight:bold;" id="ol5"/>
+                      <af:separator inlineStyle="width:inherit;" id="s3"/>
+                      <h:panelGrid columns="11" id="pg6">
+                        <af:outputLabel value="Quotation No" id="ol6"/>
+                        <af:outputText value="#{bindings.quoNo.inputValue}"
+                                       inlineStyle="font-weight:bold;"
+                                       id="ot9"/>
+                        <af:outputLabel id="outputLabel1"/>
+                        <af:outputLabel value="Client" id="ol7"/>
+                        <af:outputText value="#{bindings.client1.inputValue}"
+                                       inlineStyle="font-weight:bold;"
+                                       id="ot10"/>
+                        <af:outputLabel id="outputLabel2"/>
+                        <af:outputLabel value="Product ID" id="ol8"/>
+                        <af:outputText value="#{bindings.prod_sht_desc1.inputValue}"
+                                       id="ot6"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:outputLabel id="outputLabel3"/>
+                        <af:outputLabel value="Product" id="ol9"/>
+                        <af:outputText value="#{bindings.prod_display.inputValue}"
+                                       id="ot7"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:outputLabel value="Branch" id="ol10"/>
+                        <af:outputText value="#{bindings.branch1.inputValue}"
+                                       id="ot13"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:outputLabel id="outputLabel4"/>
+                        <af:outputLabel value="Proposer" id="ol11"/>
+                        <af:outputText value="#{bindings.client1.inputValue}"
+                                       inlineStyle="font-weight:bold;"
+                                       id="ot14"/>
+                        <af:outputLabel id="outputLabel5"/>
+                        <af:outputLabel value="Occupation" id="ol12"/>
+                        <af:outputText value="#{bindings.occupation1.inputValue}"
+                                       inlineStyle="font-weight:bold;"
+                                       id="ot15"/>
+                        <af:outputLabel id="outputLabel6" rendered="false"/>
+                        <af:outputLabel value="Hazardous" id="ol13"
+                                        rendered="false"/>
+                        <af:outputText value="#{bindings.hazard1.inputValue}"
+                                       inlineStyle="font-weight:bold;" id="ot16"
+                                       rendered="false"/>
+                        <af:outputLabel id="outputLabel12"/>
+                        <af:outputLabel value="U/W Year" id="ol14"/>
+                        <af:outputText value="#{bindings.UWYear.inputValue}"
+                                       inlineStyle="font-weight:bold;"
+                                       id="ot17"/>
+                        <af:outputLabel id="outputLabel7" rendered="false"/>
+                        <af:outputLabel value="Status" id="ol15"/>
+                        <af:outputText value="#{bindings.status.inputValue}"
+                                       inlineStyle="font-weight:bold;"
+                                       id="outputText1"/>
+                        <af:outputLabel id="outputLabel8"/>
+                        <af:outputLabel value="Freq Of Payment" id="ol18"/>
+                        <af:outputText value="#{bindings.freq_of_payment_disp.inputValue}"
+                                       id="ot5"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:outputLabel id="outputLabel11"/>
+                        <af:outputLabel value="Effective Date" id="ol16"/>
+                        <af:outputText value="#{bindings.effectDate.inputValue}"
+                                       inlineStyle="font-weight:bold;"
+                                       id="ot18">
+                          <af:convertDateTime pattern="#{bindings.effectDate.format}"/>
+                        </af:outputText>
+                        
+                        
+                        <af:outputLabel id="outputLabel9"/>
+                        <af:outputLabel value="Cover To Date" id="ol17"/>
+                        <af:outputText value="#{bindings.QUO_COVER_TO_DATE.inputValue}"
+                                       id="ot12"
+                                       inlineStyle="font-weight:bold;">
+                          <af:convertDateTime pattern="#{bindings.QUO_COVER_TO_DATE.format}"/>
+                        </af:outputText>
+                      </h:panelGrid>
+                      <af:separator id="s7"/>
+                      <h:panelGrid columns="5" id="pg10">
+                        <af:selectBooleanCheckbox label="Label 1" id="sbc1"
+                                                  simple="true"
+                                                  binding="#{quoteConv.effectiveCbox}"
+                                                  autoSubmit="true"
+                                                  valueChangeListener="#{quoteConv.EffectiveDateListener}"
+                                                  disabled="#{sessionScope['policyCode'] != null}"/>
+                        <af:outputLabel value="Change Effective Date"
+                                        id="ol20"/>
+                        <af:panelGroupLayout id="pgl3" partialTriggers="sbc1">
+                          <af:inputDate label="Label 1" id="id1" simple="true"
+                                        value="#{bindings.effectDate.inputValue}"
+                                        disabled="true"
+                                        binding="#{quoteConv.newEffectiveDate}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>
+                          <af:spacer width="5" height="2" id="s8"/>
+                          <af:outputLabel value="Policy Sign Date"
+                                        id="ol21" rendered="#{Rendering.mickVisible}"/>
+                        <af:inputDate label="Label 1" id="id2"
+                                      simple="true"
+                                      rendered="#{Rendering.mickVisible}"
+                                      binding="#{quoteConv.polSignDate}"
+                                      valueChangeListener="#{quoteConv.dateChanged}"
+                                      autoSubmit="true">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                      </af:inputDate>                
+                        </af:panelGroupLayout>
+                        <af:outputLabel value="Current Effective Date"
+                                        id="outputLabel13" visible="false"/>
+                        <af:inputDate label="Label 1" id="inputDate1"
+                                      simple="true"
+                                      value="#{bindings.effectDate.inputValue}"
+                                      disabled="true" visible="false"
+                                      binding="#{quoteConv.currEffectiveDate}">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                      </af:inputDate>
+                     
+                      </h:panelGrid>
+                      <af:spacer width="10" height="20" id="s4"/>
+                      <table cellspacing="2" cellpadding="3" border="0"
+                             width="100%">
+                        <tr>
+                          <td width="40%">
+                            <h:panelGrid columns="2" id="pg7">
+                              <af:outputLabel value="Policy Number." id="ol19"/>
+                              <af:inputText label="Label 4" simple="true"
+                                            binding="#{quoteConv.policyNumberDisplay}"
+                                            disabled="true" id="it4"
+                                            value="#{LOVC.policyNumberSel}"/>
+                            </h:panelGrid>
+                          </td>
+                          <td width="30%">
+                            <af:commandButton text="Generate Policy Number"
+                                              action="#{quoteConv.GeneratePolicyNumber}"
+                                              id="cb9"
+                                              binding="#{quoteConv.genButton}"
+                                              rendered="#{Rendering.convertPolicy}"/>
+                          </td>
+                        </tr>
+                         
+                        <tr>
+                          <td width="40%">
+                            <af:spacer width="10" height="20" id="s5"/>
+                          </td>
+                          <td width="20%">
+                            <h:panelGrid columns="3" id="pg8">
+                              <af:commandButton text="Cancel"
+                                                action="#{quoteConv.HideResults}"
+                                                id="cb10"
+                                                rendered="#{Rendering.convertPolicy}"/>
+                              <af:spacer width="10" height="10" id="s6"/>
+                              <af:commandButton text="Convert Policy"
+                                                action="#{quoteConv.ConvertPolicy}"
+                                                id="cb11"/>
+                            </h:panelGrid>
+                          </td>
+                        </tr>
+                      </table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </af:showDetailItem>
+                <af:showDetailItem text="Quotation Categories To Convert" id="sdi2"
+                                   binding="#{quoteConv.categoriesTab}"
+                                   rendered="#{sessionScope['umbrellaCover']=='Y'}">
+                  <af:panelGroupLayout id="pgl5">
+                    <af:panelBox id="pb5" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <h:panelGrid columns="2" id="pg11">
+                        <af:commandButton text="Select All" id="cb12"
+                                          action="#{quoteConv.SelectAll}"/>
+                        <af:commandButton text="Un-Select All"
+                                          id="commandButton1"
+                                          action="#{quoteConv.UnSelectAll}"/>
+                      </h:panelGrid>
+                      <af:table value="#{bindings.Quotations1.collectionModel}"
+                                var="row"
+                                rows="#{bindings.Quotations1.rangeSize}"
+                                emptyText="#{bindings.Quotations1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Quotations1.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.Quotations1Query.queryDescriptor}"
+                                queryListener="#{bindings.Quotations1Query.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Quotations1.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Quotations1.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t2"
+                                inlineStyle="width:100%; height:200.0px;"
+                                binding="#{quoteConv.categoriesTable}">
+                        <af:column sortProperty="selected" sortable="true"
+                                   headerText="Convert"
+                                   id="c3">
+                          <af:selectBooleanCheckbox id="sbc2" simple="true"
+                                                    selected="#{row.selected}"
+                                                    autoSubmit="true"
+                                                    binding="#{quoteConv.catConvCbox}"/>
+                        </af:column>
+                        <af:column sortProperty="lcaCode" filterable="true"
+                                   sortable="true" headerText="code" id="c4"
+                                   visible="false">
+                          <af:outputText value="#{row.lcaCode}" id="ot22"/>
+                        </af:column>
+                        <af:column sortProperty="catShtDesc" filterable="true"
+                                   sortable="true"
+                                   headerText="Short Description" id="c8"
+                                   width="200">
+                          <af:outputText value="#{row.catShtDesc}" id="ot19"/>
+                        </af:column>
+                        <af:column sortProperty="catDesc" filterable="true"
+                                   sortable="true" headerText="Category"
+                                   id="c9" width="200">
+                          <af:outputText value="#{row.catDesc}" id="ot11"/>
+                        </af:column>
+                        <af:column sortProperty="catPeriod" filterable="true"
+                                   sortable="true" headerText="Period" id="c5">
+                          <af:outputText value="#{row.catPeriod}" id="ot23"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </af:showDetailItem>
+              </af:panelTabbed>
+            </af:panelBox>
+          <af:panelBox text="My Tickets" id="pb3" showHeader="never"
+                       binding="#{quoteConv.myTicketsTab}" rendered="false"
+                       inlineStyle="width:100.0%;">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Quotation Tickets"
+                            inlineStyle="font-weight:bold;" id="outputLabel10"/>
+            <af:separator inlineStyle="width:inherit;" id="separator1"/>
+            <af:table value="#{bindings.workflow1.collectionModel}" var="row"
+                      rows="#{bindings.workflow1.rangeSize}"
+                      emptyText="#{bindings.workflow1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.workflow1.rangeSize}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.workflow1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.workflow1.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t5"
+                      binding="#{quoteConv.resultsLOV}"
+                      inlineStyle="width:100.0%; height:130px; border-style:none;">
+              <af:column sortProperty="TCKT_CODE" sortable="true"
+                         headerText="Ticket Id." id="c12">
+                <af:outputText value="#{row.TCKT_CODE}" id="outputText2"/>
+              </af:column>
+              <af:column sortProperty="TCKT_NAME" sortable="true"
+                         headerText="Ticket Name" id="c15" width="200">
+                <af:outputText value="#{row.TCKT_NAME}" id="outputText3"/>
+              </af:column>
+              <af:column sortProperty="TCKT_TO" sortable="true"
+                         headerText="Ticket Assignee" id="c17" width="140">
+                <af:outputText value="#{row.TCKT_TO}" id="outputText4"/>
+              </af:column>
+              <af:column sortProperty="TCKT_BY" sortable="true"
+                         headerText="Ticket From." id="c16">
+                <af:outputText value="#{row.TCKT_BY}" id="outputText5"/>
+              </af:column>
+              <af:column sortProperty="TCKT_DATE" sortable="true"
+                         headerText="Ticket Created On." id="c14">
+                <af:outputText value="#{row.TCKT_DATE}" id="outputText6">
+                  <af:convertDateTime pattern="#{bindings.workflow1.hints.TCKT_DATE.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="TCKT_REMARKS" sortable="true"
+                         headerText="Ticket Remarks." id="c13" width="200">
+                <af:outputText value="#{row.TCKT_REMARKS}" id="outputText7"/>
+              </af:column>
+              <af:column sortProperty="taskID" sortable="false" id="c18">
+                <af:commandLink text="Process" id="commandLink2"
+                                action="#{quoteConv.findTicket2Selected}"
+                                rendered="#{row.TCKT_TO == currUser.username}"/>
+              </af:column>
+            </af:table>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

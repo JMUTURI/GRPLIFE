@@ -1,0 +1,151 @@
+<dataTemplate dataSourceRef="LMS_MICK" name="disch_vchr_mad" defaultPackage="reports_parameters">
+<properties>
+<property name="xml_tag_case" value="upper"/>
+</properties>
+<parameters>
+<parameter name="V_CLM_NO" dataType="varchar2"/>
+</parameters>
+<lexicals>
+</lexicals>
+<dataQuery>
+<sqlStatement name="Q_1">
+	<![CDATA[
+	SELECT ORG_NAME ORGANIZATION,
+		ORG_PHY_ADDRS,
+		ORG_ADDRS || ' , ' || ORG_ZIP || ' - ' || TWN_NAME || ' , ' ||
+		COU_NAME POSTALADDRESS,
+		'Telephone' || ':' || ORG_TEL1 ||DECODE(ORG_TEL2, NULL, NULL, ' /' || ORG_TEL2) TELEPHONE,
+		'Fax' || ':' || ORG_FAX FAX,
+		'Email' || ':' || LOWER(ORG_EMAIL_ADDRS) EMAIL,
+		ORG_RPT_LOGO LOGO,
+		LOWER(ORG_WEB_ADDRS) WEB, 
+		CUR_SYMBOL
+	FROM TQC_ORGANIZATIONS, 
+		TQC_COUNTRIES, 
+		TQC_TOWNS, 
+		TQC_SYSTEMS,
+		TQC_CURRENCIES
+	WHERE ORG_TWN_CODE = TWN_CODE
+	AND ORG_COU_CODE = COU_CODE
+	AND TWN_COU_CODE=COU_CODE
+	AND SYS_ORG_CODE = ORG_CODE
+	AND CUR_CODE = ORG_CUR_CODE
+	AND SYS_SHT_DESC = 'LMS'
+	]]>
+</sqlStatement>
+<sqlStatement name="Q_2">
+<![CDATA[
+	SELECT PRP_SURNAME||' '||PRP_OTHER_NAMES SCHEME, 
+        MEM_OTHER_NAMES|| ' ' ||MEM_SURNAME MEM_NAME,
+        CPV_TOT_SA,
+        TQC_INTERFACES_PKG.CURRENCYNAME(TQC_INTERFACES_PKG.ORGCURRENCY(27)) CURRENCY,
+--        DECODE((SELECT SUM(CCVT_BUT_PAY_AMT) CCVT_BUT_PAY_AMT
+--                FROM LMS_CLAIMS,
+--                    LMS_CLAIM_COVER_TYPES
+--                WHERE CLM_NO=CCVT_CLM_NO
+--                AND CCVT_CLM_NO=:V_CLM_NO
+--                GROUP BY CLM_NO),0,CLM_COMPUTED_AMT_TO_PAY,(SELECT SUM(CCVT_BUT_PAY_AMT) CCVT_BUT_PAY_AMT 
+--                                                            FROM LMS_CLAIMS,LMS_CLAIM_COVER_TYPES 
+--                                                            WHERE CLM_NO=CCVT_CLM_NO
+--                                                            AND CCVT_CLM_NO=:V_CLM_NO
+--                                                            GROUP BY CLM_NO)) CLM_AMT_TO_PAY,
+--        '('||FMS_CHEQUES_PKG.NUM_TO_WORDS(CLM_AMT_TO_PAY,TQC_INTERFACES_PKG.ORGCURRENCY(27))||' '||TQC_INTERFACES_PKG.CURRENCYNAME(TQC_INTERFACES_PKG.ORGCURRENCY(27),'L')||')' WORDS,
+--        CLM_CAUSATION,
+        DECODE(CLM_CAUS_TYPE,'DTH','DEATH','DIS','DISABILITY','WIT','WITHDRAWAL', 'ILL', 'CRITICAL ILLNESS') CLM_CAUS_TYPE,
+        DECODE(CLM_CAUS_TYPE, 'DTH', 'the late ', '')||MEM_SURNAME||' '||MEM_OTHER_NAMES DECEASED,
+        ROUND(CLM_PAID_AMT, 0) CLM_PAID_AMT,
+        :V_CLM_NO CLM_NO, 
+        (SELECT USR_USERNAME 
+         FROM TQC_USERS 
+         WHERE USR_NAME = :V_USER) USERNAME,
+        CLM_POL_POLICY_NO,
+        POLM_TOT_SA,
+        CLM_PREPARED_BY,
+        TO_CHAR(SYSDATE,'DD/MM/RRRR') DATE_PREPARED,
+        CLM_AUTHORISED_BY,
+        TO_CHAR(SYSDATE,'fmDD MONTH RRRR') TODAY,
+        TO_CHAR(SYSDATE,'DD/MM/RRRR') DATE_AUTHORISED,
+        NVL((POLM_TOT_SA-CLM_AMT_TO_PAY),0) BAL_SA,
+        CVT_DESC,
+        INITCAP(REPORTS_PARAMETERS.NUMBER_TO_WORDS(DECODE((SELECT SUM(CCVT_BUT_PAY_AMT) CCVT_BUT_PAY_AMT 
+                                                            FROM LMS_CLAIMS,
+                                                                LMS_CLAIM_COVER_TYPES
+                                                            WHERE CLM_NO = CCVT_CLM_NO
+                                                            AND CCVT_CLM_NO = :V_CLM_NO
+                                                            GROUP BY CLM_NO), 0, ROUND(CLM_PAID_AMT, 0),
+        (SELECT SUM(CCVT_BUT_PAY_AMT) CCVT_BUT_PAY_AMT
+         FROM LMS_CLAIMS,
+            LMS_CLAIM_COVER_TYPES 
+         WHERE CLM_NO = CCVT_CLM_NO
+         AND CCVT_CLM_NO = :V_CLM_NO 
+         GROUP BY CLM_NO)))) AMT_IN_WORDS,
+         
+        TO_CHAR(CLM_DATE_DEATH_ACCIDENT,'DD/MM/RRRR') CLM_DATE_DEATH_ACCIDENT,
+        MEM_SURNAME||' '||MEM_OTHER_NAMES MEMDECEASED,
+        (SELECT CCVT_SA
+           FROM LMS_CLAIMS,
+                LMS_CLAIM_COVER_TYPES
+          WHERE CLM_NO = CCVT_CLM_NO
+            AND CCVT_CLM_NO = :V_CLM_NO
+            AND CCVT_PAID = 'Y'
+       GROUP BY CCVT_SA) CCVT_SA, 
+        PROD_TYPE,
+        TO_CHAR(CLM_STATUS_DATE, 'DD/Mon/RRRR') CLM_STATUS_DATE
+    FROM LMS_CLAIMS,
+        LMS_POLICY_MEMBERS,
+        LMS_MEMBERS,
+        LMS_PROPOSERS,
+        LMS_CLM_PAYMENT_VOUCHERS,
+        LMS_POLICIES,
+        LMS_CLAIM_COVER_TYPES,
+        LMS_COVER_TYPES,
+        LMS_PRODUCTS
+    WHERE CLM_POLM_CODE = POLM_CODE
+    AND CPV_CLM_NO = CLM_NO
+    AND POL_PROD_CODE = PROD_CODE
+    AND POLM_MEM_CODE = MEM_CODE
+    AND POL_CLIENT_PRP_CODE = PRP_CODE
+    AND CLM_POL_CODE = POL_CODE
+    AND CCVT_CVT_CODE = CVT_CODE
+    AND CCVT_CLM_NO = CLM_NO  
+    AND CCVT_PAID = 'Y'  
+    AND CLM_NO = :V_CLM_NO  --'2015/GCC0075'
+]]>
+</sqlStatement>
+</dataQuery>
+
+<dataStructure>
+<group name="G_ORGANIZATION" dataType="varchar2" source="Q_1">
+   <element name="ORGANIZATION" dataType="varchar2" value="ORGANIZATION"/>
+   <element name="ORG_PHY_ADDRS" dataType="varchar2" value="ORG_PHY_ADDRS"/>
+   <element name="POSTALADDRESS" dataType="varchar2" value="POSTALADDRESS"/>
+   <element name="TELEPHONE" dataType="varchar2" value="TELEPHONE"/>
+   <element name="FAX" dataType="varchar2" value="FAX"/>
+   <element name="EMAIL" dataType="varchar2" value="EMAIL"/>
+   <element name="WEB" dataType="varchar2" value="WEB"/>
+   <element name="CUR_SYMBOL" dataType="varchar2" value="CUR_SYMBOL"/>
+   <element name="LOGO" dataType="longraw" value="logo"/>
+</group>
+<group name="G_CLAIMS" dataType="varchar2" source="Q_2">
+   <element name="SCHEME" dataType="varchar2" value="SCHEME"/>
+   <element name="MEM_NAME" dataType="varchar2" value="MEM_NAME"/>
+   <element name="CLM_NO" dataType="varchar2" value="CLM_NO"/>
+   <element name="TODAY" dataType="varchar2" value="TODAY"/>
+   <element name="DECEASED" dataType="varchar2" value="DECEASED"/>
+   <element name="CVT_DESC" dataType="varchar2" value="CVT_DESC"/>
+   <element name="PROD_TYPE" dataType="varchar2" value="PROD_TYPE"/>
+   <element name="CLM_POL_POLICY_NO" dataType="varchar2" value="CLM_POL_POLICY_NO"/>
+   <element name="CLM_CAUS_TYPE" dataType="varchar2" value="CLM_CAUS_TYPE"/>
+   <element name="DECEASED" dataType="varchar2" value="DECEASED"/>
+   <element name="CLM_DATE_DEATH_ACCIDENT" dataType="date" value="CLM_DATE_DEATH_ACCIDENT"/>
+   <element name="CLM_PAID_AMT" dataType="date" value="CLM_PAID_AMT"/>
+   <element name="CPV_TOT_SA" dataType="number" value="CPV_TOT_SA"/>    
+   <element name="AMT_IN_WORDS" dataType="varchar2" value="AMT_IN_WORDS"/>
+   <element name="CLM_PREPARED_BY" dataType="varchar2" value="CLM_PREPARED_BY"/>
+   <element name="DATE_PREPARED" dataType="varchar2" value="DATE_PREPARED"/>
+   <element name="CLM_AUTHORISED_BY" dataType="varchar2" value="CLM_AUTHORISED_BY"/>
+   <element name="CLM_STATUS_DATE" dataType="varchar2" value="CLM_STATUS_DATE"/>
+ </group>
+
+</dataStructure>
+</dataTemplate>

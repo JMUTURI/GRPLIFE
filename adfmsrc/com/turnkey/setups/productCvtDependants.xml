@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="productCvtDependants" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.productCvtDependants"
+          isJavaBased="true">
+  <Attribute Name="pcdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="dtyDescription" Type="java.lang.String"/>
+  <Attribute Name="pcdProdcode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcdPctcode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcdDtycode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcdDtyshtdesc" Type="java.lang.String"/>
+  <Attribute Name="pcdMaxnoallowed" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcdMinage" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcdMaxage" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcdMaxsumassured" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcdCvtcode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcdCvtshtdesc" Type="java.lang.String"/>
+  <Attribute Name="pcdMinsumassrd" Type="java.math.BigDecimal"/>
+  <Attribute Name="dtyCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="dtyShtDesc" Type="java.lang.String"/>
+  <Attribute Name="dtyDesc" Type="java.lang.String"/>
+  <Attribute Name="pcd_default" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.productCvtDependants"
+                     BeanClass="com.turnkey.setups.productCvtDependants"
+                     id="productCvtDependants"/>
+</JavaBean>

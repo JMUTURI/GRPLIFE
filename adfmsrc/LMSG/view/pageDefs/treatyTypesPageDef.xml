@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="treatyTypesPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findTreaties.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findTreatiesIterator"/>
+    <methodIterator Binds="findTreatyTypesAndGroups.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findTreatyTypesAndGroupsIterator"/>
+    <iterator Binds="root" RangeSize="10" DataControl="SetupsDAO"
+              id="SetupIter"/>
+  </executables>
+  <bindings>
+    <methodAction id="findTreatyTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTreatyTypes_SetupsDAO_dataProvider_findTreatyTypes_result"/>
+    <methodAction id="findTreatyTypeGroups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyTypeGroups"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTreatyTypeGroups_SetupsDAO_dataProvider_findTreatyTypeGroups_result"/>
+    <methodAction id="findTreaties" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreaties"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTreaties_SetupsDAO_dataProvider_findTreaties_result"/>
+    <tree IterBinding="findTreatiesIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="TRS_SHT_DESC"/>
+          <Item Value="TRS_NAME"/>
+          <Item Value="TRS_TRTG_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTreatyTypesAndGroups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyTypesAndGroups"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTreatyTypesAndGroups_SetupsDAO_dataProvider_findTreatyTypesAndGroups_result"/>
+    <tree IterBinding="findTreatyTypesAndGroupsIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="TRT_DESC"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="treatyGroupItem"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.turnkey.setups.TreatyGroupItems"
+                      Name="Setup31">
+        <AttrNames>
+          <Item Value="TRTG_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="relationTypes" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.relationTypes" isJavaBased="true">
+  <Attribute Name="retCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="retShtDesc" Type="java.lang.String"/>
+  <Attribute Name="retDesc" Type="java.lang.String"/>
+  <Attribute Name="retComments" Type="java.lang.String"/>
+  <Attribute Name="dobRequired" Type="java.lang.String"/>
+  <Attribute Name="dobRequiredDesc" Type="java.lang.String"/>
+  <Attribute Name="dtyCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="dtyShtDesc" Type="java.lang.String"/>
+  <Attribute Name="dtyDesc" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="com.turnkey.setups.relationTypes"
+                     BeanClass="com.turnkey.setups.relationTypes"
+                     id="relationTypes"/>
+</JavaBean>

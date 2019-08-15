@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="overrideCommRatesPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="AccountDAO_dataProvider_rootIter" Binds="root"
+              DataControl="AccountDAO" RangeSize="25"/>
+    <methodIterator Binds="findAccountTypes.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findAccountTypesIterator"/>
+    <searchRegion Binds="findAccountTypesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AccountQuery"/>
+    <methodIterator Binds="findOverrideCommRates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findOverrideCommRatesIterator"/>
+    <searchRegion Binds="findOverrideCommRatesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SetupQuery"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findAccountTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAccountTypes"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findAccountTypes_AccountDAO_dataProvider_findAccountTypes_result"/>
+    <tree IterBinding="findAccountTypesIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="ACT_CODE"/>
+          <Item Value="ACT_ACCOUNT_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findOverrideCommRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOverrideCommRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findOverrideCommRates_SetupsDAO_dataProvider_findOverrideCommRates_result"/>
+    <tree IterBinding="findOverrideCommRatesIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="cratCode"/>
+          <Item Value="cratRate"/>
+          <Item Value="cratRateDesc"/>
+          <Item Value="cratWefDate"/>
+          <Item Value="cratWetDate"/>
+          <Item Value="cratAtCode"/>
+          <Item Value="cratAtShortDesc"/>
+          <Item Value="cratDivFactor"/>
+          <Item Value="cratRateType"/>
+          <Item Value="cratRangeFrom"/>
+          <Item Value="cratRangeTo"/>
+          <Item Value="cratProdCode"/>
+          <Item Value="cratYrNoFrom"/>
+          <Item Value="cratYrNoTo"/>
+          <Item Value="cratTermFrom"/>
+          <Item Value="cratTermTo"/>
+          <Item Value="cratPayFreq"/>
+          <Item Value="cratPctCode"/>
+          <Item Value="cratAtrCode"/>
+          <Item Value="cratAnbFrom"/>
+          <Item Value="cratAnbTo"/>
+          <Item Value="cratMaturityAge"/>
+          <Item Value="cratAppliedOn"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <list IterBinding="findProductsIterator" ListOperMode="navigation"
+          ListIter="findProductsIterator" id="CommRatesDef2"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="productName"/>
+      </AttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

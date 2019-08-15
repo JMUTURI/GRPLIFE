@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="ticketMngmtPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="FindSystemUsers.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSystemUsersIterator"/>
+    <searchRegion Binds="FindSystemUsersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+    <methodIterator Binds="findTicketDetailsByUser.result"
+                    DataControl="workflowDAO" RangeSize="25"
+                    BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketDetailsByUserIterator"/>
+    <searchRegion Binds="findTicketDetailsByUserIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="workflowQuery"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindSystemUsers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSystemUsers"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSystemUsers_SettingsDAO_dataProvider_FindSystemUsers_result"/>
+    <methodAction id="findTicketDetailsByUser" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketDetailsByUser"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketDetailsByUser_workflowDAO_dataProvider_findTicketDetailsByUser_result"/>
+    <tree IterBinding="findTicketDetailsByUserIterator" id="workflow1">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow10">
+        <AttrNames>
+          <Item Value="TCKT_CODE"/>
+          <Item Value="TCKT_NAME"/>
+          <Item Value="TCKT_REF_NO"/>
+          <Item Value="CLIENT"/>
+          <Item Value="TCKT_BY"/>
+          <Item Value="TCKT_TO"/>
+          <Item Value="TCKT_DATE"/>
+          <Item Value="TCKT_REMARKS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <tree IterBinding="FindSystemUsersIterator" id="Settings1">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings10">
+        <AttrNames>
+          <Item Value="USR_NAME"/>
+          <Item Value="USR_USERNAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

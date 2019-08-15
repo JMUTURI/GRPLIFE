@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:afh="http://myfaces.apache.org/trinidad/html" version="1.2"
+          xmlns:h="http://java.sun.com/jsf/html">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <f:view>
+    <af:document title="TurnQuest Group Life">
+      <af:resource type="javascript">
+         function onPageLoad(evt) {
+         var compId=AdfPage.PAGE.findComponentByAbsoluteId("username");
+            document.getElementById("pt1:username::content").focus();
+            }
+             function toUpper(event) {
+                      var inputComp = event.getCurrentTarget();
+                      inputComp.setValue(inputComp.getSubmittedValue().toUpperCase());
+            }
+       </af:resource>
+      <af:clientListener  type="load" method="onPageLoad"/>
+      <af:pageTemplate viewId="/templates/loginTemplate.jspx" id="pt1">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="center">
+          <af:group id="g1">
+            <h:panelGrid columns="1" id="pg1">
+              <af:spacer width="10" height="20" id="s1"/>
+              <af:panelBox text="PanelBox1" showHeader="never" id="login"
+                           binding="#{login.mainLogin}"
+                           inlineStyle="border-style:none;">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="2" cellspacing="5" id="pg2">
+                  <af:outputLabel value="Username" id="ol1"/>
+                  <af:inputText binding="#{login.username}"
+                                clientComponent="true" id="username">  
+                   <af:clientListener method="toUpper" type="keyUp"/>             
+                  </af:inputText>
+                  <af:outputLabel value="Password" id="ol2"/>
+                  <af:inputText secret="true" id="password"
+                                binding="#{login.password}"
+                                clientComponent="true"/>
+                  <af:commandButton text="Login"
+                                    action="#{login.UserAuthenticate}"
+                                    accessKey="L" id="loginButton"
+                                    clientComponent="true"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg5" cellspacing="5">
+                  <af:outputLabel value="New Password" id="ol7" rendered="false"
+                                  binding="#{login.newResetPassword}"/>
+                  <af:inputText id="it3" rendered="false" simple="true"
+                                binding="#{login.newPassword}" secret="true"/>
+                  <af:outputLabel value="Confirm Password" id="ol8"
+                                  rendered="false"
+                                  binding="#{login.confirmPassword}"/>
+                  <af:inputText label="Label 3" id="it4" simple="true"
+                                rendered="false"
+                                binding="#{login.newConfirmPassword}"
+                                secret="true"/>
+                  <af:commandButton text="Reset Password" id="cb4"
+                                    rendered="false"
+                                    action="#{login.ResetPassword}"
+                                    binding="#{login.resetPasswordBtn}"/>
+                </h:panelGrid>
+              </af:panelBox>
+              <af:spacer width="10" height="20" id="s2"/>
+              <af:panelBox text="PanelBox2" showHeader="never"
+                           id="confirmChange" rendered="false">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="outputLabel1" id="ol3"/>
+                <h:panelGrid columns="2" id="pg3">
+                  <af:commandButton text="No" id="cb1"/>
+                  <af:commandButton text="Yes" id="cb2"/>
+                </h:panelGrid>
+              </af:panelBox>
+              <af:spacer width="10" height="20" id="s3"/>
+              <af:panelBox text="PanelBox3" showHeader="never"
+                           id="changePassword" rendered="false">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="2" id="pg4">
+                  <af:outputLabel value="Username" id="ol4"/>
+                  <af:outputText value="outputText1" id="ot1"/>
+                  <af:outputLabel value="New Password" id="ol5"/>
+                  <af:inputText label="Label 1" simple="true" required="true"
+                                secret="true" id="it1"/>
+                  <af:outputLabel value="Confirm Password" id="ol6"/>
+                  <af:inputText label="Label 2" simple="true" required="true"
+                                secret="true" id="it2"/>
+                  <af:commandButton text="Login" id="cb3"/>
+                </h:panelGrid>
+              </af:panelBox>
+            </h:panelGrid>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>
+

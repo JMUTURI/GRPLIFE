@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="groupProductionPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findBusinessTransactions.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findBusinessTransactionsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findBusinessTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBusinessTransactions"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findBusinessTransactions_SetupsDAO_dataProvider_findBusinessTransactions_result"/>
+    <tree IterBinding="findBusinessTransactionsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="BTR_TRANS_CODE"/>
+          <Item Value="BTR_TRANS_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

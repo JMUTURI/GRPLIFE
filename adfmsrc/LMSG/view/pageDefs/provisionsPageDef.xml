@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="provisionsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindProvision1.result"
+                    DataControl="GenQuotProvisions" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotationProvision"
+                    id="FindProvision1Iterator"/>
+    <methodIterator Binds="findCoverTypes.result"
+                    DataControl="GenQoutCoverTypes" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotCoverTypes"
+                    id="findCoverTypesIterator"/>
+    <methodIterator Binds="FindProdProvision.result"
+                    DataControl="prodProvisionDAO" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.productProvisions"
+                    id="FindProdProvisionIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindProvision" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProvision"
+                  IsViewObjectMethod="false" DataControl="prodProvisionsDAO"
+                  InstanceName="prodProvisionsDAO.dataProvider"
+                  ReturnName="prodProvisionsDAO.methodResults.FindProvision_prodProvisionsDAO_dataProvider_FindProvision_result"/>
+    <methodAction id="FindProvision1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProvision"
+                  IsViewObjectMethod="false" DataControl="GenQuotProvisions"
+                  InstanceName="GenQuotProvisions.dataProvider"
+                  ReturnName="GenQuotProvisions.methodResults.FindProvision_GenQuotProvisions_dataProvider_FindProvision_result"/>
+    <tree IterBinding="FindProvision1Iterator" id="quotationProvision">
+      <nodeDefinition DefName="view.Quot.quotationProvision"
+                      Name="quotationProvision0">
+        <AttrNames>
+          <Item Value="quotProvshtDesc"/>
+          <Item Value="quotProvDesc"/>
+          <Item Value="quotProvEditable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCoverTypes"
+                  IsViewObjectMethod="false" DataControl="GenQoutCoverTypes"
+                  InstanceName="GenQoutCoverTypes.dataProvider"
+                  ReturnName="GenQoutCoverTypes.methodResults.findCoverTypes_GenQoutCoverTypes_dataProvider_findCoverTypes_result"/>
+    <tree IterBinding="findCoverTypesIterator" id="quotCoverTypes">
+      <nodeDefinition DefName="view.Quot.quotCoverTypes" Name="quotCoverTypes0">
+        <AttrNames>
+          <Item Value="quocvtShtDesc"/>
+          <Item Value="cover_display"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindProdProvision" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProdProvision"
+                  IsViewObjectMethod="false" DataControl="prodProvisionDAO"
+                  InstanceName="prodProvisionDAO.dataProvider"
+                  ReturnName="prodProvisionDAO.methodResults.FindProdProvision_prodProvisionDAO_dataProvider_FindProdProvision_result"/>
+    <tree IterBinding="FindProdProvisionIterator" id="productProvisions">
+      <nodeDefinition DefName="view.Quot.productProvisions"
+                      Name="productProvisions0">
+        <AttrNames>
+          <Item Value="PROV_SHT_DESC"/>
+          <Item Value="PROV_DESC"/>
+          <Item Value="PPROV_EDITABLE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

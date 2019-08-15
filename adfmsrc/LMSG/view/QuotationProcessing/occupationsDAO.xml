@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="occupationsDAO" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.occupationsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.occupations"
+                  BeanClass="LMSG.view.QuotationProcessing.occupations" id="FindOccupation"
+                  ReturnNodeName="occupations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.occupationsDAO"
+                     BeanClass="LMSG.view.QuotationProcessing.occupationsDAO" id="occupationsDAO"/>
+</JavaBean>

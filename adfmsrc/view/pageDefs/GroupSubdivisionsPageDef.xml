@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="GroupSubdivisionsPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="FindGroupSubdivisions.result"
+                    DataControl="SettingsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Base.Settings"
+                    id="FindGroupSubdivisionsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindGroupSubdivisions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindGroupSubdivisions"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="data.SettingsDAO.methodResults.FindGroupSubdivisions_SettingsDAO_dataProvider_FindGroupSubdivisions_result"/>
+    <tree IterBinding="FindGroupSubdivisionsIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="GSUB_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

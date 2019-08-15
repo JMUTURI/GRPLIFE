@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataTemplate dataSourceRef="LMS_MICK" name="outstanding_clm_ira" defaultPackage="reports_parameters">
+<properties>
+<property name="xml_tag_case" value="upper"/>
+</properties>
+<parameters>
+<parameter name="V_REPORT_TPE" dataType = "number"></parameter>
+<parameter name="V_MONTH" dataType = "number"></parameter>
+<parameter name="V_YEAR" dataType = "number"></parameter>
+</parameters>
+<lexicals>
+</lexicals>
+<dataQuery>
+<sqlStatement name="Q_1">
+       <![CDATA[
+          SELECT ORG_NAME ORGANIZATION,
+            INITCAP(TO_CHAR(CURRENT_DATE,'MONTH')||TO_CHAR(CURRENT_DATE,'DD')||', '||TO_CHAR(CURRENT_DATE,'RRRR'))YEA,TO_CHAR(CURRENT_DATE,'RRRR') THIS_YEAR,:V_YEAR THE_YEAR,
+            TO_CHAR(CURRENT_DATE,'HH:MM:PM')HOURS,TO_CHAR(CURRENT_DATE,'DD/MM/RRRR')TODAY_DATE,
+            ORG_PHY_ADDRS,
+            ORG_ADDRS || ' , ' || ORG_ZIP || ' - ' || TWN_NAME || ' , ' ||
+            COU_NAME POSTALADDRESS,
+            'TEL' || ':' || ORG_TEL1 ||
+            DECODE(ORG_TEL2, NULL, NULL, ' /' || ORG_TEL2) TELEPHONE,
+            'FAX' || ':' || ORG_FAX FAX,
+             'EMAIL: '||LOWER(ORG_EMAIL_ADDRS) EMAIL,decode(:v_report_tpe,1,'Month','Year')RPT_TYPE,
+             decode(:v_report_tpe,1,'Monthly','Annual')RPT_NAME,ORG_RPT_LOGO LOGO,
+            DECODE(:v_month, 1,'January',2,'February',3,'March',4,'April',5,'May',6,'June',7,'July',8,'August',9,'September',10,'October',11,'November',12,'December')MY_MONTH
+            FROM TQC_ORGANIZATIONS, TQC_COUNTRIES, TQC_TOWNS, TQC_SYSTEMS,LMS_PRODUCTS
+            WHERE ORG_TWN_CODE = TWN_CODE
+            AND ORG_COU_CODE = COU_CODE
+            AND SYS_ORG_CODE = ORG_CODE
+            AND SYS_SHT_DESC = 'LMS'
+            AND ROWNUM = 1               
+   	]]>
+ </sqlStatement>
+<sqlStatement name="Q_2">
+        <![CDATA[                
+	SELECT PROD_DESC PRODUCT,SUM(AWAITING_DOCS_AMT)AWAITING_DOCS_AMT,SUM(AWAITING_DOCS_NUM)AWAITING_DOCS_NUM,SUM(LESS_30_AMOUNT)LESS_30_AMOUNT,SUM(LESS_30_NUM)LESS_30_NUM,
+	SUM(BTW_30_60_AMT)BTW_30_60_AMT,SUM(BTW_30_60_NUM)BTW_30_60_NUM,SUM(BTW_60_90_AMT)BTW_60_90_AMT,SUM(BTW_60_90_NUM)BTW_60_90_NUM,SUM(BTW_90_180_AMT)BTW_90_180_AMT, SUM(BTW_90_180_NUM)BTW_90_180_NUM, 
+	SUM(MORE_180_AMT)MORE_180_AMT,  SUM(MORE_180_NUM)MORE_180_NUM,SUM(TOTAL_AMT)TOTAL_AMT,SUM(TOTAL_NUM)TOTAL_NUM
+	 FROM
+	 (
+       SELECT PROD_DESC,SUM(NVL(CLM_PAID_AMT,0)) AWAITING_DOCS_AMT,COUNT(CLM_NO)AWAITING_DOCS_NUM, 0 LESS_30_AMOUNT,0 LESS_30_NUM,0 BTW_30_60_AMT,0 BTW_30_60_NUM,  
+       0 BTW_60_90_AMT,0 BTW_60_90_NUM,0 BTW_90_180_AMT,0  BTW_90_180_NUM, 0 MORE_180_AMT ,0 MORE_180_NUM,0 TOTAL_AMT,0 TOTAL_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_CLAIM_AUTHORISED IN ('Y')
+                       AND lms_ord_misc.validate_clm_docs_submited(CLM_NO) IN ('N')
+                       AND lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR)   > LTR_DONE_DATE
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+    UNION
+        SELECT PROD_DESC,0 AWAITING_DOCS_AMT,0 AWAITING_DOCS_NUM,SUM(NVL(CLM_PAID_AMT,0)) LESS_30_AMOUNT,COUNT(CLM_NO)LESS_30_NUM, 0 BTW_30_60_AMT,0 BTW_30_60_NUM,  
+                       0 BTW_60_90_AMT,0 BTW_60_90_NUM,0 BTW_90_180_AMT,0 BTW_90_180_NUM, 0 MORE_180_AMT ,0 MORE_180_NUM,0 TOTAL_AMT,0 TOTAL_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_CLAIM_AUTHORISED IN ('N')
+                       AND lms_ord_misc.validate_clm_docs_submited(CLM_NO) IN ('Y')
+                       AND lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR) BETWEEN LTR_DONE_DATE AND LTR_DONE_DATE+30
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+    UNION
+        SELECT PROD_DESC,0 AWAITING_DOCS_AMT,0 AWAITING_DOCS_NUM,0 LESS_30_AMOUNT,0 LESS_30_NUM,SUM(NVL(CLM_PAID_AMT,0)) BTW_30_60_AMT,COUNT(CLM_NO) BTW_30_60_NUM,  
+       0 BTW_60_90_AMT,0 BTW_60_90_NUM,0 BTW_90_180_AMT,0 BTW_90_180_NUM, 0 MORE_180_AMT ,0 MORE_180_NUM,0 TOTAL_AMT,0 TOTAL_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                      WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_CLAIM_AUTHORISED IN ('N')
+                       AND lms_ord_misc.validate_clm_docs_submited(CLM_NO) IN ('Y')
+                       AND lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR) BETWEEN LTR_DONE_DATE+30 AND LTR_DONE_DATE+60
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+ 
+    UNION
+        SELECT PROD_DESC,0 AWAITING_DOCS_AMT,0 AWAITING_DOCS_NUM,0 LESS_30_AMOUNT,0 LESS_30_NUM,0 BTW_30_60_AMT,0 BTW_30_60_NUM,  
+       SUM(NVL(CLM_PAID_AMT,0)) BTW_60_90_AMT,COUNT(CLM_NO)  BTW_60_90_NUM,0 BTW_90_180_AMT,0 BTW_90_180_NUM, 0 MORE_180_AMT ,0 MORE_180_NUM,0 TOTAL_AMT,0 TOTAL_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_CLAIM_AUTHORISED IN ('N')
+                       AND lms_ord_misc.validate_clm_docs_submited(CLM_NO) IN ('Y')
+                       AND lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR) BETWEEN LTR_DONE_DATE+60 AND LTR_DONE_DATE+90
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+                       
+    UNION
+        SELECT PROD_DESC,0 AWAITING_DOCS_AMT,0 AWAITING_DOCS_NUM,0 LESS_30_AMOUNT,0 LESS_30_NUM,0 BTW_30_60_AMT,0 BTW_30_60_NUM,  
+       0 BTW_60_90_AMT,0 BTW_60_90_NUM,SUM(NVL(CLM_PAID_AMT,0)) BTW_90_180_AMT,COUNT(CLM_NO)  BTW_90_180_NUM, 0 MORE_180_AMT ,0 MORE_180_NUM,0 TOTAL_AMT,0 TOTAL_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                      WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_CLAIM_AUTHORISED IN ('N')
+                       AND lms_ord_misc.validate_clm_docs_submited(CLM_NO) IN ('Y')
+                       AND lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR)  BETWEEN LTR_DONE_DATE+90 AND LTR_DONE_DATE+180
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+
+    UNION
+        SELECT PROD_DESC,0 AWAITING_DOCS_AMT,0 AWAITING_DOCS_NUM,0 LESS_30_AMOUNT,0 LESS_30_NUM,0 BTW_30_60_AMT,0 BTW_30_60_NUM,  
+       0 BTW_60_90_AMT,0 BTW_60_90_NUM,0 BTW_90_180_AMT,0  BTW_90_180_NUM, SUM(NVL(CLM_PAID_AMT,0)) MORE_180_AMT ,COUNT(CLM_NO) MORE_180_NUM,0 TOTAL_AMT,0 TOTAL_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_CLAIM_AUTHORISED IN ('N')
+                       AND lms_ord_misc.validate_clm_docs_submited(CLM_NO) IN ('Y')
+                       AND lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR)   > LTR_DONE_DATE+180 
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+ 
+    UNION
+       SELECT PROD_DESC,0 AWAITING_DOCS_AMT,0 AWAITING_DOCS_NUM,0 LESS_30_AMOUNT,0 LESS_30_NUM,0 BTW_30_60_AMT,0 BTW_30_60_NUM,  
+       0 BTW_60_90_AMT,0 BTW_60_90_NUM,0 BTW_90_180_AMT,0  BTW_90_180_NUM, 0 MORE_180_AMT ,0 MORE_180_NUM,SUM(NVL(CLM_PAID_AMT,0)) TOTAL_AMT,COUNT(CLM_NO) TOTAL_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_CLAIM_AUTHORISED IN ('N')
+                       AND lms_ord_misc.validate_clm_docs_submited(CLM_NO) IN ('Y')
+                       AND lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR)> LTR_DONE_DATE
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC)                       
+                       GROUP BY PROD_DESC
+                       ORDER BY PROD_DESC
+            ]]>
+</sqlStatement>
+<sqlStatement name="Q_3">
+        <![CDATA[ 
+SELECT PROD_DESC PRODUCT,SUM(PREV_CLMS_AMT)PREV_CLMS_AMT,SUM(PREV_CLMS_NUM)PREV_CLMS_NUM,SUM(CURR_CLMS_AMT)CURR_CLMS_AMT,SUM(CURR_CLMS_NUM)CURR_CLMS_NUM,SUM(TOTAL_OS_CLMS_AMT)TOTAL_OS_CLMS_AMT,
+SUM(TOTAL_OS_CLMS_NUM)TOTAL_OS_CLMS_NUM,SUM(SETTLED_CLMS_AMT)SETTLED_CLMS_AMT,SUM(SETTLED_CLMS_NUM)SETTLED_CLMS_NUM,SUM(CLS_NO_CLM_CLMS_AMT)CLS_NO_CLM_CLMS_AMT,SUM(CLS_NO_CLM_CLMS_NUM)CLS_NO_CLM_CLMS_NUM,
+SUM(TOTAL_ACTED_CLMS_AMT)TOTAL_ACTED_CLMS_AMT,SUM(TOTAL_ACTED_CLMS_NUM)TOTAL_ACTED_CLMS_NUM,SUM(TOTAL_CLMS_AMT)TOTAL_CLMS_AMT,SUM(TOTAL_CLMS_NUM)TOTAL_CLMS_NUM
+FROM(
+SELECT PROD_DESC,SUM(NVL(CLM_PAID_AMT,0))PREV_CLMS_AMT,COUNT(CLM_NO)PREV_CLMS_NUM,0 CURR_CLMS_AMT,0 CURR_CLMS_NUM,0 TOTAL_OS_CLMS_AMT,0 TOTAL_OS_CLMS_NUM,
+0 SETTLED_CLMS_AMT,0 SETTLED_CLMS_NUM,0 CLS_NO_CLM_CLMS_AMT,0 CLS_NO_CLM_CLMS_NUM,0 TOTAL_ACTED_CLMS_AMT,0 TOTAL_ACTED_CLMS_NUM,0 TOTAL_CLMS_AMT,0 TOTAL_CLMS_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_STATUS IN ('OS')
+                       AND lms_ord_misc.ageingClaimsPreviousDate (:v_report_tpe,:V_MONTH,:V_YEAR)> CLM_DATE  
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+UNION
+SELECT PROD_DESC,0 PREV_CLMS_AMT,0 PREV_CLMS_NUM,SUM(NVL(CLM_PAID_AMT,0))CURR_CLMS_AMT,COUNT(CLM_NO)CURR_CLMS_NUM,0 TOTAL_OS_CLMS_AMT,0 TOTAL_OS_CLMS_NUM,
+0 SETTLED_CLMS_AMT,0 SETTLED_CLMS_NUM,0 CLS_NO_CLM_CLMS_AMT,0 CLS_NO_CLM_CLMS_NUM,0 TOTAL_ACTED_CLMS_AMT,0 TOTAL_ACTED_CLMS_NUM,0 TOTAL_CLMS_AMT,0 TOTAL_CLMS_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_DATE between lms_ord_misc.ageingClaimsStartDate (:v_report_tpe,:V_MONTH,:V_YEAR) and lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR)
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+ 
+UNION
+SELECT PROD_DESC PRODUCT,0 PREV_CLMS_AMT,0 PREV_CLMS_NUM,0 CURR_CLMS_AMT,0 CURR_CLMS_NUM,(SUM(PREV_CLMS_AMT)+SUM(CURR_CLMS_AMT))TOTAL_OS_CLMS_AMT,
+(SUM(PREV_CLMS_NUM)+SUM(CURR_CLMS_NUM))TOTAL_OS_CLMS_NUM,0 SETTLED_CLMS_AMT,0 SETTLED_CLMS_NUM,0 CLS_NO_CLM_CLMS_AMT,0 CLS_NO_CLM_CLMS_NUM,
+0 TOTAL_ACTED_CLMS_AMT,0 TOTAL_ACTED_CLMS_NUM,0 TOTAL_CLMS_AMT,0 TOTAL_CLMS_NUM
+FROM(SELECT PROD_DESC,SUM(NVL(CLM_PAID_AMT,0))PREV_CLMS_AMT,COUNT(CLM_NO)PREV_CLMS_NUM,0 CURR_CLMS_AMT,0 CURR_CLMS_NUM,0 TOTAL_OS_CLMS_AMT,0 TOTAL_OS_CLMS_NUM,
+0 SETTLED_CLMS_AMT,0 SETTLED_CLMS_NUM,0 CLS_NO_CLM_CLMS_AMT,0 CLS_NO_CLM_CLMS_NUM,0 TOTAL_ACTED_CLMS_AMT,0 TOTAL_ACTED_CLMS_NUM,0 TOTAL_CLMS_AMT,0 TOTAL_CLMS_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_STATUS IN ('OS')
+                       AND lms_ord_misc.ageingClaimsPreviousDate (:v_report_tpe,:V_MONTH,:V_YEAR)> CLM_DATE  
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+UNION
+SELECT PROD_DESC,0 PREV_CLMS_AMT,0 PREV_CLMS_NUM,SUM(NVL(CLM_PAID_AMT,0))CURR_CLMS_AMT,COUNT(CLM_NO)CURR_CLMS_NUM,0 TOTAL_OS_CLMS_AMT,0 TOTAL_OS_CLMS_NUM,
+0 SETTLED_CLMS_AMT,0 SETTLED_CLMS_NUM,0 CLS_NO_CLM_CLMS_AMT,0 CLS_NO_CLM_CLMS_NUM,0 TOTAL_ACTED_CLMS_AMT,0 TOTAL_ACTED_CLMS_NUM,0 TOTAL_CLMS_AMT,0 TOTAL_CLMS_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_DATE between lms_ord_misc.ageingClaimsStartDate (:v_report_tpe,:V_MONTH,:V_YEAR) and lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR)
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC
+ ) GROUP BY PROD_DESC
+
+UNION
+SELECT PROD_DESC,0 PREV_CLMS_AMT,0 PREV_CLMS_NUM,0 CURR_CLMS_AMT,0 CURR_CLMS_NUM,0 TOTAL_OS_CLMS_AMT,0 TOTAL_OS_CLMS_NUM,SUM(NVL(CLM_PAID_AMT,0))SETTLED_CLMS_AMT,
+COUNT(CLM_NO)SETTLED_CLMS_NUM,0 CLS_NO_CLM_CLMS_AMT,0 CLS_NO_CLM_CLMS_NUM,0 TOTAL_ACTED_CLMS_AMT,0 TOTAL_ACTED_CLMS_NUM,0 TOTAL_CLMS_AMT,0 TOTAL_CLMS_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_STATUS IN ('CS')
+                       AND ((CLM_STATUS_DATE between lms_ord_misc.ageingClaimsStartDate (:v_report_tpe,:V_MONTH,:V_YEAR) and lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR))
+                       OR (CLM_DATE between lms_ord_misc.ageingClaimsStartDate (:v_report_tpe,:V_MONTH,:V_YEAR) and lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR) AND CLM_STATUS_DATE IS NULL))
+                      GROUP BY    PROD_SHT_DESC,PROD_DESC
+UNION
+
+SELECT PROD_DESC,0 PREV_CLMS_AMT,0 PREV_CLMS_NUM,0 CURR_CLMS_AMT,0 CURR_CLMS_NUM,0 TOTAL_OS_CLMS_AMT,0 TOTAL_OS_CLMS_NUM,0 SETTLED_CLMS_AMT,0 SETTLED_CLMS_NUM,SUM(NVL(CLM_PAID_AMT,0))CLS_NO_CLM_CLMS_AMT,
+COUNT(CLM_NO)CLS_NO_CLM_CLMS_NUM,0 TOTAL_ACTED_CLMS_AMT,0 TOTAL_ACTED_CLMS_NUM,0 TOTAL_CLMS_AMT,0 TOTAL_CLMS_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_STATUS IN ('CN')
+                      AND ((CLM_STATUS_DATE between lms_ord_misc.ageingClaimsStartDate (:v_report_tpe,:V_MONTH,:V_YEAR) and lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR))
+                       OR (CLM_DATE between lms_ord_misc.ageingClaimsStartDate (:v_report_tpe,:V_MONTH,:V_YEAR) and lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR) AND CLM_STATUS_DATE IS NULL))
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC   
+ 
+UNION
+SELECT PROD_DESC,0 PREV_CLMS_AMT,0 PREV_CLMS_NUM,0 CURR_CLMS_AMT,0 CURR_CLMS_NUM,0 TOTAL_OS_CLMS_AMT,0 TOTAL_OS_CLMS_NUM,0 SETTLED_CLMS_AMT,0 SETTLED_CLMS_NUM,
+0 CLS_NO_CLM_CLMS_AMT,0 CLS_NO_CLM_CLMS_NUM,SUM(NVL(CLM_PAID_AMT,0))TOTAL_ACTED_CLMS_AMT,COUNT(CLM_NO)TOTAL_ACTED_CLMS_NUM,0 TOTAL_CLMS_AMT,0 TOTAL_CLMS_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND (CLM_STATUS IN ('CN') OR CLM_STATUS IN ('CS'))
+                       AND ((CLM_STATUS_DATE between lms_ord_misc.ageingClaimsStartDate (:v_report_tpe,:V_MONTH,:V_YEAR) and lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR))
+                       OR (CLM_DATE between lms_ord_misc.ageingClaimsStartDate (:v_report_tpe,:V_MONTH,:V_YEAR) and lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR) AND CLM_STATUS_DATE IS NULL))
+                      GROUP BY    PROD_SHT_DESC,PROD_DESC 
+ 
+UNION
+SELECT PROD_DESC,0 PREV_CLMS_AMT,0 PREV_CLMS_NUM,0 CURR_CLMS_AMT,0 CURR_CLMS_NUM,0 TOTAL_OS_CLMS_AMT,0 TOTAL_OS_CLMS_NUM,0 SETTLED_CLMS_AMT,0 SETTLED_CLMS_NUM,0 CLS_NO_CLM_CLMS_AMT,
+0 CLS_NO_CLM_CLMS_NUM,0 TOTAL_ACTED_CLMS_AMT,0 TOTAL_ACTED_CLMS_NUM,SUM(NVL(CLM_PAID_AMT,0))TOTAL_CLMS_AMT,COUNT(CLM_NO)TOTAL_CLMS_NUM
+                      FROM LMS_TRANSACTIONS,
+                           LMS_CLAIMS,
+                           LMS_CLAIM_NOTIFICATIONS,
+                           LMS_POLICIES,
+                           LMS_PRODUCTS
+                       WHERE LTR_CLM_NO = CLM_NO
+                       AND CLM_CNOT_CODE = CNOT_CODE(+)
+                       AND POL_PROD_CODE = PROD_CODE
+                       AND CLM_POL_CODE = POL_CODE
+                       AND CLM_STATUS IN ('OS')                      
+                       AND lms_ord_misc.ageingClaimsDate (:v_report_tpe,:V_MONTH,:V_YEAR)> CLM_DATE  
+                       GROUP BY    PROD_SHT_DESC,PROD_DESC) 
+                     GROUP BY    PROD_DESC
+                     ORDER BY    PROD_DESC              
+           
+
+		 ]]>
+</sqlStatement>
+</dataQuery>
+<dataStructure>
+    <group name="G_ORG" dataType="varchar2" source="Q_1">
+        <element name="ORGANIZATION" dataType="varchar2" value="ORGANIZATION"/>
+        <element name="YEA" dataType="varchar2" value="YEA"/>
+		<element name="THIS_YEAR" dataType="varchar2" value="THIS_YEAR"/>
+		<element name="TODAY_DATE" dataType="varchar2" value="TODAY_DATE"/>
+        <element name="HOURS" dataType="varchar2" value="HOURS"/>
+		<element name="ORG_PHY_ADDRS" dataType="varchar2" value="ORG_PHY_ADDRS"/>
+        <element name="POSTALADDRESS" dataType="varchar2" value="POSTALADDRESS"/>
+		<element name="TELEPHONE" dataType="varchar2" value="TELEPHONE"/>
+        <element name="FAX" dataType="varchar2" value="FAX"/>
+        <element name="EMAIL" dataType="varchar2" value="EMAIL"/>
+        <element name="WEB" dataType="varchar2" value="WEB"/>    
+     	<element name="LOGO" dataType="longRaw" value="LOGO"/>
+		<element name="RPT_TYPE" dataType="varchar2" value="RPT_TYPE"/> 
+		<element name="THE_YEAR" dataType="varchar2" value="THE_YEAR"/> 
+		<element name="MY_MONTH" dataType="varchar2" value="MY_MONTH"/> 
+		<element name="RPT_NAME" dataType="varchar2" value="RPT_NAME"/> 
+   </group>
+    <group name="G_CLAIMS" dataType="varchar2" source="Q_2">
+		<element name="PRODUCT" dataType="varchar2" value="PRODUCT"/>
+        <element name="AWAITING_DOCS_AMT" dataType="number" value="AWAITING_DOCS_AMT"/>
+        <element name="AWAITING_DOCS_NUM" dataType="number" value="AWAITING_DOCS_NUM"/>
+        <element name="LESS_30_AMOUNT" dataType="number" value="LESS_30_AMOUNT"/>
+        <element name="LESS_30_NUM" dataType="number" value="LESS_30_NUM"/>
+		<element name="BTW_30_60_AMT" dataType="number" value="BTW_30_60_AMT"/>
+        <element name="BTW_30_60_NUM" dataType="number" value="BTW_30_60_NUM"/>
+        <element name="BTW_60_90_AMT" dataType="number" value="BTW_60_90_AMT"/>
+        <element name="BTW_60_90_NUM" dataType="number" value="BTW_60_90_NUM"/>
+		<element name="BTW_90_180_AMT" dataType="number" value="BTW_90_180_AMT"/>
+        <element name="BTW_90_180_NUM" dataType="number" value="BTW_90_180_NUM"/>
+        <element name="MORE_180_AMT" dataType="number" value="MORE_180_AMT"/>
+        <element name="MORE_180_NUM" dataType="number" value="MORE_180_NUM"/>
+		<element name="TOTAL_AMT" dataType="number" value="TOTAL_AMT"/>
+        <element name="TOTAL_NUM" dataType="number" value="TOTAL_NUM"/>
+     </group>
+	 <element name="SUM_AWAITING_DOCS_AMT" dataType="number" function="sum" value="G_CLAIMS.AWAITING_DOCS_AMT"/>
+	 <element name="SUM_AWAITING_DOCS_NUM" dataType="number" function="sum" value="G_CLAIMS.AWAITING_DOCS_NUM"/>
+	 <element name="SUM_LESS_30_AMOUNT" dataType="number" function="sum" value="G_CLAIMS.LESS_30_AMOUNT"/>
+	 <element name="SUM_LESS_30_NUM" dataType="number" function="sum" value="G_CLAIMS.LESS_30_NUM"/>
+	 <element name="SUM_BTW_30_60_AMT" dataType="number" function="sum" value="G_CLAIMS.BTW_30_60_AMT"/>
+	 <element name="SUM_BTW_30_60_NUM" dataType="number" function="sum" value="G_CLAIMS.BTW_30_60_NUM"/>
+	 <element name="SUM_BTW_60_90_AMT" dataType="number" function="sum" value="G_CLAIMS.BTW_60_90_AMT"/>
+	 <element name="SUM_BTW_60_90_NUM" dataType="number" function="sum" value="G_CLAIMS.BTW_60_90_NUM"/>
+	 <element name="SUM_BTW_90_180_AMT" dataType="number" function="sum" value="G_CLAIMS.BTW_90_180_AMT"/>
+	 <element name="SUM_BTW_90_180_NUM" dataType="number" function="sum" value="G_CLAIMS.BTW_90_180_NUM"/>
+	 <element name="SUM_MORE_180_AMT" dataType="number" function="sum" value="G_CLAIMS.MORE_180_AMT"/>
+	 <element name="SUM_MORE_180_NUM" dataType="number" function="sum" value="G_CLAIMS.MORE_180_NUM"/>
+	 <element name="SUM_TOTAL_AMT" dataType="number" function="sum" value="G_CLAIMS.TOTAL_AMT"/>
+	 <element name="SUM_TOTAL_NUM" dataType="number" function="sum" value="G_CLAIMS.TOTAL_NUM"/>
+	<group name="G_CLAIM_ACTIONS" dataType="varchar2" source="Q_3">
+		<element name="PRODUCT" dataType="varchar2" value="PRODUCT"/>
+        <element name="PREV_CLMS_AMT" dataType="number" value="PREV_CLMS_AMT"/>
+        <element name="PREV_CLMS_NUM" dataType="number" value="PREV_CLMS_NUM"/>
+        <element name="CURR_CLMS_AMT" dataType="number" value="CURR_CLMS_AMT"/>
+        <element name="CURR_CLMS_NUM" dataType="number" value="CURR_CLMS_NUM"/>
+		<element name="TOTAL_OS_CLMS_AMT" dataType="number" value="TOTAL_OS_CLMS_AMT"/>
+        <element name="TOTAL_OS_CLMS_NUM" dataType="number" value="TOTAL_OS_CLMS_NUM"/>
+        <element name="SETTLED_CLMS_AMT" dataType="number" value="SETTLED_CLMS_AMT"/>
+        <element name="SETTLED_CLMS_NUM" dataType="number" value="SETTLED_CLMS_NUM"/>
+		<element name="CLS_NO_CLM_CLMS_AMT" dataType="number" value="CLS_NO_CLM_CLMS_AMT"/>
+        <element name="CLS_NO_CLM_CLMS_NUM" dataType="number" value="CLS_NO_CLM_CLMS_NUM"/>
+        <element name="TOTAL_ACTED_CLMS_AMT" dataType="number" value="TOTAL_ACTED_CLMS_AMT"/>
+        <element name="TOTAL_ACTED_CLMS_NUM" dataType="number" value="TOTAL_ACTED_CLMS_NUM"/>
+		<element name="TOTAL_CLMS_AMT" dataType="number" value="TOTAL_CLMS_AMT"/>
+        <element name="TOTAL_CLMS_NUM" dataType="number" value="TOTAL_CLMS_NUM"/>
+     </group>
+		<element name="SUM_PREV_CLMS_AMT" dataType="number" function="sum" value="G_CLAIM_ACTIONS.PREV_CLMS_AMT"/>
+        <element name="SUM_PREV_CLMS_NUM" dataType="number" function="sum" value="G_CLAIM_ACTIONS.PREV_CLMS_NUM"/>
+        <element name="SUM_CURR_CLMS_AMT" dataType="number" function="sum" value="G_CLAIM_ACTIONS.CURR_CLMS_AMT"/>
+        <element name="SUM_CURR_CLMS_NUM" dataType="number" function="sum" value="G_CLAIM_ACTIONS.CURR_CLMS_NUM"/>
+		<element name="SUM_TOTAL_OS_CLMS_AMT" dataType="number" function="sum" value="G_CLAIM_ACTIONS.TOTAL_OS_CLMS_AMT"/>
+        <element name="SUM_TOTAL_OS_CLMS_NUM" dataType="number" function="sum" value="G_CLAIM_ACTIONS.TOTAL_OS_CLMS_NUM"/>
+        <element name="SUM_SETTLED_CLMS_AMT" dataType="number" function="sum" value="G_CLAIM_ACTIONS.SETTLED_CLMS_AMT"/>
+        <element name="SUM_SETTLED_CLMS_NUM" dataType="number" function="sum" value="G_CLAIM_ACTIONS.SETTLED_CLMS_NUM"/>
+		<element name="SUM_CLS_NO_CLM_CLMS_AMT" dataType="number" function="sum" value="G_CLAIM_ACTIONS.CLS_NO_CLM_CLMS_AMT"/>
+        <element name="SUM_CLS_NO_CLM_CLMS_NUM" dataType="number" function="sum" value="G_CLAIM_ACTIONS.CLS_NO_CLM_CLMS_NUM"/>
+        <element name="SUM_TOTAL_ACTED_CLMS_AMT" dataType="number" function="sum"  value="G_CLAIM_ACTIONS.TOTAL_ACTED_CLMS_AMT"/>
+        <element name="SUM_TOTAL_ACTED_CLMS_NUM" dataType="number" function="sum" value="G_CLAIM_ACTIONS.TOTAL_ACTED_CLMS_NUM"/>
+		<element name="SUM_TOTAL_CLMS_AMT" dataType="number" function="sum" value="G_CLAIM_ACTIONS.TOTAL_CLMS_AMT"/>
+        <element name="SUM_TOTAL_CLMS_NUM" dataType="number" function="sum"  value="G_CLAIM_ACTIONS.TOTAL_CLMS_NUM"/>
+</dataStructure>
+</dataTemplate>

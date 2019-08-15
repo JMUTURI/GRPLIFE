@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Group Life | Tickets" id="d2">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout id="pgl2" layout="scroll">
+          <af:panelBox text="Workflow Processing" id="pb1" showHeader="never">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Ticket Processing" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1" inlineStyle="width:inherit;"/>
+            <h:panelGrid columns="11" id="pg1">
+              <af:outputLabel value="Ticket Name" id="outputLabel2"/>
+              <af:outputText value="#{LOVC.taskselName}"
+                             id="outputText1" inlineStyle="font-weight:bold;"
+                             binding="#{workflowBean.taskName}"/>
+              <af:outputLabel id="ol3"/>
+              <af:outputLabel value="Ticket ID" id="ol2"/>
+              <af:outputText id="ot7"
+                             inlineStyle="font-weight:bold;"
+                             binding="#{workflowBean.taskID}"
+                             value="#{LOVC.taskselID}"/>
+              <af:outputLabel id="outputLabel1"/>
+              <af:outputLabel value="Ticket Assignee " id="outputLabel3"/>
+              <af:outputText value="#{bindings.TCKT_TO.inputValue}" id="outputText2"
+                             inlineStyle="font-weight:bold;"
+                             binding="#{workflowBean.taskAssignee}"/>
+              <af:outputLabel id="outputLabel11"/>
+              <af:outputLabel value="Ticket Date" id="outputLabel19"/>
+              <af:outputText value="#{bindings.TCKT_DATE.inputValue}"
+                             id="outputText5" inlineStyle="font-weight:bold;">
+                <af:convertDateTime pattern="#{bindings.TCKT_DATE.format}"/>
+              </af:outputText>
+              <af:outputLabel value="Ticket System" id="outputLabel7"/>
+              <af:outputText value="#{bindings.USRSYSTEM.inputValue}" id="ot2"
+                             inlineStyle="font-weight:bold;"/>
+              <af:outputLabel id="outputLabel13"/>
+              <af:outputLabel value="Ticket Module" id="outputLabel8"/>
+              <af:outputText value="#{bindings.SYSMODULE.inputValue}" id="ot3"
+                             inlineStyle="font-weight:bold;"/>
+              <af:outputLabel id="outputLabel14"/>
+              <af:outputLabel value="Ticket By" id="outputLabel12"/>
+              <af:outputText value="#{bindings.TCKT_BY.inputValue}" id="ot8"
+                             inlineStyle="font-weight:bold;"/>
+              <af:outputLabel id="outputLabel15"/>
+              <af:outputLabel value="Ticket Due Date" id="outputLabel4"/>
+              <af:outputText value="#{LOVC.taskselDueDate}"
+                             id="outputText3" inlineStyle="font-weight:bold;"
+                             binding="#{workflowBean.taskDueDate}"/>
+              <af:outputLabel value="Quotation No" id="outputLabel9"/>
+              <af:outputText value="#{bindings.QUO_NO.inputValue}" id="ot4"
+                             inlineStyle="font-weight:bold;"/>
+              <af:outputLabel id="outputLabel18"/>
+              <af:outputLabel value="Policy No." id="outputLabel16"/>
+              <af:outputText value="#{bindings.TCKT_POL_NO.inputValue}"
+                             id="outputText4" inlineStyle="font-weight:bold;"/>
+              <af:outputLabel id="outputLabel17"/>
+              <af:outputLabel value="Client" id="outputLabel10"/>
+              <af:outputText value="#{bindings.CLIENT.inputValue}" id="ot5"
+                             inlineStyle="font-weight:bold;"/>
+              <af:outputLabel id="outputLabel21"/>
+              <af:outputLabel value="Ticket Remarks" id="outputLabel20"/>
+              <af:outputText value="#{bindings.TCKT_REMARKS.inputValue}"
+                             id="outputText6" inlineStyle="font-weight:bold;"/>
+            </h:panelGrid>
+            <h:panelGrid columns="3" id="pg5">
+              <af:commandButton text="Process" id="commandButton6"
+                                action="#{workflowBean.ProcessTask}"/>
+              <af:commandButton text="Re-Assign" id="commandButton7"
+                                action="#{workflowBean.ShowReassign}"/>
+              <af:commandButton text="Close" id="cb4"/>
+            </h:panelGrid>
+          </af:panelBox>
+          <af:panelBox text="Re-Assign Task" id="pb2" rendered="false"
+                       binding="#{workflowBean.reassignPanel}"
+                       showHeader="never">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Re Assign Task "
+                            id="outputLabel5" inlineStyle="font-weight:bold;"/>
+            <af:separator id="separator1" inlineStyle="width:inherit;"/>
+            <h:panelGrid columns="2" id="pg6">
+              <af:outputLabel value="User" id="outputLabel6"/>
+              <h:panelGrid columns="2" id="pg7">
+                <af:inputText label="Label 2" id="it2"
+                              simple="true" binding="#{workflowBean.user}"
+                              disabled="true"/>
+                <af:commandButton id="cb5" icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="reassign"/>
+                </af:commandButton>
+                <af:popup id="reassign">
+                  <af:dialog id="d1" type="none" title="Available Users">
+                      <af:table value="#{bindings.Settings1.collectionModel}"
+                                var="row" rows="#{bindings.Settings1.rangeSize}"
+                                emptyText="#{bindings.Settings1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Settings1.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.Settings1Query.queryDescriptor}"
+                                queryListener="#{bindings.Settings1Query.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Settings1.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Settings1.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t2"
+                                binding="#{workflowBean.allUsers2LOV}">
+                        <af:column sortProperty="#{bindings.Settings1.hints.USR_CODE.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="User Code"
+                                   id="c4" visible="false">
+                          <af:outputText value="#{row.USR_CODE}" id="ot10"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.Settings1.hints.USR_USERNAME.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="UserName"
+                                   filterFeatures="caseInsensitive"
+                                   id="c3">
+                          <af:outputText value="#{row.USR_USERNAME}" id="ot12"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.Settings1.hints.USR_NAME.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="User"
+                                   filterFeatures="caseInsensitive"
+                                   id="c5" width="200">
+                          <af:outputText value="#{row.USR_NAME}" id="ot11"/>
+                        </af:column>
+                      </af:table>
+                    <af:inputText label="Remarks" id="it4" rows="3" columns="45"
+                                  simple="true" value="Add Remark..."
+                                  binding="#{workflowBean.ticketRemarks}"/>
+                    <h:panelGrid columns="2" id="pg8">
+                      <af:commandButton text="OK" id="cb6"
+                                        action="#{workflowBean.findReAssignee2Selected}"/>
+                      <af:commandButton text="Cancel" id="commandButton8"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+            </h:panelGrid>
+            <h:panelGrid columns="2" id="pg2">
+              <af:commandButton text="Save" id="cb7"
+                                action="#{workflowBean.Reassign2}"/>
+              <af:commandButton text="Cancel" id="commandButton1"
+                                action="#{workflowBean.hideReassign}"/>
+            </h:panelGrid>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

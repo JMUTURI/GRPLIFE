@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Receipting" id="d2">
+      <af:pageTemplate id="lmsgroup" viewId="/templates/GroupTemplate2.jspx">
+        <f:attribute name="documentTitle" value="TurnQuest Group Life"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelBox text="Transaction Type" showHeader="never" id="pb1">
+              <f:facet name="toolbar"/>
+              <af:statusIndicator id="si1"/>
+              <af:outputLabel value="Receipting Transactions"
+                              inlineStyle="font-weight:bold;" id="ol1"/>
+              <af:separator inlineStyle="width:inherit;" id="s1"/>
+              <h:panelGrid columns="6" id="pg1">
+                <af:outputLabel value="Receipt No." id="ol2"/>
+                <af:inputText label="Label 1" id="it1" simple="true"
+                              binding="#{receipt.receiptNo}"/>
+                <af:outputLabel value="Receipt Amount." id="outputLabel2"/>
+                <af:inputText label="Label 1" id="inputText1" simple="true"
+                              binding="#{receipt.receiptAmount}"/>
+                <af:outputLabel value="Policy" id="outputLabel7"/>
+                <h:panelGrid columns="2" id="panelGrid1">
+                  <af:inputText label="Label 2" id="inputText3" simple="true"
+                                binding="#{receipt.policiesDesc}"/>
+                  <af:commandButton id="commandButton2"
+                                    icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="popup1"/>
+                  </af:commandButton>
+                  <af:popup id="popup1">
+                    <af:dialog id="dialog1" title="Policies" type="none">
+                      <af:table value="#{bindings.policies.collectionModel}"
+                                var="row" rows="#{bindings.policies.rangeSize}"
+                                emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.policies.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.policiesQuery.queryDescriptor}"
+                                queryListener="#{bindings.policiesQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t2"
+                                binding="#{receipt.policiesLOV}">
+                        <af:column sortProperty="POL_POLICY_NO"
+                                   filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Policy Number"
+                                   id="c3" width="300">
+                          <af:outputText value="#{row.POL_POLICY_NO}" id="ot4"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="panelGrid2">
+                        <af:commandButton text="OK" id="commandButton3"
+                                          action="#{receipt.findPolicies}"/>
+                        <af:commandButton text="Cancel" id="commandButton4"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Agent" id="outputLabel1"/>
+                <h:panelGrid columns="2" id="pg2">
+                  <af:inputText label="Label 2" id="it2" simple="true"
+                                binding="#{receipt.agentsDesc}"/>
+                  <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="p1"/>
+                  </af:commandButton>
+                  <af:popup id="p1">
+                    <af:dialog id="d1" title="Agents" type="none">
+                      <af:table value="#{bindings.Settings.collectionModel}"
+                                var="row" rows="#{bindings.Settings.rangeSize}"
+                                emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Settings.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.SettingsQuery.queryDescriptor}"
+                                queryListener="#{bindings.SettingsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t1"
+                                binding="#{receipt.agentsLOV}">
+                        <af:column sortProperty="AGN_SHT_DESC" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Short Desc"
+                                   id="c1">
+                          <af:outputText value="#{row.AGN_SHT_DESC}" id="ot3"/>
+                        </af:column>
+                        <af:column sortProperty="AGN_NAME" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Agent" id="c2"
+                                   width="200">
+                          <af:outputText value="#{row.AGN_NAME}" id="ot2"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg3">
+                        <af:commandButton text="OK" id="cb2"
+                                          action="#{receipt.findAgents}"/>
+                        <af:commandButton text="Cancel" id="commandButton1"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Transaction." id="outputLabel3"/>
+                <af:selectOneChoice label="Label 1" id="soc1" simple="true"
+                                    binding="#{receipt.transaction}">
+                  <af:selectItem label="Receipt" value="C" id="si3"/>
+                  <af:selectItem label="Receipt Cancellation" value="D"
+                                 id="si2"/>
+                </af:selectOneChoice>
+                <af:outputLabel value="Payment Date" id="outputLabel4"/>
+                <af:inputDate label="Label 1" id="id1" simple="true"
+                              binding="#{receipt.paymentDate}">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+                <af:outputLabel value="Payment Mode" id="outputLabel5"/>
+                <af:selectOneChoice label="Label 1" id="selectOneChoice1"
+                                    simple="true"
+                                    binding="#{receipt.paymentMode}">
+                  <af:selectItem label="Cash" value="Cash" id="selectItem1"/>
+                  <af:selectItem label="Cheque" value="Cheque"
+                                 id="selectItem2"/>
+                  <af:selectItem label="EFT" value="EFT" id="selectItem3"/>
+                </af:selectOneChoice>
+                <af:outputLabel value="Payment Source" id="outputLabel6"/>
+                <af:inputText label="Label 1" id="inputText2" simple="true"
+                              binding="#{receipt.paymentSource}"/>
+                <af:outputLabel value="Ref No." id="outputLabel8"/>
+                <af:inputText label="Label 1" id="inputText4" simple="true"
+                              binding="#{receipt.refNo}"/>
+                <af:outputLabel value="Transaction Date" id="outputLabel9"/>
+                <af:inputDate label="Label 2" id="id2" simple="true"
+                              value="#{bindings.sysDate.inputValue}"
+                              binding="#{receipt.today}">
+                  <f:validator binding="#{bindings.sysDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.sysDate.format}"/>
+                </af:inputDate>
+              </h:panelGrid>
+              <h:panelGrid columns="2" id="pg4">
+                <af:commandButton text="Receipt" id="cb3"
+                                  action="#{receipt.DoReceipting}"/>
+                <af:commandButton text="Cancel" id="commandButton5"
+                                  action="#{Links.goHome}"/>
+              </h:panelGrid>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

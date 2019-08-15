@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="g_classPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findGroupDeathAcceptable.result"
+                    DataControl="ProductSetupDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ProductSetup"
+                    id="findGroupDeathAcceptableIterator"/>
+    <methodIterator Binds="findGroupPremiumFractions.result"
+                    DataControl="ProductSetupDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ProductSetup"
+                    id="findGroupPremiumFractionsIterator"/>
+    <methodIterator Binds="findGroupScheduleReports.result"
+                    DataControl="ProductSetupDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ProductSetup"
+                    id="findGroupScheduleReportsIterator"/>
+    <methodIterator Binds="findLapsation.result" DataControl="ProductSetupDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.ProductSetup"
+                    id="findLapsationIterator"/>
+    <methodIterator Binds="findPolicyDocuments.result"
+                    DataControl="ProductSetupDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ProductSetup"
+                    id="findPolicyDocumentsIterator"/>
+    <methodIterator Binds="findGroupProducts.result"
+                    DataControl="ProductSetupDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ProductSetup"
+                    id="findGroupProductsIterator"/>
+    <methodIterator Binds="findProductPlans.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductPlansIterator"/>
+    <searchRegion Binds="findProductPlansIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SetupQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="findGroupProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGroupProducts"
+                  IsViewObjectMethod="false" DataControl="ProductSetupDAO"
+                  InstanceName="ProductSetupDAO.dataProvider"
+                  ReturnName="ProductSetupDAO.methodResults.findGroupProducts_ProductSetupDAO_dataProvider_findGroupProducts_result"/>
+    <methodAction id="findGroupDeathAcceptable" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGroupDeathAcceptable"
+                  IsViewObjectMethod="false" DataControl="ProductSetupDAO"
+                  InstanceName="ProductSetupDAO.dataProvider"
+                  ReturnName="ProductSetupDAO.methodResults.findGroupDeathAcceptable_ProductSetupDAO_dataProvider_findGroupDeathAcceptable_result"/>
+    <tree IterBinding="findGroupDeathAcceptableIterator" id="ProductSetup1">
+      <nodeDefinition DefName="com.turnkey.setups.ProductSetup"
+                      Name="ProductSetup10">
+        <AttrNames>
+          <Item Value="PDA_GRP_TOT_NO"/>
+          <Item Value="LMS_PROD_DEATH_ACCEPTABLE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGroupPremiumFractions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGroupPremiumFractions"
+                  IsViewObjectMethod="false" DataControl="ProductSetupDAO"
+                  InstanceName="ProductSetupDAO.dataProvider"
+                  ReturnName="ProductSetupDAO.methodResults.findGroupPremiumFractions_ProductSetupDAO_dataProvider_findGroupPremiumFractions_result"/>
+    <tree IterBinding="findGroupPremiumFractionsIterator" id="ProductSetup2">
+      <nodeDefinition DefName="com.turnkey.setups.ProductSetup"
+                      Name="ProductSetup20">
+        <AttrNames>
+          <Item Value="PROD_MNTH_TO_QTR_FCTOR"/>
+          <Item Value="PROD_MNTH_TO_S_ANNL_FCTOR"/>
+          <Item Value="PROD_MNTH_TO_ANNL_FCTOR"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findGroupPremiumFractionsIterator" id="ProductSetup3">
+      <nodeDefinition DefName="com.turnkey.setups.ProductSetup"
+                      Name="ProductSetup30">
+        <AttrNames>
+          <Item Value="PROD_YR_TO_MONTH_RATE"/>
+          <Item Value="PROD_YR_TO_S_ANNL_RATE"/>
+          <Item Value="PROD_YR_TO_QUATER_RATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGroupScheduleReports" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGroupScheduleReports"
+                  IsViewObjectMethod="false" DataControl="ProductSetupDAO"
+                  InstanceName="ProductSetupDAO.dataProvider"
+                  ReturnName="ProductSetupDAO.methodResults.findGroupScheduleReports_ProductSetupDAO_dataProvider_findGroupScheduleReports_result"/>
+    <tree IterBinding="findGroupScheduleReportsIterator" id="ProductSetup4">
+      <nodeDefinition DefName="com.turnkey.setups.ProductSetup"
+                      Name="ProductSetup40">
+        <AttrNames>
+          <Item Value="PROD_QUO_COSTING_SCH_RPT"/>
+          <Item Value="PROD_QUO_SAVINGS_SCH_RPT"/>
+          <Item Value="PROD_QUO_FE_SCH_RPT"/>
+          <Item Value="PROD_QUO_AGGR_DTLS_RPT"/>
+          <Item Value="PROD_UW_COSTING_SCH_RPT"/>
+          <Item Value="PROD_UW_SAVING_SCH_RPT"/>
+          <Item Value="PROD_UW_FE_SCH_RPT"/>
+          <Item Value="PROD_UW_REFUND_SCH_RPT"/>
+          <Item Value="PROD_POL_COSTING_SCH_RPT"/>
+          <Item Value="PROD_POL_SAVING_SCH_RPT"/>
+          <Item Value="PROD_POL_FE_SCH_RPT"/>
+          <Item Value="PROD_REN_COSTING_SCH_RPT"/>
+          <Item Value="PROD_REN_SAVING_SCH_RPT"/>
+          <Item Value="PROD_REN_FE_SCH_RPT"/>
+          <Item Value="PROD_QUO_AGGR_LETT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findLapsation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findLapsation"
+                  IsViewObjectMethod="false" DataControl="ProductSetupDAO"
+                  InstanceName="ProductSetupDAO.dataProvider"
+                  ReturnName="ProductSetupDAO.methodResults.findLapsation_ProductSetupDAO_dataProvider_findLapsation_result"/>
+    <tree IterBinding="findLapsationIterator" id="ProductSetup5">
+      <nodeDefinition DefName="com.turnkey.setups.ProductSetup"
+                      Name="ProductSetup50">
+        <AttrNames>
+          <Item Value="PROD_MONTHLY_LAPSE_PRD"/>
+          <Item Value="PROD_QUARTER_LAPSE_PRD"/>
+          <Item Value="PROD_SEMI_A_LAPSE_PRD"/>
+          <Item Value="PROD_ANNUALLY_LAPSE_PRD"/>
+          <Item Value="PROD_LAPSE_PRD_DAYS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolicyDocuments" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolicyDocuments"
+                  IsViewObjectMethod="false" DataControl="ProductSetupDAO"
+                  InstanceName="ProductSetupDAO.dataProvider"
+                  ReturnName="ProductSetupDAO.methodResults.findPolicyDocuments_ProductSetupDAO_dataProvider_findPolicyDocuments_result"/>
+    <tree IterBinding="findPolicyDocumentsIterator" id="ProductSetup6">
+      <nodeDefinition DefName="com.turnkey.setups.ProductSetup"
+                      Name="ProductSetup60">
+        <AttrNames>
+          <Item Value="PSPD_DOC_NAME"/>
+          <Item Value="PSPD_TYPE_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductExceptions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductExceptions"
+                  IsViewObjectMethod="false" DataControl="ProductSetupDAO"
+                  InstanceName="ProductSetupDAO.dataProvider"
+                  ReturnName="ProductSetupDAO.methodResults.findProductExceptions_ProductSetupDAO_dataProvider_findProductExceptions_result"/>
+    <tree IterBinding="findGroupProductsIterator" id="ProductSetup">
+      <nodeDefinition DefName="com.turnkey.setups.ProductSetup"
+                      Name="ProductSetup0">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductPlans" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductPlans"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProductPlans_SetupsDAO_dataProvider_findProductPlans_result"/>
+    <tree IterBinding="findProductPlansIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="pplCode"/>
+          <Item Value="pplDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

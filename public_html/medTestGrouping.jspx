@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Medical Tests Grouping" id="d3">
+    <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+
+      </f:facet>
+      <f:facet name="center">
+          <af:group id="g1">
+            <af:inputText id="it2"
+                          helpTopicId="LmsGrp_medTestGrouping" readOnly="true"/>
+
+<af:panelSplitter id="ps1" splitterPosition="250"
+                              inlineStyle="width:100%; height:540.0px;">
+              <f:facet name="first">
+                <af:panelBox text="Currencies" id="pb1">
+                  <f:facet name="toolbar"/>
+                  <af:table value="#{bindings.Setup4.collectionModel}" var="row"
+                            rows="#{bindings.Setup4.rangeSize}"
+                            emptyText="#{bindings.Setup4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.Setup4.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.Setup4Query.queryDescriptor}"
+                            queryListener="#{bindings.Setup4Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectionListener="#{SetupBean.selectMedGroupCurrency}"
+                            rowSelection="single" id="t5"
+                            binding="#{SetupBean.currencyLOV}">
+                    <af:column sortProperty="cur_code" filterable="true"
+                               sortable="true" visible="false" id="c15">
+                      <af:outputText value="#{row.cur_code}" id="ot16"/>
+                    </af:column>
+                    <af:column sortProperty="cur_symbol" filterable="true"
+                               sortable="true" visible="false" id="c17">
+                      <af:outputText value="#{row.cur_symbol}" id="ot17"/>
+                    </af:column>
+                    <af:column sortProperty="cur_desc" filterable="true"
+                               sortable="true" headerText="Currency Desc."
+                               id="c16" width="210"
+                               filterFeatures="caseInsensitive"
+                               inlineStyle="margin-left:10px">
+                      <af:outputText value="#{row.cur_desc}" id="ot18"/>
+                    </af:column>
+                  </af:table>
+                </af:panelBox>
+              </f:facet>
+              <f:facet name="second">
+              <af:panelBox>
+            <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+
+                                 id="pgl4">
+              <af:popup id="confirmDel">
+                <af:dialog id="d7" type="none" title="Delete Confirmation">
+                  <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                    <f:facet name="toolbar"/>
+
+                    <af:outputLabel value="Are you sure you want to Delete?"
+                                    id="ol86" inlineStyle="font-weight:bold;"/>
+          <h:panelGrid columns="2" id="pg8">
+
+                      <af:spacer width="10" height="10" id="s3"/>
+                    </h:panelGrid>
+
+                <h:panelGrid columns="2" id="pg19">
+      <af:commandButton text="Yes" id="cb24"
+                                  action="#{SetupBean.DeleteObject}"
+                                        partialSubmit="true"/>
+                      <af:commandButton text="No" id="commandButton9"/>
+
+                    </h:panelGrid>
+
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:panelBox text="Medical Test Grouping" showHeader="never"
+                           id="pb15">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Medical Test Grouping" id="ol1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s1"/>
+                <af:spacer width="10" height="10" id="s2"/>
+                <h:panelGrid columns="3" id="pg12">
+                  <af:commandButton id="cb19"
+                                    icon="/images/field_group_plus_ena.png"
+                                    action="#{SetupBean.AddMedicalGroup}"/>
+                  <af:commandButton icon="/images/update_ena.png"
+                                    id="commandButton11"
+                                    action="#{SetupBean.EditMedicalGroup}"/>
+                  <af:commandButton id="delMedGroup" icon="/images/delete_ena.png"
+                                    actionListener="#{SetupBean.DeleteListener}"/>
+                </h:panelGrid>
+                <af:popup id="medGrps">
+                  <af:dialog id="d1" type="none" title="Medical Groups">
+                    <h:panelGrid columns="2" id="pg1">
+                      <af:outputLabel value="Id." id="ol2"/>
+                      <af:inputText label="Label 1" id="it1" simple="true"
+                                    binding="#{SetupBean.shortDesc}"/>
+                      <af:outputLabel value="Description" id="outputLabel2"/>
+                      <af:inputText label="Label 1" id="inputText1"
+                                    simple="true" binding="#{SetupBean.desc}"/>
+                      <af:outputLabel value="WEF" id="outputLabel3"/>
+                      <af:inputDate label="Label 1" id="id1" simple="true"
+                                    binding="#{SetupBean.wef}">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                      <af:outputLabel value="WET" id="outputLabel4"/>
+                      <af:inputDate label="Label 1" id="inputDate1"
+                                    simple="true" binding="#{SetupBean.wet}">
+                         <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg2">
+                      <af:commandButton text="Save" id="cb1"
+                                        action="#{SetupBean.SaveMedicalGroup}"/>
+                      <af:commandButton text="Cancel" id="commandButton2"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+                <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                          rows="#{bindings.Setup.rangeSize}"
+                          emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup.rangeSize}"
+                          rowBandingInterval="0"
+               selectionListener="#{SetupBean.MedicalGroupsListener}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:100%; height:150.0px; border-style:none;"
+                          binding="#{SetupBean.medGrpsLOV}">
+                  <af:column sortProperty="MTG_SHT_DESC" sortable="true"
+
+
+                             headerText="Short Desc" id="c3">
+                    <af:outputText value="#{row.MTG_SHT_DESC}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="MTG_DESC" sortable="true"
+                             headerText="Descripton" id="c2" width="200">
+                    <af:outputText value="#{row.MTG_DESC}" id="ot5"/>
+        </af:column>
+                  <af:column sortProperty="MTG_WEF" sortable="true"
+                             headerText="WEF" id="c1">
+                    <af:outputText value="#{row.MTG_WEF}" id="ot2">
+                      <af:convertDateTime pattern="#{bindings.Setup.hints.MTG_WEF.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="MTG_WET" sortable="true"
+                             headerText="WET" id="c4">
+                    <af:outputText value="#{row.MTG_WET}" id="ot4">
+                      <af:convertDateTime pattern="#{bindings.Setup.hints.MTG_WET.format}"/>
+                    </af:outputText>
+                  </af:column>
+                </af:table>
+                <af:spacer width="10" height="10" id="spacer1"/>
+                <af:outputLabel value="Group Test Items" id="outputLabel1"
+                                inlineStyle="font-weight:bold;"/>
+                <h:panelGrid columns="3" id="panelGrid1">
+                  <af:commandButton id="commandButton1"
+                                    icon="/images/field_group_plus_ena.png">
+                    <af:showPopupBehavior popupId="p2"/>
+                  </af:commandButton>
+                  <af:commandButton id="delMedGroupItem"
+                                    icon="/images/delete_ena.png"
+                                    actionListener="#{SetupBean.DeleteListener}"/>
+                </h:panelGrid>
+                <af:popup id="p2">
+                  <af:dialog id="d2" type="none" title="Medical Tests">
+                    <af:table value="#{bindings.Setup2.collectionModel}"
+                              var="row" rows="#{bindings.Setup2.rangeSize}"
+                              emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup2.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Setup2Query.queryDescriptor}"
+                              queryListener="#{bindings.Setup2Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t3"
+
+                              binding="#{SetupBean.testsLOV}">
+                      <af:column sortProperty="MTL_DESC" filterable="true"
+
+                                 sortable="true" headerText="Medical Test"
+                                 id="c6" width="300">
+                        <af:outputText value="#{row.MTL_DESC}" id="ot7"/>
+                      </af:column>
+                    </af:table>
+      <h:panelGrid columns="2" id="panelGrid2">
+                      <af:commandButton text="Save" id="commandButton4"
+                                        action="#{SetupBean.AddMedicalGroupItem}"/>
+                      <af:commandButton text="Cancel" id="commandButton5"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+                <af:table value="#{bindings.Setup1.collectionModel}" var="row"
+                          rows="#{bindings.Setup1.rangeSize}"
+                          emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup1.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.Setup1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.Setup1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t2"
+                          inlineStyle="width:100%; height:150.0px; border-style:none;"
+                          binding="#{SetupBean.medGrpItemsLOV}">
+                  <af:column sortProperty="MTL_DESC" sortable="true"
+                             headerText="Medical Test" id="c5" width="400">
+                    <af:outputText value="#{row.MTL_DESC}" id="ot6"/>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+            </af:panelGroupLayout>
+           </af:panelBox>
+        </f:facet>
+	</af:panelSplitter>
+         </af:group>
+        </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

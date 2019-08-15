@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="wfProcessingPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findTicketDetails.result" DataControl="workflowDAO"
+                    RangeSize="25" BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketDetailsIterator"/>
+    <methodIterator Binds="FindSystemUsers.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSystemUsersIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <searchRegion Binds="FindSystemUsersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings1Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findTicketDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketDetails"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketDetails_workflowDAO_dataProvider_findTicketDetails_result"/>
+    <attributeValues IterBinding="findTicketDetailsIterator" id="USRSYSTEM">
+      <AttrNames>
+        <Item Value="USRSYSTEM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTicketDetailsIterator" id="SYSMODULE">
+      <AttrNames>
+        <Item Value="SYSMODULE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTicketDetailsIterator" id="QUO_NO">
+      <AttrNames>
+        <Item Value="QUO_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTicketDetailsIterator" id="TCKT_BY">
+      <AttrNames>
+        <Item Value="TCKT_BY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTicketDetailsIterator" id="CLIENT">
+      <AttrNames>
+        <Item Value="CLIENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTicketDetailsIterator" id="TCKT_POL_NO">
+      <AttrNames>
+        <Item Value="TCKT_POL_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTicketDetailsIterator" id="TCKT_REMARKS">
+      <AttrNames>
+        <Item Value="TCKT_REMARKS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTicketDetailsIterator" id="TCKT_TO">
+      <AttrNames>
+        <Item Value="TCKT_TO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTicketDetailsIterator" id="TCKT_DATE">
+      <AttrNames>
+        <Item Value="TCKT_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindSystemUsers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSystemUsers"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSystemUsers_SettingsDAO_dataProvider_FindSystemUsers_result"/>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <tree IterBinding="FindSystemUsersIterator" id="Settings1">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings10">
+        <AttrNames>
+          <Item Value="USR_CODE"/>
+          <Item Value="USR_NAME"/>
+          <Item Value="USR_USERNAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

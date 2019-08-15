@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="membersDAO" Package="LMSG.view.Members"
+          BeanClass="LMSG.view.Members.membersDAO" isJavaBased="true">
+  <Attribute Name="templateTranSeq" Type="int"/>
+  <Attribute Name="templateType" Type="java.lang.String"/>
+  <Attribute Name="templayeTypeInt" Type="int"/>
+  <Attribute Name="quotationNo" Type="java.lang.String"/>
+  <Attribute Name="emailCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="UWYear" Type="java.lang.String"/>
+  <Attribute Name="prpDesc" Type="java.lang.String"/>
+  <Attribute Name="gcoDesc" Type="java.lang.String"/>
+  <Attribute Name="policyNumberSel" Type="java.lang.String"/>
+  <Attribute Name="taskselName" Type="java.lang.String"/>
+  <Attribute Name="taskselAssignee" Type="java.lang.String"/>
+  <Attribute Name="taskselDueDate" Type="java.util.Date"/>
+  <Attribute Name="taskselID" Type="java.lang.String"/>
+  <Attribute Name="taskselCreateDate" Type="java.util.Date"/>
+  <Attribute Name="pmasCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pmasshtdesc" Type="java.lang.String"/>
+  <Attribute Name="brnName" Type="java.lang.String"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="taskActivityName" Type="java.lang.String"/>
+  <Attribute Name="loanCalcType" Type="java.lang.String"/>
+  <Attribute Name="dependantNo" Type="java.lang.String"/>
+  <Attribute Name="beneficiaryNo" Type="java.lang.String"/>
+  <Attribute Name="coverageArea" Type="java.lang.String"/>
+  <Attribute Name="locName" Type="java.lang.String"/>
+  <Attribute Name="jointMemberNo" Type="java.lang.String"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMemberDependants" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1" id="FindJointMembers"
+                  ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMemberCoverTypes" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1" id="FindMembers"
+                  ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindQuoteMemberCovers" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindQuoteJointMembers" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String" id="parseDate"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="somedate" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindIndivudualMemberDetails" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindIndivudualMemberCovers" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindIndivudualMemberPensions" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMembersForExport" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMembersBeneficiaries" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMembersBeneficiariesCovers" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMembersToReinstate" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMembersAnnDependents" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMembersAnnDependentPayments" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMembersExceptions" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindQuoteMembersExceptions" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMemberCoverDetails" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMembersBeneficiariesDetails" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMembersBeneficiariesCoversII"
+                  ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String"
+                  id="findPolMemberNo" ReturnNodeName="Return">
+    <ParameterInfo id="type" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Members.members1"
+                  BeanClass="LMSG.view.Members.members1"
+                  id="FindMemberTransactions" ReturnNodeName="members1"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Members.membersDAO"
+                     BeanClass="LMSG.view.Members.membersDAO" id="membersDAO"/>
+</JavaBean>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="productTransactions" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.productTransactions" isJavaBased="true">
+  <Attribute Name="trapProdCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="trapAccno" Type="java.lang.String"/>
+  <Attribute Name="trapContraAcc" Type="java.lang.String"/>
+  <Attribute Name="trapTrntCode" Type="java.lang.String"/>
+  <Attribute Name="trntDesc" Type="java.lang.String"/>
+  <Attribute Name="trntCode" Type="java.lang.String"/>
+  <Attribute Name="transactionDesc" Type="java.lang.String"/>
+  <Attribute Name="accNumber" Type="java.lang.String"/>
+  <Attribute Name="accName" Type="java.lang.String"/>
+  <Attribute Name="productDesc" Type="java.lang.String"/>
+  <Attribute Name="otherProdsGlcode" Type="java.lang.String"/>
+  <Attribute Name="otherProdsContraGlCode" Type="java.lang.String"/>
+  <Attribute Name="trntGlCode" Type="java.lang.String"/>
+  <Attribute Name="trntType" Type="java.lang.String"/>
+  <Attribute Name="trntProdApplcb" Type="java.lang.String"/>
+  <Attribute Name="trntConGlCode" Type="java.lang.String"/>
+  <Attribute Name="trntLevel" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.productTransactions"
+                     BeanClass="com.turnkey.setups.productTransactions"
+                     id="productTransactions"/>
+</JavaBean>

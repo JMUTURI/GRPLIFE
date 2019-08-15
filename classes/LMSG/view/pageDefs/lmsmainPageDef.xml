@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="lmsmainPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findTicketDetailsByUser.result"
+                    DataControl="workflowDAO" RangeSize="25"
+                    BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketDetailsByUserIterator"/>
+    <searchRegion Binds="findTicketDetailsByUserIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="workflowQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="findProposers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProposers"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findProposers_workflowDAO_dataProvider_findProposers_result"/>
+    <methodAction id="findTickets" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTickets"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTickets_workflowDAO_dataProvider_findTickets_result"/>
+    <methodAction id="findTicketDetailsByUser" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketDetailsByUser"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketDetailsByUser_workflowDAO_dataProvider_findTicketDetailsByUser_result"/>
+    <tree IterBinding="findTicketDetailsByUserIterator" id="workflow1">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow10">
+        <AttrNames>
+          <Item Value="TCKT_CODE"/>
+          <Item Value="TCKT_NAME"/>
+          <Item Value="TCKT_REF_NO"/>
+          <Item Value="CLIENT"/>
+          <Item Value="TCKT_BY"/>
+          <Item Value="TCKT_TO"/>
+          <Item Value="TCKT_DATE"/>
+          <Item Value="TCKT_REMARKS"/>
+          <Item Value="taskID"/>
+          <Item Value="TCKT_POL_NO"/>
+          <Item Value="TCKT_REF_NO"/>
+          <Item Value="SYSMODULE"/>          
+          
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTicketDetailsByUser1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketDetailsByUser"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketDetailsByUser_workflowDAO_dataProvider_findTicketDetailsByUser_result"/>
+    <methodAction id="FindProductCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProductCovers"
+                  IsViewObjectMethod="false" DataControl="policyCoverTypesDAO"
+                  InstanceName="policyCoverTypesDAO.dataProvider"
+                  ReturnName="policyCoverTypesDAO.methodResults.FindProductCovers_policyCoverTypesDAO_dataProvider_FindProductCovers_result"/>
+  </bindings>
+</pageDefinition>

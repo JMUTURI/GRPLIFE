@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="createTicketsPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsIterator"/>
+    <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+    <methodIterator Binds="findQuotation.result" DataControl="TicketsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.BPM.Tickets"
+                    id="findQuotationIterator"/>
+    <searchRegion Binds="findQuotationIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="TicketsQuery"/>
+    <methodIterator Binds="findPolicyTransactions.result"
+                    DataControl="TicketsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.BPM.Tickets"
+                    id="findPolicyTransactionsIterator"/>
+    <searchRegion Binds="findPolicyTransactionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Tickets1Query"/>
+    <methodIterator Binds="ReadJPDLXml.result" DataControl="TicketsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.BPM.Tickets"
+                    id="ReadJPDLXmlIterator"/>
+    <searchRegion Binds="ReadJPDLXmlIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Tickets2Query"/>
+    <methodIterator Binds="FindSystemUsers.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSystemUsersIterator"/>
+    <searchRegion Binds="FindSystemUsersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="data.ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="productDetails">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodshtDesc"/>
+          <Item Value="prodDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuotation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotation"
+                  IsViewObjectMethod="false" DataControl="TicketsDAO"
+                  InstanceName="TicketsDAO.dataProvider"
+                  ReturnName="data.TicketsDAO.methodResults.findQuotation_TicketsDAO_dataProvider_findQuotation_result"/>
+    <tree IterBinding="findQuotationIterator" id="Tickets">
+      <nodeDefinition DefName="LMSG.view.BPM.Tickets" Name="Tickets0">
+        <AttrNames>
+          <Item Value="quoNo"/>
+          <Item Value="client"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolicyTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolicyTransactions"
+                  IsViewObjectMethod="false" DataControl="TicketsDAO"
+                  InstanceName="TicketsDAO.dataProvider"
+                  ReturnName="data.TicketsDAO.methodResults.findPolicyTransactions_TicketsDAO_dataProvider_findPolicyTransactions_result"/>
+    <tree IterBinding="findPolicyTransactionsIterator" id="Tickets1">
+      <nodeDefinition DefName="LMSG.view.BPM.Tickets" Name="Tickets10">
+        <AttrNames>
+          <Item Value="ENDR_POL_POLICY_NO"/>
+          <Item Value="BTR_TRANS_TYPE"/>
+          <Item Value="CLIENT"/>
+          <Item Value="ENDR_EFFECTIVE_DATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="ReadJPDLXml" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="ReadJPDLXml"
+                  IsViewObjectMethod="false" DataControl="TicketsDAO"
+                  InstanceName="TicketsDAO.dataProvider"
+                  ReturnName="data.TicketsDAO.methodResults.ReadJPDLXml_TicketsDAO_dataProvider_ReadJPDLXml_result"/>
+    <tree IterBinding="ReadJPDLXmlIterator" id="Tickets2">
+      <nodeDefinition DefName="LMSG.view.BPM.Tickets" Name="Tickets20">
+        <AttrNames>
+          <Item Value="taskName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindSystemUsers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSystemUsers"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="data.SettingsDAO.methodResults.FindSystemUsers_SettingsDAO_dataProvider_FindSystemUsers_result"/>
+    <tree IterBinding="FindSystemUsersIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="USR_NAME"/>
+          <Item Value="USR_USERNAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

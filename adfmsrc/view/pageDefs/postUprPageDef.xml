@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="postUprPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findUprs.result" DataControl="UprDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.UprBean"
+                    id="findUprsIterator"/>
+    <methodIterator Binds="findUprDetails.result" DataControl="UprDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.UprBean"
+                    id="findUprDetailsIterator"/>
+    <searchRegion Binds="findUprDetailsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="UprBean1Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findUprs" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findUprs" IsViewObjectMethod="false"
+                  DataControl="UprDAO" InstanceName="UprDAO.dataProvider"
+                  ReturnName="UprDAO.methodResults.findUprs_UprDAO_dataProvider_findUprs_result"/>
+    <tree IterBinding="findUprsIterator" id="UprBean">
+      <nodeDefinition DefName="LMSG.view.Accounts.UprBean" Name="UprBean0">
+        <AttrNames>
+          <Item Value="utrans_year"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="uprs"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="LMSG.view.Accounts.UprBeans" Name="UprBean1">
+        <AttrNames>
+          <Item Value="monthName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findUprDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findUprDetails"
+                  IsViewObjectMethod="false" DataControl="UprDAO"
+                  InstanceName="UprDAO.dataProvider"
+                  ReturnName="UprDAO.methodResults.findUprDetails_UprDAO_dataProvider_findUprDetails_result"/>
+    <tree IterBinding="findUprDetailsIterator" id="UprBean2">
+      <nodeDefinition DefName="LMSG.view.Accounts.UprBean" Name="UprBean20">
+        <AttrNames>
+          <Item Value="utrans_code"/>
+          <Item Value="utrans_year"/>
+          <Item Value="utrans_month"/>
+          <Item Value="brn_name"/>
+          <Item Value="cur_desc"/>
+          <Item Value="type"/>
+          <Item Value="up_pol_policy_no"/>
+          <Item Value="up_property_id"/>
+          <Item Value="up_policy_cover_from"/>
+          <Item Value="up_policy_cover_to"/>
+          <Item Value="up_code"/>
+          <Item Value="up_utrans_code"/>
+          <Item Value="up_scl_code"/>
+          <Item Value="up_brn_code"/>
+          <Item Value="up_agn_code"/>
+          <Item Value="up_cur_code"/>
+          <Item Value="up_pol_batch_no"/>
+          <Item Value="up_ipu_code"/>
+          <Item Value="up_days_moths"/>
+          <Item Value="up_earned_mnths_days"/>
+          <Item Value="up_unearned_mnths_days"/>
+          <Item Value="up_unearned_prem"/>
+          <Item Value="up_gross_prem"/>
+          <Item Value="up_gross_comm"/>
+          <Item Value="up_mand_prem"/>
+          <Item Value="up_mand_comm"/>
+          <Item Value="up_quota_prem"/>
+          <Item Value="up_quota_comm"/>
+          <Item Value="up_fstsup_prem"/>
+          <Item Value="up_fstsup_comm"/>
+          <Item Value="up_secsup_prem"/>
+          <Item Value="up_secsup_comm"/>
+          <Item Value="up_facre_prem"/>
+          <Item Value="up_facre_comm"/>
+          <Item Value="up_facob_prem"/>
+          <Item Value="up_facob_comm"/>
+          <Item Value="up_pool_prem"/>
+          <Item Value="up_pool_comm"/>
+          <Item Value="agnName"/>
+          <Item Value="usum_unearned_prem"/>
+          <Item Value="usum_unearned_com"/>
+          <Item Value="up_unearned_com"/>
+          <Item Value="brnCode"/>
+          <Item Value="brnName"/>
+          <Item Value="currSymbol"/>
+          <Item Value="currDescription"/>
+          <Item Value="currencyDesc"/>
+          <Item Value="prod_desc"/>
+          <Item Value="up_unearned_comm"/>
+          <Item Value="up_ri_prem"/>
+          <Item Value="up_unearned_ri_prem"/>
+          <Item Value="up_ricomm"/>
+          <Item Value="up_unearned_ri_comm"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

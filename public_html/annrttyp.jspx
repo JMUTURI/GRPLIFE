@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    
+     <af:document id="d1000" title="Group Life | Annuity Rates">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+     <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+       <f:facet name="center">
+       <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:popup id="confirmDel">
+                <af:dialog id="d7" type="none" title="Delete Confirmation">
+                  <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Are you sure you want to Delete?"
+                                    id="ol86" inlineStyle="font-weight:bold;"/>
+                    <h:panelGrid columns="2" id="pg8">
+                      <af:spacer width="10" height="10" id="spacer1"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg19">
+                      <af:commandButton text="Yes" id="cb24"
+                                        action="#{agents.DeleteObject}"
+                                        partialSubmit="true"/>
+                      <af:commandButton text="No" id="commandButton9"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:panelBox text="Annuity Rates" id="pb1"
+                           inlineStyle="width:100%;">
+                <f:facet name="toolbar"/>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tr>
+                    <td width="50%">
+                      <af:statusIndicator id="statusIndicator1"/>
+                    </td>
+                    <td width="50%" align="right">
+                      <af:inputText id="it5" helpTopicId="LmsGrp_annrttyp"
+                                    readOnly="true"/>
+                    </td>
+                  </tr>
+                </table>
+                <af:panelSplitter id="ps1"
+                                  inlineStyle="width:100%; height:400.0px;">
+                  <f:facet name="first">
+                    <af:panelBox text="Products" id="pb2">
+                      <f:facet name="toolbar"/>
+                      <af:tree value="#{bindings.Setup1.treeModel}" var="node"
+                               selectionListener="#{agents.productSelected2}"
+                               rowSelection="single" id="t4"
+                               binding="#{agents.productsTree}">
+                        <f:facet name="nodeStamp">
+                          <af:outputText value="#{node}" id="ot11"/>
+                        </f:facet>
+                      </af:tree>
+                    </af:panelBox>
+                  </f:facet>
+                  <f:facet name="second">
+                    <af:panelBox text="Annuity Types And Options" id="pb3">
+                      <f:facet name="toolbar"/>
+                      <h:panelGrid columns="6" id="pg1">
+                        <af:commandButton id="cb1"
+                                          icon="/images/field_group_plus_ena.png"
+                                          action="#{agents.AddAnnuityType}"/>
+                        <af:commandButton id="cb2"
+                                          action="#{agents.EditAnnuityType}"
+                                          icon="/images/update_ena.png"/>
+                        <af:commandButton id="delAnnTypes"
+                                          icon="/images/delete.gif"
+                                          actionListener="#{agents.DeleteListener}"/>
+                        <af:popup id="annuityTypePopup">
+                          <af:dialog id="d1" type="none"
+                                     title="Enter Annuity Type Details">
+                            <h:panelGrid columns="2" id="pg2">
+                              <af:outputLabel value="Annuity Type" id="ol3"/>
+                              <af:selectOneChoice label="Label 1" id="soc1"
+                                                  simple="true"
+                                                  autoSubmit="true"
+                                                  binding="#{agents.annuityType}">
+                                <af:selectItem label="Immediate"
+                                               value="IMMEDIATE" id="si1"/>
+                                <af:selectItem label="Deferred" value="DEFERRED"
+                                               id="si2"/>
+                              </af:selectOneChoice>
+                              <af:outputLabel value="Guarantee Period"
+                                              id="ol4"/>
+                              <af:inputText label="Label 1" id="it1"
+                                            simple="true"
+                                            binding="#{agents.annGuaranteePeriod}"/>
+                              <af:outputLabel value="Annuity Option" id="ol5"/>
+                              <af:selectOneChoice label="Label 2" id="soc2"
+                                                  simple="true"
+                                                  autoSubmit="true"
+                                                  binding="#{agents.annuityOption}">
+                                <af:selectItem label="Option 1" value="OPTION 1"
+                                               id="si7"/>
+                                <af:selectItem label="Option 2" value="OPTION 2"
+                                               id="si5"/>
+                                <af:selectItem label="Option 3" value="OPTION 3"
+                                               id="si6"/>
+                                <af:selectItem label="Option 4" value="OPTION 4"
+                                               id="si4"/>
+                                <af:selectItem label="Option 5" value="OPTION 5"
+                                               id="si3"/>
+                              </af:selectOneChoice>
+                              <af:outputLabel value="Retirement Age" id="ol9"/>
+                              <af:inputText label="Label 4" id="it4"
+                                            simple="true"
+                                            binding="#{agents.annRetirementAge}"/>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" id="pg5">
+                              <af:commandButton text="OK" id="cb4"
+                                                action="#{agents.SaveAnnuityType}"/>
+                              <af:commandButton text="Cancel" id="cb5"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                        <af:inputFile label="Import Premium Rates"
+                                      autoSubmit="true"
+                                      binding="#{FileProcessor.upFile}"
+                                      valueChangeListener="#{FileProcessor.fileChangeForAnnRatesImport}"
+                                      immediate="true" id="if1"
+                                      inlineStyle="font-weight:bold;"/>
+                        <af:commandButton text="Refresh Rates" id="cb16"
+                                          action="#{agents.RefreshAnnuities}"/>
+                      </h:panelGrid>
+                      <af:table value="#{bindings.annuityFacDesc.collectionModel}"
+                                var="row"
+                                rows="#{bindings.annuityFacDesc.rangeSize}"
+                                emptyText="#{bindings.annuityFacDesc.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.annuityFacDesc.rangeSize}"
+                                rowBandingInterval="0"
+                                selectionListener="#{agents.AnnuityTypeListener}"
+                                rowSelection="single" id="t2"
+                                binding="#{agents.annuityTypesLOV}"
+                                inlineStyle="width:100%; height:130.0px; border-style:none;">
+                        <af:column sortProperty="atyType" sortable="true"
+                                   headerText="Annuity Type" id="c5">
+                          <af:outputText value="#{row.atyType}" id="ot6"/>
+                        </af:column>
+                        <af:column sortProperty="atyGuaranteePeriod"
+                                   sortable="true" headerText="Guarantee Period"
+                                   id="c4">
+                          <af:outputText value="#{row.atyGuaranteePeriod}"
+                                         id="ot5"/>
+                        </af:column>
+                        <af:column sortProperty="atyOption" sortable="true"
+                                   headerText="Option" id="c6">
+                          <af:outputText value="#{row.atyOption}" id="ot7"/>
+                        </af:column>
+                        <af:column sortProperty="ATY_RETIREMENT_AGE"
+                                   sortable="false" headerText="Retirement Age"
+                                   id="c9">
+                          <af:outputText value="#{row.ATY_RETIREMENT_AGE}"
+                                         id="ot10"/>
+                        </af:column>
+                      </af:table>
+                      <af:outputLabel value="Annuity Type Rates" id="ol6"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:separator id="s3"/>
+                      <h:panelGrid columns="3" id="pg3">
+                        <af:commandButton id="cb6"
+                                          icon="/images/field_group_plus_ena.png"
+                                          action="#{agents.AddAnnuityRateType}"/>
+                        <af:commandButton id="cb7" icon="/images/update_ena.png"
+                                          action="#{agents.EditAnnuityTypeRate}"/>
+                        <af:commandButton id="delAnnTypeRates"
+                                          icon="/images/delete.gif"
+                                          actionListener="#{agents.DeleteListener}"/>
+                        <af:popup id="AnnuityTypeRatesPopup">
+                          <af:dialog id="d2" type="none"
+                                     title="Enter ANB And Rate">
+                            <h:panelGrid columns="2" id="pg4">
+                              <af:outputLabel value="ANB At Entry" id="ol7"/>
+                              <af:inputText label="Label 2" id="it2"
+                                            simple="true"
+                                            binding="#{agents.anbAtEntry}"/>
+                              <af:outputLabel value="Rate" id="ol8"/>
+                              <af:inputText label="Label 3" id="it3"
+                                            simple="true"
+                                            binding="#{agents.annuityTypeRate}"/>
+                              <af:outputLabel value="Gender" id="outputLabel1"/>
+                              <af:selectOneChoice label="Label 3" id="soc3"
+                                                  autoSubmit="true"
+                                                  simple="true" value="B"
+                                                  binding="#{agents.annuityTypeGender}">
+                                <af:selectItem label="Male" value="M" id="si9"/>
+                                <af:selectItem label="Female" value="F"
+                                               id="si8"/>
+                                <af:selectItem label="Both" value="B"
+                                               id="si10"/>
+                              </af:selectOneChoice>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" id="pg6">
+                              <af:commandButton text="OK" id="cb9"
+                                                action="#{agents.SaveAnnuityTypeRate}"/>
+                              <af:commandButton text="Cancel" id="cb10"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                      </h:panelGrid>
+                      <af:table value="#{bindings.annuityFacDesc1.collectionModel}"
+                                var="row"
+                                rows="#{bindings.annuityFacDesc1.rangeSize}"
+                                emptyText="#{bindings.annuityFacDesc1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.annuityFacDesc1.rangeSize}"
+                                rowBandingInterval="0"
+                                selectedRowKeys="#{bindings.annuityFacDesc1.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.annuityFacDesc1.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t3"
+                                inlineStyle="width:100%; height:150.0px; border-style:none;"
+                                binding="#{agents.annuityTypeRates}">
+                        <af:column sortProperty="anntrAnb" sortable="true"
+                                   headerText="ANB AT Entry" id="c7"
+                                   width="200">
+                          <af:outputText value="#{row.anntrAnb}" id="ot8"/>
+                        </af:column>
+                        <af:column sortProperty="anntrRate" sortable="true"
+                                   headerText="Rate" id="c8" width="200">
+                          <af:outputText value="#{row.anntrRate}" id="ot9"/>
+                        </af:column>
+                        <af:column sortProperty="anntrGenderDesc" sortable="false"
+                                   headerText="Gender"
+                                   id="c1">
+                          <af:outputText value="#{row.anntrGenderDesc}"
+                                         id="ot2"/>
+                        </af:column>
+                        <af:column sortProperty="anntrGender"
+                                   sortable="false"
+                                   headerText="#{bindings.annuityFacDesc1.hints.anntrGender.label}"
+                                   id="c2" visible="false">
+                          <af:outputText value="#{row.anntrGender}" id="ot3"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </f:facet>
+                </af:panelSplitter>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:group>
+          </f:facet>
+          </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="branchesDAO" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.branchesDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.branches"
+                  BeanClass="LMSG.view.QuotationProcessing.branches"
+                  id="findBranches" ReturnNodeName="branches"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.branches"
+                  BeanClass="LMSG.view.QuotationProcessing.branches"
+                  id="findBudgetBranches" ReturnNodeName="branches"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.branchesDAO"
+                     BeanClass="LMSG.view.QuotationProcessing.branchesDAO"
+                     id="branchesDAO"/>
+</JavaBean>

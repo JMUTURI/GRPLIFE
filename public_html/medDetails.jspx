@@ -1,0 +1,471 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Medical Details" id="d4">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl2" layout="scroll">
+              <af:panelBox id="pb1" text="Policy Medicals">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Medical Group" id="ol1"
+                                inlineStyle="font-weight:bold;"
+                                rendered="false"/>
+                <af:separator id="s1" inlineStyle="width:inherit;"
+                              rendered="false"/>
+                 <h:panelGrid id="pg11" columns="2">
+                  <af:outputLabel value="Member Name" id="ol5"/>
+                  <af:outputText value="#{bindings.memName.inputValue}" id="ot32" inlineStyle="font-weight:bold;"/>
+                </h:panelGrid>
+                <h:panelGrid columns="11" id="pg1">
+                  <af:outputLabel value="ID" id="outputLabel1"/>
+                  <af:outputText value="#{bindings.MTG_SHT_DESC.inputValue}"
+                                 id="ot28" inlineStyle="font-weight:bold;"/>
+                  <af:outputLabel id="outputLabel14"/>
+                  <af:outputLabel value="Description" id="outputLabel2"/>
+                  <af:outputText value="#{bindings.MTG_DESC.inputValue}"
+                                 id="outputText1"
+                                 inlineStyle="font-weight:bold;"/>
+                  <af:outputLabel id="outputLabel15"/>
+                  <af:outputLabel value="ID No." id="outputLabel3"/>
+                  <af:outputText value="#{bindings.CMI_ID_NO.inputValue}"
+                                 id="outputText2"
+                                 inlineStyle="font-weight:bold;"/>
+                  <af:outputLabel id="outputLabel16"/>
+                  <af:outputLabel value="Total S.A" id="outputLabel4"/>
+                  <af:outputText value="#{bindings.POLM_MED_TOT_SA.inputValue}"
+                                 id="outputText3"
+                                 inlineStyle="font-weight:bold;"
+                                 converter="javax.faces.Number"/>
+                </h:panelGrid>
+                <af:spacer width="10" height="10" id="s2"/>
+                <af:panelBox text="Existing Proposals" id="pb2"
+                             showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <af:outputLabel value="Existing Proposals/Policies"
+                                  id="outputLabel5"
+                                  inlineStyle="font-weight:bold;"/>
+                  <af:separator id="separator1" inlineStyle="width:inherit;"/>
+                  <af:table value="#{bindings.medical.collectionModel}"
+                            var="row" rows="#{bindings.medical.rangeSize}"
+                            emptyText="#{bindings.medical.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.medical.rangeSize}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.medical.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.medical.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t1"
+                            inlineStyle="width:99%; height:70.0px; border-style:none;">
+                    <af:column sortProperty="PROPOSAL_NO" sortable="true"
+                               headerText="Proposal No" id="c3" width="200">
+                      <af:outputText value="#{row.PROPOSAL_NO}" id="ot4"/>
+                    </af:column>
+                    <af:column sortProperty="POLICY_NO" sortable="true"
+                               headerText="Policy Number" id="c2" width="200">
+                      <af:outputText value="#{row.POLICY_NO}" id="ot2"/>
+                    </af:column>
+                    <af:column sortProperty="TOT_SA" sortable="true"
+                               headerText="S.A" id="c1" width="200">
+                      <af:outputText value="#{row.TOT_SA}" id="ot3"
+                                     converter="javax.faces.Number"/>
+                    </af:column>
+                  </af:table>
+                </af:panelBox>
+                <af:panelBox text="Medical Requirements" id="pb3"
+                             showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <af:outputLabel value="Medical Requirements" id="outputLabel6"
+                                  inlineStyle="font-weight:bold;"/>
+                  <af:separator id="separator2" inlineStyle="width:inherit;"/>
+                  <af:popup id="medpopup">
+                    <af:dialog id="d1" type="none"
+                               title="Medical Requirement Details">
+                      <h:panelGrid columns="2" id="pg4">
+                        <af:outputLabel value="Medical Centre" id="ol2"/>
+                        <h:panelGrid columns="2" id="pg5">
+                          <af:inputText label="Label 1" id="it5" simple="true"
+                                        disabled="true"
+                                        binding="#{med.facDesc}"/>
+                          <af:commandButton id="cb3" icon="/images/dropdown.gif"
+                                            action="#{med.RenderFacilitators}"/>
+                        </h:panelGrid>
+                        <af:outputLabel value="Request Date" id="outputLabel7"/>
+                        <af:inputDate label="Label 1" id="id1" simple="true"
+                                      binding="#{med.reqDate}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                        <af:outputLabel value="Invoice Amount"
+                                        id="outputLabel8"/>
+                        <af:inputText label="Label 2" id="it6" simple="true"
+                                      binding="#{med.invAmt}"/>
+                        <af:outputLabel value="Check Date" id="outputLabel9"/>
+                        <af:inputDate label="Label 1" id="inputDate1"
+                                      simple="true" binding="#{med.cheqDate}">
+                           <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                        <af:outputLabel value="Checked" id="outputLabel10"/>
+                        <af:selectOneChoice label="Label 1" id="soc1"
+                                            simple="true"
+                                            binding="#{med.checkedDesc}">
+                          <af:selectItem label="Not Checked" value="N"
+                                         id="si3"/>
+                          <af:selectItem label="Checked" value="Y" id="si1"/>
+                          <af:selectItem label="Cancelled" value="C" id="si4"/>
+                          <af:selectItem label="Exempted" value="E" id="si2"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Invoice Date"
+                                        id="outputLabel11"/>
+                        <af:inputDate label="Label 1" id="inputDate2"
+                                      simple="true" binding="#{med.invDate}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                        <af:outputLabel value="Invoice No" id="outputLabel12"/>
+                        <af:inputText label="Label 2" id="inputText1"
+                                      simple="true" binding="#{med.invNo}"/>
+                        <af:outputLabel value="Remarks" id="outputLabel13"/>
+                        
+                        <af:inputText label="Label 2" id="inputText2"
+                                      simple="true" rows="3"
+                                      binding="#{med.remarks}"/>
+                        <af:outputLabel value="Result Date" id="ol6"/>
+                        <af:inputDate label="Label 2" id="id2"
+                                      binding="#{med.resultDate}" simple="true">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>   
+                        </af:inputDate>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg6">
+                        <af:commandButton text="Save" id="cb4"
+                                          action="#{med.SaveMedicalRequirement}"
+                                          partialSubmit="true"/>
+                        <af:commandButton text="Cancel" id="commandButton2"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                  <af:popup id="facPopup">
+                    <af:dialog id="d2" type="none" title="Medical Centres">
+                      <af:table value="#{bindings.Settings.collectionModel}"
+                                var="row" rows="#{bindings.Settings.rangeSize}"
+                                emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Settings.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.SettingsQuery.queryDescriptor}"
+                                queryListener="#{bindings.SettingsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t5" width="405"
+                                binding="#{med.facLOV}">
+                        <af:column sortProperty="SPR_SHT_DESC" filterable="true"
+                                   sortable="true" headerText="id." id="c24">
+                          <af:outputText value="#{row.SPR_SHT_DESC}" id="ot25"/>
+                        </af:column>
+                        <af:column sortProperty="SPR_NAME" filterable="true"
+                                   sortable="true" headerText="Name" id="c26"
+                                   width="200">
+                          <af:outputText value="#{row.SPR_NAME}" id="ot27"/>
+                        </af:column>
+                        <af:column sortProperty="TWN_NAME" filterable="true"
+                                   sortable="true" headerText="Town" id="c25">
+                          <af:outputText value="#{row.TWN_NAME}" id="ot26"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg7">
+                        <af:commandButton text="OK" id="cb5"
+                                          action="#{med.findFacilitatorsSel}"/>
+                        <af:commandButton text="Cancel" id="commandButton3"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                  <af:popup id="medTests">
+                    <af:dialog id="d5" type="none" title="Medical Tests.">
+                      <af:panelBox id="pb8" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <af:table value="#{bindings.medical5.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.medical5.rangeSize}"
+                                  emptyText="#{bindings.medical5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.medical5.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.medical5Query.queryDescriptor}"
+                                  queryListener="#{bindings.medical5Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.medical5.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.medical5.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t7"
+                                  binding="#{med.medTestsTable}">
+                          <af:column sortProperty="medicalTestDescription"
+                                     filterable="true" sortable="true"
+                                     headerText="Medical" id="c29" width="200">
+                            <af:outputText value="#{row.medicalTestDescription}"
+                                           id="ot31"/>
+                          </af:column>
+                          <af:column sortProperty="MTLFees" filterable="true"
+                                     sortable="true" headerText="Fee" id="c28">
+                            <af:outputText value="#{row.MTLFees}" id="ot30"/>
+                          </af:column>
+                        </af:table>
+                        <h:panelGrid columns="2" id="pg10">
+                          <af:commandButton text="OK" id="cb10"
+                                            action="#{med.additionalMedicals}"/>
+                          <af:commandButton text="Cancel" id="commandButton5"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                    </af:dialog>
+                  </af:popup>
+                  <h:panelGrid columns="10" id="pg3">
+                    <af:outputLabel value="Additional Medicals" id="ol3"/>
+                    <af:selectBooleanRadio label="Label 2" simple="true"
+                                           group="medicals" selected="true"
+                                           binding="#{med.additionalMedicals}"
+                                           id="sbr1"/>
+                    <af:outputLabel value="Unrequested Medicals" id="ol4"/>
+                    <af:selectBooleanRadio label="Label 1" simple="true"
+                                           group="medicals"
+                                           binding="#{med.unrequestedMedicals}"
+                                           id="sbr2"/>
+                    <af:commandButton icon="/images/field_group_plus_ena.png" id="cb9">
+                      <af:showPopupBehavior popupId="medTests"/>
+                    </af:commandButton>
+                    <af:commandButton id="cb2" icon="/images/update_ena.png"
+                                      action="#{med.EditMedicalReq}"/>
+                    <af:commandButton id="commandButton1"
+                                      icon="/images/delete_ena.png"
+                                      action="#{med.DeleteMedicalRequirement}"/>
+                  </h:panelGrid>
+                  <af:panelCollection id="pc1"
+                                      inlineStyle="height:180.0px; width:100%;">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="statusbar"/>
+                    <af:table value="#{bindings.medical1.collectionModel}"
+                              var="row" rows="#{bindings.medical1.rangeSize}"
+                              emptyText="#{bindings.medical1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.medical1.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.medical1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.medical1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t2"
+                              binding="#{med.medReqLOV}">
+                      <af:column sortProperty="MTL_DESC" sortable="true"
+                                 headerText="Description" id="c10">
+                        <af:outputText value="#{row.MTL_DESC}" id="ot19"/>
+                      </af:column>
+                      <af:column sortProperty="CML_LIMIT_AMT" sortable="true"
+                                 headerText="Limit Amount" id="c5">
+                        <af:outputText value="#{row.CML_LIMIT_AMT}" id="ot6"
+                                       converter="javax.faces.Number"/>
+                      </af:column>
+                      <af:column sortProperty="CML_REQUEST_DATE" sortable="true"
+                                 headerText="Request Date" id="c18">
+                        <af:outputText value="#{row.CML_REQUEST_DATE}"
+                                       id="ot10">
+                          <af:convertDateTime pattern="#{bindings.medical1.hints.CML_REQUEST_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="SPR_NAME" sortable="true"
+                                 headerText="Medical Centre" id="c8">
+                        <af:outputText value="#{row.SPR_NAME}" id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="CML_CLAIM_AMT" sortable="true"
+                                 headerText="Invoice Amount" id="c14">
+                        <af:outputText value="#{row.CML_CLAIM_AMT}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="CML_PAYABLE_AMT" sortable="true"
+                                 headerText="Payable Amount" id="c16">
+                        <af:outputText value="#{row.CML_PAYABLE_AMT}"
+                                       id="ot15"/>
+                      </af:column>
+                      <af:column sortProperty="CML_RECEIVED" sortable="true"
+                                 headerText="Checked" id="c15">
+                        <af:outputText value="#{row.CML_RECEIVED}" id="ot11"/>
+                      </af:column>
+                      <af:column sortProperty="CML_DATE_RECEIVED"
+                                 sortable="true" headerText="Check Date"
+                                 id="c6">
+                        <af:outputText value="#{row.CML_DATE_RECEIVED}"
+                                       id="ot17">
+                          <af:convertDateTime pattern="#{bindings.medical1.hints.CML_DATE_RECEIVED.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="CML_INVCE_DATE" sortable="true"
+                                 headerText="Invoice Date" id="c13">
+                        <af:outputText value="#{row.CML_INVCE_DATE}" id="ot12">
+                          <af:convertDateTime pattern="#{bindings.medical1.hints.CML_INVCE_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="CML_INVCE_NO" sortable="true"
+                                 headerText="Invoice No" id="c17">
+                        <af:outputText value="#{row.CML_INVCE_NO}" id="ot18"/>
+                      </af:column>
+                      <af:column sortProperty="CML_CHEQUE_NO" sortable="true"
+                                 headerText="Cheque No." id="c7">
+                        <af:outputText value="#{row.CML_CHEQUE_NO}" id="ot14"/>
+                      </af:column>
+                      <af:column sortProperty="CML_CHEQUE_DATE" sortable="true"
+                                 headerText="Cheque Date" id="c9">
+                        <af:outputText value="#{row.CML_CHEQUE_DATE}" id="ot13">
+                          <af:convertDateTime pattern="#{bindings.medical1.hints.CML_CHEQUE_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="CML_MED_LOADING" sortable="true"
+                                 headerText="Med Loading" id="c11">
+                        <af:outputText value="#{row.CML_MED_LOADING}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="POL_PROPOSAL_NO" sortable="true"
+                                 headerText="Orig. Proposal No." id="c12">
+                        <af:outputText value="#{row.POL_PROPOSAL_NO}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="CML_REMARKS" sortable="true"
+                                 headerText="Remarks" id="c4">
+                        <af:outputText value="#{row.CML_REMARKS}" id="ot16"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelBox>
+                <af:panelTabbed id="pt2"
+                                inlineStyle="height:230.0px; width:99%;">
+                  <af:showDetailItem text="Medical Centres" id="sdi1">
+                    <af:panelGroupLayout id="pgl3" layout="scroll">
+                      <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="2" id="pg2">
+                          <af:commandButton text="Medical Centres Payment" id="cb1"
+                                            action="#{med.CreateTransaction}"/>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.medical2.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.medical2.rangeSize}"
+                                  emptyText="#{bindings.medical2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.medical2.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.medical2.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.medical2.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t3"
+                                  inlineStyle="width:100%; height:130.0px; border-style:none;"
+                                  binding="#{med.facilitatorLOV}">
+                          <af:column sortProperty="FC_SPR_NAME" sortable="true"
+                                     headerText="Name" id="c20">
+                            <af:outputText value="#{row.FC_SPR_NAME}"
+                                           id="ot21"/>
+                          </af:column>
+                          <af:column sortProperty="FC_LIMIT_AMT" sortable="true"
+                                     headerText="Limit Amount" id="c22">
+                            <af:outputText value="#{row.FC_LIMIT_AMT}"
+                                           id="ot23"/>
+                          </af:column>
+                          <af:column sortProperty="FC_CLAIM_AMT" sortable="true"
+                                     headerText="Claim Amount" id="c19">
+                            <af:outputText value="#{row.FC_CLAIM_AMT}"
+                                           id="ot22"/>
+                          </af:column>
+                          <af:column sortProperty="FC_PAYABLE_AMT"
+                                     sortable="true" headerText="Payable Amount"
+                                     id="c21">
+                            <af:outputText value="#{row.FC_PAYABLE_AMT}"
+                                           id="ot20"/>
+                          </af:column>
+                        </af:table>
+                      </af:panelBox>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Underwritiing Decisions" id="sdi2">
+                    <af:popup id="decisi">
+                      <af:dialog id="d3" type="none" title="UW Decisions ">
+                        <af:panelBox text="PanelBox4" id="pb7"
+                                     showHeader="never">
+                          <f:facet name="toolbar"/>
+                          <af:table value="#{bindings.medical3.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.medical3.rangeSize}"
+                                    emptyText="#{bindings.medical3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.medical3.rangeSize}"
+                                    rowBandingInterval="0"
+                                    selectedRowKeys="#{bindings.medical3.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.medical3.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t4"
+                                    binding="#{med.decisionsLOV}">
+                            <af:column sortProperty="UD_DESC" sortable="true"
+                                       headerText="Decision" id="c23"
+                                       width="300">
+                              <af:outputText value="#{row.UD_DESC}" id="ot24"/>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                        <h:panelGrid columns="2" id="pg8">
+                          <af:commandButton text="OK" id="cb6"
+                                            action="#{med.SaveUWDecisionSel}"/>
+                          <af:commandButton text="Cancel" id="commandButton4"/>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                    <af:panelGroupLayout id="pgl4" layout="scroll">
+                      <af:panelBox text="PanelBox2" id="pb5" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="2" id="pg9">
+                          <af:commandButton id="cb7"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{med.findUWDecisionsSel}"/>
+                          <af:commandButton id="cb8"
+                                            icon="/images/delete_ena.png"
+                                            action="#{med.DeleteUWDecisions}"/>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.medical4.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.medical4.rangeSize}"
+                                  emptyText="#{bindings.medical4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.medical4.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.medical4.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.medical4.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t6"
+                                  inlineStyle="width:100.0%; height:120px; border-style:none;"
+                                  binding="#{med.memDecisionsLOV}">
+                          <af:column sortProperty="MEM_UD_DESC" sortable="true"
+                                     headerText="Decision" id="c27" width="400">
+                            <af:outputText value="#{row.MEM_UD_DESC}"
+                                           id="ot29"/>
+                          </af:column>
+                        </af:table>
+                      </af:panelBox>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Medical Reports"
+                                     id="showDetailItem1">
+                    <af:panelGroupLayout id="pgl5">
+                      <af:panelBox text="PanelBox3" id="pb6" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="1" id="panelGrid1">
+                          <af:commandLink text="Medical Facing Sheet"
+                                          id="commandLink4"
+                                          action="#{poreports.MedicalFacingSheetReport}"/>
+                          <af:commandLink text="Medical UW letter"
+                                          id="commandLink1"
+                                          action="#{poreports.MedicalUWLetterReport}"/>
+                          <af:commandLink text="Medical Letter" id="rpt1048"
+                                        actionListener="#{ReportsEngine.GetReportDetails}"/>
+                          <af:commandLink text="Acceptance / Decline Letter" id="rpt327609"
+                                        actionListener="#{ReportsEngine.GetReportDetails}"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                </af:panelTabbed>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

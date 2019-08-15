@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <Page
+      id="Page2">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="start">false</property>
+      <property
+         name="y">72.5</property>
+      <property
+         name="x">55.5</property>
+      <property
+         name="jspName">/home.jspx</property>
+      <property
+         name="realized">true</property>
+   </Page>
+   <Page
+      id="Page3">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="start">true</property>
+      <property
+         name="y">174.5</property>
+      <property
+         name="x">55.5</property>
+      <property
+         name="jspName">/index.jspx</property>
+      <property
+         name="realized">true</property>
+   </Page>
+</SDM>

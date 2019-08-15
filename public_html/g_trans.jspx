@@ -1,0 +1,856 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Policy Transactions" id="d6">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout id="pgl2">
+          <af:popup id="users">
+            <af:dialog id="dialog12" type="none"
+                       title="Users To Assign the Next Task">
+              <af:table value="#{bindings.workflow.collectionModel}" var="row"
+                        rows="#{bindings.workflow.rangeSize}"
+                        emptyText="#{bindings.workflow.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.workflow.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.workflowQuery.queryDescriptor}"
+                        queryListener="#{bindings.workflowQuery.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.workflow.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.workflow.collectionModel.makeCurrent}"
+                        rowSelection="single" id="table4" width="410"
+                        binding="#{endorse.usersLOV}">
+                <af:column sortProperty="taskUserID" filterable="true" filterFeatures="caseInsensitive"
+                           sortable="true" headerText="ID" id="column14">
+                  <af:outputText value="#{row.taskUserID}" id="outputText43"/>
+                </af:column>
+                <af:column sortProperty="taskUserShtDesc" filterable="true" filterFeatures="caseInsensitive"
+                           sortable="true" headerText="User Short Desc"
+                           id="column15">
+                  <af:outputText value="#{row.taskUserShtDesc}"
+                                 id="outputText44"/>
+                </af:column>
+                <af:column sortProperty="taskUserDesc" filterable="true" filterFeatures="caseInsensitive"
+                           sortable="true" headerText="User Name" id="column16"
+                           width="200">
+                  <af:outputText value="#{row.taskUserDesc}" id="outputText45"/>
+                </af:column>
+              </af:table>
+              <h:panelGrid columns="2" id="panelGrid26">
+                <af:commandButton text="OK" id="commandButton49"
+                                  action="#{endorse.AssignTask}"/>
+                <af:commandButton text="Cancel" id="commandButton50"
+                                  action="#{endorse.GetAssignee}"/>
+              </h:panelGrid>
+            </af:dialog>
+          </af:popup>
+          <af:popup id="p1">
+            <af:dialog id="d5" type="none" title="Policy Tickets">
+              <af:panelBox text="My Tickets" id="panelBox1"
+                           binding="#{viewPolicy.myTickets}"
+                           showHeader="never">
+                <f:facet name="toolbar"/>
+                <af:table value="#{bindings.workflow1.collectionModel}"
+                          var="row" rows="#{bindings.workflow1.rangeSize}"
+                          emptyText="#{bindings.workflow1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.workflow1.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.workflow1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.workflow1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t5"
+                          binding="#{endorse.resultsLOV}"
+                          inlineStyle="width:100.0%; height:180px; border-style:none;">
+                  <af:column sortProperty="TCKT_CODE" sortable="true"
+                             headerText="Ticket Id." id="column1">
+                    <af:outputText value="#{row.TCKT_CODE}" id="outputText2"/>
+                  </af:column>
+                  <af:column sortProperty="TCKT_NAME" sortable="true"
+                             headerText="Ticket Name" id="column2" width="200">
+                    <af:outputText value="#{row.TCKT_NAME}" id="outputText3"/>
+                  </af:column>
+                  <af:column sortProperty="TCKT_TO" sortable="true"
+                             headerText="Ticket Assignee" id="c17" width="140">
+                    <af:outputText value="#{row.TCKT_TO}" id="outputText4"/>
+                  </af:column>
+                  <af:column sortProperty="TCKT_BY" sortable="true"
+                             headerText="Ticket From." id="column3">
+                    <af:outputText value="#{row.TCKT_BY}" id="outputText5"/>
+                  </af:column>
+                  <af:column sortProperty="TCKT_DATE" sortable="true"
+                             headerText="Ticket Created On." id="column4">
+                    <af:outputText value="#{row.TCKT_DATE}" id="outputText6">
+                      <af:convertDateTime pattern="#{bindings.workflow1.hints.TCKT_DATE.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="TCKT_REMARKS" sortable="true"
+                             headerText="Ticket Remarks." id="column5"
+                             width="200">
+                    <af:outputText value="#{row.TCKT_REMARKS}"
+                                   id="outputText7"/>
+                  </af:column>
+                  <af:column sortProperty="taskID" sortable="false" id="c18">
+                    <af:commandLink text="Process" id="commandLink2"
+                                    action="#{endorse.findTicket2Selected}"
+                                    rendered="#{row.TCKT_TO == currUser.username}"/>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+            </af:dialog>
+          </af:popup>
+          <af:panelBox text="PanelBox1" showHeader="never" id="pb1">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Underwriting Transactions"
+                            inlineStyle="font-weight:bold;" id="ol1"/>
+            <af:separator id="s1"/>
+            <h:panelGrid columns="2" id="pg1">
+              <af:outputLabel value="Transaction Date" id="ol2"/>
+                <h:panelGrid columns="1" id="pg22">
+                  <af:inputDate label="Label 1" simple="true" disabled="true"
+                                value="#{bindings.sysDate.inputValue}" 
+                                id="id1" columns="31">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:inputDate>
+                </h:panelGrid>
+                <af:outputLabel value="Product ID" id="ol3"/>
+              <h:panelGrid columns="2" id="pg2">
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{endorse.productDesc}"
+                              disabled="true" id="it1"/>
+                <af:commandButton icon="/dropdown.gif"
+                                  binding="#{endorse.productButton}" id="cb1">
+                  <af:showPopupBehavior popupId="productsPopup"/>
+                </af:commandButton>
+                <af:popup id="productsPopup">
+                  <af:dialog type="none" title="Select Product" id="d1">
+                      <af:panelBox text="PanelBox2" id="pb7" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <af:table value="#{bindings.productDetails.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.productDetails.rangeSize}"
+                                  emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.productDetails.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                  queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t6"
+                                  binding="#{endorse.productLOV}">
+                          <af:column sortProperty="prodshtDesc"
+                                     filterable="true" filterFeatures="caseInsensitive" sortable="true"
+                                     headerText="Short Desc" id="c20">
+                            <af:outputText value="#{row.prodshtDesc}"
+                                           id="ot16"/>
+                          </af:column>
+                          <af:column sortProperty="prodDesc" filterable="true" filterFeatures="caseInsensitive"
+                                     sortable="true" headerText="Product"
+                                     id="c19" width="200">
+                            <af:outputText value="#{row.prodDesc}" id="ot17"/>
+                          </af:column>
+                        </af:table>
+                        <h:panelGrid columns="2" id="pg3">
+                          <af:commandButton text="OK"
+                                            action="#{endorse.findProductSelected}"
+                                            id="cb2"/>
+                          <af:commandButton text="Cancel" id="cb3"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Policy No." id="ol4"/>
+              <h:panelGrid columns="2" id="pg4">
+                <af:inputText label="Label 2" simple="true"
+                              binding="#{endorse.policiesDesc}"
+                              disabled="true" id="it2"/>
+                <af:commandButton icon="/dropdown.gif"
+                                  binding="#{endorse.policyButton}" id="cb4">
+                  <af:showPopupBehavior popupId="policies"/>
+                </af:commandButton>
+                <af:popup id="policies">
+                  <af:dialog type="none" title="Select Policy" id="d2">
+                      <af:panelBox text="PanelBox3" id="pb8" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <af:table value="#{bindings.policies1.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.policies1.rangeSize}"
+                                  emptyText="#{bindings.policies1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.policies1.rangeSize}"
+                                  filterModel="#{bindings.policies1Query.queryDescriptor}"
+                                  queryListener="#{bindings.policies1Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.policies1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.policies1.collectionModel.makeCurrent}"
+                                  rowSelection="single"
+                                  binding="#{endorse.policiesLOV}" id="t2">
+                          <af:column sortProperty="POL_POLICY_NO"
+                                     filterable="true" filterFeatures="caseInsensitive" sortable="true"
+                                     headerText="Policy Number" id="c3">
+                            <af:outputText value="#{row.POL_POLICY_NO}"
+                                           id="ot4"/>
+                          </af:column>
+                          <af:column sortProperty="CLIENT_DISPLAY"
+                                     filterable="true" filterFeatures="caseInsensitive" sortable="true"
+                                     headerText="Client" width="200" id="c4">
+                            <af:outputText value="#{row.CLIENT_DISPLAY}"
+                                           id="ot5"/>
+                          </af:column>
+                        </af:table>
+                        <h:panelGrid columns="2" id="pg18">
+                          <af:commandButton text="OK"
+                                            action="#{endorse.findPoliciesSelected}"
+                                            id="cb5"/>
+                          <af:commandButton text="Cancel" id="cb6"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Policy Effective Date" id="ol5"/>
+                <h:panelGrid columns="1" id="pg23">
+                  <af:inputDate label="Label 2" simple="true"
+                                binding="#{endorse.polEffDate}" disabled="true"
+                                id="id2" columns="31">
+                     <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                </h:panelGrid>
+                <af:outputLabel value="Endorsement Type" id="ol6"/>
+              <h:panelGrid columns="2" id="pg5">
+                <af:inputText label="Label 3" simple="true" disabled="true"
+                              binding="#{endorse.endorseDesc}" id="it3"/>
+                <af:commandButton icon="/images/dropdown.gif"
+                                  binding="#{endorse.endorseButton}" id="cb7">
+                  <af:showPopupBehavior popupId="end"/>
+                </af:commandButton>
+                <af:popup id="end">
+                  <af:dialog type="none" title="Endorsement Types" id="d3">
+                      <af:panelBox text="PanelBox4" id="pb9" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="2" id="pg26">
+                          <h:panelGrid columns="2" id="pg6">
+                            <af:outputLabel value="Add Member Schedule"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol7"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="AP"
+                                                   binding="#{endorse.addMemSch}"
+                                                   id="sbr1"/>
+                            <af:outputLabel value="Refund Premium(deletion of members)"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol8"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="RP"
+                                                   binding="#{endorse.refundPrem}"
+                                                   id="sbr2"/>
+                            <af:outputLabel value="Total Cancellation"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol9"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="TC"
+                                                   binding="#{endorse.totalCancel}"
+                                                   id="sbr3"/>
+                            <af:outputLabel value="Total Cancellation with Refund Premium"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol10"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="TP"
+                                                   binding="#{endorse.totalCancellWithRefund}"
+                                                   id="sbr4"/>
+                            <af:outputLabel value="Partial Cancellation (MEPIP)"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol11" rendered="false"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="PC"
+                                                   binding="#{endorse.partialCancel}"
+                                                   id="sbr5" rendered="false"/>
+                            <af:outputLabel value="Extension of Cover"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol12"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="EC"
+                                                   binding="#{endorse.endorseCover}"
+                                                   id="sbr6"/>
+                            <af:outputLabel value="Change of Cover Period" 
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol34"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="RCP"
+                                                   id="sbr152"
+                                                   binding="#{endorse.coverReduction}"/>                                               
+                            <af:outputLabel value="LG Initial Schedule"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol13" rendered="true"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CT"
+                                                   binding="#{endorse.lgInitialSch}"
+                                                   id="sbr7" rendered="true"/>
+                            <af:outputLabel value="Renewal"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol14" rendered="false"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="RN"
+                                                   binding="#{endorse.renewal}"
+                                                   id="sbr8" rendered="false"/>
+                            <af:outputLabel value="Schedule Adjustment"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol15"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="SA"
+                                                   binding="#{endorse.schAdjustment}"
+                                                   id="sbr9"/>
+                            <af:outputLabel value="Add/Alter Cover Type (Funeral/Shares)"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol16" rendered="false"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="AC"
+                                                   binding="#{endorse.addCoverType}"
+                                                   id="sbr10" rendered="false"/>
+                            <af:outputLabel value="Remove Cover Type (Funeral/Shares)"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol17" rendered="false"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="RC"
+                                                   binding="#{endorse.removeCoverType}"
+                                                   id="sbr11" rendered="false"/>
+                            <af:outputLabel value="Change of Policy Effective Date"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol18"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CE"
+                                                   binding="#{endorse.changePolEffDate}"
+                                                   id="sbr12"/>
+                            <af:outputLabel value="Free Cover Schedule Adjustment Limit"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol19"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="FCL"
+                                                   binding="#{endorse.freeCoverSch}"
+                                                   id="sbr13"/>
+                            <af:outputLabel value="Members Reinstatement"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol20"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="MR"
+                                                   binding="#{endorse.memberReinstatement}"
+                                                   id="sbr14"/>
+                            <af:outputLabel value="Change of Category/Earnings"
+                                            inlineStyle="font-weight:bold;"
+                                            id="outputLabel1"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CG"
+                                                   binding="#{endorse.changeCategory}"
+                                                   id="selectBooleanRadio1"/>
+                            <af:outputLabel value="Contra Transaction"
+                                            inlineStyle="font-weight:bold;"
+                                            id="outputLabel2"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CO"
+                                                   binding="#{endorse.contraTrans}"
+                                                   id="selectBooleanRadio2"/>
+                            <af:outputLabel value="Change of Premium Mask/Unit rate"
+                                            inlineStyle="font-weight:bold;"
+                                            id="outputLabel5"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CU"
+                                                   binding="#{endorse.premMask}"
+                                                   id="selectBooleanRadio3"/>
+                            <af:outputLabel value="Change of Agent/Broker"
+                                            inlineStyle="font-weight:bold;"
+                                            id="outputLabel6"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CB"
+                                                   binding="#{endorse.ageTrans}"
+                                                   id="selectBooleanRadio4"/>
+                            <af:outputLabel value="Change of Coinsurance Proportion"
+                                            inlineStyle="font-weight:bold;"
+                                            id="outputLabel7"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CCP"
+                                                   binding="#{endorse.coinPropTrans}"
+                                                   id="selectBooleanRadio5"/>
+                            <af:outputLabel value="Change of Contribution Rate / Amount"
+                                            inlineStyle="font-weight:bold;"
+                                            id="outputLabel9"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CC"
+                                                   binding="#{endorse.chngeContriTrans}"
+                                                   id="selectBooleanRadio6"/>
+                            <af:outputLabel value="Change of Life Factor"
+                                            inlineStyle="font-weight:bold;"
+                                            id="outputLabel10"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CL"
+                                                   binding="#{endorse.chngeLifeFactor}"
+                                                   id="selectBooleanRadio7"/>
+                            <af:outputLabel value="Change of Loan Repayment"
+                                            inlineStyle="font-weight:bold;"
+                                            id="outputLabel11"/>
+                            <af:selectBooleanRadio label="Label 1" simple="true"
+                                                   group="endorsements"
+                                                   value="CLR"
+                                                   binding="#{endorse.chngeLoanRepayment}"
+                                                   id="selectBooleanRadio8"/>
+                            <af:outputLabel value="Loan Topups" 
+                                            id="ol35" 
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:selectBooleanRadio text="" simple="true"
+                                                   group="endorsements"
+                                                   value="LNT"
+                                                   label="Label 2" id="sbr16"                                                   
+                                                   binding="#{endorse.loanTopup}"/>
+                          </h:panelGrid>
+                          <h:panelGrid columns="1" id="pg27">
+                            <af:selectOneChoice label="Past Period?" id="soc2"
+                                                value="N"
+                                                binding="#{endorse.pastPeriodDrop}">
+                              <af:selectItem label="Yes" value="Y" id="si3"/>
+                              <af:selectItem label="No" value="N" id="si4"/>
+                            </af:selectOneChoice>
+                            <af:spacer width="10" height="260" id="s11"/>
+                          </h:panelGrid>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="pg7">
+                          <af:commandButton text="OK"
+                                            action="#{endorse.EndorsementSelected}"
+                                            id="cb8"/>
+                          <af:commandButton text="Cancel" id="cb9"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+               <af:outputLabel value="Previous Transactions" id="outputLabel8"
+                                rendered="false"
+                                binding="#{endorse.prevTransLabel}"/>
+                <h:panelGrid columns="2" id="pg271" rendered="false"
+                             binding="#{endorse.prevTransPanel}">
+                  <af:inputText label="Label 8" id="it11" disabled="true"
+                                simple="true"
+                                binding="#{endorse.prevTransDesc}"/>
+                  <af:commandButton id="cb26" icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="p3"/>
+                  </af:commandButton>
+                  <af:popup id="p3">
+                    <af:dialog id="d8" type="none"
+                               title="Previously Authorised Transactions">
+                      <af:table value="#{bindings.endorsements3.collectionModel}"
+                                var="row"
+                                rows="#{bindings.endorsements3.rangeSize}"
+                                emptyText="#{bindings.endorsements3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.endorsements3.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.endorsements3Query.queryDescriptor}"
+                                queryListener="#{bindings.endorsements3Query.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.endorsements3.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.endorsements3.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t7" width="520"
+                                binding="#{endorse.prevTransTable}">
+                        <af:column sortProperty="ENDR_POL_POLICY_NO"
+                                   filterable="true" filterFeatures="caseInsensitive" sortable="true"
+                                   headerText="Policy No." id="c25">
+                          <af:outputText value="#{row.ENDR_POL_POLICY_NO}"
+                                         id="ot21"/>
+                        </af:column>
+                        <af:column sortProperty="ENDR_TYPE" sortable="true"
+                                   headerText="Endorsement Type" id="c24">
+                          <af:outputText value="#{row.ENDR_TYPE}" id="ot22"/>
+                        </af:column>
+                        <af:column sortProperty="TRANS"
+                                   sortable="true" headerText="Transaction."
+                                   id="c27">
+                          <af:outputText value="#{row.TRANS}" id="ot24"/>
+                        </af:column>
+                        <af:column sortProperty="ENDR_LTR_TRANS_NO"
+                                   sortable="false" headerText="Transaction No."
+                                   id="c28">
+                          <af:outputText value="#{row.ENDR_LTR_TRANS_NO}"
+                                         id="ot25"/>
+                        </af:column>
+                        <af:column sortProperty="ENDR_DATE" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Date" id="c26">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.ENDR_DATE}"
+                                          id="id9">
+                                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                            </af:inputDate>              
+                          </f:facet>
+                          <af:outputText value="#{row.ENDR_DATE}" id="ot23">
+                            <af:convertDateTime pattern="#{bindings.endorsements3.hints.ENDR_DATE.format}"/>
+                          </af:outputText>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg28">
+                        <af:commandButton text="OK" id="cb27"
+                                          action="#{endorse.findPrevTransTransSelected}"/>
+                        <af:commandButton text="Cancel" id="commandButton2"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+              <af:outputLabel value="Transaction To Contra" id="outputLabel3"
+                                rendered="false"
+                                binding="#{endorse.contraLabel}"/>
+                <h:panelGrid columns="2" id="pg20" rendered="false"
+                             binding="#{endorse.contraPanel}">
+                  <af:inputText label="Label 7" id="it10" simple="true"
+                                disabled="true"
+                                binding="#{endorse.contraDesc}"/>
+                  <af:commandButton id="cb24" icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="p2"/>
+                  </af:commandButton>
+                  <af:popup id="p2">
+                    <af:dialog id="d7" type="none" title="Old Transactions">
+                      <af:table value="#{bindings.endorsements2.collectionModel}"
+                                var="row"
+                                rows="#{bindings.endorsements2.rangeSize}"
+                                emptyText="#{bindings.endorsements2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.endorsements2.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.endorsements2Query.queryDescriptor}"
+                                queryListener="#{bindings.endorsements2Query.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.endorsements2.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.endorsements2.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t26" width="520"
+                                binding="#{endorse.contraTable}">
+                        <af:column sortProperty="ENDR_POL_POLICY_NO"
+                                   filterable="true" filterFeatures="caseInsensitive" sortable="true"
+                                   headerText="Policy No." id="c119">
+                          <af:outputText value="#{row.ENDR_POL_POLICY_NO}"
+                                         id="ot173"/>
+                        </af:column>
+                        <af:column sortProperty="ENDR_TYPE" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Trans Type"
+                                   id="c23">
+                          <af:outputText value="#{row.ENDR_TYPE}" id="ot20"/>
+                        </af:column>
+                        <af:column sortProperty="TRANS" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Transaction"
+                                   id="c21">
+                          <af:outputText value="#{row.TRANS}" id="ot19"/>
+                        </af:column>
+                        <af:column sortProperty="ENDR_LTR_TRANS_NO"
+                                   filterable="true" filterFeatures="caseInsensitive" sortable="true"
+                                   headerText="Transaction No." id="c22">
+                          <af:outputText value="#{row.ENDR_LTR_TRANS_NO}"
+                                         id="ot162"/>
+                        </af:column>
+                        <af:column sortProperty="ENDR_DATE" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Date" id="c120">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.ENDR_DATE}"
+                                          id="id8">
+                                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                          </af:inputDate>
+                          </f:facet>
+                          <af:outputText value="#{row.ENDR_DATE}" id="ot18">
+                            <af:convertDateTime pattern="#{bindings.endorsements2.hints.ENDR_DATE.format}"/>
+                          </af:outputText>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg21">
+                        <af:commandButton text="OK" id="cb25"
+                                          action="#{endorse.findOldTransSelected}"/>
+                        <af:commandButton text="Cancel" id="commandButton1"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                 <af:outputLabel value="Apply Endorsement From Inception" id="outputLabel4"
+                                rendered="false"
+                                binding="#{endorse.inceptionLabel}"/>
+                <af:selectOneChoice label="Label 1" id="soc1" simple="true"
+                                    binding="#{endorse.inceptionSelection}"
+                                    value="N"
+                                    valueChangeListener="#{endorse.inceptionListener}"
+                                    rendered="false" autoSubmit="true">
+                  <af:selectItem label="Yes" value="Y" id="si2"/>
+                  <af:selectItem label="No" value="N" id="si1"/>
+                </af:selectOneChoice>
+                <af:outputLabel value="Endorsement Effective Date" id="ol21"/>
+                <h:panelGrid columns="1" id="pg25">
+                  <af:inputDate label="Label 3" simple="true"
+                                binding="#{endorse.transEffDate}" id="id3"
+                                columns="31">
+                     <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                </h:panelGrid>
+              </h:panelGrid>
+            <af:spacer width="10" height="15" id="s2"/>
+            <h:panelGrid columns="2" id="pg8">
+              <af:commandButton text="Next>>"
+                                action="#{endorse.EndorsementAction}"
+                                id="cb10"/>
+              <af:commandButton text="Cancel" rendered="false" id="cb11"/>
+            </h:panelGrid>
+          </af:panelBox>
+          <af:panelBox text="Extension/Change of Cover" showHeader="never"
+                       rendered="false" binding="#{endorse.extOfCover}"
+                       id="pb2">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Extension of Cover"
+                            inlineStyle="font-weight:bold;" id="ol22"/>
+            <af:separator id="s3"/>
+            <h:panelGrid columns="2" id="pg9">
+              <af:outputLabel value="Old Cover To" id="ol23"/>
+              <af:inputDate label="Label 4" simple="true" disabled="true"
+                            binding="#{endorse.oldCoverTo}" id="id4">
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:inputDate>
+              <af:outputLabel value="New Cover To" id="ol24"/>
+              <af:inputDate label="Label 4" simple="true"
+                            binding="#{endorse.newCoverTo}" id="id5">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+              <af:inputDate label="Label 4" simple="true"
+                            binding="#{endorse.oldCoverFrom}" visible="false"
+                            id="id6">
+                   <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>             
+            </h:panelGrid>
+            <af:spacer width="10" height="15" id="s4"/>
+            <h:panelGrid columns="2" id="pg10">
+              <af:commandButton text="Save"
+                                action="#{endorse.CreateNewEndorsement}"
+                                id="cb12"/>
+              <af:commandButton text="Cancel"
+                                action="#{endorse.CancelEndorsement}"
+                                id="cb13"/>
+            </h:panelGrid>
+          </af:panelBox>
+          <af:panelBox text="Free Cover Adjustment" rendered="false"
+                       binding="#{endorse.freeAdj}" showHeader="never" id="pb3">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Free Cover Schedule Adjustment Limit"
+                            inlineStyle="font-weight:bold;" id="ol25"/>
+            <af:separator id="s5"/>
+            <h:panelGrid columns="3" id="pg11">
+              <af:outputLabel value="Endorsement No." id="ol26"/>
+              <h:panelGrid columns="2" id="pg12">
+                <af:inputText label="Label 4" simple="true" disabled="true"
+                              binding="#{endorse.fclDesc}" id="it4"/>
+              </h:panelGrid>
+              <af:commandButton icon="/images/dropdown.gif" id="cb14">
+                <af:showPopupBehavior popupId="fcl"/>
+              </af:commandButton>
+              <af:popup id="fcl">
+                <af:dialog type="none" title="Endorsement" id="d4">
+                  <af:table value="#{bindings.endorsements.collectionModel}"
+                            var="row" rows="#{bindings.endorsements.rangeSize}"
+                            emptyText="#{bindings.endorsements.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.endorsements.rangeSize}"
+                            filterModel="#{bindings.endorsementsQuery.queryDescriptor}"
+                            queryListener="#{bindings.endorsementsQuery.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.endorsements.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.endorsements.collectionModel.makeCurrent}"
+                            rowSelection="single" binding="#{endorse.fclLOV}"
+                            id="t3">
+                    <af:column sortProperty="FCL_ENDR_NO" filterable="true" filterFeatures="caseInsensitive"
+                               sortable="true" headerText="Endorsement No."
+                               id="c5">
+                      <af:outputText value="#{row.FCL_ENDR_NO}" id="ot6"/>
+                    </af:column>
+                    <af:column sortProperty="FCL_ENDR_POL_POLICY_NO"
+                               filterable="true" filterFeatures="caseInsensitive" sortable="true"
+                               headerText="Policy Number" id="c6">
+                      <af:outputText value="#{row.FCL_ENDR_POL_POLICY_NO}"
+                                     id="ot7"/>
+                    </af:column>
+                    <af:column sortProperty="FCL_ENDR_TYPE" filterable="true" filterFeatures="caseInsensitive"
+                               sortable="true" headerText="Endorsement Type"
+                               id="c7">
+                      <af:outputText value="#{row.FCL_ENDR_TYPE}" id="ot8"/>
+                    </af:column>
+                  </af:table>
+                  <h:panelGrid columns="2" id="pg13">
+                    <af:commandButton text="OK"
+                                      action="#{endorse.findFCLEndorsementSelected}"
+                                      id="cb15"/>
+                    <af:commandButton text="Cancel" id="cb16"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+            </h:panelGrid>
+            <af:spacer width="10" height="15" id="s6"/>
+            <h:panelGrid columns="2" id="pg14">
+              <af:commandButton text="Save"
+                                action="#{endorse.CreateNewEndorsement}"
+                                id="cb17"/>
+              <af:commandButton text="Cancel"
+                                action="#{endorse.CancelEndorsement}"
+                                id="cb18"/>
+            </h:panelGrid>
+          </af:panelBox>
+          <af:panelBox text="Schedule Adjustment" rendered="false" 
+                       binding="#{endorse.scheduleAdjust}" showHeader="never"
+                       id="pb4">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Additional Member Schedule"
+                            inlineStyle="font-weight:bold;" id="ol27"/>
+            <af:separator id="s7"/>
+            <h:panelGrid columns="4" id="pg15">
+              <af:outputLabel value="Month:" id="ol28"/>
+              <af:inputText label="Label 5" simple="true"
+                            binding="#{endorse.schMonth}" id="it5"/>
+              <af:outputLabel value="Year:" id="ol29"/>
+              <af:inputText label="Label 5" simple="true"
+                            binding="#{endorse.schYear}" id="it6"/>
+            </h:panelGrid>
+            <af:spacer width="10" height="15" id="s8"/>
+            <h:panelGrid columns="2" id="pg16">
+              <af:commandButton text="Save"
+                                action="#{endorse.CreateNewEndorsement}"
+                                id="cb19"/>
+              <af:commandButton text="Cancel"
+                                action="#{endorse.CancelEndorsement}"
+                                id="cb20"/>
+            </h:panelGrid>
+            </af:panelBox>
+            <af:panelBox text="Change Of Effective Date" id="pb6"
+                         rendered="false"
+                         binding="#{endorse.changeOfPolEffectiveDate}">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Change Of Policy Effective Date" id="ol31"
+                              rendered="false"/>
+              <af:separator id="s10" rendered="false"/>
+              <h:panelGrid columns="2" id="pg19">
+                <af:outputLabel value="Old Effective Date" id="ol32"/>
+                <af:inputText label="Label 6" id="it9" simple="true"
+                              shortDesc="Old Effective Date"
+                              binding="#{endorse.oldEffectiveDate}"
+                              disabled="true"/>
+                <af:outputLabel value="New Effective Date" id="ol33"
+                                showRequired="true"/>
+                <af:inputDate label="Label 5" id="id7" simple="true"
+                              binding="#{endorse.newEffectiveDate}"
+                              shortDesc="New Effective Date" columns="31">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                </af:inputDate>              
+                <h:panelGrid columns="2" id="pg24">
+                  <af:commandButton text="Next" id="cb22"
+                                    action="#{endorse.CreateNewEndorsement}"/>
+                  <af:commandButton text="Cancel" id="cb23"
+                                    action="#{endorse.CancelEndorsement}"/>
+                </h:panelGrid>
+              </h:panelGrid>
+            </af:panelBox>
+            <af:panelBox text="pending Transactions" rendered="false" showHeader="never"
+                       binding="#{endorse.transactions}" id="pb5">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Pending Transactions"
+                            inlineStyle="font-weight:bold;" id="ol30"/>
+            <af:separator id="s9"/>
+            <af:table value="#{bindings.endorsements1.collectionModel}"
+                      var="row" rows="#{bindings.endorsements1.rangeSize}"
+                      emptyText="#{bindings.endorsements1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.endorsements1.rangeSize}"
+                      selectedRowKeys="#{bindings.endorsements1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.endorsements1.collectionModel.makeCurrent}"
+                      rowSelection="single" binding="#{endorse.transLOV}"
+                      inlineStyle="width:100.0%; height:100px; border-style:none;" id="t4">
+              <af:column sortProperty="PT_ENDR_NO" sortable="true"
+                         headerText="Endorsement No." id="c8">
+                <af:outputText value="#{row.PT_ENDR_NO}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="PT_ENDR_POL_POLICY_NO" sortable="true"
+                         headerText="Policy Number" id="c9">
+                <af:outputText value="#{row.PT_ENDR_POL_POLICY_NO}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="PT_client" sortable="true"
+                         headerText="Client" id="c10">
+                <af:outputText value="#{row.PT_client}" id="ot11"/>
+              </af:column>
+              <af:column sortProperty="PT_AgentName" sortable="true"
+                         headerText="Agent " id="c11">
+                <af:outputText value="#{row.PT_AgentName}" id="ot12"/>
+              </af:column>
+              <af:column sortProperty="BTR_TRANS_TYPE" sortable="false"
+                         headerText="Endorsement Type" id="c16" width="130">
+                <af:outputText value="#{row.BTR_TRANS_TYPE}" id="ot15"/>
+              </af:column>
+              <af:column sortProperty="PT_ENDR_STATUS" sortable="true"
+                         headerText="Status" id="c12" width="70">
+                <af:outputText value="#{row.PT_ENDR_STATUS}" id="ot13"/>
+              </af:column>
+              <af:column sortProperty="PT_ENDR_EFFECTIVE_DATE" sortable="true"
+                         headerText="Effective Date" id="c13">
+                <af:outputText value="#{row.PT_ENDR_EFFECTIVE_DATE}" id="ot14">
+                  <af:convertDateTime pattern="#{bindings.endorsements1.hints.PT_ENDR_EFFECTIVE_DATE.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="ENDR_NO" sortable="false" id="c14">
+                <af:inputText value="#{row.bindings.ENDR_NO.inputValue}"
+                              label="#{bindings.endorsements1.hints.ENDR_NO.label}"
+                              required="#{bindings.endorsements1.hints.ENDR_NO.mandatory}"
+                              columns="#{bindings.endorsements1.hints.ENDR_NO.displayWidth}"
+                              maximumLength="#{bindings.endorsements1.hints.ENDR_NO.precision}"
+                              shortDesc="#{bindings.endorsements1.hints.ENDR_NO.tooltip}"
+                              visible="false" id="it7">
+                  <f:validator binding="#{row.bindings.ENDR_NO.validator}"/>
+                </af:inputText>
+                <af:commandLink text="Select"
+                                action="#{endorse.ShowPolicyTickets}"
+                                id="cl1"/>
+              </af:column>
+              <af:column sortProperty="ENDR_NO" sortable="false" id="c15">
+                <af:inputText value="#{row.bindings.ENDR_NO.inputValue}"
+                              label="#{bindings.endorsements1.hints.ENDR_NO.label}"
+                              required="#{bindings.endorsements1.hints.ENDR_NO.mandatory}"
+                              columns="#{bindings.endorsements1.hints.ENDR_NO.displayWidth}"
+                              maximumLength="#{bindings.endorsements1.hints.ENDR_NO.precision}"
+                              shortDesc="#{bindings.endorsements1.hints.ENDR_NO.tooltip}"
+                              visible="false" id="it8">
+                  <f:validator binding="#{row.bindings.ENDR_NO.validator}"/>
+                </af:inputText>
+                <af:commandLink text="Delete"
+                                action="#{endorse.DeletePendingEndorsementSelected}"
+                                id="cl2"/>
+              </af:column>
+            </af:table>
+            <h:panelGrid columns="2" id="pg17"/>
+            <af:commandButton text="Cancel"
+                              action="#{endorse.CancelEndorsement}" id="cb21"/>
+            </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

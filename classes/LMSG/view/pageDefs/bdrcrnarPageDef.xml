@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="bdrcrnarPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findDrCrNarratives.result"
+                    DataControl="causationsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.causations"
+                    id="findDrCrNarrativesIterator"/>
+    <methodIterator Binds="findBusinessTransactions.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findBusinessTransactionsIterator"/>
+    <searchRegion Binds="findBusinessTransactionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SetupQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="findBusinessTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBusinessTransactions"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findBusinessTransactions_SetupsDAO_dataProvider_findBusinessTransactions_result"/>
+    <methodAction id="findDrCrNarratives" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findDrCrNarratives"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findDrCrNarratives_causationsDAO_dataProvider_findDrCrNarratives_result"/>
+    <tree IterBinding="findDrCrNarrativesIterator" id="causations">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations0">
+        <AttrNames>
+          <Item Value="drcrCode"/>
+          <Item Value="btrTransCode"/>
+          <Item Value="drNarrative"/>
+          <Item Value="crNarrative"/>
+          <Item Value="causCode"/>
+          <Item Value="DRCR_END_NARRATIVE"/>
+          <Item Value="DRCR_DR_COIN_NARRATIVE"/>
+          <Item Value="causShtdesc"/>
+          <Item Value="DRCR_CR_COIN_NARRATIVE"/>
+          <Item Value="DRCR_COIN_APPORTION_NARRATIVE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findBusinessTransactionsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="BTR_TRANS_CODE"/>
+          <Item Value="BTR_TRANS_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

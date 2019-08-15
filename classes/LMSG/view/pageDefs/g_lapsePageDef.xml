@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="g_lapsePageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findLapsedProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findLapsedProductsIterator"/>
+    <searchRegion Binds="findLapsedProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+    <methodIterator Binds="FindLapsedPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindLapsedPoliciesIterator"/>
+    <searchRegion Binds="FindLapsedPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+  </executables>
+  <bindings>
+    <methodAction id="findLapsedProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findLapsedProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findLapsedProducts_ProductsDAO_dataProvider_findLapsedProducts_result"/>
+    <tree IterBinding="findLapsedProductsIterator" id="productDetails">
+      <nodeDefinition DefName="view.product.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="lp_prod_desc"/>
+          <Item Value="lp_PROD_LAPSE_PRD_DAYS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindLapsedPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindLapsedPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindLapsedPolicies_policiesDAO_dataProvider_FindLapsedPolicies_result"/>
+    <tree IterBinding="FindLapsedPoliciesIterator" id="policies">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="PL_pol_policy_no"/>
+          <Item Value="PL_client"/>
+          <Item Value="PL_brn_sht_desc"/>
+          <Item Value="PL_pol_freq_of_payment"/>
+          <Item Value="PL_pol_last_add_sched_date"/>
+          <Item Value="PL_pol_effective_date"/>
+          <Item Value="PL_pol_paid_to_date"/>
+          <Item Value="PL_pol_paid_instlmt_no"/>
+          <Item Value="PL_pol_instlmt_prem"/>
+          <Item Value="PL_os_instals"/>
+          <Item Value="PL_os_prem"/>
+          <Item Value="POL_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+  </bindings>
+</pageDefinition>

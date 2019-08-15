@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="reintabPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findOrdReinsuranceRates.result"
+                    DataControl="ordReinRatesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ordReinRates"
+                    id="findOrdReinsuranceRatesIterator"/>
+    <methodIterator Binds="findOrdReinsuranceRatesDescription.result"
+                    DataControl="ordReinRatesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ordReinRates"
+                    id="findOrdReinsuranceRatesDescriptionIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findOrdReinsuranceRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOrdReinsuranceRates"
+                  IsViewObjectMethod="false" DataControl="ordReinRatesDAO"
+                  InstanceName="ordReinRatesDAO.dataProvider"
+                  ReturnName="ordReinRatesDAO.methodResults.findOrdReinsuranceRates_ordReinRatesDAO_dataProvider_findOrdReinsuranceRates_result"/>
+    <tree IterBinding="findOrdReinsuranceRatesIterator" id="ordReinRates">
+      <nodeDefinition DefName="com.turnkey.setups.ordReinRates"
+                      Name="ordReinRates0">
+        <AttrNames>
+          <Item Value="orrpCode"/>
+          <Item Value="orrpShtDesc"/>
+          <Item Value="orrpDesc"/>
+          <Item Value="orrpClassSpecific"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findOrdReinsuranceRatesDescription"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findOrdReinsuranceRatesDescription"
+                  IsViewObjectMethod="false" DataControl="ordReinRatesDAO"
+                  InstanceName="ordReinRatesDAO.dataProvider"
+                  ReturnName="ordReinRatesDAO.methodResults.findOrdReinsuranceRatesDescription_ordReinRatesDAO_dataProvider_findOrdReinsuranceRatesDescription_result"/>
+    <tree IterBinding="findOrdReinsuranceRatesDescriptionIterator"
+          id="ordReinRates1">
+      <nodeDefinition DefName="com.turnkey.setups.ordReinRates"
+                      Name="ordReinRates10">
+        <AttrNames>
+          <Item Value="orrpCode"/>
+          <Item Value="orrpShtDesc"/>
+          <Item Value="orrpDesc"/>
+          <Item Value="orrpClassSpecific"/>
+          <Item Value="orrtCode"/>
+          <Item Value="orrtAnbFrom"/>
+          <Item Value="orrtAnbTo"/>
+          <Item Value="orrtRate"/>
+          <Item Value="orrtDivFactor"/>
+          <Item Value="orrtRateType"/>
+          <Item Value="orrtWet"/>
+          <Item Value="orrtWef"/>
+          <Item Value="orrtRateTypeDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

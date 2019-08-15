@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Occupations" id="d2">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                             id="pgl4">
+            <af:inputText id="it2"
+                          helpTopicId="LmsGrp_glfclass" readOnly="true"/>
+            <af:panelBox text="Medical Tests and Fees" showHeader="never"
+                       id="pb15">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Group Business Occupations" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1"/>
+            <af:spacer width="10" height="10" id="s2"/>
+            <h:panelGrid columns="1" id="pg1">
+              <af:outputLabel value="Life Class Definition" id="outputLabel1"
+                              inlineStyle="font-weight:bold;"/>
+              <af:spacer width="10" height="10" id="spacer1"/>
+            </h:panelGrid>
+            <h:panelGrid columns="3" id="pg12">
+              <af:commandButton id="cb19"
+                                icon="/images/field_group_plus_ena.png"
+                                action="#{otherSetups.AddLifeClasses}"/>
+              <af:commandButton icon="/images/update_ena.png"
+                                id="commandButton11"
+                                action="#{otherSetups.EditLifeClasses}"/>
+              <af:commandButton id="cb22" icon="/images/delete_ena.png"
+                                action="#{otherSetups.DeleteLifeClasses}"/>
+            </h:panelGrid>
+            <af:popup id="lifeClass">
+              <af:dialog id="d1" type="none" title="Life Classes">
+                <h:panelGrid columns="2" id="pg2">
+                  <af:outputLabel value="*Id." id="ol2"/>
+                  <af:inputText label="Label 1" id="it1" simple="true"
+                                binding="#{otherSetups.id}"
+                                shortDesc="Class ID"/>
+                  <af:outputLabel value="*Description" id="outputLabel3"/>
+                  <af:inputText label="Label 1" id="inputText1" simple="true"
+                                binding="#{otherSetups.desc}"
+                                shortDesc="Class Description"/>
+                  <af:outputLabel value="*Hazardous" id="outputLabel4"/>
+                  <af:selectOneChoice label="Label 1" id="soc1" simple="true"
+                                      binding="#{otherSetups.hazardous}"
+                                      shortDesc="Hazardous?">
+                    <af:selectItem label="Yes" value="Y" id="si2"/>
+                    <af:selectItem label="No" value="N" id="si1"/>
+                  </af:selectOneChoice>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg3">
+                  <af:commandButton text="OK" id="cb1"
+                                    action="#{otherSetups.SaveLifeClasses}"/>
+                  <af:commandButton text="Cancel" id="commandButton4"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                      rows="#{bindings.Setup.rangeSize}"
+                      emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.Setup.rangeSize}"
+                      rowBandingInterval="0"
+                      rowSelection="single" id="t1"
+                      inlineStyle="width:100%; height:100.0px; border-style:none;"
+                      binding="#{otherSetups.lifeClassLOV}"
+                      selectionListener="#{otherSetups.LifeClassListener}">
+              <af:column sortProperty="LC_HAZAROUS_DESC" sortable="true"
+                         headerText="Id." id="c1">
+                <af:outputText value="#{row.LC_HAZAROUS_DESC}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="LC_DESC" sortable="true"
+                         headerText="Description" id="c2" width="300">
+                <af:outputText value="#{row.LC_DESC}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="LC_SHT_DESC" sortable="true"
+                         headerText="Hazardous" id="c3">
+                <af:outputText value="#{row.LC_SHT_DESC}" id="ot2"/>
+              </af:column>
+            </af:table>
+            <h:panelGrid columns="1" id="panelGrid1">
+              <af:spacer width="10" height="10" id="spacer3"/>
+              <af:outputLabel value="Occupations" id="outputLabel2"
+                              inlineStyle="font-weight:bold;"/>
+              <af:spacer width="10" height="10" id="spacer2"/>
+            </h:panelGrid>
+            <h:panelGrid columns="3" id="panelGrid2">
+              <af:commandButton id="commandButton1"
+                                icon="/images/field_group_plus_ena.png"
+                                action="#{otherSetups.AddOccupation}"/>
+              <af:commandButton icon="/images/update_ena.png"
+                                id="commandButton2"
+                                action="#{otherSetups.EditOccupation}"/>
+              <af:commandButton id="commandButton3"
+                                icon="/images/delete_ena.png"
+                                action="#{otherSetups.DeleteOccupation}"/>
+            </h:panelGrid>
+            <af:popup id="occupation">
+              <af:dialog id="dialog1" type="none" title="Occupations">
+                <h:panelGrid columns="2" id="panelGrid3">
+                  <af:outputLabel value="*Id." id="outputLabel5"/>
+                  <af:inputText label="Label 1" id="inputText2" simple="true"
+                                binding="#{otherSetups.occId}"
+                                shortDesc="Occupation ID"/>
+                  <af:outputLabel value="*Description" id="outputLabel6"/>
+                  <af:inputText label="Label 1" id="inputText3" simple="true"
+                                binding="#{otherSetups.occDesc}"
+                                shortDesc="Ocupation Description"/>
+                  <af:outputLabel value="*Hazardous" id="outputLabel7"/>
+                  <af:selectOneChoice label="Label 1" id="selectOneChoice1"
+                                      simple="true"
+                                      binding="#{otherSetups.occHazardous}"
+                                      shortDesc="Is Occupation Hazardous">
+                    <af:selectItem label="Yes" value="Y" id="selectItem1"/>
+                    <af:selectItem label="No" value="N" id="selectItem2"/>
+                  </af:selectOneChoice>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="panelGrid4">
+                  <af:commandButton text="OK" id="commandButton5"
+                                    action="#{otherSetups.SaveOccupation}"/>
+                  <af:commandButton text="Cancel" id="commandButton6"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <af:table value="#{bindings.Setup1.collectionModel}" var="row"
+                      rows="#{bindings.Setup1.rangeSize}"
+                      emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.Setup1.rangeSize}"
+                      rowBandingInterval="0"
+                      rowSelection="single" id="t2"
+                      inlineStyle="width:100%; height:100.0px; border-style:none;"
+                      binding="#{otherSetups.occupationsLOV}"
+                      selectionListener="#{otherSetups.getOccupationCode}">
+              <af:column sortProperty="LC_SHT_DESC" sortable="true"
+                         headerText="Id." id="c5">
+                <af:outputText value="#{row.LC_SHT_DESC}" id="ot6"/>
+              </af:column>
+              <af:column sortProperty="LC_DESC" sortable="true"
+                         headerText="Description" id="c4" width="300">
+                <af:outputText value="#{row.LC_DESC}" id="ot5"/>
+              </af:column>
+              <af:column sortProperty="LC_HAZAROUS_DESC" sortable="true"
+                         headerText="Hazardous" id="c6">
+                <af:outputText value="#{row.LC_HAZAROUS_DESC}" id="ot7"/>
+              </af:column>
+            </af:table>
+              <af:outputText value="Occupations Categories" id="ot8" inlineStyle="font-weight:bold"/>
+              <h:panelGrid columns="3">
+                <af:commandButton icon="/images/field_group_plus_ena.png" id="cb2"
+                                  action="#{otherSetups.addOccupationCat}"/>
+                <af:commandButton icon="/images/update_ena.png" id="cb3"
+                                  action="#{otherSetups.editOccupationCat}">
+                </af:commandButton>
+                <af:commandButton icon="/images/delete_ena.png" id="cb4"
+                                  action="#{otherSetups.deleteOccupationCat}"/>
+                <af:popup id="p1">
+                <af:dialog title="Occupation categories" id="d3" okVisible="false" cancelVisible="false">
+               <h:panelGrid columns="2">               
+                      <af:outputText value="Category" id="ot9"/>
+                      <af:inputText label="Label 2" id="it3" simple="true"
+                                    binding="#{otherSetups.categoryTF}"/>
+                        
+                      <af:outputText value="Class" id="ot10"/>                      
+                      <af:inputText label="Label 3" id="it4" simple="true"
+                                    binding="#{otherSetups.classTF}"/>
+                      <af:spacer width="10" height="10" id="s3"/>
+                      <h:panelGrid columns="2" >                        
+                        <af:commandButton text="OK" id="cb5"
+                                          action="#{otherSetups.addSetupCategories}"/>
+                      <af:commandButton text="CANCEL" id="cb6"/>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:table value="#{bindings.Setup2.collectionModel}" var="row"
+                        rows="#{bindings.Setup2.rangeSize}"
+                        emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Setup2.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.Setup2Query.queryDescriptor}"
+                        queryListener="#{bindings.Setup2Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                        inlineStyle="width:100%; height:100.0px; border-style:none;"
+                        rowSelection="single" id="t3"
+                        binding="#{otherSetups.occupationCategoryLOV}">
+                <af:column sortProperty="GOC_CODE" filterable="true"
+                           sortable="true"
+                           
+                           headerText="#{bindings.Setup2.hints.GOC_CODE.label}"
+                           id="c9" visible="false">
+                  <af:outputText value="#{row.GOC_CODE}" id="ot13"/>
+                </af:column>
+                  <af:column sortProperty="GOC_CATEGORY" filterable="true"
+                           sortable="true"
+                           headerText="Category"
+                           id="c8">
+                  <af:outputText value="#{row.GOC_CATEGORY}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="GOC_CLASS" filterable="true"
+                           sortable="true"
+                           headerText="Class"
+                           id="c7">
+                  <af:outputText value="#{row.GOC_CLASS}" id="ot12"/>
+                </af:column>
+              
+              </af:table>
+            </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

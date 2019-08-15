@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="annFactrDescDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.annFactrDescDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.annuityFacDesc"
+                  BeanClass="com.turnkey.setups.annuityFacDesc"
+                  id="findAnnuityFactorsDescription"
+                  ReturnNodeName="annuityFacDesc"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.annuityFacDesc"
+                  BeanClass="com.turnkey.setups.annuityFacDesc"
+                  id="findAnnuityFactors" ReturnNodeName="annuityFacDesc"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.annuityFacDesc"
+                  BeanClass="com.turnkey.setups.annuityFacDesc"
+                  id="findAnnuityTypes" ReturnNodeName="annuityFacDesc"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.annuityFacDesc"
+                  BeanClass="com.turnkey.setups.annuityFacDesc"
+                  id="findAnnuityTypesRates" ReturnNodeName="annuityFacDesc"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.annFactrDescDAO"
+                     BeanClass="com.turnkey.setups.annFactrDescDAO"
+                     id="annFactrDescDAO"/>
+</JavaBean>

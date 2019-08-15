@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="occupations" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.occupations" isJavaBased="true">
+  <Attribute Name="gco_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="GCO_DESC" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.occupations"
+                     BeanClass="LMSG.view.QuotationProcessing.occupations" id="occupations"/>
+</JavaBean>

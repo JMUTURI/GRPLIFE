@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="policies" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.policies" isJavaBased="true">
+  <Attribute Name="POL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="UW_YEAR" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_EFFECTIVE_DATE" Type="java.util.Date"/>
+  <Attribute Name="POL_INCEPTION_DATE" Type="java.util.Date"/>
+  <Attribute Name="CLIENT_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="POL_FREQ_OF_PAYMENT" Type="java.lang.String"/>
+  <Attribute Name="OCCUPATION_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="HARZARD_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="POL_PROD_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="POL_PROD_TYPE" Type="java.lang.String"/>
+  <Attribute Name="BRANCH_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="POL_DEPENDT_COVERED" Type="java.lang.String"/>
+  <Attribute Name="POL_STATUS" Type="java.lang.String"/>
+  <Attribute Name="POL_SAVINGS_RIDER" Type="java.lang.String"/>
+  <Attribute Name="POL_PENS_CATEGORY" Type="java.lang.String"/>
+  <Attribute Name="POL_OS_LOAN_CALC" Type="java.lang.String"/>
+  <Attribute Name="POL_GRP_LIFE_RIDER" Type="java.lang.String"/>
+  <Attribute Name="POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="PTX_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_ENDR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_ENDR_NO" Type="java.lang.String"/>
+  <Attribute Name="PTX_POL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="PTX_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_TAX_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_APPL_LEVEL" Type="java.lang.String"/>
+  <Attribute Name="TAX_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="LTR_Client" Type="java.lang.String"/>
+  <Attribute Name="LTR_POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="LTR_TRANS_NO" Type="java.math.BigDecimal"/>
+  <Attribute Name="LTR_BTR_TRANS_CODE" Type="java.lang.String"/>
+  <Attribute Name="LTR_ENDR_SUB_TYPE" Type="java.lang.String"/>
+  <Attribute Name="LTR_POL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LTR_ENDR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCA_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCA_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PCA_CATEG_DESC" Type="java.lang.String"/>
+  <Attribute Name="PCA_PERIOD" Type="java.math.BigDecimal"/>
+  <Attribute Name="DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="DTY_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="DTY_DESCRIPTION" Type="java.lang.String"/>
+  <Attribute Name="PCD_MAX_NO_ALLOWED" Type="java.lang.String"/>
+  <Attribute Name="POLM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_MEM_NO" Type="java.lang.String"/>
+  <Attribute Name="POLM_client" Type="java.lang.String"/>
+  <Attribute Name="POLM_DTY_DESCRIPTION" Type="java.lang.String"/>
+  <Attribute Name="POLM_ANB" Type="java.lang.String"/>
+  <Attribute Name="POLM_JOINT_MEMBERS" Type="java.lang.String"/>
+  <Attribute Name="GCO_DESC" Type="java.lang.String"/>
+  <Attribute Name="POLM_MEM_STATUS" Type="java.lang.String"/>
+  <Attribute Name="POLM_MEM_SCHEDULE_NO" Type="java.lang.String"/>
+  <Attribute Name="prp_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_COVER_FROM" Type="java.util.Date"/>
+  <Attribute Name="POL_COVER_TO" Type="java.util.Date"/>
+  <Attribute Name="EXPIRY_DATE_DISPLAY" Type="java.util.Date"/>
+  <Attribute Name="MEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PL_pol_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="PL_pol_policy_no" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_prod_code" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_prod_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_effective_date" Type="java.util.Date"/>
+  <Attribute Name="PL_pol_authorised" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_status" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_client_prp_code" Type="java.lang.String"/>
+  <Attribute Name="PL_client" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_bra_code" Type="java.lang.String"/>
+  <Attribute Name="PL_brn_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_last_add_sched_date" Type="java.util.Date"/>
+  <Attribute Name="PL_pol_paid_to_date" Type="java.util.Date"/>
+  <Attribute Name="PL_os_instals" Type="java.lang.String"/>
+  <Attribute Name="PL_os_prem" Type="java.math.BigDecimal"/>
+  <Attribute Name="PL_pol_freq_of_payment" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_paid_instlmt_no" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_instlmt_prem" Type="java.lang.String"/>
+  <Attribute Name="co_ltr_trans_no" Type="java.lang.String"/>
+  <Attribute Name="co_ltr_btr_trans_code" Type="java.lang.String"/>
+  <Attribute Name="co_ltr_trans_date" Type="java.util.Date"/>
+  <Attribute Name="co_ltr_pol_policy_no" Type="java.lang.String"/>
+  <Attribute Name="co_endr_no" Type="java.lang.String"/>
+  <Attribute Name="co_ltr_endr_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="trans" Type="java.lang.String"/>
+  <Attribute Name="RT_pol_policy_no" Type="java.lang.String"/>
+  <Attribute Name="RT_client" Type="java.lang.String"/>
+  <Attribute Name="RT_pol_inception_uwyr" Type="java.lang.String"/>
+  <Attribute Name="RT_pol_status" Type="java.lang.String"/>
+  <Attribute Name="RT_pol_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="RT_pol_effective_date" Type="java.util.Date"/>
+  <Attribute Name="RT_pol_calc_type" Type="java.lang.String"/>
+  <Attribute Name="pol_current_endr_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_endr_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_agn_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_pol_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="coinsurer_display" Type="java.lang.String"/>
+  <Attribute Name="pol_coin_admin_fee" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_COIN_SHARE_PCT" Type="java.lang.String"/>
+  <Attribute Name="POL_COINSURE_LEADER" Type="java.lang.String"/>
+  <Attribute Name="POL_COINSURE_LEADER_SHARE" Type="java.lang.String"/>
+  <Attribute Name="POL_COINSURANCE" Type="java.lang.String"/>
+  <Attribute Name="LTR_AGN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PRO_DESC" Type="java.lang.String"/>
+  <Attribute Name="pol_status_disp" Type="java.lang.String"/>
+  <Attribute Name="pol_freq_of_payment_disp" Type="java.lang.String"/>
+  <Attribute Name="pol_dependt_covered_disp" Type="java.lang.String"/>
+  <Attribute Name="pol_savings_rider_disp" Type="java.lang.String"/>
+  <Attribute Name="pol_os_loan_calc_disp" Type="java.lang.String"/>
+  <Attribute Name="pol_pens_category_disp" Type="java.lang.String"/>
+  <Attribute Name="QMPNS_WEF_DATE" Type="java.util.Date"/>
+  <Attribute Name="QMPNS_WET_DATE" Type="java.util.Date"/>
+  <Attribute Name="QMPNS_EARNINGS" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLOYER_CONTR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLOYEE_CONTR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYE_VOLU_CONTR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_TOTAL_CONTR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ADMIN_FEE_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_NET_ANNUAL_FUND" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_COMP_INT_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ANNTY_FAC_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_PENS_ANNUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EST_MAT_VAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ER_EST_EMV_VAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EE_EST_MAT_VAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="ppvs_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="ppvs_pol_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="ppvs_endr_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="ppvs_yrs_from" Type="java.lang.String"/>
+  <Attribute Name="ppvs_yrs_to" Type="java.lang.String"/>
+  <Attribute Name="ppvs_pct_entitle" Type="java.lang.String"/>
+  <Attribute Name="QEXC_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QEXC_POL_QUOT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QEXC_AUTHORISED" Type="java.lang.String"/>
+  <Attribute Name="QEXC_DESC" Type="java.lang.String"/>
+  <Attribute Name="MEM_SCHEDULE_JOIN_DATE" Type="java.util.Date"/>
+  <Attribute Name="LTR_BUSN_TYPE" Type="java.lang.String"/>
+  <Attribute Name="LTR_TRANS_AUTHORISED" Type="java.lang.String"/>
+  <Attribute Name="endr_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_ANN_AMOUNT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_FUTURE_LIABILITY" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_PAST_LIABILITY" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_TOTAL_LIABILITY" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_COIN_FOLLOWER" Type="java.lang.String"/>
+  <Attribute Name="POL_COIN_FOLLOWER_DESC" Type="java.lang.String"/>
+  <Attribute Name="prp_clnt_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_NAME" Type="java.lang.String"/>
+  <Attribute Name="ctlCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="ctlQuoCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="ctlFee" Type="java.math.BigDecimal"/>
+  <Attribute Name="categDesc" Type="java.lang.String"/>
+  <Attribute Name="ctlLcaCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="polpCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="polpPolCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="polpPprovProvCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="polpProvShtDesc" Type="java.lang.String"/>
+  <Attribute Name="polpEditable" Type="java.lang.String"/>
+  <Attribute Name="polpEditableDesc" Type="java.lang.String"/>
+  <Attribute Name="polpEndrCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="polpDesc" Type="java.lang.String"/>
+  <Attribute Name="PMPNS_EMPYR_PENS_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPYE_PENS_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_TOT_PENS_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_MEM_CURRENT_SCH_NO" Type="java.lang.String"/>
+  <Attribute Name="POLM_MEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_NOF_JOINT_MEMBERS" Type="java.lang.String"/>
+  <Attribute Name="MEMBER_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_NO" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_SURNAME" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_OTHERNAMES" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_DOB" Type="java.util.Date"/>
+  <Attribute Name="LMID_MEM_ANB" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_SEX" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_CATEGORY" Type="java.lang.String"/>
+  <Attribute Name="LMID_EARNINGS" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_ANN_PURCHASE_PRICE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_TOTAL_TERMINAL_BEN" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_TOTAL_INVESTMENT" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_COIN_PREMIUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_COIN_SRVCE_FEE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_COIN_FOLLOWER_SHARE" Type="java.math.BigDecimal"/>
+  <Attribute Name="OWN_SHARE" Type="java.math.BigDecimal"/>
+  <Attribute Name="SHARE_DESC" Type="java.lang.String"/>
+  <Attribute Name="POL_RENEWAL_AREA_STATUS" Type="java.lang.String"/>
+  <Attribute Name="ENDR_LEADER_COMBINED" Type="java.lang.String"/>
+  <Attribute Name="pol_coin_settled" Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_comm_amt" Type="java.math.BigDecimal"/>
+  <Attribute Name="btr_trans_type" Type="java.lang.String"/>
+  <Attribute Name="pol_coin_balance" Type="java.math.BigDecimal"/>
+  <Attribute Name="fully_settled" Type="java.lang.String"/>
+  <Attribute Name="GFRT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GFRT_DATE" Type="java.util.Date"/>
+  <Attribute Name="GFRT_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="GFRT_STATUS" Type="java.lang.String"/>
+  <Attribute Name="GFRT_STATUS_DESC" Type="java.lang.String"/>
+  <Attribute Name="BTR_TRANS_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_DRCR_NO" Type="java.lang.String"/>
+  <Attribute Name="ENDR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_RECEIPT_NO" Type="java.lang.String"/>
+  <Attribute Name="MTRAN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="MTRAN_AMOUNT" Type="java.math.BigDecimal"/>
+  <Attribute Name="MTRAN_BALANCE" Type="java.math.BigDecimal"/>
+  <Attribute Name="MTRAN_RCPT_RESERVE_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_FOLLOWER_PREM_PROVIDED" Type="boolean"/>
+  <Attribute Name="ENDR_LEADER_COMBINED_LBL" Type="boolean"/>
+  <Attribute Name="selected" Type="boolean"/>
+  <Attribute Name="ENDR_MEM_CURRENT_SCH_NO1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POLM_NOF_JOINT_MEMBERS1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="MEMBER_DISPLAY1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LMID_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LMID_LMIT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LMID_MAIN_MEM_NO" Type="java.lang.String"/>
+  <Attribute Name="LMID_DEP_TYPE" Type="java.lang.String"/>
+  <Attribute Name="LMID_ID_NO" Type="java.lang.String"/>
+  <Attribute Name="LMID_MULT_EARNINGS_PRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="LIMD_DATE_JOINED" Type="java.util.Date"/>
+  <Attribute Name="LMID_MEM_OCCUPATION" Type="java.lang.String"/>
+  <Attribute Name="LMID_REMARKS" Type="java.lang.String"/>
+  <Attribute Name="LMID_STATUS" Type="java.lang.String"/>
+  <Attribute Name="LMID_EARNINGS1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="LMID_MEM_DOB1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="LMID_MEM_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_SURNAME1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_OTHERNAMES1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_ANB1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_SEX1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LMID_MEM_CATEGORY1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="GFRT_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="GFRT_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="GFRT_AMT1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="GFRT_STATUS1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="GFRT_STATUS_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="BTR_TRANS_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_DRCR_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_RECEIPT_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="MTRAN_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="MTRAN_AMOUNT1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="MTRAN_BALANCE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="MTRAN_RCPT_RESERVE_AMT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="fully_settled1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="pol_coin_settled1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_comm_amt1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="btr_trans_type1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="pol_coin_balance1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_RENEWAL_AREA_STATUS1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_LEADER_COMBINED1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="UW_YEAR1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="prp_code1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="endr_code1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_MEM_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_ANN_PURCHASE_PRICE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_TOTAL_TERMINAL_BEN1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_TOTAL_INVESTMENT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_EFFECTIVE_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="POL_INCEPTION_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="prp_clnt_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="CLIENT_DISPLAY1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POL_FREQ_OF_PAYMENT1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="OCCUPATION_DISPLAY1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="HARZARD_DISPLAY1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POL_PROD_SHT_DESC1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_PROD_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="BRANCH_DISPLAY1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POL_DEPENDT_COVERED1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_STATUS1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POL_SAVINGS_RIDER1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_PENS_CATEGORY1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_OS_LOAN_CALC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POL_GRP_LIFE_RIDER1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_POLICY_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POL_COINSURANCE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PRO_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="pol_status_disp1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="pol_freq_of_payment_disp1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="pol_dependt_covered_disp1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="pol_savings_rider_disp1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="pol_os_loan_calc_disp1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="pol_pens_category_disp1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_COVER_FROM1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="POL_COVER_TO1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="EXPIRY_DATE_DISPLAY1" IsUpdateable="0"
+             Type="java.util.Date"/>
+  <Attribute Name="ctlCode1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="ctlQuoCode1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="ctlFee1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="categDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ctlLcaCode1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_ENDR_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_ENDR_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PTX_POL_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_POL_POLICY_NO1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="PTX_RATE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_TAX_AMT1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PTX_APPL_LEVEL1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="TAX_DISPLAY1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LTR_Client1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LTR_POL_POLICY_NO1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="LTR_TRANS_NO1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="LTR_BTR_TRANS_CODE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="LTR_ENDR_SUB_TYPE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="LTR_POL_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="LTR_ENDR_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="LTR_AGN_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="LTR_BUSN_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PCA_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCA_SHT_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PCA_CATEG_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PCA_PERIOD1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_NAME1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="DTY_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="DTY_SHT_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="DTY_DESCRIPTION1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PCD_MAX_NO_ALLOWED1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POLM_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_MEM_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POLM_client1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POLM_DTY_DESCRIPTION1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POLM_ANB1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POLM_JOINT_MEMBERS1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="GCO_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POLM_MEM_STATUS1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POLM_MEM_SCHEDULE_NO1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="MEM_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PL_pol_code1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PL_pol_policy_no1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_prod_code1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_prod_sht_desc1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="PL_pol_effective_date1" IsUpdateable="0"
+             Type="java.util.Date"/>
+  <Attribute Name="PL_pol_authorised1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="PL_pol_status1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_client_prp_code1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="PL_client1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_bra_code1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PL_brn_sht_desc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PL_pol_last_add_sched_date1" IsUpdateable="0"
+             Type="java.util.Date"/>
+  <Attribute Name="PL_pol_paid_to_date1" IsUpdateable="0"
+             Type="java.util.Date"/>
+  <Attribute Name="PL_os_instals1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PL_os_prem1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PL_pol_freq_of_payment1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="PL_pol_paid_instlmt_no1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="PL_pol_instlmt_prem1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="co_ltr_trans_no1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="co_ltr_btr_trans_code1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="co_ltr_trans_date1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="co_ltr_pol_policy_no1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="co_endr_no1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="co_ltr_endr_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="trans1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="RT_pol_policy_no1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="RT_client1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="RT_pol_inception_uwyr1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="RT_pol_status1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="RT_pol_code1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="RT_pol_effective_date1" IsUpdateable="0"
+             Type="java.util.Date"/>
+  <Attribute Name="RT_pol_calc_type1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="pol_current_endr_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_endr_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_agn_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_coin_pol_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="coinsurer_display1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="pol_coin_admin_fee1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_COIN_SHARE_PCT1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_COINSURE_LEADER1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_COINSURE_LEADER_SHARE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_COIN_FOLLOWER1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_COIN_FOLLOWER_DESC1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_COIN_PREMIUM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_COIN_SRVCE_FEE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_COIN_FOLLOWER_SHARE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="OWN_SHARE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="SHARE_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ppvs_code1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="ppvs_pol_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ppvs_endr_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ppvs_yrs_from1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ppvs_yrs_to1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ppvs_pct_entitle1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QMPNS_WEF_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="QMPNS_WET_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="QMPNS_EARNINGS1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLOYER_CONTR1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLOYEE_CONTR1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYE_VOLU_CONTR1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_TOTAL_CONTR1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ADMIN_FEE_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_NET_ANNUAL_FUND1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_COMP_INT_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ANNTY_FAC_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_PENS_ANNUM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EST_MAT_VAL1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ER_EST_EMV_VAL1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EE_EST_MAT_VAL1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_ANN_AMOUNT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_FUTURE_LIABILITY1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_PAST_LIABILITY1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_TOTAL_LIABILITY1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPYR_PENS_BF1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPYE_PENS_BF1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_TOT_PENS_BF1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QEXC_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="QEXC_POL_QUOT_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="QEXC_AUTHORISED1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="QEXC_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="MEM_SCHEDULE_JOIN_DATE1" IsUpdateable="0"
+             Type="java.util.Date"/>
+  <Attribute Name="LTR_TRANS_AUTHORISED1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="polpCode1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="polpPolCode1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="polpPprovProvCode1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="polpProvShtDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="polpEditable1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="polpEditableDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="polpEndrCode1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="polpDesc1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="REFM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="REFM_LMIT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="REFM_MEM_NO" Type="java.lang.String"/>
+  <Attribute Name="REFM_MEM_SURNAME" Type="java.lang.String"/>
+  <Attribute Name="REFM_MEM_OTHER_NAMES" Type="java.lang.String"/>
+  <Attribute Name="REFM_MEM_EFFECTIVE_DATE" Type="java.util.Date"/>
+  <Attribute Name="REFM_REMARKS" Type="java.lang.String"/>
+  <Attribute Name="REFM_STATUS" Type="java.lang.String"/>
+  <Attribute Name="LMIT_CODE" Type="java.lang.Integer"/>
+  <Attribute Name="DESCRIPTION" Type="java.lang.String"/>
+  <Attribute Name="pca_lpag_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="lpag_desc" Type="java.lang.String"/>
+  <Attribute Name="LPAG_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LPAG_DESC" Type="java.lang.String"/>
+  <Attribute Name="POL_UMBRELLA" Type="java.lang.String"/>
+  <Attribute Name="POL_UMBRELLADESC" Type="java.lang.String"/>
+  <Attribute Name="pmas_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="pmas_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="polm_mem_renewal_date" Type="java.util.Date"/>
+  <Attribute Name="LIRM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LIRM_LMIT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LIRM_MEM_NO" Type="java.lang.String"/>
+  <Attribute Name="LIRM_MEM_SURNAME" Type="java.lang.String"/>
+  <Attribute Name="LIRM_MEM_OTHER_NAMES" Type="java.lang.String"/>
+  <Attribute Name="LIRM_LOAN_BAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="LIRM_LOAN_RPYMT_PRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="LIRM_MEM_EFFECTIVE_DATE" Type="java.util.Date"/>
+  <Attribute Name="LIRM_REMARKS" Type="java.lang.String"/>
+  <Attribute Name="LIRM_STATUS" Type="java.lang.String"/>
+  <Attribute Name="MEM_SURNAME" Type="java.lang.String"/>
+  <Attribute Name="MEM_OTHER_NAMES" Type="java.lang.String"/>
+  <Attribute Name="PMPNS_EMPLYR_REG_BAL_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPLYR_UNREG_BAL_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPLYE_REG_BAL_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPLYE_UNREG_BAL_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPLYR_REG_CONTRI_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPLYR_UNREG_CONTRI_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPLYE_REG_CONTRI_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPLYE_UNREG_CONTRI_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EMPLYR_LUMPSUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_ER_HIST_EST_EMV_VAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMPNS_EE_HIST_EST_EMV_VAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="pol_cur_symbol" Type="java.lang.String"/>
+  <Attribute Name="pcmSA" Type="java.math.BigDecimal"/>
+  <Attribute Name="aboveFcl" Type="java.math.BigDecimal"/>
+  <Attribute Name="ppl_desc" Type="java.lang.String"/>
+  <Attribute Name="category" Type="java.lang.String"/>
+  <Attribute Name="POL_ASSIGNEE_NAME" Type="java.lang.String"/>
+  <Attribute Name="POL_ASSIGNEE_PHY_ADDR" Type="java.lang.String"/>
+  <Attribute Name="POLMA_ANB" Type="java.math.BigDecimal"/>
+  <Attribute Name="POLM_HEIGHT" Type="java.lang.String"/>
+  <Attribute Name="POLM_WEIGHT" Type="java.lang.String"/>
+  <Attribute Name="PCA_USE_CVR_RATE" Type="java.lang.String"/>
+  <Attribute Name="PCA_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCA_RATE_DIV_FACT" Type="java.math.BigDecimal"/>
+  <Attribute Name="REFM_LOAN_ISSUE_DATE" Type="java.util.Date"/>
+  <Attribute Name="REFM_ORGINAL_LOAN" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.policies"
+                     BeanClass="LMSG.view.Policy.policies" id="policies"/>
+</JavaBean>

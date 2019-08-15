@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="pt1">
+        <f:facet name="center">
+            <af:panelGroupLayout id="pgl1">
+              <af:panelAccordion id="pa1" inlineStyle="width:100.0%;">
+                <af:showDetailItem text="Reinsurance and Coinsurance" id="sdi1">
+                <af:panelGroupLayout id="pgl2" layout="scroll">
+                  <af:panelBox text="Select a transaction" id="pb1">
+                    <f:facet name="toolbar"/>
+                    <af:separator id="separator1"/>
+                    <h:panelGrid columns="3" id="pg1">
+                      <af:outputLabel value="Reinsurance Ceding" id="ol1"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio id="sbr1" simple="true"
+                                             group="PT" selected="true"
+                                             binding="#{portfolio.riCeding}"/>
+                      <af:spacer width="10" height="20" id="s1"/>
+                      <af:outputLabel value="Reinsurance Recovery"
+                                      id="outputLabel1"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio id="selectBooleanRadio1"
+                                             simple="true" group="PT"
+                                             binding="#{portfolio.riRecovery}"/>
+                      <af:spacer width="10" height="20" id="spacer1"/>
+                      <af:outputLabel value="Coinsurance Recovery"
+                                      id="outputLabel2"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio id="selectBooleanRadio2"
+                                             simple="true" group="PT"
+                                             binding="#{portfolio.coinRecovery}"/>
+                      
+                    </h:panelGrid>
+                    <h:panelGrid columns="1" id="pg3">
+                      <af:spacer width="10" height="10" id="s2"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg2">
+                      <af:commandButton text="Next" id="cb1"
+                                        action="#{portfolio.RedirectPolicyTrans}"/>
+                      <af:commandButton text="Cancel" id="commandButton1"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+                <f:facet name="toolbar">
+                  <h:panelGrid columns="2" id="pg4">
+                    <af:inputText id="it5" helpTopicId="LmsGrp_g_gtrans"
+                                  readOnly="true"/>
+                    <af:statusIndicator id="si1"/>
+                  </h:panelGrid>
+                </f:facet>
+              </af:showDetailItem>
+              </af:panelAccordion>
+            </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

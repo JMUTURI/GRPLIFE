@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Reinsurance Reports On Member Basis">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:group id="g1">
+            <af:panelGroupLayout layout="scroll" id="pgl1">
+              <af:outputText value="Global Layer" id="ot1"/>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:outputLabel value="Reinsurance Reports On Member Basis" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1"/>
+            <h:panelGrid columns="3" id="pg1">
+              <af:outputLabel value="Product" id="ol2"/>
+              <af:inputText label="Label 1" id="it1" simple="true"
+                            binding="#{CoreReports.memProductDesc}"/>
+              <h:panelGrid columns="2" id="pg2">
+                <af:commandButton id="cb1" icon="/dropdown.gif"
+                                  action="#{CoreReports.ShowProducts}"/>
+                <af:popup id="products2Popup">
+                  <af:dialog id="d2" type="none" title="Select Product">
+                    <af:table value="#{bindings.Setup.collectionModel}"
+                              var="row" rows="#{bindings.Setup.rangeSize}"
+                              emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t1"
+                              binding="#{CoreReports.products2Lov}">
+                      <af:column sortProperty="PROD_CODE" sortable="true"
+                                 headerText="#{bindings.Setup.hints.PROD_CODE.label}"
+                                 id="c4" visible="false">
+                        <af:outputText value="#{row.PROD_CODE}" id="ot2"/>
+                      </af:column>
+                      <af:column sortProperty="PROD_SHT_DESC" sortable="true"
+                                 headerText="ID" id="c2">
+                        <af:outputText value="#{row.PROD_SHT_DESC}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="PROD_DESC" sortable="true"
+                                 headerText="DESCRIPTION" id="c3">
+                        <af:outputText value="#{row.PROD_DESC}" id="ot4"/>
+                      </af:column>
+                      <af:column sortProperty="PROD_TYPE" sortable="true"
+                                 headerText="TYPE" id="c1">
+                        <af:outputText value="#{row.PROD_TYPE}" id="ot3"/>
+                      </af:column>
+                    </af:table>
+                    <af:commandButton text="OK" id="cb2"
+                                      action="#{CoreReports.AssignProducts2}"/>
+                    <af:commandButton text="Cancel" id="cb3"/>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Policy" id="ol3"/>
+              <af:inputText label="Label 2" id="it2" simple="true"
+                            binding="#{CoreReports.policyNumber}"/>
+              <h:panelGrid columns="2" id="pg3">
+                <af:commandButton id="cb4" icon="/images/dropdown.gif"
+                                  action="#{CoreReports.ShowPolicies}"/>
+                <af:popup id="policiesPopup">
+                  <af:dialog id="d3" type="none" title="Select Policy">
+                    <af:table value="#{bindings.policies.collectionModel}"
+                              var="row" rows="#{bindings.policies.rangeSize}"
+                              emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.policies.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t2"
+                              binding="#{CoreReports.policiesLOV}">
+                      <af:column sortProperty="POL_CODE" sortable="true"
+                                 headerText="#{bindings.policies.hints.POL_CODE.label}"
+                                 id="c5" visible="false">
+                        <af:outputText value="#{row.POL_CODE}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="CLIENT_DISPLAY" sortable="true"
+                                 headerText="CLIENT" id="c6">
+                        <af:outputText value="#{row.CLIENT_DISPLAY}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="POL_POLICY_NO" sortable="true"
+                                 headerText="POLICY NUMBER" id="c8">
+                        <af:outputText value="#{row.POL_POLICY_NO}" id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="UW_YEAR" sortable="true"
+                                 headerText="U/W YEAR" id="c7">
+                        <af:outputText value="#{row.UW_YEAR}" id="ot6"/>
+                      </af:column>
+                    </af:table>
+                    <af:commandButton text="OK" id="cb5"
+                                      action="#{CoreReports.AssignPolicies}"/>
+                    <af:commandButton text="Cancel" id="cb6"/>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Transactions" id="ol4"/>
+              <af:inputText label="Label 3" id="it3" simple="true"
+                            binding="#{CoreReports.endrDescription2}"/>
+              <h:panelGrid columns="2" id="pg4">
+                <af:commandButton id="cb7" icon="/images/dropdown.gif"
+                                  action="#{CoreReports.ShowEndorsements}"/>
+                <af:popup id="endrPopup">
+                  <af:dialog id="d4" type="none" title="Select Endorsement">
+                    <af:table value="#{bindings.Setup1.collectionModel}"
+                              var="row" rows="#{bindings.Setup1.rangeSize}"
+                              emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup1.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.Setup1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Setup1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t3"
+                              binding="#{CoreReports.endorsementsLOV}">
+                      <af:column sortProperty="BTR_TRANS_CODE" sortable="true"
+                                 headerText="TYPE" id="c9">
+                        <af:outputText value="#{row.BTR_TRANS_CODE}" id="ot10"/>
+                      </af:column>
+                      <af:column sortProperty="BTR_TRANS_TYPE" sortable="true"
+                                 headerText="DESCRIPTION" id="c10">
+                        <af:outputText value="#{row.BTR_TRANS_TYPE}" id="ot11"/>
+                      </af:column>
+                    </af:table>
+                    <af:commandButton text="OK" id="cb8"
+                                      action="#{CoreReports.AssignEndorsements}"/>
+                    <af:commandButton text="Cancel" id="cb9"/>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Date From" id="ol5"/>
+              <af:inputDate label="Label 1" id="id1" simple="true"
+                            binding="#{CoreReports.memDateFrom}">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:inputDate>
+              <af:outputText id="ot13"/>
+              <af:outputLabel value="Date To" id="ol6"/>
+              <af:inputDate label="Label 2" id="id2" simple="true"
+                            binding="#{CoreReports.memDateTo}">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:inputDate>
+              <af:outputText id="ot12"/>
+              <af:commandButton text="Run Report" id="cb10"
+                                action="#{CoreReports.RunMemberRiReport}"/>
+            </h:panelGrid>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

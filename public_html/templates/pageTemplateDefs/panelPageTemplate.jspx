@@ -1,0 +1,530 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:afh="http://myfaces.apache.org/trinidad/html" version="1.2">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <description>This component lays out an entire page.</description>
+        <facet>
+          <description><![CDATA[Content to be rendered as meta data inside the 
+            "head" section.]]></description>
+          <facet-name>metaContainer</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[Area to put a commandLink to more information about the application.]]>
+          </description>
+          <facet-name>appAbout</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The copyright region of the page.  If present, this area
+              typically contains an outputText with the copyright information.]]>
+          </description>
+          <facet-name>appCopyright</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The privacy region of the page.  If present, this area
+              typically contains a commandLink to the privacy policy for the
+              application.]]>
+          </description>
+          <facet-name>appPrivacy</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The auxiliary content for the primary layer.]]>
+          </description>
+          <facet-name>auxiliary1</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The auxiliary content for the secondary layer.]]>
+          </description>
+          <facet-name>auxiliary2</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The auxiliary content for the global layer.]]>
+          </description>
+          <facet-name>auxiliaryGlobal</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The branding region of the page.  This section typically
+              contains a horizontal panelGroupLayout for an image of a logo and an
+              outputText for a title.]]>
+          </description>
+          <facet-name>branding</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The global contextual region of the page.]]>
+          </description>
+          <facet-name>contextGlobal</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[An optional horizontally oriented region of contexual components for the main content.]]>
+          </description>
+          <facet-name>contextLocal</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The footnote information region.  This region provides a location for
+              page-level information that is ancillary to the user's task.]]>
+          </description>
+          <facet-name>infoFootnote</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The return information region. Typically this will contain a "return to [X]" link.]]>
+          </description>
+          <facet-name>infoReturn</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The status information region. This region
+              provides a location for page-level status that is important to
+              the user's task.]]>
+          </description>
+          <facet-name>infoStatus</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The user information region.  This region provides a location for
+              presenting user sign-in and connection information.]]>
+          </description>
+          <facet-name>infoUser</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The locator region of the page.  If present, this section
+              typically contains either a processTrain, indicating the user's
+              location in a multistep process, or breadCrumbs, containing
+              links that will bring the user back to each of the parent
+              pages of a tree of pages that he has navigated down into.]]>
+          </description>
+          <facet-name>location</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[This location typically contains tabs for the primary layer.]]>
+          </description>
+          <facet-name>navigation1</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[This location typically contains tabs for the secondary layer.]]>
+          </description>
+          <facet-name>navigation2</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[An optional vertically oriented region of contexual components for the main content.  Often this contains a list or tree of links for deeper navigation structure than the global, primary, and secondary regions can provide.]]>
+          </description>
+          <facet-name>navigation3</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[This section typically contains global application links or otherwise top level navigation structure links, e.g. "Home", "Preferences", "Help", and "Sign Out".]]>
+          </description>
+          <facet-name>navigationGlobal</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The search region of the page.  Typically used for application or system-wide searches.]]>
+          </description>
+          <facet-name>search</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[This location typically is a toolbar for the primary layer.]]>
+          </description>
+          <facet-name>toolbar1</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[This location typically is a toolbar for the secondary layer.]]>
+          </description>
+          <facet-name>toolbar2</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[This location typically is a toolbar for the global layer.]]>
+          </description>
+          <facet-name>toolbarGlobal</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The center content.]]>
+          </description>
+          <facet-name>center</facet-name>
+        </facet>
+        <attribute>
+          <description>Specifies the number of pixels that the auxiliary1 content should consume
+                       (this is a width if the orientationis "start" or "end" or a height if the
+                       orientation is "bottom").</description>
+          <attribute-name>auxiliary1Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>200</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels that the auxiliary2 content should consume
+                       (this is a width if the orientationis "start" or "end" or a height if the
+                       orientation is "bottom").</description>
+          <attribute-name>auxiliary2Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>200</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels that the auxiliaryGlobal content should
+                       consume (this is a width if the orientationis "start" or "end" or a height if
+                       the orientation is "bottom").</description>
+          <attribute-name>auxiliaryGlobalSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>200</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the navigation1 content should
+                       consume.</description>
+          <attribute-name>navigation1Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>26</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the navigation2 content should
+                       consume.</description>
+          <attribute-name>navigation2Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>26</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels wide that the navigation3 content should
+                       consume.</description>
+          <attribute-name>navigation3Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>200</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the global content should consume.</description>
+          <attribute-name>headerGlobalSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>100</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels wide that the infoUser content should consume.</description>
+          <attribute-name>infoUserSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>200</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the global footer content should
+                       consume.</description>
+          <attribute-name>footerGlobalSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>30</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the primary header content should
+                       consume.</description>
+          <attribute-name>header1Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>22</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the secondary header content should
+                       consume.</description>
+          <attribute-name>header2Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>60</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the secondary footer content should
+                       consume.</description>
+          <attribute-name>footer2Size</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>30</default-value>
+        </attribute>
+        <attribute>
+          <description>The title of the HTML document</description>
+          <attribute-name>documentTitle</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>If true, the margin and padding are set to 0px.</description>
+          <attribute-name>maximized</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <description>the id attribute of the command button inside the form whose action should 
+            be invoked by default, when the enter key is pressed with focus inside the form.  
+            Identifiers are relative to the form component, and must account for NamingContainers. 
+            You can use a single colon to start the search from the root.</description>
+          <attribute-name>defaultCommand</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>the id of the component to which you want the focus to be when the 
+            full page renders. The accessibility-mode must not be set to "screenReader" for 
+            this feature to be on.</description>
+          <attribute-name>initialFocusId</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>whether the form supports file upload.</description>
+          <attribute-name>usesUpload</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+      </component>
+    </af:xmlContent>
+    <af:document
+      title="#{attrs.documentTitle}"
+      maximized="#{attrs.maximized}"
+      initialFocusId="#{attrs.initialFocusId}" id="pt_d1">
+      <f:facet name="metaContainer">
+        <af:group id="pt_g1"><![CDATA[
+          <style type="text/css">
+          .PanelPageSearch {
+            text-align: right;
+            padding: 4px 0px 8px 8px;
+          }
+          HTML[dir=rtl] .PanelPageSearch {
+            text-align: left;
+            padding: 4px 8px 8px 0px;
+          }
+          .PanelPagePrivacy {
+            text-align: right;
+          }
+          HTML[dir=rtl] .PanelPagePrivacy {
+            text-align: left;
+          }
+          .PanelPageInfoUser {
+            text-align: right;
+            padding-left: 0px;
+            padding-right: 10px;
+            white-space: nowrap;
+          }
+          HTML[dir=rtl] .PanelPageInfoUser {
+            text-align: left;
+            padding-left: 10px;
+            padding-right: 0px;
+          }
+          .PanelPageNavigationGlobal {
+            text-align: right;
+            padding-left: 0px;
+            padding-right: 10px;
+            white-space: nowrap;
+          }
+          HTML[dir=rtl] .PanelPageNavigationGlobal {
+            text-align: left;
+            padding-left: 10px;
+            padding-right: 0px;
+          }
+          </style>
+          ]]>
+          <af:facetRef facetName="metaContainer" />
+        </af:group>
+      </f:facet>
+      <af:form
+        defaultCommand="#{attrs.defaultCommand}"
+        usesUpload="#{attrs.usesUpload}" id="pt_f1">
+        <af:panelStretchLayout
+          theme="dark"
+          styleClass="AFVisualRoot"
+          bottomHeight="#{attrs.footerGlobalSize}" id="pt_psl1">
+          <f:facet name="center">
+            <af:panelSplitter orientation="vertical" splitterPosition="#{attrs.headerGlobalSize}"
+                              id="pt_ps1">
+              <f:facet name="first">
+                <af:panelGroupLayout layout="vertical" id="pt_pgl1">
+                  <afh:tableLayout width="100%" id="pt_tl1">
+                    <afh:rowLayout id="pt_rl1">
+                      <afh:cellFormat styleClass="AFBranding" id="pt_cf1">
+                        <af:facetRef facetName="branding"/>
+                        <af:icon name="logo" id="pt_i1"/>
+                      </afh:cellFormat>
+                      <afh:cellFormat id="pt_cf2">
+                        <af:outputText value=" " id="pt_ot1"/>
+                      </afh:cellFormat>
+                      <afh:cellFormat styleClass="PanelPageNavigationGlobal"
+                                      id="pt_cf3">
+                        <af:facetRef facetName="navigationGlobal"/>
+                      </afh:cellFormat>
+                    </afh:rowLayout>
+                  </afh:tableLayout>
+                  <afh:tableLayout width="100%" id="pt_tl2">
+                    <afh:rowLayout id="pt_rl2">
+                      <afh:cellFormat id="pt_cf4">
+                        <af:facetRef facetName="toolbarGlobal"/>
+                      </afh:cellFormat>
+                      <afh:cellFormat styleClass="PanelPageInfoUser" width="#{attrs.infoUserSize}"
+                                      rendered="#{attrs.infoUserSize!=0}"
+                                      id="pt_cf5">
+                        <af:facetRef facetName="infoUser"/>
+                      </afh:cellFormat>
+                    </afh:rowLayout>
+                  </afh:tableLayout>
+                  <af:facetRef facetName="contextGlobal"/>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="second">
+                <af:panelSplitter orientation="horizontal"
+                                  splitterPosition="184" id="pt_ps2">
+                  <f:facet name="first">
+                    <af:facetRef facetName="auxiliaryGlobal"/>
+                  </f:facet>
+                  <f:facet name="second">
+                    <!-- start of primary decoration -->
+                    <af:decorativeBox
+                      theme="medium"
+                      topHeight="#{attrs.navigation1Size}" id="pt_db1">
+                      <f:facet name="top">
+                        <af:panelStretchLayout
+                          startWidth="5"
+                          endWidth="200" id="pt_psl2">
+                          <f:facet name="start">
+                            <af:spacer id="pt_s1"/>
+                          </f:facet>
+                          <f:facet name="center">
+                            <af:facetRef facetName="navigation1"/>
+                          </f:facet>
+                          <f:facet name="end">
+                            <af:panelGroupLayout
+                              styleClass="PanelPageSearch"
+                              theme="dark" id="pt_pgl2">
+                              <af:facetRef facetName="search"/>
+                            </af:panelGroupLayout>
+                          </f:facet>
+                        </af:panelStretchLayout>
+                      </f:facet>
+                      <f:facet name="center">
+                        <af:panelStretchLayout
+                          topHeight="#{attrs.header1Size}" id="pt_psl3">
+                          <f:facet name="top">
+                            <af:facetRef facetName="toolbar1"/>
+                          </f:facet>
+                          <f:facet name="center">
+                            <af:panelSplitter orientation="horizontal"
+                                              splitterPosition="#{attrs.auxiliary1Size}"
+                                              positionedFromEnd="true"
+                                              id="pt_ps3">
+                              <f:facet name="first">
+                                <!-- start of secondary decoration -->
+                                <af:decorativeBox
+                                  topHeight="#{attrs.navigation2Size}"
+                                  theme="light" id="pt_db2">
+                                  <!-- startWidth can be 1 or 5 if you want more space -->
+                                  <f:facet name="top">
+                                    <af:panelStretchLayout startWidth="5"
+                                                           id="pt_psl4">
+                                      <!-- startWidth can be 5 or 9 if you want more space -->
+                                      <f:facet name="start">
+                                        <af:spacer id="pt_s2"/>
+                                      </f:facet>
+                                      <f:facet name="center">
+                                        <af:facetRef facetName="navigation2"/>
+                                      </f:facet>
+                                    </af:panelStretchLayout>
+                                  </f:facet>
+                                  <f:facet name="center">
+                                    <af:panelStretchLayout
+                                      topHeight="#{attrs.header2Size}"
+                                      bottomHeight="#{attrs.footer2Size}"
+                                                           id="pt_psl5">
+                                      <f:facet name="top">
+                                        <af:panelGroupLayout layout="vertical"
+                                                             id="pt_pgl3">
+                                          <af:facetRef facetName="toolbar2"/>
+                                          <af:facetRef facetName="location"/>
+                                          <af:facetRef facetName="infoStatus"/>
+                                          <af:facetRef facetName="contextLocal"/>
+                                        </af:panelGroupLayout>
+                                      </f:facet>
+                                      <f:facet name="bottom">
+                                        <af:panelGroupLayout layout="vertical"
+                                                             id="pt_pgl4">
+                                          <af:facetRef facetName="infoFootnote"/>
+                                          <af:facetRef facetName="infoReturn"/>
+                                        </af:panelGroupLayout>
+                                      </f:facet>
+                                      <f:facet name="center">
+                                        <af:panelSplitter orientation="horizontal"
+                                                          splitterPosition="#{attrs.auxiliary2Size}"
+                                                          id="pt_ps4">
+                                          <f:facet name="first">
+                                            <af:facetRef facetName="auxiliary2"/>
+                                          </f:facet>
+                                          <f:facet name="second">
+                                            <af:panelStretchLayout startWidth="#{attrs.navigation3Size}"
+                                                                   id="pt_psl6">
+                                              <f:facet name="start">
+                                                <af:facetRef facetName="navigation3"/>
+                                              </f:facet>
+                                              <f:facet name="center">
+                                                <!-- start of main decoration -->
+                                                <af:decorativeBox
+                                                  theme="default" id="pt_db3">
+                                                  <f:facet name="center">
+                                                    <af:facetRef facetName="center"/>
+                                                  </f:facet>
+                                                </af:decorativeBox>
+                                                <!-- end of main decoration -->
+                                              </f:facet>
+                                            </af:panelStretchLayout>
+                                            <!-- end of navigation3 layout -->
+                                          </f:facet>
+                                        </af:panelSplitter>
+                                        <!-- end of secondary auxiliary splitter -->
+                                      </f:facet>
+                                    </af:panelStretchLayout>
+                                    <!-- end of secondary header/footer layout -->
+                                  </f:facet>
+                                </af:decorativeBox>
+                                <!-- end of secondary decoration -->
+                              </f:facet>
+                              <f:facet name="second">
+                                <af:facetRef facetName="auxiliary1"/>
+                              </f:facet>
+                            </af:panelSplitter>
+                            <!-- end of primary auxiliary splitter -->
+                          </f:facet>
+                        </af:panelStretchLayout>
+                      </f:facet>
+                    </af:decorativeBox>
+                    <!-- end of primary decoration -->
+                  </f:facet>
+                </af:panelSplitter>
+                <!-- end of global auxiliary splitter -->
+              </f:facet>
+            </af:panelSplitter>
+            <!-- end of global top splitter -->
+          </f:facet>
+          <f:facet name="bottom">
+            <af:panelGroupLayout layout="vertical" id="pt_pgl5">
+              <afh:tableLayout width="100%" id="pt_tl3">
+                <afh:rowLayout id="pt_rl3">
+                  <afh:cellFormat id="pt_cf6">
+                    <af:facetRef facetName="appCopyright"/>
+                  </afh:cellFormat>
+                  <afh:cellFormat styleClass="PanelPagePrivacy" width="200"
+                                  id="pt_cf7">
+                    <af:facetRef facetName="appAbout"/>
+                    <af:spacer width="10" id="pt_s3"/>
+                    <af:outputText value="|" id="pt_ot2"/>
+                    <af:spacer width="10" id="pt_s4"/>
+                    <af:facetRef facetName="appPrivacy"/>
+                  </afh:cellFormat>
+                </afh:rowLayout>
+              </afh:tableLayout>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </af:pageTemplateDef>
+</jsp:root>

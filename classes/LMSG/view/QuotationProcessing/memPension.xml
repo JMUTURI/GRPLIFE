@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="memPension" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.memPension"
+          isJavaBased="true">
+  <Attribute Name="QMPNS_WEF_DATE" Type="java.util.Date"/>
+  <Attribute Name="QMPNS_WET_DATE" Type="java.util.Date"/>
+  <Attribute Name="QMPNS_EARNINGS" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLOYER_CONTR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLOYEE_CONTR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYE_VOLU_CONTR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_TOTAL_CONTR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ADMIN_FEE_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_NET_ANNUAL_FUND" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_COMP_INT_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ANNTY_FAC_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_PENS_ANNUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EST_MAT_VAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ER_EST_EMV_VAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EE_EST_MAT_VAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_TOTAL_LIABILITY" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_PAST_LIABILITY" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_FUTURE_LIABILITY" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ANNUITY_AMOUNT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYE_PENS_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYR_PENS_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_TOT_PENS_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ANN_PURCHASE_PRICE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYR_REG_BAL_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYR_UNREG_BAL_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYE_REG_BAL_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYE_UNREG_BAL_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYR_REG_CONTRI_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYR_UNREG_CONTRI_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYE_REG_CONTRI_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYE_UNREG_CONTRI_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EMPLYR_LUMPSUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_ER_HIST_EST_EMV_VAL" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMPNS_EE_HIST_EST_EMV_VAL" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.memPension"
+                     BeanClass="LMSG.view.QuotationProcessing.memPension"
+                     id="memPension"/>
+</JavaBean>

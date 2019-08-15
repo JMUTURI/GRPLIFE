@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="productCvtDependentsDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.productCvtDependentsDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.productCvtDependants"
+                  BeanClass="com.turnkey.setups.productCvtDependants"
+                  id="findTreatyLOV" ReturnNodeName="productCvtDependants"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.productCvtDependants"
+                  BeanClass="com.turnkey.setups.productCvtDependants"
+                  id="findDependentsLOV" ReturnNodeName="productCvtDependants"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.productCvtDependentsDAO"
+                     BeanClass="com.turnkey.setups.productCvtDependentsDAO"
+                     id="productCvtDependentsDAO"/>
+</JavaBean>

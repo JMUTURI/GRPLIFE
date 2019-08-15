@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" version="1.2"
+          xmlns:h="http://java.sun.com/jsf/html">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <f:view>
+    <af:document title="Group Life | Quotation Processing" id="d5">
+      <af:messages id="m1"/>
+      <af:pageTemplate id="lmsgroup"
+                     viewId="/templates/GroupTemplate2.jspx">
+      <f:attribute name="documentTitle" value="TurnQuest Group Life"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout layout="scroll" id="pgl2">
+          <af:panelBox text="Transaction Type" showHeader="never" id="pb1">
+            <f:facet name="toolbar"/>
+              <af:inputText id="it5"
+                            helpTopicId="LmsGrp_g_gtrans" readOnly="true"/>
+              <af:outputLabel value="Select A Quotation Transaction"
+                            inlineStyle="font-weight:bold;" id="ol1"/>
+            <af:separator inlineStyle="width:inherit;" id="s1"/>
+            <af:statusIndicator id="si1"/>
+            <af:popup id="users">
+              <af:dialog id="d4" type="none" title="Users To Assign the Task">
+                <af:table value="#{bindings.workflow.collectionModel}" var="row"
+                          rows="#{bindings.workflow.rangeSize}"
+                          emptyText="#{bindings.workflow.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.workflow.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.workflowQuery.queryDescriptor}"
+                          queryListener="#{bindings.workflowQuery.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.workflow.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.workflow.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t2" width="310"
+                          binding="#{QuoteTrans.usersLOV}">
+                  <af:column sortProperty="taskUserID" filterable="true" filterFeatures="caseInsensitive"
+                             sortable="true" headerText="ID" id="c3"
+                             visible="false">
+                    <af:outputText value="#{row.taskUserID}" id="ot5"/>
+                  </af:column>
+                  <af:column sortProperty="taskUserShtDesc" filterable="true" filterFeatures="caseInsensitive"
+                             sortable="true" headerText="User Short Desc"
+                             id="c4">
+                    <af:outputText value="#{row.taskUserShtDesc}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="taskUserDesc" filterable="true" filterFeatures="caseInsensitive"
+                             sortable="true" headerText="User Name" id="c7"
+                             width="200">
+                    <af:outputText value="#{row.taskUserDesc}" id="ot8"/>
+                  </af:column>
+                </af:table>
+                <af:inputText label="Remarks" id="it4" rows="3" columns="45"
+                              simple="true" value="Add Remark..."
+                              binding="#{QuoteTrans.ticketRemarks}"/>
+                <h:panelGrid columns="2" id="pg14">
+                  <af:commandButton text="OK" id="cb11"
+                                    action="#{QuoteTrans.AssignTask}"
+                                    partialSubmit="true"/>
+                  <af:commandButton text="Cancel" id="commandButton2"
+                                    action="#{QuoteTrans.GetAssignee}"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <h:panelGrid columns="2" id="pg1">
+              <h:panelGrid columns="1" id="pg2">
+                <af:outputLabel value="Operation Type" id="ol2"/>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg3">
+                <af:panelGroupLayout id="pgl3">
+                  <af:selectOneChoice label="Label 1" simple="true"
+                                      valueChangeListener="#{QuoteTrans.transactionListener}"
+                                      binding="#{QuoteTrans.quotationTransType}"
+                                      autoSubmit="true" id="OperationType"
+                                      unselectedLabel="Select Operation">
+                    <af:selectItem label="New Quotation" value="NQ" id="si2"/>
+                    <af:selectItem label="Edit Quotation" value="EQ" id="si3"/>
+                    <af:selectItem label="Revise Quotation" value="RQ"
+                                   id="si4"/>
+                    <af:selectItem label="View Quotation" value="VQ" id="si5"/>
+                  </af:selectOneChoice>
+                </af:panelGroupLayout>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg4">
+                <af:panelGroupLayout partialTriggers="OperationType" id="pgl4">
+                  <af:outputLabel value="Effective Date"
+                                  binding="#{QuoteTrans.effDateLabel}"
+                                  partialTriggers="OperationType" id="ol3"/>
+                </af:panelGroupLayout>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg5">
+                <af:panelGroupLayout partialTriggers="OperationType"
+                                     binding="#{QuoteTrans.effectDateRender}"
+                                     id="pgl5">
+                  <af:inputDate binding="#{QuoteTrans.quotationDate}"
+                                simple="true" id="id1">
+                       <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                  </af:inputDate>              
+                </af:panelGroupLayout>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg6">
+                <af:outputLabel value="Product" id="ol4"/>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg7">
+                <af:panelGroupLayout id="pgl6">
+                  <af:inputText label="Label 2" simple="true"
+                                binding="#{QuoteTrans.productDisplay}"
+                                disabled="true" id="it1"/>
+                  <af:commandButton icon="/dropdown.gif" id="cb1">
+                    <af:showPopupBehavior popupId="productsPopup"/>
+                  </af:commandButton>
+                  <af:popup id="productsPopup">
+                    <af:dialog type="none" title="Choose Product" id="d1"
+                               inlineStyle="width:inherit;">
+                        <af:table value="#{bindings.productDetails.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.productDetails.rangeSize}"
+                                  emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.productDetails.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                  queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t3"
+                                  binding="#{QuoteTrans.productsDisplayLOV}">
+                          <af:column sortProperty="prodDesc" filterable="true" filterFeatures="caseInsensitive"
+                                     sortable="true" headerText="Product "
+                                     id="c9" width="200">
+                            <af:outputText value="#{row.prodDesc}" id="ot9"/>
+                          </af:column>
+                          <af:column sortProperty="prodType" filterable="true" filterFeatures="caseInsensitive"
+                                     sortable="true" headerText="Product Type"
+                                     id="c8">
+                            <af:outputText value="#{row.prodType}" id="ot11"/>
+                          </af:column>
+                        </af:table>
+                        <h:panelGrid columns="2" id="pg8">
+                        <af:commandButton text="OK"
+                                          action="#{QuoteTrans.AssignProds}"
+                                          id="cb2"/>
+                        <af:commandButton text="Cancel" id="cb3"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </af:panelGroupLayout>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg9">
+                <af:panelGroupLayout partialTriggers="OperationType" id="pgl7">
+                  <af:outputLabel value="Quotation Number"
+                                  binding="#{QuoteTrans.quoteNoLabel}"
+                                  id="ol5"/>
+                </af:panelGroupLayout>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg10">
+                <af:panelGroupLayout partialTriggers="OperationType"
+                                     binding="#{QuoteTrans.quoteButtonRender}"
+                                     id="pgl8">
+                  <af:inputText label="Label 1" simple="true"
+                                binding="#{QuoteTrans.quotationNumber}"
+                                disabled="true" id="it2"/>
+                  <af:commandButton icon="/dropdown.gif"
+                                    binding="#{QuoteTrans.quoteButton}"
+                                    id="cb4">
+                    <af:showPopupBehavior popupId="quotations"/>
+                  </af:commandButton>
+                  <af:popup id="quotations">
+                    <af:dialog type="none" id="d2" title="Product Quotations">
+                      <af:table value="#{bindings.Quotations1.collectionModel}"
+                                var="row"
+                                rows="#{bindings.Quotations1.rangeSize}"
+                                emptyText="#{bindings.Quotations1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Quotations1.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.Quotations1Query.queryDescriptor}"
+                                queryListener="#{bindings.Quotations1Query.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Quotations1.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Quotations1.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t1"
+                                binding="#{QuoteTrans.quotationsTable}"
+                                inlineStyle="width:inherit;">
+                        <af:column sortProperty="quoNo" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true"
+                                   headerText="Quotation Number" id="c2"
+                                   width="130">
+                          <af:outputText value="#{row.quoNo}" id="ot2"/>
+                        </af:column>
+                        <af:column sortProperty="client" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true"
+                                   headerText="Quotation Client" id="c1"
+                                   width="210">
+                          <af:outputText value="#{row.client}" id="ot3"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg11">
+                        <af:commandButton text="OK"
+                                          action="#{QuoteTrans.findQuotNumber}"
+                                          id="cb5"/>
+                        <af:commandButton text="Cancel" id="cb6"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </af:panelGroupLayout>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg13">
+                <af:panelGroupLayout partialTriggers="OperationType"
+                                     id="panelGroupLayout1">
+                  <af:outputLabel value="Client"
+                                  binding="#{QuoteTrans.clientLabel}"
+                                  partialTriggers="OperationType"
+                                  id="outputLabel1"/>
+                </af:panelGroupLayout>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="panelGrid1">
+                <af:panelGroupLayout partialTriggers="OperationType"
+                                     id="panelGroupLayout2">
+                  <af:inputText label="Label 3" id="it3" simple="true"
+                                disabled="true"
+                                binding="#{QuoteTrans.clientsDisplay}"/>
+                  <af:commandButton id="cb9" icon="/images/dropdown.gif"
+                                    binding="#{QuoteTrans.clientButton}">
+                    <af:showPopupBehavior popupId="client"/>
+                  </af:commandButton>
+                  <af:commandLink text="Create Client" id="cl1"
+                                  action="#{QuoteTrans.CreateClient}"
+                                  binding="#{QuoteTrans.clientLink}"
+                                  visible="#{Rendering.hasRights}"/>
+                  <af:spacer width="10" height="1" id="s2"/>
+                  <af:commandLink text="Assign Creation Task" id="commandLink1"
+                                  action="#{QuoteTrans.AssignClientCreation}"
+                                  binding="#{QuoteTrans.assignCreation}"/>
+                  <af:popup id="client">
+                    <af:dialog id="d3" type="none" title="Clients">
+                      <af:table value="#{bindings.Client.collectionModel}"
+                                var="row" rows="#{bindings.Client.rangeSize}"
+                                emptyText="#{bindings.Client.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Client.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.ClientQuery.queryDescriptor}"
+                                queryListener="#{bindings.ClientQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Client.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Client.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t4" width="410"
+                                binding="#{QuoteTrans.clientsLOV}">
+                        <af:column sortProperty="CLIENT" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Client" id="c6"
+                                   width="200">
+                          <af:outputText value="#{row.CLIENT}" id="ot6"/>
+                        </af:column>
+                        <af:column sortProperty="GCO_DESC" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Occupation"
+                                   id="c5" width="200">
+                          <af:outputText value="#{row.GCO_DESC}" id="ot7"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg15">
+                        <af:commandButton text="OK" id="cb10"
+                                          action="#{QuoteTrans.AssignNewClients}"/>
+                        <af:commandButton text="Cancel" id="commandButton1"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </af:panelGroupLayout>
+              </h:panelGrid>
+                <h:panelGrid columns="1" id="panelGrid2">
+                  <af:panelGroupLayout partialTriggers="OperationType"
+                                       id="panelGroupLayout3">
+                    <af:outputLabel value="Umbrella Cover"
+                                    binding="#{QuoteTrans.umbrellaLabel}"
+                                    partialTriggers="OperationType"
+                                    id="outputLabel3" rendered="false"/>
+                  </af:panelGroupLayout>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="panelGrid3">
+                  <af:panelGroupLayout partialTriggers="OperationType"
+                                       id="panelGroupLayout4">
+                    <af:selectBooleanCheckbox
+                                              label="Label 1" id="sbc1"
+                                              simple="true"
+                                              binding="#{QuoteTrans.umbrellaCbox}"
+                                              rendered="false"/>
+                  </af:panelGroupLayout>
+                </h:panelGrid>
+              </h:panelGrid>
+            <h:panelGrid columns="2" id="pg12">
+              <af:commandButton text="Next" binding="#{Links.loadQuotation}"
+                                action="#{QuoteTrans.LoadQuotation}" id="cb7"/>
+              <af:commandButton text="Cancel" id="cb8"/>
+            </h:panelGrid>
+          </af:panelBox>
+          <af:panelBox text="Quotation Tickets" id="pb2" showHeader="never"
+                       binding="#{QuoteTrans.ticketsTab}" rendered="false">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Quotation Tickets"
+                            inlineStyle="font-weight:bold;" id="outputLabel2"/>
+            <af:separator inlineStyle="width:inherit;" id="separator1"/>
+              <af:table value="#{bindings.workflow1.collectionModel}" var="row"
+                      rows="#{bindings.workflow1.rangeSize}"
+                      emptyText="#{bindings.workflow1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.workflow1.rangeSize}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.workflow1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.workflow1.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t5"
+                      binding="#{QuoteTrans.resultsLOV}"
+                      inlineStyle="width:100.0%; height:130px; border-style:none;">
+              <af:column sortProperty="TCKT_CODE" sortable="true"
+                         headerText="Ticket Id." id="c12">
+                <af:outputText value="#{row.TCKT_CODE}" id="ot14"/>
+              </af:column>
+              <af:column sortProperty="TCKT_NAME" sortable="true"
+                         headerText="Ticket Name" id="c15" width="200">
+                <af:outputText value="#{row.TCKT_NAME}" id="ot17"/>
+              </af:column>
+              <af:column sortProperty="TCKT_TO" sortable="true"
+                         headerText="Ticket Assignee" id="c17" width="140">
+                <af:outputText value="#{row.TCKT_TO}" id="ot15"/>
+              </af:column>
+              <af:column sortProperty="TCKT_BY" sortable="true"
+                         headerText="Ticket From." id="c16">
+                <af:outputText value="#{row.TCKT_BY}" id="ot16"/>
+              </af:column>
+              <af:column sortProperty="TCKT_DATE" sortable="true"
+                         headerText="Ticket Created On." id="c14">
+                <af:outputText value="#{row.TCKT_DATE}" id="ot13">
+                  <af:convertDateTime pattern="#{bindings.workflow1.hints.TCKT_DATE.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="TCKT_REMARKS" sortable="true"
+                         headerText="Ticket Remarks." id="c13" width="200">
+                <af:outputText value="#{row.TCKT_REMARKS}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="taskID" sortable="false"
+                         id="c18">
+                <af:commandLink text="Process" id="commandLink2"
+                                action="#{QuoteTrans.findTicket2Selected}"
+                                rendered="#{row.TCKT_TO == currUser.username}"/>
+              </af:column>
+            </af:table>
+          </af:panelBox>
+        </af:panelGroupLayout>
+</f:facet>
+      
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

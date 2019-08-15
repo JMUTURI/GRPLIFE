@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="treatyArrangementsDAO" Package="LMSG.view.setups"
+          BeanClass="LMSG.view.setups.treatyArrangementsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.setups.treatyArrangements"
+                  BeanClass="LMSG.view.setups.treatyArrangements"
+                  id="findTreatyArrangements"
+                  ReturnNodeName="treatyArrangements"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.setups.treatyArrangementsDAO"
+                     BeanClass="LMSG.view.setups.treatyArrangementsDAO"
+                     id="treatyArrangementsDAO"/>
+</JavaBean>

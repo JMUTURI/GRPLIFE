@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="agencyPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findAccountTypes.result"
+                    DataControl="accountTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.accountTypes"
+                    id="findAccountTypesIterator"/>
+    <methodIterator Binds="findAgencies.result" DataControl="accountTypesDAO"
+                    RangeSize="200" BeanClass="com.turnkey.setups.agencies"
+                    id="findAgenciesIterator"/>
+    <methodIterator Binds="findBankBranches.result"
+                    DataControl="accountTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.accountTypes"
+                    id="findBankBranchesIterator"/>
+    <methodIterator Binds="findCommissionRates.result"
+                    DataControl="accountTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.accountTypes"
+                    id="findCommissionRatesIterator"/>
+    <methodIterator Binds="findBranches.result" DataControl="accountTypesDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.accountTypes"
+                    id="findBranchesIterator"/>
+    <methodIterator Binds="findContactPersons.result"
+                    DataControl="accountTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.accountTypes"
+                    id="findContactPersonsIterator"/>
+    <methodIterator Binds="findNewAgents.result" DataControl="accountTypesDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.accountTypes"
+                    id="findNewAgentsIterator"/>
+    <searchRegion Binds="findNewAgentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="accountTypes4Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findAccountTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAccountTypes"
+                  IsViewObjectMethod="false" DataControl="accountTypesDAO"
+                  InstanceName="accountTypesDAO.dataProvider"
+                  ReturnName="accountTypesDAO.methodResults.findAccountTypes_accountTypesDAO_dataProvider_findAccountTypes_result"/>
+    <tree IterBinding="findAccountTypesIterator" id="accountTypes">
+      <nodeDefinition DefName="com.turnkey.setups.accountTypes"
+                      Name="accountTypes0">
+        <AttrNames>
+          <Item Value="ACT_TYPE_SHT_DESC"/>
+          <Item Value="ACT_ACCOUNT_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAgencies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAgencies"
+                  IsViewObjectMethod="false" DataControl="accountTypesDAO"
+                  InstanceName="accountTypesDAO.dataProvider"
+                  ReturnName="accountTypesDAO.methodResults.findAgencies_accountTypesDAO_dataProvider_findAgencies_result"/>
+    <tree IterBinding="findAgenciesIterator" id="agencies">
+      <nodeDefinition DefName="com.turnkey.setups.agencies" Name="agencies0">
+        <AttrNames>
+          <Item Value="agn_code"/>
+          <Item Value="agn_acc_no"/>
+          <Item Value="agn_bank"/>
+          <Item Value="agn_bank_acc_no"/>
+          <Item Value="agn_comm_allowed"/>
+          <Item Value="agn_comm_allowed_desc"/>
+          <Item Value="agn_comm_payable"/>
+          <Item Value="agn_comm_payable_desc"/>
+          <Item Value="agn_comm_pymt_mthd"/>
+          <Item Value="agn_comm_pymt_mthd_desc"/>
+          <Item Value="agn_contract_date"/>
+          <Item Value="agn_contracted"/>
+          <Item Value="agn_contracted_desc"/>
+          <Item Value="agn_credit_allowed"/>
+          <Item Value="agn_credit_allowed_desc"/>
+          <Item Value="agn_date_joined"/>
+          <Item Value="agn_date_terminated"/>
+          <Item Value="agn_email_address"/>
+          <Item Value="agn_id_no"/>
+          <Item Value="agn_name"/>
+          <Item Value="agn_phone_no"/>
+          <Item Value="agn_pin_no"/>
+          <Item Value="agn_print_dbnote"/>
+          <Item Value="agn_print_dbnote_desc"/>
+          <Item Value="agn_proficiency_cert_no"/>
+          <Item Value="agn_reg_number"/>
+          <Item Value="agn_reg_status"/>
+          <Item Value="agn_reg_status_desc"/>
+          <Item Value="agn_reinsurer"/>
+          <Item Value="agn_reinsurer_desc"/>
+          <Item Value="agn_sht_desc"/>
+          <Item Value="agn_sms_tel"/>
+          <Item Value="agn_status"/>
+          <Item Value="agn_wht_tax"/>
+          <Item Value="agn_postal_address"/>
+          <Item Value="agn_retain_wthx"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findBankBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBankBranches"
+                  IsViewObjectMethod="false" DataControl="accountTypesDAO"
+                  InstanceName="accountTypesDAO.dataProvider"
+                  ReturnName="accountTypesDAO.methodResults.findBankBranches_accountTypesDAO_dataProvider_findBankBranches_result"/>
+    <tree IterBinding="findBankBranchesIterator" id="accountTypes1">
+      <nodeDefinition DefName="com.turnkey.setups.accountTypes"
+                      Name="accountTypes10">
+        <AttrNames>
+          <Item Value="bbrDescription"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCommissionRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCommissionRates"
+                  IsViewObjectMethod="false" DataControl="accountTypesDAO"
+                  InstanceName="accountTypesDAO.dataProvider"
+                  ReturnName="accountTypesDAO.methodResults.findCommissionRates_accountTypesDAO_dataProvider_findCommissionRates_result"/>
+    <tree IterBinding="findCommissionRatesIterator" id="accountTypes2">
+      <nodeDefinition DefName="com.turnkey.setups.accountTypes"
+                      Name="accountTypes20">
+        <AttrNames>
+          <Item Value="atrDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBranches"
+                  IsViewObjectMethod="false" DataControl="accountTypesDAO"
+                  InstanceName="accountTypesDAO.dataProvider"
+                  ReturnName="accountTypesDAO.methodResults.findBranches_accountTypesDAO_dataProvider_findBranches_result"/>
+    <tree IterBinding="findBranchesIterator" id="accountTypes3">
+      <nodeDefinition DefName="com.turnkey.setups.accountTypes"
+                      Name="accountTypes30">
+        <AttrNames>
+          <Item Value="brnShtDesc"/>
+          <Item Value="brnName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findContactPersons" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findContactPersons"
+                  IsViewObjectMethod="false" DataControl="accountTypesDAO"
+                  InstanceName="accountTypesDAO.dataProvider"
+                  ReturnName="accountTypesDAO.methodResults.findContactPersons_accountTypesDAO_dataProvider_findContactPersons_result"/>
+    <methodAction id="findNewAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findNewAgents"
+                  IsViewObjectMethod="false" DataControl="accountTypesDAO"
+                  InstanceName="accountTypesDAO.dataProvider"
+                  ReturnName="accountTypesDAO.methodResults.findNewAgents_accountTypesDAO_dataProvider_findNewAgents_result"/>
+    <tree IterBinding="findContactPersonsIterator" id="accountTypes6">
+      <nodeDefinition DefName="com.turnkey.setups.accountTypes"
+                      Name="accountTypes60">
+        <AttrNames>
+          <Item Value="lacContactPerson"/>
+          <Item Value="lacContactTitle"/>
+          <Item Value="lac_contact_name"/>
+          <Item Value="lac_telephone"/>
+          <Item Value="lac_sex"/>
+          <Item Value="lac_address"/>
+          <Item Value="lac_contact_email"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findNewAgentsIterator" id="accountTypes4">
+      <nodeDefinition DefName="com.turnkey.setups.accountTypes"
+                      Name="accountTypes40">
+        <AttrNames>
+          <Item Value="agnName"/>
+          <Item Value="agnStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

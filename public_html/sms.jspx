@@ -1,0 +1,535 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+  <af:document>
+    <af:pageTemplate id="demoTemplate"
+                     viewId="/templates/dialogTemplate.jspx">
+      <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot25"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout layout="scroll" id="pgl2">
+          <af:panelBox text="PanelBox1" showHeader="never"
+                       inlineStyle="padding:1%;" id="pb3">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Send SMS" inlineStyle="font-weight:bold;"
+                            id="ol18"/>
+            <af:separator id="s2"/>
+            <af:popup id="msgTemplate">
+              <af:dialog type="none" title="Select Message Template" id="d2">
+                <af:panelGroupLayout id="pgl3">
+                  <h:panelGrid columns="1" id="pg15">
+                    <af:table value="#{bindings.Correspondence1.collectionModel}"
+                              var="row"
+                              rows="#{bindings.Correspondence1.rangeSize}"
+                              emptyText="#{bindings.Correspondence1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Correspondence1.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Correspondence1Query.queryDescriptor}"
+                              queryListener="#{bindings.Correspondence1Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Correspondence1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Correspondence1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t4"
+                              binding="#{systems.msgTemplate}" width="440">
+                      <af:column sortProperty="msgCode" filterable="true"
+                                 sortable="true"
+                                 headerText="Code"
+                                 id="c13" width="30">
+                        <af:outputText value="#{row.msgCode}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="msgShtDesc" filterable="true"
+                                 sortable="true"
+                                 headerText="Sht Desc"
+                                 id="c9">
+                        <af:outputText value="#{row.msgShtDesc}" id="ot16"/>
+                      </af:column>
+                      <af:column sortProperty="msgDesc" filterable="true"
+                                 sortable="true"
+                                 headerText="Message"
+                                 id="c6" width="300">
+                        <af:outputText value="#{row.msgDesc}" id="ot10"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg6">
+                      <af:commandButton text="OK"
+                                        action="#{systems.msgTemplateSelected}"
+                                        id="cb20"/>
+                      <af:commandButton text="Cancel" id="cb2"/>
+                    </h:panelGrid>
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </af:dialog>
+            </af:popup>
+            <af:panelBox text="Msg Template" showHeader="never"
+                         binding="#{Correspondence.smsTemplateMessage}"
+                         id="pb5">
+              <f:facet name="toolbar"/>
+              <h:panelGrid columns="2" id="pg17">
+                <h:panelGrid columns="1" id="pg13">
+                  <af:outputLabel value="SMS Template" id="ol7"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg8">
+                  <af:inputText simple="true" disabled="true"
+                                binding="#{systems.msgTemplateDesc}"
+                                id="it10"/>
+                  <af:commandButton icon="/images/dropdown.gif" id="cb9"
+                                    action="#{systems.RenderTemplatePopup}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="pg18">
+                  <af:outputLabel value="Send To Client" id="ol17"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="pg5">
+                  <af:selectBooleanCheckbox simple="true" selected="true"
+                                            id="sbc2"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="pg1">
+                  <af:outputLabel value="Send To Agent" id="ol20"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="pg16">
+                  <af:selectBooleanCheckbox simple="true" id="sbc1"/>
+                </h:panelGrid>
+              </h:panelGrid>
+              <h:panelGrid columns="2" id="pg10">
+                <af:commandButton text="Cancel"
+                                  action="#{Links.closeDialog}" id="cb15"/>
+                <af:commandButton text="Next"
+                                  action="#{Correspondence.saveSMSMessage}"
+                                  id="cb21"/>
+              </h:panelGrid>
+            </af:panelBox>
+            <af:panelBox text="Msg Details" showHeader="never"
+                         binding="#{Correspondence.smsDetails}"
+                         rendered="false" id="pb2">
+              <f:facet name="toolbar"/>
+              <af:popup id="systemsLOV" rendered="false">
+                <af:dialog type="none" id="d5">
+                  <af:table value="#{bindings.emails5.collectionModel}"
+                            var="row" rows="#{bindings.emails5.rangeSize}"
+                            emptyText="#{bindings.emails5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.emails5.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.emails5Query.queryDescriptor}"
+                            queryListener="#{bindings.emails5Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.emails5.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.emails5.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t6"
+                            binding="#{systems.systemsLOV}">
+                    <af:column sortProperty="SYS_CODE" filterable="true"
+                               sortable="true"
+                               headerText="System CODE"
+                               id="c16">
+                      <af:inputText value="#{row.bindings.SYS_CODE.inputValue}"
+                                    label="#{bindings.emails5.hints.SYS_CODE.label}"
+                                    required="#{bindings.emails5.hints.SYS_CODE.mandatory}"
+                                    columns="#{bindings.emails5.hints.SYS_CODE.displayWidth}"
+                                    maximumLength="#{bindings.emails5.hints.SYS_CODE.precision}"
+                                    shortDesc="#{bindings.emails5.hints.SYS_CODE.tooltip}"
+                                    id="it18">
+                        <f:validator binding="#{row.bindings.SYS_CODE.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="SYS_SHT_DESC" filterable="true"
+                               sortable="true"
+                               headerText="Description"
+                               id="c14">
+                      <af:inputText value="#{row.bindings.SYS_SHT_DESC.inputValue}"
+                                    label="#{bindings.emails5.hints.SYS_SHT_DESC.label}"
+                                    required="#{bindings.emails5.hints.SYS_SHT_DESC.mandatory}"
+                                    columns="#{bindings.emails5.hints.SYS_SHT_DESC.displayWidth}"
+                                    maximumLength="#{bindings.emails5.hints.SYS_SHT_DESC.precision}"
+                                    shortDesc="#{bindings.emails5.hints.SYS_SHT_DESC.tooltip}"
+                                    id="it19">
+                        <f:validator binding="#{row.bindings.SYS_SHT_DESC.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="SYS_NAME" filterable="true"
+                               sortable="true"
+                               headerText="System Name"
+                               id="c17">
+                      <af:inputText value="#{row.bindings.SYS_NAME.inputValue}"
+                                    label="#{bindings.emails5.hints.SYS_NAME.label}"
+                                    required="#{bindings.emails5.hints.SYS_NAME.mandatory}"
+                                    columns="#{bindings.emails5.hints.SYS_NAME.displayWidth}"
+                                    maximumLength="#{bindings.emails5.hints.SYS_NAME.precision}"
+                                    shortDesc="#{bindings.emails5.hints.SYS_NAME.tooltip}"
+                                    id="it20">
+                        <f:validator binding="#{row.bindings.SYS_NAME.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{systems.AssignSystemsLOV}"
+                                    id="cb8"/>
+                  <af:commandButton text="Cancel" id="cb4"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="clientsLOV" rendered="false">
+                <af:dialog type="none" id="d4">
+                  <af:table value="#{bindings.emails.collectionModel}" var="row"
+                            rows="#{bindings.emails.rangeSize}"
+                            emptyText="#{bindings.emails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.emails.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.emailsQuery.queryDescriptor}"
+                            queryListener="#{bindings.emailsQuery.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.emails.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.emails.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t7"
+                            binding="#{systems.emailClientsLOV}">
+                    <af:column sortProperty="CLNT_CODE" filterable="true"
+                               sortable="true"
+                               headerText="Client Code"
+                               id="c24">
+                      <af:inputText value="#{row.bindings.CLNT_CODE.inputValue}"
+                                    label="#{bindings.emails.hints.CLNT_CODE.label}"
+                                    required="#{bindings.emails.hints.CLNT_CODE.mandatory}"
+                                    columns="#{bindings.emails.hints.CLNT_CODE.displayWidth}"
+                                    maximumLength="#{bindings.emails.hints.CLNT_CODE.precision}"
+                                    shortDesc="#{bindings.emails.hints.CLNT_CODE.tooltip}"
+                                    id="it15">
+                        <f:validator binding="#{row.bindings.CLNT_CODE.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="CLNT_SHT_DESC" filterable="true"
+                               sortable="true"
+                               headerText="Description"
+                               id="c23">
+                      <af:inputText value="#{row.bindings.CLNT_SHT_DESC.inputValue}"
+                                    label="#{bindings.emails.hints.CLNT_SHT_DESC.label}"
+                                    required="#{bindings.emails.hints.CLNT_SHT_DESC.mandatory}"
+                                    columns="#{bindings.emails.hints.CLNT_SHT_DESC.displayWidth}"
+                                    maximumLength="#{bindings.emails.hints.CLNT_SHT_DESC.precision}"
+                                    shortDesc="#{bindings.emails.hints.CLNT_SHT_DESC.tooltip}"
+                                    id="it17">
+                        <f:validator binding="#{row.bindings.CLNT_SHT_DESC.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="CLNT_NAME" filterable="true"
+                               sortable="true"
+                               headerText="Surname"
+                               id="c21">
+                      <af:inputText value="#{row.bindings.CLNT_NAME.inputValue}"
+                                    label="#{bindings.emails.hints.CLNT_NAME.label}"
+                                    required="#{bindings.emails.hints.CLNT_NAME.mandatory}"
+                                    columns="#{bindings.emails.hints.CLNT_NAME.displayWidth}"
+                                    maximumLength="#{bindings.emails.hints.CLNT_NAME.precision}"
+                                    shortDesc="#{bindings.emails.hints.CLNT_NAME.tooltip}"
+                                    id="it13">
+                        <f:validator binding="#{row.bindings.CLNT_NAME.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="CLNT_OTHER_NAMES" filterable="true"
+                               sortable="true"
+                               headerText="Other Names"
+                               id="c22">
+                      <af:inputText value="#{row.bindings.CLNT_OTHER_NAMES.inputValue}"
+                                    label="#{bindings.emails.hints.CLNT_OTHER_NAMES.label}"
+                                    required="#{bindings.emails.hints.CLNT_OTHER_NAMES.mandatory}"
+                                    columns="#{bindings.emails.hints.CLNT_OTHER_NAMES.displayWidth}"
+                                    maximumLength="#{bindings.emails.hints.CLNT_OTHER_NAMES.precision}"
+                                    shortDesc="#{bindings.emails.hints.CLNT_OTHER_NAMES.tooltip}"
+                                    id="it16">
+                        <f:validator binding="#{row.bindings.CLNT_OTHER_NAMES.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column sortProperty="NAME" filterable="true"
+                               sortable="true"
+                               headerText="Full Name"
+                               id="c20">
+                      <af:inputText value="#{row.bindings.NAME.inputValue}"
+                                    label="#{bindings.emails.hints.NAME.label}"
+                                    required="#{bindings.emails.hints.NAME.mandatory}"
+                                    columns="#{bindings.emails.hints.NAME.displayWidth}"
+                                    maximumLength="#{bindings.emails.hints.NAME.precision}"
+                                    shortDesc="#{bindings.emails.hints.NAME.tooltip}"
+                                    id="it14">
+                        <f:validator binding="#{row.bindings.NAME.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{systems.AssignClientsLOV}"
+                                    id="cb13"/>
+                  <af:commandButton text="Cancel" id="cb17"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="agentsLOV" rendered="false">
+                <af:dialog type="none" id="d3">
+                  <af:table value="#{bindings.emails1.collectionModel}"
+                            var="row" rows="#{bindings.emails1.rangeSize}"
+                            emptyText="#{bindings.emails1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.emails1.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.emails1Query.queryDescriptor}"
+                            queryListener="#{bindings.emails1Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.emails1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.emails1.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t2"
+                            binding="#{systems.agentsEmailLOV}">
+                    <af:column sortProperty="AGN_CODE" filterable="true"
+                               sortable="true"
+                               headerText="Agent Code"
+                               id="c5">
+                      <af:outputText value="#{row.AGN_CODE}" id="ot4"/>
+                    </af:column>
+                    <af:column sortProperty="AGN_SHT_DESC" filterable="true"
+                               sortable="true"
+                               headerText="Description"
+                               id="c15">
+                      <af:outputText value="#{row.AGN_SHT_DESC}" id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="AGN_NAME" filterable="true"
+                               sortable="true"
+                               headerText="Agent Name"
+                               id="c7">
+                      <af:outputText value="#{row.AGN_NAME}" id="ot7"/>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{systems.AssignAgentsLOV}"
+                                    id="cb18"/>
+                  <af:commandButton text="Cancel" id="cb19"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="quotationLOV" rendered="false">
+                <af:dialog type="none" id="d6">
+                  <af:table value="#{bindings.emails2.collectionModel}"
+                            var="row" rows="#{bindings.emails2.rangeSize}"
+                            emptyText="#{bindings.emails2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.emails2.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.emails2Query.queryDescriptor}"
+                            queryListener="#{bindings.emails2Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.emails2.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.emails2.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t1"
+                            binding="#{systems.smsQuotationLOV}">
+                    <af:column sortProperty="QUOT_CODE" filterable="true"
+                               sortable="true"
+                               headerText="Quotation Code"
+                               id="c4">
+                      <af:outputText value="#{row.QUOT_CODE}" id="ot8"/>
+                    </af:column>
+                    <af:column sortProperty="QUOT_NO" filterable="true"
+                               sortable="true"
+                               headerText="Quotation Number"
+                               id="c2">
+                      <af:outputText value="#{row.QUOT_NO}" id="ot14"/>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{systems.AssignSmsQuotation}"
+                                    id="cb22"/>
+                  <af:commandButton text="Cancel" id="cb11"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="policyLOV" rendered="false">
+                <af:dialog type="none" id="d7">
+                  <af:table value="#{bindings.emails3.collectionModel}"
+                            var="row" rows="#{bindings.emails3.rangeSize}"
+                            emptyText="#{bindings.emails3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.emails3.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.emails3Query.queryDescriptor}"
+                            queryListener="#{bindings.emails3Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.emails3.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.emails3.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t5"
+                            binding="#{systems.policiesLOV}">
+                    <af:column sortProperty="POL_BATCH_NO" filterable="true"
+                               sortable="true"
+                               headerText="Batch Number"
+                               id="c11">
+                      <af:outputText value="#{row.POL_BATCH_NO}" id="ot17"/>
+                    </af:column>
+                    <af:column sortProperty="POL_POLICY_NO" filterable="true"
+                               sortable="true"
+                               headerText="Policy Number"
+                               id="c8">
+                      <af:outputText value="#{row.POL_POLICY_NO}" id="ot1"/>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{systems.AssignPoliciesLOV}"
+                                    id="cb26"/>
+                  <af:commandButton text="Cancel" id="cb14"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="clmLOV" rendered="false">
+                <af:dialog type="none" id="d1">
+                  <af:table value="#{bindings.emails4.collectionModel}"
+                            var="row" rows="#{bindings.emails4.rangeSize}"
+                            emptyText="#{bindings.emails4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.emails4.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.emails4Query.queryDescriptor}"
+                            queryListener="#{bindings.emails4Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.emails4.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.emails4.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t3"
+                            binding="#{systems.emailClaimsLOV}">
+                    <af:column sortProperty="cmb_claim_no" filterable="true"
+                               sortable="true"
+                               headerText="Claim Number"
+                               id="c12">
+                      <af:outputText value="#{row.cmb_claim_no}" id="ot6"/>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{systems.AssignClaimsLOV}"
+                                    id="cb24"/>
+                  <af:commandButton text="Cancel" id="cb6"/>
+                </af:dialog>
+              </af:popup>
+              <af:panelBox inlineStyle="width:inherit;" showHeader="never"
+                           id="pb4">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="3" rendered="false" id="pg14">
+                  <af:outputLabel value="System" id="ol21"/>
+                  <af:inputText binding="#{systems.systemName}" simple="true"
+                                disabled="true" id="it9"/>
+                  <af:commandButton icon="/images/dropdown.gif" id="cb27">
+                    <af:showPopupBehavior popupId="systemsLOV"/>
+                  </af:commandButton>
+                  <af:outputLabel value="Client" id="ol22"/>
+                  <af:inputText simple="true" binding="#{systems.emailClient}"
+                                disabled="true" id="it5"/>
+                  <af:commandButton icon="/images/dropdown.gif" id="cb25">
+                    <af:showPopupBehavior popupId="clientsLOV"/>
+                  </af:commandButton>
+                  <af:outputLabel value="Agent" id="ol1"/>
+                  <af:inputText simple="true" binding="#{systems.agentName1}"
+                                disabled="true" id="it12"/>
+                  <af:commandButton icon="/images/dropdown.gif" id="cb5">
+                    <af:showPopupBehavior popupId="agentsLOV"/>
+                  </af:commandButton>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg12">
+                  <af:outputLabel value="Client" id="ol13"/>
+                  <af:outputText value="#{bindings.CLIENT.inputValue}"
+                                 inlineStyle="font-weight:bold;" id="ot13"/>
+                  <af:outputLabel value="Agent" id="ol16"/>
+                  <af:outputText value="#{bindings.AGN_NAME.inputValue}"
+                                 inlineStyle="font-weight:bold;" id="ot23"/>
+                  <af:outputLabel value="Quotation Code"
+                                  rendered="#{Rendering.quoteModule}" id="ol2"/>
+                  <af:outputText value="#{bindings.CODE.inputValue}"
+                                 inlineStyle="font-weight:bold;"
+                                 rendered="#{Rendering.quoteModule}" id="ot11"/>
+                  <af:outputLabel value="Quotation Number"
+                                  rendered="#{Rendering.quoteModule}"
+                                  id="ol10"/>
+                  <af:outputText value="#{bindings.VAL.inputValue}"
+                                 inlineStyle="font-weight:bold;"
+                                 rendered="#{Rendering.quoteModule}" id="ot21"/>
+                  <af:outputLabel value="Policy Number"
+                                  rendered="#{Rendering.underwritingModule}"
+                                  id="ol6"/>
+                  <af:outputText value="#{bindings.VAL.inputValue}"
+                                 inlineStyle="font-weight:bold;"
+                                 rendered="#{Rendering.underwritingModule}"
+                                 id="ot19"/>
+                  <af:outputLabel value="Claim Number"
+                                  rendered="#{Rendering.claimsModule}"
+                                  id="ol3"/>
+                  <af:outputText value="#{bindings.VAL.inputValue}"
+                                 inlineStyle="font-weight:bold;"
+                                 rendered="#{Rendering.claimsModule}" id="ot2"/>
+                </h:panelGrid>
+                <af:separator id="s1"/>
+                <h:panelGrid columns="1" id="pg3">
+                  <af:outputLabel value="Message Details"
+                                  inlineStyle="font-weight:bold;" id="ol5"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg4">
+                  <af:outputLabel value="Phone Number" id="ol9"/>
+                  <af:inputText simple="true"
+                                binding="#{Correspondence.phoneNumber}"
+                                id="it11"/>
+                  <af:outputLabel value="Message" id="ol4"/>
+                  <af:inputText simple="true" rows="6"
+                                binding="#{Correspondence.message}" id="it7"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg9">
+                  <af:commandButton text="Send Message"
+                                    action="#{Correspondence.updateSMSMessage}"
+                                    id="cb23"/>
+                  <af:commandButton text="Done"
+                                    action="#{Links.closeDialog}"
+                                    rendered="false" id="cb16"/>
+                </h:panelGrid>
+                <af:panelBox text="Message Details" showHeader="never"
+                             inlineStyle="width:inherit;" rendered="false"
+                             id="pb1">
+                  <f:facet name="toolbar"/>
+                  <af:outputLabel value="Message Details"
+                                  inlineStyle="font-weight:bold;" id="ol19"/>
+                  <h:panelGrid columns="3" id="pg7">
+                    <af:outputLabel value="Quotation Number" id="ol14"/>
+                    <af:inputText simple="true"
+                                  binding="#{systems.smsQuotationNumber}"
+                                  disabled="true" id="it2"/>
+                    <af:commandButton icon="/images/dropdown.gif" id="cb10">
+                      <af:showPopupBehavior popupId="quotationLOV"/>
+                    </af:commandButton>
+                    <af:outputLabel value="Policy Number" id="ol11"/>
+                    <af:inputText simple="true"
+                                  binding="#{systems.systemPolicyNumber}"
+                                  disabled="true" id="it3"/>
+                    <af:commandButton icon="/images/dropdown.gif" id="cb12">
+                      <af:showPopupBehavior popupId="policyLOV"/>
+                    </af:commandButton>
+                    <af:outputLabel value="Claim Number" id="ol8"/>
+                    <af:inputText simple="true"
+                                  binding="#{systems.claimNumber1}"
+                                  disabled="true" id="it6"/>
+                    <af:commandButton icon="/images/dropdown.gif" id="cb3">
+                      <af:showPopupBehavior popupId="clmLOV"/>
+                    </af:commandButton>
+                    <af:outputLabel value="SMS Telephone Number" id="ol23"/>
+                    <af:inputText simple="true"
+                                  binding="#{systems.smsTelephoneNumber}"
+                                  id="it1"/>
+                    <h:panelGrid columns="2" id="pg2">
+                      <af:outputLabel value="Status" id="ol15"/>
+                      <af:inputText label="Status" simple="true"
+                                    binding="#{systems.smsMessageStatus}"
+                                    disabled="true" id="it8"/>
+                    </h:panelGrid>
+                    <af:outputLabel value="Message:"
+                                    inlineStyle="font-weight:bold;" id="ol12"/>
+                  </h:panelGrid>
+                  <h:inputTextarea rows="10" cols="60"
+                                   binding="#{systems.smsMessage}" id="it4"/>
+                  <h:panelGrid columns="2" width="10%" id="pg11">
+                    <af:commandButton text="Send(Immediate)"
+                                      action="#{systems.SendMessage}" id="cb1"/>
+                    <af:commandButton text="Send"
+                                      action="#{systems.saveSMSMessage}"
+                                      id="cb7"/>
+                  </h:panelGrid>
+                </af:panelBox>
+              </af:panelBox>
+            </af:panelBox>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

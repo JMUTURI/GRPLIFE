@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="smsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findMessageTemplates.result"
+                    DataControl="CorrespondenceDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Correspondents.Correspondence"
+                    id="findMessageTemplatesIterator"/>
+    <methodIterator Binds="findEmailClients.result" DataControl="emailDAO"
+                    RangeSize="25" BeanClass="LMSG.view.utilities.emails"
+                    id="findEmailClientsIterator"/>
+    <searchRegion Binds="findEmailClientsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="emailsQuery"/>
+    <methodIterator Binds="findAgents.result" DataControl="emailDAO"
+                    RangeSize="25" BeanClass="LMSG.view.utilities.emails"
+                    id="findAgentsIterator"/>
+    <searchRegion Binds="findAgentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="emails1Query"/>
+    <methodIterator Binds="findSmsQuotation.result" DataControl="emailDAO"
+                    RangeSize="25" BeanClass="LMSG.view.utilities.emails"
+                    id="findSmsQuotationIterator"/>
+    <searchRegion Binds="findSmsQuotationIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="emails2Query"/>
+    <methodIterator Binds="findSmsPolicies.result" DataControl="emailDAO"
+                    RangeSize="25" BeanClass="LMSG.view.utilities.emails"
+                    id="findSmsPoliciesIterator"/>
+    <searchRegion Binds="findSmsPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="emails3Query"/>
+    <methodIterator Binds="findClaims.result" DataControl="emailDAO"
+                    RangeSize="25" BeanClass="LMSG.view.utilities.emails"
+                    id="findClaimsIterator"/>
+    <searchRegion Binds="findClaimsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="emails4Query"/>
+    <methodIterator Binds="findSystems1.result" DataControl="emailDAO"
+                    RangeSize="25" BeanClass="LMSG.view.utilities.emails"
+                    id="findSystems1Iterator"/>
+    <searchRegion Binds="findSystems1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="emails5Query"/>
+    <searchRegion Binds="findMessageTemplatesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Correspondence1Query"/>
+    <methodIterator Binds="findMessageValues.result"
+                    DataControl="CorrespondenceDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Correspondents.Correspondence"
+                    id="findMessageValuesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findMessageTemplates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMessageTemplates"
+                  IsViewObjectMethod="false" DataControl="CorrespondenceDAO"
+                  InstanceName="CorrespondenceDAO.dataProvider"
+                  ReturnName="CorrespondenceDAO.methodResults.findMessageTemplates_CorrespondenceDAO_dataProvider_findMessageTemplates_result"/>
+    <methodAction id="findSystems" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSystems"
+                  IsViewObjectMethod="false" DataControl="tqcSystemsDAO"
+                  InstanceName="tqcSystemsDAO.dataProvider"
+                  ReturnName="tqcSystemsDAO.methodResults.findSystems_tqcSystemsDAO_dataProvider_findSystems_result"/>
+    <methodAction id="findEmailClients" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findEmailClients"
+                  IsViewObjectMethod="false" DataControl="emailDAO"
+                  InstanceName="emailDAO.dataProvider"
+                  ReturnName="emailDAO.methodResults.findEmailClients_emailDAO_dataProvider_findEmailClients_result"/>
+    <tree IterBinding="findEmailClientsIterator" id="emails">
+      <nodeDefinition DefName="LMSG.view.utilities.emails" Name="emails0">
+        <AttrNames>
+          <Item Value="CLNT_CODE"/>
+          <Item Value="CLNT_SHT_DESC"/>
+          <Item Value="CLNT_NAME"/>
+          <Item Value="CLNT_OTHER_NAMES"/>
+          <Item Value="NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAgents"
+                  IsViewObjectMethod="false" DataControl="emailDAO"
+                  InstanceName="emailDAO.dataProvider"
+                  ReturnName="emailDAO.methodResults.findAgents_emailDAO_dataProvider_findAgents_result"/>
+    <tree IterBinding="findAgentsIterator" id="emails1">
+      <nodeDefinition DefName="LMSG.view.utilities.emails" Name="emails10">
+        <AttrNames>
+          <Item Value="AGN_CODE"/>
+          <Item Value="AGN_SHT_DESC"/>
+          <Item Value="AGN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSmsQuotation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSmsQuotation"
+                  IsViewObjectMethod="false" DataControl="emailDAO"
+                  InstanceName="emailDAO.dataProvider"
+                  ReturnName="emailDAO.methodResults.findSmsQuotation_emailDAO_dataProvider_findSmsQuotation_result"/>
+    <tree IterBinding="findSmsQuotationIterator" id="emails2">
+      <nodeDefinition DefName="LMSG.view.utilities.emails" Name="emails20">
+        <AttrNames>
+          <Item Value="QUOT_CODE"/>
+          <Item Value="QUOT_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSmsPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSmsPolicies"
+                  IsViewObjectMethod="false" DataControl="emailDAO"
+                  InstanceName="emailDAO.dataProvider"
+                  ReturnName="emailDAO.methodResults.findSmsPolicies_emailDAO_dataProvider_findSmsPolicies_result"/>
+    <tree IterBinding="findSmsPoliciesIterator" id="emails3">
+      <nodeDefinition DefName="LMSG.view.utilities.emails" Name="emails30">
+        <AttrNames>
+          <Item Value="POL_BATCH_NO"/>
+          <Item Value="POL_POLICY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findClaims" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClaims"
+                  IsViewObjectMethod="false" DataControl="emailDAO"
+                  InstanceName="emailDAO.dataProvider"
+                  ReturnName="emailDAO.methodResults.findClaims_emailDAO_dataProvider_findClaims_result"/>
+    <tree IterBinding="findClaimsIterator" id="emails4">
+      <nodeDefinition DefName="LMSG.view.utilities.emails" Name="emails40">
+        <AttrNames>
+          <Item Value="cmb_claim_no"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSystems1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSystems"
+                  IsViewObjectMethod="false" DataControl="emailDAO"
+                  InstanceName="emailDAO.dataProvider"
+                  ReturnName="emailDAO.methodResults.findSystems_emailDAO_dataProvider_findSystems_result"/>
+    <tree IterBinding="findSystems1Iterator" id="emails5">
+      <nodeDefinition DefName="LMSG.view.utilities.emails" Name="emails50">
+        <AttrNames>
+          <Item Value="SYS_CODE"/>
+          <Item Value="SYS_SHT_DESC"/>
+          <Item Value="SYS_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findMessageTemplatesIterator" id="Correspondence1">
+      <nodeDefinition DefName="LMSG.view.Correspondents.Correspondence"
+                      Name="Correspondence10">
+        <AttrNames>
+          <Item Value="msgCode"/>
+          <Item Value="msgShtDesc"/>
+          <Item Value="msgDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuotation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotation"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuotation_QuotationsDAO_dataProvider_findQuotation_result"/>
+    <methodAction id="findMessageValues" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMessageValues"
+                  IsViewObjectMethod="false" DataControl="CorrespondenceDAO"
+                  InstanceName="CorrespondenceDAO.dataProvider"
+                  ReturnName="CorrespondenceDAO.methodResults.findMessageValues_CorrespondenceDAO_dataProvider_findMessageValues_result"/>
+    <attributeValues IterBinding="findMessageValuesIterator" id="CLIENT">
+      <AttrNames>
+        <Item Value="CLIENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMessageValuesIterator" id="AGN_NAME">
+      <AttrNames>
+        <Item Value="AGN_NAME"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMessageValuesIterator" id="CODE">
+      <AttrNames>
+        <Item Value="CODE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMessageValuesIterator" id="VAL">
+      <AttrNames>
+        <Item Value="VAL"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,581 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Policy Medicals" id="d3">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl2" layout="scroll">
+            
+            <!-- DMS Diags-->
+                  <af:popup id="dmsUpdPop">
+                  <af:dialog id="d17ax" title="Choose upload document..." type="none">
+                    <h:panelGrid columns="1" id="pg405ax">
+                     <!--select goes here -->
+                    <af:selectOneChoice value="#{bindings.documents.inputValue}"
+                                        binding="#{med.lmsDocType}"
+                                        autoSubmit="true"
+                                        unselectedLabel="-select doc type-" 
+                                        valueChangeListener="#{med.docTypeSelectionChanged}"
+                                        id="soc3">
+                      <f:selectItems value="#{bindings.documents.items}"
+                                     id="si5"/>
+                    </af:selectOneChoice>
+                    <!--<af:outputLabel value="Upload to DMS" id="ol366ax"/>-->
+                      <af:spacer />
+                      <af:inputFile label="Select A File" id="if3ax"
+                                    inlineStyle="font-weight:bold;"
+                                    simple="true"
+                                    binding="#{med.dmsFileToUpload}"/>
+                      <af:spacer />
+                      <af:commandButton text="Save" id="cb166ax"
+                                        icon="/images/save.gif"
+                                        partialSubmit="true"
+                                        action="#{med.upLoadDocToDms}"/>
+                      
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              <af:popup id="viewdoc" contentDelivery="immediate">
+                <af:dialog id="d372" inlineStyle="width:100%;">
+                    <af:inlineFrame id="pt_if11" source="#{sessionScope['toPrint']}"
+                                inlineStyle="height:700px; width:1080px;"
+                                    binding="#{med.medViewer}"/>
+                </af:dialog>
+              </af:popup>
+            <!--End DMS Diags-->
+              <af:panelBox text="Members" id="pb1" showHeader="never">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Policy Members" id="outputLabel1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="separator3" inlineStyle="width:inherit;"/>
+                <af:table value="#{bindings.policies.collectionModel}" var="row"
+                          rows="#{bindings.policies.rangeSize}"
+                          emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.policies.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{med.policyMemberListener}"
+                          rowSelection="single" id="t7"
+                          inlineStyle="width:100.0%; height:120px; border-style:none;"
+                          binding="#{med.memDetailsTab}">
+                  <af:column sortProperty="#{bindings.policies.hints.POLM_MEM_NO.name}"
+                             sortable="true" headerText="Member No." id="c29">
+                    <af:outputText value="#{row.POLM_MEM_NO}" id="ot32"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.policies.hints.MEMBER_DISPLAY.name}"
+                             sortable="true" headerText="Member Name" id="c30">
+                    <af:outputText value="#{row.MEMBER_DISPLAY}" id="ot29"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.policies.hints.pcmSA.name}"
+                             sortable="false"
+                             headerText="Sum Assured"
+                             id="c32">
+                    <af:outputText value="#{row.pcmSA}" id="ot33"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.policies.hints.POLMA_ANB.name}"
+                             sortable="true" headerText="ANB" id="c31">
+                    <af:outputText value="#{row.POLMA_ANB}" id="ot27"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.policies.hints.POLM_HEIGHT.name}"
+                             sortable="true" headerText="Height" id="c25">
+                    <af:outputText value="#{row.POLM_HEIGHT}" id="ot31"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.policies.hints.POLM_WEIGHT.name}"
+                             sortable="true" headerText="Weight" id="c26">
+                    <af:outputText value="#{row.POLM_WEIGHT}" id="ot30"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.policies.hints.POLM_CODE.name}"
+                             sortable="false"
+                             headerText="#{bindings.policies.hints.POLM_CODE.label}"
+                             id="c33" visible="false">
+                    <af:outputText value="#{row.POLM_CODE}" id="ot34"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.policies.hints.POLM_MEM_CODE.name}"
+                             sortable="false"
+                             headerText="#{bindings.policies.hints.POLM_MEM_CODE.label}"
+                             id="c34" visible="false">
+                    <af:outputText value="#{row.POLM_MEM_CODE}" id="ot35"/>
+                  </af:column>
+                  <af:column sortProperty="POLM_WEIGHT" sortable="true"
+                             id="cc2211">
+                    <af:commandLink text="Cover Details" id="cl1"
+                                    action="#{med.viewCoverDetails}"/>
+                  </af:column>
+                  <af:column sortProperty="POLM_WEIGHT" sortable="true"
+                             id="cc222111"
+                             rendered="#{Rendering.showMedPolicy &amp;&amp; Rendering.dmsEnabled}">
+                    <af:commandLink text="Attach DMS Document" id="cl11x"
+                                    rendered="#{Rendering.showMedPolicy &amp;&amp; Rendering.dmsEnabled}"
+                                    action="#{med.updateMedDocDms}"/>
+                  </af:column>
+                </af:table>
+                <af:table value="#{bindings.policyMembers.collectionModel}"
+                          var="row" rows="#{bindings.policyMembers.rangeSize}"
+                          emptyText="#{bindings.policyMembers.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.policyMembers.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{med.policyMemberListener}"
+                          rowSelection="single" id="t3"
+                          inlineStyle="width:100.0%; height:120px; border-style:none;"
+                          rendered="false">
+                  <af:column sortProperty="POLM_MEM_NO" sortable="true"
+                             headerText="Member No." id="c19">
+                    <af:outputText value="#{row.POLM_MEM_NO}" id="ot23"/>
+                  </af:column>
+                  <af:column sortProperty="MEMBER_DISPLAY" sortable="true"
+                             headerText="Member" id="c27">
+                    <af:outputText value="#{row.MEMBER_DISPLAY}" id="ot28"/>
+                  </af:column>
+                  <af:column sortProperty="POLM_TOT_SA" sortable="true"
+                             headerText="Sum Assured" id="c22">
+                    <af:outputText value="#{row.POLM_TOT_SA}" id="ot22"/>
+                  </af:column>
+                  <af:column sortProperty="POLM_ANB" sortable="true"
+                             headerText="ANB" id="c20">
+                    <af:outputText value="#{row.POLM_ANB}" id="ot20"/>
+                  </af:column>
+                  <af:column sortProperty="POLM_HEIGHT" sortable="true"
+                             headerText="Height" id="c23">
+                    <af:outputText value="#{row.POLM_HEIGHT}" id="ot24"/>
+                  </af:column>
+                  <af:column sortProperty="POLM_WEIGHT" sortable="true"
+                             headerText="Weight" id="c21">
+                    <af:outputText value="#{row.POLM_WEIGHT}" id="ot21"/>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+              <af:panelBox text="Existing Proposals" id="pb2"
+                           showHeader="never">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Existing Proposals/Policies"
+                                id="outputLabel5"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="separator1" inlineStyle="width:inherit;"/>
+                <af:table value="#{bindings.medical.collectionModel}" var="row"
+                          rows="#{bindings.medical.rangeSize}"
+                          emptyText="#{bindings.medical.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.medical.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{bindings.medical.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:100.0%; height:100px; border-style:none;"
+                          binding="#{med.existPolLOV}">
+                  <af:column sortProperty="PROPOSAL_NO" sortable="true"
+                             headerText="Proposal No" id="c3" width="200">
+                    <af:outputText value="#{row.PROPOSAL_NO}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="POLICY_NO" sortable="true"
+                             headerText="Policy Number" id="c2" width="200">
+                    <af:outputText value="#{row.POLICY_NO}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="TOT_SA" sortable="true"
+                             headerText="S.A" id="c1" width="200">
+                    <af:outputText value="#{row.TOT_SA}" id="ot3"/>
+                  </af:column>
+                </af:table>
+                <af:spacer width="10" height="10" id="spacer1"/>
+              </af:panelBox>
+              <af:panelTabbed id="pt1"
+                              inlineStyle="width:100.0%; height:250px;">
+                <af:showDetailItem text="Medical Requirements" id="sdi1">
+                  <af:popup id="medpopup">
+                    <af:dialog id="d1" type="none"
+                               title="Medical Requirement Details">
+                      <h:panelGrid columns="2" id="pg4">
+                        <af:outputLabel value="Medical Centre" id="ol2"/>
+                        <h:panelGrid columns="2" id="pg5">
+                          <af:inputText label="Label 1" id="it5" simple="true"
+                                        disabled="true"
+                                        binding="#{med.facDesc}"/>
+                          <af:commandButton id="cb3" icon="/images/dropdown.gif"
+                                            action="#{med.RenderFacilitators}"/>
+                        </h:panelGrid>
+                        <af:outputLabel value="Request Date" id="outputLabel7"/>
+                        <af:inputDate label="Label 1" id="id1" simple="true"
+                                      binding="#{med.reqDate}">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:inputDate>
+                        <af:outputLabel value="Invoice Amount"
+                                        id="outputLabel8"/>
+                        <af:inputText label="Label 2" id="it6" simple="true"
+                                      binding="#{med.invAmt}"/>
+                        <af:outputLabel value="Check Date" id="outputLabel9"/>
+                        <af:inputDate label="Label 1" id="inputDate1"
+                                      simple="true" binding="#{med.cheqDate}">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:inputDate>
+                        <af:outputLabel value="Checked" id="outputLabel10"/>
+                        <af:selectOneChoice label="Label 1" id="soc1"
+                                            simple="true"
+                                            binding="#{med.checkedDesc}">
+                          <af:selectItem label="Not Checked" value="N"
+                                         id="si3"/>
+                          <af:selectItem label="Checked" value="Y" id="si1"/>
+                          <af:selectItem label="Cancelled" value="C" id="si4"/>
+                          <af:selectItem label="Exempted" value="E" id="si2"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Invoice Date"
+                                        id="outputLabel11"/>
+                        <af:inputDate label="Label 1" id="inputDate2"
+                                      simple="true" binding="#{med.invDate}">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:inputDate>
+                        <af:outputLabel value="Invoice No" id="outputLabel12"/>
+                        <af:inputText label="Label 2" id="inputText1"
+                                      simple="true" binding="#{med.invNo}"/>
+                        <af:outputLabel value="Result Date" id="ol1"/>
+                        <af:inputDate label="Label 2" id="id2"
+                                      simple="true"
+                                      binding="#{med.resultDate}">
+                         <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:inputDate>
+                        <af:outputLabel value="Remarks" id="outputLabel13"/>
+                        <af:inputText label="Label 2" id="inputText2"
+                                      simple="true" rows="3"
+                                      binding="#{med.remarks}"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg6">
+                        <af:commandButton text="Save" id="cb4"
+                                          action="#{med.SaveMedicalRequirement}"/>
+                        <af:commandButton text="Cancel" id="commandButton2"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                  <af:popup id="facPopup">
+                    <af:dialog id="d2" type="none" title="Medical Centre" >                      
+                      <af:table value="#{bindings.Settings.collectionModel}"
+                                var="row" rows="#{bindings.Settings.rangeSize}"
+                                emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Settings.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.SettingsQuery1.queryDescriptor}"
+                                queryListener="#{bindings.SettingsQuery1.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t6"
+                                binding="#{med.facLOV}"
+                                inlineStyle="width:100%;height:200px">
+                        <af:column sortProperty="SPR_NAME" filterable="true"
+                                   sortable="true"
+                                   headerText="Provider Name"
+                                   id="c17">
+                          <af:outputText value="#{row.SPR_NAME}" id="ot18"/>
+                        </af:column>
+                        <af:column sortProperty="TWN_NAME" filterable="true"
+                                   sortable="true"
+                                   headerText="Provider Town"
+                                   id="c28">
+                          <af:outputText value="#{row.TWN_NAME}" id="ot15"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg7">
+                        <af:commandButton text="OK" id="cb5"
+                                          action="#{med.findFacilitatorsSel}"/>
+                        <af:commandButton text="Cancel" id="commandButton3"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                  <h:panelGrid columns="10" id="pg3">
+                  <af:outputLabel value="Additional Medicals" id="ol3"/>
+                    <af:selectBooleanRadio label="Label 2" simple="true"
+                                           group="medicals" selected="true"
+                                           binding="#{med.additionalMedicals}"
+                                           id="sbr1"/>
+                    <af:outputLabel value="Unrequested Medicals" id="ol4"/>
+                    <af:selectBooleanRadio label="Label 1" simple="true"
+                                           group="medicals"
+                                           binding="#{med.unrequestedMedicals}"
+                                           id="sbr2"/>
+                      <af:commandButton icon="/images/field_group_plus_ena.png" id="cb9">
+                      <af:showPopupBehavior popupId="medTests"/>
+                    </af:commandButton>
+                    <af:commandButton id="cb2" icon="/images/update_ena.png"
+                                      action="#{med.EditMedicalReq}"/>
+                    <af:commandButton id="commandButton1"
+                                      icon="/images/delete_ena.png"
+                                      action="#{med.DeleteMedicalRequirement}"/>
+                  </h:panelGrid>
+                  <af:popup id="medTests">
+                    <af:dialog id="d5" type="none" title="Medical Tests.">
+                      <af:panelBox id="pb8" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <af:table value="#{bindings.medical1.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.medical1.rangeSize}"
+                                  emptyText="#{bindings.medical1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.medical1.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.medical1Query.queryDescriptor}"
+                                  queryListener="#{bindings.medical1Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectionListener="#{bindings.medical1.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t5"
+                                  binding="#{med.medTestsTable}">
+                          <af:column sortProperty="medicalTestDescription"
+                                     filterable="true" sortable="true"
+                                     headerText="Medical Test"
+                                     width="200"
+                                     id="c14">
+                            <af:outputText value="#{row.medicalTestDescription}"
+                                           id="ot10"/>
+                          </af:column>
+                          <af:column sortProperty="MTLCode" filterable="true"
+                                     sortable="true"
+                                     headerText="#{bindings.medical1.hints.MTLCode.label}"
+                                     visible="false"
+                                     id="c5">
+                            <af:outputText value="#{row.MTLCode}" id="ot17"/>
+                          </af:column>
+                          <af:column sortProperty="MTLFees" filterable="true"
+                                     sortable="true"
+                                     headerText="Fees"
+                                     id="c15">
+                            <af:outputText value="#{row.MTLFees}" id="ot13"/>
+                          </af:column>
+                        </af:table>
+                        <h:panelGrid columns="2" id="pg10">
+                          <af:commandButton text="OK" id="cb10"
+                                            action="#{med.additionalMedicals}"/>
+                          <af:commandButton text="Cancel" id="commandButton5"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                    </af:dialog>
+                  </af:popup>
+                  <af:table value="#{bindings.medical2.collectionModel}"
+                            var="row" rows="#{bindings.medical2.rangeSize}"
+                            emptyText="#{bindings.medical2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.medical2.rangeSize}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.medical2.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.medical2.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t4"
+                            binding="#{med.medReqLOV}"
+                            inlineStyle="width:100.0%; height:150px; border-style:none;">
+                    <af:column sortProperty="MTL_DESC" sortable="true"
+                               headerText="Description" id="c6">
+                      <af:outputText value="#{row.MTL_DESC}" id="ot5"/>
+                    </af:column>
+                    <af:column sortProperty="CML_LIMIT_AMT" sortable="true"
+                               headerText="Limit Amount" id="c7">
+                      <af:outputText value="#{row.CML_LIMIT_AMT}" id="ot11"/>
+                    </af:column>
+                    <af:column sortProperty="CML_REQUEST_DATE" sortable="true"
+                               headerText="Request Date" id="c11">
+                      <af:outputText value="#{row.CML_REQUEST_DATE}" id="ot14">
+                       <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="CML_DATE_RECEIVED" sortable="true"
+                               headerText="Check Date" id="c8">
+                      <af:outputText value="#{row.CML_DATE_RECEIVED}" id="ot6">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="CML_RESULT_DATE" sortable="true"
+                               headerText="Result Date" id="c10">
+                      <af:outputText value="#{row.CML_RESULT_DATE}" id="ot7">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    
+                    <af:column sortProperty="SPR_NAME" sortable="true"
+                               headerText="Medical Centre" id="c9">
+                      <af:outputText value="#{row.SPR_NAME}" id="ot16"/>
+                    </af:column>
+                     <af:column sortProperty="CML_INVCE_NO" sortable="true"
+                               headerText="Invoice Number" id="c16">
+                      <af:outputText value="#{row.CML_INVCE_NO}" id="ot19"/>
+                    </af:column>
+                     <af:column sortProperty="CML_INVCE_DATE" sortable="true"
+                               headerText="Invoice Date" id="c18">
+                       <af:outputText value="#{row.CML_INVCE_DATE}" id="ot25">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="CML_CLAIM_AMT" sortable="true"
+                               headerText="Limit Amount" id="c4">
+                      <af:outputText value="#{row.CML_CLAIM_AMT}" id="ot9"/>
+                    </af:column>
+                    <af:column sortProperty="CML_PAYABLE_AMT" sortable="true"
+                               headerText="Payable Amount" id="c12">
+                      <af:outputText value="#{row.CML_PAYABLE_AMT}" id="ot12"/>
+                    </af:column>
+                     <af:column sortProperty="CML_RECEIVED" sortable="true"
+                               headerText="Received" id="c24">
+                      <af:outputText value="#{row.CML_RECEIVED}" id="ot26"/>
+                    </af:column>
+                    <af:column sortProperty="medDetails" sortable="true"
+                               headerText="Details" id="c13">
+                      <af:outputText value="#{row.medDetails}" id="ot8"/>
+                    </af:column>
+                  </af:table>
+                </af:showDetailItem>
+                <af:showDetailItem text="DMS Documents" id="sdi300"
+                                inlineStyle="width:inherit;" 
+                                rendered="#{Rendering.dmsEnabled}" 
+                                binding="#{med.dmsDocTab}">
+                             
+                        <h:panelGrid columns="3" id="pg600">
+                          <af:commandButton text="Upload New File" id="cb202x"
+                                            action="#{med.newDmsDoc}" />
+                          
+                          <af:commandButton text="Refresh" id="cb202"
+                                            action="#{med.refreshDms}"/>
+                        </h:panelGrid>
+                        <af:panelGroupLayout id="pgl53">
+                          <af:panelCollection id="pc240"
+                                              inlineStyle="height:200px;"
+                                              styleClass="AFStretchWidth">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="statusbar"/>
+                        <!--TABLE HERE-->
+                      <af:table value="#{bindings.EcmBean.collectionModel}"
+                                var="row" rows="#{bindings.EcmBean.rangeSize}"
+                                emptyText="#{bindings.EcmBean.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.EcmBean.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.EcmBeanQuery.queryDescriptor}"
+                                queryListener="#{bindings.EcmBeanQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.EcmBean.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.EcmBean.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t2"
+                                binding="#{med.dmsDocTable}">
+                          <af:column sortProperty="File Name" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.EcmBean.hints.name.label}"
+                                   width="150"
+                                   id="c216">
+                          <af:outputText value="#{row.name}" id="ot255"/>
+                        </af:column>
+                        <af:column sortProperty="actualName" filterable="true"
+                                   sortable="true"
+                                   visible = "false"
+                                   width="150"
+                                   headerText="#{bindings.EcmBean.hints.actualName.label}"
+                                   id="c233">
+                          <af:outputText value="#{row.actualName}" id="ot253"/>
+                        </af:column>
+                        <af:column sortProperty="modifiedBy" filterable="true"
+                                   sortable="true"
+                                   width="150"
+                                   headerText="Modified By"
+                                   id="c235">
+                          <af:outputText value="#{row.modifiedBy}" id="ot254"/>
+                        </af:column>
+                        <af:column sortProperty="versionLabel" filterable="true"
+                                   sortable="true"
+                                   width="150"
+                                   headerText="Version"
+                                   id="c237">
+                          <af:outputText value="#{row.versionLabel}"
+                                         id="ot257"/>
+                        </af:column>
+                        <af:column sortProperty="id" filterable="true"
+                                   sortable="true"
+                                   width="150"
+                                   visible="false"
+                                   headerText="#{bindings.EcmBean.hints.id.label}"
+                                   id="c234">
+                          <af:outputText value="#{row.id}" id="ot256"/>
+                        </af:column>
+                        <af:column sortProperty="mimeType" filterable="true"
+                                   sortable="true"
+                                   width="150"
+                                   headerText="Mime Type"
+                                   id="c236">
+                          <af:outputText value="#{row.mimeType}" id="ot252"/>
+                        </af:column>
+                        <af:column sortProperty="dateCreated" filterable="true"
+                                   sortable="true"
+                                   width="150"
+                                   headerText="Date Created"
+                                   id="c217">
+                          <af:outputText value="#{row.dateCreated}" id="ot258"/>
+                        </af:column>
+                         
+                         <af:column id="c344" width="150">
+                            <af:commandLink text="[View]" id="cl133x" partialSubmit="true"
+                                            action="#{med.generateDoc}"/>
+                         </af:column>
+                      </af:table>
+                    </af:panelCollection>
+                        </af:panelGroupLayout>
+                </af:showDetailItem>
+                
+                
+                <af:showDetailItem text="Medical Reports" id="sdi2"
+                                   binding="#{med.medReportDetail}">
+                  <af:panelGroupLayout id="pgl3">
+                    <af:panelBox id="pb4" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <h:panelGrid columns="1" id="pg1">
+                           <h:panelGrid columns="1" id="pgp303">                             
+                                <af:commandLink text="Medical UW letter" id="rpt1041"
+												rendered="#{!Rendering.expressVisible}"
+                                                actionListener="#{ReportsEngine.GetReportDetails}"/>
+								<af:commandLink text="Medical Letter" id="rpt1048"
+										rendered="#{!Rendering.loansProduct &amp;&amp; Rendering.expressVisible || !Rendering.expressVisible}"
+                                        actionListener="#{ReportsEngine.GetReportDetails}"/>
+								<af:commandLink text="Medical Letter" id="rpt25208"
+										rendered="#{Rendering.loansProduct &amp;&amp; Rendering.expressVisible}"
+                                        actionListener="#{ReportsEngine.GetReportDetails}"/>
+                                <af:commandLink text="Medical Facing Sheet"
+                                                id="commandLink4"
+                                                action="#{poreports.MedicalFacingSheetReport}">
+                                </af:commandLink>
+                          </h:panelGrid>
+                          <h:panelGrid columns="3" id="pgp309">
+                                <af:outputText value="Medical Questionnaires" id="got26"/>
+                                <af:selectOneChoice label="Medical Questionnaires" id="soc2"
+                                        simple="true"
+                                        unselectedLabel="---select---"
+                                        binding="#{med.medQuestSelect}">
+                                        <af:selectItem label="General Questionnaire" id="rpt20141"
+                                                       value="20141"/>
+                                        <af:selectItem label="Gastro-Intestinal Questionnaire" id="rpt20142"
+                                                       value="20142"/>
+                                         <af:selectItem label="Habits Questionnaire" id="rpt20144"
+                                                       value="20144"/>
+                                        <af:selectItem label="Asthma Questionnaire" id="rpt20143"
+                                                       value="20143"/>                      
+                                </af:selectOneChoice>
+                                <af:commandButton text="Generate" id="cb6"
+                                            action="#{med.getSelectedReport}"/>
+                          </h:panelGrid>
+                      </h:panelGrid>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </af:showDetailItem>
+              </af:panelTabbed>
+              <af:panelBox text="Medical Requirements" id="pb3"
+                           showHeader="never" rendered="false">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Medical Requirements" id="outputLabel6"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="separator2" inlineStyle="width:inherit;"/>
+              </af:panelBox>
+              <af:commandButton text="Back" id="cb1"
+                                action="#{underwritingManipulation.BackToPolicy}"/>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:med-->
+</jsp:root>

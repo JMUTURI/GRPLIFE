@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="interestRatesDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.interestRatesDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.interestRates"
+                  BeanClass="com.turnkey.setups.interestRates"
+                  id="findReinstatementRates" ReturnNodeName="interestRates"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.interestRates"
+                  BeanClass="com.turnkey.setups.interestRates"
+                  id="findGeneralInterestRates" ReturnNodeName="interestRates"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.interestRates"
+                  BeanClass="com.turnkey.setups.interestRates"
+                  id="findLoanInterestRates" ReturnNodeName="interestRates"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.interestRates"
+                  BeanClass="com.turnkey.setups.interestRates"
+                  id="findGeneralInterestRatesForTable"
+                  ReturnNodeName="interestRates"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.interestRates"
+                  BeanClass="com.turnkey.setups.interestRates"
+                  id="findPensionTables" ReturnNodeName="interestRates"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.interestRates"
+                  BeanClass="com.turnkey.setups.interestRates"
+                  id="findPensionPolicies" ReturnNodeName="interestRates"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.interestRatesDAO"
+                     BeanClass="com.turnkey.setups.interestRatesDAO"
+                     id="interestRatesDAO"/>
+</JavaBean>

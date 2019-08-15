@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="intratesPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findReinstatementRates.result"
+                    DataControl="interestRatesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.interestRates"
+                    id="findReinstatementRatesIterator"/>
+    <methodIterator Binds="findLoanInterestRates.result"
+                    DataControl="interestRatesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.interestRates"
+                    id="findLoanInterestRatesIterator"/>
+    <methodIterator Binds="findGeneralInterestRates.result"
+                    DataControl="interestRatesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.interestRates"
+                    id="findGeneralInterestRatesIterator"/>
+    <methodIterator Binds="findGeneralInterestRatesForTable.result"
+                    DataControl="interestRatesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.interestRates"
+                    id="findGeneralInterestRatesForTableIterator"/>
+    <methodIterator Binds="findPensionTables.result"
+                    DataControl="interestRatesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.interestRates"
+                    id="findPensionTablesIterator"/>
+    <searchRegion Binds="findPensionTablesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="interestRates5Query"/>
+    <methodIterator Binds="findPensionPolicies.result"
+                    DataControl="interestRatesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.interestRates"
+                    id="findPensionPoliciesIterator"/>
+    <searchRegion Binds="findPensionPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="interestRates3Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="PROD_CODE"/>
+          <Item Value="PROD_DESC"/>
+          <Item Value="PROD_SHT_DESC"/>
+          <Item Value="PROD_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findReinstatementRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findReinstatementRates"
+                  IsViewObjectMethod="false" DataControl="interestRatesDAO"
+                  InstanceName="interestRatesDAO.dataProvider"
+                  ReturnName="interestRatesDAO.methodResults.findReinstatementRates_interestRatesDAO_dataProvider_findReinstatementRates_result"/>
+    <tree IterBinding="findReinstatementRatesIterator" id="interestRates">
+      <nodeDefinition DefName="com.turnkey.setups.interestRates"
+                      Name="interestRates0">
+        <AttrNames>
+          <Item Value="rirCode"/>
+          <Item Value="rirRate"/>
+          <Item Value="rirWef"/>
+          <Item Value="rirWet"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findLoanInterestRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findLoanInterestRates"
+                  IsViewObjectMethod="false" DataControl="interestRatesDAO"
+                  InstanceName="interestRatesDAO.dataProvider"
+                  ReturnName="interestRatesDAO.methodResults.findLoanInterestRates_interestRatesDAO_dataProvider_findLoanInterestRates_result"/>
+    <tree IterBinding="findLoanInterestRatesIterator" id="interestRates1">
+      <nodeDefinition DefName="com.turnkey.setups.interestRates"
+                      Name="interestRates10">
+        <AttrNames>
+          <Item Value="lirCode"/>
+          <Item Value="lirWef"/>
+          <Item Value="lirWet"/>
+          <Item Value="lirRate"/>
+          <Item Value="serviceCharge"/>
+          <Item Value="serviceChargeDivFact"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGeneralInterestRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGeneralInterestRates"
+                  IsViewObjectMethod="false" DataControl="interestRatesDAO"
+                  InstanceName="interestRatesDAO.dataProvider"
+                  ReturnName="interestRatesDAO.methodResults.findGeneralInterestRates_interestRatesDAO_dataProvider_findGeneralInterestRates_result"/>
+    <tree IterBinding="findGeneralInterestRatesIterator" id="interestRates2">
+      <nodeDefinition DefName="com.turnkey.setups.interestRates"
+                      Name="interestRates20">
+        <AttrNames>
+          <Item Value="typeDesc"/>
+          <Item Value="applicTypeDesc"/>
+          <Item Value="lgrRate"/>
+          <Item Value="lgrDivFactor"/>
+          <Item Value="freqDesc"/>
+          <Item Value="lgrWef"/>
+          <Item Value="lgrWet"/>
+          <Item Value="lgrCode"/>
+          <Item Value="lgrType"/>
+          <Item Value="lgrApplicationType"/>
+          <Item Value="lgrDependsonFreq"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGeneralInterestRatesForTable"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findGeneralInterestRatesForTable"
+                  IsViewObjectMethod="false" DataControl="interestRatesDAO"
+                  InstanceName="interestRatesDAO.dataProvider"
+                  ReturnName="interestRatesDAO.methodResults.findGeneralInterestRatesForTable_interestRatesDAO_dataProvider_findGeneralInterestRatesForTable_result"/>
+    <tree IterBinding="findGeneralInterestRatesForTableIterator"
+          id="interestRates4">
+      <nodeDefinition DefName="com.turnkey.setups.interestRates"
+                      Name="interestRates40">
+        <AttrNames>
+          <Item Value="rirCode"/>
+          <Item Value="rirProdCode"/>
+          <Item Value="rirProdshtdesc"/>
+          <Item Value="rirRate"/>
+          <Item Value="rirWef"/>
+          <Item Value="rirWet"/>
+          <Item Value="lirCode"/>
+          <Item Value="lirProdCode"/>
+          <Item Value="lirProdShtDesc"/>
+          <Item Value="lirWef"/>
+          <Item Value="lirWet"/>
+          <Item Value="lirRate"/>
+          <Item Value="serviceCharge"/>
+          <Item Value="serviceChargeDivFact"/>
+          <Item Value="lgrCode"/>
+          <Item Value="lgrProdCode"/>
+          <Item Value="lgrType"/>
+          <Item Value="lgrApplicationType"/>
+          <Item Value="lgrDivFactor"/>
+          <Item Value="lgrDependsonFreq"/>
+          <Item Value="lgrWef"/>
+          <Item Value="lgrWet"/>
+          <Item Value="lgrRate"/>
+          <Item Value="typeDesc"/>
+          <Item Value="freqDesc"/>
+          <Item Value="applicTypeDesc"/>
+          <Item Value="LPNT_CODE"/>
+          <Item Value="LPNT_DESC"/>
+          <Item Value="LPNT_POL_CODE"/>
+          <Item Value="POL_POLICY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPensionTables" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionTables"
+                  IsViewObjectMethod="false" DataControl="interestRatesDAO"
+                  InstanceName="interestRatesDAO.dataProvider"
+                  ReturnName="interestRatesDAO.methodResults.findPensionTables_interestRatesDAO_dataProvider_findPensionTables_result"/>
+    <tree IterBinding="findPensionTablesIterator" id="interestRates5">
+      <nodeDefinition DefName="com.turnkey.setups.interestRates"
+                      Name="interestRates50">
+        <AttrNames>
+          <Item Value="LPNT_DESC"/>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="LPNT_CODE"/>
+          <Item Value="LPNT_POL_CODE"/>
+          <Item Value="rirCode"/>
+          <Item Value="LPNT_DEFAULT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPensionPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionPolicies"
+                  IsViewObjectMethod="false" DataControl="interestRatesDAO"
+                  InstanceName="interestRatesDAO.dataProvider"
+                  ReturnName="interestRatesDAO.methodResults.findPensionPolicies_interestRatesDAO_dataProvider_findPensionPolicies_result"/>
+    <tree IterBinding="findPensionPoliciesIterator" id="interestRates3">
+      <nodeDefinition DefName="com.turnkey.setups.interestRates"
+                      Name="interestRates30">
+        <AttrNames>
+          <Item Value="LPNT_POL_CODE"/>
+          <Item Value="POL_POLICY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

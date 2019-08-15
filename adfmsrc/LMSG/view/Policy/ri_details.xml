@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="ri_details" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.ri_details" isJavaBased="true">
+  <Attribute Name="COVER_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="PMRID_PREV_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRID_TOT_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRID_ENDR_PREM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRID_GROSS_RETENTION" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRID_NET_RETENTION" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRID_EXCESS_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRID_NET_RETENTION_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMRID_CODE" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.ri_details"
+                     BeanClass="LMSG.view.Policy.ri_details" id="ri_details"/>
+</JavaBean>

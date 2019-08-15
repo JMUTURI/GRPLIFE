@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="ordReinRates" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.ordReinRates" isJavaBased="true">
+  <Attribute Name="orrpCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="orrpShtDesc" Type="java.lang.String"/>
+  <Attribute Name="orrpDesc" Type="java.lang.String"/>
+  <Attribute Name="orrpClassSpecific" Type="java.lang.String"/>
+  <Attribute Name="orrtCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="orrtAnbFrom" Type="java.lang.String"/>
+  <Attribute Name="orrtAnbTo" Type="java.lang.String"/>
+  <Attribute Name="orrtRate" Type="java.math.BigDecimal"/>
+  <Attribute Name="orrtDivFactor" Type="java.math.BigDecimal"/>
+  <Attribute Name="orrtRateType" Type="java.lang.String"/>
+  <Attribute Name="orrtWet" Type="java.util.Date"/>
+  <Attribute Name="orrtWef" Type="java.util.Date"/>
+  <Attribute Name="orrtRateTypeDesc" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="com.turnkey.setups.ordReinRates"
+                     BeanClass="com.turnkey.setups.ordReinRates"
+                     id="ordReinRates"/>
+</JavaBean>

@@ -1,0 +1,320 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:pageTemplate id="demoTemplate"
+                     viewId="/templates/pageTemplateDefs/tagDemoPortletTemplate2.jspx">
+      <f:attribute name="documentTitle" value="TurnQuest Group Life"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelBox text="Member Covers" showHeader="never" id="pb1">
+              <f:facet name="toolbar"/>
+              <af:panelBox text="Quotation Details"
+                           background="default" showHeader="never" id="pb2">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="6" width="10%" id="pg1">
+                  <af:outputLabel value="Quot Number"
+                                  inlineStyle="font-weight:bold;" id="ol1"/>
+                  <af:outputLabel value="Client"
+                                  inlineStyle="font-weight:bold;" id="ol2"/>
+                  <af:outputLabel value="Agent ID"
+                                  inlineStyle="font-weight:bold;" id="ol3"/>
+                  <af:outputLabel value="Class ID"
+                                  inlineStyle="font-weight:bold;" id="ol4"/>
+                  <af:outputLabel value="Product ID"
+                                  inlineStyle="font-weight:bold;" id="ol5"/>
+                  <af:outputLabel value="Branch"
+                                  inlineStyle="font-weight:bold;" id="ol6"/>
+                  <af:inputText label="#{bindings.quoNo.hints.label}"
+                                simple="true" columns="5"
+                                required="#{bindings.quoNo.hints.mandatory}"
+                                maximumLength="#{bindings.quoNo.hints.precision}"
+                                disabled="true"
+                                value="#{bindings.quoNo.inputValue}" id="it1">
+                    <f:validator binding="#{bindings.quoNo.validator}"/>
+                  </af:inputText>
+                  <af:inputText simple="true"
+                                columns="#{bindings.client.hints.displayWidth}"
+                                required="#{bindings.client.hints.mandatory}"
+                                maximumLength="#{bindings.client.hints.precision}"
+                                disabled="true"
+                                value="#{bindings.client.inputValue}" id="it2">
+                    <f:validator binding="#{bindings.client.validator}"/>
+                  </af:inputText>
+                  <af:inputText simple="true" columns="20"
+                                required="#{bindings.agnName.hints.mandatory}"
+                                maximumLength="#{bindings.agnName.hints.precision}"
+                                disabled="true"
+                                value="#{bindings.agnName.inputValue}" id="it3">
+                    <f:validator binding="#{bindings.agnName.validator}"/>
+                  </af:inputText>
+                  <af:inputText simple="true" columns="5"
+                                required="#{bindings.QUO_CLA_SHT_DESC.hints.mandatory}"
+                                maximumLength="#{bindings.QUO_CLA_SHT_DESC.hints.precision}"
+                                disabled="true"
+                                value="#{bindings.QUO_CLA_SHT_DESC.inputValue}"
+                                id="it4">
+                    <f:validator binding="#{bindings.QUO_CLA_SHT_DESC.validator}"/>
+                  </af:inputText>
+                  <af:inputText simple="true" columns="5"
+                                required="#{bindings.QUO_PROD_SHT_DESC.hints.mandatory}"
+                                maximumLength="#{bindings.QUO_PROD_SHT_DESC.hints.precision}"
+                                disabled="true"
+                                value="#{bindings.QUO_PROD_SHT_DESC.inputValue}"
+                                id="it5">
+                    <f:validator binding="#{bindings.QUO_PROD_SHT_DESC.validator}"/>
+                  </af:inputText>
+                  <af:inputText simple="true" columns="15"
+                                required="#{bindings.BRN_NAME.hints.mandatory}"
+                                maximumLength="#{bindings.BRN_NAME.hints.precision}"
+                                disabled="true"
+                                value="#{bindings.BRN_NAME.inputValue}"
+                                id="it6">
+                    <f:validator binding="#{bindings.BRN_NAME.validator}"/>
+                  </af:inputText>
+                </h:panelGrid>
+              </af:panelBox>
+              <h:panelGrid columns="1" id="pg2">
+                <af:table value="#{bindings.QuotMembers.collectionModel}"
+                          var="row" rows="#{bindings.QuotMembers.rangeSize}"
+                          emptyText="#{bindings.QuotMembers.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.QuotMembers.rangeSize}"
+                          selectedRowKeys="#{bindings.QuotMembers.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.QuotMembers.collectionModel.makeCurrent}"
+                          rowSelection="single"
+                          binding="#{manipulation.memberCoversLOV}"
+                          inlineStyle="width:590px; height:100px;" id="t1">
+                  <af:column sortProperty="quoMemNo" sortable="true"
+                             headerText="MEMBER NO" id="c1">
+                    <af:outputText value="#{row.quoMemNo}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="quoMemName" sortable="true"
+                             headerText="MEMBER NAME" id="c2">
+                    <af:outputText value="#{row.quoMemName}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_TOT_SA" sortable="true"
+                             headerText="TOT SA" id="c3">
+                    <af:outputText value="#{row.QMEM_TOT_SA}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_HEIGHT" sortable="true"
+                             headerText="HEIGHT" id="c4">
+                    <af:outputText value="#{row.QMEM_HEIGHT}" id="ot5"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_WEIGHT" sortable="true"
+                             headerText="WEIGHT" id="c5">
+                    <af:outputText value="#{row.QMEM_WEIGHT}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_WEIGHT_LOADING" sortable="true"
+                             headerText="WEIGHT LOADING" id="c6">
+                    <af:outputText value="#{row.QMEM_WEIGHT_LOADING}" id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_SYSTOLIC_PR" sortable="true"
+                             headerText="SYS PRS" id="c7">
+                    <af:outputText value="#{row.QMEM_SYSTOLIC_PR}" id="ot8"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_DIASTOLIC_PR" sortable="true"
+                             headerText="DIAS PRS" id="c8">
+                    <af:outputText value="#{row.QMEM_DIASTOLIC_PR}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_BPRESS_LOADING" sortable="true"
+                             headerText="B.Pr.Lo" id="c9">
+                    <af:outputText value="#{row.QMEM_BPRESS_LOADING}"
+                                   id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_LOADING_TYPE" sortable="true"
+                             headerText="Lo Type" id="c10">
+                    <af:outputText value="#{row.QMEM_LOADING_TYPE}" id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_LOADING_RATE" sortable="true"
+                             headerText="Lo.Rate" id="c11">
+                    <af:outputText value="#{row.QMEM_LOADING_RATE}" id="ot12"/>
+                  </af:column>
+                  <af:column sortProperty="QMEM_LOADING_DIV_FACT"
+                             sortable="true" headerText="Div Fact" id="c12">
+                    <af:outputText value="#{row.QMEM_LOADING_DIV_FACT}"
+                                   id="ot13"/>
+                  </af:column>
+                  <af:column id="c13">
+                    <af:commandButton icon="/icon_delete.gif"
+                                      action="#{manipulation.DeleteMemCoverDtls}"
+                                      id="cb1"/>
+                  </af:column>
+                </af:table>
+              </h:panelGrid>
+              <af:panelTabbed inlineStyle="width:inherit;" id="pt1">
+                <af:showDetailItem text="Pension Details"
+                                   rendered="#{Rendering.pensionproduct}"
+                                   id="sdi1">
+                  <h:panelGrid columns="4" width="40%" id="pg3">
+                    <h:panelGrid columns="2" id="pg4">
+                      <af:outputLabel value="Wef" id="ol7"/>
+                      <af:inputText label="Label 1" simple="true" columns="7"
+                                    id="it7"/>
+                      <af:outputLabel value="Wet" id="ol8"/>
+                      <af:inputText label="Label 2" simple="true" columns="7"
+                                    id="it8"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" width="10%" id="pg5">
+                      <af:outputLabel value="Earnings" id="ol9"/>
+                      <af:inputText label="Label 3" simple="true" columns="7"
+                                    id="it9"/>
+                      <af:outputLabel value="Employer Contr" id="ol10"/>
+                      <af:inputText label="Label 4" simple="true" columns="7"
+                                    id="it10"/>
+                      <af:outputLabel value="Employee Contr" id="ol11"/>
+                      <af:inputText label="Label 4" simple="true" columns="7"
+                                    id="it11"/>
+                      <af:outputLabel value="Employee Vol Contr" id="ol12"/>
+                      <af:inputText label="Label 4" simple="true" columns="7"
+                                    id="it12"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" width="10%" id="pg6">
+                      <af:outputLabel value="Total Contr" id="ol13"/>
+                      <af:inputText label="Label 3" simple="true" columns="7"
+                                    id="it13"/>
+                      <af:outputLabel value="Admin Fee Rate" id="ol14"/>
+                      <af:inputText label="Label 4" simple="true" columns="7"
+                                    id="it14"/>
+                      <af:outputLabel value="Net Annual Fund" id="ol15"/>
+                      <af:inputText label="Label 4" simple="true" columns="7"
+                                    id="it15"/>
+                      <af:outputLabel value="Interest Rate" id="ol16"/>
+                      <af:inputText label="Label 4" simple="true" columns="7"
+                                    id="it16"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" width="20%" id="pg7">
+                      <af:outputLabel value="Ann Fac Rate" id="ol17"/>
+                      <af:inputText label="Label 3" simple="true" columns="7"
+                                    id="it17"/>
+                      <af:outputLabel value="Pens Annum" id="ol18"/>
+                      <af:inputText label="Label 4" simple="true" columns="7"
+                                    id="it18"/>
+                      <af:outputLabel value="Est Mat Val" id="ol19"/>
+                      <af:inputText label="Label 4" simple="true" columns="7"
+                                    id="it19"/>
+                    </h:panelGrid>
+                  </h:panelGrid>
+                </af:showDetailItem>
+                <af:showDetailItem text="Member Limits" id="sdi2">
+                  <h:panelGrid columns="1" id="pg8">
+                    <af:table value="#{bindings.memCoverTypes.collectionModel}"
+                              var="row"
+                              rows="#{bindings.memCoverTypes.rangeSize}"
+                              emptyText="#{bindings.memCoverTypes.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.memCoverTypes.rangeSize}"
+                              selectedRowKeys="#{bindings.memCoverTypes.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.memCoverTypes.collectionModel.makeCurrent}"
+                              rowSelection="single"
+                              inlineStyle="width:800px; height:110px;" id="t2">
+                      <af:column sortProperty="cover_display" sortable="true"
+                                 headerText="COVER TYPE" id="c14">
+                        <af:outputText value="#{row.cover_display}" id="ot14"/>
+                      </af:column>
+                      <af:column sortProperty="QCM_COVER_WEF_DATE"
+                                 sortable="true" headerText="COVER WEF"
+                                 id="c15">
+                        <af:outputText value="#{row.QCM_COVER_WEF_DATE}"
+                                       id="ot15">
+                          <af:convertDateTime pattern="#{bindings.memCoverTypes.hints.QCM_COVER_WEF_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="QCM_COVER_WET_DATE"
+                                 sortable="true" headerText="COVER WET"
+                                 id="c16">
+                        <af:outputText value="#{row.QCM_COVER_WET_DATE}"
+                                       id="ot16">
+                          <af:convertDateTime pattern="#{bindings.memCoverTypes.hints.QCM_COVER_WET_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="QCM_SA" sortable="true"
+                                 headerText="SUM ASSURED" id="c17">
+                        <af:outputText value="#{row.QCM_SA}" id="ot17"/>
+                      </af:column>
+                      <af:column sortProperty="QCM_LOAD_DISC_PREM"
+                                 sortable="true" headerText="LOAD/DISC PREM"
+                                 id="c18">
+                        <af:outputText value="#{row.QCM_LOAD_DISC_PREM}"
+                                       id="ot18"/>
+                      </af:column>
+                      <af:column sortProperty="QCM_PREMIUM" sortable="true"
+                                 headerText="PREMIUM" id="c19">
+                        <af:outputText value="#{row.QCM_PREMIUM}" id="ot19"/>
+                      </af:column>
+                      <af:column sortProperty="QCM_ORIGINAL_LOAN_AMT"
+                                 sortable="true" headerText="ORIGINAL LOAN AMT"
+                                 id="c20">
+                        <af:outputText value="#{row.QCM_ORIGINAL_LOAN_AMT}"
+                                       id="ot20"/>
+                      </af:column>
+                      <af:column sortProperty="QCM_LOAN_ISSUE_DATE"
+                                 sortable="true" headerText="LOAN ISSUE DATE"
+                                 id="c21">
+                        <af:outputText value="#{row.QCM_LOAN_ISSUE_DATE}"
+                                       id="ot21">
+                          <af:convertDateTime pattern="#{bindings.memCoverTypes.hints.QCM_LOAN_ISSUE_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="QCM_ORIG_LOAN_REPAYMENT_PRD"
+                                 sortable="true"
+                                 headerText="ORIGINAL LOAN RPYMT DATE" id="c22">
+                        <af:outputText value="#{row.QCM_ORIG_LOAN_REPAYMENT_PRD}"
+                                       id="ot22"/>
+                      </af:column>
+                      <af:column sortProperty="QCM_SAVING_AMT" sortable="true"
+                                 headerText="SAVING AMT" id="c23">
+                        <af:outputText value="#{row.QCM_SAVING_AMT}" id="ot23"/>
+                      </af:column>
+                    </af:table>
+                  </h:panelGrid>
+                </af:showDetailItem>
+                <af:showDetailItem text="Joint Members" id="sdi3"
+                                   rendered="#{sessionScope['depCovered']=='J'}">
+                  <h:panelGrid columns="1" width="10%" id="pg9">
+                    <af:table value="#{bindings.QuotMembers1.collectionModel}"
+                              var="row"
+                              rows="#{bindings.QuotMembers1.rangeSize}"
+                              emptyText="#{bindings.QuotMembers1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.QuotMembers1.rangeSize}"
+                              selectedRowKeys="#{bindings.QuotMembers1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.QuotMembers1.collectionModel.makeCurrent}"
+                              rowSelection="single" inlineStyle="height:118px;"
+                              id="t3">
+                      <af:column sortProperty="quoMemNo" sortable="true"
+                                 headerText="MEMBER NUMBER" id="c24">
+                        <af:outputText value="#{row.quoMemNo}" id="ot24"/>
+                      </af:column>
+                      <af:column sortProperty="quoMemName" sortable="true"
+                                 headerText="NAME" id="c25">
+                        <af:outputText value="#{row.quoMemName}" id="ot25"/>
+                      </af:column>
+                    </af:table>
+                  </h:panelGrid>
+                </af:showDetailItem>
+                <af:showDetailItem text="Free Cover Limit" id="sdi4">
+                  <af:commandButton text="Determine FCL"
+                                    action="#{manipulation.DetermineFCL}"
+                                    id="cb2"/>
+                </af:showDetailItem>
+              </af:panelTabbed>
+              <af:commandButton text="Compute Premium"
+                                action="#{manipulation.computeQuotationPrem}"
+                                id="cb3"/>
+              <af:commandButton text="Finish"
+                                action="#{manipulation.ShowBackPage}" id="cb4"/>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </af:group>
+      </f:facet>
+    </af:pageTemplate>
+  </f:view>
+</jsp:root>

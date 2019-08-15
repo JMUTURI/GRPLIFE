@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.51.56" id="DataBindings" SeparateXMLFiles="false"
+             Package="LMSG.view.root" ClientType="Generic">
+  <pageMap>
+    <page path="/g_qtrans.jspx" usageId="LMSG_view_root_g_qtransPageDef"/>
+    <page path="/gquoedt.jspx" usageId="LMSG_view_root_gquoedtPageDef"/>
+    <page path="/g_conpol.jspx" usageId="LMSG_view_root_g_conpolPageDef"/>
+    <page path="/g_undwrt.jspx" usageId="LMSG_view_root_g_undwrtPageDef"/>
+    <page path="/g_quotone.jspx" usageId="LMSG_view_root_g_quotonePageDef"/>
+    <page path="/quocovers.jspx" usageId="LMSG_view_root_quocoversPageDef"/>
+    <page path="/quotaxes.jspx" usageId="LMSG_view_root_quotaxesPageDef"/>
+    <page path="/quocateg.jspx" usageId="LMSG_view_root_quocategPageDef"/>
+
+    <page path="/provisions.jspx" usageId="LMSG_view_root_provisionsPageDef"/>
+    <page path="/memcovers.jspx" usageId="LMSG_view_root_memcoversPageDef"/>
+    <page path="/undwrtone.jspx" usageId="LMSG_view_root_undwrtonePageDef"/>
+    <page path="/undwrtwo.jspx" usageId="LMSG_view_root_undwrtwoPageDef"/>
+    <page path="/undwrthr.jspx" usageId="LMSG_view_root_undwrthrPageDef"/>
+    <page path="/undcovers.jspx" usageId="LMSG_view_root_undcoversPageDef"/>
+    <page path="/undwrtax.jspx" usageId="LMSG_view_root_undwrtaxPageDef"/>
+    <page path="/undwrpro.jspx" usageId="LMSG_view_root_undwrproPageDef"/>
+    <page path="/undcateg.jspx" usageId="LMSG_view_root_undcategPageDef"/>
+    <page path="/undwrdoc.jspx" usageId="LMSG_view_root_undwrdocPageDef1"/>
+    <page path="/undwrmem.jspx" usageId="LMSG_view_root_undwrmemPageDef"/>
+
+    <page path="/g_undedt.jspx" usageId="LMSG_view_root_g_undedtPageDef"/>
+    <page path="/coverdtls.jspx" usageId="LMSG_view_root_coverdtlsPageDef"/>
+    <page path="/g_reinpl.jspx" usageId="LMSG_view_root_g_reinplPageDef"/>
+    <page path="/quomembr.jspx" usageId="LMSG_view_root_quomembrPageDef"/>
+    <page path="/recptrns.jspx" usageId="LMSG_view_root_recptrnsPageDef"/>
+    <page path="/grctpymt.jspx" usageId="LMSG_view_root_grctpymtPageDef"/>
+    <page path="/g_trans.jspx" usageId="LMSG_view_root_g_transPageDef"/>
+    <page path="/g_edtclm.jspx" usageId="LMSG_view_root_g_edtclmPageDef"/>
+    <page path="/g_clmtra.jspx" usageId="LMSG_view_root_g_clmtraPageDef"/>
+    <page path="/g_claims.jspx" usageId="LMSG_view_root_g_claimsPageDef"/>
+    <page path="/g_clmpym.jspx" usageId="LMSG_view_root_g_clmpymPageDef"/>
+    <page path="/g_qmembers.jspx" usageId="LMSG_view_root_g_qmembersPageDef"/>
+    <page path="/qmemcovers.jspx" usageId="LMSG_view_root_qmemcoversPageDef"/>
+    <page path="/g_pmembers.jspx" usageId="LMSG_view_root_g_pmembersPageDef"/>
+    <page path="/g_lapse.jspx" usageId="LMSG_view_root_g_lapsePageDef"/>
+    <page path="/g_contra.jspx" usageId="LMSG_view_root_g_contraPageDef"/>
+    <page path="/g_reinst.jspx" usageId="LMSG_view_root_g_reinstPageDef"/>
+    <page path="/medicals.jspx" usageId="LMSG_view_root_medicalsPageDef"/>
+    <page path="/medDetails.jspx" usageId="LMSG_view_root_medDetailsPageDef"/>
+    <page path="/medicalPayments.jspx" usageId="LMSG_view_root_medicalPaymentsPageDef"/>
+    <page path="/sms.jspx" usageId="LMSG_view_root_smsPageDef"/>
+    <page path="/email.jspx" usageId="LMSG_view_root_emailPageDef"/>
+    <page path="/policyMedicals.jspx" usageId="LMSG_view_root_policyMedicalsPageDef"/>
+    <page path="/pensionValuation.jspx" usageId="LMSG_view_root_pensionValuationPageDef"/>
+    <page path="/createClient.jspx" usageId="LMSG_view_root_createClientPageDef"/>
+    <page path="/lmsmain.jspx" usageId="LMSG_view_root_lmsmainPageDef"/>
+    <page path="/wfProcessing.jspx" usageId="LMSG_view_root_wfProcessingPageDef"/>
+    <page path="/g_alloctrans.jspx" usageId="LMSG_view_root_g_alloctransPageDef"/>
+    <page path="/g_allocations.jspx" usageId="LMSG_view_root_g_allocationsPageDef"/>
+    <page path="/ticketMngmt.jspx" usageId="LMSG_view_root_ticketMngmtPageDef"/>
+    <page path="/g_pensallocations.jspx"
+          usageId="LMSG_view_root_g_pensallocationsPageDef"/>
+    <page path="/g_quoteEnquiry.jspx" usageId="LMSG_view_root_g_quoteEnquiryPageDef"/>
+    <page path="/g_receipting.jspx" usageId="LMSG_view_root_g_receiptingPageDef"/>
+    <page path="/pmember_alter.jspx" usageId="LMSG_view_root_pmember_alterPageDef"/>
+    <page path="/g_renew.jspx" usageId="LMSG_view_root_g_renewPageDef"/>
+    <page path="/testHome.jspx" usageId="LMSG_view_root_testHomePageDef"/>
+    <page path="/templates/GroupTemplate1.jspx"
+          usageId="LMSG_view_root_GroupTemplate1PageDef"/>
+    <page path="/seqtemps.jspx" usageId="LMSG_view_root_seqtempsPageDef"/>
+    <page path="/commRates.jspx" usageId="LMSG_view_root_commRatesPageDef"/>
+    <page path="/premiumMasks.jspx" usageId="LMSG_view_root_premiumMasksPageDef"/>
+    <page path="/parameters.jspx" usageId="LMSG_view_root_parametersPageDef"/>
+    <page path="/fclFactors.jspx" usageId="LMSG_view_root_fclFactorsPageDef"/>
+    <page path="/businessTransactions.jspx"
+          usageId="LMSG_view_root_businessTransactionsPageDef"/>
+    <page path="/taxTypes.jspx" usageId="LMSG_view_root_taxTypesPageDef"/>
+    <page path="/taxRatesProduct.jspx" usageId="LMSG_view_root_taxRatesProductPageDef"/>
+    <page path="/medTests.jspx" usageId="LMSG_view_root_medTestsPageDef"/>
+    <page path="/premiumRates.jspx" usageId="LMSG_view_root_premiumRatesPageDef"/>
+    <page path="/medTestGrouping.jspx" usageId="LMSG_view_root_medTestGroupingPageDef"/>
+    <page path="/treatyTypes.jspx" usageId="LMSG_view_root_treatyTypesPageDef"/>
+    <page path="/medRequirements.jspx" usageId="LMSG_view_root_medRequirementsPageDef"/>
+    <page path="/renMedRatings.jspx" usageId="LMSG_view_root_renMedRatingsPageDef"/>
+    <page path="/occupations.jspx" usageId="LMSG_view_root_occupationsPageDef"/>
+    <page path="/riRatesTable.jspx" usageId="LMSG_view_root_riRatesTablePageDef"/>
+    <page path="/osReinBalances.jspx" usageId="LMSG_view_root_osReinBalancesPageDef"/>
+    <page path="/tretstp.jspx" usageId="LMSG_view_root_tretstpPageDef"/>
+    <page path="/intermedgrp.jspx" usageId="LMSG_view_root_intermedgrpPageDef"/>
+    <page path="/clagngrp.jspx" usageId="LMSG_view_root_clagngrpPageDef"/>
+    <page path="/WEB-INF/covertyp.jspx" usageId="LMSG_view_root_covertypPageDef"/>
+    <page path="/covertyp.jspx" usageId="LMSG_view_root_covertypPageDef1"/>
+    <page path="/prod_cvt.jspx" usageId="LMSG_view_root_prod_cvtPageDef"/>
+    <page path="/g_class.jspx" usageId="LMSG_view_root_g_classPageDef"/>
+    <page path="/agency.jspx" usageId="LMSG_view_root_agencyPageDef"/>
+    <page path="/annufact.jspx" usageId="LMSG_view_root_annufactPageDef"/>
+    <page path="/annrttyp.jspx" usageId="LMSG_view_root_annrttypPageDef"/>
+    <page path="/prod_ret.jspx" usageId="LMSG_view_root_prod_retPageDef"/>
+    <page path="/def_type.jspx" usageId="LMSG_view_root_def_typePageDef"/>
+    <page path="/intrates.jspx" usageId="LMSG_view_root_intratesPageDef"/>
+    <page path="/pencfac.jspx" usageId="LMSG_view_root_pencfacPageDef"/>
+    <page path="/ri_reports.jspx" usageId="LMSG_view_root_ri_reportsPageDef"/>
+    <page path="/ri_memrpt.jspx" usageId="LMSG_view_root_ri_memrptPageDef"/>
+    <page path="/pol_prdnrpt.jspx" usageId="LMSG_view_root_pol_prdnrptPageDef"/>
+    <page path="/prod_trn.jspx" usageId="LMSG_view_root_prod_trnPageDef"/>
+    <page path="/cvt_caus.jspx" usageId="LMSG_view_root_cvt_causPageDef"/>
+    <page path="/prodcaus.jspx" usageId="LMSG_view_root_prodcausPageDef"/>
+    <page path="/pol_docs.jspx" usageId="LMSG_view_root_pol_docsPageDef"/>
+    <page path="/bdrcrnar.jspx" usageId="LMSG_view_root_bdrcrnarPageDef"/>
+    <page path="/reintab.jspx" usageId="LMSG_view_root_reintabPageDef"/>
+    <page path="/premiumRates_g.jspx" usageId="LMSG_view_root_premiumRates_gPageDef"/>
+    <page path="/groupProduction.jspx" usageId="LMSG_view_root_groupProductionPageDef"/>
+    <page path="/periods.jspx" usageId="LMSG_view_root_periodsPageDef"/>
+    <page path="/productProvisions.jspx"
+          usageId="LMSG_view_root_productProvisionsPageDef"/>
+    <page path="/educRates.jspx" usageId="LMSG_view_root_educRatesPageDef"/>
+    <page path="/transTypes.jspx" usageId="LMSG_view_root_transTypesPageDef"/>
+    <page path="/memberReinst.jspx" usageId="LMSG_view_root_memberReinstPageDef"/>
+    <page path="/loadBalances.jspx"
+          usageId="LMSG_view_root_loadBalancesPageDef"/>
+    <page path="/delPolicySchedule.jspx"
+          usageId="LMSG_view_root_delPolicySchedulePageDef"/>
+    <page path="/commissionPayments.jspx"
+          usageId="LMSG_view_root_commissionPaymentsPageDef"/>
+    <page path="/loadPolicies.jspx"
+          usageId="LMSG_view_root_loadPoliciesPageDef"/>
+    <page path="/quoteStatuses.jspx"
+          usageId="LMSG_view_root_quoteStatusesPageDef"/>
+    <page path="/emassValuation.jspx"
+          usageId="LMSG_view_root_emassValuationPageDef"/>
+    <page path="/pimport.jspx" usageId="LMSG_view_root_pimportPageDef"/>
+    <page path="/refund_import.jspx"
+          usageId="LMSG_view_root_refund_importPageDef"/>
+    <page path="/qmembersimport.jspx"
+          usageId="LMSG_view_root_qmembersimportPageDef"/>
+    <page path="/AccessGroups.jspx"
+          usageId="LMSG_view_root_AccessGroupsPageDef"/>
+    <page path="/GroupSubdivisions.jspx"
+          usageId="LMSG_view_root_GroupSubdivisionsPageDef"/>
+    <page path="/ProductImportTmplts.jspx"
+          usageId="LMSG_view_root_ProductImportTmpltsPageDef"/>
+    <page path="/createTickets.jspx"
+          usageId="LMSG_view_root_createTicketsPageDef"/>
+    <page path="/g_autclm.jspx" usageId="LMSG_view_root_g_autclmPageDef"/>
+    <page path="/Loan_Import.jspx" usageId="LMSG_view_root_Loan_ImportPageDef"/>
+    <page path="/g_memcvrclm.jspx" usageId="LMSG_view_root_g_memcvrclmPageDef"/>
+    <page path="/g_memcvrclmdtls.jspx"
+          usageId="LMSG_view_root_g_memcvrclmdtlsPageDef"/>
+    <page path="/memcvr.jspx" usageId="LMSG_view_root_memcvrPageDef"/>
+    <page path="/g_naicom_rpt.jspx"
+          usageId="LMSG_view_root_g_naicom_rptPageDef"/>
+    <page path="/enmassloading.jspx"
+          usageId="LMSG_view_root_enmassloadingPageDef"/>
+    <page path="/WEB-INF/enmassclientloading.jspx"
+          usageId="LMSG_view_root_enmassclientloadingPageDef"/>
+    <page path="/enmassclientloading.jspx"
+          usageId="LMSG_view_root_enmassclientloadingPageDef1"/>
+    <page path="/g_multiclmtra.jspx"
+          usageId="LMSG_view_root_g_multiclmtraPageDef"/>
+    <page path="/g_multiclaims.jspx"
+          usageId="LMSG_view_root_g_multiclaimsPageDef"/>
+    <page path="/g_multiclmpym.jspx"
+          usageId="LMSG_view_root_g_multiclmpymPageDef"/>
+    <page path="/prod_cvt_loadings.jspx"
+          usageId="LMSG_view_root_prod_cvt_loadingsPageDef"/>
+    <page path="/report_email.jspx"
+          usageId="LMSG_view_root_report_emailPageDef"/>
+    <page path="/overrideCommRates.jspx"
+          usageId="LMSG_view_root_overrideCommRatesPageDef"/>
+    <page path="/prod_budget.jspx" usageId="LMSG_view_root_prod_budgetPageDef"/>
+    <page path="/chqTracking.jspx" usageId="LMSG_view_root_chqTrackingPageDef"/>
+    <page path="/qmember_alter.jspx"
+          usageId="LMSG_view_root_qmember_alterPageDef"/>
+    <page path="/portfolioTrans.jspx"
+          usageId="LMSG_view_root_portfolioTransPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="LMSG_view_root_PageDef" path="g_qtrans.PageDef"/>
+    <page id="LMSG_view_root_g_qtransPageDef" path="LMSG.view.pageDefs.g_qtransPageDef"/>
+    <page id="LMSG_view_root_gquoedtPageDef" path="LMSG.view.pageDefs.gquoedtPageDef"/>
+    <page id="LMSG_view_root_g_conpolPageDef" path="LMSG.view.pageDefs.g_conpolPageDef"/>
+    <page id="LMSG_view_root_g_undwrtPageDef" path="LMSG.view.pageDefs.g_undwrtPageDef"/>
+    <page id="LMSG_view_root_g_quotonePageDef"
+          path="LMSG.view.pageDefs.g_quotonePageDef"/>
+    <page id="LMSG_view_root_quocoversPageDef"
+          path="LMSG.view.pageDefs.quocoversPageDef"/>
+    <page id="LMSG_view_root_quotaxesPageDef" path="LMSG.view.pageDefs.quotaxesPageDef"/>
+    <page id="LMSG_view_root_quocategPageDef" path="LMSG.view.pageDefs.quocategPageDef"/>
+
+    <page id="LMSG_view_root_provisionsPageDef"
+          path="LMSG.view.pageDefs.provisionsPageDef"/>
+    <page id="LMSG_view_root_memcoversPageDef"
+          path="LMSG.view.pageDefs.memcoversPageDef"/>
+    <page id="LMSG_view_root_undwrtonePageDef"
+          path="LMSG.view.pageDefs.undwrtonePageDef"/>
+    <page id="LMSG_view_root_undwrtwoPageDef" path="LMSG.view.pageDefs.undwrtwoPageDef"/>
+    <page id="LMSG_view_root_undwrthrPageDef" path="LMSG.view.pageDefs.undwrthrPageDef"/>
+    <page id="LMSG_view_root_undcoversPageDef"
+          path="LMSG.view.pageDefs.undcoversPageDef"/>
+    <page id="LMSG_view_root_undwrtaxPageDef" path="LMSG.view.pageDefs.undwrtaxPageDef"/>
+    <page id="LMSG_view_root_undwrproPageDef" path="LMSG.view.pageDefs.undwrproPageDef"/>
+    <page id="LMSG_view_root_undcategPageDef" path="LMSG.view.pageDefs.undcategPageDef"/>
+    <page id="LMSG_view_root_undwrdocPageDef" path="LMSG.view.Policy.undwrdocPageDef"/>
+    <page id="LMSG_view_root_undwrdocPageDef1" path="LMSG.view.pageDefs.undwrdocPageDef"/>
+    <page id="LMSG_view_root_undwrmemPageDef" path="LMSG.view.pageDefs.undwrmemPageDef"/>
+
+    <page id="LMSG_view_root_g_undedtPageDef" path="LMSG.view.pageDefs.g_undedtPageDef"/>
+    <page id="LMSG_view_root_g_membersPageDef"
+          path="LMSG.view.pageDefs.g_membersPageDef"/>
+    <page id="LMSG_view_root_coverdtlsPageDef"
+          path="LMSG.view.pageDefs.coverdtlsPageDef"/>
+    <page id="LMSG_view_root_g_reinplPageDef" path="LMSG.view.pageDefs.g_reinplPageDef"/>
+    <page id="LMSG_view_root_quomembrPageDef" path="LMSG.view.pageDefs.quomembrPageDef"/>
+    <page id="LMSG_view_root_recptrnsPageDef" path="LMSG.view.pageDefs.recptrnsPageDef"/>
+    <page id="LMSG_view_root_grctpymtPageDef" path="LMSG.view.pageDefs.grctpymtPageDef"/>
+    <page id="LMSG_view_root_g_transPageDef" path="LMSG.view.pageDefs.g_transPageDef"/>
+    <page id="LMSG_view_root_g_edtclmPageDef" path="LMSG.view.pageDefs.g_edtclmPageDef"/>
+    <page id="LMSG_view_root_g_clmtraPageDef" path="LMSG.view.pageDefs.g_clmtraPageDef"/>
+    <page id="LMSG_view_root_g_claimsPageDef" path="LMSG.view.pageDefs.g_claimsPageDef"/>
+    <page id="LMSG_view_root_g_clmpymPageDef" path="LMSG.view.pageDefs.g_clmpymPageDef"/>
+    <page id="LMSG_view_root_g_qmembersPageDef"
+          path="LMSG.view.pageDefs.g_qmembersPageDef"/>
+    <page id="LMSG_view_root_qmemcoversPageDef"
+          path="LMSG.view.pageDefs.qmemcoversPageDef"/>
+    <page id="LMSG_view_root_g_pmembersPageDef"
+          path="LMSG.view.pageDefs.g_pmembersPageDef"/>
+    <page id="LMSG_view_root_g_lapsePageDef" path="LMSG.view.pageDefs.g_lapsePageDef"/>
+    <page id="LMSG_view_root_g_contraPageDef" path="LMSG.view.pageDefs.g_contraPageDef"/>
+    <page id="LMSG_view_root_g_reinstPageDef" path="LMSG.view.pageDefs.g_reinstPageDef"/>
+    <page id="LMSG_view_root_medicalsPageDef" path="LMSG.view.pageDefs.medicalsPageDef"/>
+    <page id="LMSG_view_root_medDetailsPageDef"
+          path="LMSG.view.pageDefs.medDetailsPageDef"/>
+    <page id="LMSG_view_root_medicalPaymentsPageDef"
+          path="LMSG.view.pageDefs.medicalPaymentsPageDef"/>
+    <page id="LMSG_view_root_smsPageDef" path="LMSG.view.pageDefs.smsPageDef"/>
+    <page id="LMSG_view_root_emailPageDef" path="LMSG.view.pageDefs.emailPageDef"/>
+    <page id="LMSG_view_root_policyMedicalsPageDef"
+          path="LMSG.view.pageDefs.policyMedicalsPageDef"/>
+    <page id="LMSG_view_root_pensionValuationPageDef"
+          path="LMSG.view.pageDefs.pensionValuationPageDef"/>
+    <page id="LMSG_view_root_createClientPageDef"
+          path="LMSG.view.pageDefs.createClientPageDef"/>
+    <page id="LMSG_view_root_lmsmainPageDef" path="LMSG.view.pageDefs.lmsmainPageDef"/>
+    <page id="LMSG_view_root_wfProcessingPageDef"
+          path="LMSG.view.pageDefs.wfProcessingPageDef"/>
+    <page id="LMSG_view_root_g_alloctransPageDef"
+          path="LMSG.view.pageDefs.g_alloctransPageDef"/>
+    <page id="LMSG_view_root_g_allocationsPageDef"
+          path="LMSG.view.pageDefs.g_allocationsPageDef"/>
+    <page id="LMSG_view_root_ticketMngmtPageDef"
+          path="LMSG.view.pageDefs.ticketMngmtPageDef"/>
+    <page id="LMSG_view_root_g_pensallocationsPageDef"
+          path="LMSG.view.pageDefs.g_pensallocationsPageDef"/>
+    <page id="LMSG_view_root_g_quoteEnquiryPageDef"
+          path="LMSG.view.pageDefs.g_quoteEnquiryPageDef"/>
+    <page id="LMSG_view_root_g_receiptingPageDef"
+          path="LMSG.view.pageDefs.g_receiptingPageDef"/>
+    <page id="LMSG_view_root_pmember_alterPageDef"
+          path="LMSG.view.pageDefs.pmember_alterPageDef"/>
+    <page id="LMSG_view_root_g_renewPageDef" path="LMSG.view.pageDefs.g_renewPageDef"/>
+    <page id="LMSG_view_root_testHomePageDef" path="LMSG.view.pageDefs.testHomePageDef"/>
+    <page id="LMSG_view_root_GroupTemplate1PageDef"
+          path="templates.GroupTemplate1PageDef"/>
+    <page id="LMSG_view_root_seqtempsPageDef" path="LMSG.view.pageDefs.seqtempsPageDef"/>
+    <page id="LMSG_view_root_commRatesPageDef"
+          path="LMSG.view.pageDefs.commRatesPageDef"/>
+    <page id="LMSG_view_root_premiumMasksPageDef"
+          path="LMSG.view.pageDefs.premiumMasksPageDef"/>
+    <page id="LMSG_view_root_parametersPageDef"
+          path="LMSG.view.pageDefs.parametersPageDef"/>
+    <page id="LMSG_view_root_fclFactorsPageDef"
+          path="LMSG.view.pageDefs.fclFactorsPageDef"/>
+    <page id="LMSG_view_root_businessTransactionsPageDef"
+          path="LMSG.view.pageDefs.businessTransactionsPageDef"/>
+    <page id="LMSG_view_root_taxTypesPageDef" path="LMSG.view.pageDefs.taxTypesPageDef"/>
+    <page id="LMSG_view_root_taxRatesProductPageDef"
+          path="LMSG.view.pageDefs.taxRatesProductPageDef"/>
+    <page id="LMSG_view_root_medTestsPageDef" path="LMSG.view.pageDefs.medTestsPageDef"/>
+    <page id="LMSG_view_root_premiumRatesPageDef"
+          path="LMSG.view.pageDefs.premiumRatesPageDef"/>
+    <page id="LMSG_view_root_medTestGroupingPageDef"
+          path="LMSG.view.pageDefs.medTestGroupingPageDef"/>
+    <page id="LMSG_view_root_treatyTypesPageDef"
+          path="LMSG.view.pageDefs.treatyTypesPageDef"/>
+    <page id="LMSG_view_root_medRequirementsPageDef"
+          path="LMSG.view.pageDefs.medRequirementsPageDef"/>
+    <page id="LMSG_view_root_renMedRatingsPageDef"
+          path="LMSG.view.pageDefs.renMedRatingsPageDef"/>
+    <page id="LMSG_view_root_occupationsPageDef"
+          path="LMSG.view.pageDefs.occupationsPageDef"/>
+    <page id="LMSG_view_root_riRatesTablePageDef"
+          path="LMSG.view.pageDefs.riRatesTablePageDef"/>
+    <page id="LMSG_view_root_osReinBalancesPageDef"
+          path="LMSG.view.pageDefs.osReinBalancesPageDef"/>
+    <page id="LMSG_view_root_tretstpPageDef" path="LMSG.view.pageDefs.tretstpPageDef"/>
+    <page id="LMSG_view_root_intermedgrpPageDef"
+          path="LMSG.view.pageDefs.intermedgrpPageDef"/>
+    <page id="LMSG_view_root_clagngrpPageDef" path="LMSG.view.pageDefs.clagngrpPageDef"/>
+    <page id="LMSG_view_root_covertypPageDef" path="LMSG.view.pageDefs.covertypPageDef"/>
+    <page id="LMSG_view_root_covertypPageDef1"
+          path="LMSG.view.pageDefs.covertypPageDef1"/>
+    <page id="LMSG_view_root_prod_cvtPageDef" path="LMSG.view.pageDefs.prod_cvtPageDef"/>
+    <page id="LMSG_view_root_g_classPageDef" path="LMSG.view.pageDefs.g_classPageDef"/>
+    <page id="LMSG_view_root_agencyPageDef" path="LMSG.view.pageDefs.agencyPageDef"/>
+    <page id="LMSG_view_root_annufactPageDef" path="LMSG.view.pageDefs.annufactPageDef"/>
+    <page id="LMSG_view_root_annrttypPageDef" path="LMSG.view.pageDefs.annrttypPageDef"/>
+    <page id="LMSG_view_root_prod_retPageDef" path="LMSG.view.pageDefs.prod_retPageDef"/>
+    <page id="LMSG_view_root_def_typePageDef" path="LMSG.view.pageDefs.def_typePageDef"/>
+    <page id="LMSG_view_root_intratesPageDef" path="LMSG.view.pageDefs.intratesPageDef"/>
+    <page id="LMSG_view_root_pencfacPageDef" path="LMSG.view.pageDefs.pencfacPageDef"/>
+    <page id="LMSG_view_root_ri_reportsPageDef"
+          path="LMSG.view.pageDefs.ri_reportsPageDef"/>
+    <page id="LMSG_view_root_ri_memrptPageDef"
+          path="LMSG.view.pageDefs.ri_memrptPageDef"/>
+    <page id="LMSG_view_root_pol_prdnrptPageDef"
+          path="LMSG.view.pageDefs.pol_prdnrptPageDef"/>
+    <page id="LMSG_view_root_prod_trnPageDef" path="LMSG.view.pageDefs.prod_trnPageDef"/>
+    <page id="LMSG_view_root_cvt_causPageDef" path="LMSG.view.pageDefs.cvt_causPageDef"/>
+    <page id="LMSG_view_root_prodcausPageDef" path="LMSG.view.pageDefs.prodcausPageDef"/>
+    <page id="LMSG_view_root_pol_docsPageDef" path="LMSG.view.pageDefs.pol_docsPageDef"/>
+    <page id="LMSG_view_root_bdrcrnarPageDef" path="LMSG.view.pageDefs.bdrcrnarPageDef"/>
+    <page id="LMSG_view_root_reintabPageDef" path="LMSG.view.pageDefs.reintabPageDef"/>
+    <page id="LMSG_view_root_premiumRates_gPageDef"
+          path="LMSG.view.pageDefs.premiumRates_gPageDef"/>
+    <page id="LMSG_view_root_groupProductionPageDef"
+          path="LMSG.view.pageDefs.groupProductionPageDef"/>
+    <page id="LMSG_view_root_periodsPageDef" path="LMSG.view.pageDefs.periodsPageDef"/>
+    <page id="LMSG_view_root_productProvisionsPageDef"
+          path="LMSG.view.pageDefs.productProvisionsPageDef"/>
+    <page id="LMSG_view_root_educRatesPageDef"
+          path="LMSG.view.pageDefs.educRatesPageDef"/>
+    <page id="LMSG_view_root_transTypesPageDef"
+          path="LMSG.view.pageDefs.transTypesPageDef"/>
+    <page id="LMSG_view_root_memberReinstPageDef"
+          path="LMSG.view.pageDefs.memberReinstPageDef"/>
+    <page id="LMSG_view_root_loadBalancesPageDef"
+          path="LMSG.view.pageDefs.loadBalancesPageDef"/>
+    <page id="LMSG_view_root_delPolicySchedulePageDef"
+          path="LMSG.view.pageDefs.delPolicySchedulePageDef"/>
+    <page id="LMSG_view_root_commissionPaymentsPageDef"
+          path="LMSG.view.pageDefs.commissionPaymentsPageDef"/>
+    <page id="LMSG_view_root_loadPoliciesPageDef"
+          path="view.pageDefs.loadPoliciesPageDef"/>
+    <page id="LMSG_view_root_quoteStatusesPageDef"
+          path="view.pageDefs.quoteStatusesPageDef"/>
+    <page id="LMSG_view_root_emassValuationPageDef"
+          path="view.pageDefs.emassValuationPageDef"/>
+    <page id="LMSG_view_root_pimportPageDef"
+          path="view.pageDefs.pimportPageDef"/>
+    <page id="LMSG_view_root_refund_importPageDef"
+          path="view.pageDefs.refund_importPageDef"/>
+    <page id="LMSG_view_root_qmembersimportPageDef"
+          path="view.pageDefs.qmembersimportPageDef"/>
+    <page id="LMSG_view_root_AccessGroupsPageDef"
+          path="view.pageDefs.AccessGroupsPageDef"/>
+    <page id="LMSG_view_root_GroupSubdivisionsPageDef"
+          path="view.pageDefs.GroupSubdivisionsPageDef"/>
+    <page id="LMSG_view_root_ProductImportTmpltsPageDef"
+          path="view.pageDefs.ProductImportTmpltsPageDef"/>
+    <page id="LMSG_view_root_createTicketsPageDef"
+          path="view.pageDefs.createTicketsPageDef"/>
+    <page id="LMSG_view_root_g_autclmPageDef"
+          path="view.pageDefs.g_autclmPageDef"/>
+
+    <page id="LMSG_view_root_Loan_ImportPageDef"
+          path="view.pageDefs.Loan_ImportPageDef"/>
+    <page id="LMSG_view_root_g_memcvrclmPageDef"
+          path="view.pageDefs.g_memcvrclmPageDef"/>
+    <page id="LMSG_view_root_g_memcvrclmdtlsPageDef"
+          path="view.pageDefs.g_memcvrclmdtlsPageDef"/>
+    <page id="LMSG_view_root_memcvrPageDef" path="view.pageDefs.memcvrPageDef"/>
+    <page id="LMSG_view_root_g_naicom_rptPageDef"
+          path="view.pageDefs.g_naicom_rptPageDef"/>
+    <page id="LMSG_view_root_enmassloadingPageDef"
+          path="view.pageDefs.enmassloadingPageDef"/>
+    <page id="LMSG_view_root_enmassclientloadingPageDef"
+          path="view.pageDefs.enmassclientloadingPageDef"/>
+    <page id="LMSG_view_root_enmassclientloadingPageDef1"
+          path="view.pageDefs.enmassclientloadingPageDef1"/>
+    <page id="LMSG_view_root_g_multiclmtraPageDef"
+          path="view.pageDefs.g_multiclmtraPageDef"/>
+    <page id="LMSG_view_root_g_multiclaimsPageDef"
+          path="view.pageDefs.g_multiclaimsPageDef"/>
+    <page id="LMSG_view_root_g_multiclmpymPageDef"
+          path="view.pageDefs.g_multiclmpymPageDef"/>
+    <page id="LMSG_view_root_prod_cvt_loadingsPageDef"
+          path="view.pageDefs.prod_cvt_loadingsPageDef"/>
+    <page id="LMSG_view_root_report_emailPageDef"
+          path="view.pageDefs.report_emailPageDef"/>
+    <page id="LMSG_view_root_overrideCommRatesPageDef"
+          path="view.pageDefs.overrideCommRatesPageDef"/>
+    <page id="LMSG_view_root_prod_budgetPageDef"
+          path="view.pageDefs.prod_budgetPageDef"/>
+    <page id="LMSG_view_root_chqTrackingPageDef"
+          path="view.pageDefs.chqTrackingPageDef"/>
+    <page id="LMSG_view_root_qmember_alterPageDef"
+          path="view.pageDefs.qmember_alterPageDef"/>
+    <page id="LMSG_view_root_portfolioTransPageDef"
+          path="view.pageDefs.portfolioTransPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="EcmUtilDAO" path="LMSG.view.root.EcmUtilDAO"/>
+    <dc id="TicketsDAO" path="LMSG.view.root.TicketsDAO"/>
+    <dc id="periodsDAO" path="LMSG.view.root.periodsDAO"/>
+    <dc id="ordReinRatesDAO" path="LMSG.view.root.ordReinRatesDAO"/>
+    <dc id="causationsDAO" path="LMSG.view.root.causationsDAO"/>
+    <dc id="productTransactionsDAO" path="LMSG.view.root.productTransactionsDAO"/>
+    <dc id="pensionCostingFactorsDAO" path="LMSG.view.root.pensionCostingFactorsDAO"/>
+    <dc id="interestRatesDAO" path="LMSG.view.root.interestRatesDAO"/>
+    <dc id="relationTypesDAO" path="LMSG.view.root.relationTypesDAO"/>
+    <dc id="productCvtDependentsDAO" path="LMSG.view.root.productCvtDependentsDAO"/>
+    <dc id="annFactrDescDAO" path="LMSG.view.root.annFactrDescDAO"/>
+    <dc id="accountTypesDAO" path="LMSG.view.root.accountTypesDAO"/>
+    <dc id="ArrangementCoverTypesDAO" path="LMSG.view.root.ArrangementCoverTypesDAO"/>
+    <dc id="treatyParticipantsDAO" path="LMSG.view.root.treatyParticipantsDAO"/>
+    <dc id="treatiesDAO" path="LMSG.view.root.treatiesDAO"/>
+    <dc id="treatySetupDAO" path="LMSG.view.root.treatySetupDAO"/>
+    <dc id="ProductSetupDAO" path="LMSG.view.root.ProductSetupDAO"/>
+    <dc id="treatyProdCoverTypesDAO" path="LMSG.view.root.treatyProdCoverTypesDAO"/>
+    <dc id="treatyProductsDAO" path="LMSG.view.root.treatyProductsDAO"/>
+    <dc id="arrangementSetupsDAO" path="LMSG.view.root.arrangementSetupsDAO"/>
+    <dc id="treatyArrangementsDAO" path="LMSG.view.root.treatyArrangementsDAO"/>
+    <dc id="SetupsDAO" path="LMSG.view.root.SetupsDAO"/>
+    <dc id="sessionAuthenticator" path="LMSG.view.root.sessionAuthenticator"/>
+    <dc id="RenewalDAO" path="LMSG.view.root.RenewalDAO"/>
+    <dc id="AccountDAO" path="LMSG.view.root.AccountDAO"/>
+    <dc id="workflowDAO" path="LMSG.view.root.workflowDAO"/>
+    <dc id="ClientDAO" path="LMSG.view.root.ClientDAO"/>
+    <dc id="pensionsDAO" path="LMSG.view.root.pensionsDAO"/>
+    <dc id="emailDAO" path="LMSG.view.root.emailDAO"/>
+    <dc id="tqcSystemsDAO" path="LMSG.view.root.tqcSystemsDAO"/>
+    <dc id="CorrespondenceDAO" path="LMSG.view.root.CorrespondenceDAO"/>
+    <dc id="medicalsDAO" path="LMSG.view.root.medicalsDAO"/>
+    <dc id="ProposersDAO" path="LMSG.view.root.ProposersDAO"/>
+    <dc id="QuotationsDAO" path="LMSG.view.root.QuotationsDAO"/>
+    <dc id="ProductsDAO" path="LMSG.view.root.ProductsDAO"/>
+    <dc id="ClaimsDAO" path="LMSG.view.root.ClaimsDAO"/>
+    <dc id="importDetailsDAO" path="LMSG.view.root.importDetailsDAO"/>
+    <dc id="ri_detailsDAO" path="LMSG.view.root.ri_detailsDAO"/>
+    <dc id="policyMembersDAO" path="LMSG.view.root.policyMembersDAO"/>
+    <dc id="SettingsDAO" path="LMSG.view.root.SettingsDAO"/>
+    <dc id="RiTreatyDAO" path="LMSG.view.root.RiTreatyDAO"/>
+    <dc id="groupPolicyDocsDAO" path="LMSG.view.root.groupPolicyDocsDAO"/>
+    <dc id="documentsDAO" path="LMSG.view.root.documentsDAO"/>
+    <dc id="PolDependentLimits" path="LMSG.view.root.PolDependentLimits"/>
+    <dc id="GenPolicyCategories" path="LMSG.view.root.GenPolicyCategories"/>
+    <dc id="polCvtProvisionsDAO" path="LMSG.view.root.polCvtProvisionsDAO"/>
+    <dc id="coverProvisionsDAO" path="LMSG.view.root.coverProvisionsDAO"/>
+    <dc id="policyProvisionsDAO" path="LMSG.view.root.policyProvisionsDAO"/>
+    <dc id="PolicyTaxesDAO" path="LMSG.view.root.PolicyTaxesDAO"/>
+    <dc id="contraPoliciesDAO" path="LMSG.view.root.contraPoliciesDAO"/>
+    <dc id="JointMembers" path="LMSG.view.root.JointMembers"/>
+    <dc id="prodProvisionsDAO" path="LMSG.view.root.prodProvisionsDAO"/>
+    <dc id="policyCoverTypesDAO" path="LMSG.view.root.policyCoverTypesDAO"/>
+    <dc id="checkOffAgentsDAO" path="LMSG.view.root.checkOffAgentsDAO"/>
+    <dc id="endorsementsDAO" path="LMSG.view.root.endorsementsDAO"/>
+    <dc id="policiesDAO" path="LMSG.view.root.policiesDAO"/>
+    <dc id="okQuotationsDAO" path="LMSG.view.root.okQuotationsDAO"/>
+    <dc id="prodTaxesDAO" path="LMSG.view.root.prodTaxesDAO"/>
+    <dc id="agentsDAO" path="LMSG.view.root.agentsDAO"/>
+    <dc id="memCoverTypesDAO" path="LMSG.view.root.memCoverTypesDAO"/>
+    <dc id="memPensionDAO" path="LMSG.view.root.memPensionDAO"/>
+    <dc id="memberDependentsDAO" path="LMSG.view.root.memberDependentsDAO"/>
+    <dc id="occupationsDAO" path="LMSG.view.root.occupationsDAO"/>
+    <dc id="prodDependentsDAO" path="LMSG.view.root.prodDependentsDAO"/>
+    <dc id="dependentLimitsDAO" path="LMSG.view.root.dependentLimitsDAO"/>
+    <dc id="dependentsDAO" path="LMSG.view.root.dependentsDAO"/>
+    <dc id="prodProvisionDAO" path="LMSG.view.root.prodProvisionDAO"/>
+    <dc id="GenQuotProvisions" path="LMSG.view.root.GenQuotProvisions"/>
+    <dc id="quotPremMaskDAO" path="LMSG.view.root.quotPremMaskDAO"/>
+    <dc id="branchesDAO" path="LMSG.view.root.branchesDAO"/>
+    <dc id="proposerDAO" path="LMSG.view.root.proposerDAO"/>
+    <dc id="GenQuotMem" path="LMSG.view.root.GenQuotMem"/>
+    <dc id="GenQuotCat" path="LMSG.view.root.GenQuotCat"/>
+    <dc id="GenQuotTaxes" path="LMSG.view.root.GenQuotTaxes"/>
+    <dc id="GenQoutCoverTypes" path="LMSG.view.root.GenQoutCoverTypes"/>
+    <dc id="ExistingQuot" path="LMSG.view.root.ExistingQuot"/>
+    <dc id="GenExistQuot" path="LMSG.view.root.GenExistQuot"/>
+    <dc id="QuotationDetailsDAO" path="LMSG.view.root.QuotationDetailsDAO"/>
+    <dc id="membersDAO" path="LMSG.view.root.membersDAO"/>
+  </dataControlUsages>
+</Application>

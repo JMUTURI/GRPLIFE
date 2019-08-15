@@ -1,0 +1,449 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Claims Causations(Group Life)">
+     <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                             id="pgl4">
+            <af:inputText id="it3"
+                          helpTopicId="LmsGrp_PRODCAUS" readOnly="true"/>
+            <af:outputLabel value="CLAIMS CAUSATIONS(GROUP BUSINESS)" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1"/>
+            <af:panelBox text="PanelBox1" id="pb1" showHeader="never">
+              <f:facet name="toolbar"/>
+              <af:panelSplitter id="ps1"
+                                inlineStyle="width:100%; height:300.0px;">
+                <f:facet name="first">
+                  <af:tree value="#{bindings.Setup.treeModel}" var="node"
+                           selectionListener="#{cauastionsManipulation.productSelected}"
+                           rowSelection="single" id="t1"
+                           binding="#{cauastionsManipulation.productsTree}">
+                    <f:facet name="nodeStamp">
+                      <af:outputText value="#{node.PROD_DESC}" id="ot2"/>
+                    </f:facet>
+                  </af:tree>
+                </f:facet>
+                <f:facet name="second">
+                  <af:panelGroupLayout layout="scroll"
+                                       xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                       id="pgl2">
+                    <af:panelTabbed id="pt1" inlineStyle="width:100.0%;">
+                      <af:showDetailItem text="Cover Type Causations" id="sdi1">
+                        <af:table value="#{bindings.Setup1.collectionModel}"
+                                  var="row" rows="#{bindings.Setup1.rangeSize}"
+                                  emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.Setup1.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectionListener="#{cauastionsManipulation.coverTypesListener}"
+                                  rowSelection="single" id="t2"
+                                  inlineStyle="width:100%; height:100px; border-style:none;"
+                                  binding="#{cauastionsManipulation.prodCoverTypesLOV}">
+                          <af:column sortProperty="PCT_CODE" sortable="true"
+                                     headerText="#{bindings.Setup1.hints.PCT_CODE.label}"
+                                     id="c4" visible="false">
+                            <af:outputText value="#{row.PCT_CODE}" id="ot7"/>
+                          </af:column>
+                          <af:column sortProperty="PCT_CVT_CODE" sortable="true"
+                                     headerText="#{bindings.Setup1.hints.PCT_CVT_CODE.label}"
+                                     id="c5" visible="false">
+                            <af:outputText value="#{row.PCT_CVT_CODE}"
+                                           id="ot6"/>
+                          </af:column>
+                          <af:column sortProperty="PCT_PROD_CODE"
+                                     sortable="true"
+                                     headerText="#{bindings.Setup1.hints.PCT_PROD_CODE.label}"
+                                     id="c1" visible="false">
+                            <af:outputText value="#{row.PCT_PROD_CODE}"
+                                           id="ot3"/>
+                          </af:column>
+                          <af:column sortProperty="PCT_CVT_SHT_DESC"
+                                     sortable="true"
+                                     headerText="#{bindings.Setup1.hints.PCT_CVT_SHT_DESC.label}"
+                                     id="c2" visible="false">
+                            <af:outputText value="#{row.PCT_CVT_SHT_DESC}"
+                                           id="ot4"/>
+                          </af:column>
+                          <af:column sortProperty="PCT_CVT_DESC" sortable="true"
+                                     headerText="Cover Type" id="c3"
+                                     width="300">
+                            <af:outputText value="#{row.PCT_CVT_DESC}"
+                                           id="ot5"/>
+                          </af:column>
+                        </af:table>
+                        <af:outputLabel value="COVER TYPE CAUSATIONS" id="ol3"
+                                        inlineStyle="font-weight:bold;"/>
+                        <h:panelGrid columns="3" id="pg1">
+                          <af:commandButton id="cb1"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{cauastionsManipulation.AddCoverTypeCausation}"/>
+                          <af:commandButton id="cb2"
+                                            icon="/images/update_ena.png"
+                                            action="#{cauastionsManipulation.EditCoverTypeCausation}"/>
+                          <af:commandButton id="cb3"
+                                            icon="/images/delete_ena.png"
+                                            action="#{cauastionsManipulation.DeleteCoverTypeCausation}"/>
+                          <af:popup id="coverTypeCausationsPopup">
+                            <af:dialog id="d2" type="none"
+                                       title="Add/Edit Cover Type Causations">
+                              <h:panelGrid columns="2" id="pg2">
+                                <af:outputLabel value="ID" id="ol4"/>
+                                <h:panelGrid columns="2" id="pg3">
+                                  <af:inputText label="Label 1" id="it1"
+                                                simple="true"
+                                                binding="#{cauastionsManipulation.cvtcCausShtDesc}"
+                                                disabled="true"/>
+                                  <af:commandButton id="cb4"
+                                                    icon="/images/dropdown.gif">
+                                    <af:showPopupBehavior popupId="causationsPopup"/>
+                                  </af:commandButton>
+                                  <af:popup id="causationsPopup">
+                                    <af:dialog id="d3" type="none"
+                                               title="Select Causation">
+                                      <af:table value="#{bindings.causations1.collectionModel}"
+                                                var="row"
+                                                rows="#{bindings.causations1.rangeSize}"
+                                                emptyText="#{bindings.causations1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                fetchSize="#{bindings.causations1.rangeSize}"
+                                                rowBandingInterval="0"
+                                                selectedRowKeys="#{bindings.causations1.collectionModel.selectedRow}"
+                                                selectionListener="#{bindings.causations1.collectionModel.makeCurrent}"
+                                                rowSelection="single" id="t4"
+                                                binding="#{cauastionsManipulation.cvCausationsLOV}">
+                                        <af:column sortProperty="causCode"
+                                                   sortable="true"
+                                                   headerText="#{bindings.causations1.hints.causCode.label}"
+                                                   id="c15" visible="false">
+                                          <af:outputText value="#{row.causCode}"
+                                                         id="ot15"/>
+                                        </af:column>
+                                        <af:column sortProperty="causShtdesc"
+                                                   sortable="true"
+                                                   headerText="Id." id="c14">
+                                          <af:outputText value="#{row.causShtdesc}"
+                                                         id="ot17"/>
+                                        </af:column>
+                                        <af:column sortProperty="causDesc"
+                                                   sortable="true"
+                                                   headerText="Causation"
+                                                   id="c13" width="200">
+                                          <af:outputText value="#{row.causDesc}"
+                                                         id="ot16"/>
+                                        </af:column>
+                                      </af:table>
+                                      <h:panelGrid columns="2" id="pg7">
+                                        <af:commandButton text="OK" id="cb5"
+                                                          action="#{cauastionsManipulation.AssignCoverTypeCausations}"/>
+                                        <af:commandButton text="Cancel"
+                                                          id="cb6"/>
+                                      </h:panelGrid>
+                                    </af:dialog>
+                                  </af:popup>
+                                </h:panelGrid>
+                                <af:outputLabel value="Causation" id="ol5"/>
+                                <af:inputText label="Label 2" id="it2"
+                                              simple="true"
+                                              binding="#{cauastionsManipulation.cvtcCausDesc}"/>
+                                              
+                                <af:outputLabel value="Minimum Days Claimable" id="ol2"/>
+                                <af:inputNumberSpinbox label="Label 1"
+                                                       id="ins1"
+                                                       simple="true"
+                                                       binding="#{cauastionsManipulation.minClaimableDays}"/>
+                                <af:outputLabel value="Maximum Days Claimable" id="ol13"/>
+                                <af:inputNumberSpinbox label="Label 2"
+                                                       id="ins2"
+                                                       simple="true"
+                                                       binding="#{cauastionsManipulation.maxClaimableDays}"/>
+                                <h:panelGrid columns="2" id="pg6">
+                                  <af:commandButton text="Save" id="cb7"
+                                                    action="#{cauastionsManipulation.SaveCoverTypeCausation}"/>
+                                  <af:commandButton text="Cancel" id="cb8"/>
+                                </h:panelGrid>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.causations.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.causations.rangeSize}"
+                                  emptyText="#{bindings.causations.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.causations.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectionListener="#{bindings.causations.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t3"
+                                  binding="#{cauastionsManipulation.coverTypeCausationsLOV}"
+                                  inlineStyle="width:100%; height:100px; border-style:none;">
+                          <af:column sortProperty="cvtcCausShtDesc"
+                                     sortable="true" headerText="Id." id="c7">
+                            <af:outputText value="#{row.cvtcCausShtDesc}"
+                                           id="ot14"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcCausDesc" sortable="true"
+                                     headerText="Causation" id="c8" width="300">
+                            <af:outputText value="#{row.cvtcCausDesc}"
+                                           id="ot9"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcCode" sortable="true"
+                                     headerText="#{bindings.causations.hints.cvtcCode.label}"
+                                     id="c11" visible="false">
+                            <af:outputText value="#{row.cvtcCode}" id="ot8"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcCvtCode" sortable="true"
+                                     headerText="#{bindings.causations.hints.cvtcCvtCode.label}"
+                                     id="c10" visible="false">
+                            <af:outputText value="#{row.cvtcCvtCode}"
+                                           id="ot10"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcCauseCode"
+                                     sortable="true"
+                                     headerText="#{bindings.causations.hints.cvtcCauseCode.label}"
+                                     id="c9" visible="false">
+                            <af:outputText value="#{row.cvtcCauseCode}"
+                                           id="ot12"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcProdCode" sortable="true"
+                                     headerText="#{bindings.causations.hints.cvtcProdCode.label}"
+                                     id="c12" visible="false">
+                            <af:outputText value="#{row.cvtcProdCode}"
+                                           id="ot11"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcProdShtDesc"
+                                     sortable="true"
+                                     headerText="#{bindings.causations.hints.cvtcProdShtDesc.label}"
+                                     id="c6" visible="false">
+                            <af:outputText value="#{row.cvtcProdShtDesc}"
+                                           id="ot13"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcMinDaysClaimable"
+                                     sortable="true"
+                                     headerText="Minimum Days Claimable"
+                                     id="c33" visible="true">
+                            <af:outputText value="#{row.cvtcMinDaysClaimable}"
+                                           id="ot35"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcMaxDaysClaimable"
+                                     sortable="true"
+                                     headerText="Maximum Days Claimable"
+                                     id="c34" visible="true">
+                            <af:outputText value="#{row.cvtcMaxDaysClaimable}"
+                                           id="ot36"/>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Causation Losses" id="sdi2">
+                        <af:outputLabel value="Cover Type Causations" id="ol6"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="s3" inlineStyle="width:100%;"/>
+                        <af:table value="#{bindings.causations2.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.causations2.rangeSize}"
+                                  emptyText="#{bindings.causations2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.causations2.rangeSize}"
+                                  rowBandingInterval="0"
+                                  rowSelection="single" id="t5"
+                                  inlineStyle="width:100%; height:100.0px;"
+                                  binding="#{cauastionsManipulation.disCausationsLOV}"
+                                  selectionListener="#{cauastionsManipulation.disabilityListener}">
+                          <af:column sortProperty="cvtcCausShtDesc"
+                                     sortable="true" headerText="ID" id="c17">
+                            <af:outputText value="#{row.cvtcCausShtDesc}"
+                                           id="ot23"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcCausDesc" sortable="true"
+                                     headerText="DESCRIPTION" id="c19">
+                            <af:outputText value="#{row.cvtcCausDesc}"
+                                           id="ot22"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcCode" sortable="true"
+                                     headerText="#{bindings.causations2.hints.cvtcCode.label}"
+                                     id="c21" visible="false">
+                            <af:outputText value="#{row.cvtcCode}" id="ot24"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcCvtCode" sortable="true"
+                                     headerText="#{bindings.causations2.hints.cvtcCvtCode.label}"
+                                     id="c20" visible="false">
+                            <af:outputText value="#{row.cvtcCvtCode}"
+                                           id="ot19"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcCauseCode"
+                                     sortable="true"
+                                     headerText="#{bindings.causations2.hints.cvtcCauseCode.label}"
+                                     id="c22" visible="false">
+                            <af:outputText value="#{row.cvtcCauseCode}"
+                                           id="ot20"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcProdCode" sortable="true"
+                                     headerText="#{bindings.causations2.hints.cvtcProdCode.label}"
+                                     id="c18" visible="false">
+                            <af:outputText value="#{row.cvtcProdCode}"
+                                           id="ot18"/>
+                          </af:column>
+                          <af:column sortProperty="cvtcProdShtDesc"
+                                     sortable="true"
+                                     headerText="#{bindings.causations2.hints.cvtcProdShtDesc.label}"
+                                     id="c16" visible="false">
+                            <af:outputText value="#{row.cvtcProdShtDesc}"
+                                           id="ot21"/>
+                          </af:column>
+                        </af:table>
+                        <af:outputLabel value="Causations Losses" id="ol7"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="s4"/>
+                        <h:panelGrid columns="3" id="pg4">
+                          <af:commandButton text="New" id="cb9"
+                                            icon="/images/new_dwn.png"
+                                            action="#{cauastionsManipulation.AddDisabilityLosses}"/>
+                          <af:commandButton text="Edit" id="cb10"
+                                            icon="/images/update_ena.png"
+                                            action="#{cauastionsManipulation.EditDisabilityLosses}"/>
+                          <af:commandButton text="Delete" id="cb11"
+                                            icon="/images/delete_ena.png"
+                                            action="#{cauastionsManipulation.DeleteDisabilityLosses}"/>
+                          <af:popup id="disabilityLossesPopup">
+                            <af:dialog id="d4" type="none"
+                                       title="Add/Edit Disability Losses">
+                              <h:panelGrid columns="2" id="pg5">
+                                <af:outputLabel id="ol8" value="Description"/>
+                                <af:inputText label="Label 3" id="it4"
+                                              simple="true"
+                                              shortDesc="Loss Description"
+                                              binding="#{cauastionsManipulation.lossDescription}"/>
+                                <af:outputLabel value="Rate" id="ol9"/>
+                                <af:inputText label="Label 4" id="it5"
+                                              simple="true"
+                                              shortDesc="Percentage Payable"
+                                              binding="#{cauastionsManipulation.percentPayable}"/>
+                                <af:outputLabel value="Division Factor" id="ol12"/>
+                                <af:selectOneChoice label="Label 3" id="soc3"
+                                                    simple="true"
+                                                    shortDesc="Rate Division Factor"
+                                                    autoSubmit="true"
+                                                    binding="#{cauastionsManipulation.ldlDivisionFactor}">
+                                  <af:selectItem label="Per Mille"
+                                                 value="1000" id="si7"/>
+                                  <af:selectItem label="Percent" value="100"
+                                                 id="si6"/>
+                                  <af:selectItem label="Amount" value="1"
+                                                 id="si5"/>
+                                </af:selectOneChoice>
+                                <af:outputLabel value="Closes Policy" id="ol10"/>
+                                <af:selectOneChoice label="Label 1" id="soc1"
+                                                    simple="true"
+                                                    shortDesc="Loss Closes Policy(Y/N)?"
+                                                    autoSubmit="true"
+                                                    binding="#{cauastionsManipulation.closesPolicy}">
+                                  <af:selectItem label="Yes" value="Y"
+                                                 id="si1"/>
+                                  <af:selectItem label="No" value="N" id="si2"/>
+                                </af:selectOneChoice>
+                                <af:outputLabel value="Weekly Indemnity" id="ol11"/>
+                                <af:selectOneChoice label="Label 2" id="soc2"
+                                                    simple="true"
+                                                    shortDesc="Weekly Indemnity"
+                                                    autoSubmit="true"
+                                                    binding="#{cauastionsManipulation.weeklyIndemnity}">
+                                  <af:selectItem label="Yes" value="Y"
+                                                 id="si4"/>
+                                  <af:selectItem label="No" value="N" id="si3"/>
+                                </af:selectOneChoice>
+                                <af:commandButton text="OK"
+                                                  id="cb12"
+                                                  action="#{cauastionsManipulation.SaveDisabilityLoss}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="cb13"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.causations3.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.causations3.rangeSize}"
+                                  emptyText="#{bindings.causations3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.causations3.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectionListener="#{bindings.causations3.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t6"
+                                  inlineStyle="width:100%; height:100.0px; border-style:none;"
+                                  binding="#{cauastionsManipulation.disabilityLossesLOV}">
+                          <af:column sortProperty="ldlDesc" sortable="true"
+                                     headerText="DESCRIPTION" id="c25">
+                            <af:outputText value="#{row.ldlDesc}" id="ot32"/>
+                          </af:column>
+                          <af:column sortProperty="ldlPerc" sortable="true"
+                                     headerText="Rate" id="c31">
+                            <af:outputText value="#{row.ldlPerc}" id="ot34"/>
+                          </af:column>
+                          <af:column sortProperty="ldlClosePolDesc"
+                                     sortable="true" headerText="CLOSES POLICY"
+                                     id="c23">
+                            <af:outputText value="#{row.ldlClosePolDesc}"
+                                           id="ot27"/>
+                          </af:column>
+                          <af:column sortProperty="ldlWklIndemnityDesc"
+                                     sortable="true"
+                                     visible="false"
+                                     headerText="WEEKLY INDEMNITY" id="c29">
+                            <af:outputText value="#{row.ldlWklIndemnityDesc}"
+                                           id="ot29"/>
+                          </af:column>
+                          <af:column sortProperty="ldlCode" sortable="true"
+                                     headerText="#{bindings.causations3.hints.ldlCode.label}"
+                                     id="c27" visible="false">
+                            <af:outputText value="#{row.ldlCode}" id="ot28"/>
+                          </af:column>
+                          <af:column sortProperty="ldlPctCode" sortable="true"
+                                     headerText="#{bindings.causations3.hints.ldlPctCode.label}"
+                                     id="c32" visible="false">
+                            <af:outputText value="#{row.ldlPctCode}" id="ot25"/>
+                          </af:column>
+                          <af:column sortProperty="ldlCvtCode" sortable="true"
+                                     headerText="#{bindings.causations3.hints.ldlCvtCode.label}"
+                                     id="c26" visible="false">
+                            <af:outputText value="#{row.ldlCvtCode}" id="ot30"/>
+                          </af:column>
+                          <af:column sortProperty="ldlCvtcCode" sortable="true"
+                                     headerText="#{bindings.causations3.hints.ldlCvtcCode.label}"
+                                     id="c30" visible="false">
+                            <af:outputText value="#{row.ldlCvtcCode}"
+                                           id="ot26"/>
+                          </af:column>
+                          <af:column sortProperty="ldlClosePol" sortable="true"
+                                     headerText="#{bindings.causations3.hints.ldlClosePol.label}"
+                                     id="c28" visible="false">
+                            <af:outputText value="#{row.ldlClosePol}"
+                                           id="ot33"/>
+                          </af:column>
+                          <af:column sortProperty="ldlWklIndemnity"
+                                     sortable="true"
+                                     headerText="#{bindings.causations3.hints.ldlWklIndemnity.label}"
+                                     id="c24">
+                            <af:outputText value="#{row.ldlWklIndemnity}"
+                                           id="ot31"/>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                    </af:panelTabbed>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelSplitter>
+            </af:panelBox>
+          </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

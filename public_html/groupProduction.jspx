@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Group Business Production Report">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:outputLabel value="Group Business Production Reports" id="ol1"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator id="s1"/>
+              <h:panelGrid columns="2" id="pg1">
+                <af:outputLabel value="*Date From" id="ol2"/>
+                <af:inputDate label="Label 1" id="id1" simple="true"
+                              shortDesc="Transaction Date From"
+                              binding="#{CoreReports.grpDateFrom}">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+                <af:outputLabel value="*Date To" id="ol3"/>
+                <af:inputDate label="Label 2" id="id2" simple="true"
+                              shortDesc="Transaction Date To"
+                              binding="#{CoreReports.grpDateTo}">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+                <af:outputLabel value="Transaction Type" id="ol4"/>
+                <h:panelGrid columns="2" id="pg2">
+                  <af:inputText label="Label 1" id="it1" simple="true"
+                                shortDesc="Transaction/Endorsement Type"
+                                binding="#{CoreReports.grpTransactionType}"/>
+                  <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="transactionsPopup"/>
+                  </af:commandButton>
+                  <af:popup id="transactionsPopup">
+                    <af:dialog id="d2" type="none"
+                               title="Select Endorsement Type">
+                      <af:table value="#{bindings.Setup.collectionModel}"
+                                var="row" rows="#{bindings.Setup.rangeSize}"
+                                emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Setup.rangeSize}"
+                                rowBandingInterval="0"
+                                selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t1"
+                                binding="#{CoreReports.grpTransactionsLOV}">
+                        <af:column sortProperty="BTR_TRANS_CODE" sortable="true"
+                                   headerText="ID" id="c2">
+                          <af:outputText value="#{row.BTR_TRANS_CODE}"
+                                         id="ot2"/>
+                        </af:column>
+                        <af:column sortProperty="BTR_TRANS_TYPE" sortable="true"
+                                   headerText="DESCRIPTION" id="c1">
+                          <af:outputText value="#{row.BTR_TRANS_TYPE}"
+                                         id="ot3"/>
+                        </af:column>
+                      </af:table>
+                      <af:commandButton text="OK" id="cb2"
+                                        action="#{CoreReports.AssignGroupProductionTransactions}"/>
+                      <af:commandButton text="Cancel" id="cb3"/>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:commandButton text="Run Report" id="cb4"
+                                  action="#{CoreReports.RunGroupProduction}"/>
+              </h:panelGrid>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

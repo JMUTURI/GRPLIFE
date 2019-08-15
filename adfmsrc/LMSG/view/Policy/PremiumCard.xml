@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="PremiumCard" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.PremiumCard" isJavaBased="true">
+  <Attribute Name="POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="CLIENT" Type="java.lang.String"/>
+  <Attribute Name="PRODUCT_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="BRANCH_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="POL_FREQ_OF_PAYMENT" Type="java.lang.String"/>
+  <Attribute Name="PRP_PIN" Type="java.lang.String"/>
+  <Attribute Name="PRP_PAYROLL_NO" Type="java.lang.String"/>
+  <Attribute Name="AGENT_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="POL_EFFECTIVE_DATE" Type="java.util.Date"/>
+  <Attribute Name="POL_PAID_TO_DATE" Type="java.util.Date"/>
+  <Attribute Name="POL_TOT_INSTLMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_PAID_INSTLMT_NO" Type="java.math.BigDecimal"/>
+  <Attribute Name="OS_INSTALMENTS" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_PENS_INSTLMT_PREM" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_INSTLMT_PREM" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_OS_INSTLMT_NO" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_OS_PREM_BAL_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PROD_TYPE" Type="java.lang.String"/>
+  <Attribute Name="PREM_ALLOC" Type="java.math.BigDecimal"/>
+  <Attribute Name="PENS_ALLOC" Type="java.math.BigDecimal"/>
+  <Attribute Name="ALL_ALLOC" Type="java.math.BigDecimal"/>
+  <Attribute Name="GGTRAN_DTLS_TRAN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GTRAN_DTLS_PENS_ALLOC" Type="java.math.BigDecimal"/>
+  <Attribute Name="GTRAN_DTLS_PREM_ALLOC" Type="java.math.BigDecimal"/>
+  <Attribute Name="GTRAN_DTLS_TOT_ALLOC" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_RECEIPT_NO" Type="java.lang.String"/>
+  <Attribute Name="GTRAN_POL_POLICY_FROM" Type="java.lang.String"/>
+  <Attribute Name="GTRAN_POL_POLICY_TO" Type="java.lang.String"/>
+  <Attribute Name="GTRAN_DTLS_STATUS" Type="java.lang.String"/>
+  <Attribute Name="GTRAN_DTLS_REMARKS" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.PremiumCard"
+                     BeanClass="LMSG.view.Policy.PremiumCard" id="PremiumCard"/>
+</JavaBean>

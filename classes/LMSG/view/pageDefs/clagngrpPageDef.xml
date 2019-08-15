@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="clagngrpPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findIntermediary.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findIntermediaryIterator"/>
+    <methodIterator Binds="findInterMedGroups.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findInterMedGroupsIterator"/>
+    <methodIterator Binds="findCreditActions.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findCreditActionsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findIntermediary" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findIntermediary"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findIntermediary_SetupsDAO_dataProvider_findIntermediary_result"/>
+    <tree IterBinding="findIntermediaryIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="client"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findInterMedGroups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findInterMedGroups"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findInterMedGroups_SetupsDAO_dataProvider_findInterMedGroups_result"/>
+    <tree IterBinding="findInterMedGroupsIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="INGR_SHT_DESC"/>
+          <Item Value="INGR_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findInterMedGroupsIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="INGR_SHT_DESC"/>
+          <Item Value="INGR_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCreditActions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCreditActions"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findCreditActions_SetupsDAO_dataProvider_findCreditActions_result"/>
+    <tree IterBinding="findCreditActionsIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="CRA_CREDIT_DAYS"/>
+          <Item Value="CRA_ACTION"/>
+          <Item Value="CRA_WAIVER"/>
+          <Item Value="CRA_INGR_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

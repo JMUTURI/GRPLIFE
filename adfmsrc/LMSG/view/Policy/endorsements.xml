@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="endorsements" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.endorsements" isJavaBased="true">
+  <Attribute Name="ENDR_NO" Type="java.lang.String"/>
+  <Attribute Name="ENDR_DURATION_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_STATUS" Type="java.lang.String"/>
+  <Attribute Name="ENDR_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_PAY_METHOD" Type="java.lang.String"/>
+  <Attribute Name="AGENT_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="ENDR_FREQ_OF_PAYMENT" Type="java.lang.String"/>
+  <Attribute Name="MASK_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="CHECK_AGENT_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="ENDR_CALC_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_PENS_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_SCHEME_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_REG_NO" Type="java.lang.String"/>
+  <Attribute Name="ENDR_SCHEME_TRUSTEES" Type="java.lang.String"/>
+  <Attribute Name="ENDR_NSSF_INCLUDE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_PENS_TAX_COMPLIA" Type="java.lang.String"/>
+  <Attribute Name="ENDR_PENS_PAY_FREQ" Type="java.lang.String"/>
+  <Attribute Name="ENDR_CONTRIBTN_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_TOT_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_TOT_PREMIUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PREV_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PREV_PREM" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_ADD_REF_PREM" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_MALE_NRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_ADD_REF_PERC_VARIANCE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_FEMALE_NRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_COMM_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_CHECKOFF_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_NOF_MEMBERS" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_INST_PREM" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_COMM_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PENS_ESC" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EARN_ESCALATION" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_NSSF_AMOUNT" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_GUARANT_PRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EMPYER_CONTR_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EMPYEE_CONTR_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PENS_ADMIN_FEE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EMPYR_PENS_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EMPYE_PENS_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_TOT_PENS_BF" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PENS_COMM_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_FNDING_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EFFECTIVE_DATE" Type="java.util.Date"/>
+  <Attribute Name="ENDR_COVER_TO_DATE" Type="java.util.Date"/>
+  <Attribute Name="ENDR_REG_DATE" Type="java.util.Date"/>
+  <Attribute Name="FCL_ENDR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="FCL_ENDR_POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="FCL_ENDR_NO" Type="java.lang.String"/>
+  <Attribute Name="FCL_ENDR_TYPE" Type="java.lang.String"/>
+  <Attribute Name="FCL_ENDR_FCL_DATE" Type="java.util.Date"/>
+  <Attribute Name="FCL_ENDR_FCL_AMT" Type="java.lang.String"/>
+  <Attribute Name="PT_ENDR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PT_ENDR_NO" Type="java.lang.String"/>
+  <Attribute Name="PT_ENDR_POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="PT_client" Type="java.lang.String"/>
+  <Attribute Name="PT_AgentName" Type="java.lang.String"/>
+  <Attribute Name="PT_ENDR_STATUS" Type="java.lang.String"/>
+  <Attribute Name="PT_ENDR_EFFECTIVE_DATE" Type="java.util.Date"/>
+  <Attribute Name="PT_ENDR_LTR_TRANS_NO" Type="java.math.BigDecimal"/>
+  <Attribute Name="PENSTYPE" Type="java.lang.String"/>
+  <Attribute Name="CONTRIBTYPE" Type="java.lang.String"/>
+  <Attribute Name="NSSF_INCL" Type="java.lang.String"/>
+  <Attribute Name="PAYFREQ" Type="java.lang.String"/>
+  <Attribute Name="ENDR_UNIT_RATE_FORMULA" Type="java.lang.String"/>
+  <Attribute Name="ENDR_VAT_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_OV_COMM_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="FCL_CALC_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_FCL_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_OVERRIDE_FCL_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_AUTHORIZED" Type="java.lang.String"/>
+  <Attribute Name="BTR_TRANS_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_TA_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TA_DESC" Type="java.lang.String"/>
+  <Attribute Name="EMPYER" Type="java.math.BigDecimal"/>
+  <Attribute Name="EMPYEE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TOTAL_CONTR" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_TOT_SCHEME_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="SERVICE_PROVIDER" Type="java.lang.String"/>
+  <Attribute Name="endrAnnAmount" Type="java.math.BigDecimal"/>
+  <Attribute Name="endrAnnOption" Type="java.lang.String"/>
+  <Attribute Name="endrAnnType" Type="java.lang.String"/>
+  <Attribute Name="endrAnnEscalation" Type="java.lang.String"/>
+  <Attribute Name="ENDR_PENS_INT_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_FACRE_CEDING" Type="boolean"/>
+  <Attribute Name="ENDR_FACRE_RATE_TYPE" Type="java.lang.String"/>
+  <Attribute Name="endrANN_INVEST_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="endrANN_TERMINAL_PAYOUT_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="endrANN_SCHEME_LEGAL_AGE" Type="java.math.BigDecimal"/>
+  <Attribute Name="endrANN_ADMIN_CHARGE" Type="java.math.BigDecimal"/>
+  <Attribute Name="endrANN_INVEST_INTR_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="endrTOT_ANN_INVESTMENTS" Type="java.math.BigDecimal"/>
+  <Attribute Name="endrTOT_TERMINAL_BENEFITS" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="CLIENT" Type="java.lang.String"/>
+  <Attribute Name="POL_INCEPTION_UWYR" Type="java.lang.String"/>
+  <Attribute Name="POL_STATUS" Type="java.lang.String"/>
+  <Attribute Name="POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="ENDR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_LTR_TRANS_NO" Type="java.lang.String"/>
+  <Attribute Name="ENDR_DATE" Type="java.util.Date"/>
+  <Attribute Name="ENDR_POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="TRANS" Type="java.lang.String"/>
+  <Attribute Name="ENDR_PENS_VAL_FREQUENCY" Type="java.lang.String"/>
+  <Attribute Name="ENDR_COINSURANCE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_COINSURE_LEADER" Type="java.lang.String"/>
+  <Attribute Name="ENDR_COVER_FROM_DATE" Type="java.util.Date"/>
+  <Attribute Name="ENDR_REIN_PMAS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_REIN_PMAS_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="ENDR_FCL_CALC_TYPE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_DURATION_TERM_TYPE" Type="java.lang.String"/>
+  <Attribute Name="LGA_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LGA_AGN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_NAME" Type="java.lang.String"/>
+  <Attribute Name="LGA_REMARKS" Type="java.lang.String"/>
+  <Attribute Name="endr_pens_mode" Type="java.lang.String"/>
+  <Attribute Name="ENDR_COIN_FAC_SHARE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LGA_START_DATE" Type="java.util.Date"/>
+  <Attribute Name="LGA_VAL_FREQ" Type="java.lang.String"/>
+  <Attribute Name="endr_mktr_agn_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="marketer" Type="java.lang.String"/>
+  <Attribute Name="endr_emplyr_volu_contr" Type="java.math.BigDecimal"/>
+  <Attribute Name="endr_emplye_volu_contr" Type="java.math.BigDecimal"/>
+  <Attribute Name="endr_joint_agents" Type="boolean"/>
+  <Attribute Name="endr_agen_share" Type="java.math.BigDecimal"/>
+  <Attribute Name="joi_agn_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="agn_name" Type="java.lang.String"/>
+  <Attribute Name="joi_sub_agent_share" Type="java.math.BigDecimal"/>
+  <Attribute Name="joi_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_UMBRELLA_DURATION" Type="java.lang.String"/>
+  <Attribute Name="PGSUB_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PGSUB_GSUB_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GSUB_DESC" Type="java.lang.String"/>
+  <Attribute Name="PGSUB_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PGSUB_DESC" Type="java.lang.String"/>
+  <Attribute Name="PMEMS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="endr_pmas_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="endr_pmas_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="total_coin_prem" Type="java.math.BigDecimal"/>
+  <Attribute Name="total_coin_sa" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_DURATION_TYPE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_STATUS1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_PAY_METHOD1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="AGENT_DISPLAY1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_FREQ_OF_PAYMENT1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="MASK_DISPLAY1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="CHECK_AGENT_DISPLAY1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_CALC_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_PENS_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_SCHEME_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_REG_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_SCHEME_TRUSTEES1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_NSSF_INCLUDE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_PENS_TAX_COMPLIA1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_PENS_PAY_FREQ1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_CONTRIBTN_TYPE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="PENSTYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="CONTRIBTYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="NSSF_INCL1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PAYFREQ1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_UNIT_RATE_FORMULA1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="SERVICE_PROVIDER1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_FACRE_RATE_TYPE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="endr_mktr_agn_code1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="marketer1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_FCL_CALC_TYPE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_DURATION_TERM_TYPE1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="endr_pens_mode1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_TOT_SA1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_TOT_PREMIUM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PREV_SA1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PREV_PREM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_ADD_REF_PREM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_MALE_NRD1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_ADD_REF_PERC_VARIANCE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_FEMALE_NRD1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_COMM_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_CHECKOFF_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_NOF_MEMBERS1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_INST_PREM1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_COMM_AMT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PENS_ESC1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EARN_ESCALATION1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_NSSF_AMOUNT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_GUARANT_PRD1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EMPYER_CONTR_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EMPYEE_CONTR_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PENS_ADMIN_FEE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EMPYR_PENS_BF1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EMPYE_PENS_BF1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_TOT_PENS_BF1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PENS_COMM_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_FNDING_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_VAT_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_OV_COMM_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_PENS_INT_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_EFFECTIVE_DATE1" IsUpdateable="0"
+             Type="java.util.Date"/>
+  <Attribute Name="ENDR_COVER_TO_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="ENDR_REG_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="ENDR_PENS_VAL_FREQUENCY1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_COINSURANCE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_COINSURE_LEADER1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_REIN_PMAS_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_COIN_FAC_SHARE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_REIN_PMAS_SHT_DESC1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="LGA_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="LGA_AGN_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_NAME1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LGA_REMARKS1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="LGA_START_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="LGA_VAL_FREQ1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="FCL_ENDR_CODE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="FCL_ENDR_POL_POLICY_NO1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="FCL_ENDR_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="FCL_ENDR_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="FCL_ENDR_FCL_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="ENDR_COVER_FROM_DATE1" IsUpdateable="0"
+             Type="java.util.Date"/>
+  <Attribute Name="FCL_ENDR_FCL_AMT1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POL_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="CLIENT1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POL_INCEPTION_UWYR1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="POL_STATUS1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="POL_POLICY_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_LTR_TRANS_NO1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="ENDR_DATE1" IsUpdateable="0" Type="java.util.Date"/>
+  <Attribute Name="ENDR_POL_POLICY_NO1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="TRANS1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PT_ENDR_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="PT_ENDR_NO1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PT_ENDR_POL_POLICY_NO1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="PT_client1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PT_AgentName1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PT_ENDR_STATUS1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="PT_ENDR_EFFECTIVE_DATE1" IsUpdateable="0"
+             Type="java.util.Date"/>
+  <Attribute Name="PT_ENDR_LTR_TRANS_NO1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="FCL_CALC_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_FCL_AMT1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_OVERRIDE_FCL_AMT1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_AUTHORIZED1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="BTR_TRANS_TYPE1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_TA_CODE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="TA_DESC1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="ENDR_TOT_SCHEME_SA1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="EMPYER1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="EMPYEE1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="TOTAL_CONTR1" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="endrAnnAmount1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="endrAnnOption1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="endrAnnType1" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="endrAnnEscalation1" IsUpdateable="0"
+             Type="java.lang.String"/>
+  <Attribute Name="endrANN_INVEST_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="endrANN_TERMINAL_PAYOUT_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="endrANN_SCHEME_LEGAL_AGE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="endrANN_ADMIN_CHARGE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="endrANN_INVEST_INTR_RATE1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="endrTOT_ANN_INVESTMENTS1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="endrTOT_TERMINAL_BENEFITS1" IsUpdateable="0"
+             Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_LOSS_RATIO" Type="java.math.BigDecimal"/>
+  <Attribute Name="LPT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TRUSTEE_NAME" Type="java.lang.String"/>
+  <Attribute Name="LPT_STATUS" Type="java.lang.String"/>
+  <Attribute Name="LPT_REPRESENTATION" Type="java.lang.String"/>
+  <Attribute Name="LPT_TEL_NO" Type="java.lang.String"/>
+  <Attribute Name="LPT_PIN_NO" Type="java.lang.String"/>
+  <Attribute Name="LPT_ID_NO" Type="java.lang.String"/>
+  <Attribute Name="LPT_CERT_NO" Type="java.lang.String"/>
+  <Attribute Name="LPT_WEF_DATE" Type="java.util.Date"/>
+  <Attribute Name="LPT_WET_DATE" Type="java.util.Date"/>
+  <Attribute Name="LPT_REN_DATE" Type="java.util.Date"/>
+  <Attribute Name="LPT_ADDRESS" Type="java.lang.String"/>
+  <Attribute Name="LPT_PHYSICAL_ADDR" Type="java.lang.String"/>
+  <Attribute Name="ENDR_AVG_ANB" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_HIST_PENS_INT_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PRM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PRM_REMARKS" Type="java.lang.String"/>
+  <Attribute Name="ENDR_SINGLE_GROSS_RATE" Type="java.lang.String"/>
+  <Attribute Name="ENDR_TOT_CLAIM_PAID" Type="java.math.BigDecimal"/>
+  <Attribute Name="ENDR_TOT_PREM_PAID" Type="java.math.BigDecimal"/>
+  <Attribute Name="LPT_SURNAME" Type="java.lang.String"/>
+  <Attribute Name="LPT_OTHER_NAMES" Type="java.lang.String"/>
+  <Attribute Name="STATUS" Type="java.lang.String"/>
+  <Attribute Name="LPT_REMOVED" Type="java.lang.String"/>
+  <Attribute Name="PRM_REMARK_TYPE" Type="java.lang.String"/>
+  <Attribute Name="PRM_REMARKS_DATE" Type="java.util.Date"/>
+  <Attribute Name="PRM_REMARKS_BY" Type="java.lang.String"/>
+  <Attribute Name="REMARKS_DESC" Type="java.lang.String"/>
+  <Attribute Name="earnPrdType" Type="java.lang.String"/>
+  <Attribute Name="SBU_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="SBU" Type="java.lang.String"/>
+  <Attribute Name="SPOKE_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="SPOKE" Type="java.lang.String"/>
+  <Attribute Name="COVERAGE_AREA_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="COVERAGE_AREA" Type="java.lang.String"/>
+  <Attribute Name="LOCATION_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LOCATION" Type="java.lang.String"/>
+  <Attribute Name="ORGANIZATION" Type="java.lang.String"/>
+  <Attribute Name="LPT_REMOVED_DATE" Type="java.lang.String"/>
+  <Attribute Name="LPT_REMOVED_BY" Type="java.lang.String"/>
+  <Attribute Name="LPT_REMOVED_ENDR_CODE" Type="java.lang.String"/>
+  <Attribute Name="LPT_REMOVED_WEF" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.endorsements"
+                     BeanClass="LMSG.view.Policy.endorsements"
+                     id="endorsements"/>
+</JavaBean>

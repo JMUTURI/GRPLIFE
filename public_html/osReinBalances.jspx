@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Outstanding Balance Reinsurance Rates" id="d1">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                               id="pgl4">
+            <af:panelBox text="Reinsurance Outstanding Balance Table"
+                         showHeader="never" id="pb15">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Reinsurance Outstanding Balance Table"
+                              id="ol1" inlineStyle="font-weight:bold;"/>
+              <af:separator id="s1"/>
+              <af:spacer width="10" height="10" id="s2"/>
+              <h:panelGrid columns="1" id="panelGrid2">
+                <af:outputLabel value="Reducing Table" id="outputLabel5"
+                                inlineStyle="font-weight:bold;"/>
+                <af:spacer width="10" height="10" id="spacer5"/>
+              </h:panelGrid>
+              <h:panelGrid columns="3" id="panelGrid3">
+                <af:commandButton id="commandButton2"
+                                  icon="/images/field_group_plus_ena.png"
+                                  action="#{otherSetups.AddRIOSRateDesc}"/>
+                <af:commandButton icon="/images/update_ena.png"
+                                  id="commandButton3"
+                                  action="#{otherSetups.EditRIOSRateDesc}"/>
+                <af:commandButton id="commandButton4"
+                                  icon="/images/delete_ena.png"
+                                  action="#{otherSetups.DeleteRIOSRateDesc}"/>
+              </h:panelGrid>
+              <af:popup id="osRate">
+                <af:dialog id="d2" type="none" title="RI Rate Description">
+                  <h:panelGrid columns="2" id="pg5">
+                    <af:outputLabel value="Id." id="ol3"/>
+                    <af:inputText label="Label 2" id="it2" simple="true"
+                                  binding="#{otherSetups.id}"/>
+                    <af:outputLabel value="Description" id="outputLabel3"/>
+                    <af:inputText label="Label 2" id="inputText1" simple="true"
+                                  binding="#{otherSetups.desc}"/>
+                    <af:outputLabel value="WEF" id="outputLabel2"/>
+                    <af:inputDate label="Label 1" id="id1" simple="true"
+                                  value="#{bindings.sysDate.inputValue}"
+                                  binding="#{otherSetups.wef}">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                    <af:outputLabel value="WET" id="outputLabel4"/>
+                    <af:inputDate label="Label 1" id="inputDate1" simple="true"
+                                  binding="#{otherSetups.wet}">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg6">
+                    <af:commandButton text="Save" id="cb3"
+                                      action="#{otherSetups.SaveRIOSRateDesc}"/>
+                    <af:commandButton text="Cancel" id="commandButton7"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+              <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                        rows="#{bindings.Setup.rangeSize}"
+                        emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Setup.rangeSize}"
+                        rowBandingInterval="0"
+                        selectionListener="#{otherSetups.RIOSRatesListener}"
+                        rowSelection="single" id="t1"
+                        inlineStyle="width:100%; height:150.0px; border-style:none;"
+                        binding="#{otherSetups.riRatesDescLOV}">
+                <af:column sortProperty="RIOS_SHT_DESC" sortable="true"
+                           headerText="Id." id="c4">
+                  <af:outputText value="#{row.RIOS_SHT_DESC}" id="ot3"/>
+                </af:column>
+                <af:column sortProperty="RIOS_DESC" sortable="true"
+                           headerText="Description" id="c1">
+                  <af:outputText value="#{row.RIOS_DESC}" id="ot5"/>
+                </af:column>
+                <af:column sortProperty="RIOS_WEF" sortable="true"
+                           headerText="WEF" id="c3">
+                  <af:outputText value="#{row.RIOS_WEF}" id="ot4"/>
+                </af:column>
+                <af:column sortProperty="RIOS_WET" sortable="true"
+                           headerText="WET" id="c2">
+                  <af:outputText value="#{row.RIOS_WET}" id="ot2"/>
+                </af:column>
+              </af:table>
+              <h:panelGrid columns="1" id="panelGrid1">
+                <af:outputLabel value="Reducing Balance Rates" id="outputLabel1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:spacer width="10" height="10" id="spacer1"/>
+              </h:panelGrid>
+              <h:panelGrid columns="3" id="panelGrid4">
+                <af:commandButton id="commandButton1"
+                                  icon="/images/field_group_plus_ena.png"
+                                  action="#{otherSetups.AddRIOSRates}"/>
+                <af:commandButton icon="/images/update_ena.png"
+                                  id="commandButton5"
+                                  action="#{otherSetups.EditRIOSRates}"/>
+                <af:commandButton id="commandButton6"
+                                  icon="/images/delete_ena.png"
+                                  action="#{otherSetups.DeleteRIOSRates}"/>
+              </h:panelGrid>
+              <af:popup id="osRate2">
+                <af:dialog id="dialog1" type="none" title="RI Rates">
+                  <h:panelGrid columns="2" id="panelGrid5">
+                    <af:outputLabel value="Policy Term From" id="outputLabel6"/>
+                    <af:inputText label="Label 2" id="inputText2" simple="true"
+                                  binding="#{otherSetups.polTermFrm}"/>
+                    <af:outputLabel value="Policy Term To" id="outputLabel7"/>
+                    <af:inputText label="Label 2" id="inputText3" simple="true"
+                                  binding="#{otherSetups.polTermTo}"/>
+                    <af:outputLabel value="lapsed Term From" id="outputLabel8"/>
+                    <af:inputText label="Label 2" id="inputText4" simple="true"
+                                  binding="#{otherSetups.lapsedTermFrm}"/>
+                    <af:outputLabel value="Lapsed Term To" id="outputLabel9"/>
+                    <af:inputText label="Label 2" id="inputText5" simple="true"
+                                  binding="#{otherSetups.lapsedTermTo}"/>
+                    <af:outputLabel value="Rate" id="outputLabel10"/>
+                    <af:inputText label="Label 2" id="inputText6" simple="true"
+                                  binding="#{otherSetups.rate}"/>
+                    <af:outputLabel value="Division Factor" id="outputLabel11"/>
+                    <af:inputText label="Label 2" id="inputText7" simple="true"
+                                  binding="#{otherSetups.divFac}"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="panelGrid6">
+                    <af:commandButton text="Save" id="commandButton8"
+                                      action="#{otherSetups.SaveRIOSRates}"/>
+                    <af:commandButton text="Cancel" id="commandButton9"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+              <af:table value="#{bindings.Setup1.collectionModel}" var="row"
+                        rows="#{bindings.Setup1.rangeSize}"
+                        emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Setup1.rangeSize}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.Setup1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.Setup1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t2"
+                        inlineStyle="width:100%; height:150.0px; border-style:none;"
+                        binding="#{otherSetups.riRatesLOV}">
+                <af:column sortProperty="RIOT_POLICY_TERM" sortable="true"
+                           headerText="Policy Term From" id="c9">
+                  <af:outputText value="#{row.RIOT_POLICY_TERM}" id="ot9"/>
+                </af:column>
+                <af:column sortProperty="RIOT_POLICY_TERM_TO" sortable="true"
+                           headerText="Policy Term To" id="c10">
+                  <af:outputText value="#{row.RIOT_POLICY_TERM_TO}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="RIOT_LAPSED_TERM" sortable="true"
+                           headerText="Lapsed Term From" id="c5">
+                  <af:outputText value="#{row.RIOT_LAPSED_TERM}" id="ot7"/>
+                </af:column>
+                <af:column sortProperty="RIOT_LAPSED_TERM_TO" sortable="true"
+                           headerText="Lapsed Term To" id="c6">
+                  <af:outputText value="#{row.RIOT_LAPSED_TERM_TO}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="RIOT_RATE" sortable="true"
+                           headerText="Rate" id="c8">
+                  <af:outputText value="#{row.RIOT_RATE}" id="ot6"/>
+                </af:column>
+                <af:column sortProperty="RIOT_DIVISION_FACTOR" sortable="true"
+                           headerText="Div Factor" id="c7">
+                  <af:outputText value="#{row.RIOT_DIVISION_FACTOR}" id="ot8"/>
+                </af:column>
+              </af:table>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

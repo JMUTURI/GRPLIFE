@@ -1,0 +1,701 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Group Life | Interest Rates">
+        <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+     <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+       <f:facet name="center">
+        <af:group id="g1">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:500.0px;">
+              <af:showDetailItem text="Interest Rates" id="sdi4">
+                <f:facet name="toolbar">
+                  <h:panelGrid columns="2" id="pg7">
+                    <af:statusIndicator id="si17"/>
+                    <af:inputText id="it1" helpTopicId="LmsGrp_INTRATES"
+                                  readOnly="true"/>
+                  </h:panelGrid>
+                </f:facet>
+                <af:panelGroupLayout layout="scroll" id="pgl100">
+                  <af:popup id="GeneralInterestRatesPopup">
+                    <af:dialog id="d4" type="none"
+                               title="Add/Edit Interest Rates">
+                      <h:panelGrid columns="2" id="pg6">
+                        <af:outputLabel value="*Type" id="ol10"/>
+                        <af:selectOneChoice label="Label 2" id="soc2"
+                                            simple="true" autoSubmit="true"
+                                            shortDesc="Rate Type"
+                                            binding="#{agents.generalType}">
+                          <af:selectItem label="Investment Valuation Interest"
+                                         value="INVL" id="si12"/>
+                          <af:selectItem label="Reinstatement Revival Charge"
+                                         value="RCHRG" id="si6"/>
+                          <af:selectItem label="EMV Rates Interest"
+                                         value="EMV_INTR" id="si4"/>
+                          <af:selectItem label="Loan Penalty Interest"
+                                         value="LPI" id="si5"/>
+                          <af:selectItem label="Cancellation Admin. Charge"
+                                         value="CADC" id="si7"/>
+                          <af:selectItem label="Company Profit Share"
+                                         value="CPSHR" id="si9"/>
+                          <af:selectItem label="Withdrawal Admin. Charge"
+                                         value="WAC" id="si11"/>
+                          <af:selectItem label="Encashing Maturities Interest"
+                                         value="EMI" id="si8"/>
+                          <af:selectItem label="Encashing Maturities Discount Rate"
+                                         value="EMD" id="si10"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="*Application" id="ol11"/>
+                        <af:selectOneChoice label="Label 3" id="soc3"
+                                            simple="true"
+                                            shortDesc="Application Type"
+                                            binding="#{agents.generalAppType}">
+                          <af:selectItem label="Amount" value="A" id="si13"/>
+                          <af:selectItem label="Others" value="O" id="si14"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="*Interest Rate" id="ol12"/>
+                        <af:inputText label="Label 4" id="it5" simple="true"
+                                      binding="#{agents.generalInterest}"
+                                      shortDesc="General Interest Rate"/>
+                        <af:outputLabel value="*Div Factor" id="ol13"/>
+                        <af:inputText label="Label 5" id="it6" simple="true"
+                                      shortDesc="Rate Division Factor"
+                                      binding="#{agents.genrlDivFactor}"/>
+                        <af:outputLabel value="*Depends On Frequency Of Payment"
+                                        id="ol14"/>
+                        <af:selectOneChoice label="Label 4" id="soc4"
+                                            simple="true" autoSubmit="true"
+                                            binding="#{agents.freqOfPayment}">
+                          <af:selectItem label="Yes" value="Y" id="si15"/>
+                          <af:selectItem label="No" value="N" id="si16"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="*WEF" id="ol15"/>
+                        <af:inputDate label="Label 5" id="id5" simple="true"
+                                      binding="#{agents.generalWEF}"
+                                      shortDesc="WEF Date">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                        <af:outputLabel value="WET" id="ol16"/>
+                        <af:inputDate label="Label 6" id="id6" simple="true"
+                                      shortDesc="With Effect To Date"
+                                      binding="#{agents.genrlWetDate}">
+                           <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                        <h:panelGrid columns="2" id="pg10">
+                          <af:commandButton text="OK" id="cb14"
+                                            action="#{agents.SaveGeneralInterestRate}"/>
+                          <af:commandButton text="Cancel" id="cb15"/>
+                        </h:panelGrid>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                  <af:popup id="confirmDel">
+                    <af:dialog id="d7" type="none" title="Delete Confirmation">
+                      <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <af:outputLabel value="Are you sure you want to Delete?"
+                                        id="ol86"
+                                        inlineStyle="font-weight:bold;"/>
+                        <h:panelGrid columns="2" id="panelGrid1">
+                          <af:spacer width="10" height="10" id="spacer1"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="pg19">
+                          <af:commandButton text="Yes" id="cb24"
+                                            action="#{agents.DeleteObject}"
+                                            partialSubmit="true"/>
+                          <af:commandButton text="No" id="commandButton9"/>
+                        </h:panelGrid>
+                      </af:panelBox>
+                    </af:dialog>
+                  </af:popup>
+                  <af:panelBox text="PanelBox1" id="pb1" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:panelSplitter id="ps1"
+                                      inlineStyle="width:100%; height:400.0px;">
+                      <f:facet name="first">
+                        <af:tree value="#{bindings.Setup.treeModel}" var="node"
+                                 selectionListener="#{agents.productSelected}"
+                                 rowSelection="single" id="t1"
+                                 binding="#{agents.productsTree}">
+                          <f:facet name="nodeStamp">
+                            <af:outputText value="#{node.PROD_DESC}" id="ot2"/>
+                          </f:facet>
+                        </af:tree>
+                      </f:facet>
+                      <af:panelGroupLayout layout="scroll"
+                                           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                           id="pgl3">
+                        <af:group id="g2"/>
+                      </af:panelGroupLayout>
+                      <f:facet name="second">
+                        <af:panelTabbed id="pt1" inlineStyle="width:100.0%;">
+                          <af:showDetailItem text="Reinstatement Rates"
+                                             id="sdi1">
+                            <h:panelGrid columns="3" id="pg1">
+                              <af:commandButton id="cb1"
+                                                icon="/images/field_group_plus_ena.png"
+                                                action="#{agents.AddReinstatementRate}"/>
+                              <af:commandButton id="cb2"
+                                                icon="/images/update_ena.png"
+                                                action="#{agents.EditReinstatementRates}"/>
+                              <af:commandButton id="delReinsRates"
+                                                icon="/images/delete_ena.png"
+                                                actionListener="#{agents.DeleteListener}"/>
+                              <af:popup id="reinstatementRatesPopup">
+                                <af:dialog id="d2" type="none"
+                                           title="Add/Edit Reinstatement Rates">
+                                  <h:panelGrid columns="2" id="pg2">
+                                    <af:outputLabel id="ol2" value="WEF"/>
+                                    <af:inputDate label="Label 1" id="id1"
+                                                  simple="true"
+                                                  binding="#{agents.reinWefDate}">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>                
+                                    <af:outputLabel value="WET" id="ol3"/>
+                                    <af:inputDate label="Label 2" id="id2"
+                                                  simple="true"
+                                                  binding="#{agents.reinWetDate}">
+                                        <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                                    <af:outputLabel value="Rate" id="ol4"/>
+                                    <af:inputText label="Label 1" id="it2"
+                                                  simple="true"
+                                                  binding="#{agents.reinRates}"/>
+                                    <h:panelGrid columns="2" id="pg8">
+                                      <af:commandButton text="OK" id="cb4"
+                                                        action="#{agents.SaveReinstatementRates}"/>
+                                      <af:commandButton text="Cancel" id="cb5"/>
+                                    </h:panelGrid>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                            <af:table value="#{bindings.interestRates.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.interestRates.rangeSize}"
+                                      emptyText="#{bindings.interestRates.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.interestRates.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.interestRates.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.interestRates.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t2"
+                                      inlineStyle="width:100%; height:100px; border-style:none;"
+                                      binding="#{agents.reinstatementRatesLOV}">
+                              <af:column sortProperty="rirRate" sortable="true"
+                                         headerText="RATE" id="c3">
+                                <af:outputText value="#{row.rirRate}" id="ot4"/>
+                              </af:column>
+                              <af:column sortProperty="rirWef" sortable="true"
+                                         headerText="WEF" id="c2">
+                                <af:outputText value="#{row.rirWef}" id="ot5">
+                                  <af:convertDateTime pattern="#{bindings.interestRates.hints.rirWef.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="rirWet" sortable="true"
+                                         headerText="WET" id="c1">
+                                <af:outputText value="#{row.rirWet}" id="ot3">
+                                  <af:convertDateTime pattern="#{bindings.interestRates.hints.rirWet.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column id="c4" headerText="RIR CODE"
+                                         visible="false">
+                                <af:outputText value="#{row.rirCode}" id="ot6"/>
+                              </af:column>
+                            </af:table>
+                          </af:showDetailItem>
+                          <af:showDetailItem text="Loan Interest Rates"
+                                             id="sdi2">
+                            <h:panelGrid columns="3" id="pg3">
+                              <af:commandButton id="cb6"
+                                                icon="/images/field_group_plus_ena.png"
+                                                action="#{agents.AddLoanInterestRates}"/>
+                              <af:commandButton id="cb7"
+                                                icon="/images/update.gif"
+                                                action="#{agents.EditLoanInterestRates}"/>
+                              <af:commandButton id="delLoanIntRate"
+                                                icon="/images/delete.gif"
+                                                actionListener="#{agents.DeleteListener}"/>
+                              <af:popup id="LoanInterestRatesPopup">
+                                <af:dialog id="d3" type="none"
+                                           title="Add/Edit Loan Interest Rates">
+                                  <h:panelGrid columns="2" id="pg4">
+                                    <af:outputLabel value="*Rate(%)" id="ol5"/>
+                                    <af:inputText label="Label 2" id="it3"
+                                                  simple="true"
+                                                  binding="#{agents.loanRate}"
+                                                  shortDesc="Loan Interest Rate(%)"/>
+                                    <af:outputLabel value="Service Charge Rate"
+                                                    id="ol6"/>
+                                    <af:inputText label="Label 3" id="it4"
+                                                  simple="true"
+                                                  shortDesc="Service Charge Rate"
+                                                  binding="#{agents.serviceChargeRate}"/>
+                                    <af:outputLabel value="Service Charge Div Factor"
+                                                    id="ol7"/>
+                                    <af:selectOneChoice label="Label 1"
+                                                        id="soc1" simple="true"
+                                                        autoSubmit="true"
+                                                        shortDesc="Service Charge Division Factor"
+                                                        binding="#{agents.serviceChargeDivFact}">
+                                      <af:selectItem label="Amount" value="1"
+                                                     id="si2"/>
+                                      <af:selectItem label="Percent" value="100"
+                                                     id="si1"/>
+                                      <af:selectItem label="Per Mille"
+                                                     value="1000" id="si3"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="WEF" id="ol8"/>
+                                    <af:inputDate label="Label 3" id="id3"
+                                                  simple="true"
+                                                  binding="#{agents.loanWefDate}">
+                                       <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                                    <af:outputLabel value="WET" id="ol9"/>
+                                    <af:inputDate label="Label 4" id="id4"
+                                                  simple="true"
+                                                  binding="#{agents.loanWET}">
+                                       <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                                    <h:panelGrid columns="2" id="pg9">
+                                      <af:commandButton text="OK" id="cb9"
+                                                        action="#{agents.SaveLoanInterestRates}"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="cb10"/>
+                                    </h:panelGrid>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                            <af:table value="#{bindings.interestRates1.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.interestRates1.rangeSize}"
+                                      emptyText="#{bindings.interestRates1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.interestRates1.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.interestRates1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.interestRates1.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t3"
+                                      inlineStyle="width:100%; border-style:none; height:100.0px;"
+                                      binding="#{agents.loanInterestRatesLOV}">
+                              <af:column sortProperty="lirCode" sortable="true"
+                                         headerText="#{bindings.interestRates1.hints.lirCode.label}"
+                                         id="c8" visible="false">
+                                <af:outputText value="#{row.lirCode}"
+                                               id="ot12"/>
+                              </af:column>
+                              <af:column sortProperty="lirWef" sortable="true"
+                                         headerText="WEF DATE" id="c5">
+                                <af:outputText value="#{row.lirWef}" id="ot8">
+                                  <af:convertDateTime pattern="#{bindings.interestRates1.hints.lirWef.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="lirWet" sortable="true"
+                                         headerText="WET DATE" id="c9">
+                                <af:outputText value="#{row.lirWet}" id="ot9">
+                                  <af:convertDateTime pattern="#{bindings.interestRates1.hints.lirWet.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="lirRate" sortable="true"
+                                         headerText="RATE" id="c7">
+                                <af:outputText value="#{row.lirRate}"
+                                               id="ot11"/>
+                              </af:column>
+                              <af:column sortProperty="serviceCharge"
+                                         sortable="true"
+                                         headerText="SERVICE CHARGE" id="c10">
+                                <af:outputText value="#{row.serviceCharge}"
+                                               id="ot7"/>
+                              </af:column>
+                              <af:column sortProperty="serviceChargeDivFact"
+                                         sortable="true"
+                                         headerText="SERVICE DIV FACT" id="c6">
+                                <af:outputText value="#{row.serviceChargeDivFact}"
+                                               id="ot10"/>
+                              </af:column>
+                            </af:table>
+                          </af:showDetailItem>
+                          <af:showDetailItem text="General Interest Rates"
+                                             id="sdi3">
+                            <h:panelGrid columns="3" id="pg5">
+                              <af:commandButton id="cb11"
+                                                icon="/images/field_group_plus_ena.png"
+                                                action="#{agents.AddGeneralInterestRates}"/>
+                              <af:commandButton id="cb12"
+                                                action="#{agents.EditGeneralInterestRate}"
+                                                icon="/images/update_ena.png"/>
+                              <af:commandButton id="delGenRate"
+                                                icon="/images/delete.gif"
+                                                actionListener="#{agents.DeleteListener}"/>
+                            </h:panelGrid>
+                            <af:table value="#{bindings.interestRates2.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.interestRates2.rangeSize}"
+                                      emptyText="#{bindings.interestRates2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.interestRates2.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.interestRates2.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.interestRates2.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t4"
+                                      inlineStyle="width:100%; height:100.0px; border-style:none;"
+                                      binding="#{agents.generalInterestLOV}">
+                              <af:column sortProperty="typeDesc" sortable="true"
+                                         headerText="TYPE" id="c21">
+                                <af:outputText value="#{row.typeDesc}"
+                                               id="ot20"/>
+                              </af:column>
+                              <af:column sortProperty="applicTypeDesc"
+                                         sortable="true"
+                                         headerText="APPLICATION" id="c17">
+                                <af:outputText value="#{row.applicTypeDesc}"
+                                               id="ot22"/>
+                              </af:column>
+                              <af:column sortProperty="lgrRate" sortable="true"
+                                         headerText="INTEREST RATE" id="c19">
+                                <af:outputText value="#{row.lgrRate}"
+                                               id="ot19"/>
+                              </af:column>
+                              <af:column sortProperty="lgrDivFactor"
+                                         sortable="true" headerText="DIV FACTOR"
+                                         id="c15">
+                                <af:outputText value="#{row.lgrDivFactor}"
+                                               id="ot18"/>
+                              </af:column>
+                              <af:column sortProperty="freqDesc" sortable="true"
+                                         headerText="DEPENDS ON FREQ. OF PAYMENT"
+                                         id="c11">
+                                <af:outputText value="#{row.freqDesc}"
+                                               id="ot13"/>
+                              </af:column>
+                              <af:column sortProperty="lgrWef" sortable="true"
+                                         headerText="WEF" id="c16">
+                                <af:outputText value="#{row.lgrWef}" id="ot23">
+                                  <af:convertDateTime pattern="#{bindings.interestRates2.hints.lgrWef.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="lgrWet" sortable="true"
+                                         headerText="WET" id="c20">
+                                <af:outputText value="#{row.lgrWet}" id="ot17">
+                                  <af:convertDateTime pattern="#{bindings.interestRates2.hints.lgrWet.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="lgrCode" sortable="true"
+                                         headerText="#{bindings.interestRates2.hints.lgrCode.label}"
+                                         id="c13" visible="false">
+                                <af:outputText value="#{row.lgrCode}"
+                                               id="ot21"/>
+                              </af:column>
+                              <af:column sortProperty="lgrType" sortable="true"
+                                         headerText="#{bindings.interestRates2.hints.lgrType.label}"
+                                         id="c14" visible="false">
+                                <af:outputText value="#{row.lgrType}"
+                                               id="ot16"/>
+                              </af:column>
+                              <af:column sortProperty="lgrApplicationType"
+                                         sortable="true"
+                                         headerText="#{bindings.interestRates2.hints.lgrApplicationType.label}"
+                                         id="c18" visible="false">
+                                <af:outputText value="#{row.lgrApplicationType}"
+                                               id="ot14"/>
+                              </af:column>
+                              <af:column sortProperty="lgrDependsonFreq"
+                                         sortable="true"
+                                         headerText="#{bindings.interestRates2.hints.lgrDependsonFreq.label}"
+                                         id="c12" visible="false">
+                                <af:outputText value="#{row.lgrDependsonFreq}"
+                                               id="ot15"/>
+                              </af:column>
+                            </af:table>
+                          </af:showDetailItem>
+                           <af:showDetailItem text="Pension Rate Tables" id="sdi47">
+                          <af:panelBox text="PanelBox2" id="pb2"
+                                       inlineStyle="width:100.0%;"
+                                       showHeader="never">
+                            <f:facet name="toolbar"/>
+                            <h:panelGrid columns="3" id="panelGrid4">
+                              <af:commandButton id="commandButton7"
+                                                icon="/images/field_group_plus_ena.png"
+                                                action="#{agents.AddRateTable}"/>
+                              <af:commandButton id="commandButton8"
+                                                action="#{agents.EditRateTable}"
+                                                icon="/images/update_ena.png"/>
+                              <af:commandButton id="commandButton19"
+                                                icon="/images/delete.gif"
+                                                action="#{agents.DeleteRateTable}"/>
+                              <af:popup id="p1">
+                                <af:dialog id="d5" type="none" title="Policies">
+                                    <af:table value="#{bindings.interestRates3.collectionModel}"
+                                              var="row"
+                                              rows="#{bindings.interestRates3.rangeSize}"
+                                              emptyText="#{bindings.interestRates3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.interestRates3.rangeSize}"
+                                              rowBandingInterval="0"
+                                              filterModel="#{bindings.interestRates3Query.queryDescriptor}"
+                                              queryListener="#{bindings.interestRates3Query.processQuery}"
+                                              filterVisible="true"
+                                              varStatus="vs"
+                                              selectedRowKeys="#{bindings.interestRates3.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.interestRates3.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="t5"
+                                              binding="#{agents.pensPoliciesLOV}">
+                                      <af:column sortProperty="LPNT_POL_CODE"
+                                                 filterable="true"
+                                                 sortable="true"
+                                                 headerText="Policy Code"
+                                                 id="c22" visible="false">
+                                        <af:outputText value="#{row.LPNT_POL_CODE}"
+                                                       id="ot24"/>
+                                      </af:column>
+                                      <af:column sortProperty="POL_POLICY_NO"
+                                                 filterable="true"
+                                                 sortable="true"
+                                                 headerText="Policy No."
+                                                 id="c23" width="300">
+                                        <af:outputText value="#{row.POL_POLICY_NO}"
+                                                       id="ot25"/>
+                                      </af:column>
+                                    </af:table>
+                                  <h:panelGrid columns="2" id="pg11">
+                                    <af:commandButton text="OK" id="cb17"
+                                                      action="#{agents.PensionPolicySelected}"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton6"/>
+                                  </h:panelGrid>
+                                  </af:dialog>
+                              </af:popup>
+                              <af:popup id="TableRtes">
+                                <af:dialog id="d6" type="none"
+                                           title="Rate Tables">
+                                  <h:panelGrid columns="2" id="pg13">
+                                    <af:outputLabel value="Description"
+                                                    id="ol18"/>
+                                    <af:inputText label="Label 7" id="it8"
+                                                  simple="true"
+                                                  binding="#{agents.tableDescription}"/>
+                                    <af:outputLabel value="Policy No."
+                                                    id="outputLabel8"/>
+                                    <h:panelGrid columns="2" id="pg110">
+                                      <af:inputText label="Label 6" id="it7"
+                                                    simple="true"
+                                                    disabled="true"
+                                                    binding="#{agents.pensPoliciesDesc}"/>
+                                      <af:commandButton id="cb16"
+                                                        icon="/images/dropdown.gif">
+                                        <af:showPopupBehavior popupId="p1"/>
+                                      </af:commandButton>
+                                    </h:panelGrid>
+                                      <af:outputLabel value="Default"
+                                                      id="outputLabel1"/>
+                                      <af:selectOneChoice label="Label 5"
+                                                          id="soc5"
+                                                          simple="true"
+                                                          binding="#{agents.tablesDefault}">
+                                        <af:selectItem label="Yes" value="Y"
+                                                       id="si18"/>
+                                        <af:selectItem label="No" value="N"
+                                                       id="si19"/>
+                                      </af:selectOneChoice>
+                                    </h:panelGrid>
+                                  <h:panelGrid columns="2" id="pg12">
+                                    <af:commandButton text="OK" id="cb18"
+                                                      action="#{agents.SaveTableRate}"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton10"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                              </h:panelGrid>
+                              <af:table value="#{bindings.interestRates5.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.interestRates5.rangeSize}"
+                                        emptyText="#{bindings.interestRates5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.interestRates5.rangeSize}"
+                                        rowBandingInterval="0"
+                                        filterModel="#{bindings.interestRates5Query.queryDescriptor}"
+                                        queryListener="#{bindings.interestRates5Query.processQuery}"
+                                        filterVisible="true" varStatus="vs"
+                                        selectionListener="#{agents.PensionTablesListener}"
+                                        rowSelection="single" id="t8"
+                                        inlineStyle="width:100%; height:100.0px; border-style:none;"
+                                        binding="#{agents.ratesTables}">
+                                <af:column sortProperty="LPNT_DESC"
+                                           filterable="true" sortable="true"
+                                           headerText="Description" id="c26"
+                                           width="200">
+                                  <af:outputText value="#{row.LPNT_DESC}"
+                                                 id="ot33"/>
+                                </af:column>
+                                <af:column sortProperty="POL_POLICY_NO"
+                                           filterable="true" sortable="true"
+                                           headerText="Policy No." id="c32"
+                                           width="200">
+                                  <af:outputText value="#{row.POL_POLICY_NO}"
+                                                 id="ot29"/>
+                                </af:column>
+                                <af:column sortProperty="LPNT_DEFAULT"
+                                           sortable="false" headerText="Default"
+                                           id="c24">
+                                  <af:outputText value="#{row.LPNT_DEFAULT}"
+                                                 id="ot26"/>
+                                </af:column>
+                                <af:column sortProperty="LPNT_CODE"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.interestRates5.hints.LPNT_CODE.label}"
+                                           id="c27" visible="false">
+                                  <af:outputText value="#{row.LPNT_CODE}"
+                                                 id="ot34"/>
+                                </af:column>
+                                <af:column sortProperty="LPNT_POL_CODE"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.interestRates5.hints.LPNT_POL_CODE.label}"
+                                           id="c31" visible="false">
+                                  <af:outputText value="#{row.LPNT_POL_CODE}"
+                                                 id="ot28"/>
+                                </af:column>
+                              </af:table>
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <af:outputLabel value="Table Rates" id="ol17"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:separator id="s3"/>
+                            <h:panelGrid columns="3" id="panelGrid11">
+                              <af:commandButton id="commandButton1"
+                                                icon="/images/field_group_plus_ena.png"
+                                                action="#{agents.AddGeneralInterestRatesTbles}"/>
+                              <af:commandButton id="commandButton2"
+                                                action="#{agents.EditGeneralInterestRateTbles}"
+                                                icon="/images/update_ena.png"/>
+                              <af:commandButton id="commandButton3"
+                                                icon="/images/delete.gif"
+                                                action="#{agents.DeleteGeneralInterestRateTbl}"/>
+                            </h:panelGrid>
+                              <af:table value="#{bindings.interestRates4.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.interestRates4.rangeSize}"
+                                      emptyText="#{bindings.interestRates4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.interestRates4.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.interestRates4.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.interestRates4.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t6"
+                                      inlineStyle="width:100%; height:150.0px; border-style:none;"
+                                      binding="#{agents.tableRates}">
+                              <af:column sortProperty="typeDesc" sortable="true"
+                                         headerText="Type" id="c28">
+                                <af:outputText value="#{row.typeDesc}"
+                                               id="ot32"/>
+                              </af:column>
+                              <af:column sortProperty="applicTypeDesc"
+                                         sortable="true"
+                                         headerText="Application" id="c29">
+                                <af:outputText value="#{row.applicTypeDesc}"
+                                               id="ot212"/>
+                              </af:column>
+                              <af:column sortProperty="lgrRate" sortable="true"
+                                         headerText="Interest Rate" id="c120">
+                                <af:outputText value="#{row.lgrRate}"
+                                               id="ot121"/>
+                              </af:column>
+                              <af:column sortProperty="lgrDivFactor"
+                                         sortable="true" headerText="Div Factor"
+                                         id="c191">
+                                <af:outputText value="#{row.lgrDivFactor}"
+                                               id="ot123"/>
+                              </af:column>
+                              <af:column sortProperty="freqDesc" sortable="true"
+                                         headerText="Freq of Payment" id="c121">
+                                <af:outputText value="#{row.freqDesc}"
+                                               id="ot120"/>
+                              </af:column>
+                              <af:column sortProperty="lgrWef" sortable="true"
+                                         headerText="WEF" id="c118">
+                                <af:outputText value="#{row.lgrWef}" id="ot31">
+                                  <af:convertDateTime pattern="#{bindings.interestRates4.hints.lgrWef.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="lgrWet" sortable="true"
+                                         headerText="WET" id="c30">
+                                <af:outputText value="#{row.lgrWet}" id="ot30">
+                                  <af:convertDateTime pattern="#{bindings.interestRates4.hints.lgrWet.format}"/>
+                                </af:outputText>
+                              </af:column>
+                            <af:column sortProperty="lgrType" sortable="false"
+                                       headerText="#{bindings.interestRates4.hints.lgrType.label}"
+                                       id="c35" visible="false">
+                              <af:inputText value="#{row.bindings.lgrType.inputValue}"
+                                            label="#{bindings.interestRates4.hints.lgrType.label}"
+                                            required="#{bindings.interestRates4.hints.lgrType.mandatory}"
+                                            columns="#{bindings.interestRates4.hints.lgrType.displayWidth}"
+                                            maximumLength="#{bindings.interestRates4.hints.lgrType.precision}"
+                                            shortDesc="#{bindings.interestRates4.hints.lgrType.tooltip}"
+                                            id="it9">
+                                <f:validator binding="#{row.bindings.lgrType.validator}"/>
+                              </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="lgrApplicationType"
+                                       sortable="false"
+                                       headerText="#{bindings.interestRates4.hints.lgrApplicationType.label}"
+                                       id="c36" visible="false">
+                              <af:inputText value="#{row.bindings.lgrApplicationType.inputValue}"
+                                            label="#{bindings.interestRates4.hints.lgrApplicationType.label}"
+                                            required="#{bindings.interestRates4.hints.lgrApplicationType.mandatory}"
+                                            columns="#{bindings.interestRates4.hints.lgrApplicationType.displayWidth}"
+                                            maximumLength="#{bindings.interestRates4.hints.lgrApplicationType.precision}"
+                                            shortDesc="#{bindings.interestRates4.hints.lgrApplicationType.tooltip}"
+                                            id="it10">
+                                <f:validator binding="#{row.bindings.lgrApplicationType.validator}"/>
+                              </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="lgrCode"
+                                       sortable="false"
+                                       headerText="#{bindings.interestRates4.hints.lgrCode.label}"
+                                       id="c37" visible="false">
+                              <af:inputText value="#{row.bindings.lgrCode.inputValue}"
+                                            label="#{bindings.interestRates4.hints.lgrCode.label}"
+                                            required="#{bindings.interestRates4.hints.lgrCode.mandatory}"
+                                            columns="#{bindings.interestRates4.hints.lgrCode.displayWidth}"
+                                            maximumLength="#{bindings.interestRates4.hints.lgrCode.precision}"
+                                            shortDesc="#{bindings.interestRates4.hints.lgrCode.tooltip}"
+                                            id="it11">
+                                <f:validator binding="#{row.bindings.lgrCode.validator}"/>
+                              </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="lgrDependsonFreq" sortable="false"
+                                       headerText="#{bindings.interestRates4.hints.lgrDependsonFreq.label}"
+                                       id="c38" visible="false">
+                              <af:inputText value="#{row.bindings.lgrDependsonFreq.inputValue}"
+                                            label="#{bindings.interestRates4.hints.lgrDependsonFreq.label}"
+                                            required="#{bindings.interestRates4.hints.lgrDependsonFreq.mandatory}"
+                                            columns="#{bindings.interestRates4.hints.lgrDependsonFreq.displayWidth}"
+                                            maximumLength="#{bindings.interestRates4.hints.lgrDependsonFreq.precision}"
+                                            shortDesc="#{bindings.interestRates4.hints.lgrDependsonFreq.tooltip}"
+                                            id="it12">
+                                <f:validator binding="#{row.bindings.lgrDependsonFreq.validator}"/>
+                              </af:inputText>
+                            </af:column>
+                          </af:table>
+                          </af:panelBox>
+                        </af:showDetailItem>
+                        </af:panelTabbed>
+                      </f:facet>
+                    </af:panelSplitter>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:group>
+        </f:facet>
+        </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+     <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+       <f:facet name="center">
+       <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+           <af:outputLabel value="CLIENT/AGENT CREDIT GROUPINGS"
+                              inlineStyle="font-weight:bold;"
+                              id="outputLabel1"/>
+              <af:separator inlineStyle="width:350.0px;" id="s4"/>
+              <h:panelGrid columns="1" id="pg1" width="40%">
+                <af:selectOneRadio label="Label 1" id="sor1" simple="true"
+                                   autoSubmit="true"
+                                   valueChangeListener="#{otherSetups.intermediaryOption}"
+                                   binding="#{otherSetups.clientAgentOption}">
+                  <af:selectItem label="Corporate Client" value="C" id="si2"/>
+                  <af:selectItem label="Agent/Broker" value="A" id="si1"/>
+                </af:selectOneRadio>
+              </h:panelGrid>
+              <h:panelGrid columns="3" id="pg2" width="20%">
+                <af:outputLabel value="Client/Agent" id="ol1"/>
+                <af:inputText label="Label 1" id="it1" simple="true"
+                              binding="#{otherSetups.interMediary}"/>
+                <h:panelGrid columns="2" id="pg3">
+                  <af:commandButton id="cb1" icon="/dropdown.gif">
+                    <af:showPopupBehavior popupId="intermediariesPopup"/>
+                  </af:commandButton>
+                  <af:popup id="intermediariesPopup">
+                    <af:dialog id="d2" type="none" title="Select Intermediary">
+                      <af:table value="#{bindings.Setup.collectionModel}"
+                                var="row" rows="#{bindings.Setup.rangeSize}"
+                                emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Setup.rangeSize}"
+                                rowBandingInterval="0"
+                                selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t1"
+                                inlineStyle="height:138px; width:235PX"
+                                binding="#{otherSetups.intermediaryLOV}">
+                        <af:column sortProperty="client" sortable="true"
+                                   headerText="INTERMEDIARY" id="c1"
+                                   inlineStyle="width:235PX">
+                          <af:outputText value="#{row.client}" id="ot2"/>
+                        </af:column>
+                      </af:table>
+                      <af:commandButton text="OK" id="cb3"
+                                        action="#{otherSetups.AssignIntermediary}"/>
+                      <af:commandButton text="Cancel" id="cb4"/>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Credit Group" id="ol2"/>
+                <af:inputText label="Label 2" id="it2" simple="true"
+                              binding="#{otherSetups.interMedCrditGroup}"/>
+                <h:panelGrid columns="2" id="pg4">
+                  <af:commandButton id="cb2" icon="/dropdown.gif">
+                    <af:showPopupBehavior popupId="IntemedGroupPopup"/>
+                  </af:commandButton>
+                  <af:popup id="IntemedGroupPopup">
+                    <af:dialog id="d3" type="none" title="Select Credit Group">
+                      <af:table value="#{bindings.Setup1.collectionModel}"
+                                var="row" rows="#{bindings.Setup1.rangeSize}"
+                                emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Setup1.rangeSize}"
+                                rowBandingInterval="0" id="t2" width="212"
+                                inlineStyle="height:110px;"
+                                rowSelection="single"
+                                binding="#{otherSetups.intermedCredGroupLOV}">
+                        <af:column sortProperty="INGR_SHT_DESC" sortable="false"
+                                   headerText="ID" id="c2">
+                          <af:outputText value="#{row.INGR_SHT_DESC}" id="ot3"/>
+                        </af:column>
+                        <af:column sortProperty="INGR_DESC" sortable="false"
+                                   headerText="GROUP" id="c3">
+                          <af:outputText value="#{row.INGR_DESC}" id="ot4"/>
+                        </af:column>
+                      </af:table>
+                      <af:commandButton text="OK" id="cb5"
+                                        action="#{otherSetups.AssignCreditGroup}"/>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:commandButton text="Group" id="cb6"
+                                  action="#{otherSetups.AssignInterMediaryGroup}"/>
+                <af:commandButton text="Cancel" id="cb7"/>
+              </h:panelGrid>
+              <af:outputLabel value="CREDIT ACTIONS" id="ol3"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator inlineStyle="width:350.0px;" id="separator1"/>
+              <h:panelGrid columns="3" id="pg7">
+                <af:commandButton id="cb13"
+                                  icon="/images/field_group_plus_ena.png"
+                                  action="#{otherSetups.ReinitializeVariables}">
+                  <af:showPopupBehavior popupId="AddCreditActions"/>
+                </af:commandButton>
+                <af:commandButton id="cb14" icon="/images/update_ena.png"
+                                  action="#{otherSetups.EditCreditAction}"/>
+                <af:commandButton id="cb15" icon="/images/delete.gif"
+                                  action="#{otherSetups.DeleteCreditAction}"/>
+                <af:popup id="AddCreditActions">
+                  <af:dialog id="d5" type="none" title="Credit Actions">
+                    <h:panelGrid columns="2" id="pg5" width="20%">
+                      <af:outputLabel value="Credit Days" id="ol4"/>
+                      <af:selectOneChoice label="Label 1" id="soc1"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{otherSetups.creditDays}">
+                        <af:selectItem label="Beyond Insurance Period" value="A"
+                                       id="si7"/>
+                        <af:selectItem label="Beyond 30 Days" value="B"
+                                       id="si4"/>
+                        <af:selectItem label="Beyond 60 Days" value="C"
+                                       id="si5"/>
+                        <af:selectItem label="Beyond 90 Days" value="D"
+                                       id="si3"/>
+                        <af:selectItem label="Agreement To Pay In Installments"
+                                       value="E" id="si6"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Credit Action" id="ol5"/>
+                      <af:selectOneChoice label="Label 2" id="soc2"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{otherSetups.creditAction}">
+                        <af:selectItem label="No Renewal" value="NR" id="si8"/>
+                        <af:selectItem label="Cancellation" value="C"
+                                       id="si10"/>
+                        <af:selectItem label="Reminder" value="R" id="si9"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Waiver" id="ol6"/>
+                      <af:selectOneChoice label="Label 3" id="soc3"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{otherSetups.creditWaiver}">
+                        <af:selectItem label="General Manager And Above"
+                                       value="GM" id="si11"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Credit Category" id="ol7"/>
+                      <h:panelGrid columns="3" id="pg6">
+                        <af:inputText label="Label 3" id="it3" simple="true"
+                                      binding="#{otherSetups.creditActionGroup}"/>
+                        <af:commandButton id="cb8" icon="/dropdown.gif">
+                          <af:showPopupBehavior popupId="creditGroupActionPopup"/>
+                        </af:commandButton>
+                        <af:popup id="creditGroupActionPopup">
+                          <af:dialog id="d4" type="none"
+                                     title="Select Credit Category">
+                            <af:table value="#{bindings.Setup2.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Setup2.rangeSize}"
+                                      emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Setup2.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t3" width="179"
+                                      inlineStyle="height:88px;"
+                                      binding="#{otherSetups.creditGroupsActionLOV}">
+                              <af:column sortProperty="INGR_SHT_DESC"
+                                         sortable="true"
+                                         headerText="DESCRIPTION" id="c4">
+                                <af:outputText value="#{row.INGR_SHT_DESC}"
+                                               id="ot6"/>
+                              </af:column>
+                              <af:column sortProperty="INGR_DESC"
+                                         sortable="true"
+                                         headerText="CREDIT GROUP" id="c5">
+                                <af:outputText value="#{row.INGR_DESC}"
+                                               id="ot5"/>
+                              </af:column>
+                            </af:table>
+                            <af:commandButton text="OK" id="cb9"
+                                              action="#{otherSetups.AssignCreditAction}"/>
+                            <af:commandButton text="Cancel" id="cb10"/>
+                          </af:dialog>
+                        </af:popup>
+                      </h:panelGrid>
+                      <af:commandButton text="OK" id="cb11"
+                                        action="#{otherSetups.CreateCreditActions}"/>
+                      <af:commandButton text="Cancel" id="cb12"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg8">
+                <af:table value="#{bindings.Setup3.collectionModel}" var="row"
+                          rows="#{bindings.Setup3.rangeSize}"
+                          emptyText="#{bindings.Setup3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup3.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.Setup3.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.Setup3.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t4"
+                          inlineStyle="height:150.0px;"
+                          binding="#{otherSetups.creditGroupActionsLOV}">
+                  <af:column sortProperty="CRA_CREDIT_DAYS" sortable="true"
+                             headerText="CREDIT DAYS" id="c6">
+                    <af:outputText value="#{row.CRA_CREDIT_DAYS}" id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="CRA_ACTION" sortable="true"
+                             headerText="CREDIT ACTION" id="c7">
+                    <af:outputText value="#{row.CRA_ACTION}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="CRA_WAIVER" sortable="true"
+                             headerText="WAIVER" id="c8">
+                    <af:outputText value="#{row.CRA_WAIVER}" id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="CRA_INGR_DESC" sortable="true"
+                             headerText="CREDIT GROUP" id="c9">
+                    <af:outputText value="#{row.CRA_INGR_DESC}" id="ot8"/>
+                  </af:column>
+                </af:table>
+              </h:panelGrid>
+            </af:panelGroupLayout>
+        </af:group>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

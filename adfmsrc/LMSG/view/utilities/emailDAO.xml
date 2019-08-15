@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="emailDAO" Package="LMSG.view.utilities"
+          BeanClass="LMSG.view.utilities.emailDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.utilities.emails"
+                  BeanClass="LMSG.view.utilities.emails" id="findEmailClients"
+                  ReturnNodeName="emails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.utilities.emails"
+                  BeanClass="LMSG.view.utilities.emails" id="findAgents"
+                  ReturnNodeName="emails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.utilities.emails"
+                  BeanClass="LMSG.view.utilities.emails" id="findSmsQuotation"
+                  ReturnNodeName="emails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.utilities.emails"
+                  BeanClass="LMSG.view.utilities.emails" id="findSmsPolicies"
+                  ReturnNodeName="emails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.utilities.emails"
+                  BeanClass="LMSG.view.utilities.emails" id="findClaims"
+                  ReturnNodeName="emails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.utilities.emails"
+                  BeanClass="LMSG.view.utilities.emails" id="findSystems"
+                  ReturnNodeName="emails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.utilities.emailDAO"
+                     BeanClass="LMSG.view.utilities.emailDAO" id="emailDAO"/>
+</JavaBean>

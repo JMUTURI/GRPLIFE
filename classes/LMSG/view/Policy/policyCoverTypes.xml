@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="policyCoverTypes" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.policyCoverTypes" isJavaBased="true">
+  <Attribute Name="PCVT_CVT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="CVT_DEPEND_DISP" Type="java.lang.String"/>
+  <Attribute Name="PCVT_LOAD_DISC" Type="java.lang.String"/>
+  <Attribute Name="PCVT_USE_UNIT_RATE" Type="java.lang.String"/>
+  <Attribute Name="PCVT_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_PREMIUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_BUT_CHARGE_PREMIUM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_TOT_MEMBERS" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_DISC_LOAD_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_DISC_LOAD_DIV_FACT" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_AVERAGE_PERIOD" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_SA_PER_MEMBER" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_UNIT_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_MAIN_RIDER" Type="java.lang.String"/>
+  <Attribute Name="PCVT_CVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_AVG_ANB" Type="java.lang.String"/>
+  <Attribute Name="PCVT_MAIN_SA_PERC" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_MAIN_COVER" Type="java.lang.String"/>
+  <Attribute Name="MAIN_COVER_DESC" Type="java.lang.String"/>
+  <Attribute Name="PCVT_PCT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_LOANAMT_PER_MEM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_LOAN_RPYMT_PRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_LOANINT_PER_MEM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_SAVINGS_PER_MEM" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_DISC" Type="java.lang.String"/>
+  <Attribute Name="PCVT_DISC_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCVT_DISC_DIV_FACT" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcvt_pmas_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcvt_pmas_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="pcvt_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcvt_rate_div_fact" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcvt_use_cvr_rate" Type="java.lang.String"/>
+  <Attribute Name="CVR_RATE_DESC" Type="java.lang.String"/>
+  <Attribute Name="pcvt_load_age_fact" Type="java.math.BigDecimal"/>
+  <Attribute Name="pcvtPctInbuilt" Type="java.lang.String"/>
+  <Attribute Name="pcvtAccelerator" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Policy.policyCoverTypes"
+                     BeanClass="LMSG.view.Policy.policyCoverTypes"
+                     id="policyCoverTypes"/>
+</JavaBean>

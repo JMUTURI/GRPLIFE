@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.59.23"
+          id="ProductCoverTypes" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.ProductCoverTypes" isJavaBased="true">
+  <Attribute Name="PCT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCT_CVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PCT_CVT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PCT_CVT_DESC" Type="java.lang.String"/>
+  <Attribute Name="type" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.ProductCoverTypes"
+                     BeanClass="com.turnkey.setups.ProductCoverTypes"
+                     id="ProductCoverTypes"/>
+</JavaBean>

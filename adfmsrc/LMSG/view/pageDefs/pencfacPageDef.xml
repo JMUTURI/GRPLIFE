@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="pencfacPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findPensionCostingFactors.result"
+                    DataControl="pensionCostingFactorsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.pensionCostingFactors"
+                    id="findPensionCostingFactorsIterator"/>
+    <methodIterator Binds="findPensionContributionFactors.result"
+                    DataControl="pensionCostingFactorsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.pensionCostingFactors"
+                    id="findPensionContributionFactorsIterator"/>
+    <methodIterator Binds="findRetirementAges.result"
+                    DataControl="pensionCostingFactorsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.pensionCostingFactors"
+                    id="findRetirementAgesIterator"/>
+    <methodIterator Binds="findEmvErRates.result"
+                    DataControl="pensionCostingFactorsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.pensionCostingFactors"
+                    id="findEmvErRatesIterator"/>
+    <methodIterator Binds="findEmvEERates.result"
+                    DataControl="pensionCostingFactorsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.pensionCostingFactors"
+                    id="findEmvEERatesIterator"/>
+    <methodIterator Binds="findGratuityPensionrates.result"
+                    DataControl="pensionCostingFactorsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.pensionCostingFactors"
+                    id="findGratuityPensionratesIterator"/>
+    <methodIterator Binds="findPensionCostingFactorRates.result"
+                    DataControl="pensionCostingFactorsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.pensionCostingFactors"
+                    id="findPensionCostingFactorRatesIterator"/>
+    <methodIterator Binds="findPensionVestingScales.result"
+                    DataControl="pensionCostingFactorsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.pensionCostingFactors"
+                    id="findPensionVestingScalesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="PROD_CODE"/>
+          <Item Value="PROD_DESC"/>
+          <Item Value="PROD_SHT_DESC"/>
+          <Item Value="PROD_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPensionCostingFactors" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionCostingFactors"
+                  IsViewObjectMethod="false"
+                  DataControl="pensionCostingFactorsDAO"
+                  InstanceName="pensionCostingFactorsDAO.dataProvider"
+                  ReturnName="pensionCostingFactorsDAO.methodResults.findPensionCostingFactors_pensionCostingFactorsDAO_dataProvider_findPensionCostingFactors_result"/>
+    <tree IterBinding="findPensionCostingFactorsIterator"
+          id="pensionCostingFactors">
+      <nodeDefinition DefName="com.turnkey.setups.pensionCostingFactors"
+                      Name="pensionCostingFactors0">
+        <AttrNames>
+          <Item Value="pcfsRateType"/>
+          <Item Value="pcfsCode"/>
+          <Item Value="pcfsEsca"/>
+          <Item Value="pcfsInterest"/>
+          <Item Value="pcfsWithRate"/>
+          <Item Value="pcfsRateTypeDesc"/>
+          <Item Value="pcfsDivFact"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPensionContributionFactors" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findPensionContributionFactors"
+                  IsViewObjectMethod="false"
+                  DataControl="pensionCostingFactorsDAO"
+                  InstanceName="pensionCostingFactorsDAO.dataProvider"
+                  ReturnName="pensionCostingFactorsDAO.methodResults.findPensionContributionFactors_pensionCostingFactorsDAO_dataProvider_findPensionContributionFactors_result"/>
+    <tree IterBinding="findPensionContributionFactorsIterator"
+          id="pensionCostingFactors1">
+      <nodeDefinition DefName="com.turnkey.setups.pensionCostingFactors"
+                      Name="pensionCostingFactors10">
+        <AttrNames>
+          <Item Value="peirCntrTaxExempt"/>
+          <Item Value="peirTaxExempt"/>
+          <Item Value="peirMaxTaxExempt"/>
+          <Item Value="peirIntRate"/>
+          <Item Value="peirTaxRelief"/>
+          <Item Value="peirUndwConvFactor"/>
+          <Item Value="peirDirConvFactor"/>
+          <Item Value="peirFactorTypeDesc"/>
+          <Item Value="peirWef"/>
+          <Item Value="peirWet"/>
+          <Item Value="peirFactorType"/>
+          <Item Value="peirCode"/>
+          <Item Value="peir_int_rate"/>
+          <Item Value="peir_empyr_lump_tax_exmpt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findRetirementAges" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRetirementAges"
+                  IsViewObjectMethod="false"
+                  DataControl="pensionCostingFactorsDAO"
+                  InstanceName="pensionCostingFactorsDAO.dataProvider"
+                  ReturnName="pensionCostingFactorsDAO.methodResults.findRetirementAges_pensionCostingFactorsDAO_dataProvider_findRetirementAges_result"/>
+    <tree IterBinding="findRetirementAgesIterator" id="pensionCostingFactors2">
+      <nodeDefinition DefName="com.turnkey.setups.pensionCostingFactors"
+                      Name="pensionCostingFactors20">
+        <AttrNames>
+          <Item Value="retCode"/>
+          <Item Value="retAge"/>
+          <Item Value="retSex"/>
+          <Item Value="retSexDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findEmvErRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findEmvErRates"
+                  IsViewObjectMethod="false"
+                  DataControl="pensionCostingFactorsDAO"
+                  InstanceName="pensionCostingFactorsDAO.dataProvider"
+                  ReturnName="pensionCostingFactorsDAO.methodResults.findEmvErRates_pensionCostingFactorsDAO_dataProvider_findEmvErRates_result"/>
+    <tree IterBinding="findEmvErRatesIterator" id="pensionCostingFactors3">
+      <nodeDefinition DefName="com.turnkey.setups.pensionCostingFactors"
+                      Name="pensionCostingFactors30">
+        <AttrNames>
+          <Item Value="emverCode"/>
+          <Item Value="emverAnb"/>
+          <Item Value="emverBasicSa"/>
+          <Item Value="emverBasicPrem"/>
+          <Item Value="emverEmvValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findEmvEERates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findEmvEERates"
+                  IsViewObjectMethod="false"
+                  DataControl="pensionCostingFactorsDAO"
+                  InstanceName="pensionCostingFactorsDAO.dataProvider"
+                  ReturnName="pensionCostingFactorsDAO.methodResults.findEmvEERates_pensionCostingFactorsDAO_dataProvider_findEmvEERates_result"/>
+    <tree IterBinding="findEmvEERatesIterator" id="pensionCostingFactors4">
+      <nodeDefinition DefName="com.turnkey.setups.pensionCostingFactors"
+                      Name="pensionCostingFactors40">
+        <AttrNames>
+          <Item Value="emveeCode"/>
+          <Item Value="emveeTerm"/>
+          <Item Value="emveeBasicPrem"/>
+          <Item Value="emveeBasicSa"/>
+          <Item Value="emveeEmv"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGratuityPensionrates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGratuityPensionrates"
+                  IsViewObjectMethod="false"
+                  DataControl="pensionCostingFactorsDAO"
+                  InstanceName="pensionCostingFactorsDAO.dataProvider"
+                  ReturnName="pensionCostingFactorsDAO.methodResults.findGratuityPensionrates_pensionCostingFactorsDAO_dataProvider_findGratuityPensionrates_result"/>
+    <tree IterBinding="findGratuityPensionratesIterator"
+          id="pensionCostingFactors5">
+      <nodeDefinition DefName="com.turnkey.setups.pensionCostingFactors"
+                      Name="pensionCostingFactors50">
+        <AttrNames>
+          <Item Value="grapCode"/>
+          <Item Value="grapServiceYrs"/>
+          <Item Value="grapGratPct"/>
+          <Item Value="grapPensionPct"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPensionCostingFactorRates" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findPensionCostingFactorRates"
+                  IsViewObjectMethod="false"
+                  DataControl="pensionCostingFactorsDAO"
+                  InstanceName="pensionCostingFactorsDAO.dataProvider"
+                  ReturnName="pensionCostingFactorsDAO.methodResults.findPensionCostingFactorRates_pensionCostingFactorsDAO_dataProvider_findPensionCostingFactorRates_result"/>
+    <tree IterBinding="findPensionCostingFactorRatesIterator"
+          id="pensionCostingFactors6">
+      <nodeDefinition DefName="com.turnkey.setups.pensionCostingFactors"
+                      Name="pensionCostingFactors60">
+        <AttrNames>
+          <Item Value="PCFR_CODE"/>
+          <Item Value="PCFR_TERM_FROM"/>
+          <Item Value="PCFR_TERM_TO"/>
+          <Item Value="PCFR_BENE_DISC_FACT"/>
+          <Item Value="PCFR_CONTR_FACT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPensionVestingScales" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionVestingScales"
+                  IsViewObjectMethod="false"
+                  DataControl="pensionCostingFactorsDAO"
+                  InstanceName="pensionCostingFactorsDAO.dataProvider"
+                  ReturnName="pensionCostingFactorsDAO.methodResults.findPensionVestingScales_pensionCostingFactorsDAO_dataProvider_findPensionVestingScales_result"/>
+    <tree IterBinding="findPensionVestingScalesIterator"
+          id="pensionCostingFactors7">
+      <nodeDefinition DefName="com.turnkey.setups.pensionCostingFactors"
+                      Name="pensionCostingFactors70">
+        <AttrNames>
+          <Item Value="PVGS_CODE"/>
+          <Item Value="PVGS_YRS_FROM"/>
+          <Item Value="PVGS_YRS_TO"/>
+          <Item Value="PVGS_EMYR_PCT_ENT"/>
+          <Item Value="PVGS_EMYE_PCT_ENT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

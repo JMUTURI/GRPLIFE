@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelBox text=" Quotation Cover Details"
+                     inlineStyle="height:245px; width:800px;" id="pb1">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="1" width="30%" id="pg1">
+            <af:commandButton text="Add Cover" id="cb1">
+              <af:showPopupBehavior popupId="quotCoversPopup"/>
+            </af:commandButton>
+            <af:popup id="quotCoversPopup">
+              <af:dialog type="none" title="Select Product Cover Type" id="d2">
+                <h:panelGrid columns="3" width="10%" id="pg2">
+                  <af:outputLabel value="Cover ID" id="ol1"/>
+                  <af:inputText label="Label 1" simple="true" columns="15"
+                                binding="#{manipulation.prodCoverDisplay}"
+                                id="it1"/>
+                  <h:panelGrid columns="2" id="pg3">
+                    <af:commandButton icon="/dropdown.gif" id="cb2">
+                      <af:showPopupBehavior popupId="coversPopup"/>
+                    </af:commandButton>
+                    <af:popup id="coversPopup">
+                      <af:dialog id="d3">
+                        <af:table value="#{bindings.ProdCovers.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.ProdCovers.rangeSize}"
+                                  emptyText="#{bindings.ProdCovers.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.ProdCovers.rangeSize}"
+                                  selectedRowKeys="#{bindings.ProdCovers.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.ProdCovers.collectionModel.makeCurrent}"
+                                  rowSelection="single"
+                                  inlineStyle="height:235px;"
+                                  binding="#{manipulation.prodCoversLOV}"
+                                  id="t1">
+                          <af:column sortProperty="cvt_sht_desc" sortable="true"
+                                     headerText="DESCRIPTION" id="c1">
+                            <af:outputText value="#{row.cvt_sht_desc}"
+                                           id="ot1"/>
+                          </af:column>
+                          <af:column sortProperty="cvt_desc" sortable="true"
+                                     headerText="COVER" id="c2">
+                            <af:outputText value="#{row.cvt_desc}" id="ot2"/>
+                          </af:column>
+                          <af:column sortProperty="cvt_main_cover"
+                                     sortable="true" headerText="MAIN COVER"
+                                     id="c3">
+                            <af:outputText value="#{row.cvt_main_cover}"
+                                           id="ot3"/>
+                          </af:column>
+                          <af:column sortProperty="cvt_duration_type"
+                                     sortable="true" headerText="DURATION TYPE"
+                                     id="c4">
+                            <af:outputText value="#{row.cvt_duration_type}"
+                                           id="ot4"/>
+                          </af:column>
+                        </af:table>
+                        <af:commandButton text="OK"
+                                          action="#{manipulation.AttachProductCoverTypes}"
+                                          id="cb3"/>
+                        <af:commandButton text="Cancel" id="cb4"/>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:outputLabel value="Sum Assured" id="ol2"/>
+                  <af:inputText label="Label 2" simple="true"
+                                binding="#{manipulation.coverSADisplay}"
+                                columns="15" id="it2"/>
+                  <af:outputText id="ot5"/>
+                  <af:outputLabel value="Override Premium" id="ol3"/>
+                  <af:inputText label="Label 3" simple="true" columns="15"
+                                binding="#{manipulation.coverButChargePremium}"
+                                id="it3"/>
+                  <af:outputText id="ot6"/>
+                  <af:outputLabel value="Disc/Load" id="ol4"/>
+                  <af:selectOneChoice label="Label 1"
+                                      valueChangeListener="#{manipulation.GetCoverLoadingType}"
+                                      simple="true"
+                                      binding="#{manipulation.discLoadChoice}"
+                                      id="soc1">
+                    <af:selectItem label="None" value="N" id="si1"/>
+                    <af:selectItem label="Loading" value="L" id="si2"/>
+                    <af:selectItem label="Discount" value="D" id="si3"/>
+                  </af:selectOneChoice>
+                  <af:outputText id="ot7"/>
+                  <af:outputLabel value="Disc/Load Rate" id="ol5"/>
+                  <af:inputText label="Label 4" simple="true" columns="15"
+                                binding="#{manipulation.discLoadRateDisplay}"
+                                id="it4"/>
+                  <af:outputText id="ot8"/>
+                  <af:commandButton text="Save"
+                                    action="#{manipulation.SaveQuotationCovers}"
+                                    id="cb5"/>
+                  <af:commandButton text="Cancel" id="cb6"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <af:table value="#{bindings.quotCoverTypes.collectionModel}"
+                      var="row" rows="#{bindings.quotCoverTypes.rangeSize}"
+                      emptyText="#{bindings.quotCoverTypes.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.quotCoverTypes.rangeSize}"
+                      selectedRowKeys="#{bindings.quotCoverTypes.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.quotCoverTypes.collectionModel.makeCurrent}"
+                      rowSelection="single"
+                      inlineStyle="height:170px; width:800px;"
+                      binding="#{manipulation.quotCoverTypes}" width="700"
+                      id="t2">
+              <af:column sortProperty="quocvtShtDesc" sortable="true"
+                         headerText="COVER ID" id="c5">
+                <af:outputText value="#{row.quocvtShtDesc}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="quoQcvtSa" sortable="true"
+                         headerText="SUM ASSURED" id="c6">
+                <af:outputText value="#{row.quoQcvtSa}" id="ot10">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.quotCoverTypes.hints.quoQcvtSa.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="QCVT_PREMIUM" sortable="true"
+                         headerText="PREMIUM" id="c7">
+                <af:outputText value="#{row.QCVT_PREMIUM}" id="ot11">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.quotCoverTypes.hints.QCVT_PREMIUM.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="quoButChargePrem" sortable="true"
+                         headerText="BUT CHARGE PREMIUM" id="c8">
+                <af:outputText value="#{row.quoButChargePrem}" id="ot12">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.quotCoverTypes.hints.quoButChargePrem.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="quoMembers" sortable="true"
+                         headerText="AVG/TOT MEMBERS" id="c9">
+                <af:outputText value="#{row.quoMembers}" id="ot13">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.quotCoverTypes.hints.quoMembers.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="QCVT_LOAD_DISC" sortable="true"
+                         headerText="DISC/LOAD" id="c10">
+                <af:outputText value="#{row.QCVT_LOAD_DISC}" id="ot14"/>
+              </af:column>
+              <af:column sortProperty="discLoadRate" sortable="true"
+                         headerText="DISC/LOAD RATE" id="c11">
+                <af:outputText value="#{row.discLoadRate}" id="ot15">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.quotCoverTypes.hints.discLoadRate.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="QCVT_DISC_LOAD_DIV_FACT" sortable="true"
+                         headerText="LOAD DIV BY" id="c12">
+                <af:outputText value="#{row.QCVT_DISC_LOAD_DIV_FACT}" id="ot16">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.quotCoverTypes.hints.QCVT_DISC_LOAD_DIV_FACT.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="quoQcvtRate" sortable="true"
+                         headerText="RATE" id="c13">
+                <af:outputText value="#{row.quoQcvtRate}" id="ot17">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.quotCoverTypes.hints.quoQcvtRate.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="cover_display" sortable="true"
+                         headerText="DESCRIPTION" id="c14">
+                <af:outputText value="#{row.cover_display}" id="ot18"/>
+              </af:column>
+              <af:column id="c15">
+                <af:commandButton icon="/icon_delete.gif"
+                                  action="#{manipulation.DeleteQuotCoverType}"
+                                  id="cb7"/>
+              </af:column>
+            </af:table>
+          </h:panelGrid>
+          <h:panelGrid columns="2" width="10%" id="pg4">
+            <af:commandButton text="Back " action="#{manipulation.Return}"
+                              id="cb8"/>
+            <af:commandButton text="Cancel" rendered="false" id="cb9"/>
+          </h:panelGrid>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

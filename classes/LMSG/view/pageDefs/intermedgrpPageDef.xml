@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="intermedgrpPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findInterMedGroups.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findInterMedGroupsIterator"/>
+    <methodIterator Binds="findCreditCriterion.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findCreditCriterionIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findInterMedGroups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findInterMedGroups"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findInterMedGroups_SetupsDAO_dataProvider_findInterMedGroups_result"/>
+    <tree IterBinding="findInterMedGroupsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="INGR_SHT_DESC"/>
+          <Item Value="INGR_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCreditCriterion" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCreditCriterion"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findCreditCriterion_SetupsDAO_dataProvider_findCreditCriterion_result"/>
+    <tree IterBinding="findCreditCriterionIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="CCR_DESCRIPTION"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

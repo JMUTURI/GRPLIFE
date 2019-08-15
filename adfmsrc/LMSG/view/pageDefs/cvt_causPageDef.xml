@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="cvt_causPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findCausations.result" DataControl="causationsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.causations"
+                    id="findCausationsIterator"/>
+    <methodIterator Binds="findDeathDisabilityCauses.result"
+                    DataControl="causationsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.causations"
+                    id="findDeathDisabilityCausesIterator"/>
+    <methodIterator Binds="findCausationCauses.result"
+                    DataControl="causationsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.causations"
+                    id="findCausationCausesIterator"/>
+    <methodIterator Binds="findNonMedicalsSA.result" DataControl="causationsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.causations"
+                    id="findNonMedicalsSAIterator"/>
+    <searchRegion Binds="findDeathDisabilityCausesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="causations4Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findCausations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCausations"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findCausations_causationsDAO_dataProvider_findCausations_result"/>
+    <tree IterBinding="findCausationsIterator" id="causations">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations0">
+        <AttrNames>
+          <Item Value="causCode"/>
+          <Item Value="causShtdesc"/>
+          <Item Value="causDesc"/>
+          <Item Value="causType"/>
+          <Item Value="causWthld_emplr_fnd"/>
+          <Item Value="causClm_prefix"/>
+          <Item Value="caus_wthld_emple_fnd"/>
+          <Item Value="caus_age_from"/>
+          <Item Value="caus_age_to"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findDeathDisabilityCauses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findDeathDisabilityCauses"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findDeathDisabilityCauses_causationsDAO_dataProvider_findDeathDisabilityCauses_result"/>
+    <tree IterBinding="findDeathDisabilityCausesIterator" id="causations1">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations10">
+        <AttrNames>
+          <Item Value="ddcCode"/>
+          <Item Value="ddcShtDesc"/>
+          <Item Value="ddcDesc"/>
+          <Item Value="ddcHivDesc"/>
+          <Item Value="ddcWaitingPrd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findCausationsIterator" id="causations2">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations20">
+        <AttrNames>
+          <Item Value="causCode"/>
+          <Item Value="causShtdesc"/>
+          <Item Value="causDesc"/>
+          <Item Value="causType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCausationCauses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCausationCauses"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findCausationCauses_causationsDAO_dataProvider_findCausationCauses_result"/>
+    <tree IterBinding="findCausationCausesIterator" id="causations3">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations30">
+        <AttrNames>
+          <Item Value="ddsShtDesc"/>
+          <Item Value="ddsDesc"/>
+          <Item Value="cscSex"/>
+          <Item Value="cscMinClaimableprd"/>
+          <Item Value="cscCode"/>
+          <Item Value="cscDdcCode"/>
+          <Item Value="cscCausCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findNonMedicalsSA" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findNonMedicalsSA"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="causationsDAO.methodResults.findNonMedicalsSA_causationsDAO_dataProvider_findNonMedicalsSA_result"/>
+    <tree IterBinding="findNonMedicalsSAIterator" id="causations5">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations50">
+        <AttrNames>
+          <Item Value="nmsCode"/>
+          <Item Value="mmsYearFrom"/>
+          <Item Value="nmsYearTo"/>
+          <Item Value="nmsRate"/>
+          <Item Value="nmsMaxAmt"/>
+          <Item Value="nmsDivFact"/>
+          <Item Value="nmsWef"/>
+          <Item Value="nmsWet"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findDeathDisabilityCausesIterator" id="causations4">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations40">
+        <AttrNames>
+          <Item Value="ddcCode"/>
+          <Item Value="ddcShtDesc"/>
+          <Item Value="ddcDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

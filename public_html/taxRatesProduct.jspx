@@ -1,0 +1,555 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Tax Rates Per Products" id="d2">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                                 id="pgl4">
+              <af:panelAccordion id="pa1"
+                                 inlineStyle="width:100%; height:460.0px;">
+                <af:showDetailItem text="Tax Rates By Product Tax Type" id="sdi1">
+                  <af:panelGroupLayout id="pgl2" layout="scroll">
+                    <af:panelBox id="pb1" showHeader="never"
+                                 inlineStyle="width:100%; height:410.0px;">
+                      <f:facet name="toolbar"/>
+                      <af:panelGroupLayout id="pgl3" layout="scroll"
+                                           partialTriggers="soc4">
+                        <af:panelSplitter id="ps1"
+                                          inlineStyle="width:100%; height:410.0px;"
+                                          binding="#{SetupBean.splitterPanel}"
+                                          partialTriggers="soc4">
+                          <f:facet name="first">
+                            <af:panelBox text="Products" id="pb2">
+                              <f:facet name="toolbar"/>
+                              <af:tree value="#{bindings.Setup.treeModel}"
+                                       var="node"
+                                       selectionListener="#{SetupBean.ProductCoversTreeListener}"
+                                       rowSelection="single" id="t5"
+                                       binding="#{SetupBean.productsTree}">
+                                <f:facet name="nodeStamp">
+                                  <af:outputText value="#{node}" id="ot24"/>
+                                </f:facet>
+                              </af:tree>
+                              <af:tree value="#{bindings.Setup1.treeModel}"
+                                       var="node"
+                                       selectionListener="#{SetupBean.ProductTreeListener}"
+                                       rowSelection="single" id="t2"
+                                       rendered="false">
+                                <f:facet name="nodeStamp">
+                                  <af:outputText value="#{node}" id="ot4"/>
+                                </f:facet>
+                              </af:tree>
+                            </af:panelBox>
+                          </f:facet>
+                          <f:facet name="second">
+                            <af:panelGroupLayout layout="scroll"
+                                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                 id="pgl5" partialTriggers="t2">
+                              <af:popup id="confirmDel">
+                                <af:dialog id="d7" type="none"
+                                           title="Delete Confirmation">
+                                  <af:panelBox text="PanelBox1" id="pb4"
+                                               showHeader="never">
+                                    <f:facet name="toolbar"/>
+                                    <af:outputLabel value="Are you sure you want to Delete?"
+                                                    id="ol86"
+                                                    inlineStyle="font-weight:bold;"/>
+                                    <h:panelGrid columns="2" id="pg8">
+                                      <af:spacer width="10" height="10"
+                                                 id="s3"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" id="pg19">
+                                      <af:commandButton text="Yes" id="cb24"
+                                                        action="#{SetupBean.DeleteObject}"
+                                                        partialSubmit="true"/>
+                                      <af:commandButton text="No"
+                                                        id="commandButton9"/>
+                                    </h:panelGrid>
+                                  </af:panelBox>
+                                </af:dialog>
+                              </af:popup>
+                              <af:panelBox text="Tax Rates" id="pb3">
+                                <f:facet name="toolbar"/>
+                                <h:panelGrid columns="2" id="pg6">
+                                  <af:outputLabel value="Applicable At Product Level"
+                                                  id="outputLabel1"/>
+                                  <af:selectOneChoice label="Label 4" id="soc4"
+                                                      simple="true"
+                                                      valueChangeListener="#{SetupBean.applicableLevelListener}"
+                                                      binding="#{SetupBean.applLevel}"
+                                                      autoSubmit="true"
+                                                      value="Y">
+                                    <af:selectItem label="Yes" value="Y"
+                                                   id="si12"/>
+                                    <af:selectItem label="No" value="N"
+                                                   id="si13"/>
+                                  </af:selectOneChoice>
+                                  <af:outputLabel value="Select A Tax Type"
+                                                  id="ol1"/>
+                                  <h:panelGrid columns="2" id="pg1">
+                                    <af:inputText label="Label 2" id="it3"
+                                                  simple="true" disabled="true"
+                                                  binding="#{SetupBean.taxTypeDesc}"/>
+                                    <af:commandButton id="cb3"
+                                                      icon="/images/dropdown.gif">
+                                      <af:showPopupBehavior popupId="p1"/>
+                                    </af:commandButton>
+                                    <af:popup id="p1">
+                                      <af:dialog id="d3" type="none"
+                                                 title="Tax Types">
+                                        <af:panelGroupLayout id="pgl6"
+                                                             partialTriggers="soc4">
+                                          <af:table value="#{bindings.Setup3.collectionModel}"
+                                                    var="row"
+                                                    rows="#{bindings.Setup3.rangeSize}"
+                                                    emptyText="#{bindings.Setup3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                    fetchSize="#{bindings.Setup3.rangeSize}"
+                                                    rowBandingInterval="0"
+                                                    filterModel="#{bindings.Setup3Query.queryDescriptor}"
+                                                    queryListener="#{bindings.Setup3Query.processQuery}"
+                                                    filterVisible="true"
+                                                    varStatus="vs"
+                                                    selectedRowKeys="#{bindings.Setup3.collectionModel.selectedRow}"
+                                                    selectionListener="#{bindings.Setup3.collectionModel.makeCurrent}"
+                                                    rowSelection="single"
+                                                    id="t4"
+                                                    binding="#{SetupBean.taxesLOV}">
+                                            <af:column sortProperty="TT_SHT_DESC"
+                                                       filterable="true"
+                                                       sortable="true"
+                                                       headerText="Id." id="c4">
+                                              <af:outputText value="#{row.TT_SHT_DESC}"
+                                                             id="ot19"/>
+                                            </af:column>
+                                            <af:column sortProperty="TT_DESC"
+                                                       filterable="true"
+                                                       sortable="true"
+                                                       headerText="Description"
+                                                       id="c3" width="200">
+                                              <af:outputText value="#{row.TT_DESC}"
+                                                             id="ot5"/>
+                                            </af:column>
+                                          </af:table>
+                                        </af:panelGroupLayout>
+                                        <h:panelGrid columns="2" id="pg7">
+                                          <af:commandButton text="OK" id="cb2"
+                                                            action="#{SetupBean.TaxTypeSelected}"/>
+                                          <af:commandButton text="Cancel"
+                                                            id="commandButton2"/>
+                                        </h:panelGrid>
+                                      </af:dialog>
+                                    </af:popup>
+                                  </h:panelGrid>
+                                </h:panelGrid>
+                                <af:spacer width="10" height="20" id="spacer1"/>
+                                <af:outputLabel value="Tax Rates"
+                                                id="outputLabel3"
+                                                inlineStyle="font-weight:bold;"/>
+                                <af:separator id="separator1"/>
+                                <h:panelGrid columns="3" id="pg12">
+                                  <af:commandButton id="cb19"
+                                                    icon="/images/new_dwn.png"
+                                                    action="#{SetupBean.AddTaxRates}"
+                                                    text="New"/>
+                                  <af:commandButton icon="/images/update_ena.png"
+                                                    id="commandButton11"
+                                                    action="#{SetupBean.EditTaxRates}"
+                                                    text="Edit"/>
+                                  <af:commandButton id="delTaxRates"
+                                                    icon="/images/delete_ena.png"
+                                                    text="Delete"
+                                                    actionListener="#{SetupBean.DeleteListener}"/>
+                                </h:panelGrid>
+                                <af:popup id="p2">
+                                  <af:dialog id="d4" type="none"
+                                             title="Causations">
+                                    <af:panelBox id="pb5" showHeader="never">
+                                      <f:facet name="toolbar"/>
+                                      <af:table value="#{bindings.causations.collectionModel}"
+                                                var="row"
+                                                rows="#{bindings.causations.rangeSize}"
+                                                emptyText="#{bindings.causations.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                fetchSize="#{bindings.causations.rangeSize}"
+                                                rowBandingInterval="0"
+                                                filterModel="#{bindings.causationsQuery.queryDescriptor}"
+                                                queryListener="#{bindings.causationsQuery.processQuery}"
+                                                filterVisible="true"
+                                                varStatus="vs"
+                                                selectedRowKeys="#{bindings.causations.collectionModel.selectedRow}"
+                                                selectionListener="#{bindings.causations.collectionModel.makeCurrent}"
+                                                rowSelection="single" id="t1"
+                                                binding="#{SetupBean.causationTable}">
+                                        <af:column sortProperty="causShtdesc"
+                                                   filterable="true"
+                                                   sortable="true"
+                                                   headerText="Short Desc"
+                                                   id="c19">
+                                          <af:outputText value="#{row.causShtdesc}"
+                                                         id="ot20"/>
+                                        </af:column>
+                                        <af:column sortProperty="causDesc"
+                                                   filterable="true"
+                                                   sortable="true"
+                                                   headerText="Causation"
+                                                   id="c18" width="200">
+                                          <af:outputText value="#{row.causDesc}"
+                                                         id="ot21"/>
+                                        </af:column>
+                                      </af:table>
+                                      <h:panelGrid columns="2" id="pg9">
+                                        <af:commandButton text="OK" id="cb5"
+                                                          action="#{SetupBean.findCausationSelected}"
+                                                          partialSubmit="true"/>
+                                        <af:commandButton text="Cancel"
+                                                          id="commandButton3"
+                                                          action="#{SetupBean.CancelCausation}"
+                                                          partialSubmit="true"/>
+                                      </h:panelGrid>
+                                    </af:panelBox>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:popup id="taxRates">
+                                  <af:dialog id="d1" title="Tax Types"
+                                             type="none">
+                                    <h:panelGrid columns="4" id="pg3">
+                                      <af:outputLabel value="Range From"
+                                                      id="ol2"/>
+                                      <af:inputText label="Label 1" id="it1"
+                                                    simple="true"
+                                                    binding="#{SetupBean.txRangeFrom}"/>
+                                      <af:outputLabel value="Range To "
+                                                      id="outputLabel4"/>
+                                      <af:inputText label="Label 1"
+                                                    id="inputText1"
+                                                    simple="true"
+                                                    binding="#{SetupBean.txRangeTo}"/>
+                                      <af:outputLabel value="Age From"
+                                                      id="outputLabel5"/>
+                                      <af:inputText label="Label 1"
+                                                    id="inputText2"
+                                                    simple="true"
+                                                    binding="#{SetupBean.txAgeFrm}"/>
+                                      <af:outputLabel value="Age To"
+                                                      id="outputLabel6"/>
+                                      <af:inputText label="Label 1"
+                                                    id="inputText3"
+                                                    simple="true"
+                                                    binding="#{SetupBean.txAgeTo}"/>
+                                      <af:outputLabel value="Rate"
+                                                      id="outputLabel7"/>
+                                      <af:inputText label="Label 1"
+                                                    id="inputText4"
+                                                    simple="true"
+                                                    binding="#{SetupBean.txRate}"/>
+                                      <af:outputLabel value="Division Factor"
+                                                      id="outputLabel8"/>
+                                      <af:inputText label="Label 1"
+                                                    id="inputText5"
+                                                    simple="true"
+                                                    binding="#{SetupBean.txDivFac}"/>
+                                      <af:outputLabel value="Rate Type"
+                                                      id="outputLabel9"/>
+                                      <af:selectOneChoice label="Label 1"
+                                                          id="soc1"
+                                                          simple="true"
+                                                          binding="#{SetupBean.txRateType}">
+                                        <af:selectItem label="Fixed" value="FXD"
+                                                       id="si3"/>
+                                        <af:selectItem label="Recurring"
+                                                       value="RCU" id="si2"/>
+                                        <af:selectItem label="Step Range"
+                                                       value="SRG" id="si4"/>
+                                        <af:selectItem label="Step Absolute"
+                                                       value="SAB" id="si1"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Applied To"
+                                                      id="outputLabel10"/>
+                                      <af:selectOneChoice label="Label 2"
+                                                          id="soc2"
+                                                          simple="true"
+                                                          binding="#{SetupBean.txApplTo}">
+                                        <af:selectItem label="Company"
+                                                       value="CO" id="si6"/>
+                                        <af:selectItem label="Client" value="CL"
+                                                       id="si5"/>
+                                        <af:selectItem label="Client At Valuation" value="CV"
+                                                       id="selectItem1"/>
+                                        <af:selectItem label="Client Reserve" value="CR"
+                                                       id="si16"/>
+                                        <af:selectItem label="Members Only" value="MO"
+                                                       id="si17"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Rate Applied On"
+                                                      id="ol3"/>
+                                      <af:selectOneChoice label="Label 6"
+                                                          id="soc6"
+                                                          simple="true"
+                                                          binding="#{SetupBean.txApplOn}">
+                                        <af:selectItem label="Fund Value"
+                                                       value="FV" id="si19"/>
+                                        <af:selectItem label="Unregistered Interest"
+                                                       value="UI" id="si20"/>
+                                        <af:selectItem label="No of Members"
+                                                       value="NM" id="si21"/>
+                                        <af:selectItem label="Flat Amount"
+                                                       value="FA" id="si18"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Application Frequency"
+                                                      id="outputLabel11"/>
+                                      <af:selectOneChoice label="Label 3"
+                                                          id="soc3"
+                                                          simple="true"
+                                                          binding="#{SetupBean.txApplFreq}">
+                                        <af:selectItem label="Once Only"
+                                                       value="O" id="si10"/>
+                                        <af:selectItem label="At Renewal"
+                                                       value="R" id="si9"/>
+                                        <af:selectItem label="Always" value="A"
+                                                       id="si7"/>
+                                        <af:selectItem label="Fixed Duration"
+                                                       value="F" id="si8"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Duration"
+                                                      id="outputLabel12"/>
+                                      <af:inputText label="Label 1"
+                                                    id="inputText6"
+                                                    simple="true"
+                                                    binding="#{SetupBean.txDuration}"/>
+                                      <af:outputLabel value="Service Years From"
+                                                      id="outputLabel2"/>
+                                      <af:inputText label="Label 1"
+                                                    id="inputText7"
+                                                    simple="true"
+                                                    binding="#{SetupBean.yrsOfService}"/>
+                                      <af:outputLabel value="Service Years To"
+                                                      id="outputLabel16"/>
+                                      <af:inputText label="Label 1"
+                                                    id="inputText8"
+                                                    simple="true"
+                                                    binding="#{SetupBean.yrsOfServiceTo}"/>
+                                      <af:outputLabel value="Applicable at Causation"
+                                                      id="outputLabel17"/>
+                                      <af:selectOneChoice label="Label 5"
+                                                          id="soc5"
+                                                          simple="true"
+                                                          value="N"
+                                                          binding="#{SetupBean.applAtCause}"
+                                                          autoSubmit="true"
+                                                          valueChangeListener="#{SetupBean.ApplicableAtCauseListener}">
+                                        <af:selectItem label="Yes" value="Y"
+                                                       id="si15"/>
+                                        <af:selectItem label="No" value="N"
+                                                       id="si14"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Causation"
+                                                      id="outputLabel15"/>
+                                      <af:panelGroupLayout id="pgl7"
+                                                           partialTriggers="soc5">
+                                        <h:panelGrid columns="2" id="pg2">
+                                          <af:inputText label="Label 3" id="it4"
+                                                        disabled="true"
+                                                        simple="true"
+                                                        binding="#{SetupBean.causationDesc}"/>
+                                          <af:commandButton id="cb4"
+                                                            icon="/images/dropdown.gif"
+                                                            binding="#{SetupBean.causationButton}">
+                                            <af:showPopupBehavior popupId="p2"/>
+                                          </af:commandButton>
+                                        </h:panelGrid>
+                                      </af:panelGroupLayout>
+                                      <af:outputLabel value="WEF"
+                                                      id="outputLabel13"/>
+                                      <af:inputDate label="Label 1" id="id1"
+                                                    simple="true"
+                                                    binding="#{SetupBean.wef}">
+                                         <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                     </af:inputDate>               
+                                      <af:outputLabel value="WET"
+                                                      id="outputLabel14"/>
+                                      <af:inputDate label="Label 2" id="id2"
+                                                    simple="true"
+                                                    binding="#{SetupBean.wet}">
+                                         <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" id="pg4">
+                                      <af:commandButton text="Save" id="cb1"
+                                                        action="#{SetupBean.SaveTaxRates}"
+                                                        partialSubmit="true"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="commandButton1"/>
+                                    </h:panelGrid>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:table value="#{bindings.Setup2.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.Setup2.rangeSize}"
+                                          emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Setup2.rangeSize}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t3"
+                                          inlineStyle="width:100%; height:230.0px; border-style:none;"
+                                          binding="#{SetupBean.ratesLOV}">
+                                  <af:column sortProperty="TRT_RANGE_FROM"
+                                             sortable="true"
+                                             headerText="Range From" id="c13"
+                                             width="60">
+                                    <af:outputText value="#{row.TRT_RANGE_FROM}"
+                                                   id="ot13"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_RANGE_TO"
+                                             sortable="true"
+                                             headerText="Range To" id="c10"
+                                             width="60">
+                                    <af:outputText value="#{row.TRT_RANGE_TO}"
+                                                   id="ot10"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_AGE_FROM"
+                                             sortable="true"
+                                             headerText="Age From" id="c5"
+                                             width="60">
+                                    <af:outputText value="#{row.TRT_AGE_FROM}"
+                                                   id="ot9"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_AGE_TO"
+                                             sortable="true" headerText="Age To"
+                                             id="c15" width="60">
+                                    <af:outputText value="#{row.TRT_AGE_TO}"
+                                                   id="ot16"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_RATE"
+                                             sortable="true" headerText="Rate"
+                                             id="c6" width="60">
+                                    <af:outputText value="#{row.TRT_RATE}"
+                                                   id="ot8"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_DIVISION_FACTOR"
+                                             sortable="true"
+                                             headerText="Div Factor" id="c9"
+                                             width="60">
+                                    <af:outputText value="#{row.TRT_DIVISION_FACTOR}"
+                                                   id="ot17"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_RATE_TYPE_DESC"
+                                             sortable="true"
+                                             headerText="Rate Type" id="c7">
+                                    <af:outputText value="#{row.TRT_RATE_TYPE_DESC}"
+                                                   id="ot6"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_APPLIED_TO_DESC"
+                                             sortable="true"
+                                             headerText="Applied To" id="c16">
+                                    <af:outputText value="#{row.TRT_APPLIED_TO_DESC}"
+                                                   id="ot15"/>
+                                  </af:column>
+                                  
+                                  <af:column sortProperty="TRT_APPLIED_ON_DESC"
+                                             sortable="true"
+                                             headerText="Applied On" id="c22">
+                                    <af:outputText value="#{row.TRT_APPLIED_ON_DESC}"
+                                                   id="ot25"/>
+                                  </af:column>
+                                  
+                                  <af:column sortProperty="TRT_APPLICATION_FREQ_DESC"
+                                             sortable="true"
+                                             headerText="Application Freq"
+                                             id="c17">
+                                    <af:outputText value="#{row.TRT_APPLICATION_FREQ_DESC}"
+                                                   id="ot14"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_TAX_DURATION"
+                                             sortable="true"
+                                             headerText="Duration" id="c8">
+                                    <af:outputText value="#{row.TRT_TAX_DURATION}"
+                                                   id="ot7"/>
+                                  </af:column>
+                                  <af:column sortProperty="CVT_DESC"
+                                             sortable="true"
+                                             headerText="Product Cover"
+                                             id="c14">
+                                    <af:outputText value="#{row.CVT_DESC}"
+                                                   id="ot18"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_YRS_OF_SERVICE_FROM"
+                                             sortable="false"
+                                             headerText="Service Years From"
+                                             id="c1">
+                                    <af:outputText value="#{row.TRT_YRS_OF_SERVICE_FROM}"
+                                                   id="ot2"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_YRS_OF_SERVICE_TO"
+                                             sortable="false"
+                                             headerText="Service Years To"
+                                             id="c20">
+                                    <af:outputText value="#{row.TRT_YRS_OF_SERVICE_TO}"
+                                                   id="ot22"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_APPLICABLE_AT_CAUS"
+                                             sortable="false"
+                                             headerText="Appl at Causation"
+                                             id="c21">
+                                    <af:outputText value="#{row.TRT_APPLICABLE_AT_CAUS}"
+                                                   id="ot23"/>
+                                  </af:column>
+                                  <af:column sortProperty="CAUS_DESC"
+                                             sortable="false"
+                                             headerText="Causation" id="c2">
+                                    <af:outputText value="#{row.CAUS_DESC}"
+                                                   id="ot3"/>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_WEF_DATE"
+                                             sortable="true" headerText="WEF"
+                                             id="c12" width="60">
+                                    <af:outputText value="#{row.TRT_WEF_DATE}"
+                                                   id="ot11">
+                                      <af:convertDateTime pattern="#{bindings.Setup2.hints.TRT_WEF_DATE.format}"/>
+                                    </af:outputText>
+                                  </af:column>
+                                  <af:column sortProperty="TRT_WET_DATE"
+                                             sortable="true" headerText="WET"
+                                             id="c11" width="60">
+                                    <af:outputText value="#{row.TRT_WET_DATE}"
+                                                   id="ot12">
+                                      <af:convertDateTime pattern="#{bindings.Setup2.hints.TRT_WET_DATE.format}"/>
+                                    </af:outputText>
+                                  </af:column>
+                                </af:table>
+                              </af:panelBox>
+                            </af:panelGroupLayout>
+                          </f:facet>
+                        </af:panelSplitter>
+                      </af:panelGroupLayout>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <h:panelGrid columns="2" id="pg5">
+                      <af:inputText id="it2"
+                                    helpTopicId="LmsGrp_taxRatesProduct"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si11"/>
+                    </h:panelGrid>
+                  </f:facet>
+                </af:showDetailItem>
+              </af:panelAccordion>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

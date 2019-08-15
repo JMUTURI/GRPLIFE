@@ -1,0 +1,464 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:afh="http://myfaces.apache.org/trinidad/html"
+          version="1.2">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <description>This component lays out an entire page.</description>
+        <facet>
+          <description>
+            <![CDATA[Content to be rendered as meta data inside the "head" section.]]>
+          </description>
+          <facet-name>metaContainer</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The center content.]]>
+          </description>
+          <facet-name>center</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The auxiliary content for the global layer.]]>
+          </description>
+          <facet-name>auxiliaryGlobal</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The global contextual region of the page.]]>
+          </description>
+          <facet-name>contextGlobal</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[An optional horizontally oriented region of contexual components for the main content.]]>
+          </description>
+          <facet-name>contextLocal</facet-name>
+        </facet>
+        <attribute>
+          <description>The title of the HTML document</description>
+          <attribute-name>documentTitle</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>If true, the margin and padding are set to 0px.</description>
+          <attribute-name>maximized</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <description>the id attribute of the command button inside the form whose action should be
+                       invoked by default, when the enter key is pressed with focus inside the form.
+                       Identifiers are relative to the form component, and must account for
+                       NamingContainers. You can use a single colon to start the search from the
+                       root.</description>
+          <attribute-name>defaultCommand</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>the id of the component to which you want the focus to be when the full page
+                       renders. The accessibility-mode must not be set to "screenReader" for this
+                       feature to be on.</description>
+          <attribute-name>initialFocusId</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>whether the form supports file upload.</description>
+          <attribute-name>usesUpload</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the name of the component tag.</description>
+          <attribute-name>tagName</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>Specifies the name of the visual design demo.</description>
+          <attribute-name>visualDesignName</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels that the editor content should consume (this
+                       is a width if the orientationis "start" or "end" or a height if the
+                       orientation is "bottom").</description>
+          <attribute-name>editorSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>340</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels that the auxiliaryGlobal content should
+                       consume (this is a width if the orientationis "start" or "end" or a height if
+                       the orientation is "bottom").</description>
+          <attribute-name>auxiliaryGlobalSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>200</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the global content should consume.</description>
+          <attribute-name>headerGlobalSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>30</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the secondary header content should
+                       consume.</description>
+          <attribute-name>header2Size</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>18</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies whether or not to hide the built-in editor.</description>
+          <attribute-name>customEditorPresent</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the kind of demo the tag represents.</description>
+          <attribute-name>demoKind</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>Specifies a custom inlineStyle for the visible root element of the layout.</description>
+          <attribute-name>rootInlineStyle</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>For purposes of the component demo, if the current page is the document demo
+                       page.</description>
+          <attribute-name>editingDocument</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <description>For purposes of the component demo, if the current page is the form demo page.</description>
+          <attribute-name>editingForm</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+      </component>
+    </af:xmlContent>
+    <af:document title="#{attrs.documentTitle}" maximized="#{attrs.maximized}"
+                 initialFocusId="#{attrs.initialFocusId}"
+                 binding="#{templateBindings.documentComponent}" id="pt_d1">
+      <f:facet name="metaContainer">
+        <af:group id="pt_g1">
+          <h:outputText
+            escape="false"
+            value="&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;#{facesContext.externalContext.requestContextPath}/images/favicon.png&quot;>"
+                        id="pt_ot1"/>
+          <h:outputText
+            escape="false"
+            value="&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;#{facesContext.externalContext.requestContextPath}/images/touchicon.png&quot;>"
+                        id="pt_ot2"/>
+          <![CDATA[
+          <style type="text/css">
+          .DemoNavigationGlobal {
+            text-align: right;
+            padding-left: 0px;
+            padding-right: 10px;
+            white-space: normal;
+          }
+          HTML[dir=rtl] .DemoNavigationGlobal {
+            text-align: left;
+            padding-left: 10px;
+            padding-right: 0px;
+          }
+          </style>
+          ]]>
+          <af:facetRef facetName="metaContainer"/>
+        </af:group>
+      </f:facet>
+      <af:form defaultCommand="#{attrs.defaultCommand}" usesUpload="#{attrs.usesUpload}"
+               binding="#{templateBindings.formComponent}" id="myForm">
+        <af:panelStretchLayout
+          theme="dark"
+          styleClass="AFVisualRoot"
+          inlineStyle="#{attrs.rootInlineStyle}" id="pt_psl1">
+          <f:facet name="center">
+            <af:panelSplitter orientation="vertical" splitterPosition="#{attrs.headerGlobalSize}"
+                              id="pt_ps1">
+              <f:facet name="first">
+                <af:panelGroupLayout layout="scroll" id="pt_pgl1">
+                  <afh:tableLayout width="100%" id="pt_tl1">
+                    <afh:rowLayout id="pt_rl1">
+                      <afh:cellFormat styleClass="AFBranding" id="pt_cf1">
+                        <af:panelGroupLayout layout="horizontal" shortDesc="branding"
+                                             id="pt_pgl2">
+                          <af:icon name="logo" shortDesc="Oracle" id="pt_i1"/>
+                          <af:outputText inlineStyle="white-space: nowrap;"
+                                         value="#{attrs.tagName}#{attrs.demoKind=='feature'?'':' Demo'}"
+                                         id="pt_ot3"/>
+                        </af:panelGroupLayout>
+                      </afh:cellFormat>
+                      <afh:cellFormat id="pt_cf2">
+                        <af:outputText value=" " id="pt_ot4"/>
+                      </afh:cellFormat>
+                      <afh:cellFormat styleClass="DemoNavigationGlobal"
+                                      id="pt_cf3">
+                        <af:navigationPane hint="buttons" id="pt_np1">
+                          <!-- When changing this please make appropriate change to tagDemoPortletTemplate.jspx -->
+                          <af:commandNavigationItem text="Tag Documentation"
+                                                    rendered="#{attrs.demoKind!='visualDesign' and attrs.demoKind!='feature'}"
+                                                    destination="/docs/tagdoc/af_#{attrs.tagName}.html"
+                                                    id="pt_cni1"/>
+                          <af:commandNavigationItem text="Skinning Key Demo"
+                                                    rendered="#{attrs.demoKind=='component' or attrs.demoKind=='styles'}"
+                                                    destination="/components/skinningKeys/#{attrs.tagName}.jspx"
+                                                    id="pt_cni2"/>
+                          <af:commandNavigationItem text="Tag Demo"
+                                                    rendered="#{attrs.demoKind=='skinning'} or attrs.demoKind=='styles'}"
+                                                    destination="/components/#{attrs.tagName}.jspx"
+                                                    id="pt_cni3"/>
+                          <af:commandNavigationItem text="Skinning Key Documentation"
+                                                    rendered="#{attrs.demoKind=='component' or attrs.demoKind=='skinning' or attrs.demoKind=='styles'}"
+                                                    destination="/docs/skinsdoc/skin-selectors.html##{attrs.tagName}"
+                                                    id="pt_cni4"/>
+                          <af:commandNavigationItem text="Visual Design Demo"
+                                                    rendered="#{attrs.demoKind=='component'}"
+                                                    destination="/visualDesigns/#{attrs.visualDesignName}.jspx"
+                                                    disabled="#{''==attrs.visualDesignName}"
+                                                    id="pt_cni5"/>
+                          <af:commandNavigationItem text="View Page Source"
+                                                    destination="#{facesContext.viewRoot.viewId}.source"
+                                                    id="pt_cni6"/>
+                        </af:navigationPane>
+                      </afh:cellFormat>
+                      <afh:cellFormat width="30" id="pt_cf4">
+                        <af:panelGroupLayout layout="vertical" id="pt_pgl3">
+                          <af:spacer height="3" id="pt_s1"/>
+                          <af:statusIndicator id="pt_si1"/>
+                        </af:panelGroupLayout>
+                      </afh:cellFormat>
+                    </afh:rowLayout>
+                  </afh:tableLayout>
+                  <af:facetRef facetName="contextGlobal"/>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="second">
+                <af:panelSplitter orientation="horizontal"
+                                  splitterPosition="#{attrs.auxiliaryGlobalSize}"
+                                  id="pt_ps2">
+                  <f:facet name="first">
+                    <af:facetRef facetName="auxiliaryGlobal"/>
+                  </f:facet>
+                  <f:facet name="second">
+                    <af:decorativeBox
+                      topHeight="26"
+                      theme="light" id="pt_db1">
+                      <f:facet name="top">
+                        <af:panelStretchLayout
+                          startWidth="5px" id="pt_psl2">
+                          <f:facet name="start">
+                            <af:spacer id="pt_s2"/>
+                          </f:facet>
+                          <f:facet name="center">
+                            <af:navigationPane id="nav1" hint="tabs">
+                              <af:commandNavigationItem
+                                id="tagGuideTab"
+                                text="Tag Guide"
+                                shortDesc="View demonstrations of components, validators, converters, etc."
+                                selected="#{attrs.demoKind == 'component'}"
+                                action="guide"/>
+                              <af:commandNavigationItem
+                                id="componentSkinningTab"
+                                text="Component Skinning"
+                                shortDesc="View examples to learn more about component skinning"
+                                selected="#{attrs.demoKind == 'skinning'}"
+                                action="skinning"/>
+                              <af:commandNavigationItem
+                                id="fileExplorerTab"
+                                text="File Explorer"
+                                shortDesc="View a file browser example linked to a live server model"
+                                selected="false"
+                                action="fileExplorer"/>
+                              <af:commandNavigationItem
+                                id="featureTab"
+                                text="Framework Features"
+                                shortDesc="View framework features"
+                                selected="#{attrs.demoKind == 'feature'}"
+                                action="feature"/>
+                              <af:commandNavigationItem
+                                id="pageTemplatesTab"
+                                text="Page Templates"
+                                shortDesc="View a collection of sample page templates"
+                                selected="false"
+                                action="templates"/>
+                              <af:commandNavigationItem
+                                id="visualDesignsTab"
+                                text="Visual Designs"
+                                shortDesc="View demonstrations grouped by visual theme"
+                                selected="#{attrs.demoKind == 'visualDesign'}"
+                                action="visualDesigns"/>
+                              <af:commandNavigationItem
+                                id="styleDemoTab"
+                                text="Styles"
+                                shortDesc="View demonstrations of inlineStyle and contentStyle"
+                                selected="#{attrs.demoKind == 'styles'}"
+                                action="styles"/>
+                            </af:navigationPane>
+                          </f:facet>
+                        </af:panelStretchLayout>
+                      </f:facet>
+                      <f:facet name="center">
+                        <af:panelSplitter
+                          orientation="horizontal"
+                          positionedFromEnd="true"
+                          splitterPosition="195"
+                          collapsed="true" id="pt_ps3">
+                          <f:facet name="first">
+                            <af:panelStretchLayout topHeight="#{attrs.header2Size}"
+                                                   id="pt_psl3">
+                              <f:facet name="top">
+                                <af:panelGroupLayout layout="vertical"
+                                                     id="pt_pgl4">
+                                  <af:breadCrumbs inlineStyle="margin: 0 6px 0 6px; display: block;"
+                                                  id="pt_bc1">
+                                    <af:commandNavigationItem rendered="#{(attrs.demoKind!='visualDesign') and
+                                                                          (attrs.demoKind!='skinning') and
+                                                                          (attrs.demoKind!='styles') and
+                                                                          (attrs.demoKind!='feature')}"
+                                                              action="guide" immediate="true"
+                                                              text="Tag Guide"
+                                                              id="pt_cni7"/>
+                                    <af:commandNavigationItem rendered="#{attrs.demoKind=='visualDesign'}"
+                                                              destination="/visualDesigns/index.jspx"
+                                                              text="Visual Designs"
+                                                              id="pt_cni8"/>
+                                    <af:commandNavigationItem rendered="#{attrs.demoKind=='feature'}"
+                                                              destination="index.jspx"
+                                                              text="Framework Features"
+                                                              id="pt_cni9"/>
+                                    <af:commandNavigationItem rendered="#{attrs.demoKind=='skinning'}"
+                                                              destination="index.jspx"
+                                                              text="Component Skinning"
+                                                              id="pt_cni10"/>
+                                    <af:commandNavigationItem rendered="#{attrs.demoKind=='styles'}"
+                                                          destination="index.jspx"
+                                                          text="Styles"
+                                                              id="pt_cni11"/>
+                                    <af:commandNavigationItem text="#{attrs.tagName} Demo"
+                                                              id="pt_cni12"/>
+                                  </af:breadCrumbs>
+                                  <af:facetRef facetName="contextLocal"/>
+                                </af:panelGroupLayout>
+                              </f:facet>
+                              <f:facet name="center">
+                                <af:panelSplitter orientation="horizontal"
+                                                  splitterPosition="#{attrs.editorSize}"
+                                                  positionedFromEnd="true"
+                                                  id="pt_ps4">
+                                  <f:facet name="second">
+                                    <af:panelGroupLayout layout="scroll"
+                                                         rendered="#{!attrs.customEditorPresent}"
+                                                         id="pt_pgl5">
+                                      <f:subview id="editor" rendered="#{attrs.demoKind!='styles'}">
+                                        <jsp:include page="/components/editor.jspx"/>
+                                      </f:subview>
+                                      <f:subview id="styleEditor"
+                                                 rendered="#{attrs.demoKind=='styles'}">
+                                        <jsp:include page="/components/styles/styleEditor.jspx"/>
+                                      </f:subview>
+                                    </af:panelGroupLayout>
+                                  </f:facet>
+                                  <f:facet name="first">
+                                    <af:decorativeBox
+                                      theme="default" id="pt_db2">
+                                      <f:facet name="center">
+                                        <af:panelStretchLayout id="pt_psl4">
+                                          <!-- Mark the skip link target - skip link jumps here. -->
+                                          <af:skipLinkTarget/>
+                                          <f:facet name="center">
+                                            <af:facetRef facetName="center"/>
+                                          </f:facet>
+                                          <f:facet name="bottom">
+                                            <!-- Don't stretch the button -->
+                                            <af:panelGroupLayout id="pt_pgl6">
+                                              <af:commandButton text="Print Content"
+                                                                id="pt_cb1">
+                                                <af:showPrintablePageBehavior/>
+                                              </af:commandButton>
+                                            </af:panelGroupLayout>
+                                          </f:facet>
+                                        </af:panelStretchLayout>
+                                      </f:facet>
+                                    </af:decorativeBox>
+                                  </f:facet>
+                                </af:panelSplitter>
+                                <!-- end of secondary auxiliary splitter -->
+                              </f:facet>
+                            </af:panelStretchLayout>
+                            <!-- end of secondary header layout -->
+                          </f:facet>
+                          <f:facet name="second">
+                            <af:panelGroupLayout layout="scroll"
+                                             rendered="#{attrs.mode != 'skinning' and attrs.mode != 'styles'}"
+                              inlineStyle="border-left: 1px dashed gray; padding-left: 10px;"
+                                                 id="pt_pgl7">
+                              <af:panelHeader text="Settings" inlineStyle="padding-top: 5px;"
+                                              id="pt_ph1">
+                                <af:panelFormLayout maxColumns="1" labelAlignment="top"
+                                                    id="pt_pfl1">
+                                  <af:selectOneRadio label="Skin" value="#{demoSkin.skinFamily}" autoSubmit="true"
+                                                     id="pt_sor1">
+                                    <af:selectItem value="blafplus-rich" label="blafplus-rich"
+                                                   id="pt_si2"/>
+                                    <af:selectItem value="blafplus-medium" label="blafplus-medium"
+                                                   id="pt_si3"/>
+                                    <af:selectItem value="simple" label="simple"
+                                                   id="pt_si4"/>
+                                    <af:selectItem value="richDemo" label="richDemo"
+                                                   id="pt_si5"/>
+                                    <af:selectItem value="rainforest" label="rainforest"
+                                                   id="pt_si6"/>
+                                    <af:selectItem value="sporty" label="sporty"
+                                                   id="pt_si7"/>
+                                    <af:selectItem value="princess" label="princess"
+                                                   id="pt_si8"/>
+                                    <af:selectItem value="lowVision" label="Low Vision"
+                                                   id="pt_si9"/>
+                                    <af:selectItem value="lowVisionMediumFont" label="Low Vision (medium font)"
+                                                   id="pt_si10"/>
+                                    <af:selectItem value="lowVisionEmFont" label="Low Vision (em-based font)"
+                                                   id="pt_si11"/>
+                                    <af:selectItem value="lowVisionNoFont" label="Low Vision (no font)"
+                                                   id="pt_si12"/>
+                                  </af:selectOneRadio>
+                                  <af:selectOneRadio
+                                    label="Accessibility Mode"
+                                    value="#{accessibility.accessibilityMode}"
+                                                     id="pt_sor2">
+                                    <af:selectItem value="default" label="default"
+                                                   id="pt_si13"/>
+                                    <af:selectItem value="screenReader" label="screenReader"
+                                                   id="pt_si14"/>
+                                  </af:selectOneRadio>
+                                  <af:selectBooleanCheckbox
+                                    label="Animation Enabled"
+                                    value="#{animation.animationEnabled}"
+                                                            id="pt_sbc1">
+                                  </af:selectBooleanCheckbox>
+                                  <af:commandButton text="Refresh" id="pt_cb2"/>
+                                </af:panelFormLayout>
+                              </af:panelHeader>
+                            </af:panelGroupLayout>
+                          </f:facet>
+                        </af:panelSplitter>
+                      </f:facet>
+                    </af:decorativeBox>
+                  </f:facet>
+                </af:panelSplitter>
+              </f:facet>
+            </af:panelSplitter>
+            <!-- end of global top splitter -->
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </af:pageTemplateDef>
+</jsp:root>

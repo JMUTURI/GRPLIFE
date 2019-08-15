@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="tretstpPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findTreatyArrangements.result"
+                    DataControl="treatyArrangementsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.setups.treatyArrangements"
+                    id="findTreatyArrangementsIterator"/>
+    <methodIterator Binds="findArrangementSetups.result"
+                    DataControl="arrangementSetupsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.setups.arrangementSetups"
+                    id="findArrangementSetupsIterator"/>
+    <searchRegion Binds="findArrangementSetupsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="arrangementSetupsQuery"/>
+    <methodIterator Binds="findArrangementSetups1.result"
+                    DataControl="treatyProductsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.setups.treatyProducts"
+                    id="findArrangementSetups1Iterator"/>
+    <methodIterator Binds="findTreatyProdCoverTypes.result"
+                    DataControl="treatyProdCoverTypesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.setups.treatyProdCoverTypes"
+                    id="findTreatyProdCoverTypesIterator"/>
+    <methodIterator Binds="findProductCoverTypesLOV.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findProductCoverTypesLOVIterator"/>
+    <methodIterator Binds="findTreatySetups.result" DataControl="treatySetupDAO"
+                    RangeSize="25" BeanClass="LMSG.view.setups.treatySetups"
+                    id="findTreatySetupsIterator"/>
+    <methodIterator Binds="findTreatyLOV.result" DataControl="treatiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.setups.treaties"
+                    id="findTreatyLOVIterator"/>
+    <methodIterator Binds="findArrangementCoverTypesLOV.result"
+                    DataControl="ArrangementCoverTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+                    id="findArrangementCoverTypesLOVIterator"/>
+    <methodIterator Binds="findOrdReinRatesLOV.result"
+                    DataControl="ArrangementCoverTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+                    id="findOrdReinRatesLOVIterator"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findReinsurers.result"
+                    DataControl="treatyParticipantsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.TreatyParticipants"
+                    id="findReinsurersIterator"/>
+    <methodIterator Binds="findTreatyParticipants.result"
+                    DataControl="treatyParticipantsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.TreatyParticipants"
+                    id="findTreatyParticipantsIterator"/>
+    <methodIterator Binds="findArrangementCoverTypes.result"
+                    DataControl="ArrangementCoverTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+                    id="findArrangementCoverTypesIterator"/>
+    <methodIterator Binds="findArrangementCoverTypesCommRates.result"
+                    DataControl="ArrangementCoverTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+                    id="findArrangementCoverTypesCommRatesIterator"/>
+    <methodIterator Binds="findGLAccounts.result"
+                    DataControl="productTransactionsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.productTransactions"
+                    id="findGLAccountsIterator"/>
+    <searchRegion Binds="findGLAccountsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productTransactionsQuery"/>
+    <searchRegion Binds="findTreatySetupsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="treatySetups2Query"/>
+    <searchRegion Binds="findArrangementSetups1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="treatyProductsQuery"/>
+<methodIterator Binds="findTreatyLayers.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findTreatyLayersIterator"/>
+    <searchRegion Binds="findTreatyLayersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup2Query"/>
+    <methodIterator Binds="findOrgCurrencies.result" DataControl="SetupsDAO"
+                    RangeSize="100" BeanClass="com.turnkey.setups.Setup"
+                    id="findOrgCurrenciesIterator"/>
+    <iterator Binds="root" RangeSize="25" DataControl="SetupsDAO"
+              id="SetupsDAOIterator"/>
+    <methodIterator Binds="findOrgCurrencies.result" DataControl="SetupsDAO"
+                    RangeSize="-1" BeanClass="com.turnkey.setups.Setup"
+                    id="findOrgCurrenciesIter"/>
+    <searchRegion Binds="findOrgCurrenciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup4Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findTreatyArrangements" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyArrangements"
+                  IsViewObjectMethod="false" DataControl="treatyArrangementsDAO"
+                  InstanceName="treatyArrangementsDAO.dataProvider"
+                  ReturnName="treatyArrangementsDAO.methodResults.findTreatyArrangements_treatyArrangementsDAO_dataProvider_findTreatyArrangements_result"/>
+    <methodAction id="findArrangementSetups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findArrangementSetups"
+                  IsViewObjectMethod="false" DataControl="arrangementSetupsDAO"
+                  InstanceName="arrangementSetupsDAO.dataProvider"
+                  ReturnName="arrangementSetupsDAO.methodResults.findArrangementSetups_arrangementSetupsDAO_dataProvider_findArrangementSetups_result"/>
+    <tree IterBinding="findArrangementSetupsIterator" id="arrangementSetups">
+      <nodeDefinition DefName="LMSG.view.setups.arrangementSetups"
+                      Name="arrangementSetups0">
+        <AttrNames>
+          <Item Value="AS_UWYR"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findArrangementSetups1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findArrangementSetups"
+                  IsViewObjectMethod="false" DataControl="treatyProductsDAO"
+                  InstanceName="treatyProductsDAO.dataProvider"
+                  ReturnName="treatyProductsDAO.methodResults.findArrangementSetups_treatyProductsDAO_dataProvider_findArrangementSetups_result"/>
+    <methodAction id="findTreatyProdCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyProdCoverTypes"
+                  IsViewObjectMethod="false"
+                  DataControl="treatyProdCoverTypesDAO"
+                  InstanceName="treatyProdCoverTypesDAO.dataProvider"
+                  ReturnName="treatyProdCoverTypesDAO.methodResults.findTreatyProdCoverTypes_treatyProdCoverTypesDAO_dataProvider_findTreatyProdCoverTypes_result"/>
+    <tree IterBinding="findTreatyProdCoverTypesIterator"
+          id="treatyProdCoverTypes">
+      <nodeDefinition DefName="LMSG.view.setups.treatyProdCoverTypes"
+                      Name="treatyProdCoverTypes0">
+        <AttrNames>
+          <Item Value="CVT_DESC"/>
+          <Item Value="TCT_RETENTION_LIMIT"/>
+          <Item Value="TCT_MULTI_LIFE_RETN_LIMT"/>
+          <Item Value="TCT_OVER_LIMIT_TOCEDE"/>
+          <Item Value="TCT_OS_BAL_METHOD"/>
+          <Item Value="RIOS_DESC"/>
+          <Item Value="TCT_AAL"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTreatyProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTreatyProducts_SetupsDAO_dataProvider_findTreatyProducts_result"/>
+    <methodAction id="findProductCoverTypesLOV" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductCoverTypesLOV"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProductCoverTypesLOV_SetupsDAO_dataProvider_findProductCoverTypesLOV_result"/>
+    <tree IterBinding="findProductCoverTypesLOVIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="ADD_CVT_SHT_DESC"/>
+          <Item Value="ADD_CVT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTreatySetups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatySetups"
+                  IsViewObjectMethod="false" DataControl="treatySetupDAO"
+                  InstanceName="treatySetupDAO.dataProvider"
+                  ReturnName="treatySetupDAO.methodResults.findTreatySetups_treatySetupDAO_dataProvider_findTreatySetups_result"/>
+    <methodAction id="findTreatyLOV" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyLOV"
+                  IsViewObjectMethod="false" DataControl="treatiesDAO"
+                  InstanceName="treatiesDAO.dataProvider"
+                  ReturnName="treatiesDAO.methodResults.findTreatyLOV_treatiesDAO_dataProvider_findTreatyLOV_result"/>
+    <tree IterBinding="findTreatyLOVIterator" id="treaties">
+      <nodeDefinition DefName="LMSG.view.setups.treaties" Name="treaties0">
+        <AttrNames>
+          <Item Value="TRS_SHT_DESC"/>
+          <Item Value="TRS_TRT_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTreatyParticipants" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyParticipants"
+                  IsViewObjectMethod="false" DataControl="treatyParticipantsDAO"
+                  InstanceName="treatyParticipantsDAO.dataProvider"
+                  ReturnName="treatyParticipantsDAO.methodResults.findTreatyParticipants_treatyParticipantsDAO_dataProvider_findTreatyParticipants_result"/>
+    <methodAction id="findArrangementCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findArrangementCoverTypes"
+                  IsViewObjectMethod="false"
+                  DataControl="ArrangementCoverTypesDAO"
+                  InstanceName="ArrangementCoverTypesDAO.dataProvider"
+                  ReturnName="ArrangementCoverTypesDAO.methodResults.findArrangementCoverTypes_ArrangementCoverTypesDAO_dataProvider_findArrangementCoverTypes_result"/>
+    <methodAction id="findArrangementCoverTypesLOV" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findArrangementCoverTypesLOV"
+                  IsViewObjectMethod="false"
+                  DataControl="ArrangementCoverTypesDAO"
+                  InstanceName="ArrangementCoverTypesDAO.dataProvider"
+                  ReturnName="ArrangementCoverTypesDAO.methodResults.findArrangementCoverTypesLOV_ArrangementCoverTypesDAO_dataProvider_findArrangementCoverTypesLOV_result"/>
+    <tree IterBinding="findArrangementCoverTypesLOVIterator"
+          id="ArrangementCoverTypes1">
+      <nodeDefinition DefName="com.turnkey.setups.ArrangementCoverTypes"
+                      Name="ArrangementCoverTypes10">
+        <AttrNames>
+          <Item Value="TCT_CVT_SHT_DESC"/>
+          <Item Value="CVT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findOrdReinRatesLOV" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOrdReinRatesLOV"
+                  IsViewObjectMethod="false"
+                  DataControl="ArrangementCoverTypesDAO"
+                  InstanceName="ArrangementCoverTypesDAO.dataProvider"
+                  ReturnName="ArrangementCoverTypesDAO.methodResults.findOrdReinRatesLOV_ArrangementCoverTypesDAO_dataProvider_findOrdReinRatesLOV_result"/>
+    <tree IterBinding="findOrdReinRatesLOVIterator" id="ArrangementCoverTypes2">
+      <nodeDefinition DefName="com.turnkey.setups.ArrangementCoverTypes"
+                      Name="ArrangementCoverTypes20">
+        <AttrNames>
+          <Item Value="ORRP_SHT_DESC"/>
+          <Item Value="ORRP_DESC"/>
+          <Item Value="ORRP_CLASS_SPECIFIC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findArrangementCoverTypesCommRates"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findArrangementCoverTypesCommRates"
+                  IsViewObjectMethod="false"
+                  DataControl="ArrangementCoverTypesDAO"
+                  InstanceName="ArrangementCoverTypesDAO.dataProvider"
+                  ReturnName="ArrangementCoverTypesDAO.methodResults.findArrangementCoverTypesCommRates_ArrangementCoverTypesDAO_dataProvider_findArrangementCoverTypesCommRates_result"/>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="PROD_SHT_DESC"/>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findReinsurers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findReinsurers"
+                  IsViewObjectMethod="false" DataControl="treatyParticipantsDAO"
+                  InstanceName="treatyParticipantsDAO.dataProvider"
+                  ReturnName="treatyParticipantsDAO.methodResults.findReinsurers_treatyParticipantsDAO_dataProvider_findReinsurers_result"/>
+    <tree IterBinding="findReinsurersIterator" id="TreatyParticipants1">
+      <nodeDefinition DefName="com.turnkey.setups.TreatyParticipants"
+                      Name="TreatyParticipants10">
+        <AttrNames>
+          <Item Value="AGEN_CODE"/>
+          <Item Value="AGEN_SHT_DESC"/>
+          <Item Value="AGEN_NAME"/>
+          <Item Value="trpa_agen_code"/>
+          <Item Value="trpa_rei_code"/>
+          <Item Value="trpa_uw_year"/>
+          <Item Value="trpa_comp_rate"/>
+          <Item Value="trpa_trs_code"/>
+          <Item Value="trpa_agen_sht_desc"/>
+          <Item Value="agn_name"/>
+          <Item Value="trpa_gl_ctrl_account"/>
+          <Item Value="trpa_trs_sht_desc"/>
+          <Item Value="trpa_rei_prem_taxable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findTreatyParticipantsIterator" id="TreatyParticipants">
+      <nodeDefinition DefName="com.turnkey.setups.TreatyParticipants"
+                      Name="TreatyParticipants0">
+        <AttrNames>
+          <Item Value="trpa_agen_sht_desc"/>
+          <Item Value="agn_name"/>
+          <Item Value="trpa_comp_rate"/>
+          <Item Value="trpa_rei_prem_taxable"/>
+          <Item Value="trpa_gl_ctrl_account"/>
+          <Item Value="trpa_agen_code"/>
+          <Item Value="trpa_rei_code"/>
+          <Item Value="trpa_uw_year"/>
+          <Item Value="trpa_trs_code"/>
+          <Item Value="trpa_trs_sht_desc"/>
+          <Item Value="AGEN_CODE"/>
+          <Item Value="AGEN_SHT_DESC"/>
+          <Item Value="AGEN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findArrangementCoverTypesIterator"
+          id="ArrangementCoverTypes">
+      <nodeDefinition DefName="com.turnkey.setups.ArrangementCoverTypes"
+                      Name="ArrangementCoverTypes0">
+        <AttrNames>
+          <Item Value="atct_code"/>
+          <Item Value="atct_tct_code"/>
+          <Item Value="atct_tprd_code"/>
+          <Item Value="atct_ta_code"/>
+          <Item Value="atct_rei_code"/>
+          <Item Value="atct_pct_code"/>
+          <Item Value="atct_cvt_code"/>
+          <Item Value="atct_as_code"/>
+          <Item Value="atct_prod_code"/>
+          <Item Value="atct_comm_rate"/>
+          <Item Value="atct_cede_rate"/>
+          <Item Value="atct_rate_div_fact"/>
+          <Item Value="atct_orrp_code"/>
+          <Item Value="atct_rate"/>
+          <Item Value="atct_cvt_sht_desc"/>
+          <Item Value="atct_cede_type"/>
+          <Item Value="atct_rate_type"/>
+          <Item Value="atct_limit"/>
+          <Item Value="atct_class_specific"/>
+          <Item Value="cvt_desc"/>
+          <Item Value="atct_ta_sht_desc"/>
+          <Item Value="orrp_desc"/>
+          <Item Value="ratetype_desc"/>
+          <Item Value="cede_type_desc"/>
+          <Item Value="TCT_CODE"/>
+          <Item Value="TCT_CVT_CODE"/>
+          <Item Value="TCT_CVT_SHT_DESC"/>
+          <Item Value="CVT_DESC"/>
+          <Item Value="TCT_PCT_CODE"/>
+          <Item Value="ORRP_CODE"/>
+          <Item Value="ORRP_SHT_DESC"/>
+          <Item Value="ORRP_DESC"/>
+          <Item Value="ORRP_CLASS_SPECIFIC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findTreatySetupsIterator" id="treatySetups">
+      <nodeDefinition DefName="LMSG.view.setups.treatySetups"
+                      Name="treatySetups0">
+        <AttrNames>
+          <Item Value="REI_TRS_SHT_DESC"/>
+          <Item Value="REI_TRT_SHT_DESC"/>
+          <Item Value="REI_WEF_DT"/>
+          <Item Value="REI_WET_DT"/>
+          <Item Value="REI_PREM_RESV_INT"/>
+          <Item Value="REI_PROFIT_COMM"/>
+          <Item Value="REI_MGT_FEE"/>
+          <Item Value="REI_CASH_LOSS"/>
+          <Item Value="REI_ACCOUNTS_DESC"/>
+          <Item Value="REI_AOFREINS_CODE"/>
+          <Item Value="REI_PREM_PORTFOLIO"/>
+          <Item Value="REI_LOSS_PORTFOLIO"/>
+          <Item Value="REI_QUAKE_LIMIT"/>
+          <Item Value="REI_COMM_RATE"/>
+          <Item Value="CUR_DESCN"/>
+          <Item Value="REI_PRD_LOSSES_CARRIED_FRD"/>
+          <Item Value="REI_SI_START_FROM"/>
+          <Item Value="REI_GEN_CONDITIONS"/>
+          <Item Value="REI_EXCLUSIONS"/>
+          <Item Value="REI_INFORMATION"/>
+          <Item Value="REI_WORDING"/>
+          <Item Value="REI_WARRANTY"/>
+          <Item Value="REI_RATE_TYPE"/>
+          <Item Value="REI_TRS_CODE"/>
+          <Item Value="REI_TRT_CODE"/>
+          <Item Value="REI_CODE"/>
+          <Item Value="REI_UW_YEAR"/>
+          <Item Value="REI_CEDE_RATE"/>
+          <Item Value="REI_ACCOUNTS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findArrangementCoverTypesCommRatesIterator"
+          id="ArrangementCoverTypes3">
+      <nodeDefinition DefName="com.turnkey.setups.ArrangementCoverTypes"
+                      Name="ArrangementCoverTypes30">
+        <AttrNames>
+          <Item Value="tacr_code"/>
+          <Item Value="tacr_atct_code"/>
+          <Item Value="tacr_pct_code"/>
+          <Item Value="tacr_comm_div_factr"/>
+          <Item Value="tacr_comm_rate"/>
+          <Item Value="tacr_yr_from"/>
+          <Item Value="tacr_yr_to"/>
+          <Item Value="tacr_wef"/>
+          <Item Value="tacr_wet"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findTreatyArrangementsIterator" id="treatyArrangements1">
+      <nodeDefinition DefName="LMSG.view.setups.treatyArrangements"
+                      Name="treatyArrangements10">
+        <AttrNames>
+          <Item Value="TA_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGLAccounts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGLAccounts"
+                  IsViewObjectMethod="false"
+                  DataControl="productTransactionsDAO"
+                  InstanceName="productTransactionsDAO.dataProvider"
+                  ReturnName="productTransactionsDAO.methodResults.findGLAccounts_productTransactionsDAO_dataProvider_findGLAccounts_result"/>
+    <tree IterBinding="findGLAccountsIterator" id="productTransactions">
+      <nodeDefinition DefName="com.turnkey.setups.productTransactions"
+                      Name="productTransactions0">
+        <AttrNames>
+          <Item Value="accNumber"/>
+          <Item Value="accName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findTreatySetupsIterator" id="treatySetups2">
+      <nodeDefinition DefName="LMSG.view.setups.treatySetups"
+                      Name="treatySetups20">
+        <AttrNames>
+          <Item Value="REI_TRS_SHT_DESC"/>
+          <Item Value="REI_TRT_SHT_DESC"/>
+          <Item Value="REI_UW_YEAR"/>
+          <Item Value="REI_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findArrangementSetups1Iterator" id="treatyProducts">
+      <nodeDefinition DefName="LMSG.view.setups.treatyProducts"
+                      Name="treatyProducts0">
+        <AttrNames>
+          <Item Value="PRODUCT_DISPLAY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findArrangementSetups1Iterator" id="treatyProducts2">
+      <nodeDefinition DefName="LMSG.view.setups.treatyProducts"
+                      Name="treatyProducts20">
+        <AttrNames>
+          <Item Value="PRODUCT_DISPLAY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTreatyLayers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyLayers"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTreatyLayers_SetupsDAO_dataProvider_findTreatyLayers_result"/>
+    <tree IterBinding="findTreatyLayersIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="trlCode"/>
+          <Item Value="trlCedeRate"/>
+          <Item Value="trlRangeFrom"/>
+          <Item Value="trlRangeTo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+        <methodAction id="findOrgCurrencies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOrgCurrencies"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findOrgCurrencies_SetupsDAO_dataProvider_findOrgCurrencies_result"/>
+     <tree IterBinding="findOrgCurrenciesIterator" id="Setup4">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup40">
+        <AttrNames>
+          <Item Value="cur_code"/>
+          <Item Value="cur_desc"/>
+          <Item Value="cur_symbol"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,2138 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Group Life | Reinsurance" id="d1">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                               id="pgl4">
+            <af:popup id="p2">
+              <af:dialog id="d16" type="none" title="Treaties">
+                <af:table value="#{bindings.treatySetups2.collectionModel}"
+                          var="row" rows="#{bindings.treatySetups2.rangeSize}"
+                          emptyText="#{bindings.treatySetups2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.treatySetups2.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.treatySetups2Query.queryDescriptor}"
+                          queryListener="#{bindings.treatySetups2Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.treatySetups2.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.treatySetups2.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t18"
+                          binding="#{otherSetups.treatyCoverTypesTabSetupsLOV}">
+                  <af:column sortProperty="REI_TRS_SHT_DESC" filterable="true"
+                             sortable="true" headerText="Treaty" id="c8">
+                    <af:outputText value="#{row.REI_TRS_SHT_DESC}" id="ot48"/>
+                  </af:column>
+                  <af:column sortProperty="REI_TRT_SHT_DESC" filterable="true"
+                             sortable="true" headerText="Treaty Type" id="c47">
+                    <af:outputText value="#{row.REI_TRT_SHT_DESC}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="REI_UW_YEAR" filterable="true"
+                             sortable="true" headerText="UW Year" id="c4">
+                    <af:outputText value="#{row.REI_UW_YEAR}" id="ot50"/>
+                  </af:column>
+                  <af:column sortProperty="REI_CODE" filterable="true"
+                             sortable="true" headerText="Code" id="c3">
+                    <af:outputText value="#{row.REI_CODE}" id="ot49"/>
+                  </af:column>
+                </af:table>
+                <h:panelGrid columns="2" id="pg40">
+                  <af:commandButton text="OK" id="cb56"
+                                    action="#{otherSetups.findTreatyCoverTypesSelected}"/>
+                  <af:commandButton text="Cancel" id="commandButton9"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <af:popup id="p1">
+              <af:dialog id="d14" type="none" title="Products">
+                <af:table value="#{bindings.treatyProducts.collectionModel}"
+                          var="row" rows="#{bindings.treatyProducts.rangeSize}"
+                          emptyText="#{bindings.treatyProducts.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.treatyProducts.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.treatyProductsQuery.queryDescriptor}"
+                          queryListener="#{bindings.treatyProductsQuery.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.treatyProducts.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.treatyProducts.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t10"
+                          binding="#{otherSetups.treatyCoverTypesTabProdLOV}">
+                  <af:column sortProperty="PRODUCT_DISPLAY" filterable="true"
+                             sortable="true" headerText="Product" id="c46"
+                             width="300">
+                    <af:outputText value="#{row.PRODUCT_DISPLAY}" id="ot47"/>
+                  </af:column>
+                </af:table>
+                <h:panelGrid columns="2" id="pg38">
+                  <af:commandButton text="OK" id="cb54"
+                                    action="#{otherSetups.findTreatyProductsSelected}"/>
+                  <af:commandButton text="Cancel" id="commandButton8"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <af:inputText id="it40" simple="false" readOnly="true"
+                          helpTopicId="LmsGrp_TRETSTP"/>
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:550.0px;">
+              <af:showDetailItem text="Treaty Arrangements" id="sdi4">
+                <af:panelGroupLayout id="pgl2" layout="scroll">
+                  <af:panelSplitter id="ps1"
+                                    inlineStyle="width:100%; height:520.0px;">
+                    <f:facet name="first">
+                      <af:panelGroupLayout id="pgl3">
+                        <af:panelBox text="Treaties" id="pb1">
+                          <f:facet name="toolbar"/>
+                          <h:panelGrid columns="3" id="pg5">
+                            <af:commandButton id="cb2"
+                                              icon="/images/field_group_plus_ena.png"
+                                              action="#{otherSetups.ClearTreaty}"/>
+                            <af:commandButton id="cb3"
+                                              icon="/images/update_ena.png">
+                              <af:showPopupBehavior popupId="TreatyDetails"/>
+                            </af:commandButton>
+                            <af:commandButton id="cb4"
+                                              icon="/images/delete_ena.png"
+                                              action="#{otherSetups.DeleteTreaty}"/>
+                            <af:panelGroupLayout id="pgl8"
+                                                 partialTriggers="t17">
+                              <af:popup id="TreatyDetails">
+                                <af:dialog id="d2" type="none"
+                                           title="Specify Treaty Details">
+                                  <h:panelGrid columns="2" id="pg9">
+                                    <af:outputLabel value="ID" id="ol3"/>
+                                    <af:inputText label="Label 2" id="it2"
+                                                  simple="true" rows="1"
+                                                  binding="#{otherSetups.treatyShtDesc}"/>
+                                    <af:outputLabel value="Description"
+                                                    id="ol4"/>
+                                    <af:inputText label="Label 3" id="it3"
+                                                  simple="true"
+                                                  binding="#{otherSetups.treatyDesc}"/>
+                                    <af:outputLabel value="Currency"
+                                                    id="ol59"/>
+                                    <h:panelGrid columns="2">
+                            <af:inputText label="Label 49" id="it44" simple="true" 
+                                                    disabled="true"
+                                          binding="#{otherSetups.currencyTF}"/>
+                             <af:commandButton id="cb63" icon="/dropdown.gif">
+                             <af:showPopupBehavior popupId="Currencies" />
+                            </af:commandButton>
+                            <af:popup id="Currencies">
+                            <af:dialog id="d38T" type="none" title="Currencies">
+                              <af:table value="#{bindings.Setup4.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup4.rangeSize}"
+                                        emptyText="#{bindings.Setup4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup4.rangeSize}"
+                                        rowBandingInterval="0"
+                                        filterModel="#{bindings.Setup4Query.queryDescriptor}"
+                                        queryListener="#{bindings.Setup4Query.processQuery}"
+                                        filterVisible="true" varStatus="vs"
+                                        selectedRowKeys="#{bindings.Setup4.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Setup4.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t40T"
+                                        inlineStyle="width:100%;height:200px"
+                                        binding="#{otherSetups.currencyLOV}">
+                                <af:column sortProperty="cur_code"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.Setup4.hints.cur_code.label}"
+                                           id="c203T"
+                                           visible="false">
+                                  <af:outputText value="#{row.cur_code}"
+                                                 id="ot210T"/>
+                                </af:column>
+                                
+                                <af:column sortProperty="cur_symbol"
+                                           filterable="true" sortable="true"
+                                           headerText="Currency Symbol"
+                                           id="c204T">
+                                  <af:outputText value="#{row.cur_symbol}"
+                                                 id="ot211T"/>
+                                </af:column>
+                                <af:column sortProperty="cur_desc"
+                                           filterable="true" sortable="true"
+                                           headerText="Currency Description"
+                                           id="c202T">
+                                  <af:outputText value="#{row.cur_desc}"
+                                                 id="ot212T"/>
+                                </af:column>
+                              </af:table>
+                              <h:panelGrid columns="2">
+                                <af:commandButton text="Ok"
+                                                  id="cb129T"                                                  
+                                                  action="#{otherSetups.selectCurrency}"
+                                                  partialSubmit="true"/>
+                                <af:commandButton text="Cancel"
+                                                  id="cb130T"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                                    </h:panelGrid>
+                                    <af:outputLabel value="Type" id="ol5"/>
+                                    <af:selectOneChoice label="Label 1"
+                                                        id="soc1" simple="true"
+                                                        binding="#{otherSetups.treatyType}">
+                                      <af:selectItem label="Underwriting"
+                                                     value="U" id="si3"/>
+                                      <af:selectItem label="Clean Cut" value="C"
+                                                     id="si1"/>
+                                      <af:selectItem label="XOL" value="X"
+                                                     id="si2"/>
+                                    </af:selectOneChoice>
+                                  </h:panelGrid>
+                                  <h:panelGrid columns="2" id="pg28">
+                                    <af:commandButton text="OK" id="cb8"
+                                                      action="#{otherSetups.AddTreaty}"/>
+                                    <af:commandButton text="Cancel" id="cb9"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                            </af:panelGroupLayout>
+                          </h:panelGrid>
+                          <af:tree value="#{bindings.treatyArrangements1.treeModel}"
+                                   var="node"
+                                   selectionListener="#{otherSetups.ArrangementsSetupsTreeListener}"
+                                   rowSelection="single" id="t17"
+                                   binding="#{otherSetups.treatiesTree}">
+                            <f:facet name="nodeStamp">
+                              <af:outputText value="#{node}" id="ot152"/>
+                            </f:facet>
+                          </af:tree>
+                        </af:panelBox>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="second">
+                      <af:panelGroupLayout id="pgl5" layout="scroll">
+                        <af:panelBox id="pb2" text="Arrangement Details">
+                          <f:facet name="toolbar"/>
+                          <h:panelGrid columns="4" id="pg7">
+                            <af:commandButton id="cb5"
+                                              icon="/images/field_group_plus_ena.png">
+                              <af:showPopupBehavior popupId="ArrangementPopup"/>
+                            </af:commandButton>
+                            <af:commandButton id="cb6"
+                                              icon="/images/update_ena.png"
+                                              rendered="false"/>
+                            <af:commandButton id="cb7"
+                                              icon="/images/delete_ena.png"
+                                              action="#{otherSetups.deleteArrangementSetup}"/>
+                            <af:commandButton id="commandButton10"
+                                              icon="/images/folders.gif"
+                                              text="Clone Year"
+                                              action="#{otherSetups.CloneYear}"/>
+                            <af:popup id="ArrangementPopup">
+                              <af:dialog id="d3" type="none"
+                                         title="Underwriting Year">
+                                <h:panelGrid columns="2" id="pg10">
+                                  <af:outputLabel value="Year" id="ol6"/>
+                                  <af:inputText label="Label 4" id="it4"
+                                                simple="true"
+                                                binding="#{otherSetups.arragementYear}"/>
+                                </h:panelGrid>
+                                <h:panelGrid columns="2" id="pg3">
+                                  <af:commandButton text="OK" id="cb10"
+                                                    action="#{otherSetups.AddArrangement}"/>
+                                  <af:commandButton text="Cancel" id="cb11"/>
+                                </h:panelGrid>
+                              </af:dialog>
+                            </af:popup>
+                            <af:popup id="clonepopup">
+                              <af:dialog id="d17" type="none"
+                                         title="Clone Underwriting Year">
+                                <af:panelBox id="pb10" showHeader="never">
+                                  <f:facet name="toolbar"/>
+                                  <af:panelGroupLayout id="pgl12"
+                                                       partialTriggers="commandButton14">
+                                    <h:panelGrid columns="2" id="pg41">
+                                      <af:outputLabel id="ol55"
+                                                      value="Selected Year to Clone"/>
+                                      <af:outputText id="ot123"
+                                                     inlineStyle="font-weight:bold;"
+                                                     binding="#{otherSetups.cloneYear}"/>
+                                      <af:outputLabel id="outputLabel5"
+                                                      value="New Year Description"/>
+                                      <af:inputText label="Label 42" id="it42"
+                                                    simple="true"
+                                                    binding="#{otherSetups.newYear}"/>
+                                    </h:panelGrid>
+                                    <af:panelGroupLayout id="pgl14"
+                                                         partialTriggers="cb57">
+                                      <h:panelGrid columns="2" id="pg42"
+                                                   binding="#{otherSetups.clonePanel}">
+                                        <af:commandButton text="Next" id="cb57"
+                                                          action="#{otherSetups.ValidateCloneDetails}"
+                                                          partialSubmit="true"/>
+                                        <af:commandButton text="Cancel"
+                                                          id="commandButton12"/>
+                                      </h:panelGrid>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s2"/>
+                                    <af:panelGroupLayout id="pgl13"
+                                                         partialTriggers="cb57">
+                                      <h:panelGrid columns="1" id="pg43"
+                                                   rendered="false"
+                                                   binding="#{otherSetups.confirmPanel}">
+                                        <af:outputLabel value="Confirmation"
+                                                        id="ol56"
+                                                        inlineStyle="font-weight:bold;"/>
+                                        <af:separator id="s7"/>
+                                        <h:panelGrid columns="2" id="pg44">
+                                          <af:outputLabel value="Note:"
+                                                          id="ol57"
+                                                          inlineStyle="font-weight:bold;"/>
+                                          <af:outputLabel value="Are you sure you want to proceed?"
+                                                          id="outputLabel6"
+                                                          inlineStyle="font-weight:bold; color:Red;"/>
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="2"
+                                                     id="panelGrid5">
+                                          <af:commandButton text="Proceed"
+                                                            id="commandButton13"
+                                                            partialSubmit="true"
+                                                            action="#{otherSetups.ProceedToCloneYear}"/>
+                                          <af:commandButton text="Cancel"
+                                                            id="commandButton14"
+                                                            partialSubmit="true"
+                                                            action="#{otherSetups.CancelValidate}"/>
+                                        </h:panelGrid>
+                                      </h:panelGrid>
+                                    </af:panelGroupLayout>
+                                  </af:panelGroupLayout>
+                                </af:panelBox>
+                              </af:dialog>
+                            </af:popup>
+                          </h:panelGrid>
+                          <af:table value="#{bindings.arrangementSetups.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.arrangementSetups.rangeSize}"
+                                    emptyText="#{bindings.arrangementSetups.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.arrangementSetups.rangeSize}"
+                                    rowBandingInterval="0"
+                                    filterModel="#{bindings.arrangementSetupsQuery.queryDescriptor}"
+                                    queryListener="#{bindings.arrangementSetupsQuery.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectionListener="#{otherSetups.ArrangementYears}"
+                                    rowSelection="single" id="t4"
+                                    inlineStyle="width:100%; height:100.0px; border-style:none;"
+                                    binding="#{otherSetups.arrangementSetupsLOV}">
+                            <af:column sortProperty="AS_UWYR" filterable="true"
+                                       sortable="false" headerText="U/W Year"
+                                       id="c9"
+                                       binding="#{otherSetups.arrangementsSetUpLov}"
+                                       width="300">
+                              <af:outputText value="#{row.AS_UWYR}" id="ot10"/>
+                            </af:column>
+                          </af:table>
+                          <af:spacer width="10" height="10" id="spacer1"/>
+                          <af:panelTabbed id="pt1"
+                                          inlineStyle="width:99%; height:340.0px;">
+                            <af:showDetailItem text="Class of Business"
+                                               id="sdi1">
+                              <af:panelGroupLayout id="pgl6">
+                                <af:panelBox text="PanelBox1" id="pb3"
+                                             showHeader="never">
+                                  <f:facet name="toolbar"/>
+                                  <af:panelSplitter id="ps2"
+                                                    inlineStyle="width:100%;">
+                                    <f:facet name="first">
+                                      <af:panelBox text="Products" id="pb4"
+                                                   inlineStyle="width:100%; height:300.0px;">
+                                        <f:facet name="toolbar"/>
+                                        <h:panelGrid columns="3" id="pg6">
+                                          <af:commandButton id="cb19"
+                                                            icon="/images/field_group_plus_ena.png"
+                                                            action="#{otherSetups.AddTreatyProduct}">
+                                            <af:showPopupBehavior popupId="productsPopup"/>
+                                          </af:commandButton>
+                                          <af:commandButton id="cb22"
+                                                            icon="/images/delete_ena.png"
+                                                            action="#{otherSetups.DeleteTreatyProduct}"/>
+                                          <af:popup id="productsPopup">
+                                            <af:dialog id="d15" type="none"
+                                                       title="Treaty Products">
+                                              <af:table value="#{bindings.Setup1.collectionModel}"
+                                                        var="row"
+                                                        rows="#{bindings.Setup1.rangeSize}"
+                                                        emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                        fetchSize="#{bindings.Setup1.rangeSize}"
+                                                        rowBandingInterval="0"
+                                                        selectedRowKeys="#{bindings.Setup1.collectionModel.selectedRow}"
+                                                        selectionListener="#{bindings.Setup1.collectionModel.makeCurrent}"
+                                                        rowSelection="single"
+                                                        id="t16"
+                                                        binding="#{otherSetups.treatyProdsLOV}">
+                                                <af:column sortProperty="PROD_SHT_DESC"
+                                                           sortable="true"
+                                                           headerText="Short Desc"
+                                                           id="c68">
+                                                  <af:outputText value="#{row.PROD_SHT_DESC}"
+                                                                 id="ot69"/>
+                                                </af:column>
+                                                <af:column sortProperty="PROD_DESC"
+                                                           sortable="true"
+                                                           headerText="Product"
+                                                           id="c67" width="200">
+                                                  <af:outputText value="#{row.PROD_DESC}"
+                                                                 id="ot68"/>
+                                                </af:column>
+                                              </af:table>
+                                              <h:panelGrid columns="2" id="pg1">
+                                                <af:commandButton text="Save"
+                                                                  id="cb51"
+                                                                  action="#{otherSetups.AssignTreatyProduct}"/>
+                                                <af:commandButton text="Cancel"
+                                                                  id="cb52"/>
+                                              </h:panelGrid>
+                                            </af:dialog>
+                                          </af:popup>
+                                        </h:panelGrid>
+                                        <af:tree value="#{bindings.treatyProducts2.treeModel}"
+                                                 var="node"
+                                                 selectionListener="#{otherSetups.treatyProductsListener}"
+                                                 rowSelection="single" id="t1"
+                                                 binding="#{otherSetups.treatyProductTree}"
+                                                 inlineStyle="width:100%; height:250.0px;">
+                                          <f:facet name="nodeStamp">
+                                            <af:outputText value="#{node}"
+                                                           id="ot2"/>
+                                          </f:facet>
+                                        </af:tree>
+                                      </af:panelBox>
+                                    </f:facet>
+                                    <f:facet name="second">
+                                      <af:panelGroupLayout id="pgl7"
+                                                           partialTriggers="t1">
+                                        <af:panelBox text="Treaty Product Details"
+                                                     id="pb6">
+                                          <f:facet name="toolbar"/>
+                                          <h:panelGrid columns="3" id="pg12">
+                                            <af:commandButton icon="/images/save.gif"
+                                                              id="commandButton11"
+                                                              action="#{otherSetups.UpdateTreatyProd}"/>
+                                          </h:panelGrid>
+                                          <h:panelGrid columns="5" id="pg4">
+                                            <af:outputLabel value="Product"
+                                                            id="ol1"
+                                                            inlineStyle="font-weight:bold;"/>
+                                            <af:outputText id="ot3"
+                                                           inlineStyle="font-weight:bold;"
+                                                           binding="#{otherSetups.productLabel}"/>
+                                            <af:spacer width="10" height="10"
+                                                       id="s1"/>
+                                            <af:outputLabel value="Default Treaty"
+                                                            id="outputLabel2"
+                                                            inlineStyle="font-weight:bold;"/>
+                                            <af:selectOneChoice label="Label 9"
+                                                                id="soc9"
+                                                                binding="#{otherSetups.defaultTreatyProd}"
+                                                                simple="true">
+                                              <af:selectItem label="Yes"
+                                                             value="Y"
+                                                             id="si26"/>
+                                              <af:selectItem label="No"
+                                                             value="N"
+                                                             id="si25"/>
+                                            </af:selectOneChoice>
+                                          </h:panelGrid>
+                                          <af:panelBox text="Product Cover Types"
+                                                       id="pb5">
+                                            <f:facet name="toolbar"/>
+                                            <h:panelGrid columns="3" id="pg2">
+                                              <af:commandButton id="cb1"
+                                                                icon="/images/field_group_plus_ena.png"
+                                                                action="#{otherSetups.AddTreatyProductCoverType}"
+                                                                text="New"/>
+                                              <af:commandButton id="cb12"
+                                                                icon="/images/update_ena.png"
+                                                                action="#{otherSetups.EditProductCoverTypes}"
+                                                                text="Edit"/>
+                                              <af:commandButton id="cb13"
+                                                                icon="/images/delete.gif"
+                                                                action="#{otherSetups.DeleteTreatyProductCoverType}"
+                                                                text="Delete"/>
+                                              <af:popup id="AddTreatyProdCoverPopup">
+                                                <af:dialog id="d4" type="none"
+                                                           title="Add Treaty Product Cover Type">
+                                                  <af:panelBox id="pb9"
+                                                               showHeader="never">
+                                                    <f:facet name="toolbar"/>
+                                                    <h:panelGrid columns="2"
+                                                                 id="pg11">
+                                                      <af:outputLabel id="ol7"
+                                                                      value="Cover Type"
+                                                                      showRequired="true"/>
+                                                      <h:panelGrid columns="2"
+                                                                   id="pg13">
+                                                        <af:inputText label="Label 5"
+                                                                      id="it1"
+                                                                      simple="true"
+                                                                      binding="#{otherSetups.addCoverDescription}"
+                                                                      shortDesc="Product Cover Type"
+                                                                      disabled="true"/>
+                                                        <af:commandButton id="cb14"
+                                                                          icon="/images/dropdown.gif"
+                                                                          partialSubmit="true"
+                                                                          action="#{otherSetups.ShowCoverTypesPopup}"/>
+                                                        <af:popup id="treatyProdCvPopup">
+                                                          <af:dialog id="d5"
+                                                                     type="none"
+                                                                     title="Select Cover Type">
+                                                            <af:table value="#{bindings.Setup.collectionModel}"
+                                                                      var="row"
+                                                                      rows="#{bindings.Setup.rangeSize}"
+                                                                      emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                                      fetchSize="#{bindings.Setup.rangeSize}"
+                                                                      rowBandingInterval="0"
+                                                                      selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                                                                      selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                                                                      rowSelection="single"
+                                                                      id="t6"
+                                                                      binding="#{otherSetups.addCoverTypesLOV}">
+                                                              <af:column sortProperty="ADD_CVT_SHT_DESC"
+                                                                         sortable="true"
+                                                                         headerText="Cover ID"
+                                                                         id="c17">
+                                                                <af:outputText value="#{row.ADD_CVT_SHT_DESC}"
+                                                                               id="ot18"/>
+                                                              </af:column>
+                                                              <af:column sortProperty="ADD_CVT_DESC"
+                                                                         sortable="true"
+                                                                         headerText="Cover"
+                                                                         id="c16"
+                                                                         width="200">
+                                                                <af:outputText value="#{row.ADD_CVT_DESC}"
+                                                                               id="ot17"/>
+                                                              </af:column>
+                                                            </af:table>
+                                                            <h:panelGrid columns="2"
+                                                                         id="pg8">
+                                                              <af:commandButton text="OK"
+                                                                                id="cb15"
+                                                                                action="#{otherSetups.AssignAdditionCoverTypes}"
+                                                                                partialSubmit="false"/>
+                                                              <af:commandButton text="Cancel"
+                                                                                id="cb16"/>
+                                                            </h:panelGrid>
+                                                          </af:dialog>
+                                                        </af:popup>
+                                                      </h:panelGrid>
+                                                      <af:outputLabel value="Retention Limit"
+                                                                      id="ol8"/>
+                                                      <af:inputText label="Label 6"
+                                                                    id="it5"
+                                                                    simple="true"
+                                                                    binding="#{otherSetups.retentionLimit}"
+                                                                    shortDesc="Retention Limit"/>
+                                                      <af:outputLabel value="Multi Life Retention Limit"
+                                                                      id="ol9"/>
+                                                      <af:inputText label="Label 7"
+                                                                    id="it6"
+                                                                    simple="true"
+                                                                    binding="#{otherSetups.multiLifeRetentionLimit}"
+                                                                    shortDesc="Multi Life retention Limit"/>
+                                                      <af:outputLabel value="*Amount Over Limit To Cede"
+                                                                      id="ol10"/>
+                                                      <af:inputText label="Label 8"
+                                                                    id="it7"
+                                                                    simple="true"
+                                                                    binding="#{otherSetups.amountOverLimitToCede}"
+                                                                    shortDesc="Amount Over Limit To Cede"/>
+                                                      <af:outputLabel value="Reduce Balance"
+                                                                      id="ol11"
+                                                                      showRequired="true"/>
+                                                      <af:selectOneChoice label="Label 2"
+                                                                          id="soc2"
+                                                                          simple="true"
+                                                                          autoSubmit="true"
+                                                                          binding="#{otherSetups.reducingBalance}"
+                                                                          shortDesc="Reducing Balance (Y/N)?">
+                                                        <af:selectItem label="Constant SA"
+                                                                       value="C"
+                                                                       id="si4"/>
+                                                        <af:selectItem label="Remaining Period"
+                                                                       value="P"
+                                                                       id="si6"/>
+                                                        <af:selectItem label="OS Balance Tables"
+                                                                       value="T"
+                                                                       id="si5"/>
+                                                      </af:selectOneChoice>
+                                                      <af:outputLabel value="Automatic Acceptance Lim."
+                                                                      id="ol58"/>
+                                                      <af:inputText label="Label 43"
+                                                                    id="it43"
+                                                                    simple="true"
+                                                                    binding="#{otherSetups.aal}"/>
+                                                    </h:panelGrid>
+                                                    <h:panelGrid columns="2"
+                                                                 id="pg26">
+                                                      <af:commandButton text="Save"
+                                                                        id="cb17"
+                                                                        action="#{otherSetups.SaveTreatyProductCoverType}"/>
+                                                      <af:commandButton text="Cancel"
+                                                                        id="cb18"/>
+                                                    </h:panelGrid>
+                                                  </af:panelBox>
+                                                </af:dialog>
+                                              </af:popup>
+                                            </h:panelGrid>
+                                            <af:table value="#{bindings.treatyProdCoverTypes.collectionModel}"
+                                                      var="row"
+                                                      rows="#{bindings.treatyProdCoverTypes.rangeSize}"
+                                                      emptyText="#{bindings.treatyProdCoverTypes.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.treatyProdCoverTypes.rangeSize}"
+                                                      rowBandingInterval="0"
+                                                      selectedRowKeys="#{bindings.treatyProdCoverTypes.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.treatyProdCoverTypes.collectionModel.makeCurrent}"
+                                                      rowSelection="single"
+                                                      id="t5"
+                                                      inlineStyle="width:100%; height:150.0px; border-style:none;"
+                                                      binding="#{otherSetups.treatyProdCoverTypesLOV}">
+                                              <af:column sortProperty="CVT_DESC"
+                                                         sortable="true"
+                                                         headerText="Cover Type"
+                                                         id="c11" width="90">
+                                                <af:outputText value="#{row.CVT_DESC}"
+                                                               id="ot12"/>
+                                              </af:column>
+                                              <af:column sortProperty="TCT_RETENTION_LIMIT"
+                                                         sortable="true"
+                                                         headerText="Retention Limit"
+                                                         id="c14"
+                                                         displayIndex="-1"
+                                                         width="80">
+                                                <af:outputText value="#{row.TCT_RETENTION_LIMIT}"
+                                                               id="ot16"/>
+                                              </af:column>
+                                              <af:column sortProperty="TCT_MULTI_LIFE_RETN_LIMT"
+                                                         sortable="true"
+                                                         headerText="Multi Life Ret Limit"
+                                                         id="c15"
+                                                         displayIndex="-1">
+                                                <af:outputText value="#{row.TCT_MULTI_LIFE_RETN_LIMT}"
+                                                               id="ot11"/>
+                                              </af:column>
+                                              <af:column sortProperty="TCT_OVER_LIMIT_TOCEDE"
+                                                         sortable="true"
+                                                         headerText="Amt Ovr Limit To Cede"
+                                                         id="c13">
+                                                <af:outputText value="#{row.TCT_OVER_LIMIT_TOCEDE}"
+                                                               id="ot14"/>
+                                              </af:column>
+                                              <af:column sortProperty="TCT_OS_BAL_METHOD"
+                                                         sortable="true"
+                                                         headerText="Reduce Balance"
+                                                         id="c12" width="80">
+                                                <af:outputText value="#{row.TCT_OS_BAL_METHOD}"
+                                                               id="ot13"/>
+                                              </af:column>
+                                              <af:column sortProperty="RIOS_DESC"
+                                                         sortable="true"
+                                                         headerText="OS Balance Table"
+                                                         id="c10" width="90">
+                                                <af:outputText value="#{row.RIOS_DESC}"
+                                                               id="ot15"/>
+                                              </af:column>
+                                              <af:column sortProperty="TCT_AAL"
+                                                         sortable="true"
+                                                         headerText="Automatic Acceptance Lim(AAL)"
+                                                         id="c101" width="90">
+                                                <af:outputText value="#{row.TCT_AAL}"
+                                                               id="ot151"/>
+                                              </af:column>
+                                            </af:table>
+                                          </af:panelBox>
+                                        </af:panelBox>
+                                      </af:panelGroupLayout>
+                                    </f:facet>
+                                  </af:panelSplitter>
+                                </af:panelBox>
+                              </af:panelGroupLayout>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Treaties" id="sdi2"
+                                               inlineStyle="width:100.0%;">
+                              <h:panelGrid columns="3" id="panelGrid1">
+                                <af:commandButton id="commandButton2"
+                                                  icon="/images/new_dwn_rtl.png"
+                                                  action="#{otherSetups.AddTreatySetup}"
+                                                  text="New"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="commandButton3"
+                                                  action="#{otherSetups.EditTreatySetup}"
+                                                  text="Edit"/>
+                                <af:commandButton id="commandButton4"
+                                                  icon="/images/delete_ena.png"
+                                                  action="#{otherSetups.DeleteTreatySetup}"
+                                                  text="Delete"/>
+                                <af:popup id="TreatySetup">
+                                  <af:dialog id="d6" type="none"
+                                             title="Add Treaty Setup">
+                                    <h:panelGrid columns="4" id="pg14">
+                                      <af:outputLabel value="Treaty" id="ol12"
+                                                      showRequired="true"/>
+                                      <h:panelGrid columns="3" id="pg15">
+                                        <af:inputText label="Label 9" id="it8"
+                                                      simple="true"
+                                                      binding="#{otherSetups.trsShtDesc}"
+                                                      shortDesc="Treaty Type"
+                                                      disabled="true"/>
+                                        <af:commandButton id="cb20"
+                                                          icon="/dropdown.gif">
+                                          <af:showPopupBehavior popupId="TreatyTypesPopup"/>
+                                        </af:commandButton>
+                                        <af:popup id="TreatyTypesPopup">
+                                          <af:dialog id="d7" type="none"
+                                                     title="Select Treaty">
+                                            <af:table value="#{bindings.treaties.collectionModel}"
+                                                      var="row"
+                                                      rows="#{bindings.treaties.rangeSize}"
+                                                      emptyText="#{bindings.treaties.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.treaties.rangeSize}"
+                                                      rowBandingInterval="0"
+                                                      selectedRowKeys="#{bindings.treaties.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.treaties.collectionModel.makeCurrent}"
+                                                      rowSelection="single"
+                                                      id="t7"
+                                                      inlineStyle="height:191px;"
+                                                      binding="#{otherSetups.treatiesLOV}">
+                                              <af:column sortProperty="TRS_SHT_DESC"
+                                                         sortable="true"
+                                                         headerText="Treaty Code"
+                                                         id="c38">
+                                                <af:outputText value="#{row.TRS_SHT_DESC}"
+                                                               id="ot38"/>
+                                              </af:column>
+                                              <af:column sortProperty="TRS_TRT_SHT_DESC"
+                                                         sortable="true"
+                                                         headerText="Treaty Type"
+                                                         id="c37" width="200">
+                                                <af:outputText value="#{row.TRS_TRT_SHT_DESC}"
+                                                               id="ot39"/>
+                                              </af:column>
+                                            </af:table>
+                                            <h:panelGrid columns="2" id="pg29">
+                                              <af:commandButton text="OK"
+                                                                id="cb21"
+                                                                action="#{otherSetups.AssignTreatyLOV}"/>
+                                              <af:commandButton text="Cancel"
+                                                                id="cb23"/>
+                                            </h:panelGrid>
+                                          </af:dialog>
+                                        </af:popup>
+                                      </h:panelGrid>
+                                      <af:outputLabel value="Treaty Type"
+                                                      id="ol13"
+                                                      showRequired="true"/>
+                                      <af:inputText label="Label 10" id="it9"
+                                                    simple="true"
+                                                    binding="#{otherSetups.trsTrtShtDesc}"
+                                                    shortDesc="Treaty Type"/>
+                                      <af:outputLabel value="Period From"
+                                                      id="ol14"
+                                                      showRequired="true"/>
+                                      <af:inputDate label="Label 1" id="id1"
+                                                    autoSubmit="true"
+                                                    simple="true"
+                                                    binding="#{otherSetups.periodFrom}"
+                                                    shortDesc="Period from">
+                                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                      </af:inputDate>
+                                      <af:outputLabel value="Period To"
+                                                      id="ol15"
+                                                      showRequired="true"/>
+                                      <af:inputDate label="Label 2" id="id2"
+                                                    simple="true"
+                                                    binding="#{otherSetups.periodTo}"
+                                                    shortDesc="Period To">
+                                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                      </af:inputDate>
+                                      <af:outputLabel value="Int On Prem Resv"
+                                                      id="ol16"/>
+                                      <af:inputText label="Label 11" id="it10"
+                                                    simple="true"
+                                                    binding="#{otherSetups.interestOnPremiumResv}"
+                                                    shortDesc="Interest on Premium Reserve"/>
+                                      <af:outputLabel value="Profit Commission"
+                                                      id="ol17"/>
+                                      <af:inputText label="Label 12" id="it11"
+                                                    simple="true"
+                                                    binding="#{otherSetups.profitCommission}"
+                                                    shortDesc="Profit  Commission"/>
+                                      <af:outputLabel value="Management Fee Rate"
+                                                      id="ol18"/>
+                                      <af:inputText label="Label 13" id="it12"
+                                                    simple="true"
+                                                    binding="#{otherSetups.managementFeeRate}"
+                                                    shortDesc="Management Fee Rate"/>
+                                      <af:outputLabel value="Cash Loss"
+                                                      id="ol19"/>
+                                      <af:inputText label="Label 14" id="it13"
+                                                    simple="true"
+                                                    binding="#{otherSetups.cashLoss}"
+                                                    shortDesc="Cash Loss"/>
+                                      <af:outputLabel value="Accounts"
+                                                      id="ol20"/>
+                                      <af:selectOneChoice label="Label 3"
+                                                          id="soc3"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{otherSetups.accounts}"
+                                                          shortDesc="Accounting Statements Generation Frequency"
+                                                          value="Yearly">
+                                        <af:selectItem label="Monthly"
+                                                       value="Monthly"
+                                                       id="si10"/>
+                                        <af:selectItem label="Quaterly"
+                                                       value="Quaterly"
+                                                       id="si8"/>
+                                        <af:selectItem label="Half Yearly"
+                                                       value="Half Yearly"
+                                                       id="si7"/>
+                                        <af:selectItem label="Yearly"
+                                                       value="Yearly" id="si9"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Company Reins. Code"
+                                                      id="ol21"/>
+                                      <af:inputText label="Label 15" id="it14"
+                                                    simple="true"
+                                                    binding="#{otherSetups.companyReinsCode}"
+                                                    shortDesc="Company Reinsurance Code"/>
+                                      <af:outputLabel value="Premium Portfolio"
+                                                      id="ol22"/>
+                                      <af:inputText label="Label 16" id="it15"
+                                                    simple="true"
+                                                    binding="#{otherSetups.premiumPortfolio}"
+                                                    shortDesc="Premium Portfolio"/>
+                                      <af:outputLabel value="Claim Portfolio"
+                                                      id="ol23"/>
+                                      <af:inputText label="Label 17" id="it16"
+                                                    simple="true"
+                                                    binding="#{otherSetups.claimPortfolio}"
+                                                    shortDesc="Claim Portfolio"/>
+                                      <af:outputLabel value="Quake Limit"
+                                                      id="ol24"/>
+                                      <af:inputText label="Label 18" id="it17"
+                                                    simple="true"
+                                                    binding="#{otherSetups.quakeLimit}"
+                                                    shortDesc="Quake Limit"/>
+                                      <af:outputLabel value="Commission Rate"
+                                                      id="ol25"/>
+                                      <af:inputText label="Label 19" id="it18"
+                                                    binding="#{otherSetups.commissionRate}"
+                                                    simple="true"
+                                                    shortDesc="Commission Rate"/>
+                                      <af:outputLabel value="Currency"
+                                                      id="ol26"/>
+                                      <af:inputText label="Label 20" id="it19"
+                                                    simple="true"
+                                                    binding="#{otherSetups.currency}"
+                                                    shortDesc="Currency"/>
+                                      <af:outputLabel value="Premium Reserve"
+                                                      id="ol27"/>
+                                      <af:inputText label="Label 21" id="it20"
+                                                    simple="true"
+                                                    binding="#{otherSetups.premiumReserve}"
+                                                    shortDesc="Premium Reserve"/>
+                                      <af:outputLabel value="Period Loss Carried Forward"
+                                                      id="ol28"/>
+                                      <af:inputText label="Label 22" id="it21"
+                                                    simple="true"
+                                                    binding="#{otherSetups.periodLossCarriedForward}"
+                                                    shortDesc="Period Losses Carried Forward"/>
+                                      <af:outputLabel value="SI Start From"
+                                                      id="ol29"/>
+                                      <af:inputText label="Label 23" id="it22"
+                                                    simple="true"
+                                                    binding="#{otherSetups.siStartFrom}"
+                                                    shortDesc="SI Start From"/>
+                                      <af:outputLabel value="General Conditions"
+                                                      id="ol30"/>
+                                      <af:inputText label="Label 24" id="it23"
+                                                    simple="true"
+                                                    binding="#{otherSetups.generalConditions}"
+                                                    shortDesc="General Conditions"/>
+                                      <af:outputLabel value="Exclusions"
+                                                      id="ol31"/>
+                                      <af:inputText label="Label 25" id="it24"
+                                                    simple="true"
+                                                    binding="#{otherSetups.exclusions}"/>
+                                      <af:outputLabel value="Information"
+                                                      id="ol32"/>
+                                      <af:inputText label="Label 26" id="it25"
+                                                    simple="true"
+                                                    binding="#{otherSetups.information}"/>
+                                      <af:outputLabel value="Wording"
+                                                      id="ol33"/>
+                                      <af:inputText label="Label 27" id="it26"
+                                                    simple="true"
+                                                    binding="#{otherSetups.wording}"
+                                                    shortDesc="Wording"/>
+                                      <af:outputLabel value="Warranty"
+                                                      id="ol34"/>
+                                      <af:inputText label="Label 28" id="it27"
+                                                    simple="true"
+                                                    binding="#{otherSetups.warranty}"
+                                                    shortDesc="Warranty"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" id="pg27">
+                                      <af:commandButton text="OK" id="cb24"
+                                                        action="#{otherSetups.SaveTreatySetup}"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="cb25"/>
+                                    </h:panelGrid>
+                                  </af:dialog>
+                                </af:popup>
+                              </h:panelGrid>
+                              <af:popup id="treaty">
+                                <af:dialog id="dialog1" type="none"
+                                           title="Treaties">
+                                  <h:panelGrid columns="2" id="panelGrid2">
+                                    <af:outputLabel value="Id."
+                                                    id="outputLabel1"/>
+                                    <af:inputText label="Label 1"
+                                                  id="inputText2" simple="true"
+                                                  binding="#{SetupBean.trtShortDesc}"/>
+                                    <af:outputLabel value="Description"
+                                                    id="outputLabel3"/>
+                                    <af:inputText label="Label 1"
+                                                  id="inputText3" simple="true"
+                                                  binding="#{SetupBean.trtDesc}"/>
+                                  </h:panelGrid>
+                                  <h:panelGrid columns="2" id="panelGrid3">
+                                    <af:commandButton text="Save"
+                                                      id="commandButton5"
+                                                      action="#{SetupBean.SaveTreaty}"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton6"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                              <af:table value="#{bindings.treatySetups.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.treatySetups.rangeSize}"
+                                        emptyText="#{bindings.treatySetups.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.treatySetups.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectionListener="#{otherSetups.TreatyParticipantsListener}"
+                                        rowSelection="single" id="t3"
+                                        inlineStyle="width:100%; height:100.0px; border-style:none;"
+                                        binding="#{otherSetups.treatySetupsLOV}">
+                                <af:column sortProperty="REI_TRS_SHT_DESC"
+                                           sortable="true" headerText="Treaty"
+                                           id="c19">
+                                  <af:outputText value="#{row.REI_TRS_SHT_DESC}"
+                                                 id="ot118"/>
+                                </af:column>
+                                <af:column sortProperty="REI_TRT_SHT_DESC"
+                                           sortable="true"
+                                           headerText="Treaty Type" id="c24">
+                                  <af:outputText value="#{row.REI_TRT_SHT_DESC}"
+                                                 id="ot23"/>
+                                </af:column>
+                                <af:column sortProperty="REI_WEF_DT"
+                                           sortable="true" headerText="Prd From"
+                                           id="c29" width="70">
+                                  <af:outputText value="#{row.REI_WEF_DT}"
+                                                 id="ot116">
+                                    <af:convertDateTime pattern="#{bindings.treatySetups.hints.REI_WEF_DT.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="REI_WET_DT"
+                                           sortable="true" headerText="Prd To"
+                                           id="c33" width="70">
+                                  <af:outputText value="#{row.REI_WET_DT}"
+                                                 id="ot117">
+                                    <af:convertDateTime pattern="#{bindings.treatySetups.hints.REI_WET_DT.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="REI_PREM_RESV_INT"
+                                           sortable="true"
+                                           headerText="Int on Prem Resv"
+                                           id="c25">
+                                  <af:outputText value="#{row.REI_PREM_RESV_INT}"
+                                                 id="ot33"/>
+                                </af:column>
+                                <af:column sortProperty="REI_PROFIT_COMM"
+                                           sortable="true"
+                                           headerText="Profit Comm" id="c22">
+                                  <af:outputText value="#{row.REI_PROFIT_COMM}"
+                                                 id="ot35"/>
+                                </af:column>
+                                <af:column sortProperty="REI_MGT_FEE"
+                                           sortable="true"
+                                           headerText="Managt Fee Rate"
+                                           id="c117">
+                                  <af:outputText value="#{row.REI_MGT_FEE}"
+                                                 id="ot8"/>
+                                </af:column>
+                                <af:column sortProperty="REI_CASH_LOSS"
+                                           sortable="true"
+                                           headerText="Cash Loss" id="c116">
+                                  <af:outputText value="#{row.REI_CASH_LOSS}"
+                                                 id="ot6"/>
+                                </af:column>
+                                <af:column sortProperty="REI_ACCOUNTS_DESC"
+                                           sortable="true" headerText="Accounts"
+                                           id="c115">
+                                  <af:outputText value="#{row.REI_ACCOUNTS_DESC}"
+                                                 id="ot122"/>
+                                </af:column>
+                                <af:column sortProperty="REI_AOFREINS_CODE"
+                                           sortable="true"
+                                           headerText="Comp Reins Code"
+                                           id="c120">
+                                  <af:outputText value="#{row.REI_AOFREINS_CODE}"
+                                                 id="ot37"/>
+                                </af:column>
+                                <af:column sortProperty="REI_PREM_PORTFOLIO"
+                                           sortable="true"
+                                           headerText="Premium Portfolio"
+                                           id="c20">
+                                  <af:outputText value="#{row.REI_PREM_PORTFOLIO}"
+                                                 id="ot20"/>
+                                </af:column>
+                                <af:column sortProperty="REI_LOSS_PORTFOLIO"
+                                           sortable="true"
+                                           headerText="Claim Portfolio" id="c6">
+                                  <af:outputText value="#{row.REI_LOSS_PORTFOLIO}"
+                                                 id="ot30"/>
+                                </af:column>
+                                <af:column sortProperty="REI_QUAKE_LIMIT"
+                                           sortable="true"
+                                           headerText="Quake Limit" id="c23">
+                                  <af:outputText value="#{row.REI_QUAKE_LIMIT}"
+                                                 id="ot34"/>
+                                </af:column>
+                                <af:column sortProperty="REI_COMM_RATE"
+                                           sortable="true"
+                                           headerText="Comm Rate" id="c18">
+                                  <af:outputText value="#{row.REI_COMM_RATE}"
+                                                 id="ot31"/>
+                                </af:column>
+                                <af:column sortProperty="CUR_DESCN"
+                                           sortable="true" headerText="Currency"
+                                           id="c30">
+                                  <af:outputText value="#{row.CUR_DESCN}"
+                                                 id="ot19"/>
+                                </af:column>
+                                <af:column sortProperty="REI_PRD_LOSSES_CARRIED_FRD"
+                                           sortable="true"
+                                           headerText="Prd Loss Carried Fwd"
+                                           id="c21" width="110">
+                                  <af:outputText value="#{row.REI_PRD_LOSSES_CARRIED_FRD}"
+                                                 id="ot27"/>
+                                </af:column>
+                                <af:column sortProperty="REI_SI_START_FROM"
+                                           sortable="true"
+                                           headerText="SI Start From" id="c31">
+                                  <af:outputText value="#{row.REI_SI_START_FROM}"
+                                                 id="ot21"/>
+                                </af:column>
+                                <af:column sortProperty="REI_GEN_CONDITIONS"
+                                           sortable="true"
+                                           headerText="General Conditions"
+                                           id="c28">
+                                  <af:outputText value="#{row.REI_GEN_CONDITIONS}"
+                                                 id="ot121"/>
+                                </af:column>
+                                <af:column sortProperty="REI_EXCLUSIONS"
+                                           sortable="true"
+                                           headerText="Exclusions" id="c7">
+                                  <af:outputText value="#{row.REI_EXCLUSIONS}"
+                                                 id="ot7"/>
+                                </af:column>
+                                <af:column sortProperty="REI_INFORMATION"
+                                           sortable="true"
+                                           headerText="Information" id="c121">
+                                  <af:outputText value="#{row.REI_INFORMATION}"
+                                                 id="ot24"/>
+                                </af:column>
+                                <af:column sortProperty="REI_WORDING"
+                                           sortable="true" headerText="Wording"
+                                           id="c35">
+                                  <af:outputText value="#{row.REI_WORDING}"
+                                                 id="ot28"/>
+                                </af:column>
+                                <af:column sortProperty="REI_WARRANTY"
+                                           sortable="true" headerText="Warranty"
+                                           id="c26">
+                                  <af:outputText value="#{row.REI_WARRANTY}"
+                                                 id="ot25"/>
+                                </af:column>
+                                <af:column sortProperty="REI_RATE_TYPE"
+                                           sortable="true"
+                                           headerText="#{bindings.treatySetups.hints.REI_RATE_TYPE.label}"
+                                           id="c119" visible="false">
+                                  <af:outputText value="#{row.REI_RATE_TYPE}"
+                                                 id="ot120"/>
+                                </af:column>
+                                <af:column sortProperty="REI_TRS_CODE"
+                                           sortable="true"
+                                           headerText="#{bindings.treatySetups.hints.REI_TRS_CODE.label}"
+                                           id="c27" visible="false">
+                                  <af:outputText value="#{row.REI_TRS_CODE}"
+                                                 id="ot22"/>
+                                </af:column>
+                                <af:column sortProperty="REI_TRT_CODE"
+                                           sortable="true"
+                                           headerText="#{bindings.treatySetups.hints.REI_TRT_CODE.label}"
+                                           id="c34" visible="false">
+                                  <af:outputText value="#{row.REI_TRT_CODE}"
+                                                 id="ot32"/>
+                                </af:column>
+                                <af:column sortProperty="REI_CODE"
+                                           sortable="true"
+                                           headerText="#{bindings.treatySetups.hints.REI_CODE.label}"
+                                           id="c36" visible="false">
+                                  <af:outputText value="#{row.REI_CODE}"
+                                                 id="ot29"/>
+                                </af:column>
+                                <af:column sortProperty="REI_UW_YEAR"
+                                           sortable="true"
+                                           headerText="#{bindings.treatySetups.hints.REI_UW_YEAR.label}"
+                                           id="c5" visible="false">
+                                  <af:outputText value="#{row.REI_UW_YEAR}"
+                                                 id="ot119"/>
+                                </af:column>
+                                <af:column sortProperty="REI_CEDE_RATE"
+                                           sortable="true"
+                                           headerText="#{bindings.treatySetups.hints.REI_CEDE_RATE.label}"
+                                           id="c118" visible="false">
+                                  <af:outputText value="#{row.REI_CEDE_RATE}"
+                                                 id="ot26"/>
+                                </af:column>
+                                <af:column sortProperty="REI_ACCOUNTS"
+                                           sortable="true"
+                                           headerText="#{bindings.treatySetups.hints.REI_ACCOUNTS.label}"
+                                           id="c32" visible="false">
+                                  <af:outputText value="#{row.REI_ACCOUNTS}"
+                                                 id="ot36"/>
+                                </af:column>
+                              </af:table>
+                              <af:separator id="s3"/>
+                              <h:panelGrid columns="3" id="pg16">
+                                <af:commandButton id="cb26"
+                                                  icon="/images/new_dwn_rtl.png"
+                                                  action="#{otherSetups.AddTreatyParticipants}"
+                                                  text="New"/>
+                                <af:commandButton id="cb27"
+                                                  icon="/images/update.gif"
+                                                  action="#{otherSetups.EditTreatyParticipant}"
+                                                  text="Edit"/>
+                                <af:commandButton id="cb28"
+                                                  icon="/images/delete.gif"
+                                                  action="#{otherSetups.DeleteTreatyParticipant}"
+                                                  text="Delete"/>
+                                <af:popup id="AddParticispantPopup">
+                                  <af:dialog id="d8" type="none"
+                                             title="Add Treaty Participant">
+                                    <h:panelGrid columns="2" id="pg17">
+                                      <af:outputLabel value="ID" id="ol35"
+                                                      showRequired="true"/>
+                                      <h:panelGrid columns="2" id="pg18">
+                                        <af:inputText label="Label 29" id="it28"
+                                                      simple="true"
+                                                      binding="#{otherSetups.participantID}"
+                                                      shortDesc="Participant ID"/>
+                                        <af:commandButton id="cb29"
+                                                          icon="/dropdown.gif">
+                                          <af:showPopupBehavior popupId="ParticpantsPopup"/>
+                                        </af:commandButton>
+                                        <af:popup id="ParticpantsPopup">
+                                          <af:dialog id="d9" type="none"
+                                                     title="Select Particpant">
+                                            <af:table value="#{bindings.TreatyParticipants1.collectionModel}"
+                                                      var="row"
+                                                      rows="#{bindings.TreatyParticipants1.rangeSize}"
+                                                      emptyText="#{bindings.TreatyParticipants1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.TreatyParticipants1.rangeSize}"
+                                                      rowBandingInterval="0"
+                                                      selectedRowKeys="#{bindings.TreatyParticipants1.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.TreatyParticipants1.collectionModel.makeCurrent}"
+                                                      rowSelection="single"
+                                                      id="t9"
+                                                      binding="#{otherSetups.reinsurersLOV}">
+                                              <af:column sortProperty="AGEN_CODE"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.AGEN_CODE.label}"
+                                                         id="c79"
+                                                         visible="false">
+                                                <af:outputText value="#{row.AGEN_CODE}"
+                                                               id="ot76"/>
+                                              </af:column>
+                                              <af:column sortProperty="AGEN_SHT_DESC"
+                                                         sortable="true"
+                                                         headerText="Id"
+                                                         id="c72">
+                                                <af:outputText value="#{row.AGEN_SHT_DESC}"
+                                                               id="ot79"/>
+                                              </af:column>
+                                              <af:column sortProperty="AGEN_NAME"
+                                                         sortable="true"
+                                                         headerText="Reinsurer"
+                                                         id="c74" width="200">
+                                                <af:outputText value="#{row.AGEN_NAME}"
+                                                               id="ot45"/>
+                                              </af:column>
+                                              <af:column sortProperty="trpa_agen_code"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.trpa_agen_code.label}"
+                                                         id="c75"
+                                                         visible="false">
+                                                <af:outputText value="#{row.trpa_agen_code}"
+                                                               id="ot70"/>
+                                              </af:column>
+                                              <af:column sortProperty="trpa_rei_code"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.trpa_rei_code.label}"
+                                                         id="c73"
+                                                         visible="false">
+                                                <af:outputText value="#{row.trpa_rei_code}"
+                                                               id="ot71"/>
+                                              </af:column>
+                                              <af:column sortProperty="trpa_uw_year"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.trpa_uw_year.label}"
+                                                         id="c69"
+                                                         visible="false">
+                                                <af:outputText value="#{row.trpa_uw_year}"
+                                                               id="ot77"/>
+                                              </af:column>
+                                              <af:column sortProperty="trpa_comp_rate"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.trpa_comp_rate.label}"
+                                                         id="c71"
+                                                         visible="false">
+                                                <af:outputText value="#{row.trpa_comp_rate}"
+                                                               id="ot75"/>
+                                              </af:column>
+                                              <af:column sortProperty="trpa_trs_code"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.trpa_trs_code.label}"
+                                                         id="c78"
+                                                         visible="false">
+                                                <af:outputText value="#{row.trpa_trs_code}"
+                                                               id="ot72"/>
+                                              </af:column>
+                                              <af:column sortProperty="trpa_agen_sht_desc"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.trpa_agen_sht_desc.label}"
+                                                         id="c44"
+                                                         visible="false">
+                                                <af:outputText value="#{row.trpa_agen_sht_desc}"
+                                                               id="ot46"/>
+                                              </af:column>
+                                              <af:column sortProperty="agn_name"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.agn_name.label}"
+                                                         id="c45"
+                                                         visible="false">
+                                                <af:outputText value="#{row.agn_name}"
+                                                               id="ot74"/>
+                                              </af:column>
+                                              <af:column sortProperty="trpa_gl_ctrl_account"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.trpa_gl_ctrl_account.label}"
+                                                         id="c76"
+                                                         visible="false">
+                                                <af:outputText value="#{row.trpa_gl_ctrl_account}"
+                                                               id="ot78"/>
+                                              </af:column>
+                                              <af:column sortProperty="trpa_trs_sht_desc"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.trpa_trs_sht_desc.label}"
+                                                         id="c77"
+                                                         visible="false">
+                                                <af:outputText value="#{row.trpa_trs_sht_desc}"
+                                                               id="ot80"/>
+                                              </af:column>
+                                              <af:column sortProperty="trpa_rei_prem_taxable"
+                                                         sortable="true"
+                                                         headerText="#{bindings.TreatyParticipants1.hints.trpa_rei_prem_taxable.label}"
+                                                         id="c70"
+                                                         visible="false">
+                                                <af:outputText value="#{row.trpa_rei_prem_taxable}"
+                                                               id="ot73"/>
+                                              </af:column>
+                                            </af:table>
+                                            <h:panelGrid columns="2" id="pg30">
+                                              <af:commandButton text="OK"
+                                                                id="cb30"
+                                                                action="#{otherSetups.AssignReinsurer}"/>
+                                              <af:commandButton text="Cancel"
+                                                                id="cb31"/>
+                                            </h:panelGrid>
+                                          </af:dialog>
+                                        </af:popup>
+                                      </h:panelGrid>
+                                      <af:outputLabel value="Participant"
+                                                      id="ol36"
+                                                      showRequired="true"/>
+                                      <af:inputText label="Label 30" id="it29"
+                                                    simple="true"
+                                                    binding="#{otherSetups.participantName}"
+                                                    shortDesc="Participant"/>
+                                      <af:outputLabel value="Company Rate"
+                                                      id="ol37"
+                                                      showRequired="true"/>
+                                      <af:inputText label="Label 31" id="it30"
+                                                    simple="true"
+                                                    binding="#{otherSetups.companyRate}"
+                                                    shortDesc="Company Cession rate"/>
+                                      <af:outputLabel value="Premium Tax Chargeable"
+                                                      id="ol38"/>
+                                      <af:selectOneChoice label="Label 4"
+                                                          id="soc4"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{otherSetups.premTaxChargeable}"
+                                                          shortDesc="Premium Tax Chargeable">
+                                        <af:selectItem label="None" value="N"
+                                                       id="si14"/>
+                                        <af:selectItem label="Reinsurance Premium Tax"
+                                                       value="RI" id="si11"/>
+                                        <af:selectItem label="Underwriting Tax"
+                                                       value="UN" id="si12"/>
+                                        <af:selectItem label="Both" value="B"
+                                                       id="si13"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="GL Account Code"
+                                                      id="ol39"
+                                                      showRequired="true"/>
+                                      <h:panelGrid columns="3" id="pg35">
+                                        <af:inputText label="Label 32" id="it31"
+                                                      simple="true"
+                                                      binding="#{otherSetups.glAccountCode}"
+                                                      shortDesc="GL Account Code"/>
+                                        <af:commandButton id="cb50"
+                                                          icon="/images/dropdown.gif">
+                                          <af:showPopupBehavior popupId="glAccountsPopup"/>
+                                        </af:commandButton>
+                                        <af:popup id="glAccountsPopup">
+                                          <af:dialog id="dialog2" type="none"
+                                                     title="Select General Ledger Acc Code">
+                                            <af:panelBox text="PanelBox3"
+                                                         id="panelBox1"
+                                                         showHeader="never">
+                                              <f:facet name="toolbar"/>
+                                              <af:table value="#{bindings.productTransactions.collectionModel}"
+                                                        var="row"
+                                                        rows="#{bindings.productTransactions.rangeSize}"
+                                                        emptyText="#{bindings.productTransactions.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                        fetchSize="#{bindings.productTransactions.rangeSize}"
+                                                        rowBandingInterval="0"
+                                                        filterModel="#{bindings.productTransactionsQuery.queryDescriptor}"
+                                                        queryListener="#{bindings.productTransactionsQuery.processQuery}"
+                                                        filterVisible="true"
+                                                        varStatus="vs"
+                                                        selectedRowKeys="#{bindings.productTransactions.collectionModel.selectedRow}"
+                                                        selectionListener="#{bindings.productTransactions.collectionModel.makeCurrent}"
+                                                        rowSelection="single"
+                                                        id="t2"
+                                                        binding="#{otherSetups.glAccountsLOV}">
+                                                <af:column sortProperty="accNumber"
+                                                           filterable="true"
+                                                           sortable="true"
+                                                           headerText="Account Number"
+                                                           id="c2">
+                                                  <af:outputText value="#{row.accNumber}"
+                                                                 id="ot4"/>
+                                                </af:column>
+                                                <af:column sortProperty="accName"
+                                                           filterable="true"
+                                                           sortable="true"
+                                                           headerText="Account Name"
+                                                           id="c1" width="200">
+                                                  <af:outputText value="#{row.accName}"
+                                                                 id="ot5"/>
+                                                </af:column>
+                                              </af:table>
+                                            </af:panelBox>
+                                            <h:panelGrid columns="2"
+                                                         id="panelGrid4">
+                                              <af:commandButton text="OK"
+                                                                id="commandButton1"
+                                                                action="#{otherSetups.AssignGlCode}"
+                                                                partialSubmit="true"/>
+                                              <af:commandButton text="Cancel"
+                                                                id="commandButton7"/>
+                                            </h:panelGrid>
+                                          </af:dialog>
+                                        </af:popup>
+                                      </h:panelGrid>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" id="pg31">
+                                      <af:commandButton text="OK" id="cb32"
+                                                        action="#{otherSetups.SaveParticipant}"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="cb33"/>
+                                    </h:panelGrid>
+                                  </af:dialog>
+                                </af:popup>
+                              </h:panelGrid>
+                              <af:table value="#{bindings.TreatyParticipants.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.TreatyParticipants.rangeSize}"
+                                        emptyText="#{bindings.TreatyParticipants.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.TreatyParticipants.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectionListener="#{bindings.TreatyParticipants.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t8"
+                                        binding="#{otherSetups.participantsLOV}"
+                                        inlineStyle="width:100%; height:100.0px; border-style:none;">
+                                <af:column sortProperty="trpa_agen_sht_desc"
+                                           sortable="true" headerText="Id"
+                                           id="c39">
+                                  <af:outputText value="#{row.trpa_agen_sht_desc}"
+                                                 id="ot40"/>
+                                </af:column>
+                                <af:column sortProperty="agn_name"
+                                           sortable="true"
+                                           headerText="Participant" id="c40">
+                                  <af:outputText value="#{row.agn_name}"
+                                                 id="ot44"/>
+                                </af:column>
+                                <af:column sortProperty="trpa_comp_rate"
+                                           sortable="true"
+                                           headerText="Company Rate" id="c83">
+                                  <af:outputText value="#{row.trpa_comp_rate}"
+                                                 id="ot87"/>
+                                </af:column>
+                                <af:column sortProperty="trpa_rei_prem_taxable"
+                                           sortable="true"
+                                           headerText="Prem Tax Chargable"
+                                           id="c82" width="150">
+                                  <af:outputText value="#{row.trpa_rei_prem_taxable}"
+                                                 id="ot41"/>
+                                </af:column>
+                                <af:column sortProperty="trpa_gl_ctrl_account"
+                                           sortable="true"
+                                           headerText="GL A/c Code" id="c43">
+                                  <af:outputText value="#{row.trpa_gl_ctrl_account}"
+                                                 id="ot84"/>
+                                </af:column>
+                                <af:column sortProperty="trpa_agen_code"
+                                           sortable="true"
+                                           headerText="#{bindings.TreatyParticipants.hints.trpa_agen_code.label}"
+                                           id="c85" visible="false">
+                                  <af:outputText value="#{row.trpa_agen_code}"
+                                                 id="ot86"/>
+                                </af:column>
+                                <af:column sortProperty="trpa_rei_code"
+                                           sortable="true"
+                                           headerText="#{bindings.TreatyParticipants.hints.trpa_rei_code.label}"
+                                           id="c87" visible="false">
+                                  <af:outputText value="#{row.trpa_rei_code}"
+                                                 id="ot83"/>
+                                </af:column>
+                                <af:column sortProperty="trpa_uw_year"
+                                           sortable="true"
+                                           headerText="#{bindings.TreatyParticipants.hints.trpa_uw_year.label}"
+                                           id="c84" visible="false">
+                                  <af:outputText value="#{row.trpa_uw_year}"
+                                                 id="ot88"/>
+                                </af:column>
+                                <af:column sortProperty="trpa_trs_code"
+                                           sortable="true"
+                                           headerText="#{bindings.TreatyParticipants.hints.trpa_trs_code.label}"
+                                           id="c86" visible="false">
+                                  <af:outputText value="#{row.trpa_trs_code}"
+                                                 id="ot85"/>
+                                </af:column>
+                                <af:column sortProperty="trpa_trs_sht_desc"
+                                           sortable="true"
+                                           headerText="#{bindings.TreatyParticipants.hints.trpa_trs_sht_desc.label}"
+                                           id="c41" visible="false">
+                                  <af:outputText value="#{row.trpa_trs_sht_desc}"
+                                                 id="ot81"/>
+                                </af:column>
+                                <af:column sortProperty="AGEN_CODE"
+                                           sortable="true"
+                                           headerText="#{bindings.TreatyParticipants.hints.AGEN_CODE.label}"
+                                           id="c81" visible="false">
+                                  <af:outputText value="#{row.AGEN_CODE}"
+                                                 id="ot42"/>
+                                </af:column>
+                                <af:column sortProperty="AGEN_SHT_DESC"
+                                           sortable="true"
+                                           headerText="#{bindings.TreatyParticipants.hints.AGEN_SHT_DESC.label}"
+                                           id="c80" visible="false">
+                                  <af:outputText value="#{row.AGEN_SHT_DESC}"
+                                                 id="ot43"/>
+                                </af:column>
+                                <af:column sortProperty="AGEN_NAME"
+                                           sortable="true"
+                                           headerText="#{bindings.TreatyParticipants.hints.AGEN_NAME.label}"
+                                           id="c42" visible="false">
+                                  <af:outputText value="#{row.AGEN_NAME}"
+                                                 id="ot82"/>
+                                </af:column>
+                              </af:table>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Treaty Cover Types"
+                                               id="sdi3"
+                                               inlineStyle="width:100.0%;">
+                              <af:panelGroupLayout id="pgl9" layout="scroll"
+                                                   partialTriggers="t4">
+                                <af:panelBox text="PanelBox2" id="pb7"
+                                             showHeader="never">
+                                  <f:facet name="toolbar"/>
+                                  <af:outputLabel value="Treaty Products"
+                                                  id="ol40"
+                                                  inlineStyle="font-weight:bold;"/>
+                                  <af:separator id="s4"/>
+                                  <h:panelGrid columns="2" id="pg19"
+                                               style="width:100.0%;">
+                                    <h:panelGrid columns="3" id="pg37">
+                                      <af:outputLabel value="Select A Product"
+                                                      id="ol2"/>
+                                      <af:panelGroupLayout id="pgl10"
+                                                           partialTriggers="t4">
+                                        <af:inputText label="Label 40" id="it39"
+                                                      simple="true"
+                                                      disabled="true"
+                                                      binding="#{otherSetups.treatyProductDesc}"/>
+                                      </af:panelGroupLayout>
+                                      <af:commandButton id="cb53"
+                                                        icon="/images/dropdown.gif"
+                                                        action="#{otherSetups.showTreatyProducts}"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="3" id="pg39">
+                                      <af:outputLabel value="Select A Treaty"
+                                                      id="outputLabel4"/>
+                                      <af:panelGroupLayout id="pgl11"
+                                                           partialTriggers="t4">
+                                        <af:inputText label="Label 41" id="it41"
+                                                      simple="true"
+                                                      disabled="true"
+                                                      binding="#{otherSetups.arrangementDesc}"/>
+                                      </af:panelGroupLayout>
+                                      <af:commandButton id="cb55"
+                                                        icon="/images/dropdown.gif"
+                                                        action="#{otherSetups.showTreatyCoverTypes}"/>
+                                    </h:panelGrid>
+                                  </h:panelGrid>
+                                  <af:outputLabel value="Arrangement Cover Types"
+                                                  id="ol41"
+                                                  inlineStyle="font-weight:bold;"/>
+                                  <af:separator id="s5"/>
+                                  <h:panelGrid columns="3" id="pg20">
+                                    <af:commandButton id="cb34"
+                                                      icon="/images/new_dwn_rtl.png"
+                                                      action="#{otherSetups.AddArrangementCoverType}"
+                                                      text="New"/>
+                                    <af:commandButton id="cb35"
+                                                      icon="/images/update_ena.png"
+                                                      action="#{otherSetups.EditArrangementCoverType}"
+                                                      text="Edit"/>
+                                    <af:commandButton id="cb36"
+                                                      icon="/images/delete_ena.png"
+                                                      action="#{otherSetups.DeleteArrCoverType}"
+                                                      text="Delete"/>
+                                    <af:popup id="ArrangementCoverType">
+                                      <af:dialog id="d10" type="none"
+                                                 title="Add Arrangement Cover Type">
+                                        <af:panelBox id="pb8">
+                                          <f:facet name="toolbar"/>
+                                          <h:panelGrid columns="2" id="pg21">
+                                            <af:outputLabel value="Cover Type"
+                                                            id="ol42"
+                                                            showRequired="true"/>
+                                            <h:panelGrid columns="2" id="pg22">
+                                              <af:inputText label="Label 33"
+                                                            id="it32"
+                                                            simple="true"
+                                                            binding="#{otherSetups.arrCoverType}"
+                                                            shortDesc="Cover Type"
+                                                            disabled="true"/>
+                                              <af:commandButton id="cb37"
+                                                                icon="/images/dropdown.gif">
+                                                <af:showPopupBehavior popupId="CoverTypespopup"/>
+                                              </af:commandButton>
+                                              <af:popup id="CoverTypespopup">
+                                                <af:dialog id="d11" type="none"
+                                                           title="Select Cover">
+                                                  <af:table value="#{bindings.ArrangementCoverTypes1.collectionModel}"
+                                                            var="row"
+                                                            rows="#{bindings.ArrangementCoverTypes1.rangeSize}"
+                                                            emptyText="#{bindings.ArrangementCoverTypes1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                            fetchSize="#{bindings.ArrangementCoverTypes1.rangeSize}"
+                                                            rowBandingInterval="0"
+                                                            selectedRowKeys="#{bindings.ArrangementCoverTypes1.collectionModel.selectedRow}"
+                                                            selectionListener="#{bindings.ArrangementCoverTypes1.collectionModel.makeCurrent}"
+                                                            rowSelection="single"
+                                                            id="t13"
+                                                            inlineStyle="height:171px;"
+                                                            binding="#{otherSetups.arrangeCoversLOV}">
+                                                    <af:column sortProperty="TCT_CVT_SHT_DESC"
+                                                               sortable="true"
+                                                               headerText="ID"
+                                                               id="c57">
+                                                      <af:outputText value="#{row.TCT_CVT_SHT_DESC}"
+                                                                     id="ot57"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="CVT_DESC"
+                                                               sortable="true"
+                                                               headerText="Cover Description"
+                                                               id="c56"
+                                                               width="200">
+                                                      <af:outputText value="#{row.CVT_DESC}"
+                                                                     id="ot58"/>
+                                                    </af:column>
+                                                  </af:table>
+                                                  <h:panelGrid columns="2"
+                                                               id="pg33">
+                                                    <af:commandButton text="OK"
+                                                                      id="cb38"
+                                                                      action="#{otherSetups.AssignArrangementCoverType}"/>
+                                                    <af:commandButton text="Cancel"
+                                                                      id="cb39"/>
+                                                  </h:panelGrid>
+                                                </af:dialog>
+                                              </af:popup>
+                                            </h:panelGrid>
+                                            <af:outputLabel value="Cede Type"
+                                                            id="ol43"
+                                                            showRequired="true"/>
+                                            <af:selectOneChoice label="Label 5"
+                                                                id="soc5"
+                                                                simple="true"
+                                                                autoSubmit="true"
+                                                                binding="#{otherSetups.cedeType}"
+                                                                shortDesc="Cession Type">
+                                              <af:selectItem label="Lines"
+                                                             value="LN"
+                                                             id="si15"/>
+                                              <af:selectItem label="Percentage"
+                                                             value="PC"
+                                                             id="si16"/>
+                                              <af:selectItem label="Main Cover Percentage"
+                                                             value="MC"
+                                                             id="si23"/>               
+                                            </af:selectOneChoice>
+                                            <af:outputLabel value="Cede Rate"
+                                                            id="ol44"
+                                                            showRequired="true"/>
+                                            <af:inputText label="Label 34"
+                                                          id="it33"
+                                                          simple="true"
+                                                          binding="#{otherSetups.cedeRate}"
+                                                          shortDesc="Cession Rate"/>
+                                            <af:outputLabel value="Rate Type"
+                                                            id="ol45"/>
+                                            <af:selectOneChoice label="Label 6"
+                                                                id="soc6"
+                                                                simple="true"
+                                                                autoSubmit="true"
+                                                                binding="#{otherSetups.arrRateType}"
+                                                                shortDesc="*Rate Type">
+                                              <af:selectItem label="R/I Rate Table"
+                                                             value="RT"
+                                                             id="si18"/>
+                                              <af:selectItem label="Premium Rates"
+                                                             value="PR"
+                                                             id="si19"/>
+                                              <af:selectItem label="Cession Rates"
+                                                             value="CR"
+                                                             id="si17"/>
+                                            </af:selectOneChoice>
+                                            <af:outputLabel value="Rate Name"
+                                                            id="ol46"/>
+                                            <h:panelGrid columns="2" id="pg23">
+                                              <af:inputText label="Label 35"
+                                                            id="it34"
+                                                            simple="true"
+                                                            binding="#{otherSetups.arrRateName}"
+                                                            disabled="true"/>
+                                              <af:commandButton id="cb40"
+                                                                icon="/images/dropdown.gif">
+                                                <af:showPopupBehavior popupId="arrRatesPopup"/>
+                                              </af:commandButton>
+                                              <af:popup id="arrRatesPopup">
+                                                <af:dialog id="d12" type="none">
+                                                  <af:table value="#{bindings.ArrangementCoverTypes2.collectionModel}"
+                                                            var="row"
+                                                            rows="#{bindings.ArrangementCoverTypes2.rangeSize}"
+                                                            emptyText="#{bindings.ArrangementCoverTypes2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                            fetchSize="#{bindings.ArrangementCoverTypes2.rangeSize}"
+                                                            rowBandingInterval="0"
+                                                            selectedRowKeys="#{bindings.ArrangementCoverTypes2.collectionModel.selectedRow}"
+                                                            selectionListener="#{bindings.ArrangementCoverTypes2.collectionModel.makeCurrent}"
+                                                            rowSelection="single"
+                                                            id="t14"
+                                                            inlineStyle="height:201px;"
+                                                            binding="#{otherSetups.ordReinRatesLOV}">
+                                                    <af:column sortProperty="ORRP_SHT_DESC"
+                                                               sortable="true"
+                                                               headerText="ID"
+                                                               id="c60">
+                                                      <af:outputText value="#{row.ORRP_SHT_DESC}"
+                                                                     id="ot60"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="ORRP_DESC"
+                                                               sortable="true"
+                                                               headerText="Description"
+                                                               id="c58">
+                                                      <af:outputText value="#{row.ORRP_DESC}"
+                                                                     id="ot61"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="ORRP_CLASS_SPECIFIC"
+                                                               sortable="true"
+                                                               headerText="Class Specific"
+                                                               id="c59">
+                                                      <af:outputText value="#{row.ORRP_CLASS_SPECIFIC}"
+                                                                     id="ot59"/>
+                                                    </af:column>
+                                                  </af:table>
+                                                  <h:panelGrid columns="2"
+                                                               id="pg34">
+                                                    <af:commandButton text="OK"
+                                                                      id="cb41"
+                                                                      action="#{otherSetups.AssignOrdReinRates}"
+                                                                      partialSubmit="true"/>
+                                                    <af:commandButton text="Cancel"
+                                                                      id="cb42"
+                                                                      partialSubmit="true"
+                                                                      action="#{otherSetups.CancelRateName}"/>
+                                                  </h:panelGrid>
+                                                </af:dialog>
+                                              </af:popup>
+                                            </h:panelGrid>
+                                            <af:outputLabel value="Limit"
+                                                            id="ol47"
+                                                            showRequired="true"/>
+                                            <af:inputText label="Label 36"
+                                                          id="it35"
+                                                          simple="true"
+                                                          binding="#{otherSetups.atctLimit}"
+                                                          shortDesc="Limit"/>
+                                          </h:panelGrid>
+                                          <h:panelGrid columns="2" id="pg32">
+                                            <af:commandButton text="Save"
+                                                              id="cb43"
+                                                              action="#{otherSetups.SaveArrangementCoverType}"/>
+                                            <af:commandButton text="Cancel"
+                                                              id="cb44"/>
+                                          </h:panelGrid>
+                                        </af:panelBox>
+                                      </af:dialog>
+                                    </af:popup>
+                                  </h:panelGrid>
+                                  <af:table value="#{bindings.ArrangementCoverTypes.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.ArrangementCoverTypes.rangeSize}"
+                                            emptyText="#{bindings.ArrangementCoverTypes.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.ArrangementCoverTypes.rangeSize}"
+                                            rowBandingInterval="0"
+                                            selectionListener="#{otherSetups.ArrCoverTypesListener}"
+                                            rowSelection="single" id="t12"
+                                            inlineStyle="width:100%; height:70.0px; border-style:none;"
+                                            binding="#{otherSetups.arrangementCoverTypesLOV}">
+                                    <af:column sortProperty="atct_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_code.label}"
+                                               id="c100" visible="false">
+                                      <af:outputText value="#{row.atct_code}"
+                                                     id="ot115"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_tct_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_tct_code.label}"
+                                               id="c54" visible="false">
+                                      <af:outputText value="#{row.atct_tct_code}"
+                                                     id="ot96"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_tprd_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_tprd_code.label}"
+                                               id="c101" visible="false">
+                                      <af:outputText value="#{row.atct_tprd_code}"
+                                                     id="ot107"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_ta_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_ta_code.label}"
+                                               id="c53" visible="false">
+                                      <af:outputText value="#{row.atct_ta_code}"
+                                                     id="ot92"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_rei_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_rei_code.label}"
+                                               id="c91" visible="false">
+                                      <af:outputText value="#{row.atct_rei_code}"
+                                                     id="ot93"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_pct_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_pct_code.label}"
+                                               id="c110" visible="false">
+                                      <af:outputText value="#{row.atct_pct_code}"
+                                                     id="ot91"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_cvt_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_cvt_code.label}"
+                                               id="c109" visible="false">
+                                      <af:outputText value="#{row.atct_cvt_code}"
+                                                     id="ot52"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_as_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_as_code.label}"
+                                               id="c108" visible="false">
+                                      <af:outputText value="#{row.atct_as_code}"
+                                                     id="ot100"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_prod_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_prod_code.label}"
+                                               id="c105" visible="false">
+                                      <af:outputText value="#{row.atct_prod_code}"
+                                                     id="ot105"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_comm_rate"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_comm_rate.label}"
+                                               id="c103" visible="false">
+                                      <af:outputText value="#{row.atct_comm_rate}"
+                                                     id="ot112"/>
+                                    </af:column>
+                                    <af:column sortProperty="cvt_desc"
+                                               sortable="true"
+                                               headerText="Cover Type" id="c93">
+                                      <af:outputText value="#{row.cvt_desc}"
+                                                     id="ot102"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_cede_rate"
+                                               sortable="true"
+                                               headerText="Cede Rate" id="c92"
+                                               visible="true">
+                                      <af:outputText value="#{row.atct_cede_rate}"
+                                                     id="ot97"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_rate_div_fact"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_rate_div_fact.label}"
+                                               id="c52" visible="false">
+                                      <af:outputText value="#{row.atct_rate_div_fact}"
+                                                     id="ot89"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_orrp_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_orrp_code.label}"
+                                               id="c102" visible="false">
+                                      <af:outputText value="#{row.atct_orrp_code}"
+                                                     id="ot51"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_rate"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_rate.label}"
+                                               id="c114" visible="false">
+                                      <af:outputText value="#{row.atct_rate}"
+                                                     id="ot54"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_cvt_sht_desc"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_cvt_sht_desc.label}"
+                                               id="c95" visible="false">
+                                      <af:outputText value="#{row.atct_cvt_sht_desc}"
+                                                     id="ot111"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_cede_type"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_cede_type.label}"
+                                               id="c106" visible="false">
+                                      <af:outputText value="#{row.atct_cede_type}"
+                                                     id="ot55"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_rate_type"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_rate_type.label}"
+                                               id="c107" visible="false">
+                                      <af:outputText value="#{row.atct_rate_type}"
+                                                     id="ot104"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_limit"
+                                               sortable="true"
+                                               headerText="Limit" id="c94">
+                                      <af:outputText value="#{row.atct_limit}"
+                                                     id="ot98"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_class_specific"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_class_specific.label}"
+                                               id="c51" visible="false">
+                                      <af:outputText value="#{row.atct_class_specific}"
+                                                     id="ot108"/>
+                                    </af:column>
+                                    <af:column sortProperty="atct_ta_sht_desc"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.atct_ta_sht_desc.label}"
+                                               id="c97" visible="false">
+                                      <af:outputText value="#{row.atct_ta_sht_desc}"
+                                                     id="ot101"/>
+                                    </af:column>
+                                    <af:column sortProperty="orrp_desc"
+                                               sortable="true"
+                                               headerText="Rate Name" id="c113"
+                                               visible="false">
+                                      <af:outputText value="#{row.orrp_desc}"
+                                                     id="ot99"/>
+                                    </af:column>
+                                    <af:column sortProperty="ratetype_desc"
+                                               sortable="true"
+                                               headerText="Rate Type" id="c90">
+                                      <af:outputText value="#{row.ratetype_desc}"
+                                                     id="ot114"/>
+                                    </af:column>
+                                    <af:column sortProperty="cede_type_desc"
+                                               sortable="true"
+                                               headerText="Cede Type" id="c104">
+                                      <af:outputText value="#{row.cede_type_desc}"
+                                                     id="ot109"/>
+                                    </af:column>
+                                    <af:column sortProperty="TCT_CODE"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.TCT_CODE.label}"
+                                               id="c112" visible="false">
+                                      <af:outputText value="#{row.TCT_CODE}"
+                                                     id="ot113"/>
+                                    </af:column>
+                                    <af:column sortProperty="TCT_CVT_CODE"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.TCT_CVT_CODE.label}"
+                                               id="c50" visible="false">
+                                      <af:outputText value="#{row.TCT_CVT_CODE}"
+                                                     id="ot106"/>
+                                    </af:column>
+                                    <af:column sortProperty="TCT_CVT_SHT_DESC"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.TCT_CVT_SHT_DESC.label}"
+                                               id="c99" visible="false">
+                                      <af:outputText value="#{row.TCT_CVT_SHT_DESC}"
+                                                     id="ot110"/>
+                                    </af:column>
+                                    <af:column sortProperty="CVT_DESC"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.CVT_DESC.label}"
+                                               id="c89" visible="false">
+                                      <af:outputText value="#{row.CVT_DESC}"
+                                                     id="ot90"/>
+                                    </af:column>
+                                    <af:column sortProperty="TCT_PCT_CODE"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.TCT_PCT_CODE.label}"
+                                               id="c96" visible="false">
+                                      <af:outputText value="#{row.TCT_PCT_CODE}"
+                                                     id="ot56"/>
+                                    </af:column>
+                                    <af:column sortProperty="ORRP_CODE"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.ORRP_CODE.label}"
+                                               id="c55" visible="false">
+                                      <af:outputText value="#{row.ORRP_CODE}"
+                                                     id="ot103"/>
+                                    </af:column>
+                                    <af:column sortProperty="ORRP_SHT_DESC"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.ORRP_SHT_DESC.label}"
+                                               id="c98" visible="false">
+                                      <af:outputText value="#{row.ORRP_SHT_DESC}"
+                                                     id="ot95"/>
+                                    </af:column>
+                                    <af:column sortProperty="orrp_desc"
+                                               sortable="true"
+                                               headerText="Rate Name" id="c88">
+                                      <af:outputText value="#{row.orrp_desc}"
+                                                     id="ot53"/>
+                                    </af:column>
+                                    <af:column sortProperty="ORRP_CLASS_SPECIFIC"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes.hints.ORRP_CLASS_SPECIFIC.label}"
+                                               id="c111" visible="false">
+                                      <af:outputText value="#{row.ORRP_CLASS_SPECIFIC}"
+                                                     id="ot94"/>
+                                    </af:column>
+                                  </af:table>
+                                  <af:outputLabel value="Commission Rates"
+                                                  id="ol48"
+                                                  inlineStyle="font-weight:bold;"/>
+                                  <af:separator id="s6"/>
+                                  <h:panelGrid columns="3" id="pg24">
+                                    <af:commandButton id="cb45"
+                                                      icon="/images/field_group_plus_ena.png"
+                                                      action="#{otherSetups.AddCommissionRates}"/>
+                                    <af:commandButton id="cb46"
+                                                      icon="/images/update_ena.png"
+                                                      action="#{otherSetups.EditCommissionrates}"/>
+                                    <af:commandButton id="cb47"
+                                                      action="#{otherSetups.DeleteCommissionrates}"
+                                                      icon="/images/delete_ena.png"/>
+                                    <af:popup id="CommissionRatesPopup">
+                                      <af:dialog id="d13" type="none"
+                                                 title="Enter Commission Rates">
+                                        <h:panelGrid columns="2" id="pg25">
+                                          <af:outputLabel value="*Year From"
+                                                          id="ol49"/>
+                                          <af:inputText label="Label 37"
+                                                        id="it36" simple="true"
+                                                        binding="#{otherSetups.yearFrom}"
+                                                        shortDesc="Year From"/>
+                                          <af:outputLabel value="*Year To"
+                                                          id="ol50"/>
+                                          <af:inputText label="Label 38"
+                                                        id="it37" simple="true"
+                                                        binding="#{otherSetups.yearTo}"
+                                                        shortDesc="Year To"/>
+                                          <af:outputLabel value="*Commission Rate"
+                                                          id="ol51"/>
+                                          <af:inputText label="Label 39"
+                                                        id="it38" simple="true"
+                                                        binding="#{otherSetups.arrcommissionRate}"
+                                                        shortDesc="Commission rate"/>
+                                          <af:outputLabel value="*Commission Div Fact"
+                                                          id="ol52"/>
+                                          <af:selectOneChoice label="Label 7"
+                                                              id="soc7"
+                                                              simple="true"
+                                                              autoSubmit="true"
+                                                              binding="#{otherSetups.commissionDivFact}"
+                                                              shortDesc="Commission Division Factor">
+                                            <af:selectItem label="Percent"
+                                                           value="100"
+                                                           id="si20"/>
+                                            <af:selectItem label="Per Mille"
+                                                           value="1000"
+                                                           id="si22"/>
+                                            <af:selectItem label="Amount"
+                                                           value="1" id="si21"/>
+                                          </af:selectOneChoice>
+                                          <af:outputLabel value="*Wef" id="ol53"
+                                                          shortDesc="With Effect From Date"/>
+                                          <af:inputDate label="Label 3" id="id3"
+                                                        simple="true"
+                                                        binding="#{otherSetups.wefDate}">
+                                            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                          </af:inputDate>
+                                          <af:outputLabel value="Wet"
+                                                          id="ol54"/>
+                                          <af:inputDate label="Label 4" id="id4"
+                                                        simple="true"
+                                                        binding="#{otherSetups.wetDate}">
+                                            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                          </af:inputDate>
+                                          <h:panelGrid columns="2" id="pg36">
+                                            <af:commandButton text="Save"
+                                                              id="cb48"
+                                                              action="#{otherSetups.SaveCommissionrates}"/>
+                                            <af:commandButton text="Cancel"
+                                                              id="cb49"/>
+                                          </h:panelGrid>
+                                        </h:panelGrid>
+                                      </af:dialog>
+                                    </af:popup>
+                                  </h:panelGrid>
+                                  <af:table value="#{bindings.ArrangementCoverTypes3.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.ArrangementCoverTypes3.rangeSize}"
+                                            emptyText="#{bindings.ArrangementCoverTypes3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.ArrangementCoverTypes3.rangeSize}"
+                                            rowBandingInterval="0"
+                                            selectionListener="#{bindings.ArrangementCoverTypes3.collectionModel.makeCurrent}"
+                                            rowSelection="single" id="t15"
+                                            binding="#{otherSetups.commissionRatesLOV}"
+                                            inlineStyle="width:100%; height:100.0px; border-style:none;">
+                                    <af:column sortProperty="tacr_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes3.hints.tacr_code.label}"
+                                               id="c63" visible="false">
+                                      <af:outputText value="#{row.tacr_code}"
+                                                     id="ot64"/>
+                                    </af:column>
+                                    <af:column sortProperty="tacr_atct_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes3.hints.tacr_atct_code.label}"
+                                               id="c66" visible="false">
+                                      <af:outputText value="#{row.tacr_atct_code}"
+                                                     id="ot66"/>
+                                    </af:column>
+                                    <af:column sortProperty="tacr_pct_code"
+                                               sortable="true"
+                                               headerText="#{bindings.ArrangementCoverTypes3.hints.tacr_pct_code.label}"
+                                               id="c148" visible="false">
+                                      <af:outputText value="#{row.tacr_pct_code}"
+                                                     id="ot151"/>
+                                    </af:column>
+                                    <af:column sortProperty="tacr_comm_div_factr"
+                                               sortable="true"
+                                               headerText="Division Factor"
+                                               id="c149">
+                                      <af:outputText value="#{row.tacr_comm_div_factr}"
+                                                     id="ot65"/>
+                                    </af:column>
+                                    <af:column sortProperty="tacr_comm_rate"
+                                               sortable="true"
+                                               headerText="Commission Rate"
+                                               id="c150">
+                                      <af:outputText value="#{row.tacr_comm_rate}"
+                                                     id="ot149"/>
+                                    </af:column>
+                                    <af:column sortProperty="tacr_yr_from"
+                                               sortable="true"
+                                               headerText="Year From" id="c61">
+                                      <af:outputText value="#{row.tacr_yr_from}"
+                                                     id="ot62"/>
+                                    </af:column>
+                                    <af:column sortProperty="tacr_yr_to"
+                                               sortable="true"
+                                               headerText="Year To" id="c64">
+                                      <af:outputText value="#{row.tacr_yr_to}"
+                                                     id="ot63"/>
+                                    </af:column>
+                                    <af:column sortProperty="tacr_wef"
+                                               sortable="true" headerText="WEF"
+                                               id="c65">
+                                      <af:outputText value="#{row.tacr_wef}"
+                                                     id="ot150">
+                                        <af:convertDateTime pattern="#{bindings.ArrangementCoverTypes3.hints.tacr_wef.format}"/>
+                                      </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="tacr_wet"
+                                               sortable="true" headerText="WET"
+                                               id="c62">
+                                      <af:outputText value="#{row.tacr_wet}"
+                                                     id="ot67">
+                                        <af:convertDateTime pattern="#{bindings.ArrangementCoverTypes3.hints.tacr_wet.format}"/>
+                                      </af:outputText>
+                                    </af:column>
+                                  </af:table>
+                                </af:panelBox>
+                              </af:panelGroupLayout>
+                            </af:showDetailItem>
+                          </af:panelTabbed>
+                        </af:panelBox>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelSplitter>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

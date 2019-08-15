@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataTemplate dataSourceRef="lms_pioneer" name="glquosch" defaultPackage="reports_parameters">
+<properties>
+<property name="xml_tag_case" value="upper"/>
+</properties>
+<parameters>
+<parameter name="UP_QUO_CODE" dataType="integer"/>
+<parameter name="V_APPLY_RATES" dataType="varchar"/>
+<parameter name="V_PCA_CODE" dataType="integer"/>
+<parameter name="V_USER" dataType="varchar"/>
+</parameters>
+<lexicals>
+</lexicals>
+    <dataQuery>
+      
+            <sqlStatement name="Q_1">
+       <![CDATA[
+        SELECT ORG_NAME ORGANIZATION,
+            INITCAP(TRIM(TO_CHAR(CURRENT_DATE,'DAY'))||','||TO_CHAR(CURRENT_DATE,'MONTH')||''||TO_CHAR(CURRENT_DATE,'DD')||','||TO_CHAR(CURRENT_DATE,'RRRR'))YEA,
+            TO_CHAR(CURRENT_DATE,'HH:MM:PM')HOURS,
+            ORG_PHY_ADDRS,
+            ORG_ADDRS || ' , ' || ORG_ZIP || ' - ' || TWN_NAME || ' , ' ||
+            COU_NAME POSTALADDRESS,
+            'TEL' || ':' || ORG_TEL1 ||
+            DECODE(ORG_TEL2, NULL, NULL, ' /' || ORG_TEL2) TELEPHONE,
+            'FAX' || ':' || ORG_FAX FAX,
+             'EMAIL: '||LOWER(ORG_EMAIL_ADDRS) EMAIL,
+            ORG_RPT_LOGO LOGO,
+            'WEBSITE: '||LOWER(ORG_WEB_ADDRS) WEB
+            FROM TQC_ORGANIZATIONS, TQC_COUNTRIES, TQC_TOWNS, TQC_SYSTEMS,LMS_AGENCIES
+            WHERE ORG_TWN_CODE = TWN_CODE
+            AND ORG_COU_CODE = COU_CODE
+            AND SYS_ORG_CODE = ORG_CODE
+            AND SYS_SHT_DESC = 'LMS'
+            AND ROWNUM=1 
+            			]]>
+ </sqlStatement>
+ <sqlStatement name="Q_2"> <![CDATA[
+--QUOTATION COVER DETAILS
+SELECT QUO_CODE, QUO_NO, PRP_SURNAME || ' ' || PRP_OTHER_NAMES CLIENT,AGN_NAME,BRN_NAME,
+QUO_NOF_MEMBERS, TO_CHAR(TO_DATE(QUO_EFFECTIVE_DATE,'DD/MM/RRRR'), 'DD-MON-YYYY')QUO_EFFECTIVE_DATE,
+TO_CHAR(TO_DATE(QUO_COVER_TO_DATE,'DD/MM/RRRR'), 'DD-MON-YYYY')COVER_TO_DATE, 
+TO_CHAR(TO_DATE(QUO_EFFECTIVE_DATE,'DD/MM/RRRR'), 'DD-MON-YYYY')COVER_FROM_DATE, 
+TO_CHAR(SYSDATE, 'DD-MON-YYYY')RUNDATE,
+nvl(QUO_OVERRIDE_FCL_AMT,QUO_FCL_AMT)FCL,
+PROD_DESC SCHEME,ROUND((QUO_MALE_NRD+QUO_FEMALE_NRD)/2,0) NRA,
+LMS_REPORTS_PKG.get_category_multiples(QUO_CODE,'Q')CAT_MULTI,
+tqc_interfaces_pkg.currencyname(tqc_interfaces_pkg.orgcurrency(27),'D')currency
+FROM   LMS_QUOTATIONS, 
+LMS_PROPOSERS, LMS_AGENCIES, TQC_BRANCHES,LMS_PRODUCTS
+WHERE  QUO_AGENCY_CODE = AGN_CODE
+AND QUO_PRP_CODE=PRP_CODE
+AND QUO_BRA_CODE = BRN_CODE
+AND QUO_PROD_CODE=PROD_CODE
+AND QUO_CODE = :UP_QUO_CODE
+]]>
+</sqlStatement>
+
+<sqlStatement name="Q_3"> 
+<![CDATA[
+--QUOTATION COVER MEMBERS.
+
+SELECT ROWNUM SN,CVT_SHT_DESC,CVT_DESC,MEM_NO, MEM_SURNAME||' '||MEM_OTHER_NAMES MEMBER,MEM_SEX,QMEM_ANB,LCA_CATEG_DESC,QCM_EARNINGS, 
+NVL(QCM_MULT_EARNINGS_PRD,0)QCM_MULT_EARNINGS_PRD,NVL(QCM_SA,0)+NVL(QCMC_SA,0)QCM_SA,
+NVL(QCM_PREMIUM,0)+NVL(QCMC_PREMIUM,0)QCM_PREMIUM, :V_APPLY_RATES APPLY_RATES, QCM_RATE PCM_RATE,
+TO_CHAR(MEM_DOB,'DD-Mon-RRRR')MEM_DOB,reports_parameters.getMedicalGroup(NVL(QCM_SA,0)+NVL(QCMC_SA,0),nvl(QUO_OVERRIDE_FCL_AMT,QUO_FCL_AMT),QMEM_ANB,QUO_EFFECTIVE_DATE)MED_GRP
+from LMS_QUOTATION_MEMBERS,LMS_MEMBERS,LMS_QUOTATIONS,LMS_QUOTATION_CATEGORIES,
+LMS_QUOT_MEMBER_CVT, LMS_QUOT_COIN_MEMBER_CVTS,LMS_QUOTATION_COVER_TYPES,lms_cover_types
+WHERE QMEM_MEM_CODE=MEM_CODE
+AND QCM_QMEM_CODE=QMEM_CODE
+AND QMEM_QUO_CODE=QUO_CODE
+AND QCM_QUO_CODE=QUO_CODE
+AND NVL(LCA_CODE(+),0) = NVL(QMEM_LCA_CODE,0)
+AND QCM_CODE = QCMC_QCM_CODE(+)
+AND QUO_CODE=:UP_QUO_CODE
+AND QCM_QCVT_CODE = QCVT_CODE
+AND QCVT_QUO_CODE = QUO_CODE
+AND cvt_code = qcm_qcvt_cvt_code
+AND lca_code = NVL(:V_PCA_CODE, lca_code)
+ORDER BY QMEM_MEM_NO ASC
+]]>
+</sqlStatement>
+<sqlStatement name="Q_4">
+<![CDATA[
+ --Express Life Quotation Schedule
+SELECT GOC_CLASS,GCO_DESC ,GOC_CATEGORY,MEM_SURNAME||' '||MEM_OTHER_NAMES NAMES,
+MEM_SEX,QMEM_ANB,TO_CHAR(MEM_DOB,'Month dd,RRRR')DOB,QCM_EARNINGS,
+LMS_REPORTS_PKG.get_category_multiples(QUO_CODE,'Q') QCM_MULT_EARNINGS_PRD,
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'GLIFE',QCM_SA)),0)"GL_SA",
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'FE',QCM_SA)),0)"FE_SA",
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'PTD_G',QCM_SA)),0)"PTD_SA",
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'MER',QCM_SA)),0)"MED_SA",
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'CI_G',QCM_SA)),0)"CI_G_SA",
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'GLIFE',QCM_PREMIUM)),0)"GL_PREM",
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'FE',QCM_PREMIUM)),0)"FE_G_PREM",
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'PTD_G',QCM_PREMIUM)),0)"PTD_PREM",
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'MED',QCM_PREMIUM)),0)"MED_PREM",
+    NVL(SUM(decode(QCVT_CVT_SHT_DESC,'CI_G',QCM_PREMIUM)),0)"CI_G_PREM",
+    DECODE(LEAST(SUM(decode(QCVT_CVT_SHT_DESC,'GL',QCM_SA)),QUO_OVERRIDE_FCL_AMT),QUO_OVERRIDE_FCL_AMT,'Yes','No')ABOVE_FCL,
+    NVL(QUO_CUR_SYMBOL,tqc_interfaces_pkg.currencyname(tqc_interfaces_pkg.orgcurrency(27),'S')) CURRENCY,
+    NVL(QUO_OVERRIDE_FCL_AMT,0)FCL,QUO_CODE,QUO_NOF_MEMBERS,
+    TO_CHAR(QUO_DATE,'Month dd,RRRR')QUO_DATE,TO_CHAR(QUO_EFFECTIVE_DATE,'Month dd,RRRR')QUO_EFFECTIVE_DATE
+FROM LMS_QUOTATIONS,LMS_QUOTATION_MEMBERS,LMS_MEMBERS,
+LMS_GRP_CLASS_OCCUPATIONS,LMS_GRP_OCCUPATION_CATEGORIES,LMS_QUOT_MEMBER_CVT,
+LMS_QUOTATION_COVER_TYPES,LMS_QUOTATION_CATEGORIES
+WHERE QMEM_QUO_CODE=QUO_CODE
+AND QMEM_MEM_CODE=MEM_CODE
+AND QMEM_GCO_CODE(+)=GCO_CODE
+AND GCO_CODE(+)=GOC_GCO_CODE
+AND QCM_QMEM_CODE=QMEM_CODE
+AND QCM_QUO_CODE=QUO_CODE
+AND QCVT_QUO_CODE=QUO_CODE
+AND QCM_QCVT_CODE=QCVT_CODE
+AND QMEM_LCA_CODE=LCA_CODE
+AND LCA_CATEG_DESC=GOC_CATEGORY
+AND QUO_CODE=:UP_QUO_CODE
+GROUP BY(GOC_CLASS,GCO_DESC ,GOC_CATEGORY,MEM_SURNAME||' '||MEM_OTHER_NAMES,
+        MEM_SEX,QMEM_ANB,MEM_DOB,QCM_EARNINGS,QUO_OVERRIDE_FCL_AMT,
+        QUO_CUR_SYMBOL,QUO_DATE,QUO_EFFECTIVE_DATE,QUO_CODE,QUO_NOF_MEMBERS)
+]]>
+</sqlStatement>
+
+            </dataQuery>
+        <dataStructure>
+		<group name="G_ORG" dataType="varchar2" source="Q_1">
+        <element name="ORGANIZATION" dataType="varchar2" value="ORGANIZATION"/>
+        <element name="YEA" dataType="varchar2" value="YEA"/>
+        <element name="HOURS" dataType="varchar2" value="HOURS"/>
+		<element name="ORGANIZATION" dataType="varchar2" value="ORGANIZATION"/>
+        <element name="ORG_PHY_ADDRS" dataType="varchar2" value="ORG_PHY_ADDRS"/>
+        <element name="POSTALADDRESS" dataType="varchar2" value="POSTALADDRESS"/>
+		<element name="TELEPHONE" dataType="varchar2" value="TELEPHONE"/>
+        <element name="FAX" dataType="varchar2" value="FAX"/>
+        <element name="EMAIL" dataType="varchar2" value="EMAIL"/>
+        <element name="WEB" dataType="varchar2" value="WEB"/>    
+      	<element name="LOGO" dataType="longRaw" value="LOGO"/>       	
+    </group>
+	 <group name="G_POLICY_COVERS" dataType="varchar2" source="Q_2">
+        <element name="QUO_CODE" dataType="number" value="QUO_CODE"/>
+        <element name="QUO_NO" dataType="varchar2" value="QUO_NO"/>
+        <element name="CLIENT" dataType="varchar2" value="CLIENT"/>
+        <element name="AGN_NAME" dataType="varchar2" value="AGN_NAME"/>
+        <element name="BRN_NAME" dataType="varchar2" value="BRN_NAME"/>
+        <element name="QUO_NOF_MEMBERS" dataType="number" value="QUO_NOF_MEMBERS"/>
+        <element name="SCHEME" dataType="varchar2" value="SCHEME"/>
+        <element name="QUO_EFFECTIVE_DATE" dataType="date" value="QUO_EFFECTIVE_DATE"/>
+        <element name="COVER_TO_DATE" dataType="date" value="COVER_TO_DATE"/>
+        <element name="COVER_FROM_DATE" dataType="date" value="COVER_FROM_DATE"/>
+        <element name="RUNDATE" dataType="date" value="RUNDATE"/>
+        <element name="QCVT_CODE" dataType="number" value="QCVT_CODE"/>
+        <element name="QCVT_CVT_CODE" dataType="number" value="QCVT_CVT_CODE"/>
+        <element name="FCL" dataType="number" value="FCL"/>
+        <element name="PROD_DESC" dataType="varchar2" value="PROD_DESC"/>
+        <element name="NRA" dataType="varchar2" value="NRA"/>
+        <element name="CATEGORY_MULTI" dataType="varchar2" value="CAT_MULTI"/>
+        <element name="CURRENCY" dataType="varchar2" value="currency"/>        
+        <element name="SUM_PCM_EARNINGS" function="sum" dataType="number" value="G_POL_COVER_MEMBERS.QCM_EARNINGS"/>
+        <element name="SUM_PCM_SA" function="sum" dataType="number" value="G_POL_COVER_MEMBERS.QCM_SA"/>
+        <element name="SUM_PCMPREMIUM" function="sum" dataType="number" value="G_POL_COVER_MEMBERS.QCM_PREMIUM"/>
+        
+        
+  <group name="G_POL_COVER_MEMBERS" dataType="varchar2" source="Q_3">
+        <element name="SN" dataType="varchar2" value="SN"/>
+        <element name="MEM_NO" dataType="varchar2" value="MEM_NO"/>
+        <element name="MEMBER" dataType="varchar2" value="MEMBER"/>
+        <element name="MEM_SEX" dataType="varchar2" value="MEM_SEX"/>
+        <element name="QMEM_ANB" dataType="number" value="QMEM_ANB"/>
+		<element name="CVT_DESC" dataType="number" value="CVT_DESC"/>
+        <element name="LCA_CATEG_DESC" dataType="varchar2" value="LCA_CATEG_DESC"/>
+        <element name="QCM_EARNINGS" dataType="number" value="QCM_EARNINGS"/>
+        <element name="QCM_MULT_EARNINGS_PRD" dataType="number" value="QCM_MULT_EARNINGS_PRD"/>
+        <element name="QCM_SA" dataType="number" value="QCM_SA"/>
+        <element name="QCM_PREMIUM" dataType="number" value="QCM_PREMIUM"/>
+        <element name="PCM_RATE" dataType="number" value="PCM_RATE"/>
+        <element name="APPLY_RATES" dataType="varchar2" value="APPLY_RATES"/>
+        <element name="MEM_DOB" dataType="varchar2" value="MEM_DOB"/>
+        <element name="MED_GRP" dataType="varchar2" value="MED_GRP"/>
+  
+        </group>
+     </group>
+   <group name="ROLA" dataType="varchar2" source="Q_4">
+    <element name="CLASS" dataType="varchar2" value="GOC_CLASS"/>
+    <element name="INDUSTRY" dataType="varchar2" value="GCO_DESC"/>
+    <element name="OCCUPATION" dataType="varchar2" value="GOC_CATEGORY"/>
+    <element name="MEMBER_NAME" dataType="varchar2" value="NAMES"/>
+    <element name="MEMBER_CODE" dataType="varchar2" value="MEM_NO"/>
+    <element name="DOB" dataType="varchar2" value="DOB"/>
+    <element name="ANB" dataType="varchar2" value="QMEM_ANB"/>
+    <element name="ANNUAL_SAL" dataType="number" value="QCM_EARNINGS"/>
+    <element name="GL_SA" dataType="number" value="GL_SA"/>
+    <element name="FE_SA" dataType="number" value="FE_SA"/>
+    <element name="PTD_SA" dataType="number" value="PTD_SA"/>
+    <element name="MED_SA" dataType="number" value="MED_SA"/>  
+    <element name="CI_G_SA" dataType="number" value="CI_G_SA"/>  
+    <element name="GL_PREM" dataType="number" value="GL_PREM"/>  
+    <element name="FE_G_PREM" dataType="number" value="FE_G_PREM"/> 
+    <element name="CI_G_PREM" dataType="number" value="CI_G_PREM"/> 
+    <element name="PTD_PREM" dataType="number" value="PTD_PREM"/> 
+    <element name="MED_PREM" dataType="number" value="MED_PREM"/>
+    <element name="FCL" dataType="varchar2" value="FCL"/>
+    <element name="SEX" dataType="varchar2" value="MEM_SEX"/> 
+    <element name="QUO_DATE" dataType="varchar2" value="QUO_DATE"/> 
+    <element name="QUO_EFFECTIVE_DATE" dataType="varchar2" value="QUO_EFFECTIVE_DATE"/>  
+    <element name="CURRENCY" dataType="varchar2" value="CURRENCY"/> 
+    <element name="ABOVE_FCL" dataType="varchar2" value="ABOVE_FCL"/> 
+    <element name="EARN_MULTI" dataType="varchar2" value="QCM_MULT_EARNINGS_PRD"/> 
+</group>
+       
+			
+     </dataStructure>
+</dataTemplate>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="createClientPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findClientOccupations.result" DataControl="ClientDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Clients.Client"
+                    id="findClientOccupationsIterator"/>
+    <searchRegion Binds="findClientOccupationsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ClientQuery"/>
+    <methodIterator Binds="findSimilarClients.result" DataControl="ClientDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Clients.Client"
+                    id="findSimilarClientsIterator"/>
+    <methodIterator Binds="findAllClients.result" DataControl="ClientDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Clients.Client"
+                    id="findAllClientsIterator"/>
+    <searchRegion Binds="findAllClientsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Client2Query"/>
+    <methodIterator Binds="findCountries.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="findCountriesIterator"/>
+    <searchRegion Binds="findCountriesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+    <methodIterator Binds="findTowns.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="findTownsIterator"/>
+    <searchRegion Binds="findTownsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings1Query"/>
+    <methodIterator Binds="FindSysDate.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSysDateIterator"/>
+    <methodIterator Binds="findTicketAssignee.result" DataControl="workflowDAO"
+                    RangeSize="25" BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketAssigneeIterator"/>
+    <invokeAction Binds="Authenticate" id="Auth" Refresh="always"/>
+    <methodIterator Binds="FindStates.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindStatesIterator"/>
+    <searchRegion Binds="FindStatesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings2Query"/>
+    <methodIterator Binds="FindBranches.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindBranchesIterator"/>
+    <searchRegion Binds="FindBranchesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings3Query"/>
+    <methodIterator Binds="findContactPersons.result" DataControl="ClientDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Clients.Client"
+                    id="findContactPersonsIterator"/>
+    <searchRegion Binds="findContactPersonsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Client3Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findClientOccupations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClientOccupations"
+                  IsViewObjectMethod="false" DataControl="ClientDAO"
+                  InstanceName="ClientDAO.dataProvider"
+                  ReturnName="ClientDAO.methodResults.findClientOccupations_ClientDAO_dataProvider_findClientOccupations_result"/>
+    <tree IterBinding="findClientOccupationsIterator" id="Client">
+      <nodeDefinition DefName="LMSG.view.Clients.Client" Name="Client0">
+        <AttrNames>
+          <Item Value="occupationCode"/>
+          <Item Value="occupationalDesc"/>
+          <Item Value="lifeClass"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSimilarClients" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSimilarClients"
+                  IsViewObjectMethod="false" DataControl="ClientDAO"
+                  InstanceName="ClientDAO.dataProvider"
+                  ReturnName="ClientDAO.methodResults.findSimilarClients_ClientDAO_dataProvider_findSimilarClients_result"/>
+    <tree IterBinding="findSimilarClientsIterator" id="Client1">
+      <nodeDefinition DefName="LMSG.view.Clients.Client" Name="Client10">
+        <AttrNames>
+          <Item Value="clientCode"/>
+          <Item Value="PINNumber"/>
+          <Item Value="postalAddress"/>
+          <Item Value="telphoneOne"/>
+          <Item Value="othernames"/>
+          <Item Value="fullname"/>
+          <Item Value="idRegNumber"/>
+          <Item Value="shortDescription"/>
+          <Item Value="ZIPCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAllClients" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAllClients"
+                  IsViewObjectMethod="false" DataControl="ClientDAO"
+                  InstanceName="ClientDAO.dataProvider"
+                  ReturnName="ClientDAO.methodResults.findAllClients_ClientDAO_dataProvider_findAllClients_result"/>
+    <tree IterBinding="findAllClientsIterator" id="Client2">
+      <nodeDefinition DefName="LMSG.view.Clients.Client" Name="Client20">
+        <AttrNames>
+          <Item Value="clientCode"/>
+          <Item Value="othernames"/>
+          <Item Value="fullname"/>
+          <Item Value="postalAddress"/>
+          <Item Value="PINNumber"/>
+          <Item Value="telphoneOne"/>
+          <Item Value="idRegNumber"/>
+          <Item Value="shortDescription"/>
+          <Item Value="ZIPCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCountries" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCountries"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.findCountries_SettingsDAO_dataProvider_findCountries_result"/>
+    <tree IterBinding="findCountriesIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="countryCode"/>
+          <Item Value="countryShtDesc"/>
+          <Item Value="countryName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTowns" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTowns"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.findTowns_SettingsDAO_dataProvider_findTowns_result"/>
+    <tree IterBinding="findTownsIterator" id="Settings1">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings10">
+        <AttrNames>
+          <Item Value="townCode"/>
+          <Item Value="postalDesc"/>
+          <Item Value="townShtDesc"/>
+          <Item Value="townName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindSysDate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSysDate"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSysDate_SettingsDAO_dataProvider_FindSysDate_result"/>
+    <attributeValues IterBinding="FindSysDateIterator" id="sysDate">
+      <AttrNames>
+        <Item Value="sysDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findTicketAssignee" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketAssignee"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketAssignee_workflowDAO_dataProvider_findTicketAssignee_result"/>
+    <tree IterBinding="findTicketAssigneeIterator" id="workflow">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow0">
+        <AttrNames>
+          <Item Value="taskUserID"/>
+          <Item Value="taskUserShtDesc"/>
+          <Item Value="taskUserDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="FindStates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindStates"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindStates_SettingsDAO_dataProvider_FindStates_result"/>
+    <tree IterBinding="FindStatesIterator" id="Settings2">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings20">
+        <AttrNames>
+          <Item Value="STS_SHT_DESC"/>
+          <Item Value="STS_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindBranches"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindBranches_SettingsDAO_dataProvider_FindBranches_result"/>
+    <tree IterBinding="FindBranchesIterator" id="Settings3">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings30">
+        <AttrNames>
+          <Item Value="BRN_CODE"/>
+          <Item Value="BRN_SHT_DESC"/>
+          <Item Value="BRN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findContactPersons" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findContactPersons"
+                  IsViewObjectMethod="false" DataControl="ClientDAO"
+                  InstanceName="ClientDAO.dataProvider"
+                  ReturnName="ClientDAO.methodResults.findContactPersons_ClientDAO_dataProvider_findContactPersons_result"/>
+    <tree IterBinding="findContactPersonsIterator" id="Client3">
+      <nodeDefinition DefName="LMSG.view.Clients.Client" Name="Client30">
+        <AttrNames>
+          <Item Value="pctcCode"/>
+          <Item Value="pctcName"/>
+          <Item Value="pctcDob"/>
+          <Item Value="pctcPhyAddr"/>
+          <Item Value="pctcPostAddr"/>
+          <Item Value="pctcTel"/>
+          <Item Value="pctcEmail"/>
+          <Item Value="pctcWef"/>
+          <Item Value="pctcWet"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

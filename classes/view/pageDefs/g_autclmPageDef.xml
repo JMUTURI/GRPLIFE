@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="g_autclmPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsIterator"/>
+   <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+    <methodIterator Binds="FindClaimAuthorisation.result"
+                    DataControl="ClaimsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimAuthorisationIterator"/>
+ <searchRegion Binds="FindClaimAuthorisationIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="claimsAuthorisedQuery"/>
+   
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="productDetails">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodCode"/>
+          <Item Value="prodDesc"/>
+          <Item Value="prodshtDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClaimAuthorisation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimAuthorisation"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimAuthorisation_ClaimsDAO_dataProvider_FindClaimAuthorisation_result"/>
+    <tree IterBinding="FindClaimAuthorisationIterator" id="Claim">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim0">
+        <AttrNames>
+          <Item Value="LTR_CLM_NO"/>
+          <Item Value="LTR_POL_POLICY_NO"/>
+          <Item Value="LTR_TRANS_NO"/>
+          <Item Value="MEM_NO_DISP"/>
+          <Item Value="LTR_DONE_BY"/>
+          <Item Value="MEM_NAME_DISP"/>
+          <Item Value="LTR_POL_CODE"/>
+          <Item Value="LTR_MEM_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    
+  </bindings>
+</pageDefinition>

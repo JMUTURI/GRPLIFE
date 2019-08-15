@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="prod_cvt_loadingsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findPremiumRates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findPremiumRatesIterator"/>
+    <methodIterator Binds="findProductDependants.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductDependantsIterator"/>
+    <methodIterator Binds="findLifeClasses.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findLifeClassesIterator"/>
+    <methodIterator Binds="findPremiumRateTerms.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findPremiumRateTermsIterator"/>
+    <methodIterator Binds="findPremiumInterestRates.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findPremiumInterestRatesIterator"/>
+    <methodIterator Binds="FindSysDate.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSysDateIterator"/>
+    <methodIterator Binds="findAllProductsAndMasks.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findAllProductsAndMasksIterator"/>
+    <methodIterator Binds="findSchClasses.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findSchClassesIterator"/>
+    <searchRegion Binds="findSchClassesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SetupQuery"/>
+    <methodIterator Binds="findImportLoadingTemplate.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findImportLoadingTemplateIterator"/>
+    <methodIterator Binds="findImportLoadingRates.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findImportLoadingRatesIterator"/>
+    <searchRegion Binds="findImportLoadingRatesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup8Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findAllProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAllProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findAllProducts_SetupsDAO_dataProvider_findAllProducts_result"/>
+    <methodAction id="findPremiumRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findPremiumRates_SetupsDAO_dataProvider_findPremiumRates_result"/>
+    <methodAction id="findProductDependants" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductDependants"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProductDependants_SetupsDAO_dataProvider_findProductDependants_result"/>
+    <tree IterBinding="findProductDependantsIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="PCD_PROD_DESC"/>
+          <Item Value="PCD_DTY_DESCRIPTION"/>
+          <Item Value="PCD_PCT_CODE"/>
+          
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findLifeClasses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findLifeClasses"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findLifeClasses_SetupsDAO_dataProvider_findLifeClasses_result"/>
+    <tree IterBinding="findLifeClassesIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="LC_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPremiumRateTerms" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumRateTerms"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findPremiumRateTerms_SetupsDAO_dataProvider_findPremiumRateTerms_result"/>
+    <tree IterBinding="findPremiumRateTermsIterator" id="Setup4">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup40">
+        <AttrNames>
+          <Item Value="GRPT_TERM_FROM"/>
+          <Item Value="GRPT_TERM_TO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPremiumInterestRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumInterestRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findPremiumInterestRates_SetupsDAO_dataProvider_findPremiumInterestRates_result"/>
+    <tree IterBinding="findPremiumRatesIterator" id="Setup6">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup60">
+        <AttrNames>
+          <Item Value="GPR_ANB_FROM"/>
+          <Item Value="GPR_ANB_TO"/>
+          <Item Value="GPR_RANGE_FROM"/>
+          <Item Value="GPR_RANGE_TO"/>
+          <Item Value="GPR_RATE"/>
+          <Item Value="GPR_ANNUAL_RATE"/>
+          <Item Value="GPR_SINGLE_RATE"/>
+          <Item Value="GPR_RATE_DESC"/>
+          <Item Value="GPR_DIVISION_FACTOR"/>
+          <Item Value="GPR_RATE_TYPE_DESC"/>
+          <Item Value="GPR_PRORATED_FULL"/>
+          <Item Value="GPR_MULTIPLIER_RATE"/>
+          <Item Value="GPR_MULTPLIER_DIV_FACT"/>
+          <Item Value="GPR_CONSTANT"/>
+          <Item Value="GPR_CONSTANT_DIV_FACT"/>
+          <Item Value="GPR_NORMAL_REFUND_DESC"/>
+          <Item Value="GPR_WEF"/>
+          <Item Value="GPR_WET"/>
+          <Item Value="CLA_CODE"/>
+          <Item Value="CVT_PAY_BEN_DESC"/>
+          <Item Value="GPR_SEX"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPremiumMasks" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMasks"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findPremiumMasks_SetupsDAO_dataProvider_findPremiumMasks_result"/>
+    <methodAction id="FindSysDate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSysDate"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSysDate_SettingsDAO_dataProvider_FindSysDate_result"/>
+    <attributeValues IterBinding="FindSysDateIterator" id="sysDate">
+      <AttrNames>
+        <Item Value="sysDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findAllProductsAndMasks" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAllProductsAndMasks"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findAllProductsAndMasks_SetupsDAO_dataProvider_findAllProductsAndMasks_result"/>
+    <tree IterBinding="findAllProductsAndMasksIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="premiumMaskItem"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="LMSG.view.setups.PremiumMaskItems"
+                      Name="Setup11">
+        <AttrNames>
+          <Item Value="PMAS_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSchClasses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSchClasses"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findSchClasses_SetupsDAO_dataProvider_findSchClasses_result"/>
+    <tree IterBinding="findSchClassesIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="SCH_SHT_DESC"/>
+          <Item Value="SCH_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findPremiumInterestRatesIterator" id="Setup7">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup70">
+        <AttrNames>
+          <Item Value="GPIR_RATE_FROM"/>
+          <Item Value="GPIR_RATE_TO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findImportLoadingTemplate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findImportLoadingTemplate"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findImportLoadingTemplate_SetupsDAO_dataProvider_findImportLoadingTemplate_result"/>
+    <tree IterBinding="findImportLoadingTemplateIterator" id="Setup5">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup50">
+        <AttrNames>
+          <Item Value="PCTL_CODE"/>
+          <Item Value="PCTL_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findImportLoadingRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findImportLoadingRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findImportLoadingRates_SetupsDAO_dataProvider_findImportLoadingRates_result"/>
+    <tree IterBinding="findImportLoadingRatesIterator" id="Setup8">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup80">
+        <AttrNames>
+          <Item Value="GLR_ANB_FROM"/>
+          <Item Value="GLR_ANB_TO"/>
+          <Item Value="GLR_CLASS"/>
+          <Item Value="GLR_RANGE_FROM"/>
+          <Item Value="GLR_RANGE_TO"/>
+          <Item Value="GLR_RATE"/>
+          <Item Value="GLR_DIV_FACT"/>
+          <Item Value="GLR_SEX"/>
+          <Item Value="GLR_WEF"/>
+          <Item Value="GLR_WET"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>
+

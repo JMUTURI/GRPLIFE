@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelBox text="Cover Type Provisions"
+                     inlineStyle="width:573px; height:300px;" id="pb1">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="1" width="20%" id="pg1">
+            <af:table value="#{bindings.quotCoverTypes.collectionModel}"
+                      var="row" rows="#{bindings.quotCoverTypes.rangeSize}"
+                      emptyText="#{bindings.quotCoverTypes.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.quotCoverTypes.rangeSize}"
+                      selectedRowKeys="#{bindings.quotCoverTypes.collectionModel.selectedRow}"
+                      selectionListener="#{manipulation.GetProvisionCover}"
+                      rowSelection="single" inlineStyle="height:100px;"
+                      width="296" binding="#{manipulation.coverProvisionsLOV}"
+                      id="t1">
+              <af:column sortProperty="quocvtShtDesc" sortable="true"
+                         headerText="COVER ID" id="c1">
+                <af:outputText value="#{row.quocvtShtDesc}" id="ot1"/>
+              </af:column>
+              <af:column sortProperty="cover_display" sortable="true"
+                         headerText="COVER" width="200" id="c2">
+                <af:outputText value="#{row.cover_display}" id="ot2"/>
+              </af:column>
+            </af:table>
+          </h:panelGrid>
+          <h:panelGrid columns="3" width="10%" id="pg2">
+            <af:commandButton text="Add" id="cb1">
+              <af:showPopupBehavior popupId="ProvisionsPopup"/>
+            </af:commandButton>
+            <af:commandButton text="Edit" id="cb2">
+              <af:showPopupBehavior popupId="ProvisionsPopup"/>
+            </af:commandButton>
+            <af:popup id="ProvisionsPopup">
+              <af:dialog type="none" title="Enter Product Provisions" id="d2">
+                <h:panelGrid columns="3" id="pg3">
+                  <af:outputLabel value="ID" id="ol1"/>
+                  <af:inputText label="Label 1" columns="25" simple="true"
+                                binding="#{manipulation.provID}" id="it1"/>
+                  <h:panelGrid columns="2" id="pg4">
+                    <af:commandButton icon="/dropdown.gif" id="cb3">
+                      <af:showPopupBehavior popupId="provPopup"/>
+                    </af:commandButton>
+                    <af:popup id="provPopup">
+                      <af:dialog type="none" title="Select Product Provision"
+                                 id="d3">
+                        <af:table value="#{bindings.productProvisions.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.productProvisions.rangeSize}"
+                                  emptyText="#{bindings.productProvisions.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.productProvisions.rangeSize}"
+                                  selectedRowKeys="#{bindings.productProvisions.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.productProvisions.collectionModel.makeCurrent}"
+                                  rowSelection="single"
+                                  inlineStyle="height:123px;"
+                                  binding="#{manipulation.productProvisionsLOV}"
+                                  width="353" id="t2">
+                          <af:column sortProperty="PROV_SHT_DESC"
+                                     sortable="true" headerText="DESCRIPTION"
+                                     id="c3">
+                            <af:outputText value="#{row.PROV_SHT_DESC}"
+                                           id="ot3"/>
+                          </af:column>
+                          <af:column sortProperty="PROV_DESC" sortable="true"
+                                     headerText="PROVISION" id="c4">
+                            <af:outputText value="#{row.PROV_DESC}" id="ot4"/>
+                          </af:column>
+                          <af:column sortProperty="PPROV_EDITABLE"
+                                     sortable="true" headerText="EDITABLE"
+                                     width="140" id="c5">
+                            <af:outputText value="#{row.PPROV_EDITABLE}"
+                                           id="ot5"/>
+                          </af:column>
+                        </af:table>
+                        <af:commandButton text="OK"
+                                          action="#{manipulation.AssignProvision}"
+                                          id="cb4"/>
+                        <af:commandButton text="Cancel" id="cb5"/>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:outputLabel value="Provisions" id="ol2"/>
+                  <af:inputText label="Label 2" simple="true" columns="25"
+                                binding="#{manipulation.provisions}" id="it2"/>
+                  <af:outputText id="ot6"/>
+                  <af:outputLabel value="Editable" id="ol3"/>
+                  <af:selectOneChoice label="Label 1" simple="true"
+                                      autoSubmit="true"
+                                      binding="#{manipulation.provEditable}"
+                                      id="soc1">
+                    <af:selectItem label="Yes" value="Y" id="si1"/>
+                    <af:selectItem label="No" value="N" id="si2"/>
+                  </af:selectOneChoice>
+                  <af:outputText id="ot7"/>
+                  <af:commandButton text="OK"
+                                    action="#{manipulation.AssignProductProvisions}"
+                                    id="cb6"/>
+                  <af:commandButton text="Cancel" id="cb7"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+          </h:panelGrid>
+          <h:panelGrid columns="1" width="10%" id="pg5">
+            <af:table value="#{bindings.quotationProvision.collectionModel}"
+                      var="row" rows="#{bindings.quotationProvision.rangeSize}"
+                      emptyText="#{bindings.quotationProvision.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.quotationProvision.rangeSize}"
+                      selectedRowKeys="#{bindings.quotationProvision.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.quotationProvision.collectionModel.makeCurrent}"
+                      rowSelection="single" inlineStyle="height:122px;"
+                      width="343" binding="#{manipulation.coverTypeProvisions}"
+                      id="t3">
+              <af:column sortProperty="quotProvshtDesc" sortable="true"
+                         headerText="DESCRIPTION" width="150" id="c6">
+                <af:outputText value="#{row.quotProvshtDesc}" id="ot8"/>
+              </af:column>
+              <af:column sortProperty="quotProvDesc" sortable="true"
+                         headerText="PROVISION" width="150" id="c7">
+                <af:outputText value="#{row.quotProvDesc}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="quotProvEditable" sortable="true"
+                         headerText="EDITABLE" id="c8">
+                <af:outputText value="#{row.quotProvEditable}" id="ot10"/>
+              </af:column>
+              <af:column id="c9">
+                <af:commandButton icon="/icon_delete.gif"
+                                  action="#{manipulation.DeleteCoverProvision}"
+                                  id="cb8"/>
+              </af:column>
+            </af:table>
+          </h:panelGrid>
+          <h:panelGrid columns="2" width="10%" id="pg6">
+            <af:commandButton text="Next"
+                              action="#{manipulation.ShowAddMembers}" id="cb9"/>
+            <af:commandButton text="Cancel" id="cb10"/>
+          </h:panelGrid>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

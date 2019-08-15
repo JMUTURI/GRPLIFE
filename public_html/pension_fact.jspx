@@ -1,0 +1,955 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Pension Costing Factors" id="d1">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+           <af:popup id="confirmDelete">
+                          <af:dialog id="delete_dialog" title="Confirm Delete Action"
+                                         type="yesNo"
+                                     dialogListener="#{agents.actionConfirmDelete}">
+                                <af:outputText value="Are you sure you want to delete the selected row?"
+                                               id="delete_outtxt"/>
+                              </af:dialog>
+                            </af:popup>
+       <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:inputText id="it3" simple="false"
+                            helpTopicId="LmsGrp_pencfac" readOnly="true"/>
+              <af:outputLabel value="PENSION COSTING FACTORS" id="ol3"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator id="s1"/>
+              <af:panelBox text="PanelBox1" id="pb1" showHeader="never">
+                <f:facet name="toolbar"/>
+                <af:panelSplitter id="ps1"
+                                  inlineStyle="width:100%; height:370.0px;">
+                  <f:facet name="first">                 
+                    <af:tree value="#{bindings.Setup.treeModel}" var="node"
+                             selectionListener="#{agents.pensionProductsListener}"
+                             rowSelection="single" id="t1"
+                             binding="#{agents.pensionProductsTree}">
+                      <f:facet name="nodeStamp">
+                        <af:outputText value="#{node.PROD_DESC}" id="ot2"/>
+                      </f:facet>
+                    </af:tree>
+                  </f:facet>
+                  <f:facet name="second">
+                    <af:panelTabbed id="pt1"
+                                    inlineStyle="width:100%; height:360.0px;">                                    
+                                    
+                      <af:showDetailItem text="Benefit Costing Factors" id="sdi1"
+                                         inlineStyle="width:100.0%;">
+                         
+                        <af:panelGroupLayout id="pgl3" layout="scroll">
+                          <af:panelBox text="PanelBox2" id="pb3"
+                                       showHeader="never">
+                            <f:facet name="toolbar"/>
+                            <h:panelGrid columns="3" id="pg1">
+                              <af:commandButton id="cb1"
+                                                icon="/images/field_group_plus_ena.png"
+                                                action="#{agents.AddpensionCostingFactors}"/>
+                              <af:commandButton id="cb2"
+                                                icon="/images/update_ena.png"
+                                                action="#{agents.EditPensionCostingFactors}"/>
+                              <af:commandButton id="cb3"
+                                                icon="/images/delete.gif"
+                                              action="#{agents.performPensionCostingFactorsDelete}"/>
+                              <af:popup id="pensionCostingFactorsPopup">
+                                <af:dialog id="d2" type="none"
+                                           title="Add/Edit Pension Costing Factors">
+                                  <af:panelBox text="PanelBox3" id="pb4"
+                                               showHeader="never">
+                                    <f:facet name="toolbar"/>
+                                    <h:panelGrid columns="2" id="pg2">
+                                      <af:outputLabel value="Escalation"
+                                                      id="ol1"/>
+                                      <af:inputText label="Label 1" id="it1"
+                                                    simple="true"
+                                                    binding="#{agents.pcfsEscalation}"
+                                                    shortDesc="Escalation %"/>
+                                      <af:outputLabel value="Interest"
+                                                      id="ol2"/>
+                                      <af:inputText label="Label 2" id="it2"
+                                                    simple="true"
+                                                    binding="#{agents.pcfsInterest}"
+                                                    shortDesc="Interest Rate"/>
+                                      <af:outputLabel value="Withholding Rate"
+                                                      id="ol4"/>
+                                      <af:inputText label="Label 3" id="it4"
+                                                    simple="true"
+                                                    binding="#{agents.pcfsWithholdingRate}"
+                                                    shortDesc="Pensions Retirement Withholding Rate"/>
+                                      <af:outputLabel value="Withholding Rate Type"
+                                                      id="ol5"/>
+                                      <af:selectOneChoice label="Label 1"
+                                                          id="soc1"
+                                                          shortDesc="Withholding Rate Type"
+                                                          simple="true"
+                                                          autoSubmit="true"
+                                                          binding="#{agents.withholdingRateType}">
+                                        <af:selectItem label="Percentile"
+                                                       value="PCT" id="si1"/>
+                                        <af:selectItem label="Mille" value="MIL"
+                                                       id="si2"/>
+                                      </af:selectOneChoice>
+                                      <af:outputLabel value="Pensions Division Factor"
+                                                      id="ol6"/>
+                                      <af:inputText label="Label 4" id="it5"
+                                                    simple="true"
+                                                    binding="#{agents.pcfsDivisionFactor}"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" id="pg14">
+                                      <af:commandButton text="OK" id="cb4"
+                                                        action="#{agents.SavePensionCostingFactors}"/>
+                                      <af:commandButton text="Cancel" id="cb5"/>
+                                    </h:panelGrid>
+                                  </af:panelBox>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                            <af:table value="#{bindings.pensionCostingFactors.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.pensionCostingFactors.rangeSize}"
+                                      emptyText="#{bindings.pensionCostingFactors.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.pensionCostingFactors.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectionListener="#{agents.costingFactorsListener}"
+                                      rowSelection="single" id="t2"
+                                      inlineStyle="width:100%; height:100px; border-style:none;"
+                                      binding="#{agents.pensionCostingFactorsLOV}">
+                              <af:column sortProperty="pcfsRateType"
+                                         sortable="true"
+                                         headerText="#{bindings.pensionCostingFactors.hints.pcfsRateType.label}"
+                                         id="c5" visible="false">
+                                <af:outputText value="#{row.pcfsRateType}"
+                                               id="ot5"/>
+                              </af:column>
+                              <af:column sortProperty="pcfsCode" sortable="true"
+                                         headerText="#{bindings.pensionCostingFactors.hints.pcfsCode.label}"
+                                         id="c2" visible="false">
+                                <af:outputText value="#{row.pcfsCode}"
+                                               id="ot3"/>
+                              </af:column>
+                              <af:column sortProperty="pcfsEsca" sortable="true"
+                                         headerText="Escalation" id="c6">
+                                <af:outputText value="#{row.pcfsEsca}"
+                                               id="ot8"/>
+                              </af:column>
+                              <af:column sortProperty="pcfsInterest"
+                                         sortable="true" headerText="Interest"
+                                         id="c3">
+                                <af:outputText value="#{row.pcfsInterest}"
+                                               id="ot7"/>
+                              </af:column>
+                              <af:column sortProperty="pcfsWithRate"
+                                         sortable="true"
+                                         headerText="Withholding Rate" id="c7">
+                                <af:outputText value="#{row.pcfsWithRate}"
+                                               id="ot6"/>
+                              </af:column>
+                              <af:column sortProperty="pcfsRateTypeDesc"
+                                         sortable="true" headerText="Rate Type"
+                                         id="c4">
+                                <af:outputText value="#{row.pcfsRateTypeDesc}"
+                                               id="ot9"/>
+                              </af:column>
+                              <af:column sortProperty="pcfsDivFact"
+                                         sortable="true"
+                                         headerText="Division Factor" id="c1">
+                                <af:outputText value="#{row.pcfsDivFact}"
+                                               id="ot4"/>
+                              </af:column>
+                            </af:table>
+                            <af:outputLabel value="Benefit Discount &amp; Contribution Factors" id="ol30"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:separator id="s2"/>
+                            <h:panelGrid columns="3" id="panelGrid1">
+                              <af:commandButton id="commandButton1"
+                                                icon="/images/field_group_plus_ena.png"
+                                                action="#{agents.AddpensionCostingFactorRates}"/>
+                              <af:commandButton id="commandButton2"
+                                                icon="/images/update_ena.png"
+                                                action="#{agents.EditPensionCostingFactorRates}"/>
+                              <af:commandButton id="commandButton3"
+                                                icon="/images/delete.gif"
+                                                action="#{agents.performPensionCostingFactorRatesDelete}"/>
+                              <af:popup id="popup1">
+                                <af:dialog id="dialog1" type="none"
+                                           title="Pension Costing Factor Rates">
+                                  <af:panelBox text="PanelBox4" id="pb5"
+                                               showHeader="never">
+                                    <f:facet name="toolbar"/>
+                                    <h:panelGrid columns="2" id="panelGrid2">
+                                      <af:outputLabel value="Term From"
+                                                      id="outputLabel1"/>
+                                      <af:inputText label="Label 1"
+                                                    id="inputText1"
+                                                    simple="true"
+                                                    binding="#{agents.termFrom}"
+                                                    shortDesc="Escalation %"/>
+                                      <af:outputLabel value="Term To"
+                                                      id="outputLabel2"/>
+                                      <af:inputText label="Label 2"
+                                                    id="inputText2"
+                                                    simple="true"
+                                                    binding="#{agents.termTo}"
+                                                    shortDesc="Interest Rate"/>
+                                      <af:outputLabel value="Benefit Discount Factor"
+                                                      id="outputLabel3"/>
+                                      <af:inputText label="Label 3"
+                                                    id="inputText3"
+                                                    simple="true"
+                                                    binding="#{agents.benefitDiscount}"
+                                                    shortDesc="Pensions Retirement Withholding Rate"/>
+                                      <af:outputLabel value="Contribution Factor"
+                                                      id="outputLabel6"/>
+                                      <af:inputText label="Label 3"
+                                                    id="inputText5"
+                                                    simple="true"
+                                                    binding="#{agents.contriFactor}"
+                                                    shortDesc="Pensions Retirement Withholding Rate"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" id="pg15">
+                                      <af:commandButton text="OK"
+                                                        id="commandButton4"
+                                                        action="#{agents.savePensionCostingRates}"
+                                                        partialSubmit="true"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="commandButton5"/>
+                                    </h:panelGrid>
+                                  </af:panelBox>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                            <af:table value="#{bindings.pensionCostingFactors6.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.pensionCostingFactors6.rangeSize}"
+                                      emptyText="#{bindings.pensionCostingFactors6.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.pensionCostingFactors6.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.pensionCostingFactors6.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.pensionCostingFactors6.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t8"
+                                      binding="#{agents.pensionCostingRates}"
+                                      inlineStyle="width:100%; height:100px; border-style:none;">
+                              <af:column sortProperty="PCFR_CODE"
+                                         sortable="true" headerText="code"
+                                         id="c41" visible="false">
+                                <af:outputText value="#{row.PCFR_CODE}"
+                                               id="ot42"/>
+                              </af:column>
+                              <af:column sortProperty="PCFR_TERM_FROM"
+                                         sortable="true" headerText="Term From"
+                                         id="c39">
+                                <af:outputText value="#{row.PCFR_TERM_FROM}"
+                                               id="ot44"/>
+                              </af:column>
+                              <af:column sortProperty="PCFR_TERM_TO"
+                                         sortable="true" headerText="Term To"
+                                         id="c42">
+                                <af:outputText value="#{row.PCFR_TERM_TO}"
+                                               id="ot41"/>
+                              </af:column>
+                              <af:column sortProperty="PCFR_BENE_DISC_FACT"
+                                         sortable="true"
+                                         headerText="Benefit Disc Fact"
+                                         id="c38">
+                                <af:outputText value="#{row.PCFR_BENE_DISC_FACT}"
+                                               id="ot43"/>
+                              </af:column>
+                              <af:column sortProperty="PCFR_CONTR_FACT"
+                                         sortable="true"
+                                         headerText="Contribution Fact"
+                                         id="c40">
+                                <af:outputText value="#{row.PCFR_CONTR_FACT}"
+                                               id="ot40"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelBox>
+                        </af:panelGroupLayout>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Contribution Tax Exempt Limit, Pens.Inv. Taxable Amounts and Interest" id="sdi2">
+                        <h:panelGrid columns="3" id="pg3">
+                          <af:commandButton id="cb6"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{agents.AddContributionFactors}"/>
+                          <af:commandButton id="cb7" icon="/images/update.gif"
+                                            action="#{agents.EditPensionContrFactors}"/>
+                          <af:commandButton id="cb8" icon="/images/delete.gif"
+                                            action="#{agents.performPensionContrFactorsDelete}"/>
+                          <af:popup id="contributionFactorsPopup">
+                            <af:dialog id="d3" type="none"
+                                       title="Add/Edit Contribution Factors">
+                              <af:panelBox id="pb2">
+                                <f:facet name="toolbar"/>
+                                <h:panelGrid columns="2" id="pg4">
+                                  <af:outputLabel value="Contribution Tax  Exempt Amt(Annual)"
+                                                  id="ol7"/>
+                                  <af:inputText label="Label 5" id="it6"
+                                                simple="true"
+                                                shortDesc="Contribution Tax  Exempt Amt(Annual)"
+                                                binding="#{agents.contrTaxExempt}"/>
+                                  <af:outputLabel value="Pens./Inv. Payable Tax  Exempt Amt (Annual)"
+                                                  id="ol8"/>
+                                  <af:inputText label="Label 6" id="it7"
+                                                simple="true"
+                                                shortDesc="Pens./Inv. Payable Tax  Exempt Amt (Annual)"
+                                                binding="#{agents.taxExempt}"/>
+                                  <af:outputLabel value="Employer lumpsum tax exempt (Annual)"
+                                                  id="ol31"/>
+                                  <af:inputText label="Label 24" id="it25" simple="true"
+                                                binding="#{agents.empyr_lump_exempt}"/>                                  
+                                  <af:outputLabel value="Pens./Inv. Intr. Rate (%)"
+                                                  id="ol9"/>
+                                  <af:inputText label="Label 7" id="it8"
+                                                simple="true"
+                                                binding="#{agents.pensIntrRate}"/>
+                                  <af:outputLabel value="Pens./Inv. Max Tax Exempt Amt"
+                                                  id="ol10"/>
+                                  <af:inputText label="Label 8" id="it9"
+                                                simple="true"
+                                                binding="#{agents.taxMaxExemptAmount}"
+                                                shortDesc="Pens./Inv. Max Tax Exempt Amt"/>
+                                  <af:outputLabel value="Tax  Relief"
+                                                  id="ol11"/>
+                                  <af:inputText label="Label 9" id="it10"
+                                                simple="true"
+                                                shortDesc="Tax  Relief"
+                                                binding="#{agents.taxRelief}"/>
+                                  <af:outputLabel value="Female Factor"
+                                                  id="ol12"/>
+                                  <af:inputText label="Label 10" id="it11"
+                                                simple="true"
+                                                shortDesc="Female Factor"
+                                                binding="#{agents.femaleFactor}"/>
+                                  <af:outputLabel value="Male Factor"
+                                                  id="ol13"/>
+                                  <af:inputText label="Label 11" id="it12"
+                                                binding="#{agents.maleFactor}"
+                                                simple="true"/>
+                                  <af:outputLabel value="Factor Type"
+                                                  id="ol14"/>
+                                  <af:selectOneChoice label="Label 2" id="soc2"
+                                                      simple="true"
+                                                      autoSubmit="true"
+                                                      binding="#{agents.factorType}">
+                                    <af:selectItem label="Amount" value="A"
+                                                   id="si5"/>
+                                    <af:selectItem label="Percent" value="P"
+                                                   id="si3"/>
+                                    <af:selectItem label="Per Mille" value="M"
+                                                   id="si4"/>
+                                  </af:selectOneChoice>
+                                  <af:outputLabel value="WEF" id="ol15"/>
+                                  <af:inputDate label="Label 1" id="id1"
+                                                binding="#{agents.contrWEF}"
+                                                simple="true">
+                                     <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                                  <af:outputLabel value="WET" id="ol16"/>
+                                  <af:inputDate label="Label 2" id="id2"
+                                                simple="true"
+                                                binding="#{agents.contrWetDate}">
+                                   <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>                 
+                                </h:panelGrid>
+                                <h:panelGrid columns="2" id="pg13">
+                                  <af:commandButton text="OK" id="cb9"
+                                                    action="#{agents.SaveContributionFactors}"/>
+                                  <af:commandButton text="Cancel" id="cb10"/>
+                                </h:panelGrid>
+                              </af:panelBox>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.pensionCostingFactors1.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.pensionCostingFactors1.rangeSize}"
+                                  emptyText="#{bindings.pensionCostingFactors1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.pensionCostingFactors1.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.pensionCostingFactors1.collectionModel.selectedRow}"
+                                  rowSelection="single" id="t3"
+                                  binding="#{agents.pensContributionFactorsLOV}"
+                                  inlineStyle="width:100.0%; height:180.0px;">
+                          <af:column sortProperty="peirCntrTaxExempt"
+                                     sortable="true"
+                                     headerText="Contribution Tax  Exempt Amt(Annual)"
+                                     id="c16">
+                            <af:outputText value="#{row.peirCntrTaxExempt}"
+                                           id="ot15"/>
+                          </af:column>
+                          <af:column sortProperty="peirTaxExempt"
+                                     sortable="true"
+                                     headerText="Pens./Inv. Payable Tax  Exempt Amt (Annual)"
+                                     id="c11">
+                            <af:outputText value="#{row.peirTaxExempt}"
+                                           id="ot16"/>
+                          </af:column>
+                           <af:column sortProperty="peirTaxExempt"
+                                     sortable="true"
+                                     headerText="Employer lumpsum tax Exempt Amt(Annual)"
+                                     id="c48">
+                            <af:outputText value="#{row.peir_empyr_lump_tax_exmpt}"
+                                           id="ot50"/>
+                          </af:column>
+                          <af:column sortProperty="peir_int_rate"
+                                     sortable="true"
+                                     headerText="Pens./Inv. Intr. Rate (%)"
+                                     id="c13">
+                            <af:outputText value="#{row.peir_int_rate}"
+                                           id="ot14"/>
+                          </af:column>
+                          <af:column sortProperty="peirMaxTaxExempt" sortable="true"
+                                     headerText="Pens./Inv. Max Tax Exempt Amt"
+                                     id="c18">
+                            <af:outputText value="#{row.peirMaxTaxExempt}"
+                                           id="ot18"/>
+                          </af:column>
+                          <af:column sortProperty="peirTaxRelief"
+                                     sortable="true" headerText="Tax  Relief"
+                                     id="c10">
+                            <af:outputText value="#{row.peirTaxRelief}"
+                                           id="ot20"/>
+                          </af:column>
+                          <af:column sortProperty="peirUndwConvFactor"
+                                     sortable="true"
+                                     headerText="Female  Factor" id="c8">
+                            <af:outputText value="#{row.peirUndwConvFactor}"
+                                           id="ot10"/>
+                          </af:column>
+                          <af:column sortProperty="peirDirConvFactor"
+                                     sortable="true" headerText="Male Factor"
+                                     id="c9">
+                            <af:outputText value="#{row.peirDirConvFactor}"
+                                           id="ot11"/>
+                          </af:column>
+                          <af:column sortProperty="peirFactorTypeDesc"
+                                     sortable="true" headerText="Factor  Type"
+                                     id="c17">
+                            <af:outputText value="#{row.peirFactorTypeDesc}"
+                                           id="ot12"/>
+                          </af:column>
+                          <af:column sortProperty="peirWef" sortable="true"
+                                     headerText="WEF" id="c14">
+                            <af:outputText value="#{row.peirWef}" id="ot19">
+                              <af:convertDateTime pattern="#{bindings.pensionCostingFactors1.hints.peirWef.format}"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="peirWet" sortable="true"
+                                     headerText="WET" id="c15">
+                            <af:outputText value="#{row.peirWet}" id="ot21">
+                              <af:convertDateTime pattern="#{bindings.pensionCostingFactors1.hints.peirWet.format}"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="peirFactorType"
+                                     sortable="true" headerText="Factor  Type"
+                                     id="c12">
+                            <af:outputText value="#{row.peirFactorType}"
+                                           id="ot17"/>
+                          </af:column>
+                          <af:column sortProperty="peirCode" sortable="true"
+                                     headerText="#{bindings.pensionCostingFactors1.hints.peirCode.label}"
+                                     id="c19">
+                            <af:outputText value="#{row.peirCode}" id="ot13"/>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="EMV Rates-Employer Rates" id="sdi3">
+                        <h:panelGrid columns="3" id="pg5">
+                          <af:commandButton id="cb11"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{agents.AddRetirementAges}"/>
+                          <af:commandButton id="cb12"
+                                            icon="/images/update_ena.png"
+                                            action="#{agents.EditRetirementAges}"/>
+                          <af:commandButton id="cb13"
+                                            icon="/images/delete_ena.png"
+                                            action="#{agents.DeleteRetirementAges}"/>
+                          <af:popup id="retirementAgesPopup">
+                            <af:dialog id="d4" type="none"
+                                       title="Edit/Add Retirement Ages">
+                              <h:panelGrid columns="2" id="pg6">
+                                <af:outputLabel value="*Retirement Age" id="ol17"/>
+                                <af:inputText label="Label 12" id="it13"
+                                              simple="true"
+                                              shortDesc="Retirement Age"
+                                              binding="#{agents.emvErRetireAge}"/>
+                                <af:outputLabel value="*Sex" id="ol18"/>
+                                <af:selectOneChoice label="Label 3" id="soc3"
+                                                    simple="true"
+                                                    autoSubmit="true"
+                                                    shortDesc="Gender"
+                                                    binding="#{agents.emvErSex}">
+                                  <af:selectItem label="Male" value="M"
+                                                 id="si6"/>
+                                  <af:selectItem label="Female" value="F"
+                                                 id="si7"/>
+                                </af:selectOneChoice>
+                                <af:commandButton text="OK"
+                                                  id="cb14"
+                                                  action="#{agents.SaveEmvErRates}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="cb15"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.pensionCostingFactors2.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.pensionCostingFactors2.rangeSize}"
+                                  emptyText="#{bindings.pensionCostingFactors2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.pensionCostingFactors2.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.pensionCostingFactors2.collectionModel.selectedRow}"
+                                  selectionListener="#{agents.RetirementAgesListener}"
+                                  rowSelection="single" id="t4"
+                                  inlineStyle="width:100%; height:100px; border-style:none;"
+                                  binding="#{agents.retirementAgesLOV}">
+                          <af:column sortProperty="retCode" sortable="true"
+                                     headerText="#{bindings.pensionCostingFactors2.hints.retCode.label}"
+                                     id="c22" visible="false">
+                            <af:outputText value="#{row.retCode}" id="ot22"/>
+                          </af:column>
+                          <af:column sortProperty="retAge" sortable="true"
+                                     headerText="Retirement Age" id="c21">
+                            <af:outputText value="#{row.retAge}" id="ot24"/>
+                          </af:column>
+                          <af:column sortProperty="retSex" sortable="true"
+                                     headerText="Sex" id="c23" visible="false">
+                            <af:outputText value="#{row.retSex}" id="ot25"/>
+                          </af:column>
+                          <af:column sortProperty="retSexDesc" sortable="true"
+                                     headerText="Sex" id="c20">
+                            <af:outputText value="#{row.retSexDesc}" id="ot23"/>
+                          </af:column>
+                        </af:table>
+                        <h:panelGrid columns="3" id="pg7">
+                          <af:commandButton id="cb16"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{agents.AddEmvErRates}"/>
+                          <af:commandButton id="cb17"
+                                            icon="/images/update_ena.png"
+                                            action="#{agents.EditEmvErRates}"/>
+                          <af:commandButton id="cb18"
+                                            icon="/images/delete.gif"
+                                          action="#{agents.performDeleteEmvErRates}"/>
+                          <af:popup id="EmvErRatesPopup">
+                            <af:dialog id="d5" type="none"
+                                       title="Add/Edit Employer EMV Rates">
+                              <h:panelGrid columns="2" id="pg8">
+                                <af:outputLabel value="*ANB" id="ol19"/>
+                                <af:inputText label="Label 13" id="it14"
+                                              simple="true"
+                                              shortDesc="Age Next Birthday"
+                                              binding="#{agents.emverANB}"/>
+                                <af:outputLabel value="*Basic Premium" id="ol20"/>
+                                <af:inputText label="Label 14" id="it15"
+                                              simple="true"
+                                              shortDesc="Basic Premium"
+                                              binding="#{agents.emverBasicPrem}"/>
+                                <af:outputLabel value="*Basic SA" id="ol21"/>
+                                <af:inputText label="Label 15" id="it16"
+                                              simple="true"
+                                              binding="#{agents.emverBasicSA}"/>
+                                <af:outputLabel value="*EMV Value" id="ol22"/>
+                                <af:inputText label="Label 16" id="it17"
+                                              simple="true"
+                                              binding="#{agents.emverEmvValue}"/>
+                                <af:commandButton text="OK"
+                                                  id="cb19"
+                                                  action="#{agents.SaveEmvEmpyrRates}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="cb20"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.pensionCostingFactors3.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.pensionCostingFactors3.rangeSize}"
+                                  emptyText="#{bindings.pensionCostingFactors3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.pensionCostingFactors3.rangeSize}"
+                                  rowBandingInterval="0"
+                                  rowSelection="single" id="t5"
+                                  inlineStyle="width:100%; height:100px; border-style:none;"
+                                  binding="#{agents.emvErRatesLOV}">
+                          <af:column sortProperty="emverCode" sortable="true"
+                                     headerText="#{bindings.pensionCostingFactors3.hints.emverCode.label}"
+                                     id="c27" visible="false">
+                            <af:outputText value="#{row.emverCode}" id="ot27"/>
+                          </af:column>
+                          <af:column sortProperty="emverAnb" sortable="true"
+                                     headerText="ANB" id="c24">
+                            <af:outputText value="#{row.emverAnb}" id="ot28"/>
+                          </af:column>
+                          <af:column sortProperty="emverBasicSa" sortable="true"
+                                     headerText="BASIC SA" id="c25">
+                            <af:outputText value="#{row.emverBasicSa}"
+                                           id="ot30"/>
+                          </af:column>
+                          <af:column sortProperty="emverBasicPrem"
+                                     sortable="true" headerText="BASIC PREMIUM"
+                                     id="c26">
+                            <af:outputText value="#{row.emverBasicPrem}"
+                                           id="ot26"/>
+                          </af:column>
+                          <af:column sortProperty="emverEmvValue"
+                                     sortable="true" headerText="EMV VALUE"
+                                     id="c28">
+                            <af:outputText value="#{row.emverEmvValue}"
+                                           id="ot29"/>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="EMV Rates-Employee Rates" id="sdi4">
+                        <h:panelGrid columns="3" id="pg9">
+                          <af:commandButton id="cb21"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{agents.AddEMVeeRates}"/>
+                          <af:commandButton id="cb22"
+                                            icon="/images/update_ena.png"
+                                            action="#{agents.EditEmvEeRates}"/>
+                          <af:commandButton id="cb23"
+                                            icon="/images/delete_ena.png"
+                                           action="#{agents.performDeleteEmvEeRates}"/>
+                          <af:popup id="EmployeeEMVRates">
+                            <af:dialog id="d6" type="none"
+                                       title="Add/Edit Employee EMV Rates">
+                              <h:panelGrid columns="2" id="pg10">
+                                <af:outputLabel value="*Term(In Complete Years)" id="ol23"/>
+                                <af:inputText label="Label 17" id="it18"
+                                              simple="true"
+                                              shortDesc="Term(In Complete Years)"
+                                              binding="#{agents.term}"/>
+                                <af:outputLabel value="*Basic Premium" id="ol24"/>
+                                <af:inputText label="Label 18" id="it19"
+                                              simple="true"
+                                              shortDesc="Basic Premium"
+                                              binding="#{agents.emveeBasicPremium}"/>
+                                <af:outputLabel value="*Basic SA" id="ol25"/>
+                                <af:inputText label="Label 19" id="it20"
+                                              simple="true"
+                                              shortDesc="Basic Sum Assured"
+                                              binding="#{agents.emveeBasicSumAssured}"/>
+                                <af:outputLabel value="*Estimated Maturity Value" id="ol26"/>
+                                <af:inputText label="Label 20" id="it21"
+                                              simple="true"
+                                              shortDesc="Estimated Maturity Value"
+                                              binding="#{agents.emveeEMV}"/>
+                                <af:commandButton text="OK"
+                                                  id="cb24"
+                                                  action="#{agents.SaveEmvEERates}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="cb25"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.pensionCostingFactors4.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.pensionCostingFactors4.rangeSize}"
+                                  emptyText="#{bindings.pensionCostingFactors4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.pensionCostingFactors4.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.pensionCostingFactors4.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.pensionCostingFactors4.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t6"
+                                  inlineStyle="width:100%; height:100px; border-style:none;"
+                                  binding="#{agents.employeeEmvRatesLOV}">
+                          <af:column sortProperty="emveeCode" sortable="true"
+                                     headerText="#{bindings.pensionCostingFactors4.hints.emveeCode.label}"
+                                     id="c29" visible="false">
+                            <af:outputText value="#{row.emveeCode}" id="ot32"/>
+                          </af:column>
+                          <af:column sortProperty="emveeTerm" sortable="true"
+                                     headerText="Term(In Complete Years)"
+                                     id="c33">
+                            <af:outputText value="#{row.emveeTerm}" id="ot33"/>
+                          </af:column>
+                          <af:column sortProperty="emveeBasicPrem"
+                                     sortable="true" headerText="Basic Premium"
+                                     id="c32">
+                            <af:outputText value="#{row.emveeBasicPrem}"
+                                           id="ot35"/>
+                          </af:column>
+                          <af:column sortProperty="emveeBasicSa" sortable="true"
+                                     headerText="Basic Sum Assured" id="c31">
+                            <af:outputText value="#{row.emveeBasicSa}"
+                                           id="ot31"/>
+                          </af:column>
+                          <af:column sortProperty="emveeEmv" sortable="true"
+                                     headerText="Estimated Maturity Value"
+                                     id="c30">
+                            <af:outputText value="#{row.emveeEmv}" id="ot34"/>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Governing Authority Scales" id="sdi6">
+                        <af:panelGroupLayout id="pgl4">
+                          <af:panelBox id="pb6">
+                            <f:facet name="toolbar"/>
+                            <h:panelGrid columns="3" id="panelGrid3">
+                              <af:commandButton id="commandButton6"
+                                                icon="/images/field_group_plus_ena.png"
+                                                action="#{agents.AddPensionScale}"/>
+                              <af:commandButton id="commandButton7"
+                                                icon="/images/update_ena.png"
+                                                action="#{agents.EditPensionScale}"/>
+                              <af:commandButton id="commandButton8"
+                                                icon="/images/delete_ena.png"
+                                                action="#{agents.DeletePensionScale}"/>
+                              <af:popup id="popup2">
+                                <af:dialog id="dialog2" type="none"
+                                           title="Vesting Scale">
+                                  <h:panelGrid columns="2" id="panelGrid4">
+                                    <af:outputLabel value="Year From"
+                                                    id="outputLabel4"
+                                                    showRequired="true"/>
+                                    <af:inputText label="Label 17"
+                                                  id="inputText4" simple="true"
+                                                  shortDesc="Term(In Complete Years)"
+                                                  binding="#{agents.yearFrom}"/>
+                                    <af:outputLabel value="Year To"
+                                                    id="outputLabel5"
+                                                    showRequired="true"/>
+                                    <af:inputText label="Label 18"
+                                                  id="inputText6" simple="true"
+                                                  shortDesc="Basic Premium"
+                                                  binding="#{agents.yearTo}"/>
+                                    <af:outputLabel value="Employer Entitlement %"
+                                                    id="outputLabel7"/>
+                                    <af:inputText label="Label 19"
+                                                  id="inputText7" simple="true"
+                                                  shortDesc="Basic Sum Assured"
+                                                  binding="#{agents.emyrEnt}"/>
+                                    <af:outputLabel value="Employee Entitlement %"
+                                                    id="outputLabel8"/>
+                                    <af:inputText label="Label 20"
+                                                  id="inputText8" simple="true"
+                                                  shortDesc="Estimated Maturity Value"
+                                                  binding="#{agents.emyeEnt}"/>
+                                  </h:panelGrid>
+                                  <h:panelGrid columns="2" id="pg16">
+                                    <af:commandButton text="OK"
+                                                      id="commandButton9"
+                                                      action="#{agents.SavePensionScale}"
+                                                      partialSubmit="true"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton10"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                            <af:table value="#{bindings.pensionCostingFactors7.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.pensionCostingFactors7.rangeSize}"
+                                      emptyText="#{bindings.pensionCostingFactors7.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.pensionCostingFactors7.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.pensionCostingFactors7.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.pensionCostingFactors7.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t9"
+                                      binding="#{agents.vestingTable}"
+                                      inlineStyle="width:100%; height:150px; border-style:none;">
+                              <af:column sortProperty="PVGS_CODE"
+                                         sortable="true" headerText="Code"
+                                         id="c43" visible="false">
+                                <af:outputText value="#{row.PVGS_CODE}"
+                                               id="ot46"/>
+                              </af:column>
+                              <af:column sortProperty="PVGS_YRS_FROM"
+                                         sortable="true" headerText="Year From"
+                                         id="c44">
+                                <af:outputText value="#{row.PVGS_YRS_FROM}"
+                                               id="ot45"/>
+                              </af:column>
+                              <af:column sortProperty="PVGS_YRS_TO"
+                                         sortable="true" headerText="Year To"
+                                         id="c47">
+                                <af:outputText value="#{row.PVGS_YRS_TO}"
+                                               id="ot49"/>
+                              </af:column>
+                              <af:column sortProperty="PVGS_EMYR_PCT_ENT"
+                                         sortable="true"
+                                         headerText="Employer Pct" id="c46">
+                                <af:outputText value="#{row.PVGS_EMYR_PCT_ENT}"
+                                               id="ot48"/>
+                              </af:column>
+                              <af:column sortProperty="PVGS_EMYE_PCT_ENT"
+                                         sortable="true"
+                                         headerText="Employee Pct" id="c45">
+                                <af:outputText value="#{row.PVGS_EMYE_PCT_ENT}"
+                                               id="ot47"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelBox>
+                        </af:panelGroupLayout>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Gratuity And Pension Rates" id="sdi5">
+                        <h:panelGrid columns="3" id="pg11">
+                          <af:commandButton id="cb26"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{agents.AddGratuityRates}"/>
+                          <af:commandButton id="cb27"
+                                            icon="/images/update_ena.png"
+                                            action="#{agents.EditGratuityRates}"/>
+                          <af:commandButton id="cb28"
+                                            icon="/images/delete_ena.png"
+                                             action="#{agents.performDeleteGratuityRates}"/>
+                          <af:popup id="GratuityPopup">
+                            <af:dialog id="d7" type="none"
+                                       title="Edit/Add Gratuity Rates">
+                              <h:panelGrid columns="2" id="pg12">
+                                <af:outputLabel value="*Service Years" id="ol27"/>
+                                <af:inputText label="Label 21" id="it22"
+                                              simple="true"
+                                              shortDesc="Service Years"
+                                              binding="#{agents.serviceYears}"/>
+                                <af:outputLabel value="*Pension %" id="ol28"/>
+                                <af:inputText label="Label 22" id="it23"
+                                              simple="true"
+                                              shortDesc="Pension %"
+                                              binding="#{agents.pensionPct}"/>
+                                <af:outputLabel value="*Gratuity %" id="ol29"/>
+                                <af:inputText label="Label 23" id="it24"
+                                              simple="true"
+                                              shortDesc="Gratuity Percentage"
+                                              binding="#{agents.gratuityPct}"/>
+                                <af:commandButton text="OK"
+                                                  id="cb29"
+                                                  action="#{agents.SaveGratuityPct}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="cb30"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:table value="#{bindings.pensionCostingFactors5.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.pensionCostingFactors5.rangeSize}"
+                                  emptyText="#{bindings.pensionCostingFactors5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.pensionCostingFactors5.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.pensionCostingFactors5.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.pensionCostingFactors5.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t7"
+                                  binding="#{agents.gratuityLOV}"
+                                  inlineStyle="width:100%; height:100px; border-style:none;">
+                          <af:column sortProperty="grapCode" sortable="true"
+                                     headerText="#{bindings.pensionCostingFactors5.hints.grapCode.label}"
+                                     id="c37">
+                            <af:outputText value="#{row.grapCode}" id="ot39"/>
+                          </af:column>
+                          <af:column sortProperty="grapServiceYrs"
+                                     sortable="true" headerText="Service Years"
+                                     id="c36">
+                            <af:outputText value="#{row.grapServiceYrs}"
+                                           id="ot37"/>
+                          </af:column>
+                          <af:column sortProperty="grapGratPct" sortable="true"
+                                     headerText="Gratuity %" id="c34">
+                            <af:outputText value="#{row.grapGratPct}"
+                                           id="ot36"/>
+                          </af:column>
+                          <af:column sortProperty="grapPensionPct"
+                                     sortable="true" headerText="Pension %"
+                                     id="c35">
+                            <af:outputText value="#{row.grapPensionPct}"
+                                           id="ot38"/>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                    <!--  <af:showDetailItem text="Pension Commutation" id="sdi7">
+                     <h:panelGrid columns="3">
+                          <af:commandButton text="" id="cb31" icon="/images/field_group_plus_ena.png"
+                                            action="#{agents.showCommutationPop}"/>
+                          <af:commandButton text="" id="cb32" icon="/images/update_ena.png"
+                                            action="#{agents.editCommutation}"/>
+                          <af:commandButton text="" id="cb33" icon="/images/delete_ena.png"
+                                            action="#{agents.deleteCommutation}"/>
+                                             
+                          <af:popup id="p1">
+                            <af:dialog id="d8" type="none">
+                            <h:panelGrid columns="2">
+                            <af:outputLabel value="Range From" id="ol32"/>
+                            <af:inputText label="Label 25" id="it26" simple="true"
+                                          binding="#{agents.commRangeFrom}"/>
+                            <af:outputLabel value="Range To" id="ol33"/>
+                            <af:inputText label="Label 26" id="it27" simple="true"
+                                          binding="#{agents.commRangeTo}"/>
+                            <af:outputLabel value="Commutation Rate(%)" id="ol34"/>                            
+                            <af:inputText label="Label 27" id="it28" simple="true"
+                                          binding="#{agents.commutationRate}"/>
+                            <h:panelGrid columns="2">
+                            <af:commandButton text="Save"
+                                                    id="cb34"
+                                              action="#{agents.saveCommutation}"/>
+                            <af:commandButton text="Cancel"
+                                                    id="cb35"/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                      <af:table value="#{bindings.pensionCostingFactors8.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.pensionCostingFactors8.rangeSize}"
+                                  emptyText="#{bindings.pensionCostingFactors8.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.pensionCostingFactors8.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.pensionCostingFactors8Query.queryDescriptor}"
+                                  queryListener="#{bindings.pensionCostingFactors8Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.pensionCostingFactors8.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.pensionCostingFactors8.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t11"
+                                  inlineStyle="width:100%"
+                                  binding="#{agents.commutationLOV}">
+                          <af:column sortProperty="#{bindings.pensionCostingFactors8.hints.PCOM_CODE.name}"
+                                     filterable="true" sortable="true"
+                                     headerText="code" id="c56" visible="false">
+                            <af:outputText value="#{row.PCOM_CODE}" id="ot56"/>
+                          </af:column>
+                          <af:column sortProperty="#{bindings.pensionCostingFactors8.hints.PCOM_RANGE_FROM.name}"
+                                     filterable="true" sortable="true"
+                                     headerText="Range From" id="c53">
+                            <af:outputText value="#{row.PCOM_RANGE_FROM}"
+                                           id="ot57"/>
+                          </af:column>
+                          <af:column sortProperty="#{bindings.pensionCostingFactors8.hints.PCOM_RANGE_TO.name}"
+                                     filterable="true" sortable="true"
+                                     headerText="Range To" id="c54">
+                            <af:outputText value="#{row.PCOM_RANGE_TO}"
+                                           id="ot55"/>
+                          </af:column>
+                          <af:column sortProperty="#{bindings.pensionCostingFactors8.hints.PCOM_PERC.name}"
+                                     filterable="true" sortable="true"
+                                     headerText="Commutation Rate(%)" id="c55">
+                            <af:outputText value="#{row.PCOM_PERC}" id="ot58"/>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>-->
+                    </af:panelTabbed>
+                  </f:facet>
+                </af:panelSplitter>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

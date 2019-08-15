@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="policiesDAO" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.policiesDAO" isJavaBased="true">
+  <Attribute Name="categoryShtDesc" Type="java.lang.String"/>
+  <Attribute Name="withdrawalReceipt" Type="java.math.BigDecimal"/>
+  <Attribute Name="lmitCode" Type="java.lang.Integer"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="FindPolicies"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="FindPolicyTaxes"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyTransactions" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyCategories" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyDependantTypes" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="FindPolicyMembers"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.PolicyPremiums"
+                  BeanClass="LMSG.view.Policy.PolicyPremiums"
+                  id="FindPolicyPremiums" ReturnNodeName="PolicyPremiums"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.PremiumCard"
+                  BeanClass="LMSG.view.Policy.PremiumCard"
+                  id="FindPremiumCardDetails" ReturnNodeName="PremiumCard"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.PolicyReceipts"
+                  BeanClass="LMSG.view.Policy.PolicyReceipts"
+                  id="FindPolicyReceipts" ReturnNodeName="PolicyReceipts"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.Policy.PolicyRecptInstlmnts"
+                  BeanClass="LMSG.view.Policy.PolicyRecptInstlmnts"
+                  id="FindPolicyRecptInstlmnts"
+                  ReturnNodeName="PolicyRecptInstlmnts"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="FindLapsedPolicies"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="FindContraPolicies"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindReinstatePolicyCandidates" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyCoinsurers" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="findMemberPensionDtls" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="FindVestingScales"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyExceptions" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyClassTerms" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyProvisions" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="FindPolicySchedules"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="findScheduleMembers"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="findDuplicatedMembers" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="findQuoteDuplicatedMembers" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyLoadedTransactions" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyFirstReceipts" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="findInvalidMembers"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="findRefundInvalidMembers" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="findPolicyImportBatches" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="findLnRepayInvalidMembers" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="FindPolicyProposers"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies" id="FindPolicyMem"
+                  ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policies"
+                  BeanClass="LMSG.view.Policy.policies"
+                  id="FindPolicyFCLMembers" ReturnNodeName="policies"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.PremiumCard"
+                  BeanClass="LMSG.view.Policy.PremiumCard"
+                  id="FindReceiptTransfers" ReturnNodeName="PremiumCard"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.policiesDAO"
+                     BeanClass="LMSG.view.Policy.policiesDAO" id="policiesDAO"/>
+</JavaBean>

@@ -1,0 +1,16 @@
+@noteNotMatchingBookmarks               TRUE
+@createNewDocumentFromTemplate          GLA+Policy+Document
+POL_POLICY_NO                           GTA/2009/00333/4
+PROPOSER                                ZAIN NETWORKS AFRICA 
+PROPOSER2                               ZAIN NETWORKS AFRICA 
+POL_POLICY_NO2                          GTA/2009/00333/4
+POL_INCEPTION_DATE                      2008-05-22 00:00:00.0
+PREMIUM                                 NGN215820
+PREMIUM_DUE_DATE                        5th May
+PREMIUM_DUE_DATE1                       5th May
+POL_POLICY_NO3                          GTA/2009/00333/4
+POL_POLICY_NO4                          GTA/2009/00333/4
+SIGN_DAY                                4th
+SIGN_MONTH                              December
+SIGN_YEAR                               2009
+@saveDocumentAs                         GLPolicyDocument2009246877

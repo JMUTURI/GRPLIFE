@@ -1,0 +1,134 @@
+<dataTemplate dataSourceRef="LMS_MICK" name="mem_contribution" defaultPackage="reports_parameters">
+<properties>
+<property name="xml_tag_case" value="upper"/>
+</properties>
+<parameters>
+<parameter name="V_POL_CODE" dataType="INTEGER"/>
+<parameter name="V_YEAR" dataType="INTEGER"/>
+<parameter name="V_USER" dataType="VARCHAR2"/>
+</parameters>
+<lexicals>
+</lexicals>
+<dataQuery>
+
+<sqlStatement name="Q_1"> 
+<![CDATA[
+/* Formatted on 2015/06/19 11:45 (Formatter Plus v4.8.8) */
+SELECT org_name, org_phy_addrs,
+          org_addrs
+       || ' , '
+       || org_zip
+       || ' - '
+       || twn_name
+       || ' , '
+       || cou_name postaladdress,
+          'Telephone'
+       || ':'
+       || org_tel1
+       || DECODE (org_tel2, NULL, NULL, ' /' || org_tel2) telephone,
+       'Fax' || ':' || org_fax fax,
+       'E-mail' || ':' || LOWER (org_email_addrs) email, org_rpt_logo logo,
+       cou_name country, cur_symbol
+  FROM tqc_organizations,
+       tqc_countries,
+       tqc_towns,
+       tqc_systems,
+       tqc_currencies
+ WHERE org_twn_code = twn_code
+   AND org_cou_code = cou_code
+   AND sys_org_code = org_code
+   AND org_cur_code = cur_code
+   AND sys_sht_desc = 'LMS'
+]]>
+</sqlStatement>
+<sqlStatement name="Q_2">
+<![CDATA[
+SELECT MEM_NO,MEM_SURNAME||' '||MEM_OTHER_NAMES MEM_NAME,
+      NVL(PNMBAL_EMPYE_BAL_BF,0)EMPYE_BAL_BF,PNMBAL_EMPYE_AMT,
+      NVL(PNMBAL_EMPYE_WITH_AMT,0)EMPYE_WITH_AMT,
+      ROUND(NVL(PNMBAL_EMPYE_BAL_INCOME,0)+NVL(PNMBAL_EMPYE_CNTRI_INCOME,0),2)EMPYE_INT,
+      ROUND(NVL(PNMBAL_EMPYE_BAL_CF,0),2)EMPYE_BAL_CF,
+      NVL(PNMBAL_EMPYR_BAL_BF,0)EMPYR_BAL_BF,PNMBAL_EMPYR_AMT,
+      NVL(PNMBAL_EMPYR_WITH_AMT,0)+NVL(PNMBAL_EMPYR_RETIRE_HELD,0) EMPYR_WITH_AMT,
+      ROUND(NVL(PNMBAL_EMPYR_BAL_INCOME,0)+NVL(PNMBAL_EMPYR_CNTRI_INCOME,0),2)EMPYR_INT,
+      ROUND(NVL(PNMBAL_EMPYR_BAL_CF,0),2) EMPYR_BAL_CF,
+      PRP_SURNAME||' '||PRP_OTHER_NAMES CLIENT,
+      POL_POLICY_NO        
+FROM LMS_PENSION_MEM_BALANCES,LMS_POLICY_MEMBERS,LMS_MEMBERS,
+     LMS_POLICIES,LMS_PROPOSERS
+WHERE PNMBAL_POLM_CODE=POLM_CODE
+AND POLM_MEM_CODE=MEM_CODE
+AND PNMBAL_POL_CODE=POL_CODE
+AND POL_PRP_CODE=PRP_CODE
+AND PNMBAL_POL_CODE=:V_POL_CODE
+AND PNMBAL_YEAR=:V_YEAR
+]]>
+</sqlStatement>
+<sqlStatement name="DEDUCTION_QUERY">
+<![CDATA[
+SELECT PDED_RATE_DESC,PDED_TAX_AMT
+FROM LMS_PENSION_DEDUCTIONS
+WHERE PDED_POL_CODE=:V_POL_CODE
+AND PDED_YEAR=:V_YEAR
+AND PDED_AUTHORIZED='Y'
+]]>
+</sqlStatement>
+<sqlStatement name="INTEREST_QUERY">
+<![CDATA[
+SELECT DISTINCT PNDPI_APP_INTR INT_RATE
+FROM LMS_PENSION_DEPOSITS_INTR
+WHERE PNDPI_POL_CODE=:V_POL_CODE
+AND TO_DATE('31/12/'||:V_YEAR,'DD/MM/RRRR') BETWEEN PNDPI_WEF AND PNDPI_WET
+]]>
+</sqlStatement>
+</dataQuery>
+<dataStructure>
+ <group name="G_ORGANIZATION" dataType="varchar2" source="Q_1"> 
+     <element name="ORG_PHY_ADDRS" dataType="varchar2" value="ORG_PHY_ADDRS"/>
+     <element name="ORG_NAME" dataType="varchar2" value="ORG_NAME"/>   
+     <element name="POSTALADDRESS" dataType="varchar2" value="POSTALADDRESS"/>
+     <element name="TELEPHONE" dataType="varchar2" value="TELEPHONE"/>
+     <element name="FAX" dataType="varchar2" value="FAX"/>
+     <element name="EMAIL" dataType="varchar2" value="EMAIL"/>
+     <element name="LOGO" dataType="longRaw" value="LOGO"/>   
+     <element name="COUNTRY" dataType="varchar2" value="COUNTRY"/> 
+     <element name="CURRENCY" dataType="varchar2" value="CUR_SYMBOL"/> 
+</group> 
+    <group name="MEM_BALANCES" dataType="varchar2" source="Q_2"> 
+        <element name="MEM_NO" dataType="varchar2" value="MEM_NO"/> 
+         <element name="CLIENT" dataType="varchar2" value="CLIENT"/> 
+        <element name="MEM_NAME" dataType="varchar2" value="MEM_NAME"/>  
+        <element name="MEM_NO" dataType="varchar2" value="MEM_NO"/> 
+        <element name="EMPYE_BAL_BF" dataType="number" value="EMPYE_BAL_BF"/> 
+        <element name="PNMBAL_EMPYE_AMT" dataType="number" value="PNMBAL_EMPYE_AMT"/>
+        <element name="EMPYE_WITH_AMT" dataType="number" value="EMPYE_WITH_AMT"/>
+         <element name="EMPYE_INT" dataType="number" value="EMPYE_INT"/>
+        <element name="EMPYE_BAL_CF" dataType="number" value="EMPYE_BAL_CF"/>
+        <element name="EMPYR_BAL_BF" dataType="number" value="EMPYR_BAL_BF"/>
+        <element name="PNMBAL_EMPYR_AMT" dataType="number" value="PNMBAL_EMPYR_AMT"/>
+        <element name="EMPYR_WITH_AMT" dataType="number" value="EMPYR_WITH_AMT"/>
+        <element name="EMPYR_INT" dataType="number" value="EMPYR_INT"/> 
+        <element name="EMPYR_BAL_CF" dataType="number" value="EMPYR_BAL_CF"/>  
+        <element name="CLIENT" dataType="varchar2" value="CLIENT"/>
+        <element name="POL_POLICY_NO" dataType="varchar2" value="POL_POLICY_NO"/>
+    </group> 
+        <group name="MEM_DEDUCTIONS" dataType="varchar2" source="DEDUCTION_QUERY"> 
+        <element name="DESC" dataType="varchar2" value="PDED_RATE_DESC"/> 
+        <element name="TAX_AMT" dataType="varchar2" value="PDED_TAX_AMT"/> 
+    </group>
+     <group name="INTERST" dataType="varchar2" source="INTEREST_QUERY"> 
+        <element name="INT_RATE" dataType="varchar2" value="INT_RATE"/> 
+    </group>    
+      <element name="TOT_EMPYE_BAL_BF" dataType="number" function="sum" value="MEM_BALANCES.EMPYE_BAL_BF"/> 
+       <element name="TOT_PNMBAL_EMPYE_AMT" dataType="number" function="sum" value="MEM_BALANCES.PNMBAL_EMPYE_AMT"/>
+        <element name="TOT_EMPYE_WITH_AMT" dataType="number" function="sum" value="MEM_BALANCES.EMPYE_WITH_AMT"/>
+         <element name="TOT_EMPYE_INT" dataType="number" function="sum" value="MEM_BALANCES.EMPYE_INT"/>
+        <element name="TOT_EMPYE_BAL_CF" dataType="number" function="sum" value="MEM_BALANCES.EMPYE_BAL_CF"/>
+        <element name="TOT_EMPYR_BAL_BF" dataType="number" function="sum" value="MEM_BALANCES.EMPYR_BAL_BF"/>
+        <element name="TOT_PNMBAL_EMPYR_AMT" dataType="number" function="sum" value="MEM_BALANCES.PNMBAL_EMPYR_AMT"/>
+        <element name="TOT_EMPYR_WITH_AMT" dataType="number" function="sum" value="MEM_BALANCES.EMPYR_WITH_AMT"/>
+        <element name="TOT_EMPYR_INT" dataType="number" function="sum" value="MEM_BALANCES.EMPYR_INT"/> 
+        <element name="TOT_EMPYR_BAL_CF" dataType="number" function="sum" value="MEM_BALANCES.EMPYR_BAL_CF"/>
+        <element name="TOT_DEDUCTION" dataType="number" function="sum" value="MEM_DEDUCTIONS.TAX_AMT"/>  
+</dataStructure>
+</dataTemplate>

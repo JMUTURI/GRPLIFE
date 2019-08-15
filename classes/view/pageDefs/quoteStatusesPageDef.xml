@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="quoteStatusesPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsIterator"/>
+    <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+    <methodIterator Binds="findQuotationsEnquiry.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuotationsEnquiryIterator"/>
+    <searchRegion Binds="findQuotationsEnquiryIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="QuotationsQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="productDetails">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodCode"/>
+          <Item Value="prodDesc"/>
+          <Item Value="prodshtDesc"/>
+          <Item Value="prodType"/>
+          <Item Value="PMAS_CODE"/>
+          <Item Value="PMAS_SHT_DESC"/>
+          <Item Value="PMAS_DESC"/>
+          <Item Value="cvt_code"/>
+          <Item Value="pct_code"/>
+          <Item Value="cvt_sht_desc"/>
+          <Item Value="cvt_desc"/>
+          <Item Value="cvt_main_cover"/>
+          <Item Value="pct_formular"/>
+          <Item Value="pct_refund_formular"/>
+          <Item Value="cvt_duration_type"/>
+          <Item Value="PPROV_CODE"/>
+          <Item Value="PROV_SHT_DESC"/>
+          <Item Value="PROV_DESC"/>
+          <Item Value="PPROV_EDITABLE"/>
+          <Item Value="PPROV_PROD_CODE"/>
+          <Item Value="DTY_CODE"/>
+          <Item Value="max_allowed"/>
+          <Item Value="DTY_SHT_DESC"/>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="lp_prod_code"/>
+          <Item Value="lp_prod_sht_desc"/>
+          <Item Value="lp_prod_desc"/>
+          <Item Value="lp_prod_type"/>
+          <Item Value="lp_PROD_LAPSE_PRD_DAYS"/>
+          <Item Value="prod_lapse_prd_days"/>
+          <Item Value="PROD_MIN_EARNINGS_PRD"/>
+          <Item Value="PROD_DEPENDT_COVERED"/>
+          <Item Value="PROD_SAVINGS_COVERED"/>
+          <Item Value="PROD_DEPENDT_COVERED2"/>
+          <Item Value="selected"/>
+          <Item Value="pct_main_sa_perc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuotationsEnquiry" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotationsEnquiry"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuotationsEnquiry_QuotationsDAO_dataProvider_findQuotationsEnquiry_result"/>
+    <tree IterBinding="findQuotationsEnquiryIterator" id="Quotations">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations0">
+        <AttrNames>
+          <Item Value="client"/>
+          <Item Value="quoCode"/>
+          <Item Value="quoNo"/>
+          <Item Value="quoRevNo"/>
+          <Item Value="agnshtDesc"/>
+          <Item Value="agnName"/>
+          <Item Value="quoType"/>
+          <Item Value="QUO_SAVINGS_RIDER"/>
+          <Item Value="QUO_GRP_LIFE_RIDER"/>
+          <Item Value="quocvtShtDesc"/>
+          <Item Value="cover_display"/>
+          <Item Value="quoQcvtSa"/>
+          <Item Value="quoButChargePrem"/>
+          <Item Value="QCVT_PREMIUM"/>
+          <Item Value="quoButChargePrem2"/>
+          <Item Value="quoDependents"/>
+          <Item Value="quoMembers"/>
+          <Item Value="QCVT_CODE"/>
+          <Item Value="QCVT_CVT_CODE"/>
+          <Item Value="discLoadRate"/>
+          <Item Value="QCVT_DISC_LOAD_DIV_FACT"/>
+          <Item Value="quoQcvtRate"/>
+          <Item Value="quoAvganb"/>
+          <Item Value="quoQCVTwetDate"/>
+          <Item Value="quoQcvtAvgprd"/>
+          <Item Value="quoSaPerMember"/>
+          <Item Value="quoUseUnitRate"/>
+          <Item Value="QCVT_LOAD_DISC"/>
+          <Item Value="quoUnitRate"/>
+          <Item Value="qtax_code"/>
+          <Item Value="qtax_rate"/>
+          <Item Value="qtax_tax_amt"/>
+          <Item Value="tt_desc"/>
+          <Item Value="qtax_rate_desc"/>
+          <Item Value="catShtDesc"/>
+          <Item Value="catDesc"/>
+          <Item Value="catPeriod"/>
+          <Item Value="lcaCode"/>
+          <Item Value="QDL_CODE"/>
+          <Item Value="QDL_QUO_CODE"/>
+          <Item Value="QDL_MAX_TYPE_ALLOWED"/>
+          <Item Value="QDL_LIMIT_AMT"/>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="quotProvshtDesc"/>
+          <Item Value="quotProvDesc"/>
+          <Item Value="quotProvEditable"/>
+          <Item Value="qpprCode"/>
+          <Item Value="quoMemNo"/>
+          <Item Value="quoMemName"/>
+          <Item Value="quoDepMemType"/>
+          <Item Value="quoMemAnb"/>
+          <Item Value="quoJointMem"/>
+          <Item Value="quoOccupation"/>
+          <Item Value="QMEM_LOADING_TYPE"/>
+          <Item Value="QMEM_DTY_CODE"/>
+          <Item Value="QMEM_MEM_CODE"/>
+          <Item Value="QMEM_CODE"/>
+          <Item Value="QMEM_HEIGHT"/>
+          <Item Value="QMEM_WEIGHT"/>
+          <Item Value="QMEM_WEIGHT_LOADING"/>
+          <Item Value="QMEM_SYSTOLIC_PR"/>
+          <Item Value="QMEM_DIASTOLIC_PR"/>
+          <Item Value="QMEM_BPRESS_LOADING"/>
+          <Item Value="QMEM_LOADING_RATE"/>
+          <Item Value="QMEM_LOADING_DIV_FACT"/>
+          <Item Value="QMEM_TOT_SA"/>
+          <Item Value="coverDescription"/>
+          <Item Value="prod_sht_desc"/>
+          <Item Value="prod_display"/>
+          <Item Value="branch"/>
+          <Item Value="UWYear"/>
+          <Item Value="occupation"/>
+          <Item Value="hazard"/>
+          <Item Value="status"/>
+          <Item Value="effectDate"/>
+          <Item Value="freqofPay"/>
+          <Item Value="QCOIN_CODE"/>
+          <Item Value="QCOIN_QUO_CODE"/>
+          <Item Value="QCOIN_AGN_CODE"/>
+          <Item Value="coinsurer_display"/>
+          <Item Value="QCOIN_SHARE_PCT"/>
+          <Item Value="QCOIN_ADMIN_FEE"/>
+          <Item Value="QCOIN_LEAD_FOLLOW"/>
+          <Item Value="QCOIN_COIN_LEADER_SHARE"/>
+          <Item Value="QTAX_RATE_TYPE"/>
+          <Item Value="PROP_CODE"/>
+          <Item Value="AGN_CODE"/>
+          <Item Value="qua_code"/>
+          <Item Value="qua_agn_code"/>
+          <Item Value="qua_agn_asgn"/>
+          <Item Value="qua_authorized"/>
+          <Item Value="freq_of_payment_disp"/>
+          <Item Value="QEXC_CODE"/>
+          <Item Value="QEXC_POL_QUOT_CODE"/>
+          <Item Value="QEXC_AUTHORISED"/>
+          <Item Value="QEXC_DESC"/>
+          <Item Value="ENQ_quo_code"/>
+          <Item Value="ENQ_quo_no"/>
+          <Item Value="ENQ_CLIENT"/>
+          <Item Value="ENQ_brn_name"/>
+          <Item Value="ENQ_agn_name"/>
+          <Item Value="ENQ_DATE"/>
+          <Item Value="ENQ_STATUS"/>
+          <Item Value="qua_agn_name"/>
+          <Item Value="QCVT_DTY_CODE"/>
+          <Item Value="QCVT_DTY_DESCRIPTION"/>
+          <Item Value="QCVT_AVG_EARN_PER_MEM"/>
+          <Item Value="QCVT_STAFF_DESC"/>
+          <Item Value="QCVT_MULT_EARNINGS_PRD"/>
+          <Item Value="LCA_CATEG_DESC"/>
+          <Item Value="QCVT_FCL_AMT"/>
+          <Item Value="QCVT_OVERRIDE_FCL_AMT"/>
+          <Item Value="SCH_CODE"/>
+          <Item Value="CVT_MAIN_COVER"/>
+          <Item Value="QCVT_MAIN_SA_PERC"/>
+          <Item Value="QCVT_MAIN_COVER"/>
+          <Item Value="MAIN_COVER_DESC"/>
+          <Item Value="QUO_PAY_METHOD"/>
+          <Item Value="QUO_COVER_TO_DATE"/>
+          <Item Value="QDL_DTY_CODE"/>
+          <Item Value="QDL_QCVT_CODE"/>
+          <Item Value="QCOIN_PREMIUM"/>
+          <Item Value="QCOIN_SRVCE_FEE"/>
+          <Item Value="QCOIN_FOLLOWER_LEADER"/>
+          <Item Value="FOLLOWER_LEADER"/>
+          <Item Value="selected"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

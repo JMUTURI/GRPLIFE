@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelBox text="Policy Provisions Details"
+                     inlineStyle="width:681px; height:309px;" id="pb1">
+          <f:facet name="toolbar"/>
+          <af:table value="#{bindings.productProvisions.collectionModel}"
+                    var="row" rows="#{bindings.productProvisions.rangeSize}"
+                    emptyText="#{bindings.productProvisions.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.productProvisions.rangeSize}"
+                    selectedRowKeys="#{bindings.productProvisions.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.productProvisions.collectionModel.makeCurrent}"
+                    rowSelection="single" inlineStyle="height:92px;"
+                    width="421"
+                    binding="#{underwritingManipulation.policyProvisionsLOV}"
+                    id="t1">
+            <af:column sortProperty="PROV_SHT_DESC" sortable="true"
+                       headerText="ID" id="c1">
+              <af:outputText value="#{row.PROV_SHT_DESC}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="PROV_DESC" sortable="true"
+                       headerText="DESCRIPTION" id="c2">
+              <af:outputText value="#{row.PROV_DESC}" id="ot2"/>
+            </af:column>
+            <af:column sortProperty="PPROV_EDITABLE" sortable="true"
+                       headerText="EDITABLE(Y/N)" id="c3">
+              <af:outputText value="#{row.PPROV_EDITABLE}" id="ot3"/>
+            </af:column>
+            <af:column id="c4">
+              <af:commandButton icon="/icon_delete.gif"
+                                action="#{underwritingManipulation.DeletePolicyProvisions}"
+                                id="cb1"/>
+            </af:column>
+          </af:table>
+          <h:panelGrid columns="2" width="10%" id="pg1">
+            <af:table value="#{bindings.policyCoverTypes.collectionModel}"
+                      var="row" rows="#{bindings.policyCoverTypes.rangeSize}"
+                      emptyText="#{bindings.policyCoverTypes.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.policyCoverTypes.rangeSize}"
+                      selectedRowKeys="#{bindings.policyCoverTypes.collectionModel.selectedRow}"
+                      selectionListener="#{underwritingManipulation.GetSelectedCoverType}"
+                      rowSelection="single" inlineStyle="height:69px;"
+                      width="154"
+                      binding="#{underwritingManipulation.policyCoverProvisions}"
+                      id="t2">
+              <af:column sortProperty="PCVT_CVT_SHT_DESC" sortable="true"
+                         headerText="COVERS" inlineStyle="width:50%;" id="c5">
+                <af:outputText value="#{row.PCVT_CVT_SHT_DESC}" id="ot4"/>
+              </af:column>
+            </af:table>
+            <af:outputText id="ot5"/>
+            <af:commandButton text="Add" id="cb2">
+              <af:showPopupBehavior popupId="provisionsPopup"/>
+            </af:commandButton>
+            <af:popup id="provisionsPopup">
+              <af:dialog type="none" title="Select Cover Provision" id="d2">
+                <af:table value="#{bindings.productProvisions1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.productProvisions1.rangeSize}"
+                          emptyText="#{bindings.productProvisions1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.productProvisions1.rangeSize}"
+                          selectedRowKeys="#{bindings.productProvisions1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.productProvisions1.collectionModel.makeCurrent}"
+                          rowSelection="single" inlineStyle="height:87px;"
+                          binding="#{underwritingManipulation.coverTypeProvisions}"
+                          id="t3">
+                  <af:column sortProperty="PROV_SHT_DESC" sortable="true"
+                             headerText="ID" id="c6">
+                    <af:outputText value="#{row.PROV_SHT_DESC}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="PROV_DESC" sortable="true"
+                             headerText="DESCRIPTION" id="c7">
+                    <af:outputText value="#{row.PROV_DESC}" id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="PPROV_EDITABLE" sortable="true"
+                             headerText="EDITABLE" id="c8">
+                    <af:outputText value="#{row.PPROV_EDITABLE}" id="ot8"/>
+                  </af:column>
+                </af:table>
+                <af:commandButton text="OK"
+                                  action="#{underwritingManipulation.SaveCoverProvision}"
+                                  id="cb3"/>
+                <af:commandButton text="Cancel" id="cb4"/>
+              </af:dialog>
+            </af:popup>
+          </h:panelGrid>
+          <h:panelGrid columns="1" width="20%" id="pg2">
+            <af:table value="#{bindings.productProvisions2.collectionModel}"
+                      var="row" rows="#{bindings.productProvisions2.rangeSize}"
+                      emptyText="#{bindings.productProvisions2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.productProvisions2.rangeSize}"
+                      selectedRowKeys="#{bindings.productProvisions2.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.productProvisions2.collectionModel.makeCurrent}"
+                      rowSelection="single" inlineStyle="height:105px;"
+                      binding="#{underwritingManipulation.polCvtProvisions}"
+                      id="t4">
+              <af:column sortProperty="PROV_SHT_DESC" sortable="true"
+                         headerText="ID" id="c9">
+                <af:outputText value="#{row.PROV_SHT_DESC}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="PROV_DESC" sortable="true"
+                         headerText="DESCRIPTION" id="c10">
+                <af:outputText value="#{row.PROV_DESC}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="PPROV_EDITABLE" sortable="true"
+                         headerText="EDITABLE(Y/N)" id="c11">
+                <af:outputText value="#{row.PPROV_EDITABLE}" id="ot11"/>
+              </af:column>
+              <af:column id="c12">
+                <af:commandButton icon="/icon_delete.gif" id="cb5"/>
+              </af:column>
+            </af:table>
+          </h:panelGrid>
+          <af:commandButton text="Next"
+                            action="#{underwritingManipulation.ShowPolicyCategories}"
+                            id="cb6"/>
+          <af:commandButton text="Cancel" id="cb7"/>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

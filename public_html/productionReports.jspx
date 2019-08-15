@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+       <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+     <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+       <f:facet name="center">
+       <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:outputLabel value="Business Generated Period Wise Report"
+                              id="ol3" inlineStyle="font-weight:bold;"/>
+              <af:separator id="s1"/>
+              <h:panelGrid columns="2" id="pg1">
+                <af:outputLabel id="ol1" value="Date From"/>
+                <af:inputDate label="Label 1" id="id1" simple="true"
+                              shortDesc="Date From"
+                              binding="#{CoreReports.prdnDateFrom}">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                <af:outputLabel value="Date To" id="ol2"/>
+                <af:inputDate label="Label 2" id="id2" shortDesc="Date To"
+                              simple="true"
+                              binding="#{CoreReports.prdnDateTo}">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>                
+                <af:commandButton text="Run Report" id="cb1"
+                                  action="#{CoreReports.RunProductionReports}"/>
+              </h:panelGrid>
+            </af:panelGroupLayout>
+          </af:group>
+          </f:facet>
+          </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

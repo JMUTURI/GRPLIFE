@@ -1,0 +1,84 @@
+BEGIN
+Insert into TQC_SYSTEM_REPORTS
+   (RPT_CODE, RPT_SYS_CODE, RPT_NAME, RPT_DESCRIPTION, RPT_DATA_FILE, 
+    RPT_APPLCTN_LEVEL, RPT_ACTIVE)
+ Values
+   (2095, 27, 'MEM_BENEFIT_REPORT', 'Member benefit report', 'mem_ben.xml', 
+    NULL, 'A');
+Insert into TQC_SYSTEM_REPORTS
+   (RPT_CODE, RPT_SYS_CODE, RPT_NAME, RPT_DESCRIPTION, RPT_DATA_FILE, 
+    RPT_APPLCTN_LEVEL, RPT_ACTIVE)
+ Values
+   (2097, 27, 'CLIENTS_BEN_REPORT', 'Client Benefit Report', 'client_ben.xml', 
+    NULL, 'A');
+Insert into TQC_SYS_RPT_TEMPLATES
+   (RPT_TMPL_CODE, RPT_TMPL_RPT_CODE, RPT_TMPL_FILE, RPT_TMPL_NAME, RPT_TMPL_DESCRIPTION, 
+    RPT_TMPL_STYLE_FILE, RPT_TMPL_ACTIVE, RPT_TMPL_ORG_CODE)
+ Values
+   (3415, 2095, 'mem_ben_temp.rtf', 'MEM_BENEFIT_REPORT', 'Member benefit report Template', 
+    'mem_ben_temp.xsl', 'A', NULL);
+Insert into TQC_SYS_RPT_TEMPLATES
+   (RPT_TMPL_CODE, RPT_TMPL_RPT_CODE, RPT_TMPL_FILE, RPT_TMPL_NAME, RPT_TMPL_DESCRIPTION, 
+    RPT_TMPL_STYLE_FILE, RPT_TMPL_ACTIVE, RPT_TMPL_ORG_CODE)
+ Values
+   (3418, 2097, 'client_ben_temp.rtf', 'CLIENTS_BEN_REPORT', 'Client Benefit Report Template', 
+    'client_ben_temp.xsl', 'A', NULL);
+Insert into TQC_SYS_RPT_PARAMETERS
+   (RPTP_CODE, RPTP_RPT_CODE, RPTP_PARAM_NAME, RPTP_PARAM_DESC, RPTP_PARAM_PROMPT, 
+    RPTP_PARAM_TYPE, RPTP_PARENT_CODE, RPTP_QUERY, RPTP_PARAM_CLAUSE, RPTP_USER_REQUIRED, 
+    RPTP_CHILD_CODE)
+ Values
+   (24939, 2095, 'END_DATE', 'END DATE', 'End Date', 
+    'DATE', NULL, NULL, NULL, NULL, 
+    NULL);
+Insert into TQC_SYS_RPT_PARAMETERS
+   (RPTP_CODE, RPTP_RPT_CODE, RPTP_PARAM_NAME, RPTP_PARAM_DESC, RPTP_PARAM_PROMPT, 
+    RPTP_PARAM_TYPE, RPTP_PARENT_CODE, RPTP_QUERY, RPTP_PARAM_CLAUSE, RPTP_USER_REQUIRED, 
+    RPTP_CHILD_CODE)
+ Values
+   (24940, 2095, 'GRP_CLIENT', 'Group Clients', 'Group Clients', 
+    'LOV', NULL, 'SELECT prp_code, prp_surname || '' '' || prp_other_names client
+FROM lms_proposers, lms_grp_class_occupations, lms_life_classes
+WHERE gco_code(+) = prp_gco_code
+AND gco_lc_code = lc_code(+)
+AND prp_class_type = ''G''', NULL, NULL, 
+    NULL);
+Insert into TQC_SYS_RPT_PARAMETERS
+   (RPTP_CODE, RPTP_RPT_CODE, RPTP_PARAM_NAME, RPTP_PARAM_DESC, RPTP_PARAM_PROMPT, 
+    RPTP_PARAM_TYPE, RPTP_PARENT_CODE, RPTP_QUERY, RPTP_PARAM_CLAUSE, RPTP_USER_REQUIRED, 
+    RPTP_CHILD_CODE)
+ Values
+   (24938, 2095, 'START_DATE', 'START DATE', 'Start Date', 
+    'DATE', NULL, NULL, NULL, NULL, 
+    NULL);
+Insert into TQC_SYS_RPT_PARAMETERS
+   (RPTP_CODE, RPTP_RPT_CODE, RPTP_PARAM_NAME, RPTP_PARAM_DESC, RPTP_PARAM_PROMPT, 
+    RPTP_PARAM_TYPE, RPTP_PARENT_CODE, RPTP_QUERY, RPTP_PARAM_CLAUSE, RPTP_USER_REQUIRED, 
+    RPTP_CHILD_CODE)
+ Values
+   (24942, 2097, 'END_DATE', 'END DATE', 'End Date', 
+    'DATE', NULL, NULL, NULL, NULL, 
+    NULL);
+Insert into TQC_SYS_RPT_PARAMETERS
+   (RPTP_CODE, RPTP_RPT_CODE, RPTP_PARAM_NAME, RPTP_PARAM_DESC, RPTP_PARAM_PROMPT, 
+    RPTP_PARAM_TYPE, RPTP_PARENT_CODE, RPTP_QUERY, RPTP_PARAM_CLAUSE, RPTP_USER_REQUIRED, 
+    RPTP_CHILD_CODE)
+ Values
+   (24943, 2097, 'GRP_CLIENT', 'Group Clients', 'Group Clients', 
+    'LOV', NULL, 'SELECT prp_code, prp_surname || '' '' || prp_other_names client
+FROM lms_proposers, lms_grp_class_occupations, lms_life_classes
+WHERE gco_code(+) = prp_gco_code
+AND gco_lc_code = lc_code(+)
+AND prp_class_type = ''G''', NULL, NULL, 
+    NULL);
+Insert into TQC_SYS_RPT_PARAMETERS
+   (RPTP_CODE, RPTP_RPT_CODE, RPTP_PARAM_NAME, RPTP_PARAM_DESC, RPTP_PARAM_PROMPT, 
+    RPTP_PARAM_TYPE, RPTP_PARENT_CODE, RPTP_QUERY, RPTP_PARAM_CLAUSE, RPTP_USER_REQUIRED, 
+    RPTP_CHILD_CODE)
+ Values
+   (24941, 2097, 'START_DATE', 'START DATE', 'Start Date', 
+    'DATE', NULL, NULL, NULL, NULL, 
+    NULL);
+COMMIT;
+END;
+/

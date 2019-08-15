@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>login</display-name>
+        <facet>
+          <facet-name>
+            center
+          </facet-name>
+        </facet>
+      </component>
+    </af:xmlContent>
+      <af:messages id="pt_m1"/>
+      <af:form id="pt_f1" defaultCommand="pt1:loginButton">
+        <af:panelStretchLayout id="pt_psl1">
+          <f:facet name="center">
+            <af:panelGroupLayout layout="scroll"
+                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                 id="pt_pgl1" halign="center">
+              <af:panelBox text="PanelBox2" id="pt_pb2" showHeader="never">
+                <f:facet name="toolbar"/>
+                <af:image source="/images/Group Life Banner.png" id="pt_i1"/>
+              </af:panelBox>
+              <h:panelGrid columns="1" id="pt_pg1">
+                <af:panelBox text="PanelBox1" id="pt_pb1" showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <af:image source="/imageservlet?Id=0&amp;perID=0" id="image1"
+                            shortDesc="Organizational Logo"/>
+                </af:panelBox>
+              </h:panelGrid>
+              <af:facetRef facetName="center"/>
+            </af:panelGroupLayout>
+            <!-- id="af_one_column_footer_stretched"  -->
+          </f:facet>
+          <f:facet name="bottom"/>
+        </af:panelStretchLayout>
+      </af:form>
+  </af:pageTemplateDef>
+</jsp:root>

@@ -1,0 +1,398 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Number Formats" id="d3">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:inputText id="it3" helpTopicId="LmsGrp_seqtemps"
+                          readOnly="true"/>
+            <af:popup id="confirmDel">
+              <af:dialog id="d7" type="none" title="Delete Confirmation">
+                <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <af:outputLabel value="Are you sure you want to Delete?"
+                                  id="ol86" inlineStyle="font-weight:bold;"/>
+                  <h:panelGrid columns="2" id="pg8">
+                    <af:spacer width="10" height="10" id="s3"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg19">
+                    <af:commandButton text="Yes" id="cb24"
+                                      action="#{SetupBean.DeleteObject}"
+                                      partialSubmit="true"/>
+                    <af:commandButton text="No" id="commandButton9"/>
+                  </h:panelGrid>
+                </af:panelBox>
+              </af:dialog>
+            </af:popup>
+            <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                                 id="pgl4">
+              <af:panelBox text="Class of Business" showHeader="never"
+                           id="pb15">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Class of Business" id="ol1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s1"/>
+                <af:popup id="seqTyp">
+                  <af:dialog id="d1" title="Add/Edit Sequence" type="none">
+                    <h:panelGrid columns="2" id="pg4">
+                      <af:outputLabel value="Short Desc" id="ol2"/>
+                      <af:inputText label="Label 1" id="it1" simple="true"
+                                    binding="#{SetupBean.shortDesc}"/>
+                      <af:outputLabel value="Description" id="outputLabel4"/>
+                      <af:inputText label="Label 1" id="inputText1"
+                                    simple="true" binding="#{SetupBean.desc}"/>
+                      <af:outputLabel value="Sequence Type" id="outputLabel5"/>
+                      <af:selectOneChoice label="Label 1" id="soc1"
+                                          simple="true"
+                                          binding="#{SetupBean.seqType}">
+                        <af:selectItem label="Policy No." value="PL" id="si3"/>
+                        <af:selectItem label="Proposal No." value="PR"
+                                       id="si5"/>
+                        <af:selectItem label="Claims" value="CL" id="si2"/>
+                        <af:selectItem label="Quotation No" value="QU"
+                                       id="si1"/>
+                        <af:selectItem label="Agents" value="AG" id="si4"/>
+                        <af:selectItem label="Debit Note No." value="DN"
+                                       id="selectItem1"/>
+                        <af:selectItem label="Credit Note No." value="CR"
+                                       id="si38"/>
+                        <af:selectItem label="Certificate No." value="CN"
+                                       id="si27"/>
+                        <af:selectItem label="NB Endorsement No" id="si28"
+                                       value="NBENDRNO"/>
+                        <af:selectItem label="Renewal Endorsement No" id="si29"
+                                       value="RNENDRNO"/>
+                        <af:selectItem label="AP Endorsement No"
+                                       value="APENDRNO" id="si31"/>
+                        <af:selectItem label="Member No" 
+                                       value="MEM_NO" id="si36"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Length of Seq. No."
+                                      id="outputLabel6"/>
+                      <af:inputText label="Label 1" id="inputText2"
+                                    simple="true"
+                                    binding="#{SetupBean.lengthSeqNo}"/>
+                      <af:outputLabel value="Separator" id="outputLabel7"/>
+                      <af:inputText label="Label 1" id="inputText3"
+                                    simple="true"
+                                    binding="#{SetupBean.separator}"/>
+                      <af:outputLabel value="Predefined Text" id="ol4"/>
+                      <af:inputText label="Label 3" id="it4" simple="true"
+                                    binding="#{SetupBean.text}"/>
+                      <af:outputLabel value="WEF" id="outputLabel8"/>
+                      <af:inputDate label="Label 1" id="id1" simple="true"
+                                    binding="#{SetupBean.wef}">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:inputDate>
+                      <af:outputLabel value="WET" id="outputLabel9"/>
+                      <af:inputDate label="Label 1" id="inputDate1"
+                                    simple="true" binding="#{SetupBean.wet}">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:inputDate>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg5">
+                      <af:commandButton text="Save" id="cb1"
+                                        action="#{SetupBean.SaveSequenceTypes}"/>
+                      <af:commandButton text="Cancel" id="commandButton1"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+                <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                          rows="#{bindings.Setup.rangeSize}"
+                          emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{SetupBean.classListener}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:100%; height:50px; border-style:none;">
+                  <af:column sortProperty="CLA_SHT_DESC" sortable="true"
+                             headerText="Short Description" id="c2">
+                    <af:outputText value="#{row.CLA_SHT_DESC}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="CLA_DESC" sortable="true"
+                             headerText="Description" id="c1" width="200">
+                    <af:outputText value="#{row.CLA_DESC}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="CLA_TYPE" sortable="true"
+                             headerText="Type" id="c3" width="200"
+                             minimumWidth="12">
+                    <af:outputText value="#{row.CLA_TYPE}" id="ot3"/>
+                  </af:column>
+                </af:table>
+                <af:spacer width="10" height="20" id="s2"/>
+                <af:outputLabel value="Sequences" id="outputLabel1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="separator1"/>
+                <h:panelGrid columns="3" id="pg12">
+                  <af:commandButton id="cb19"
+                                    icon="/images/field_group_plus_ena.png"
+                                    action="#{SetupBean.AddSequenceType}"/>
+                  <af:commandButton icon="/images/update_ena.png"
+                                    id="commandButton11"
+                                    action="#{SetupBean.EditSequenceType}"/>
+                  <af:commandButton id="delSeqType"
+                                    icon="/images/delete_ena.png"
+                                    actionListener="#{SetupBean.DeleteListener}"/>
+                </h:panelGrid>
+                <af:table value="#{bindings.Setup1.collectionModel}" var="row"
+                          rows="#{bindings.Setup1.rangeSize}"
+                          emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup1.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{SetupBean.seqTypeListener}"
+                          rowSelection="single" id="t2"
+                          inlineStyle="width:100%; height:130.0px; border-style:none;"
+                          binding="#{SetupBean.seqTypesLOV}">
+                  <af:column sortProperty="LST_SHT_DESC" sortable="true"
+                             headerText="Short Desc" id="c6">
+                    <af:outputText value="#{row.LST_SHT_DESC}" id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="LST_DESC" sortable="true"
+                             headerText="Description" id="c7" width="150">
+                    <af:outputText value="#{row.LST_DESC}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="LST_TYPE_DESC" sortable="true"
+                             headerText="Sequence Type" id="c5" width="150">
+                    <af:outputText value="#{row.LST_TYPE_DESC}" id="ot8"/>
+                  </af:column>
+                  <af:column sortProperty="LST_SEQ_NO_LEN" sortable="true"
+                             headerText="Length of Seq. No." id="c8">
+                    <af:outputText value="#{row.LST_SEQ_NO_LEN}" id="ot5"/>
+                  </af:column>
+                  
+                   <af:column sortProperty="LST_SEPARATOR" sortable="true"
+                             headerText="Separator" id="c18" width="80">
+                    <af:outputText value="#{row.LST_SEPARATOR}" id="ot19"/>
+                  </af:column>
+                  <af:column sortProperty="LST_TEXT" sortable="true"
+                             headerText="Predefined Text" id="c4" width="80">
+                    <af:outputText value="#{row.LST_TEXT}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="LST_WEF" sortable="true"
+                             headerText="WEF" id="c10" width="80">
+                    <af:outputText value="#{row.LST_WEF}" id="ot7">
+                      <af:convertDateTime pattern="#{bindings.Setup1.hints.LST_WEF.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="LST_WET" sortable="true"
+                             headerText="WET" id="c9" width="80">
+                    <af:outputText value="#{row.LST_WET}" id="ot10">
+                      <af:convertDateTime pattern="#{bindings.Setup1.hints.LST_WET.format}"/>
+                    </af:outputText>
+                  </af:column>
+                </af:table>
+                <af:spacer width="10" height="20" id="spacer1"/>
+                <af:popup id="seqTemplate">
+                  <af:dialog id="d2" type="none" title="Sequence Templates">
+                    <h:panelGrid columns="2" id="pg6">
+                      <af:outputLabel value="Order" id="ol3"/>
+                      <af:inputText label="Label 2" id="it2" simple="true"
+                                    binding="#{SetupBean.order}"/>
+                      <af:outputLabel value="Number Component"
+                                      id="outputLabel10"/>
+                      <af:selectOneChoice label="Label 2" id="soc2"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{SetupBean.numCompType}">
+                        <af:selectItem label="Proposal No. Prefix"
+                                       value="PROD_PROP_CODE_FIX" id="si18"/>
+                        <af:selectItem label="Policy No.  Prefix"
+                                       value="PROD_POL_CODE_FIX" id="si26"/>
+                        <af:selectItem label="Claim No. Prefix" id="si42"
+                                       value="PROD_CLM_CODE_FIX"/>
+                        <af:selectItem label="Region Code" value="REG_SHT_DESC"
+                                       id="si24"/>
+                        <af:selectItem label="Branch Code" value="BRN_SHT_DESC"
+                                       id="si14"/>
+                        <af:selectItem label="Agency Code" value="BRA_SHT_DESC"
+                                       id="si6"/>
+                        <af:selectItem label="Unit Code" value="BRU_SHT_DESC"
+                                       id="si19"/>
+                        <af:selectItem label="Product Specific Sequence Number"
+                                       value="SEQ_NO" id="si13"/>
+                        <af:selectItem label="Non Product Specific Sequence Number"
+                                       value="NP_SEQ_NO" id="si16"/>
+                        <af:selectItem label="Debit Note Sequence Number"
+                                       value="DN_SEQ_NO" id="selectItem2"/>
+                        <af:selectItem label="Credit Note Sequence Number" 
+                                       value="CN_SEQ_NO" id="si40"/>
+                        <af:selectItem label="Year(yyyy)" value="YYYY"
+                                       id="si22"/>
+                        <af:selectItem label="Year(yy)" value="YY" id="si20"/>
+                        <af:selectItem label="Separator" value="[SEPARATOR]"
+                                       id="si12"/>
+                        <af:selectItem label="Text" id="si39" value="[TEXT]"/>
+                        <af:selectItem label="Proposal No." value="PROPOSALNO"
+                                       id="si21"/>
+                        <af:selectItem label="Product Sht Desc"
+                                       value="PROD_SHT_DESC" id="si11"/>
+                        <af:selectItem label="Causation Claim Prefix"
+                                       value="CAUS_CLM_PRE" id="si9"/>
+                        <af:selectItem label="Policy Serial Number"
+                                       value="POL_SER_NO" id="si25"/>
+                        <af:selectItem label="Formed Policy Number"
+                                       value="FRMED_POL_NO" id="selectItem3"/>
+                        <af:selectItem label="Member Number" value="MEM_NO"
+                                       id="si7"/>
+                        <af:selectItem label="Agent Account type"
+                                       value="AGENT_TYPE" id="si23"/>
+                        <af:selectItem label="Surname Abbreviation"
+                                       value="SURNAME_ABBRV" id="si15"/>
+                        <af:selectItem label="Agent Sequence Number"
+                                       value="AGENT_SEQ_NO" id="si17"/>
+                        <af:selectItem label="Agent Code" value="AGN_SHT_DESC"
+                                       id="si10"/>
+                        <af:selectItem label="Year Of Death/Accident"
+                                       value="DTH_ACC_YEAR" id="si8"/>
+                        <af:selectItem label="Month of Death/Accident" 
+                                       value="DTH_ACC_MONTH" id="si41"/>
+                        <af:selectItem label="Policy Issue Year"
+                                       value="POL_ISSUE_DATE" id="si30"/>
+                        <af:selectItem label="Policy Renewal Year"
+                                       value="RENEWAL_YEAR" id="si32"/>
+                        <af:selectItem label="Amendment year"
+                                       value="AMENDMENT_YEAR" id="si34"/>
+                        <af:selectItem label="Amendment No" value="AMENDMENT_NO"
+                                       id="si35"/>
+                        <af:selectItem label="Cumulative Renewals"
+                                       value="CUMULATIVE_RENEWALS" id="si33"/>
+                         <af:selectItem label="Member Sequence"
+                                       value="MEMBER_SEQUENCE" id="si37"/>
+                        <af:selectItem label="Monthly sequence" id="si43" value="MONTHLY_SEQ"/>
+                        <af:selectItem label="Client Abbreviation" id="si44" value="ABBREVIATION"/>
+                      </af:selectOneChoice>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg7">
+                      <af:commandButton text="Save" id="cb2"
+                                        action="#{SetupBean.SaveSequenceTemplate}"/>
+                      <af:commandButton text="Cancel" id="commandButton2"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+                <af:popup id="products">
+                  <af:dialog id="dialog1" type="none">
+                    <af:table value="#{bindings.Setup4.collectionModel}"
+                              var="row" rows="#{bindings.Setup4.rangeSize}"
+                              emptyText="#{bindings.Setup4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup4.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Setup4Query.queryDescriptor}"
+                              queryListener="#{bindings.Setup4Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Setup4.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Setup4.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t5" width="500"
+                              binding="#{SetupBean.productsLOV}">
+                      <af:column sortProperty="PROD_SHT_DESC" filterable="true"
+                                 sortable="true" headerText="Short Description"
+                                 id="c16">
+                        <af:outputText value="#{row.PROD_SHT_DESC}" id="ot16"/>
+                      </af:column>
+                      <af:column sortProperty="PROD_DESC" filterable="true"
+                                 sortable="true" headerText="Product" id="c15"
+                                 width="200">
+                        <af:outputText value="#{row.PROD_DESC}" id="ot18"/>
+                      </af:column>
+                      <af:column sortProperty="PROD_TYPE" filterable="true"
+                                 sortable="true" headerText="Product Type"
+                                 id="c17" width="160">
+                        <af:outputText value="#{row.PROD_TYPE}" id="ot17"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="panelGrid1">
+                      <af:commandButton text="Save" id="commandButton3"
+                                        action="#{SetupBean.SaveSequenceproduct}"/>
+                      <af:commandButton text="Cancel" id="commandButton4"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+                <h:panelGrid columns="2" id="pg1">
+                  <h:panelGrid columns="1" id="pg2">
+                    <af:outputLabel value="Sequence Templates" id="outputLabel2"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="separator2"/>
+                    <h:panelGrid columns="3" id="panelGrid2">
+                      <af:commandButton id="commandButton5"
+                                        icon="/images/field_group_plus_ena.png"
+                                        action="#{SetupBean.AddSequenceTemplate}"/>
+                      <af:commandButton icon="/images/update_ena.png"
+                                        id="commandButton6"
+                                        action="#{SetupBean.EditSequenceTemplate}"/>
+                      <af:commandButton id="delSeqTemplate"
+                                        icon="/images/delete_ena.png"
+                                        actionListener="#{SetupBean.DeleteListener}"/>
+                    </h:panelGrid>
+                    <af:table value="#{bindings.Setup2.collectionModel}"
+                              var="row" rows="#{bindings.Setup2.rangeSize}"
+                              emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup2.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t3"
+                              inlineStyle="width:100%; height:170.0px; border-style:none;"
+                              binding="#{SetupBean.seqTempLOV}">
+                      <af:column sortProperty="LNT_ORDER" sortable="true"
+                                 headerText="Order " id="c12">
+                        <af:outputText value="#{row.LNT_ORDER}" id="ot12"/>
+                      </af:column>
+                      <af:column sortProperty="LNT_ITEM_ID" sortable="true"
+                                 headerText="Number Component" id="c11"
+                                 width="200">
+                        <af:outputText value="#{row.LNT_ITEM_ID}" id="ot13"/>
+                      </af:column>
+                    </af:table>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg3">
+                    <af:outputLabel value="Products" id="outputLabel3"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="separator3"/>
+                    <h:panelGrid columns="3" id="panelGrid3">
+                      <af:commandButton id="commandButton8"
+                                        icon="/images/field_group_plus_ena.png">
+                        <af:showPopupBehavior popupId="products"/>
+                      </af:commandButton>
+                      <af:commandButton id="delSeqProduct"
+                                        icon="/images/delete_ena.png"
+                                        actionListener="#{SetupBean.DeleteListener}"/>
+                    </h:panelGrid>
+                    <af:table value="#{bindings.Setup3.collectionModel}"
+                              var="row" rows="#{bindings.Setup3.rangeSize}"
+                              emptyText="#{bindings.Setup3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup3.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.Setup3.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Setup3.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t4"
+                              inlineStyle="width:100%; height:170.0px; border-style:none;"
+                              binding="#{SetupBean.prodSeqLOV}">
+                      <af:column sortProperty="PROD_SHT_DESC" sortable="true"
+                                 headerText="Short Desc" id="c13">
+                        <af:outputText value="#{row.PROD_SHT_DESC}" id="ot14"/>
+                      </af:column>
+                      <af:column sortProperty="PROD_DESC" sortable="true"
+                                 headerText="Product" id="c14" width="200">
+                        <af:outputText value="#{row.PROD_DESC}" id="ot15"/>
+                      </af:column>
+                    </af:table>
+                  </h:panelGrid>
+                </h:panelGrid>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

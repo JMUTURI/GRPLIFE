@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Home">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="pt1">
+        <f:facet name="center">
+          <af:group id="g1">
+            <h:panelGrid columns="2" id="pg2"/>
+            <af:panelSplitter id="ps1" inlineStyle="width:100%; height:410.0px;"
+                              splitterPosition="320" orientation="horizontal"
+                              positionedFromEnd="true">
+              <f:facet name="first">
+                <af:panelGroupLayout layout="scroll"
+                                     xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                     id="pgl1">
+                  <af:panelBox text="My Tickets" id="pb1" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="2" id="pg1"/>
+                    <af:commandLink text="Reinsurance Accounts Report"
+                                    id="rpt1477"
+                                    actionListener="#{ReportsEngine.GetReportDetails}"
+                                    inlineStyle="color:Black; text-decoration:underline;"
+                                    rendered="false"/>
+                    <af:outputLabel value="My Pending Tickets" id="ol1"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="s1"/>
+                    <af:table value="#{bindings.workflow1.collectionModel}"
+                              var="row" rows="#{bindings.workflow1.rangeSize}"
+                              emptyText="#{bindings.workflow1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.workflow1.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.workflowQuery.queryDescriptor}"
+                              queryListener="#{bindings.workflowQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.workflow1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.workflow1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t1"
+                              inlineStyle="width:100%; height:320.0px; border-style:none;"
+                              binding="#{workflowBean.resultsLOV}">
+                      <af:column sortProperty="taskID" sortable="false"
+                                 id="c2ty" visible="#{Rendering.expressVisible}"
+                                 width="80">
+                        <af:commandLink text="Process" id="cl1"
+                                        action="#{workflowBean.findTicket2Selected}"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_CODE" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Ticket ID." id="c8"
+                                 width="70">
+                        <af:outputText value="#{row.TCKT_CODE}" id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_NAME" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Ticket Name"
+                                 id="c3" width="120">
+                        <af:outputText value="#{row.TCKT_NAME}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_REF_NO" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Reference No."
+                                 id="c9">
+                        <af:outputText value="#{row.TCKT_REF_NO}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="SYSMODULE" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Ticket Module."
+                                 id="c11">
+                        <af:outputText value="#{row.SYSMODULE}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="CLIENT" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Client" id="c7"
+                                 width="140">
+                        <af:outputText value="#{row.CLIENT}" id="ot12"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_BY" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Ticket From"
+                                 id="c5">
+                        <af:outputText value="#{row.TCKT_BY}" id="ot13"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_TO" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Ticket Assignee"
+                                 id="c6">
+                        <af:outputText value="#{row.TCKT_TO}" id="ot3"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_DATE" filterable="false"
+                                 sortable="true" headerText="Created On."
+                                 id="c1">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.TCKT_DATE}"
+                                        id="id2"/>
+                        </f:facet>
+                        <af:outputText value="#{row.TCKT_DATE}" id="ot6">
+                          <af:convertDateTime pattern="#{bindings.workflow1.hints.TCKT_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="TCKT_REMARKS" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Ticket Remarks"
+                                 id="c12">
+                        <af:outputText value="#{row.TCKT_REMARKS}" id="ot2"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_POL_NO" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" rendered="false" id="c4">
+                        <af:outputText value="#{row.TCKT_POL_NO}" id="ot1"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_REF_NO" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" rendered="false" id="c10">
+                        <af:outputText value="#{row.TCKT_REF_NO}" id="ot4"/>
+                      </af:column>
+                      <af:column sortProperty="taskID" sortable="false" id="c2"
+                                 visible="#{!Rendering.expressVisible}"
+                                 width="80">
+                        <af:commandLink text="Process" id="cl2"
+                                        action="#{workflowBean.findTicket2Selected}"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="second">
+                <af:panelBox text="My Calendar Events" id="pb5"
+                             inlineStyle="width:100.0%;" showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <af:outputLabel value="My Calendar Events" id="outputLabel1"
+                                  inlineStyle="font-weight:bold;"/>
+                  <af:separator id="separator2"/>
+                  <af:calendar id="cal" value="#{calendarBean.calendarModel}"
+                               binding="#{editor.component}"
+                               calendarActivityListener="#{calendarBean.activityListener}"
+                               calendarListener="#{calendarBean.calendarListener}"
+                               calendarDisplayChangeListener="#{calendarBean.displayChangeListener}"
+                               calendarActivityDurationChangeListener="#{calendarBean.activityDurationChangeListener}"
+                               inlineStyle="height:300.0px; width:300px;">
+                    <f:facet name="create">
+                      <af:popup id="create" contentDelivery="lazyUncached"
+                                popupFetchListener="#{calendarBean.createPopupListener}">
+                        <af:dialog title="Create New Activity" type="okCancel"
+                                   id="d5"
+                                   dialogListener="#{calendarBean.createDialogListener}">
+                          <af:spacer height="20" id="s9"/>
+                          <af:panelFormLayout id="pfl4">
+                            <af:inputText label="Owner"
+                                          value="#{calendarBean.newActivity.providerId}"
+                                          readOnly="true" id="it8"
+                                          binding="#{calendarBean.creOwner}"/>
+                            <af:inputText label="Title"
+                                          value="#{calendarBean.newActivity.title}"
+                                          id="it9"
+                                          binding="#{calendarBean.creTitle}"/>
+                            <af:inputText label="Location"
+                                          value="#{calendarBean.newActivity.location}"
+                                          id="it10"
+                                          binding="#{calendarBean.creLocation}"/>
+                            <af:separator id="s10"/>
+                            <af:selectBooleanCheckbox id="allDayNewFlagId"
+                                                      text="All-Day"
+                                                      value="#{calendarBean.newActivity.allDay}"
+                                                      autoSubmit="true"
+                                                      rendered="false"/>
+                            <af:inputDate label="From"
+                                          value="#{calendarBean.newActivity.from}"
+                                          partialTriggers="allDayNewFlagId"
+                                          id="id7"
+                                          binding="#{calendarBean.creFrom}">
+                              <af:convertDateTime type="#{calendarBean.newActivity.allDay == true ? 'date' : 'both'}"
+                                                  timeZone="#{calendarBean.timeZone}"/>
+                              <af:convertDateTime pattern="yyyy-MM-dd HH:mm:ss aaa"/>
+                            </af:inputDate>
+                            <af:inputDate label="To"
+                                          value="#{calendarBean.newActivity.to}"
+                                          partialTriggers="allDayNewFlagId"
+                                          id="id8"
+                                          binding="#{calendarBean.creTo}">
+                              <af:convertDateTime type="#{calendarBean.newActivity.allDay == true ? 'date' : 'both'}"
+                                                  timeZone="#{calendarBean.timeZone}"/>
+                              <af:convertDateTime pattern="yyyy-MM-dd HH:mm:ss aaa"/>
+                            </af:inputDate>
+                            <af:selectBooleanCheckbox text="Recurring"
+                                                      value="#{calendarBean.newActivity.recurring}"
+                                                      id="sbc4"
+                                                      rendered="false"/>
+                            <af:selectBooleanCheckbox text="Reminder"
+                                                      value="#{calendarBean.newActivity.reminder}"
+                                                      id="sbc5"
+                                                      binding="#{calendarBean.creReminder}"/>
+                            <af:separator id="s11"/>
+                            <af:selectOneChoice label="Priority"
+                                                value="#{calendarBean.newActivity.customAttributes['priority']}"
+                                                id="soc4"
+                                                binding="#{calendarBean.crePriority}">
+                              <f:selectItems value="#{calendarBean.prioritySelectItems}"
+                                             id="si9"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice label="Status"
+                                                value="#{calendarBean.newActivity.customAttributes['status']}"
+                                                id="soc5" rendered="false">
+                              <f:selectItems value="#{calendarBean.statusSelectItems}"
+                                             id="si10"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice label="Access"
+                                                value="#{calendarBean.newActivity.customAttributes['access']}"
+                                                id="soc6" rendered="false">
+                              <f:selectItems value="#{calendarBean.accessSelectItems}"
+                                             id="si11"/>
+                            </af:selectOneChoice>
+                            <af:separator id="separator1"/>
+                            <h:panelGrid columns="2" id="pg5" rendered="false">
+                              <af:commandButton text="Save" id="cb1"
+                                                action="#{calendarBean.CreateNewActivity}"/>
+                              <af:commandButton text="Cancel"
+                                                id="commandButton1"/>
+                            </h:panelGrid>
+                          </af:panelFormLayout>
+                        </af:dialog>
+                      </af:popup>
+                    </f:facet>
+                    <f:facet name="activityDetail">
+                      <af:popup id="edit" contentDelivery="lazyUncached">
+                        <af:dialog rendered="#{calendarBean.currActivity == null}"
+                                   id="d3" title="No activity available">
+                          <af:outputText value="The activity has been deleted and is no longer available."
+                                         id="outputText32"/>
+                        </af:dialog>
+                        <!-- don't render if the activity is null -->
+                        <af:dialog title="#{calendarBean.currActivity.title}"
+                                   type="okCancel"
+                                   dialogListener="#{calendarBean.editDialogListener}"
+                                   rendered="#{calendarBean.currActivity != null}"
+                                   id="d4">
+                          <af:spacer height="20" id="s6"/>
+                          <af:panelFormLayout id="pfl3">
+                            <af:inputText label="Owner"
+                                          value="#{calendarBean.currActivity.providerId}"
+                                          readOnly="true" id="it5"/>
+                            <af:inputText label="Title"
+                                          value="#{calendarBean.currActivity.title}"
+                                          id="it6"/>
+                            <af:inputText label="Location"
+                                          value="#{calendarBean.currActivity.location}"
+                                          id="it7"/>
+                            <af:separator id="s7"/>
+                            <af:selectBooleanCheckbox id="allDayFlagId"
+                                                      text="All-Day"
+                                                      value="#{calendarBean.currActivity.allDay}"
+                                                      autoSubmit="true"
+                                                      rendered="false"/>
+                            <af:inputDate label="From"
+                                          value="#{calendarBean.currActivity.from}"
+                                          partialTriggers="allDayFlagId"
+                                          id="id5">
+                              <af:convertDateTime type="#{calendarBean.currActivity.allDay == true ? 'date' : 'both'}"
+                                                  timeZone="#{calendarBean.timeZone}"/>
+                            </af:inputDate>
+                            <af:inputDate label="To"
+                                          value="#{calendarBean.currActivity.to}"
+                                          partialTriggers="allDayFlagId"
+                                          id="id6">
+                              <af:convertDateTime type="#{calendarBean.currActivity.allDay == true ? 'date' : 'both'}"
+                                                  timeZone="#{calendarBean.timeZone}"/>
+                            </af:inputDate>
+                            <af:selectBooleanCheckbox text="Recurring"
+                                                      value="#{calendarBean.currActivity.recurring}"
+                                                      id="sbc2"
+                                                      rendered="false"/>
+                            <af:selectBooleanCheckbox text="Reminder"
+                                                      value="#{calendarBean.currActivity.reminder}"
+                                                      id="sbc3"/>
+                            <af:separator id="s8"/>
+                            <af:selectOneChoice label="Priority"
+                                                value="#{calendarBean.currActivity.customAttributes['priority']}"
+                                                id="soc1">
+                              <f:selectItems value="#{calendarBean.prioritySelectItems}"
+                                             id="si6"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice label="Status"
+                                                value="#{calendarBean.currActivity.customAttributes['status']}"
+                                                id="soc2" rendered="false">
+                              <f:selectItems value="#{calendarBean.statusSelectItems}"
+                                             id="si7"/>
+                            </af:selectOneChoice>
+                            <af:selectOneChoice label="Access"
+                                                value="#{calendarBean.currActivity.customAttributes['access']}"
+                                                id="soc3" rendered="false">
+                              <f:selectItems value="#{calendarBean.accessSelectItems}"
+                                             id="si8"/>
+                            </af:selectOneChoice>
+                          </af:panelFormLayout>
+                        </af:dialog>
+                      </af:popup>
+                    </f:facet>
+                  </af:calendar>
+                </af:panelBox>
+              </f:facet>
+            </af:panelSplitter>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

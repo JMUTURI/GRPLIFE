@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="prod_budgetPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProductsSetUp.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsSetUpIterator"/>
+    <searchRegion Binds="findProductsSetUpIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+    <methodIterator Binds="findBudgetBranches.result" DataControl="branchesDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.branches"
+                    id="findBudgetBranchesIterator"/>
+    <searchRegion Binds="findBudgetBranchesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="branches1Query"/>
+    <methodIterator Binds="findBudgetTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findBudgetTypesIterator"/>
+    <searchRegion Binds="findBudgetTypesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SetupQuery"/>
+    <methodIterator Binds="findProdBudgetTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProdBudgetTypesIterator"/>
+    <searchRegion Binds="findProdBudgetTypesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup2Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProductsSetUp" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductsSetUp"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsSetUpIterator" id="productDetails">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodCode"/>
+          <Item Value="prodDesc"/>
+          <Item Value="prodshtDesc"/>
+          <Item Value="prodType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findBudgetBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBudgetBranches"
+                  IsViewObjectMethod="false" DataControl="branchesDAO"
+                  InstanceName="branchesDAO.dataProvider"
+                  ReturnName="branchesDAO.methodResults.findBudgetBranches_branchesDAO_dataProvider_findBudgetBranches_result"/>
+    <tree IterBinding="findBudgetBranchesIterator" id="branches">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.branches"
+                      Name="branches0">
+        <AttrNames>
+          <Item Value="BRN_CODE"/>
+          <Item Value="BRN_SHT_DESC"/>
+          <Item Value="BRN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findBudgetBranchesIterator" id="branches1">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.branches"
+                      Name="branches10">
+        <AttrNames>
+          <Item Value="BRN_CODE"/>
+          <Item Value="BRN_SHT_DESC"/>
+          <Item Value="BRN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findBudgetTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBudgetTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findBudgetTypes_SetupsDAO_dataProvider_findBudgetTypes_result"/>
+    <tree IterBinding="findBudgetTypesIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="btsCode"/>
+          <Item Value="btsUwYr"/>
+          <Item Value="btsName"/>
+          <Item Value="btsDesc"/>
+          <Item Value="btsPolEffDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findBudgetTypesIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="btsCode"/>
+          <Item Value="btsUwYr"/>
+          <Item Value="btsName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProdBudgetTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProdBudgetTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProdBudgetTypes_SetupsDAO_dataProvider_findProdBudgetTypes_result"/>
+    <tree IterBinding="findProdBudgetTypesIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="btsName"/>
+          <Item Value="pbgtCode"/>
+          <Item Value="pbgtJanRenAmt"/>
+          <Item Value="pbgtFebRenAmt"/>
+          <Item Value="pbgtMarRenAmt"/>
+          <Item Value="pbgtAprRenAmt"/>
+          <Item Value="pbgtMayRenAmt"/>
+          <Item Value="pbgtJunRenAmt"/>
+          <Item Value="pbgtJulRenAmt"/>
+          <Item Value="pbgtAugRenAmt"/>
+          <Item Value="pbgtSepRenAmt"/>
+          <Item Value="pbgtOctRenAmt"/>
+          <Item Value="pbgtNovRenAmt"/>
+          <Item Value="pbgtDecRenAmt"/>
+          <Item Value="pbgtJanNBAmt"/>
+          <Item Value="pbgtFebNBAmt"/>
+          <Item Value="pbgtMarNBAmt"/>
+          <Item Value="pbgtAprNBAmt"/>
+          <Item Value="pbgtMayNBAmt"/>
+          <Item Value="pbgtJunNBAmt"/>
+          <Item Value="pbgtJulNBAmt"/>
+          <Item Value="pbgtAugNBAmt"/>
+          <Item Value="pbgtSepNBAmt"/>
+          <Item Value="pbgtOctNBAmt"/>
+          <Item Value="pbgtNovNBAmt"/>
+          <Item Value="pbgtDecNBAmt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

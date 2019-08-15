@@ -1,0 +1,8 @@
+SET DEFINE OFF;
+Insert into LMS_GRP_EXCEPTIONS
+   (LGE_CODE, LGE_SHT_DESC, LGE_DESC, LGE_LEVEL, LGE_CHECKED, 
+    LGE_BLOCK)
+ Values
+   (20122, 'MEM_ACLR_CLAIMED', 'The Member is denied the [COVER_TYPE] Cover due to him/her having already claimed on it. ', 'M', 'N', 
+    'N');
+COMMIT;

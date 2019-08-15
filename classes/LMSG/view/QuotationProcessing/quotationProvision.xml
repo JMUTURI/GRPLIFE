@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="quotationProvision" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.quotationProvision" isJavaBased="true">
+  <Attribute Name="quotProvshtDesc" Type="java.lang.String"/>
+  <Attribute Name="quotProvDesc" Type="java.lang.String"/>
+  <Attribute Name="quotProvEditable" Type="java.lang.String"/>
+  <Attribute Name="qpprCode" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.quotationProvision"
+                     BeanClass="LMSG.view.QuotationProcessing.quotationProvision"
+                     id="quotationProvision"/>
+</JavaBean>

@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:group id="g1">
+          <af:panelGroupLayout id="pgl2"/>
+          <af:panelBox text="Search Claim" showHeader="never" id="pb1">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Search Claim" inlineStyle="font-weight:bold;"
+                            id="ol1"/>
+            <af:separator id="s1"/>
+            <h:panelGrid columns="2" id="pg1">
+              <af:outputLabel value="Product " id="ol2"/>
+              <h:panelGrid columns="2" id="pg2">
+                <af:inputText label="Label 1" simple="true" disabled="true"
+                              binding="#{claim.productDesc}" id="it1"/>
+                <af:commandButton icon="/images/dropdown.gif" id="cb1">
+                  <af:showPopupBehavior popupId="product"/>
+                </af:commandButton>
+                <af:popup id="product">
+                  <af:dialog type="none" title="Products" id="dialog1">
+                    <af:table value="#{bindings.prod.collectionModel}" var="row"
+                              rows="#{bindings.prod.rangeSize}"
+                              emptyText="#{bindings.prod.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.prod.rangeSize}"
+                              filterModel="#{bindings.prodQuery.queryDescriptor}"
+                              queryListener="#{bindings.prodQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.prod.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.prod.collectionModel.makeCurrent}"
+                              rowSelection="single"
+                              binding="#{claim.productsLOV}" id="t1">
+                      <af:column sortProperty="prodshtDesc" filterable="true"
+                                 sortable="true" headerText="Short Desc"
+                                 id="c1">
+                        <af:outputText value="#{row.prodshtDesc}" id="ot2"/>
+                      </af:column>
+                      <af:column sortProperty="prodDesc" filterable="true"
+                                 sortable="true" headerText="Product"
+                                 width="200" id="c2">
+                        <af:outputText value="#{row.prodDesc}" id="ot3"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg3">
+                      <af:commandButton text="OK"
+                                        action="#{claim.findProductSelected}"
+                                        id="cb2"/>
+                      <af:commandButton text="Cancel" id="cb3"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Policy" id="ol3"/>
+              <h:panelGrid columns="2" id="pg4">
+                <af:inputText label="Label 1" simple="true" disabled="true"
+                              binding="#{claim.policiesDesc}" id="it2"/>
+                <af:commandButton icon="/images/dropdown.gif" id="cb4">
+                  <af:showPopupBehavior popupId="policy"/>
+                </af:commandButton>
+                <af:popup id="policy">
+                  <af:dialog type="none" title="Policies" id="d2">
+                    <af:table value="#{bindings.policies.collectionModel}"
+                              var="row" rows="#{bindings.policies.rangeSize}"
+                              emptyText="#{bindings.policies.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.policies.rangeSize}"
+                              filterModel="#{bindings.policiesQuery.queryDescriptor}"
+                              queryListener="#{bindings.policiesQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                              rowSelection="single"
+                              binding="#{claim.policiesLOV}" id="t2">
+                      <af:column sortProperty="POL_POLICY_NO" filterable="true"
+                                 sortable="true" headerText="Policy Number"
+                                 id="c3">
+                        <af:outputText value="#{row.POL_POLICY_NO}" id="ot4"/>
+                      </af:column>
+                      <af:column sortProperty="CLIENT_DISPLAY" filterable="true"
+                                 sortable="true" headerText="Client" width="200"
+                                 id="c4">
+                        <af:outputText value="#{row.CLIENT_DISPLAY}" id="ot5"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg5">
+                      <af:commandButton text="OK"
+                                        action="#{claim.findPoliciesSelected}"
+                                        id="cb5"/>
+                      <af:commandButton text="Cancel" id="cb6"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Claim" id="ol4"/>
+              <h:panelGrid columns="2" id="pg6">
+                <af:inputText label="Label 1" simple="true" disabled="true"
+                              binding="#{claim.claimDesc}" id="it3"/>
+                <af:commandButton icon="/images/dropdown.gif" id="cb7">
+                  <af:showPopupBehavior popupId="claims"/>
+                </af:commandButton>
+                <af:popup id="claims">
+                  <af:dialog type="none" title="Claims" id="d3">
+                    <af:table value="#{bindings.Claim.collectionModel}"
+                              var="row" rows="#{bindings.Claim.rangeSize}"
+                              emptyText="#{bindings.Claim.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Claim.rangeSize}"
+                              filterModel="#{bindings.ClaimQuery.queryDescriptor}"
+                              queryListener="#{bindings.ClaimQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Claim.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Claim.collectionModel.makeCurrent}"
+                              rowSelection="single" binding="#{claim.claimLOV}"
+                              id="t3">
+                      <af:column sortProperty="LTR_CLM_NO" filterable="true"
+                                 sortable="true" headerText="Claim Number"
+                                 id="c5">
+                        <af:outputText value="#{row.LTR_CLM_NO}" id="ot6"/>
+                      </af:column>
+                      <af:column sortProperty="LTR_TRANS_NO" filterable="true"
+                                 sortable="true" headerText="Trans No." id="c6">
+                        <af:outputText value="#{row.LTR_TRANS_NO}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="LTR_BTR_TRANS_CODE"
+                                 filterable="true" sortable="true"
+                                 headerText="Trans Code" id="c7">
+                        <af:outputText value="#{row.LTR_BTR_TRANS_CODE}"
+                                       id="ot8"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg7">
+                      <af:commandButton text="OK"
+                                        action="#{claim.findClaimSelected}"
+                                        id="cb8"/>
+                      <af:commandButton text="Cancel" id="cb9"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:outputLabel value="Policy Number" id="ol5"/>
+              <h:panelGrid columns="1" id="pg8">
+                <af:inputText simple="true"
+                              required="#{bindings.LTR_POL_POLICY_NO.hints.mandatory}"
+                              columns="#{bindings.LTR_POL_POLICY_NO.hints.displayWidth}"
+                              maximumLength="#{bindings.LTR_POL_POLICY_NO.hints.precision}"
+                              shortDesc="#{bindings.LTR_POL_POLICY_NO.hints.tooltip}"
+                              disabled="true" binding="#{claim.editPolNo}"
+                              id="it4"/>
+              </h:panelGrid>
+              <af:outputLabel value="Transaction No." id="ol6"/>
+              <h:panelGrid columns="1" id="pg9">
+                <af:inputText simple="true"
+                              required="#{bindings.LTR_TRANS_NO.hints.mandatory}"
+                              columns="#{bindings.LTR_TRANS_NO.hints.displayWidth}"
+                              maximumLength="#{bindings.LTR_TRANS_NO.hints.precision}"
+                              shortDesc="#{bindings.LTR_TRANS_NO.hints.tooltip}"
+                              disabled="true" binding="#{claim.editTransNo}"
+                              id="it5"/>
+              </h:panelGrid>
+            </h:panelGrid>
+            <af:spacer width="10" height="15" id="s2"/>
+            <af:commandButton text="Next" action="#{claim.SearchClaim}"
+                              id="cb10"/>
+          </af:panelBox>
+        </af:group>
+      </f:facet>
+    </af:pageTemplate>
+  </f:view>
+</jsp:root>

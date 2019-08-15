@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="renMedRatingsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findRenMedicalRatings.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findRenMedicalRatingsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findRenMedicalRatings" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRenMedicalRatings"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findRenMedicalRatings_SetupsDAO_dataProvider_findRenMedicalRatings_result"/>
+    <tree IterBinding="findRenMedicalRatingsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="GFM_ANB_FROM"/>
+          <Item Value="GFM_ANB_TO"/>
+          <Item Value="GFM_LAST_MEDICAL_DURATION"/>
+          <Item Value="GMF_INCREASE_SA_LAST_MED_PERC"/>
+          <Item Value="GFM_INCREASE_TYPE"/>
+          <Item Value="GFM_INCREASE_MULT_DIV_FACT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

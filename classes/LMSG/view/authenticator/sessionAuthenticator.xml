@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="sessionAuthenticator" Package="LMSG.view.authenticator"
+          BeanClass="LMSG.view.authenticator.sessionAuthenticator"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="false" Type="java.lang.String" id="Authenticate"
+                  ReturnNodeName="Return"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String"
+                  id="browseAuthenticate" ReturnNodeName="Return"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.authenticator.sessionAuthenticator"
+                     BeanClass="LMSG.view.authenticator.sessionAuthenticator"
+                     id="sessionAuthenticator"/>
+</JavaBean>

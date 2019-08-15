@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="medTestGroupingPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findMedTestGroups.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findMedTestGroupsIterator"/>
+    <methodIterator Binds="findMedTestGroupTests.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findMedTestGroupTestsIterator"/>
+    <methodIterator Binds="findMedicalTests.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findMedicalTestsIterator"/>
+    <searchRegion Binds="findMedicalTestsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup2Query"/>
+    <methodIterator Binds="findOrgCurrencies.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findOrgCurrenciesIterator"/>
+    <searchRegion Binds="findOrgCurrenciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup4Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findMedTestGroups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMedTestGroups"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findMedTestGroups_SetupsDAO_dataProvider_findMedTestGroups_result"/>
+    <tree IterBinding="findMedTestGroupsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="MTG_SHT_DESC"/>
+          <Item Value="MTG_DESC"/>
+          <Item Value="MTG_WEF"/>
+          <Item Value="MTG_WET"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findMedTestGroupTests" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMedTestGroupTests"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findMedTestGroupTests_SetupsDAO_dataProvider_findMedTestGroupTests_result"/>
+    <tree IterBinding="findMedTestGroupTestsIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="MTL_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findMedicalTests" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMedicalTests"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findMedicalTests_SetupsDAO_dataProvider_findMedicalTests_result"/>
+    <tree IterBinding="findMedicalTestsIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="MTL_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findOrgCurrencies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOrgCurrencies"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="data.SetupsDAO.methodResults.findOrgCurrencies_SetupsDAO_dataProvider_findOrgCurrencies_result"/>
+    <tree IterBinding="findOrgCurrenciesIterator" id="Setup4">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup40">
+        <AttrNames>
+          <Item Value="cur_code"/>
+          <Item Value="cur_symbol"/>
+          <Item Value="cur_desc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+
+
+  </bindings>
+</pageDefinition>

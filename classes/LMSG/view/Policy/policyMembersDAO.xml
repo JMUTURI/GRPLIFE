@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="policyMembersDAO" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.policyMembersDAO" isJavaBased="true">
+  <Attribute Name="templateTranSeq" Type="int"/>
+  <Attribute Name="templateType" Type="java.lang.String"/>
+  <Attribute Name="templayeTypeInt" Type="int"/>
+  <Attribute Name="quotationNo" Type="java.lang.String"/>
+  <Attribute Name="emailCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="UWYear" Type="java.lang.String"/>
+  <Attribute Name="prpDesc" Type="java.lang.String"/>
+  <Attribute Name="gcoDesc" Type="java.lang.String"/>
+  <Attribute Name="policyNumberSel" Type="java.lang.String"/>
+  <Attribute Name="taskselName" Type="java.lang.String"/>
+  <Attribute Name="taskselAssignee" Type="java.lang.String"/>
+  <Attribute Name="taskselDueDate" Type="java.util.Date"/>
+  <Attribute Name="taskselID" Type="java.lang.String"/>
+  <Attribute Name="taskselCreateDate" Type="java.util.Date"/>
+  <Attribute Name="pmasCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pmasshtdesc" Type="java.lang.String"/>
+  <Attribute Name="brnName" Type="java.lang.String"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="taskActivityName" Type="java.lang.String"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policyMembers"
+                  BeanClass="LMSG.view.Policy.policyMembers"
+                  id="FindPolicyMembers" ReturnNodeName="policyMembers"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String" id="parseDate"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="somedate" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.policyMembers"
+                  BeanClass="LMSG.view.Policy.policyMembers"
+                  id="FindPolicyMemberAtCovers" ReturnNodeName="policyMembers"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Policy.policyMembersDAO"
+                     BeanClass="LMSG.view.Policy.policyMembersDAO"
+                     id="policyMembersDAO"/>
+</JavaBean>

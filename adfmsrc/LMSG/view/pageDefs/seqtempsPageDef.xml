@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="seqtempsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findClassesofBusiness.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findClassesofBusinessIterator"/>
+    <methodIterator Binds="findSequenceTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findSequenceTypesIterator"/>
+    <methodIterator Binds="findSequenceTemplates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findSequenceTemplatesIterator"/>
+    <methodIterator Binds="findProductSeqTemplates.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findProductSeqTemplatesIterator"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup4Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findClassesofBusiness" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClassesofBusiness"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findClassesofBusiness_SetupsDAO_dataProvider_findClassesofBusiness_result"/>
+    <tree IterBinding="findClassesofBusinessIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="CLA_SHT_DESC"/>
+          <Item Value="CLA_DESC"/>
+          <Item Value="CLA_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSequenceTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSequenceTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findSequenceTypes_SetupsDAO_dataProvider_findSequenceTypes_result"/>
+    <tree IterBinding="findSequenceTypesIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="LST_SHT_DESC"/>
+          <Item Value="LST_DESC"/>
+          <Item Value="LST_TYPE_DESC"/>
+          <Item Value="LST_SEQ_NO_LEN"/>
+          <Item Value="LST_SEPARATOR"/>
+          <Item Value="LST_WEF"/>
+          <Item Value="LST_WET"/>
+          <Item Value="LST_TEXT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSequenceTemplates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSequenceTemplates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findSequenceTemplates_SetupsDAO_dataProvider_findSequenceTemplates_result"/>
+    <tree IterBinding="findSequenceTemplatesIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="LNT_ORDER"/>
+          <Item Value="LNT_ITEM_ID"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductSeqTemplates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductSeqTemplates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProductSeqTemplates_SetupsDAO_dataProvider_findProductSeqTemplates_result"/>
+    <tree IterBinding="findProductSeqTemplatesIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="PROD_SHT_DESC"/>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="Setup4">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup40">
+        <AttrNames>
+          <Item Value="PROD_SHT_DESC"/>
+          <Item Value="PROD_DESC"/>
+          <Item Value="PROD_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

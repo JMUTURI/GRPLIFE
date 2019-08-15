@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+  <skin>
+    <id>myskin.desktop</id>
+    <family>myskin</family>
+    <extends>fusion.desktop</extends>
+    <style-sheet-name>css/layout.css</style-sheet-name>
+  </skin>
+</skins>

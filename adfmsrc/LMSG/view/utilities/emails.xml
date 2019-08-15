@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="emails" Package="LMSG.view.utilities"
+          BeanClass="LMSG.view.utilities.emails" isJavaBased="true">
+  <Attribute Name="CLNT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="CLNT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="CLNT_NAME" Type="java.lang.String"/>
+  <Attribute Name="CLNT_OTHER_NAMES" Type="java.lang.String"/>
+  <Attribute Name="NAME" Type="java.lang.String"/>
+  <Attribute Name="AGN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="AGN_NAME" Type="java.lang.String"/>
+  <Attribute Name="QUOT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QUOT_NO" Type="java.lang.String"/>
+  <Attribute Name="POL_BATCH_NO" Type="java.math.BigDecimal"/>
+  <Attribute Name="POL_POLICY_NO" Type="java.lang.String"/>
+  <Attribute Name="cmb_claim_no" Type="java.lang.String"/>
+  <Attribute Name="SYS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="SYS_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="SYS_NAME" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.utilities.emails"
+                     BeanClass="LMSG.view.utilities.emails" id="emails"/>
+</JavaBean>

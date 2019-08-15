@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="prodTaxes" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.prodTaxes"
+          isJavaBased="true">
+  <Attribute Name="TT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TRT_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TRT_DIVISION_FACTOR" Type="java.math.BigDecimal"/>
+  <Attribute Name="TRT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TT_RENEWAL_ENDOS" Type="java.lang.String"/>
+  <Attribute Name="TRT_RATE_TYPE" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.prodTaxes"
+                     BeanClass="LMSG.view.QuotationProcessing.prodTaxes" id="prodTaxes"/>
+</JavaBean>

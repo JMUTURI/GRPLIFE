@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="periodsDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.periodsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.periods"
+                  BeanClass="com.turnkey.setups.periods" id="findPeriods"
+                  ReturnNodeName="periods"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="com.turnkey.setups.periodsDAO"
+                     BeanClass="com.turnkey.setups.periodsDAO" id="periodsDAO"/>
+</JavaBean>

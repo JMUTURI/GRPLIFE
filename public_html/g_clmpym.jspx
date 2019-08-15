@@ -1,0 +1,1106 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Group Life | Claim Payments" id="d2">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <h:panelGrid columns="3" id="panelGrid20">
+                <af:outputLabel value="My Current Ticket:" id="outputLabel57"/>
+                <af:outputText value="#{LOVC.taskActivityName}" id="ot59"
+                               inlineStyle="font-weight:bold;"/>
+                  <af:commandLink text="[Re-Assign Ticket]" id="cl3"
+                                inlineStyle="Font-weight:bold;text-decoration:underline">
+                  <af:showPopupBehavior popupId="p14"/>
+                </af:commandLink>
+                
+                <af:popup id="p14">
+                  <af:dialog id="d441" type="none" title="Re-Assign User">
+                    <af:table value="#{bindings.Settings16.collectionModel}"
+                              var="row" rows="#{bindings.Settings16.rangeSize}"
+                              emptyText="#{bindings.Settings16.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Settings16.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Settings16Query.queryDescriptor}"
+                              queryListener="#{bindings.Settings16Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              rowSelection="single" id="t491"
+                              inlineStyle="width:300px"
+                              binding="#{claim.ticketsUserLOV}">
+                      <af:column sortProperty="USR_CODE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Settings16.hints.USR_CODE.label}"
+                                 id="c2511" visible="false">
+                        <af:outputText value="#{row.USR_CODE}" id="ot2741"/>
+                      </af:column>
+                      <af:column sortProperty="USR_USERNAME" filterable="true"
+                                 sortable="true" headerText="User Name"
+                                 id="c2521">
+                        <af:outputText value="#{row.USR_USERNAME}" id="ot2731"/>
+                      </af:column>
+                      <af:column sortProperty="USR_NAME" filterable="true"
+                                 sortable="true" headerText="Name" id="c2531"
+                                 width="170px">
+                        <af:outputText value="#{row.USR_NAME}" id="ot2721"/>
+                      </af:column>
+                    </af:table>
+                    <af:inputText label="Remarks" id="it801" rows="6" columns="50"
+                                  value="Add Remarks" simple="true"
+                                  binding="#{claim.tcktAsignee}"></af:inputText>
+                    <af:separator id="s201"/>
+                    <h:panelGrid columns="3">
+                      <af:spacer width="30" height="10" id="s191"/>
+                      <af:commandButton text="Save" id="cb113"
+                                        action="#{claim.ticketAssignee}"/>
+                      <af:commandButton text="Cancel" id="cb114"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <af:panelBox text="Claim Payments For Claim No. #{sessionScope['ClaimNo']}" id="pb3">
+                <f:facet name="toolbar"/>
+                <af:spacer width="10" height="10"
+                           inlineStyle="font-weight:bold;" id="s1"/>
+                <af:panelBox text="Policy Details" id="pb1">
+                  <f:facet name="toolbar"/>
+                  <h:panelGrid columns="11"
+                               style="color:Black; font-weight:bold;" id="pg1">
+                    <af:outputLabel value="Policy No." id="ol3"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.POL_POLICY_NO.inputValue}"
+                                   id="ot2"/>
+                    <af:spacer width="10" height="10" id="s2"/>
+                    <af:outputLabel value="Client" id="ol4"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.CLIENT_DISPLAY.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot3"/>
+                    <af:spacer width="10" height="10" id="s5"/>
+                    <af:outputLabel value="Product Description" id="ol5"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.POL_PROD_SHT_DESC.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot4"/>
+                    <af:spacer width="10" height="10" id="s7"/>
+                    <af:outputLabel value="Branch" id="ol6"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.BRANCH_DISPLAY.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot5"/>
+                    <af:outputLabel value="Inception Date" id="ol7"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.POL_INCEPTION_DATE.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot6">
+                      <af:convertDateTime pattern="#{bindings.POL_INCEPTION_DATE.format}"/>
+                    </af:outputText>
+                    <af:spacer width="10" height="10" id="s8"/>
+                    <af:outputLabel value="U/W Year" id="ol8"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.UW_YEAR.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot7"/>
+                    <af:spacer width="10" height="10" id="s9"/>
+                    <af:outputLabel value="Effective Date" id="outputLabel1"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.POL_EFFECTIVE_DATE.inputValue}"
+                                   inlineStyle="font-weight:bold;"
+                                   id="outputText1">
+                      <af:convertDateTime pattern="#{bindings.POL_EFFECTIVE_DATE.format}"/>
+                    </af:outputText>
+                    <af:spacer width="10" height="10" id="s10"/>
+                    <af:outputLabel value="Expiry Date" id="outputLabel2"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.EXPIRY_DATE_DISPLAY.inputValue}"
+                                   inlineStyle="font-weight:bold;"
+                                   id="outputText2">
+                      <af:convertDateTime pattern="#{bindings.EXPIRY_DATE_DISPLAY.format}"/>
+                    </af:outputText>
+                     <af:outputLabel value="Currency" id="ol22"  inlineStyle="text-decoration:underline;"/>
+                     <af:outputText value="#{bindings.pol_cur_symbol.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot5666"/>
+                  </h:panelGrid>
+                </af:panelBox>
+                <af:spacer width="10" height="10" id="spacer1"/>
+                <af:panelBox text="Claim Details" id="pb2">
+                  <f:facet name="toolbar"/>
+                  <h:panelGrid columns="6" id="pg2">
+                    <af:outputLabel value="Claim No." id="ol10"/>
+                    <af:inputText value="#{bindings.CLM_NO.inputValue}"
+                                  simple="true"
+                                  required="#{bindings.CLM_NO.hints.mandatory}"
+                                  columns="#{bindings.CLM_NO.hints.displayWidth}"
+                                  maximumLength="#{bindings.CLM_NO.hints.precision}"
+                                  shortDesc="#{bindings.CLM_NO.hints.tooltip}"
+                                  disabled="true" id="it1"
+                                  readOnly="true">
+                      <f:validator binding="#{bindings.CLM_NO.validator}"/>
+                    </af:inputText>
+                     <af:outputLabel value="Mem No." id="ol13w"/>
+                    <af:inputText value="#{bindings.CLM_MEM_NO.inputValue}"
+                                 id="it2w"
+                                  readOnly="true"
+                                  contentStyle="font-weight:bold;">
+                    </af:inputText>
+                    <af:outputLabel value="Member Name" id="ol19"/>
+                   <af:inputText value="#{bindings.CLM_MEMBER_DISPLAY.inputValue}"
+                                 id="it2w4"
+                                  readOnly="true"
+                                  contentStyle="font-weight:bold;">
+                    </af:inputText>
+                    
+                    <af:outputLabel value="Causation" id="ol11"/>
+                    <af:inputText value="#{bindings.CLM_CAUS_DESC.inputValue}"
+                                  simple="true"
+                                  required="#{bindings.CLM_CAUS_DESC.hints.mandatory}"
+                                  columns="#{bindings.CLM_CAUS_DESC.hints.displayWidth}"
+                                  maximumLength="#{bindings.CLM_CAUS_DESC.hints.precision}"
+                                  shortDesc="#{bindings.CLM_CAUS_DESC.hints.tooltip}"
+                                  disabled="true" id="it2"
+                                  readOnly="true">
+                      <f:validator binding="#{bindings.CLM_CAUS_DESC.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="Claim Status" id="ol12"/>
+                    <af:selectOneChoice label="Label 1"
+                                        value="#{bindings.CLM_STATUS.inputValue}"
+                                        simple="true" disabled="true" id="soc1"
+                                        readOnly="true">
+                      <af:selectItem label="Closed (No Claim)" value="CN"
+                                     id="si1"/>
+                      <af:selectItem label="Closed (Settled)" value="CS"
+                                     id="si2"/>
+                      <af:selectItem label="Outstanding" value="OS" id="si3"/>
+                      <af:selectItem label="Reopened" value="RO" id="si4"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="Date" id="ol13"/>
+                    <af:inputDate label="Label 1" id="id2"
+                                  value="#{bindings.CLM_DATE.inputValue}"
+                                  simple="true" disabled="true"
+                                  readOnly="true">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                    </af:inputDate>              
+                    <af:outputLabel value="Gross Ret Amt" id="ol14"/>
+                    <af:inputText value="#{bindings.CLM_GROSS_RET_AMT.inputValue}"
+                                  simple="true"
+                                  required="#{bindings.CLM_GROSS_RET_AMT.hints.mandatory}"
+                                  columns="#{bindings.CLM_GROSS_RET_AMT.hints.displayWidth}"
+                                  maximumLength="#{bindings.CLM_GROSS_RET_AMT.hints.precision}"
+                                  shortDesc="#{bindings.CLM_GROSS_RET_AMT.hints.tooltip}"
+                                  disabled="true" id="it4"
+                                  readOnly="true">
+                      <f:validator binding="#{bindings.CLM_GROSS_RET_AMT.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="Net Ret Amt" id="ol15"/>
+                    <af:inputText value="#{bindings.CLM_RETETION_AMT.inputValue}"
+                                  simple="true"
+                                  required="#{bindings.CLM_RETETION_AMT.hints.mandatory}"
+                                  columns="#{bindings.CLM_RETETION_AMT.hints.displayWidth}"
+                                  maximumLength="#{bindings.CLM_RETETION_AMT.hints.precision}"
+                                  shortDesc="#{bindings.CLM_RETETION_AMT.hints.tooltip}"
+                                  disabled="true" id="it5"
+                                  readOnly="true">
+                      <f:validator binding="#{bindings.CLM_RETETION_AMT.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="XOL Rec. Amt" id="ol16"/>
+                    <af:inputText value="#{bindings.CLM_RECOVERY_AMT.inputValue}"
+                                  simple="true"
+                                  required="#{bindings.CLM_RECOVERY_AMT.hints.mandatory}"
+                                  columns="#{bindings.CLM_RECOVERY_AMT.hints.displayWidth}"
+                                  maximumLength="#{bindings.CLM_RECOVERY_AMT.hints.precision}"
+                                  shortDesc="#{bindings.CLM_RECOVERY_AMT.hints.tooltip}"
+                                  disabled="true" id="it6"
+                                  readOnly="true">
+                      <f:validator binding="#{bindings.CLM_RECOVERY_AMT.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel value="XOL Total Recd. Amt" id="ol17"/>
+                    <af:inputText value="#{bindings.CLM_RECOVERED_AMT.inputValue}"
+                                  simple="true"
+                                  required="#{bindings.CLM_RECOVERED_AMT.hints.mandatory}"
+                                  columns="#{bindings.CLM_RECOVERED_AMT.hints.displayWidth}"
+                                  maximumLength="#{bindings.CLM_RECOVERED_AMT.hints.precision}"
+                                  shortDesc="#{bindings.CLM_RECOVERED_AMT.hints.tooltip}"
+                                  disabled="true" id="it7"
+                                  readOnly="true">
+                      <f:validator binding="#{bindings.CLM_RECOVERED_AMT.validator}"/>
+                    </af:inputText>
+                    <af:outputLabel id="outputLabel9"/>
+                  </h:panelGrid>
+                </af:panelBox>
+                <h:panelGrid columns="1" id="pg3">
+                  <af:commandButton text="Back To Claim"
+                                    action="#{claim.ReturnToLandingScreen}"
+                                    id="cb1"/>
+                </h:panelGrid>
+                <af:panelTabbed inlineStyle="width:100.0%; height:200px;"
+                                id="pt1">
+                  <af:showDetailItem text="Voucher Details" id="sdi4"
+                                     inlineStyle="text-decoration:underline;">
+                    <af:panelBox id="pb4" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <h:panelGrid columns="7" id="pg4">
+                        <af:commandButton id="commandButton2"
+                                          icon="/images/update_ena.png"
+                                          action="#{claim.EditVoucher}"/>
+                        <af:commandButton text="Make Ready" id="cb2"
+                                          action="#{claim.MakeReady}"/>
+                        <af:commandButton text="Update Client FeedBack"
+                                          id="commandButton4"
+                                          action="#{claim.UpdateClientFeedBack}"/>
+                        <af:commandButton text="Authorise"
+                                          id="commandButton1"
+                                          action="#{claim.authorizeVoucher}"/>
+                        <af:spacer width="100" height="10" id="s3"/>
+                        <af:commandLink text="Print Discharge Voucher"
+                                        id="rpt1479"
+                                        actionListener="#{ReportsEngine.GetReportDetails}"
+                                        rendered="#{!Rendering.pensionproduct}"/>
+                      </h:panelGrid>
+                      <af:popup id="p1">
+                        <af:dialog id="d1" type="none" title="Edit Voucher">
+                          <h:panelGrid columns="2" id="pg5">
+                            <af:outputLabel value="Voucher No." id="ol2"/>
+                            <af:outputText value="outputText1" id="ot26"
+                                           inlineStyle="font-weight:bold;"
+                                           binding="#{claim.voucherLabel}"/>
+                            <af:outputLabel value="Payee" id="outputLabel10"/>
+                            <af:outputText value="outputText1" id="outputText3"
+                                           inlineStyle="font-weight:bold;"
+                                           binding="#{claim.payeeLabel}"/>
+                            <af:outputLabel value="Dispatch Status"
+                                            id="outputLabel11"/>
+                            <af:selectOneChoice label="Label 2" id="soc2"
+                                                simple="true"
+                                                binding="#{claim.dispStatus}">
+                              <af:selectItem label="Pending" value="PEND"
+                                             id="si6"/>
+                              <af:selectItem label="Rejected" value="REJ"
+                                             id="si5"/>
+                              <af:selectItem label="Accepted" value="ACC"
+                                             id="si7"/>
+                            </af:selectOneChoice>
+                            <af:outputLabel value="Client Acc No." id="ol223"/>
+                            <af:inputText id="it1675" binding="#{claim.vchrAccNo}" disabled="true"/>
+                                        
+                          </h:panelGrid>
+                          <h:panelGrid columns="2" id="pg6">
+                            <af:commandButton text="Save" id="commandButton3"
+                                              action="#{claim.UpdateVoucherStatus}"/>
+                            <af:commandButton text="Cancel" id="cb3"/>
+                          </h:panelGrid>
+                        </af:dialog>
+                      </af:popup>
+                      <!-- NEW MFT POP UP -->
+                      <af:popup id="mftpop">
+                        <af:dialog id="mftdiag" type="none" title="MFT Payment Details">
+                          <h:panelGrid columns="2" id="pg8">
+                            <af:outputLabel value="Payment Method Sub Type"
+                                            id="ol1"/>
+                            <h:panelGrid columns="2" id="pg88">
+                                <af:inputText id="ot56"
+                                               disabled="true"
+                                               binding="#{claim.provSubType}"/>
+                                <af:commandButton id="cb4" icon="/dropdown.gif">
+                                    <af:showPopupBehavior popupId="mftpay_type"/>
+                                </af:commandButton>
+                            </h:panelGrid>
+                            <af:outputLabel value="Mobile No."
+                                            id="ol9"/>
+                            <af:inputText id="ot5665"
+                                           binding="#{claim.mobileNumber}"/>
+                            <af:outputLabel value="Identity Type" id="ol991"/>
+                            <af:selectOneChoice id="soc3" 
+                                              binding="#{claim.idType}">
+                              <af:selectItem label="ID" value="I" id="si9"/>
+                              <af:selectItem label="Passport" value="P" id="si8"/>
+                          </af:selectOneChoice>
+                            <af:outputLabel value="ID/ Passport No." id="ol18"/>
+                            <af:inputText id="it18"
+                                           binding="#{claim.passIdNo}"/>
+                          </h:panelGrid>
+                          <h:panelGrid columns="2" id="pg9">
+                            <af:commandButton text="Save" id="cb6"         
+                            action="#{claim.updatePaymentDetails}"/>
+                            <af:commandButton text="Cancel" id="cb7"/>
+                          </h:panelGrid>
+                        </af:dialog>
+                      </af:popup>
+                      <!--END MFT POP UP-->
+                      <!--INTERIOR-->
+                      <af:popup id="mftpay_type">
+                        <af:dialog id="mftpay_type1" type="none" title="Mobile Payment Type">
+                          <h:panelGrid columns="1" id="pg11">
+                            <af:table value="#{bindings.Claim8.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Claim8.rangeSize}"
+                                      emptyText="#{bindings.Claim8.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Claim8.rangeSize}"
+                                      rowBandingInterval="0"
+                                      filterModel="#{bindings.Claim8Query.queryDescriptor}"
+                                      queryListener="#{bindings.Claim8Query.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.Claim8.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.Claim8.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t9"
+                                      binding="#{claim.providersTableLOV}">
+                              <af:column sortProperty="MPT_CODE"
+                                         filterable="true" sortable="true"
+                                         visible="false"
+                                         headerText="#{bindings.Claim8.hints.MPT_CODE.label}"
+                                         id="c64">
+                                <af:outputText value="#{row.MPT_CODE}"
+                                               id="ot62"/>
+                              </af:column>
+                              <af:column sortProperty="MPT_DESC"
+                                         filterable="true" sortable="true"
+                                         headerText="Provider"
+                                         id="c65">
+                                <af:outputText value="#{row.MPT_DESC}"
+                                               id="ot58"/>
+                              </af:column>
+                              <af:column sortProperty="MPT_SHT_DESC"
+                                         filterable="true" sortable="true"
+                                         headerText="Provider Short Desc."
+                                         id="c62">
+                                <af:outputText value="#{row.MPT_SHT_DESC}"
+                                               id="ot57"/>
+                              </af:column>
+                              <af:column sortProperty="MPT_MIN_AMT_ALLOWED"
+                                         filterable="true" sortable="true"
+                                         headerText="Min. Amount"
+                                         id="c66">
+                                <af:outputText value="#{row.MPT_MIN_AMT_ALLOWED}"
+                                               id="ot61"/>
+                              </af:column>
+                              <af:column sortProperty="MPT_MAX_AMT_ALLOWED"
+                                         filterable="true" sortable="true"
+                                         headerText="Max. Amount"
+                                         id="c67">
+                                <af:outputText value="#{row.MPT_MAX_AMT_ALLOWED}"
+                                               id="ot60"/>
+                              </af:column>                       
+                            </af:table>
+                            <h:panelGrid columns="2" id="pg10">
+                                <af:commandButton text="Select" id="cbb66"
+                                              partialSubmit="true"
+                                              action="#{claim.providerSelected}"/>
+                                <af:commandButton text="Cancel" id="cb8"/>
+                            </h:panelGrid>
+                          </h:panelGrid>
+                        </af:dialog>
+                      </af:popup>
+                      <!--END-->
+                      <af:table value="#{bindings.Claim.collectionModel}"
+                                var="row" rows="#{bindings.Claim.rangeSize}"
+                                emptyText="#{bindings.Claim.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Claim.rangeSize}"
+                                selectionListener="#{claim.VoucherListener}"
+                                rowSelection="single"
+                                binding="#{claim.claimVouchers}"
+                                inlineStyle="width:100.0%; height:120px; border-style:none;"
+                                id="t1">
+                        <af:column sortProperty="cpvVouvherNo" sortable="false"
+                                   headerText="Voucher No" id="c1">
+                          <af:outputText value="#{row.cpvVouvherNo}" id="ot8"/>
+                        </af:column>
+                        <af:column sortProperty="cpvDate" sortable="false"
+                                   headerText="Date" id="c2">
+                          <af:outputText value="#{row.cpvDate}" id="ot9">
+                            <af:convertDateTime pattern="#{bindings.Claim.hints.cpvDate.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="cpvAmount" sortable="false"
+                                   headerText="Voucher Amount" id="c3">
+                          <af:outputText value="#{row.cpvAmount}" id="ot10"/>
+                        </af:column>
+                        <af:column sortProperty="cpvPayee" sortable="false"
+                                   headerText="Payee" id="c4" width="200">
+                          <af:outputText value="#{row.cpvPayee}" id="ot11"/>
+                        </af:column>
+                        <af:column sortProperty="CPV_DISP_STATUS_DISP"
+                                   sortable="false" headerText="Dispatch Status"
+                                   id="c20">
+                          <af:outputText value="#{row.CPV_DISP_STATUS_DISP}"
+                                         id="ot27"/>
+                        </af:column>
+                        <af:column sortProperty="cpvSarAmt" sortable="false"
+                                   headerText="Savings" id="c5">
+                          <af:outputText value="#{row.cpvSarAmt}" id="ot12"/>
+                        </af:column>
+                        <af:column sortProperty="cpvLoanAmt" sortable="false"
+                                   headerText="Loans" id="c6">
+                          <af:outputText value="#{row.cpvLoanAmt}" id="ot13"/>
+                        </af:column>
+                        <af:column sortProperty="cpvTransType" sortable="false"
+                                   headerText="Trans Source" id="c7">
+                          <af:outputText value="#{row.cpvTransType}" id="ot14"/>
+                        </af:column>
+                        <af:column sortProperty="cpvTransType" sortable="false"
+                                   headerText="Pay Method" id="c58">
+                          <af:selectOneChoice label="Label 3" id="soc4" 
+                                              value="#{row.cpv_payment_mode}"
+                                              binding="#{claim.paymentMode}"
+                                              autoSubmit="true"
+                                              valueChangeListener="#{claim.payMethod}">                            
+                            <af:selectItem label="EFT" value="EFT" id="si11"/>
+							<af:selectItem label="CHQ" value="CHQ" id="si10"/>
+                            <af:selectItem label="MFT" value="MFT" id="si118"/>
+                          </af:selectOneChoice>
+                        </af:column>
+                         <af:column sortProperty="cpvTransType" sortable="false"
+                                   headerText="Client Acc No" id="c60">
+                          <af:inputText label="Label 7" id="it15"
+                                        binding="#{claim.clientACCNo}"
+                                        value="#{row.cpv_bbr_acc_no}"/>
+                        </af:column>
+                     
+                         <af:column sortProperty="cpvTransType" sortable="false"
+                                   headerText="Client Bank" id="c59" width="300">
+                               <h:panelGrid columns="2" id="pg7">    
+                          <af:commandButton id="cb5" icon="/dropdown.gif">
+                          <af:showPopupBehavior popupId="bank_details"/>
+                          </af:commandButton>
+                          <af:inputText simple="true" label="Label 8" id="it16" readOnly="true" rendered="true"
+                                        binding="#{claim.bank_display}"
+                                        value="#{row.BBR_BRANCH_NAME}"/>
+                              </h:panelGrid>          
+                          <af:popup id="bank_details">
+                     <af:dialog id="d13" title="Bank Details" okVisible="false" cancelVisible="false">
+                        <af:panelBox text="PanelBox7" id="pb13" showHeader="never">
+                          <f:facet name="toolbar"/>
+                                <af:panelBox id="pb5"
+                                             showHeader="never">
+                                  <f:facet name="toolbar"/>
+                                  <h:panelGrid columns="1" id="pg12">
+                                    <af:inputText label="Bank Branch Name:" id="it17"
+                                                  binding="#{claim.bankBrnchSearch}"/>
+                                    <af:commandButton text="Search"
+                                                      id="cb9"
+                                                      partialSubmit="true"
+                                                      action="#{claim.SearchBankBranch}"/>
+                                  </h:panelGrid>
+                                </af:panelBox>
+                                <af:panelGroupLayout id="pgl3"
+                                                     partialTriggers="cb5">
+                                  <af:panelBox id="pb6" showHeader="never">
+                                    <f:facet name="toolbar"/>
+                                    <af:table value="#{bindings.Claim7.collectionModel}"
+                                              var="row"
+                                              rows="#{bindings.Claim7.rangeSize}"
+                                              emptyText="#{bindings.Claim7.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.Claim7.rangeSize}"
+                                              rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.Claim7.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.Claim7.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="t8"
+                                              binding="#{claim.clientBankLOV}"
+                                              contentDelivery="immediate">
+                                      <af:column sortProperty="#{bindings.Claim7.hints.BBR_CODE.name}"
+                                                 sortable="true"
+                                                 headerText="Branch Code"
+                                                 id="c63" rendered="false">
+                                        <af:outputText value="#{row.BBR_CODE}"
+                                                       id="ot55"/>
+                                      </af:column>
+                                      <af:column sortProperty="#{bindings.Claim7.hints.BBR_BRANCH_NAME.name}"
+                                                 sortable="true"
+                                                 headerText="Bank Branch"
+                                                 id="c61" width="300">
+                                        <af:outputText value="#{row.BBR_BRANCH_NAME}"
+                                                       id="ot63"/>
+                                      </af:column>
+                                    </af:table>
+                                  </af:panelBox>
+                                </af:panelGroupLayout>
+                                <h:panelGrid columns="2" id="pg40">
+                            <af:commandButton text="Ok" id="cb30"
+                                              action="#{claim.selectBankAction}"/>
+                            <af:commandButton text="Cancel" id="cb31"/>
+                          </h:panelGrid>
+                        </af:panelBox>
+                      </af:dialog>
+                    </af:popup>
+                          
+                          
+                        </af:column>
+                        
+                        <af:column sortProperty="POLM_CODE" sortable="false"
+                                   id="c8" visible="false">
+                          <af:commandLink text="Authorise"
+                                          action="#{claim.authorizeVoucher}"
+                                          id="cl1"/>
+                        </af:column>
+                        <af:column sortProperty="cpv_authorised" sortable="false"
+                                   id="c57" visible="true" headerText="Voucher Authorised" width="150">
+                        <af:outputText value="#{row.cpv_authorised}" id="ot54"/>
+                        </af:column>
+                      </af:table>
+                   
+                    </af:panelBox>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Voucher Cover Details" id="sdi1"
+                                     inlineStyle="text-decoration:underline;">
+                    <af:table value="#{bindings.Claim1.collectionModel}"
+                              var="row" rows="#{bindings.Claim1.rangeSize}"
+                              emptyText="#{bindings.Claim1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Claim1.rangeSize}"
+                              filterModel="#{bindings.Claim1Query.queryDescriptor}"
+                              queryListener="#{bindings.Claim1Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Claim1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Claim1.collectionModel.makeCurrent}"
+                              rowSelection="single"
+                              inlineStyle="width:100.0%; height:100px; border-style:none;"
+                              binding="#{claim.voucherDetails}" id="t2">
+                      <af:column sortProperty="cpvVouvherNo" sortable="false"
+                                 headerText="Voucher No."
+                                 id="c30" filterable="true">
+                        <af:outputText value="#{row.cpvVouvherNo}" id="ot37"/>
+                      </af:column>
+                      <af:column sortProperty="cvtDesc" filterable="true"
+                                 sortable="true" headerText="Cover" id="c9"
+                                 width="200">
+                        <af:outputText value="#{row.cvtDesc}" id="ot15"/>
+                      </af:column>
+                      <af:column sortProperty="cpvPayee" sortable="false"
+                                 headerText="Payee" id="c31" filterable="true">
+                        <af:outputText value="#{row.cpvPayee}" id="ot38"/>
+                      </af:column>
+                       <af:column sortProperty="cpvMftProvider" sortable="false"
+                                 headerText="Provider" id="c313" filterable="true">
+                        <af:outputText value="#{row.cpvMftProvider}" id="ot388"/>
+                      </af:column>
+                       <af:column sortProperty="cpvAccNo" sortable="false"
+                                 headerText="Acc No" id="c312" filterable="true">
+                        <af:outputText value="#{row.cpvAccNo}" id="ot389"/>
+                      </af:column>
+                      <af:column sortProperty="cpvdDate" filterable="true"
+                                 sortable="true" headerText="Date" id="c10"
+                                 width="200">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.cpvdDate}"
+                                        id="id1"/>
+                        </f:facet>
+                        <af:outputText value="#{row.cpvdDate}" id="ot16">
+                          <af:convertDateTime pattern="#{bindings.Claim1.hints.cpvdDate.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="cpvdAmount" filterable="true"
+                                 sortable="true" headerText="Amount" id="c11">
+                        <af:outputText value="#{row.cpvdAmount}" id="ot17"/>
+                      </af:column>
+                    </af:table>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Group Life RI" id="sdi2"
+                                     inlineStyle="text-decoration:underline;">
+                    <af:table value="#{bindings.Claim2.collectionModel}"
+                              var="row" rows="#{bindings.Claim2.rangeSize}"
+                              emptyText="#{bindings.Claim2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Claim2.rangeSize}"
+                              selectedRowKeys="#{bindings.Claim2.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Claim2.collectionModel.makeCurrent}"
+                              rowSelection="single"
+                              inlineStyle="width:100.0%; height:100px; border-style:none;"
+                              binding="#{claim.groupLifeRI}" id="t3">
+                      <af:column sortProperty="CRCTD_CPV_VOUCHER_NO"
+                                 sortable="false" headerText="Voucher No."
+                                 id="c45">
+                        <af:outputText value="#{row.CRCTD_CPV_VOUCHER_NO}"
+                                       id="ot52"/>
+                      </af:column>
+                      <af:column sortProperty="reiTrtShtDesc" sortable="true"
+                                 headerText="Treaty" id="c12" width="200">
+                        <af:outputText value="#{row.bindings.reiTrtShtDesc.inputValue}"
+                                       id="ot18"/>
+                      </af:column>
+                      <af:column sortProperty="cvtDesc" sortable="true"
+                                 headerText="Cover Type" id="c13" width="200">
+                        <af:outputText value="#{row.cvtDesc}" id="ot19"/>
+                      </af:column>
+                      <af:column sortProperty="coritdCessionRate"
+                                 sortable="true" headerText="Cede Rate"
+                                 id="c14">
+                        <af:outputText value="#{row.coritdCessionRate}"
+                                       id="ot20"/>
+                      </af:column>
+                      <af:column sortProperty="coritdAmount" sortable="true"
+                                 headerText="Amount" id="c15">
+                        <af:outputText value="#{row.coritdAmount}" id="ot21"/>
+                      </af:column>
+                    </af:table>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Group Participants RI" id="sdi3"
+                                     inlineStyle="text-decoration:underline;">
+                    <af:table value="#{bindings.Claim3.collectionModel}"
+                              var="row" rows="#{bindings.Claim3.rangeSize}"
+                              emptyText="#{bindings.Claim3.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Claim3.rangeSize}"
+                              selectedRowKeys="#{bindings.Claim3.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Claim3.collectionModel.makeCurrent}"
+                              rowSelection="single"
+                              inlineStyle="width:100.0%; height:100px; border-style:none;"
+                              binding="#{claim.participantsRI}" id="t4">
+                      <af:column sortProperty="CRCTD_CPV_VOUCHER_NO"
+                                 sortable="false" headerText="Voucher No."
+                                 id="c46">
+                        <af:outputText value="#{row.CRCTD_CPV_VOUCHER_NO}"
+                                       id="ot53"/>
+                      </af:column>
+                      <af:column sortProperty="coriptAgenShtDesc"
+                                 sortable="true" headerText="Reinsurer" id="c16"
+                                 width="200">
+                        <af:outputText value="#{row.coriptAgenShtDesc}"
+                                       id="ot22"/>
+                      </af:column>
+                      <af:column sortProperty="cvtDesc" sortable="true"
+                                 headerText="Treaty" id="c17" width="200">
+                        <af:outputText value="#{row.cvtDesc}" id="ot23"/>
+                      </af:column>
+                      <af:column sortProperty="coriptCessionRate"
+                                 sortable="true" headerText="Cession Rate"
+                                 id="c18">
+                        <af:outputText value="#{row.coriptCessionRate}"
+                                       id="ot24"/>
+                      </af:column>
+                      <af:column sortProperty="coriptAmount" sortable="true"
+                                 headerText="Amount" id="c19">
+                        <af:outputText value="#{row.coriptAmount}" id="ot25"/>
+                      </af:column>
+                    </af:table>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Claim Exceptions " id="sdi6">
+                    <af:panelBox text="PanelBox8" id="pb7" showHeader="never">
+                       <h:panelGrid columns="1" id="pg27">
+                      <af:commandButton text="Authorise Exception" id="cb26"
+                                        action="#{claim.ProcessClaimException}"/>
+                    </h:panelGrid>
+                    <af:separator/>
+                      <af:table value="#{bindings.Claim9.collectionModel}"
+                                var="row" rows="#{bindings.Claim9.rangeSize}"
+                                emptyText="#{bindings.Claim9.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Claim9.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.Claim9Query.queryDescriptor}"
+                                queryListener="#{bindings.Claim9Query.processQuery}"
+                                filterVisible="true" varStatus="vs" id="t10"
+                                inlineStyle="width:100%;height:100px"
+                                binding="#{claim.exceptionLOV}"
+                                rowSelection="single">
+                        <af:column sortProperty="QEXC_CODE" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.Claim9.hints.QEXC_CODE.label}"
+                                   id="c68"
+                                   visible="false">
+                          <af:outputText value="#{row.QEXC_CODE}" id="ot65"/>
+                        </af:column>
+                        <af:column sortProperty="QEXC_DESC" filterable="false"
+                                   sortable="true"
+                                   headerText="Exception Description"
+                                   id="c69"
+                                   width="500">
+                          <af:outputText value="#{row.QEXC_DESC}" id="ot64"/>
+                        </af:column>
+                            <af:column sortProperty="CCVT_DESC" sortable="false"
+                                 headerText="Authorised By" id="c144" width="150">
+                        <af:outputText value="#{row.CCVT_DESC}" id="ot149"/>
+                      </af:column>
+                      <af:column sortProperty="AGN_NAME" sortable="false"
+                                 headerText="Date Authorised" id="c145" width="150">
+                        <af:outputText value="#{row.AGN_NAME}" id="ot150"/>
+                      </af:column>
+                      <af:column sortProperty="QEXC_AUTHORISED"
+                                 filterable="true" sortable="true"
+                                 headerText="Authorised" id="c146" width="150">
+                        <af:outputText value="#{row.QEXC_AUTHORISED}"
+                                       id="ot151"/>
+                      </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Beneficiary Payments" id="sdi5"
+                                     rendered="false">
+                    <af:table value="#{bindings.Claim4.collectionModel}"
+                              var="row" rows="#{bindings.Claim4.rangeSize}"
+                              emptyText="#{bindings.Claim4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Claim4.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Claim4Query.queryDescriptor}"
+                              queryListener="#{bindings.Claim4Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Claim4.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Claim4.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t5">
+                      <af:column sortProperty="BPY_CODE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim4.hints.BPY_CODE.label}"
+                                 id="c24">
+                        <af:outputText value="#{row.BPY_CODE}" id="ot30"/>
+                      </af:column>
+                      <af:column sortProperty="BPY_NAME" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim4.hints.BPY_NAME.label}"
+                                 id="c27">
+                        <af:outputText value="#{row.BPY_NAME}" id="ot29"/>
+                      </af:column>
+                      <af:column sortProperty="BPY_AMOUNT" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim4.hints.BPY_AMOUNT.label}"
+                                 id="c22">
+                        <af:outputText value="#{row.BPY_AMOUNT}" id="ot32"/>
+                      </af:column>
+                      <af:column sortProperty="BPY_PAY_DATE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim4.hints.BPY_PAY_DATE.label}"
+                                 id="c26">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.BPY_PAY_DATE}"
+                                        id="id3"/>
+                        </f:facet>
+                        <af:outputText value="#{row.BPY_PAY_DATE}" id="ot28">
+                          <af:convertDateTime pattern="#{bindings.Claim4.hints.BPY_PAY_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="BPY_PAID" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim4.hints.BPY_PAID.label}"
+                                 id="c28">
+                        <af:outputText value="#{row.BPY_PAID}" id="ot36"/>
+                      </af:column>
+                      <af:column sortProperty="BPY_PAID_DISPLAY"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Claim4.hints.BPY_PAID_DISPLAY.label}"
+                                 id="c25">
+                        <af:outputText value="#{row.BPY_PAID_DISPLAY}"
+                                       id="ot31"/>
+                      </af:column>
+                      <af:column sortProperty="BPY_PAY_TERM" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim4.hints.BPY_PAY_TERM.label}"
+                                 id="c29">
+                        <af:outputText value="#{row.BPY_PAY_TERM}" id="ot33"/>
+                      </af:column>
+                      <af:column sortProperty="BPY_CLASS" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim4.hints.BPY_CLASS.label}"
+                                 id="c23">
+                        <af:outputText value="#{row.BPY_CLASS}" id="ot34"/>
+                      </af:column>
+                      <af:column sortProperty="BPY_VOUCHER_NO" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim4.hints.BPY_VOUCHER_NO.label}"
+                                 id="c21">
+                        <af:outputText value="#{row.BPY_VOUCHER_NO}" id="ot35"/>
+                      </af:column>
+                    </af:table>
+                    <af:table value="#{bindings.Claim6.collectionModel}"
+                              var="row" rows="#{bindings.Claim6.rangeSize}"
+                              emptyText="#{bindings.Claim6.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Claim6.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Claim6Query.queryDescriptor}"
+                              queryListener="#{bindings.Claim6Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Claim6.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Claim6.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t7" visible="false">
+                      <af:column sortProperty="PABP_CODE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim6.hints.PABP_CODE.label}"
+                                 id="c53">
+                        <af:inputText value="#{row.bindings.PABP_CODE.inputValue}"
+                                      label="#{bindings.Claim6.hints.PABP_CODE.label}"
+                                      required="#{bindings.Claim6.hints.PABP_CODE.mandatory}"
+                                      columns="#{bindings.Claim6.hints.PABP_CODE.displayWidth}"
+                                      maximumLength="#{bindings.Claim6.hints.PABP_CODE.precision}"
+                                      shortDesc="#{bindings.Claim6.hints.PABP_CODE.tooltip}"
+                                      id="it8">
+                          <f:validator binding="#{row.bindings.PABP_CODE.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="PABP_NO" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim6.hints.PABP_NO.label}"
+                                 id="c54">
+                        <af:inputText value="#{row.bindings.PABP_NO.inputValue}"
+                                      label="#{bindings.Claim6.hints.PABP_NO.label}"
+                                      required="#{bindings.Claim6.hints.PABP_NO.mandatory}"
+                                      columns="#{bindings.Claim6.hints.PABP_NO.displayWidth}"
+                                      maximumLength="#{bindings.Claim6.hints.PABP_NO.precision}"
+                                      shortDesc="#{bindings.Claim6.hints.PABP_NO.tooltip}"
+                                      id="it13">
+                          <f:validator binding="#{row.bindings.PABP_NO.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="PAB_SURNAME" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim6.hints.PAB_SURNAME.label}"
+                                 id="c51">
+                        <af:inputText value="#{row.bindings.PAB_SURNAME.inputValue}"
+                                      label="#{bindings.Claim6.hints.PAB_SURNAME.label}"
+                                      required="#{bindings.Claim6.hints.PAB_SURNAME.mandatory}"
+                                      columns="#{bindings.Claim6.hints.PAB_SURNAME.displayWidth}"
+                                      maximumLength="#{bindings.Claim6.hints.PAB_SURNAME.precision}"
+                                      shortDesc="#{bindings.Claim6.hints.PAB_SURNAME.tooltip}"
+                                      id="it10">
+                          <f:validator binding="#{row.bindings.PAB_SURNAME.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="PAB_OTHERNAMES" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim6.hints.PAB_OTHERNAMES.label}"
+                                 id="c48">
+                        <af:inputText value="#{row.bindings.PAB_OTHERNAMES.inputValue}"
+                                      label="#{bindings.Claim6.hints.PAB_OTHERNAMES.label}"
+                                      required="#{bindings.Claim6.hints.PAB_OTHERNAMES.mandatory}"
+                                      columns="#{bindings.Claim6.hints.PAB_OTHERNAMES.displayWidth}"
+                                      maximumLength="#{bindings.Claim6.hints.PAB_OTHERNAMES.precision}"
+                                      shortDesc="#{bindings.Claim6.hints.PAB_OTHERNAMES.tooltip}"
+                                      id="it14">
+                          <f:validator binding="#{row.bindings.PAB_OTHERNAMES.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="PABP_DATE_DUE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim6.hints.PABP_DATE_DUE.label}"
+                                 id="c55">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.PABP_DATE_DUE}"
+                                        id="id7"/>
+                        </f:facet>
+                        <af:inputDate value="#{row.bindings.PABP_DATE_DUE.inputValue}"
+                                      label="#{bindings.Claim6.hints.PABP_DATE_DUE.label}"
+                                      required="#{bindings.Claim6.hints.PABP_DATE_DUE.mandatory}"
+                                      shortDesc="#{bindings.Claim6.hints.PABP_DATE_DUE.tooltip}"
+                                      id="id6">
+                          <f:validator binding="#{row.bindings.PABP_DATE_DUE.validator}"/>
+                          <af:convertDateTime pattern="#{bindings.Claim6.hints.PABP_DATE_DUE.format}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column sortProperty="PABP_AMOUNT" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim6.hints.PABP_AMOUNT.label}"
+                                 id="c50">
+                        <af:inputText value="#{row.bindings.PABP_AMOUNT.inputValue}"
+                                      label="#{bindings.Claim6.hints.PABP_AMOUNT.label}"
+                                      required="#{bindings.Claim6.hints.PABP_AMOUNT.mandatory}"
+                                      columns="#{bindings.Claim6.hints.PABP_AMOUNT.displayWidth}"
+                                      maximumLength="#{bindings.Claim6.hints.PABP_AMOUNT.precision}"
+                                      shortDesc="#{bindings.Claim6.hints.PABP_AMOUNT.tooltip}"
+                                      id="it3">
+                          <f:validator binding="#{row.bindings.PABP_AMOUNT.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="PABP_PAID" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim6.hints.PABP_PAID.label}"
+                                 id="c56">
+                        <af:inputText value="#{row.bindings.PABP_PAID.inputValue}"
+                                      label="#{bindings.Claim6.hints.PABP_PAID.label}"
+                                      required="#{bindings.Claim6.hints.PABP_PAID.mandatory}"
+                                      columns="#{bindings.Claim6.hints.PABP_PAID.displayWidth}"
+                                      maximumLength="#{bindings.Claim6.hints.PABP_PAID.precision}"
+                                      shortDesc="#{bindings.Claim6.hints.PABP_PAID.tooltip}"
+                                      id="it11">
+                          <f:validator binding="#{row.bindings.PABP_PAID.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="PABP_PAID_DATE" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Claim6.hints.PABP_PAID_DATE.label}"
+                                 id="c49">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.PABP_PAID_DATE}"
+                                        id="id5"/>
+                        </f:facet>
+                        <af:inputDate value="#{row.bindings.PABP_PAID_DATE.inputValue}"
+                                      label="#{bindings.Claim6.hints.PABP_PAID_DATE.label}"
+                                      required="#{bindings.Claim6.hints.PABP_PAID_DATE.mandatory}"
+                                      shortDesc="#{bindings.Claim6.hints.PABP_PAID_DATE.tooltip}"
+                                      id="id4">
+                          <f:validator binding="#{row.bindings.PABP_PAID_DATE.validator}"/>
+                          <af:convertDateTime pattern="#{bindings.Claim6.hints.PABP_PAID_DATE.format}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column sortProperty="PABP_VOUCHER_NO"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Claim6.hints.PABP_VOUCHER_NO.label}"
+                                 id="c52">
+                        <af:inputText value="#{row.bindings.PABP_VOUCHER_NO.inputValue}"
+                                      label="#{bindings.Claim6.hints.PABP_VOUCHER_NO.label}"
+                                      required="#{bindings.Claim6.hints.PABP_VOUCHER_NO.mandatory}"
+                                      columns="#{bindings.Claim6.hints.PABP_VOUCHER_NO.displayWidth}"
+                                      maximumLength="#{bindings.Claim6.hints.PABP_VOUCHER_NO.precision}"
+                                      shortDesc="#{bindings.Claim6.hints.PABP_VOUCHER_NO.tooltip}"
+                                      id="it9">
+                          <f:validator binding="#{row.bindings.PABP_VOUCHER_NO.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="CRCTD_CPV_VOUCHER_NO"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Claim6.hints.CRCTD_CPV_VOUCHER_NO.label}"
+                                 id="c47">
+                        <af:inputText value="#{row.bindings.CRCTD_CPV_VOUCHER_NO.inputValue}"
+                                      label="#{bindings.Claim6.hints.CRCTD_CPV_VOUCHER_NO.label}"
+                                      required="#{bindings.Claim6.hints.CRCTD_CPV_VOUCHER_NO.mandatory}"
+                                      columns="#{bindings.Claim6.hints.CRCTD_CPV_VOUCHER_NO.displayWidth}"
+                                      maximumLength="#{bindings.Claim6.hints.CRCTD_CPV_VOUCHER_NO.precision}"
+                                      shortDesc="#{bindings.Claim6.hints.CRCTD_CPV_VOUCHER_NO.tooltip}"
+                                      id="it12">
+                          <f:validator binding="#{row.bindings.CRCTD_CPV_VOUCHER_NO.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                    </af:table>
+                  </af:showDetailItem>
+                </af:panelTabbed>
+                <af:table value="#{bindings.Claim5.collectionModel}" var="row"
+                          rows="#{bindings.Claim5.rangeSize}"
+                          emptyText="#{bindings.Claim5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Claim5.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.Claim5Query.queryDescriptor}"
+                          queryListener="#{bindings.Claim5Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.Claim5.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.Claim5.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t6" visible="false">
+                  <af:column sortProperty="CCVT_CODE" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_CODE.label}"
+                             id="c41">
+                    <af:outputText value="#{row.CCVT_CODE}" id="ot44"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_DESC" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CVT_DESC.label}"
+                             id="c35">
+                    <af:outputText value="#{row.CVT_DESC}" id="ot43"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_MULT_EARNINGS_PRD"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_MULT_EARNINGS_PRD.label}"
+                             id="c32">
+                    <af:outputText value="#{row.CCVT_MULT_EARNINGS_PRD}"
+                                   id="ot41"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_EARNINGS" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_EARNINGS.label}"
+                             id="c37">
+                    <af:outputText value="#{row.CCVT_EARNINGS}" id="ot50"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_SA" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_SA.label}"
+                             id="c44">
+                    <af:outputText value="#{row.CCVT_SA}" id="ot48"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_PAYABLE_AMT" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_PAYABLE_AMT.label}"
+                             id="c38">
+                    <af:outputText value="#{row.CCVT_PAYABLE_AMT}" id="ot40"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_AMT_CLAIMED" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_AMT_CLAIMED.label}"
+                             id="c36">
+                    <af:outputText value="#{row.CCVT_AMT_CLAIMED}" id="ot51"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_AMT_TO_BE_PAID"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_AMT_TO_BE_PAID.label}"
+                             id="c39">
+                    <af:outputText value="#{row.CCVT_AMT_TO_BE_PAID}"
+                                   id="ot49"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_BUT_PAY_AMT" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_BUT_PAY_AMT.label}"
+                             id="c43">
+                    <af:outputText value="#{row.CCVT_BUT_PAY_AMT}" id="ot45"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_PAID_AMT" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_PAID_AMT.label}"
+                             id="c34">
+                    <af:outputText value="#{row.CCVT_PAID_AMT}" id="ot42"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_REMARKS" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_REMARKS.label}"
+                             id="c40">
+                    <af:outputText value="#{row.CCVT_REMARKS}" id="ot47"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_PAID" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_PAID.label}"
+                             id="c42">
+                    <af:outputText value="#{row.CCVT_PAID}" id="ot46"/>
+                  </af:column>
+                  <af:column sortProperty="CCVT_PAYEE" filterable="true"
+                             sortable="true"
+                             headerText="#{bindings.Claim5.hints.CCVT_PAYEE.label}"
+                             id="c33">
+                    <af:outputText value="#{row.CCVT_PAYEE}" id="ot39"/>
+                  </af:column>
+                </af:table>
+                <af:popup id="users">
+                  <af:dialog id="dialog4" type="none"
+                             title="Users To Assign the Task">
+                    <af:table value="#{bindings.workflow.collectionModel}"
+                              var="row" rows="#{bindings.workflow.rangeSize}"
+                              emptyText="#{bindings.workflow.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.workflow.rangeSize}"
+                              rowBandingInterval="0"
+                              queryListener="#{bindings.workflowQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.workflow.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.workflow.collectionModel.makeCurrent}"
+                              rowSelection="single" id="table2" width="310"
+                              binding="#{claim.usersLOV}">
+                      <af:column sortProperty="taskUserID" filterable="true"
+                                 sortable="true" headerText="ID" id="column2"
+                                 visible="false">
+                        <af:outputText value="#{row.taskUserID}"
+                                       id="outputText43"/>
+                      </af:column>
+                      <af:column sortProperty="taskUserShtDesc"
+                                 filterable="true" sortable="true"
+                                 headerText="User Short Desc" id="column3">
+                        <af:outputText value="#{row.taskUserShtDesc}"
+                                       id="outputText44"/>
+                      </af:column>
+                      <af:column sortProperty="taskUserDesc" filterable="true"
+                                 sortable="true" headerText="User Name"
+                                 id="column4" width="200">
+                        <af:outputText value="#{row.taskUserDesc}"
+                                       id="outputText45"/>
+                      </af:column>
+                    </af:table>
+                    <af:inputText label="Remarks" id="inputText31" rows="3"
+                                  columns="36" simple="true"
+                                  value="Add Remark..."
+                                  binding="#{claim.ticketRemarks}"/>
+                    <h:panelGrid columns="2" id="panelGrid7">
+                      <af:commandButton text="OK" id="commandButton11"
+                                        action="#{claim.AssignTask}"/>
+                      <af:commandButton text="Cancel" id="commandButton22"
+                                        action="#{claim.GetAssignee}"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </af:panelBox>
+          </af:panelGroupLayout>
+          </af:group>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

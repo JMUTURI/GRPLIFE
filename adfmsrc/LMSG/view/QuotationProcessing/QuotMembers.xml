@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.56"
+          id="QuotMembers" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+          isJavaBased="true">
+  <Attribute Name="quoMemNo" Type="java.lang.String"/>
+  <Attribute Name="quoMemName" Type="java.lang.String"/>
+  <Attribute Name="quoDepMemType" Type="java.lang.String"/>
+  <Attribute Name="quoMemAnb" Type="java.lang.Integer"/>
+  <Attribute Name="quoJointMem" Type="java.lang.String"/>
+  <Attribute Name="quoOccupation" Type="java.lang.String"/>
+  <Attribute Name="QMEM_DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_MEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_LOADING_TYPE" Type="java.lang.String"/>
+  <Attribute Name="QMEM_HEIGHT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_WEIGHT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_WEIGHT_LOADING" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_SYSTOLIC_PR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_DIASTOLIC_PR" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_BPRESS_LOADING" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_LOADING_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_LOADING_DIV_FACT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QMEM_TOT_SA" Type="java.math.BigDecimal"/>
+  <Attribute Name="qmemBenCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="qmemBenMainMemCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="qmemBenSurname" Type="java.lang.String"/>
+  <Attribute Name="qmemBenOtherNames" Type="java.lang.String"/>
+  <Attribute Name="qmemBenClass" Type="java.lang.String"/>
+  <Attribute Name="qmemBenTerm" Type="java.lang.String"/>
+  <Attribute Name="qmemBenMemNo" Type="java.lang.String"/>
+  <Attribute Name="classDisplay" Type="java.lang.String"/>
+  <Attribute Name="benTerm" Type="java.lang.String"/>
+  <Attribute Name="feeDisplay" Type="java.math.BigDecimal"/>
+  <Attribute Name="qmem_ben_sex" Type="java.lang.String"/>
+  <Attribute Name="qabCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="qabMemNo" Type="java.lang.String"/>
+  <Attribute Name="qabSurname" Type="java.lang.String"/>
+  <Attribute Name="qabOtherNames" Type="java.lang.String"/>
+  <Attribute Name="qabAnb" Type="java.lang.String"/>
+  <Attribute Name="qabSharePct" Type="java.lang.String"/>
+  <Attribute Name="qab_ann_purchase_amt" Type="java.math.BigDecimal"/>
+  <Attribute Name="qab_ben_terminal_amt" Type="java.math.BigDecimal"/>
+  <Attribute Name="qab_dob" Type="java.util.Date"/>
+  <Attribute Name="qab_number" Type="java.lang.String"/>
+  <Attribute Name="QABP_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QABP_NO" Type="java.math.BigDecimal"/>
+  <Attribute Name="QABP_DATE_DUE" Type="java.util.Date"/>
+  <Attribute Name="QABP_AMOUNT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QABP_PAID" Type="java.lang.String"/>
+  <Attribute Name="QABP_PAID_DESC" Type="java.lang.String"/>
+  <Attribute Name="QABP_PAID_DATE" Type="java.util.Date"/>
+  <Attribute Name="QABP_VOUCHER_NO" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.QuotMembers"
+                     BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                     id="QuotMembers"/>
+</JavaBean>

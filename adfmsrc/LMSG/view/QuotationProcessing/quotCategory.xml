@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.56"
+          id="quotCategory" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.quotCategory"
+          isJavaBased="true">
+  <Attribute Name="catShtDesc" Type="java.lang.String"/>
+  <Attribute Name="catDesc" Type="java.lang.String"/>
+  <Attribute Name="catPeriod" Type="java.lang.String"/>
+  <Attribute Name="lcaCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="ctlCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="ctlQuoCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="ctlFee" Type="java.math.BigDecimal"/>
+  <Attribute Name="categDesc" Type="java.lang.String"/>
+  <Attribute Name="ctlLcaCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pca_sch_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pca_lpag_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="lpag_desc" Type="java.lang.String"/>
+  <Attribute Name="pmas_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pmas_sht_desc" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.quotCategory"
+                     BeanClass="LMSG.view.QuotationProcessing.quotCategory"
+                     id="quotCategory"/>
+</JavaBean>

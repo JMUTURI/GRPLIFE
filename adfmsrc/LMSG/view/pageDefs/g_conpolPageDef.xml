@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="g_conpolPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="findProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsIterator"/>
+    <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+    <methodIterator Binds="findQuotation.result" DataControl="QuotationsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuotationIterator"/>
+    <searchRegion Binds="findQuotationIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="QuotationsQuery"/>
+    <methodIterator Binds="findTicketAssignee.result" DataControl="workflowDAO"
+                    RangeSize="25" BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketAssigneeIterator"/>
+    <searchRegion Binds="findTicketAssigneeIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="workflowQuery"/>
+    <methodIterator Binds="findTicketDetailsByUser.result"
+                    DataControl="workflowDAO" RangeSize="25"
+                    BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketDetailsByUserIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="findQuoteCategories.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteCategoriesIterator"/>
+    <searchRegion Binds="findQuoteCategoriesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Quotations1Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindOkQuotations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindOkQuotations"
+                  IsViewObjectMethod="false" DataControl="okQuotationsDAO"
+                  InstanceName="okQuotationsDAO.dataProvider"
+                  ReturnName="okQuotationsDAO.methodResults.FindOkQuotations_okQuotationsDAO_dataProvider_FindOkQuotations_result"/>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="productDetails">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodDesc"/>
+          <Item Value="prodshtDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuotation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotation"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuotation_QuotationsDAO_dataProvider_findQuotation_result"/>
+    <tree IterBinding="findQuotationIterator" id="Quotations">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations0">
+        <AttrNames>
+          <Item Value="client"/>
+          <Item Value="quoNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuotationIterator" id="quoNo">
+      <AttrNames>
+        <Item Value="quoNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="client1">
+      <AttrNames>
+        <Item Value="client"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="prod_sht_desc1">
+      <AttrNames>
+        <Item Value="prod_sht_desc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="prod_display">
+      <AttrNames>
+        <Item Value="prod_display"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="branch1">
+      <AttrNames>
+        <Item Value="branch"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="occupation1">
+      <AttrNames>
+        <Item Value="occupation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="hazard1">
+      <AttrNames>
+        <Item Value="hazard"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="UWYear">
+      <AttrNames>
+        <Item Value="UWYear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="status">
+      <AttrNames>
+        <Item Value="status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="effectDate">
+      <AttrNames>
+        <Item Value="effectDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findTicketAssignee" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketAssignee"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketAssignee_workflowDAO_dataProvider_findTicketAssignee_result"/>
+    <tree IterBinding="findTicketAssigneeIterator" id="workflow">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow0">
+        <AttrNames>
+          <Item Value="taskUserID"/>
+          <Item Value="taskUserShtDesc"/>
+          <Item Value="taskUserDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuotationIterator"
+                     id="freq_of_payment_disp">
+      <AttrNames>
+        <Item Value="freq_of_payment_disp"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findTicketDetailsByUser" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketDetailsByUser"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketDetailsByUser_workflowDAO_dataProvider_findTicketDetailsByUser_result"/>
+    <tree IterBinding="findTicketDetailsByUserIterator" id="workflow1">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow10">
+        <AttrNames>
+          <Item Value="taskID"/>
+          <Item Value="taskActivityName"/>
+          <Item Value="taskAssignee"/>
+          <Item Value="taskDuedate"/>
+          <Item Value="taskCreateDate"/>
+          <Item Value="TCKT_CODE"/>
+          <Item Value="USRSYSTEM"/>
+          <Item Value="SYSMODULE"/>
+          <Item Value="TCKT_CLNT_CODE"/>
+          <Item Value="CLIENT"/>
+          <Item Value="TCKT_AGN_CODE"/>
+          <Item Value="AGENT"/>
+          <Item Value="TCKT_POL_CODE"/>
+          <Item Value="TCKT_POL_NO"/>
+          <Item Value="TCKT_CLM_NO"/>
+          <Item Value="TCKT_QUOT_CODE"/>
+          <Item Value="QUO_NO"/>
+          <Item Value="TCKT_DATE"/>
+          <Item Value="TCKT_BY"/>
+          <Item Value="TCKT_PROCESS_ID"/>
+          <Item Value="TCKT_SYS_MODULE_CODE"/>
+          <Item Value="TCKT_ENDR_CODE"/>
+          <Item Value="taskUserID"/>
+          <Item Value="taskUserShtDesc"/>
+          <Item Value="taskUserDesc"/>
+          <Item Value="TCKT_PROD_TYPE"/>
+          <Item Value="TCKT_TO"/>
+          <Item Value="TCKT_REMARKS"/>
+          <Item Value="TCKT_NAME"/>
+          <Item Value="TCKT_DUE_DATE"/>
+          <Item Value="TCKT_CDE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <attributeValues IterBinding="findQuotationIterator" id="QUO_COVER_TO_DATE">
+      <AttrNames>
+        <Item Value="QUO_COVER_TO_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findQuoteCategories" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteCategories"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="data.QuotationsDAO.methodResults.findQuoteCategories_QuotationsDAO_dataProvider_findQuoteCategories_result"/>
+    <tree IterBinding="findQuoteCategoriesIterator" id="Quotations1">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations10">
+        <AttrNames>
+          <Item Value="lcaCode"/>
+          <Item Value="catShtDesc"/>
+          <Item Value="catDesc"/>
+          <Item Value="catPeriod"/>
+          <Item Value="quoCode"/>
+          <Item Value="selected"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

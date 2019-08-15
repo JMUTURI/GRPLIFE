@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Group Subdivisions">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelBox id="pb1" showHeader="never">
+              <f:facet name="toolbar"/>
+              <af:panelSplitter id="ps1" splitterPosition="250"
+                                inlineStyle="width:100%;">
+                <f:facet name="first">
+                  <af:panelGroupLayout id="pgl5">
+                    <af:panelBox text="Access Groups" id="pb2">
+                      <f:facet name="toolbar"/>
+                      <af:tree value="#{bindings.Settings.treeModel}" var="node"
+                               selectionListener="#{coreSetups.subdivisionsListener}"
+                               rowSelection="single" id="t8"
+                               binding="#{coreSetups.subdivisionsTree}">
+                        <f:facet name="nodeStamp">
+                          <af:outputText value="#{node}" id="ot24"/>
+                        </f:facet>
+                      </af:tree>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="second">
+                  <af:panelGroupLayout id="pgl6"
+                                       partialTriggers="t8">
+                    <af:panelBox id="pb3">
+                      <f:facet name="toolbar"/>
+                      <af:panelBox id="pb4" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <af:outputLabel value="Subdivision Details"
+                                        id="outputLabel7"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator8"/>
+                        <af:spacer width="10" height="10" id="spacer1"/>
+                        <h:panelGrid columns="3" id="panelGrid33">
+                          <af:commandButton id="commandButton82"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{coreSetups.AddSubdivision}"/>
+                          <af:commandButton id="commandButton83"
+                                            icon="/images/save.gif"
+                                            action="#{coreSetups.SaveSubdivision}"/>
+                          <af:commandButton id="commandButton84"
+                                            icon="/images/delete_ena.png"
+                                            action="#{coreSetups.DeleteSubdivision}"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="6" id="pg1">
+                          <af:outputLabel value="Short Description" id="ol1"/>
+                          <af:inputText label="Label 1" id="it1" simple="true"
+                                        binding="#{coreSetups.shortDesc}"/>
+                          <af:outputLabel value="Description"
+                                          id="outputLabel1"/>
+                          <af:inputText label="Label 1" id="inputText1"
+                                        simple="true"
+                                        binding="#{coreSetups.description}"/>
+                        </h:panelGrid>
+                        <af:spacer width="10" height="10" id="s1"/>
+                      </af:panelBox>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelSplitter>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Import Members For Refund" id="d1">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                             id="pgl4">
+          <af:panelBox text="Import Members" showHeader="never" id="pb15">
+            <f:facet name="toolbar"/>
+            <af:inputFile label="File To Upload" autoSubmit="true"
+                          binding="#{FileProcessor.upFile}"
+                          valueChangeListener="#{FileProcessor.fileChangeForRefund}"
+                          immediate="true" id="if1"/>
+              <af:spacer width="10" height="10" id="spacer1"/>
+              <af:panelGroupLayout id="pgl2" partialTriggers="if1">
+                <af:panelBox text="Member Statistics" id="pb1"
+                             showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <af:outputLabel value="Member Statistics." id="ol62"
+                                  inlineStyle="font-weight:bold;"/>
+                  <af:separator id="s19"/>
+                  <h:panelGrid columns="8" id="pg58">
+                    <af:outputLabel value="Current Batch No:" id="ol61"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:outputText id="outputText1"
+                                   inlineStyle="font-weight:bold; color:Black;"
+                                   value="#{sessionScope['templateTranSeq']}"/>
+                    <af:outputLabel value="Total Members:" id="outputLabel69"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:outputText id="outputText10"
+                                   inlineStyle="font-weight:bold; color:Red;"
+                                   value="#{sessionScope['TotalMembers']}"/>
+                    <af:outputLabel value="Valid Members:" id="outputLabel70"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:outputText id="outputText11"
+                                   inlineStyle="font-weight:bold; color:Red;"
+                                   value="#{sessionScope['ValidMembers']}"/>
+                    <af:outputLabel value="Invalid Members:" id="outputLabel71"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:outputText id="outputText12"
+                                   inlineStyle="font-weight:bold; color:Red;"
+                                   value="#{sessionScope['InValidMembers']}"/>
+                  </h:panelGrid>
+                  <af:spacer width="10" height="10" id="s22"/>
+                  <h:panelGrid columns="7" id="pg59">
+                    <af:commandButton text="Back To Policy" id="cb1"
+                                      action="#{underwritingManipulation.BackToPolicy}"/>
+                    <af:selectOneChoice label="Selection Criteria" id="soc16"
+                                        value="A"
+                                        valueChangeListener="#{CsvProcessor.searchListener}"
+                                        binding="#{CsvProcessor.searchCriteria}">
+                      <af:selectItem label="All Members" value="A" id="si50"/>
+                      <af:selectItem label="Valid Members" value="V" id="si49"/>
+                      <af:selectItem label="Invalid Members" value="I"
+                                     id="si46"/>
+                    </af:selectOneChoice>
+                    <af:selectOneChoice value="#{bindings.lmitCode.inputValue}"
+                                        label="All Refund Batches"
+                                        required="#{bindings.lmitCode.hints.mandatory}"
+                                        shortDesc="#{bindings.lmitCode.hints.tooltip}"
+                                        id="soc17"
+                                        binding="#{CsvProcessor.allPolicyBatches}">
+                      <f:selectItems value="#{bindings.lmitCode.items}"
+                                     id="si51"/>
+                    </af:selectOneChoice>
+                    <af:commandButton id="cb87" icon="/images/find_ena.png"
+                                      action="#{CsvProcessor.ValidateRefundMembers}"/>
+                    <af:commandButton text="Refund Batch" id="cb86"
+                                      action="#{CsvProcessor.RefundSelectedMembers}"/>
+                    <af:spacer width="50" height="10" id="s21"/>
+                    <af:commandLink text="Export Batch Details" id="rpt1162"
+                                    inlineStyle="font-weight:bold;"
+                                    actionListener="#{ReportsEngine.GetReportDetails}"
+                                    rendered="false"/>
+                  </h:panelGrid>
+                  <af:panelCollection id="pc1"
+                                      inlineStyle="width:100%; height:270.0px;">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="statusbar"/>
+                    <af:table value="#{bindings.policies.collectionModel}"
+                              var="row" rows="#{bindings.policies.rangeSize}"
+                              emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.policies.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.policiesQuery.queryDescriptor}"
+                              queryListener="#{bindings.policiesQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t2"
+                              binding="#{CsvProcessor.importedMembers}">
+                      <af:column sortProperty="REFM_CODE" filterable="true"
+                                 sortable="true" headerText="code" id="c13"
+                                 rendered="false">
+                        <af:outputText value="#{row.REFM_CODE}" id="ot17"/>
+                      </af:column>
+                      <af:column sortProperty="REFM_LMIT_CODE" filterable="true"
+                                 sortable="true" headerText="lmitCode" id="c11"
+                                 rendered="false">
+                        <af:outputText value="#{row.REFM_LMIT_CODE}" id="ot13"/>
+                      </af:column>
+                      <af:column sortProperty="REFM_MEM_NO" filterable="true"
+                                 sortable="true" headerText="Member No" id="c9">
+                        <af:outputText value="#{row.REFM_MEM_NO}" id="ot14"/>
+                      </af:column>
+                      <af:column sortProperty="REFM_MEM_SURNAME"
+                                 filterable="true" sortable="true"
+                                 headerText="Surname" id="c14" width="150">
+                        <af:outputText value="#{row.REFM_MEM_SURNAME}"
+                                       id="ot10"/>
+                      </af:column>
+                      <af:column sortProperty="REFM_MEM_OTHER_NAMES"
+                                 filterable="true" sortable="true"
+                                 headerText="Other Names" id="c10" width="150">
+                        <af:outputText value="#{row.REFM_MEM_OTHER_NAMES}"
+                                       id="ot11"/>
+                      </af:column>
+                      <af:column sortProperty="REFM_MEM_EFFECTIVE_DATE"
+                                 filterable="true" sortable="true"
+                                 headerText="Date of Leaving" id="c15">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.REFM_MEM_EFFECTIVE_DATE}"
+                                        id="id1"/>
+                        </f:facet>
+                        <af:outputText value="#{row.REFM_MEM_EFFECTIVE_DATE}"
+                                       id="ot12">
+                          <af:convertDateTime pattern="#{bindings.policies.hints.REFM_MEM_EFFECTIVE_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="REFM_STATUS" filterable="true"
+                                 sortable="true" headerText="Status" id="c16">
+                        <af:outputText value="#{row.REFM_STATUS}" id="ot16"/>
+                      </af:column>
+                      <af:column sortProperty="REFM_REMARKS" filterable="true"
+                                 sortable="true" headerText="Remarks" id="c12"
+                                 width="300">
+                        <af:outputText value="#{row.REFM_REMARKS}" id="ot15"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelBox>
+              </af:panelGroupLayout>
+            </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="productDetails" Package="LMSG.view.Product"
+          BeanClass="LMSG.view.Product.productDetails" isJavaBased="true">
+  <Attribute Name="prodCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="prodDesc" Type="java.lang.String"/>
+  <Attribute Name="prodshtDesc" Type="java.lang.String"/>
+  <Attribute Name="prodType" Type="java.lang.String"/>
+  <Attribute Name="PMAS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PMAS_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PMAS_DESC" Type="java.lang.String"/>
+  <Attribute Name="cvt_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pct_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="cvt_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="cvt_desc" Type="java.lang.String"/>
+  <Attribute Name="cvt_main_cover" Type="java.lang.String"/>
+  <Attribute Name="pct_formular" Type="java.lang.String"/>
+  <Attribute Name="pct_refund_formular" Type="java.lang.String"/>
+  <Attribute Name="cvt_duration_type" Type="java.lang.String"/>
+  <Attribute Name="PPROV_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PROV_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PROV_DESC" Type="java.lang.String"/>
+  <Attribute Name="PPROV_EDITABLE" Type="java.lang.String"/>
+  <Attribute Name="PPROV_PROD_CODE" Type="java.lang.Integer"/>
+  <Attribute Name="DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="max_allowed" Type="java.math.BigDecimal"/>
+  <Attribute Name="DTY_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="DTY_DESCRIPTION" Type="java.lang.String"/>
+  <Attribute Name="lp_prod_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="lp_prod_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="lp_prod_desc" Type="java.lang.String"/>
+  <Attribute Name="lp_prod_type" Type="java.lang.String"/>
+  <Attribute Name="lp_PROD_LAPSE_PRD_DAYS" Type="java.lang.String"/>
+  <Attribute Name="prod_lapse_prd_days" Type="java.math.BigDecimal"/>
+  <Attribute Name="PROD_MIN_EARNINGS_PRD" Type="java.math.BigDecimal"/>
+  <Attribute Name="PROD_DEPENDT_COVERED" Type="java.lang.String"/>
+  <Attribute Name="PROD_SAVINGS_COVERED" Type="java.lang.String"/>
+  <Attribute Name="PROD_DEPENDT_COVERED2" Type="java.lang.String"/>
+  <Attribute Name="selected" Type="java.lang.Boolean"/>
+  <Attribute Name="pct_main_sa_perc" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Product.productDetails"
+                     BeanClass="LMSG.view.Product.productDetails"
+                     id="productDetails"/>
+</JavaBean>

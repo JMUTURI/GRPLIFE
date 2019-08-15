@@ -1,0 +1,94 @@
+<dataTemplate dataSourceRef="aiicolms" name="clmdisch" defaultPackage="reports_parameters">
+<properties>
+<property name="xml_tag_case" value="upper"/>
+</properties>
+<parameters>
+<parameter name="V_CLM_NO" dataType="varchar2"/>
+<parameter name="V_USER" dataType="varchar2"/>
+</parameters>
+<lexicals>
+</lexicals>
+<dataQuery>
+<sqlStatement name="Q_1">
+
+
+select ORG_NAME,ORG_PHY_ADDRS,
+ORG_ADDRS||' , '||ORG_ZIP||' - '||TWN_NAME||' , '||COU_NAME POSTALADDRESS , 
+'Telephone'||':'||ORG_TEL1||DECODE(ORG_TEL2 ,NULL,NULL,' /'||ORG_TEL2) TELEPHONE,  
+'Fax'||':'||ORG_FAX FAX, 
+'E-mail'||':'||lower(ORG_EMAIL_ADDRS) EMAIL,ORG_RPT_LOGO LOGO
+from TQC_ORGANIZATIONS, TQC_COUNTRIES, TQC_TOWNS, TQC_SYSTEMS
+where ORG_TWN_CODE = TWN_CODE
+and ORG_COU_CODE = COU_CODE
+and SYS_ORG_CODE = ORG_CODE
+and SYS_SHT_DESC = 'LMS'
+
+
+</sqlStatement><sqlStatement name="Q_2">
+
+SELECT PRP_SURNAME||' '||PRP_OTHER_NAMES CLIENTNAME,
+TQC_INTERFACES_PKG.CURRENCYNAME(TQC_INTERFACES_PKG.ORGCURRENCY(27)) CURRENCY,
+ DECODE((SELECT SUM(CCVT_BUT_PAY_AMT) CCVT_BUT_PAY_AMT FROM LMS_CLAIMS,LMS_CLAIM_COVER_TYPES
+WHERE CLM_NO=CCVT_CLM_NO
+AND CCVT_CLM_NO=:V_CLM_NO
+GROUP BY CLM_NO),0,CLM_COMPUTED_AMT_TO_PAY,(SELECT SUM(CCVT_BUT_PAY_AMT) CCVT_BUT_PAY_AMT FROM LMS_CLAIMS,LMS_CLAIM_COVER_TYPES WHERE CLM_NO=CCVT_CLM_NO
+AND CCVT_CLM_NO=:V_CLM_NO
+GROUP BY CLM_NO)) CLM_AMT_TO_PAY,NVL(CCVT_PAYABLE_AMT,0)CCVT_PAYABLE_AMT,
+INITCAP(REPORTS_PARAMETERS.NUMBER_TO_WORDS_CURRENCY(NVL(CCVT_PAYABLE_AMT,0)))|| ' '||TQC_INTERFACES_PKG.CURRENCYNAME(TQC_INTERFACES_PKG.ORGCURRENCY(27),'L')WORDS,
+--'('||FMS_CHEQUES_PKG.NUM_TO_WORDS(CLM_AMT_TO_PAY,TQC_INTERFACES_PKG.ORGCURRENCY(27))||' '||TQC_INTERFACES_PKG.CURRENCYNAME(TQC_INTERFACES_PKG.ORGCURRENCY(27),'L')||')' WORDS,
+MEM_SURNAME||' '||MEM_OTHER_NAMES DECEASED,MEM_NO,:V_CLM_NO CLM_NO, :V_USER USERNAME,CLM_POL_POLICY_NO,POLM_TOT_SA,decode(nvl(ccvt_sa,0),0,nvl(CCVT_PAYABLE_AMT,0),nvl(ccvt_sa,0))SA,CLM_PREPARED_BY,CLM_AUTHORISED_BY,
+TO_CHAR(SYSDATE,'DD MONTH RRRR') TODAY,TO_CHAR(SYSDATE,'DD/MM/RRRR') DATE_AUTHORISED,NVL((POLM_TOT_SA-CLM_AMT_TO_PAY),0) BAL_SA,CVT_DESC,
+TO_CHAR(CLM_DATE_DEATH_ACCIDENT,'DD MonthRRRR')DEATH_DATE,LE_AMT
+FROM LMS_CLAIMS,LMS_POLICY_MEMBERS,LMS_MEMBERS,LMS_PROPOSERS,LMS_POLICIES,LMS_CLAIM_COVER_TYPES,LMS_COVER_TYPES,
+ (SELECT SUM(CCVT_PAYABLE_AMT) LE_AMT FROM LMS_CLAIM_COVER_TYPES--, LMS_CLM_PAYMENT_VOUCHERS
+ WHERE CCVT_CVT_SHT_DESC IN ('LAE','LEA')
+ --AND CCVT_VCHR_NO=CPV_VOUCHER_NO
+ AND CCVT_CLM_NO=:V_CLM_NO
+ )
+WHERE CLM_POLM_CODE=POLM_CODE
+AND POLM_MEM_CODE=MEM_CODE
+AND POL_CLIENT_PRP_CODE=PRP_CODE
+AND CLM_POL_CODE=POL_CODE
+AND CLM_NO=CCVT_CLM_NO
+AND CCVT_CVT_CODE=CVT_CODE
+--AND CLM_NO= COVER_CLM(+)
+AND CLM_NO=:V_CLM_NO
+</sqlStatement></dataQuery>
+<dataStructure>
+
+   <group name="G_ORGANIZATION" dataType="varchar2" source="Q_1">
+     
+         <element name="ORG_NAME" dataType="varchar2" value="ORG_NAME"/>
+         <element name="ORG_PHY_ADDRS" dataType="varchar2" value="ORG_PHY_ADDRS"/>
+         <element name="POSTALADDRESS" dataType="varchar2" value="POSTALADDRESS"/>
+         <element name="TELEPHONE" dataType="varchar2" value="TELEPHONE"/>
+         <element name="FAX" dataType="varchar2" value="FAX"/>
+         <element name="EMAIL" dataType="varchar2" value="EMAIL"/>
+         <element name="LOGO" dataType="longRaw" value="LOGO"/>
+    
+    </group>
+
+    <group name="G_CLAIMS" dataType="varchar2" source="Q_2">
+
+        <element name="CLIENTNAME" dataType="varchar2" value="CLIENTNAME"/>
+        <element name="CURRENCY" dataType="varchar2" value="CURRENCY"/>
+        <element name="CLM_AMT_TO_PAY" dataType="number" value="CLM_AMT_TO_PAY"/>
+        <element name="WORDS" dataType="varchar2" value="WORDS"/>
+        <element name="DECEASED" dataType="varchar2" value="DECEASED"/>
+        <element name="CLM_NO" dataType="varchar2" value="CLM_NO"/>
+        <element name="USERNAME" dataType="varchar2" value="USERNAME"/>
+        <element name="CLM_POL_POLICY_NO" dataType="varchar2" value="CLM_POL_POLICY_NO"/>
+        <element name="MEM_SA" dataType="varchar2" value="POLM_TOT_SA"/>
+        <element name="TODAY" dataType="varchar2" value="TODAY"/> 
+        <element name="BAL_SA" dataType="varchar2" value="BAL_SA"/>   
+        <element name="DATE_AUTHORISED" dataType="varchar2" value="DATE_AUTHORISED"/>  
+        <element name="CLM_PREPARED_BY" dataType="varchar2" value="CLM_PREPARED_BY"/> 
+        <element name="COVER_TYPE" dataType="varchar2" value="CVT_DESC"/>
+        <element name="MEMBER_NO" dataType="varchar2" value="MEM_NO"/>  
+        <element name="DEATH_DATE" dataType="varchar2" value="DEATH_DATE"/> 
+        <element name="LE_AMT" dataType="varchar2" value="LE_AMT"/> 
+		<element name="SA" dataType="number" value="SA"/> 
+		<element name="CCVT_PAYABLE_AMT" dataType="number" value="CCVT_PAYABLE_AMT"/>		
+ </group>
+</dataStructure>
+</dataTemplate>

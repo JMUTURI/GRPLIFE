@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.56.60"
+          id="TreatyGroupItems" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.TreatyGroupItems" isJavaBased="true">
+  <Attribute Name="TRTG_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TRTG_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TRTG_DESC" Type="java.lang.String"/>
+  <Attribute Name="type" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.TreatyGroupItems"
+                     BeanClass="com.turnkey.setups.TreatyGroupItems"
+                     id="TreatyGroupItems"/>
+</JavaBean>

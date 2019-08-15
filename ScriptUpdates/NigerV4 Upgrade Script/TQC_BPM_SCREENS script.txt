@@ -1,0 +1,118 @@
+--SET DEFINE OFF;
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (1, 'Create Quotation', 'g_qtrans.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (2, 'Underwrite Quotation', 'gquoedt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (4, 'Authorise Quotation', 'gquoedt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (10, 'Underwrite Policy', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (14, 'Perform Reinsurance', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (15, 'Medical Underwriting', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (16, 'Authorise Policy', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (17, 'Dispatch Policy Documents', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (19, 'Authorise Exceptions', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (21, 'Input Claim Data', 'g_clmtra.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (22, 'Dispatch Acknowledgement Letter', 'g_claims.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (23, 'Waiting for Document Task', 'g_claims.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (24, 'Raise Payment Voucher', 'g_claims.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (26, 'Authorise Voucher', 'g_clmpym.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (6, 'send Quotation Schedule', 'gquoedt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (11, 'Verify Policy Details', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (12, 'Make Ready for Authorisation', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (27, 'Client Feedback', 'g_clmpym.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (7, 'Create Quotation Client', 'createClient.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (13, 'Wait for Payment', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (20, 'Quotation Data Entry', 'g_quotone.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (28, 'Dispatch Cheque', 'g_claims.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (3, 'Dispatch Quotation Documents', 'gquoedt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (5, 'send Quotation Letter', 'gquoedt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (8, 'Convert Quotation', 'g_conpol.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (9, 'New Business Data Entry', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (18, 'Data Entry And Validation', 'g_undwrt.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (25, 'Make Voucher Ready', 'g_clmpym.jspx', 27);
+Insert into TQC_BPM_SCREENS
+   (SCRN_CODE, SCRN_TASK_DESC, SCRN_NAME, SCRN_SYS_CODE)
+ Values
+   (29, 'Perform reinsurance', 'g_undwrt.jspx', 27);
+COMMIT;

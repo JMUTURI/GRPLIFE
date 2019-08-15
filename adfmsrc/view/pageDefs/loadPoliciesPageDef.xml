@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="loadPoliciesPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProposers.result" DataControl="proposerDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.proposers"
+                    id="findProposersIterator"/>
+    <searchRegion Binds="findProposersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="proposersQuery"/>
+    <methodIterator Binds="findProducts.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductsIterator"/>
+    <searchRegion Binds="findProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetailsQuery"/>
+    <methodIterator Binds="findBranches.result" DataControl="branchesDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.branches"
+                    id="findBranchesIterator"/>
+    <methodIterator Binds="FindAgents.result" DataControl="agentsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.agents"
+                    id="FindAgentsIterator"/>
+    <methodIterator Binds="findPremiumMask.result" DataControl="quotPremMaskDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotPremMask"
+                    id="findPremiumMaskIterator"/>
+    <methodIterator Binds="findPoliciesToLoad.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPoliciesToLoadIterator"/>
+    <searchRegion Binds="findPoliciesToLoadIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AccountQuery"/>
+    <methodIterator Binds="findPolMembersToLoad.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolMembersToLoadIterator"/>
+    <searchRegion Binds="findPolMembersToLoadIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account1Query"/>
+    <methodIterator Binds="findPolCoinsToLoad.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolCoinsToLoadIterator"/>
+    <searchRegion Binds="findPolCoinsToLoadIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account2Query"/>
+    <methodIterator Binds="findPolRidersToLoad.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolRidersToLoadIterator"/>
+    <searchRegion Binds="findPolRidersToLoadIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account3Query"/>
+    <methodIterator Binds="FindCoinsurers.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindCoinsurersIterator"/>
+    <searchRegion Binds="FindCoinsurersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+    <methodIterator Binds="FindPolicyLoadedTransactions.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policies"
+                    id="FindPolicyLoadedTransactionsIterator"/>
+    <searchRegion Binds="FindPolicyLoadedTransactionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProposers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProposers"
+                  IsViewObjectMethod="false" DataControl="proposerDAO"
+                  InstanceName="proposerDAO.dataProvider"
+                  ReturnName="proposerDAO.methodResults.findProposers_proposerDAO_dataProvider_findProposers_result"/>
+    <tree IterBinding="findProposersIterator" id="proposers">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.proposers"
+                      Name="proposers0">
+        <AttrNames>
+          <Item Value="CLIENT"/>
+          <Item Value="GCO_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="productDetails">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="prodshtDesc"/>
+          <Item Value="prodDesc"/>
+          <Item Value="prodType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBranches"
+                  IsViewObjectMethod="false" DataControl="branchesDAO"
+                  InstanceName="branchesDAO.dataProvider"
+                  ReturnName="branchesDAO.methodResults.findBranches_branchesDAO_dataProvider_findBranches_result"/>
+    <tree IterBinding="findBranchesIterator" id="branches1">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.branches"
+                      Name="branches10">
+        <AttrNames>
+          <Item Value="BRN_CODE"/>
+          <Item Value="BRN_SHT_DESC"/>
+          <Item Value="BRN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindAgents"
+                  IsViewObjectMethod="false" DataControl="agentsDAO"
+                  InstanceName="agentsDAO.dataProvider"
+                  ReturnName="agentsDAO.methodResults.FindAgents_agentsDAO_dataProvider_FindAgents_result"/>
+    <tree IterBinding="FindAgentsIterator" id="agents1">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.agents"
+                      Name="agents10">
+        <AttrNames>
+          <Item Value="AGN_CODE"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="AGN_SHT_DESC"/>
+          <Item Value="AGN_POSTAL_ADDRESS"/>
+          <Item Value="agent"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPremiumMask" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMask"
+                  IsViewObjectMethod="false" DataControl="quotPremMaskDAO"
+                  InstanceName="quotPremMaskDAO.dataProvider"
+                  ReturnName="quotPremMaskDAO.methodResults.findPremiumMask_quotPremMaskDAO_dataProvider_findPremiumMask_result"/>
+    <tree IterBinding="findPremiumMaskIterator" id="quotPremMask">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.quotPremMask"
+                      Name="quotPremMask0">
+        <AttrNames>
+          <Item Value="PMAS_CODE"/>
+          <Item Value="PMAS_SHT_DESC"/>
+          <Item Value="PMAS_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPoliciesToLoad" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPoliciesToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPoliciesToLoad_AccountDAO_dataProvider_findPoliciesToLoad_result"/>
+    <tree IterBinding="findPoliciesToLoadIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="LGPL_POL_NO"/>
+          <Item Value="LGPL_CLIENT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolMembersToLoad" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolMembersToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolMembersToLoad_AccountDAO_dataProvider_findPolMembersToLoad_result"/>
+    <tree IterBinding="findPolMembersToLoadIterator" id="Account1">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account10">
+        <AttrNames>
+          <Item Value="LGMD_SN"/>
+          <Item Value="LGMD_SURNAME"/>
+          <Item Value="LGMD_DOB"/>
+          <Item Value="LGMD_ANB"/>
+          <Item Value="LGMD_BASIC"/>
+          <Item Value="LGMD_HOUSING"/>
+          <Item Value="LGMD_TRANSPORT"/>
+          <Item Value="LGMD_MONTH_SAL"/>
+          <Item Value="LGMD_TOT_EMUL"/>
+          <Item Value="LGMD_SA"/>
+          <Item Value="LGMD_PREM"/>
+          <Item Value="LGMD_PREM_RATE"/>
+          <Item Value="LGMD_DOJ"/>
+          <Item Value="LGMD_COVER_FROM_DATE"/>
+          <Item Value="LGMD_EMYR_BAL_BF"/>
+          <Item Value="LGMD_EMYE_BAL_BF"/>
+          <Item Value="LGMD_EMPYR_CONTRI"/>
+          <Item Value="LGMD_EMYE_CONTRI"/>
+          <Item Value="LGMD_ORIG_LOAN_AMT"/>
+          <Item Value="LGMD_LOAN_ISSUE_DATE"/>
+          <Item Value="LGMD_ORIG_LN_PRD"/>
+          <Item Value="LGMD_LOAN_INT"/>
+          
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolCoinsToLoad" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolCoinsToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolCoinsToLoad_AccountDAO_dataProvider_findPolCoinsToLoad_result"/>
+    <tree IterBinding="findPolCoinsToLoadIterator" id="Account2">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account20">
+        <AttrNames>
+          <Item Value="LGCA_COINSURER"/>
+          <Item Value="LGCA_COIN_SHARE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolRidersToLoad" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolRidersToLoad"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolRidersToLoad_AccountDAO_dataProvider_findPolRidersToLoad_result"/>
+    <tree IterBinding="findPolRidersToLoadIterator" id="Account3">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account30">
+        <AttrNames>
+          <Item Value="LGRA_MEM_NO"/>
+          <Item Value="LGRA_SA"/>
+          <Item Value="LGRA_BEN_CODE"/>
+          <Item Value="LGRA_BEN_TYPE"/>
+          <Item Value="LGRA_BEN_SA"/>
+          <Item Value="LGRA_BEN_RATE"/>
+          <Item Value="LGRA_BEN_PREM"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindCoinsurers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCoinsurers"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindCoinsurers_SettingsDAO_dataProvider_FindCoinsurers_result"/>
+    <tree IterBinding="FindCoinsurersIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="CO_agn_name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyLoadedTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="FindPolicyLoadedTransactions"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyLoadedTransactions_policiesDAO_dataProvider_FindPolicyLoadedTransactions_result"/>
+    <tree IterBinding="FindPolicyLoadedTransactionsIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="LTR_POL_POLICY_NO"/>
+          <Item Value="LTR_Client"/>
+          <Item Value="LTR_BUSN_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

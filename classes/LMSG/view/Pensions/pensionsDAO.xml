@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="pensionsDAO" Package="LMSG.view.Pensions"
+          BeanClass="LMSG.view.Pensions.pensionsDAO" isJavaBased="true">
+  <Attribute Name="templateTranSeq" Type="int"/>
+  <Attribute Name="templateType" Type="java.lang.String"/>
+  <Attribute Name="templayeTypeInt" Type="int"/>
+  <Attribute Name="quotationNo" Type="java.lang.String"/>
+  <Attribute Name="emailCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="UWYear" Type="java.lang.String"/>
+  <Attribute Name="prpDesc" Type="java.lang.String"/>
+  <Attribute Name="gcoDesc" Type="java.lang.String"/>
+  <Attribute Name="policyNumberSel" Type="java.lang.String"/>
+  <Attribute Name="taskselName" Type="java.lang.String"/>
+  <Attribute Name="taskselAssignee" Type="java.lang.String"/>
+  <Attribute Name="taskselDueDate" Type="java.util.Date"/>
+  <Attribute Name="taskselID" Type="java.lang.String"/>
+  <Attribute Name="taskselCreateDate" Type="java.util.Date"/>
+  <Attribute Name="pmasCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pmasshtdesc" Type="java.lang.String"/>
+  <Attribute Name="brnName" Type="java.lang.String"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="taskActivityName" Type="java.lang.String"/>
+  <Attribute Name="loanCalcType" Type="java.lang.String"/>
+  <Attribute Name="dependantNo" Type="java.lang.String"/>
+  <Attribute Name="beneficiaryNo" Type="java.lang.String"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindPensionTransactions" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindPensionBalances" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindPensionBalancesSummary" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String" id="parseDate"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="somedate" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindPensionDeductions" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="AuthorisedPensionDeductions" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindPensionDeposits" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindMembersPensionDeposits" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindPensionDepositsByReceipt" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="distributeToMembers" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindPensionBalancesPeriods" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindPensionBalancesPeriodSummary" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="FindPensionDepositInterest" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension" id="valuation_refunds"
+                  ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String"
+                  id="findPolMemberNo" ReturnNodeName="Return">
+    <ParameterInfo id="type" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Pensions.pensionsDAO"
+                     BeanClass="LMSG.view.Pensions.pensionsDAO"
+                     id="pensionsDAO"/>
+</JavaBean>

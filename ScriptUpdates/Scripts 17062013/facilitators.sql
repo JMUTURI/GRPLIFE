@@ -1,0 +1,28 @@
+/*creates a new table*/
+CREATE TABLE 
+LMS_POLICY_SERVICE_PROVIDER ( 
+LPSP_CODE NUMBER,
+ LPSP_SPR_CODE NUMBER,
+ LPSP_POL_CODE NUMBER 
+) 
+
+--
+/*Adds Auditor and Fund Manager service provider types*/
+begin
+Insert into TQC_SERVICE_PROVIDER_TYPES
+   (SPT_CODE, SPT_SHT_DESC, SPT_NAME, SPT_STATUS, SPT_WHTX_RATE, 
+    SPT_VAT_RATE)
+ Values
+   (41, 'AUD', 'AUDITOR', 'A', NULL, 
+    NULL);
+Insert into TQC_SERVICE_PROVIDER_TYPES
+   (SPT_CODE, SPT_SHT_DESC, SPT_NAME, SPT_STATUS, SPT_WHTX_RATE, 
+    SPT_VAT_RATE)
+ Values
+   (42, 'FM', 'FUND MANAGER', 'A', NULL, 
+    NULL);
+COMMIT;
+end;
+/
+
+

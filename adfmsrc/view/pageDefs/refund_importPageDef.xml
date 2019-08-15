@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="refund_importPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="root" RangeSize="25" DataControl="policiesDAO"
+              id="policiesDAOIterator"/>
+    <methodIterator Binds="findPolicyImportBatches.result"
+                    DataControl="policiesDAO" RangeSize="-1"
+                    BeanClass="LMSG.view.Policy.policies"
+                    id="findPolicyImportBatchesIter"/>
+    <methodIterator Binds="findRefundInvalidMembers.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policies"
+                    id="findRefundInvalidMembersIterator"/>
+    <searchRegion Binds="findRefundInvalidMembersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+  </executables>
+  <bindings>
+    <list IterBinding="policiesDAOIterator" id="lmitCode" DTSupportsMRU="true"
+          StaticList="false" ListIter="findPolicyImportBatchesIter">
+      <AttrNames>
+        <Item Value="lmitCode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="LMIT_CODE"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="DESCRIPTION"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="findPolicyImportBatches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolicyImportBatches"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="data.policiesDAO.methodResults.findPolicyImportBatches_policiesDAO_dataProvider_findPolicyImportBatches_result"/>
+    <methodAction id="findRefundInvalidMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRefundInvalidMembers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="data.policiesDAO.methodResults.findRefundInvalidMembers_policiesDAO_dataProvider_findRefundInvalidMembers_result"/>
+    <tree IterBinding="findRefundInvalidMembersIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="REFM_CODE"/>
+          <Item Value="REFM_LMIT_CODE"/>
+          <Item Value="REFM_MEM_NO"/>
+          <Item Value="REFM_MEM_SURNAME"/>
+          <Item Value="REFM_MEM_OTHER_NAMES"/>
+          <Item Value="REFM_MEM_EFFECTIVE_DATE"/>
+          <Item Value="REFM_STATUS"/>
+          <Item Value="REFM_REMARKS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

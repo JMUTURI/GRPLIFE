@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="fclFactorsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findFCLFactors.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findFCLFactorsIterator"/>
+    <iterator Binds="root" RangeSize="25" DataControl="ProductsDAO"
+              id="ProductsDAOIterator"/>
+    <methodIterator Binds="findOtherProducts.result" DataControl="ProductsDAO"
+                    RangeSize="-1"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findOtherProductsIter"/>
+  </executables>
+  <bindings>
+    <methodAction id="findClassesofBusiness" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClassesofBusiness"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findClassesofBusiness_SetupsDAO_dataProvider_findClassesofBusiness_result"/>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <methodAction id="findFCLFactors" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findFCLFactors"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findFCLFactors_SetupsDAO_dataProvider_findFCLFactors_result"/>
+    <tree IterBinding="findFCLFactorsIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="FCL_LIVES_FROM"/>
+          <Item Value="FCL_LIVE_TO"/>
+          <Item Value="FCL_FCL_FACTOR"/>
+          <Item Value="FCL_LIMIT"/>
+          <Item Value="FCL_WEF"/>
+          <Item Value="FCL_WET"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findProductsIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findOtherProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOtherProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="data.ProductsDAO.methodResults.findOtherProducts_ProductsDAO_dataProvider_findOtherProducts_result"/>
+    <list IterBinding="ProductsDAOIterator" id="cloneProductCode"
+          DTSupportsMRU="true" StaticList="false"
+          ListIter="findOtherProductsIter">
+      <AttrNames>
+        <Item Value="cloneProductCode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="prodCode"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="prodDesc"/>
+      </ListDisplayAttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

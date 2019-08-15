@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="ArrangementCoverTypes" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+          isJavaBased="true">
+  <Attribute Name="atct_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_tct_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_tprd_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_ta_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_rei_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_pct_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_cvt_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_as_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_prod_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_comm_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_cede_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_rate_div_fact" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_orrp_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="atct_cvt_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="atct_cede_type" Type="java.lang.String"/>
+  <Attribute Name="atct_rate_type" Type="java.lang.String"/>
+  <Attribute Name="atct_limit" Type="java.lang.String"/>
+  <Attribute Name="atct_class_specific" Type="java.lang.String"/>
+  <Attribute Name="cvt_desc" Type="java.lang.String"/>
+  <Attribute Name="atct_ta_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="orrp_desc" Type="java.lang.String"/>
+  <Attribute Name="ratetype_desc" Type="java.lang.String"/>
+  <Attribute Name="cede_type_desc" Type="java.lang.String"/>
+  <Attribute Name="TCT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_CVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCT_CVT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="CVT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TCT_PCT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ORRP_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ORRP_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="ORRP_DESC" Type="java.lang.String"/>
+  <Attribute Name="ORRP_CLASS_SPECIFIC" Type="java.lang.String"/>
+  <Attribute Name="tacr_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="tacr_atct_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="tacr_pct_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="tacr_comm_div_factr" Type="java.math.BigDecimal"/>
+  <Attribute Name="tacr_comm_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="tacr_yr_from" Type="java.lang.String"/>
+  <Attribute Name="tacr_yr_to" Type="java.lang.String"/>
+  <Attribute Name="tacr_wef" Type="java.util.Date"/>
+  <Attribute Name="tacr_wet" Type="java.util.Date"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.ArrangementCoverTypes"
+                     BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+                     id="ArrangementCoverTypes"/>
+</JavaBean>

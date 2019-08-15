@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="proposerDAO" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.proposerDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.proposers"
+                  BeanClass="LMSG.view.QuotationProcessing.proposers" id="findProposers"
+                  ReturnNodeName="proposers"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.proposerDAO"
+                     BeanClass="LMSG.view.QuotationProcessing.proposerDAO" id="proposerDAO"/>
+</JavaBean>

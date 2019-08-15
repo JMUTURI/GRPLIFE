@@ -1,0 +1,371 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Quotation Enquiry" id="d2">
+      <af:pageTemplate id="lmsgroup" viewId="/templates/GroupTemplate2.jspx">
+        <f:attribute name="documentTitle" value="TurnQuest Group Life"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:statusIndicator id="si1"/>
+            <af:panelBox text="Select Search Creteria" showHeader="never"
+                         id="pb1">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Quotation Enquiry"
+                              inlineStyle="font-weight:bold;" id="ol1"/>
+              <af:separator inlineStyle="width:inherit;" id="s1"/>
+              <h:panelGrid columns="6" id="pg1">
+                <af:outputLabel value="Product" id="ol2"/>
+                <h:panelGrid columns="2" id="pg2">
+                  <af:inputText label="Label 1" id="it1" simple="true"
+                                disabled="true"
+                                binding="#{quoteEnq.productDesc}"/>
+                  <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="products"/>
+                  </af:commandButton>
+                  <af:popup id="products">
+                    <af:dialog id="d1" type="none" title="Products">
+                      <af:table value="#{bindings.productDetails.collectionModel}"
+                                var="row"
+                                rows="#{bindings.productDetails.rangeSize}"
+                                emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.productDetails.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t1" width="310"
+                                binding="#{quoteEnq.productsLOV}">
+                        <af:column sortProperty="prodshtDesc" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Short Desc"
+                                   id="c2">
+                          <af:outputText value="#{row.prodshtDesc}" id="ot2"/>
+                        </af:column>
+                        <af:column sortProperty="prodDesc" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Product" id="c1"
+                                   width="200">
+                          <af:outputText value="#{row.prodDesc}" id="ot3"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg3">
+                        <af:commandButton text="OK" id="cb2"
+                                          action="#{quoteEnq.findQuotationProducts}"/>
+                        <af:commandButton text="Cancel" id="commandButton1"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Client" id="outputLabel1"/>
+                <h:panelGrid columns="2" id="panelGrid1">
+                  <af:inputText label="Label 1" id="inputText1" simple="true"
+                                disabled="true"
+                                binding="#{quoteEnq.clientsDesc}"/>
+                  <af:commandButton id="commandButton2"
+                                    icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="popup1"/>
+                  </af:commandButton>
+                  <af:popup id="popup1">
+                    <af:dialog type="none" title="Clients">
+                      <af:table value="#{bindings.proposers.collectionModel}"
+                                var="row" rows="#{bindings.proposers.rangeSize}"
+                                emptyText="#{bindings.proposers.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.proposers.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.proposersQuery.queryDescriptor}"
+                                queryListener="#{bindings.proposersQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.proposers.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.proposers.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t2"
+                                binding="#{quoteEnq.clientsLOV}" width="550">
+                        <af:column sortProperty="CLIENT" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Client" id="c4"
+                                   width="200">
+                          <af:outputText value="#{row.CLIENT}" id="ot4"/>
+                        </af:column>
+                        <af:column sortProperty="PRP_ID_REG_NO"
+                                   filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="ID Number"
+                                   id="c3" width="150">
+                          <af:outputText value="#{row.PRP_ID_REG_NO}" id="ot6"/>
+                        </af:column>
+                        <af:column sortProperty="GCO_DESC" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Occupation"
+                                   id="c5" width="200">
+                          <af:outputText value="#{row.GCO_DESC}" id="ot5"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="panelGrid2">
+                        <af:commandButton text="OK" id="commandButton3"
+                                          action="#{quoteEnq.findQuotationClients}"/>
+                        <af:commandButton text="Cancel" id="commandButton4"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Agent" id="outputLabel2"/>
+                <h:panelGrid columns="2" id="panelGrid3">
+                  <af:inputText label="Label 1" id="inputText2" simple="true"
+                                disabled="true"
+                                binding="#{quoteEnq.agentDesc}"/>
+                  <af:commandButton id="commandButton5"
+                                    icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="popup2"/>
+                  </af:commandButton>
+                  <af:popup id="popup2">
+                    <af:dialog id="dialog2" type="none">
+                      <af:table value="#{bindings.agents.collectionModel}"
+                                var="row" rows="#{bindings.agents.rangeSize}"
+                                emptyText="#{bindings.agents.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.agents.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.agentsQuery.queryDescriptor}"
+                                queryListener="#{bindings.agentsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.agents.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.agents.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t3"
+                                binding="#{quoteEnq.agentsLOV}">
+                        <af:column sortProperty="AGN_NAME" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Agent" id="c7"
+                                   width="200">
+                          <af:outputText value="#{row.AGN_NAME}" id="ot7"/>
+                        </af:column>
+                        <af:column sortProperty="AGN_POSTAL_ADDRESS"
+                                   filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Postal Address"
+                                   id="c6" width="150">
+                          <af:outputText value="#{row.AGN_POSTAL_ADDRESS}"
+                                         id="ot8"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="panelGrid4">
+                        <af:commandButton text="OK" id="commandButton6"
+                                          action="#{quoteEnq.findQuotationAgents}"/>
+                        <af:commandButton text="Cancel" id="commandButton7"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Branch" id="outputLabel3"/>
+                <h:panelGrid columns="2" id="panelGrid5">
+                  <af:inputText label="Label 1" id="inputText3" simple="true"
+                                binding="#{quoteEnq.branchDesc}"
+                                disabled="true"/>
+                  <af:commandButton id="commandButton8"
+                                    icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="popup3"/>
+                  </af:commandButton>
+                  <af:popup id="popup3">
+                    <af:dialog id="dialog3" type="none" title="Branches">
+                      <af:table value="#{bindings.Settings.collectionModel}"
+                                var="row" rows="#{bindings.Settings.rangeSize}"
+                                emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Settings.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.SettingsQuery.queryDescriptor}"
+                                queryListener="#{bindings.SettingsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t4"
+                                binding="#{quoteEnq.branchesLOV}">
+                        <af:column sortProperty="BRN_SHT_DESC" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Short Desc"
+                                   id="c9">
+                          <af:outputText value="#{row.BRN_SHT_DESC}" id="ot10"/>
+                        </af:column>
+                        <af:column sortProperty="BRN_NAME" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Branch" id="c8"
+                                   width="200">
+                          <af:outputText value="#{row.BRN_NAME}" id="ot9"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="panelGrid6">
+                        <af:commandButton text="OK" id="commandButton9"
+                                          action="#{quoteEnq.findQuotationBranch}"/>
+                        <af:commandButton text="Cancel" id="commandButton10"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Status" id="outputLabel4"/>
+                <af:selectOneChoice label="Label 1" id="soc1" simple="true"
+                                    binding="#{quoteEnq.status}"
+                                    valueChangeListener="#{quoteEnq.statusListener}">
+                  <af:selectItem label="Draft" value="Draft" id="si3"/>
+                  <af:selectItem label="Pending" value="Pending" id="si6"/>
+                  <af:selectItem label="Successful" value="Successful"
+                                 id="si5"/>
+                  <af:selectItem label="Rejected" value="Rejected" id="si2"/>
+                  <af:selectItem label="Lapsed" value="Lapsed" id="si4"/>
+                  <af:selectItem label="Authorized" id="si7"
+                                 value="Authorized"/>
+                </af:selectOneChoice>
+              </h:panelGrid>
+              <h:panelGrid columns="4" id="pg4">
+                <af:outputLabel value="Date From" id="ol3" showRequired="true"/>
+                <af:inputDate label="Date From" id="id1" simple="true"
+                              binding="#{quoteEnq.dateFrom}">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+                <af:outputLabel value="Date To" id="outputLabel5"
+                                showRequired="true"/>
+                <af:inputDate label="Date To" id="inputDate1" simple="true"
+                              binding="#{quoteEnq.dateTo}">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+              </h:panelGrid>
+              <h:panelGrid columns="3" id="pg5">
+                <af:commandButton text="Clear" id="cb3"
+                                  action="#{quoteEnq.ClearSearches}"/>
+                <af:commandButton text="Search" id="commandButton11"
+                                  action="#{quoteEnq.SearchQuotation}"/>
+                <af:commandButton text="Cancel" id="commandButton12"
+                                  action="#{Links.goHome}"/>
+              </h:panelGrid>
+            </af:panelBox>
+            <af:spacer width="10" height="15" id="s2"/>
+            <af:panelBox text="Search Results" id="pb2" showHeader="never"
+                         binding="#{quoteEnq.resultsTab}" rendered="false">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Search Results"
+                              inlineStyle="font-weight:bold;"
+                              id="outputLabel6"/>
+              <af:separator inlineStyle="width:inherit;" id="separator1"/>
+              <af:table value="#{bindings.Quotations.collectionModel}" var="row"
+                        rows="#{bindings.Quotations.rangeSize}"
+                        emptyText="#{bindings.Quotations.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Quotations.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.QuotationsQuery.queryDescriptor}"
+                        queryListener="#{bindings.QuotationsQuery.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.Quotations.collectionModel.selectedRow}"
+                        selectionListener="#{quoteEnq.quoteSelListener}"
+                        rowSelection="single" id="t5"
+                        binding="#{quoteEnq.quoteResultsLOV}"
+                        inlineStyle="width:100.0%; height:150px; border-style:none;">
+                <af:column sortProperty="ENQ_quo_no" filterable="true"
+                           filterFeatures="caseInsensitive" sortable="true"
+                           headerText="Quotation No." id="c12">
+                  <af:outputText value="#{row.ENQ_quo_no}" id="ot14"/>
+                </af:column>
+                <af:column sortProperty="ENQ_CLIENT" filterable="true"
+                           filterFeatures="caseInsensitive" sortable="true"
+                           headerText="Client" id="c15" width="200">
+                  <af:outputText value="#{row.ENQ_CLIENT}" id="ot16"/>
+                </af:column>
+                <af:column sortProperty="ENQ_brn_name" filterable="true"
+                           filterFeatures="caseInsensitive" sortable="true"
+                           headerText="Branch" id="c13" width="150">
+                  <af:outputText value="#{row.ENQ_brn_name}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="ENQ_agn_name" filterable="true"
+                           filterFeatures="caseInsensitive" sortable="true"
+                           headerText="Agent " id="c14" width="200">
+                  <af:outputText value="#{row.ENQ_agn_name}" id="ot15"/>
+                </af:column>
+                <af:column sortProperty="ENQ_DATE" filterable="true"
+                           filterFeatures="caseInsensitive" sortable="true"
+                           headerText="Quotation Date" id="c11">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{vs.filterCriteria.ENQ_DATE}"
+                                  id="id2"/>
+                  </f:facet>
+                  <af:outputText value="#{row.ENQ_DATE}" id="ot13">
+                    <af:convertDateTime pattern="#{bindings.Quotations.hints.ENQ_DATE.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="ENQ_STATUS" filterable="true"
+                           filterFeatures="caseInsensitive" sortable="true"
+                           headerText="Status" id="c10" width="90">
+                  <af:outputText value="#{row.ENQ_STATUS}" id="ot12"/>
+                </af:column>
+                <af:column sortProperty="client" sortable="false" id="c19"
+                           width="80">
+                  <af:commandLink text="view" id="commandLink1"
+                                  action="#{quoteEnq.ViewQuotation}"
+                                  rendered="#{row.ENQ_STATUS == 'Successful'}"/>
+                </af:column>
+              </af:table>
+            </af:panelBox>
+            <af:panelBox text="Quotation Tickets" id="panelBox1"
+                         showHeader="never" binding="#{quoteEnq.ticketsTab}"
+                         rendered="false">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Quotation Tickets"
+                              inlineStyle="font-weight:bold;"
+                              id="outputLabel7"/>
+              <af:separator inlineStyle="width:inherit;" id="separator2"/>
+              <af:table value="#{bindings.workflow1.collectionModel}" var="row"
+                        rows="#{bindings.workflow1.rangeSize}"
+                        emptyText="#{bindings.workflow1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.workflow1.rangeSize}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.workflow1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.workflow1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="table1"
+                        binding="#{quoteEnq.resultsLOV}"
+                        inlineStyle="width:100.0%; height:80px; border-style:none;">
+                <af:column sortProperty="TCKT_CODE" sortable="true"
+                           headerText="Ticket Id." id="column1">
+                  <af:outputText value="#{row.TCKT_CODE}" id="outputText1"/>
+                </af:column>
+                <af:column sortProperty="TCKT_NAME" sortable="true"
+                           headerText="Ticket Name" id="column2" width="200">
+                  <af:outputText value="#{row.TCKT_NAME}" id="ot17"/>
+                </af:column>
+                <af:column sortProperty="TCKT_TO" sortable="true"
+                           headerText="Ticket Assignee" id="c17" width="140">
+                  <af:outputText value="#{row.TCKT_TO}" id="outputText2"/>
+                </af:column>
+                <af:column sortProperty="TCKT_BY" sortable="true"
+                           headerText="Ticket From." id="c16">
+                  <af:outputText value="#{row.TCKT_BY}" id="outputText3"/>
+                </af:column>
+                <af:column sortProperty="TCKT_DATE" sortable="true"
+                           headerText="Ticket Created On." id="column3">
+                  <af:outputText value="#{row.TCKT_DATE}" id="outputText4">
+                    <af:convertDateTime pattern="#{bindings.workflow1.hints.TCKT_DATE.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="TCKT_REMARKS" sortable="true"
+                           headerText="Ticket Remarks." id="column4"
+                           width="200">
+                  <af:outputText value="#{row.TCKT_REMARKS}" id="outputText5"/>
+                </af:column>
+                <af:column sortProperty ="taskID" sortable="false" id="c18"
+                           width="80">
+                  <af:commandLink text="Process" id="commandLink2"
+                                  action="#{quoteEnq.findTicket2Selected}"
+                                  rendered="#{row.TCKT_TO == currUser.username}"/>
+                </af:column>
+              </af:table>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

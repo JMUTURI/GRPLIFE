@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+        <af:panelBox text="Enter Earnings And Pension Details"
+                     inlineStyle="height:453px; width:450px;" id="pb1">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="2" width="70%" id="pg1">
+            <af:outputText value="Pension Type" id="ot1"/>
+            <af:selectOneChoice label="Label 1" simple="true"
+                                binding="#{manipulation.pensionType}" id="soc1">
+              <af:selectItem label="Defined Benefit" value="DB" id="si1"/>
+              <af:selectItem label="Defined Contribution" value="DC" id="si2"/>
+            </af:selectOneChoice>
+            <af:outputLabel value="Guarantee Period" id="ol1"/>
+            <af:inputText label="Label 1" simple="true" columns="14"
+                          binding="#{manipulation.guaranteePrdDisplay}"
+                          id="it1"/>
+            <af:outputLabel value="Pensions Esc%" id="ol2"/>
+            <af:inputText label="Label 2" simple="true" columns="14"
+                          binding="#{manipulation.pensEscDisplay}" id="it2"/>
+            <af:outputLabel value="Pensions Pay Frequency" id="ol3"/>
+            <af:selectOneChoice label="Label 2" simple="true"
+                                binding="#{manipulation.pensPayFrequency}"
+                                id="soc2">
+              <af:selectItem label="Monthly" value="M" id="si3"/>
+              <af:selectItem label="Quaterly" value="Q" id="si4"/>
+              <af:selectItem label="Semi Annualy" value="S" id="si5"/>
+              <af:selectItem label="Annualy" value="A" id="si6"/>
+              <af:selectItem label="Single" value="S" id="si7"/>
+            </af:selectOneChoice>
+            <af:outputLabel value="Retire Age(Male)" id="ol4"/>
+            <af:inputText label="Label 3" simple="true" columns="14"
+                          binding="#{manipulation.rmaleDisplay}" id="it3"/>
+            <af:outputLabel value="Retire Age(Female)" id="ol5"/>
+            <af:inputText label="Label 4" simple="true" columns="14"
+                          binding="#{manipulation.rfemaleDisplay}" id="it4"/>
+            <af:outputLabel value="Pension Admin Fee" id="ol6"/>
+            <af:inputText label="Label 5" simple="true" columns="14"
+                          binding="#{manipulation.pensAdminDisplay}" id="it5"/>
+            <af:outputLabel value="Total Empyee Contr" id="ol7"/>
+            <af:inputText label="Label 6" simple="true" columns="14"
+                          binding="#{manipulation.totEmpyeeContr}" id="it6"/>
+            <af:outputLabel value="Total Empyer Contr" id="ol8"/>
+            <af:inputText label="Label 7" simple="true" columns="14"
+                          binding="#{manipulation.totEmpyerContr}" id="it7"/>
+            <af:outputLabel value="Contrib Type" id="ol9"/>
+            <af:selectOneChoice label="Label 3" simple="true"
+                                binding="#{manipulation.contrType}" id="soc3">
+              <af:selectItem label="Percentage" value="P" id="si8"/>
+              <af:selectItem label="Amount" value="A" id="si9"/>
+            </af:selectOneChoice>
+            <af:outputLabel value="Employer  Contr Rate" id="ol10"/>
+            <af:inputText label="Label 8" columns="14" simple="true"
+                          binding="#{manipulation.empyerContrRate}" id="it8"/>
+            <af:outputLabel value="Employee Contr Rate" id="ol11"/>
+            <af:inputText label="Label 9" simple="true" columns="14"
+                          binding="#{manipulation.empyeeContrRate}" id="it9"/>
+            <af:outputLabel value="Funding Rate" id="ol12"/>
+            <af:inputText label="Label 10" simple="true" columns="14"
+                          binding="#{manipulation.fundingRate}" id="it10"/>
+            <af:outputLabel value="Pens Comm Rate" id="ol13"/>
+            <af:inputText label="Label 11" simple="true" columns="14"
+                          binding="#{manipulation.pensCommRate}" id="it11"/>
+            <af:outputLabel value="Empyer Vol Contr" id="ol14"/>
+            <af:inputText label="Label 12" simple="true" columns="14"
+                          binding="#{manipulation.empyerVolContr}" id="it12"/>
+            <af:outputLabel value="Emplyee Vol Contr" id="ol15"/>
+            <af:inputText label="Label 13" columns="14" simple="true"
+                          binding="#{manipulation.emplyeeVolContr}" id="it13"/>
+            <af:outputLabel value="Employer Pens BF" id="ol16"/>
+            <af:inputText label="Label 14" simple="true" columns="14"
+                          binding="#{manipulation.empyerPensBF}" id="it14"/>
+            <af:outputLabel value="Employee Pens BF" id="ol17"/>
+            <af:inputText label="Label 15" simple="true" columns="14"
+                          binding="#{manipulation.empyeePensBF}" id="it15"/>
+            <af:outputLabel value="Tot Pens BF" id="ol18"/>
+            <af:inputText label="Label 16" simple="true" columns="14"
+                          binding="#{manipulation.totPensBF}" id="it16"/>
+            <af:outputLabel value="Pension Interest Rate" id="ol19"/>
+            <af:inputText label="Label 17" simple="true" columns="14"
+                          binding="#{manipulation.pensInterestRate}" id="it17"/>
+            <af:commandButton text="Next"
+                              action="#{manipulation.Update_Earn_Pensions}"
+                              id="cb1"/>
+            <af:commandButton text="Cancel" id="cb2"/>
+          </h:panelGrid>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

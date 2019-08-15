@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="transTypesPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findGLAccounts.result"
+                    DataControl="productTransactionsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.productTransactions"
+                    id="findGLAccountsIterator"/>
+    <searchRegion Binds="findGLAccountsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productTransactionsQuery"/>
+    <methodIterator Binds="findTransTypes.result"
+                    DataControl="productTransactionsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.productTransactions"
+                    id="findTransTypesIterator1"/>
+    <searchRegion Binds="findTransTypesIterator1" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productTransactions1Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findGLAccounts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGLAccounts"
+                  IsViewObjectMethod="false"
+                  DataControl="productTransactionsDAO"
+                  InstanceName="productTransactionsDAO.dataProvider"
+                  ReturnName="productTransactionsDAO.methodResults.findGLAccounts_productTransactionsDAO_dataProvider_findGLAccounts_result"/>
+    <tree IterBinding="findGLAccountsIterator" id="productTransactions">
+      <nodeDefinition DefName="com.turnkey.setups.productTransactions"
+                      Name="productTransactions0">
+        <AttrNames>
+          <Item Value="accName"/>
+          <Item Value="accNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTransTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTransTypes"
+                  IsViewObjectMethod="false"
+                  DataControl="productTransactionsDAO"
+                  InstanceName="productTransactionsDAO.dataProvider"
+                  ReturnName="productTransactionsDAO.methodResults.findTransTypes_productTransactionsDAO_dataProvider_findTransTypes_result"/>
+    <methodAction id="findTransactionTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTransactionTypes"
+                  IsViewObjectMethod="false"
+                  DataControl="productTransactionsDAO"
+                  InstanceName="productTransactionsDAO.dataProvider"
+                  ReturnName="productTransactionsDAO.methodResults.findTransactionTypes_productTransactionsDAO_dataProvider_findTransactionTypes_result"/>
+    <tree IterBinding="findTransTypesIterator1" id="productTransactions1">
+      <nodeDefinition DefName="com.turnkey.setups.productTransactions"
+                      Name="productTransactions10">
+        <AttrNames>
+          <Item Value="trntCode"/>
+          <Item Value="trntDesc"/>
+          <Item Value="trntType"/>
+          <Item Value="trntProdApplcb"/>
+          <Item Value="trntGlCode"/>
+          <Item Value="trntConGlCode"/>
+          <Item Value="trntLevel"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

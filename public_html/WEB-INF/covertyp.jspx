@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Cover Types" id="d8">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:group id="g1">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+              <h:panelGrid columns="3" id="pg1">
+                <af:commandButton id="cb2"
+                                  icon="/images/field_group_plus_dwn.png">
+                  <af:showPopupBehavior popupId="CoverTypesPopup"/>
+                </af:commandButton>
+                <af:commandButton id="cb1" icon="/images/update_ena.png"
+                                  action="#{otherSetups.EditCoverTypes}"/>
+                <af:commandButton id="cb3" icon="/images/delete_ena.png"/>
+                <af:popup id="CoverTypesPopup">
+                  <af:dialog id="d1" type="none"
+                             title="Create/Edit Cover Type">
+                    <h:panelGrid columns="2" id="pg2">
+                      <af:outputLabel value="Cover ID" id="ol1"/>
+                      <af:inputText label="Label 1" id="it1" simple="true"
+                                    binding="#{otherSetups.coverID}"/>
+                      <af:outputLabel value="Cover Description" id="ol2"/>
+                      <af:inputText label="Label 2" id="it2" simple="true"
+                                    binding="#{otherSetups.coverDescription}"/>
+                      <af:outputLabel id="ol3" value="Main Cover/Rider"/>
+                      <af:selectOneChoice label="Label 1" id="soc1"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{otherSetups.mainCover}">
+                        <af:selectItem label="Main Cover" value="M" id="si15"/>
+                        <af:selectItem label="Savings Rider" value="S"
+                                       id="si11"/>
+                        <af:selectItem label="Other Benefits (Riders)"
+                                       value="R" id="si14"/>
+                        <af:selectItem label="Waiver of Premium I" value="W"
+                                       id="si1"/>
+                        <af:selectItem label="Natural Death Benefit" value="N"
+                                       id="si17"/>
+                        <af:selectItem label="Maturity Value Increase Option"
+                                       value="O" id="si5"/>
+                        <af:selectItem label="Additional Fatal Accident Ben."
+                                       value="A" id="si27"/>
+                        <af:selectItem label="Total Permanent Disability"
+                                       value="T" id="si16"/>
+                        <af:selectItem label="Funeral Benefit (self)"
+                                       value="F" id="si2"/>
+                        <af:selectItem label="Funeral Benefit (spouse)"
+                                       value="FS" id="si28"/>
+                        <af:selectItem label="Funeral Benefit (child)"
+                                       value="FC" id="si4"/>
+                        <af:selectItem label="Premium Waiver" value="WP"
+                                       id="si8"/>
+                        <af:selectItem label="Disability (% SA)" value="D"
+                                       id="si25"/>
+                        <af:selectItem label="A.I.R. (Self)" value="I"
+                                       id="si3"/>
+                        <af:selectItem label="A.I.R. (Spouse)" value="IS"
+                                       id="si29"/>
+                        <af:selectItem label="A.I.R. (Child)" value="IC"
+                                       id="si21"/>
+                        <af:selectItem label="PA Basic Cover" value="PB"
+                                       id="si9"/>
+                        <af:selectItem label="PA Rider" value="PR" id="si26"/>
+                        <af:selectItem label="PA Indemnity Rider" value="PI"
+                                       id="si13"/>
+                        <af:selectItem label="Claim Value Increase Option"
+                                       value="CO" id="si23"/>
+                        <af:selectItem label="Personal Accident Benefit"
+                                       value="PA" id="si20"/>
+                        <af:selectItem label="Waiver of Premium II" value="W2"
+                                       id="si18"/>
+                        <af:selectItem label="Critical Illness" value="CI"
+                                       id="si22"/>
+                        <af:selectItem label="Rider (% of Main Cover)"
+                                       value="RM" id="si24"/>
+                        <af:selectItem label="Rider (% of Yr Earnings)"
+                                       value="RA" id="si30"/>
+                        <af:selectItem label="PA / ADB Rider" value="RS"
+                                       id="si10"/>
+                        <af:selectItem label="Personal Accident Benefit II"
+                                       value="PA2" id="si6"/>
+                        <af:selectItem label="Waiver of Premium III"
+                                       value="W3" id="si12"/>
+                        <af:selectItem label="Waiver of Premium IV" value="W4"
+                                       id="si7"/>
+                        <af:selectItem label="Assured Cover" value="AC"
+                                       id="si19"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Maximum Age" id="ol4"/>
+                      <af:inputText label="Label 3" id="it3" simple="true"
+                                    binding="#{otherSetups.maximumAge}"/>
+                      <af:outputLabel value="Duration Type" id="ol12"/>
+                      <af:selectOneChoice label="Label 5" id="soc5"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{otherSetups.durationType}">
+                        <af:selectItem label="Annual" value="A" id="si40"/>
+                        <af:selectItem label="Open" value="O" id="si41"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Multiplier" id="ol5"/>
+                      <af:inputText label="Label 4" id="it4" simple="true"
+                                    binding="#{otherSetups.multiplier}"/>
+                      <af:outputLabel value="Division Factor" id="ol6"/>
+                      <af:inputText label="Label 5" id="it5" simple="true"
+                                    binding="#{otherSetups.divisionFactor}"/>
+                      <af:outputLabel value="Read From" id="ol7"/>
+                      <af:selectOneChoice label="Label 2" id="soc2"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{otherSetups.cvtReadFrom}">
+                        <af:selectItem label="Tables" value="Tables" id="si31"/>
+                        <af:selectItem label="Other Rates" value="Other Rates"
+                                       id="si32"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Rate Type" id="ol8"/>
+                      <af:selectOneChoice label="Label 3" id="soc3"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{otherSetups.cvtRateType}">
+                        <af:selectItem label="Monthly" value="M" id="si33"/>
+                        <af:selectItem label="Annual" value="A" id="si35"/>
+                        <af:selectItem label="Both M$A" value="B" id="si34"/>
+                        <af:selectItem label="Single" value="S" id="si37"/>
+                        <af:selectItem label="Both S$A" value="BS" id="si36"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Report Name" id="ol9"/>
+                      <af:inputText label="Label 6" id="it6" simple="true"
+                                    binding="#{otherSetups.cvtReportName}"/>
+                      <af:outputLabel value="Remarks" id="ol10"/>
+                      <af:inputText label="Label 7" id="it7" simple="true"
+                                    binding="#{otherSetups.cvtRemarks}"/>
+                      <af:outputLabel value="PA Rates Dependent On Freq Of Pymt" id="ol11"/>
+                      <af:selectOneChoice label="Label 4" id="soc4"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{otherSetups.paRatesFreqOfPymt}">
+                        <af:selectItem label="Yes" value="Y" id="si38"/>
+                        <af:selectItem label="No" value="N" id="si39"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="OK" id="cb4"
+                                        action="#{otherSetups.CreateCoverType}"/>
+                      <af:commandButton text="Cancel" id="cb5"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="pg3">
+                <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                          rows="#{bindings.Setup.rangeSize}"
+                          emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="height:178px;"
+                          binding="#{otherSetups.coverTypesLOV}">
+                  <af:column sortProperty="CVT_SHT_DESC" sortable="true"
+                             headerText="ID" id="c2">
+                    <af:outputText value="#{row.CVT_SHT_DESC}" id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_DESCRIPTION" sortable="true"
+                             headerText="DEESCRIPTION" id="c3">
+                    <af:outputText value="#{row.CVT_DESCRIPTION}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_MAIN_COVER_DESC" sortable="true"
+                             headerText="MAIN COVER/RIDER" id="c12">
+                    <af:outputText value="#{row.CVT_MAIN_COVER_DESC}" id="ot5"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_DURATION_TYPE_DESC"
+                             sortable="true" headerText="DURATION TYPE" id="c4">
+                    <af:outputText value="#{row.CVT_DURATION_TYPE_DESC}"
+                                   id="ot12"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_MAX_AGE" sortable="true"
+                             headerText="MAX AGE" id="c11">
+                    <af:outputText value="#{row.CVT_MAX_AGE}" id="ot13"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_MULTIPLIER" sortable="true"
+                             headerText="MULTIPLIER" id="c5">
+                    <af:outputText value="#{row.CVT_MULTIPLIER}" id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_MULT_DIV_FACT" sortable="true"
+                             headerText="DIVISION FACTOR" id="c6">
+                    <af:outputText value="#{row.CVT_MULT_DIV_FACT}" id="ot8"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_READ_FROM_DESC" sortable="true"
+                             headerText="READ FROM" id="c8">
+                    <af:outputText value="#{row.CVT_READ_FROM_DESC}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_RATE_TYPE_DESC" sortable="true"
+                             headerText="RATE TYPE" id="c1">
+                    <af:outputText value="#{row.CVT_RATE_TYPE_DESC}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_REPORT_NAME" sortable="true"
+                             headerText="REPORT NAME" id="c7">
+                    <af:outputText value="#{row.CVT_REPORT_NAME}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_REMARKS" sortable="true"
+                             headerText="REMARKS" id="c10">
+                    <af:outputText value="#{row.CVT_REMARKS}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="CVT_RATES_FREQ_OF_PYMT_DESC"
+                             sortable="true"
+                             headerText="PA RATES DEPEND ON FREQ OF PYMT"
+                             id="c9">
+                    <af:outputText value="#{row.CVT_RATES_FREQ_OF_PYMT_DESC}"
+                                   id="ot7"/>
+                  </af:column>
+                </af:table>
+              </h:panelGrid>
+            </af:panelGroupLayout>
+        </af:group>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

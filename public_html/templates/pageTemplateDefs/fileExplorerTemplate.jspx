@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:afh="http://myfaces.apache.org/trinidad/html"
+          version="1.2">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+<component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+  <description>
+  This component lays out an entire page.
+  </description>
+  <facet>
+    <description><![CDATA[Content to be rendered as meta data inside the 
+      "head" section.]]></description>
+    <facet-name>metaContainer</facet-name>
+  </facet>
+  <facet>
+    <description><![CDATA[The auxiliary content for the secondary layer.]]></description>
+    <facet-name>auxiliary2</facet-name>
+  </facet>
+  <facet>
+    <description><![CDATA[The branding region of the page.  This section typically
+              contains a horizontal panelGroupLayout for an image of a logo and an
+              outputText for a title.]]>
+    </description>
+    <facet-name>branding</facet-name>
+  </facet>
+  <facet>
+    <description><![CDATA[Content for the top of the secondary layer.]]>
+    </description>
+    <facet-name>header2</facet-name>
+  </facet>
+  <facet>
+    <description><![CDATA[This section typically contains global application links or otherwise top level navigation structure links, e.g. "Home", "Preferences", "Help", and "Sign Out".]]></description>
+    <facet-name>navigationGlobal</facet-name>
+  </facet>
+  <facet>
+    <description><![CDATA[The center content.]]></description>
+    <facet-name>center</facet-name>
+  </facet>
+  <attribute>
+    <description>Specifies the number of pixels that the auxiliary2 content should consume (this is a width if the orientationis "start" or "end" or a height if the orientation is "bottom").
+    </description>
+    <attribute-name>auxiliary2Size</attribute-name>
+    <attribute-class>int</attribute-class>
+    <default-value>200</default-value>
+  </attribute>
+  <attribute>
+    <description>Specifies the number of pixels tall that the global content should consume.
+    </description>
+    <attribute-name>headerGlobalSize</attribute-name>
+    <attribute-class>int</attribute-class>
+    <default-value>100</default-value>
+  </attribute>
+  <attribute>
+    <description>Specifies the number of pixels tall that the secondary header content should consume.
+    </description>
+    <attribute-name>header2Size</attribute-name>
+    <attribute-class>int</attribute-class>
+    <default-value>60</default-value>
+  </attribute>
+  <attribute>
+    <description>The title of the HTML document</description>
+    <attribute-name>documentTitle</attribute-name>
+    <attribute-class>java.lang.String</attribute-class>
+  </attribute>
+  <attribute>
+    <description>If true, the margin and padding are set to 0px.</description>
+    <attribute-name>maximized</attribute-name>
+    <attribute-class>boolean</attribute-class>
+    <default-value>true</default-value>
+  </attribute>
+  <attribute>
+    <description>the id attribute of the command button inside the form whose action should 
+      be invoked by default, when the enter key is pressed with focus inside the form.  
+      Identifiers are relative to the form component, and must account for NamingContainers. 
+      You can use a single colon to start the search from the root.</description>
+    <attribute-name>defaultCommand</attribute-name>
+    <attribute-class>java.lang.String</attribute-class>
+  </attribute>
+  <attribute>
+    <description>the id of the component to which you want the focus to be when the 
+      full page renders. The accessibility-mode must not be set to "screenReader" for 
+      this feature to be on.</description>
+    <attribute-name>initialFocusId</attribute-name>
+    <attribute-class>java.lang.String</attribute-class>
+  </attribute>
+  <attribute>
+    <description>whether the form supports file upload.</description>
+    <attribute-name>usesUpload</attribute-name>
+    <attribute-class>boolean</attribute-class>
+    <default-value>false</default-value>
+  </attribute>
+</component>
+    </af:xmlContent>
+    <af:document
+      title="#{attrs.documentTitle}"
+      maximized="#{attrs.maximized}"
+      initialFocusId="#{attrs.initialFocusId}" id="pt_d1">
+      <f:facet name="metaContainer">
+        <af:group id="pt_g1"><![CDATA[
+          <style type="text/css">
+          .FileExplorerNavigationGlobal {
+            text-align: right;
+            padding-left: 0px;
+            padding-right: 10px;
+            white-space: normal;
+          }
+          HTML[dir=rtl] .FileExplorerNavigationGlobal {
+            text-align: left;
+            padding-left: 10px;
+            padding-right: 0px;
+          }
+          </style>
+          ]]>
+          <af:facetRef facetName="metaContainer" />
+        </af:group>
+      </f:facet>
+      <af:form
+        defaultCommand="#{attrs.defaultCommand}"
+        usesUpload="#{attrs.usesUpload}" id="pt_f1">
+        <af:panelStretchLayout
+          theme="dark"
+          styleClass="AFVisualRoot" id="pt_psl1">
+          <f:facet name="center">
+            <af:panelSplitter
+              orientation="vertical" splitterPosition="#{attrs.headerGlobalSize}"
+                              id="pt_ps1">
+              <f:facet name="first">
+                <af:panelGroupLayout layout="vertical" id="pt_pgl1">
+                  <afh:tableLayout width="100%" id="pt_tl1">
+                    <afh:rowLayout id="pt_rl1">
+                      <afh:cellFormat styleClass="AFBranding" id="pt_cf1">
+                        <af:facetRef facetName="branding"/>
+                      </afh:cellFormat>
+                      <afh:cellFormat id="pt_cf2">
+                        <af:outputText value=" " id="pt_ot1"/>
+                      </afh:cellFormat>
+                      <afh:cellFormat styleClass="FileExplorerNavigationGlobal"
+                                      id="pt_cf3">
+                        <af:facetRef facetName="navigationGlobal"/>
+                      </afh:cellFormat>
+                    </afh:rowLayout>
+                  </afh:tableLayout>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="second">
+                <!-- start of secondary decoration -->
+                <af:decorativeBox
+                  theme="light" id="pt_db1">
+                  <f:facet name="center">
+                    <af:panelStretchLayout
+                      topHeight="#{attrs.header2Size}" id="pt_psl2">
+                      <f:facet name="top">
+                        <af:facetRef facetName="header2"/>
+                      </f:facet>
+                      <f:facet name="center">
+                        <af:panelSplitter orientation="horizontal"
+                          splitterPosition="#{attrs.auxiliary2Size}"
+                                          id="pt_ps2">
+                          <f:facet name="first">
+                            <af:facetRef facetName="auxiliary2"/>
+                          </f:facet>
+                          <f:facet name="second">
+                            <!-- start of main decoration -->
+                            <af:decorativeBox
+                              theme="default" id="pt_db2">
+                              <f:facet name="center">
+                                <af:facetRef facetName="center"/>
+                              </f:facet>
+                            </af:decorativeBox>
+                            <!-- end of main decoration -->
+                          </f:facet>
+                        </af:panelSplitter><!-- end of secondary auxiliary splitter -->
+                      </f:facet>
+                    </af:panelStretchLayout><!-- end of secondary header/footer layout -->
+                  </f:facet>
+                </af:decorativeBox>
+                <!-- end of secondary decoration -->
+              </f:facet>
+            </af:panelSplitter><!-- end of global top splitter -->
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </af:pageTemplateDef>
+</jsp:root>

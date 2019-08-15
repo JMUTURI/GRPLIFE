@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" version="1.2"
+          xmlns:h="http://java.sun.com/jsf/html">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <f:view>
+    <af:document title="Premium Rates" id="d15">
+      <af:messages id="m1"/>
+      <af:pageTemplate id="lmsgroup" viewId="/templates/GroupTemplate2.jspx">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                                 id="pgl4">
+              <af:panelBox text="Group Life Premium Rates" showHeader="never"
+                           id="pb15">
+                <f:facet name="toolbar"/>
+                <af:inputText id="it6" readOnly="true"
+                              helpTopicId="LmsGrp_PRATES_G"/>
+                <af:outputLabel value="Group Life Premium Rates" id="ol1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s1"/>
+                <af:spacer width="10" height="10" id="s2"/>
+                <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                          rows="#{bindings.Setup.rangeSize}"
+                          emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{SetupBean.AllproductsListener}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:100%; height:100.0px; border-style:none;">
+                  <af:column sortProperty="PROD_SHT_DESC" sortable="true"
+                             headerText="Short Desc" id="c1" width="150">
+                    <af:outputText value="#{row.PROD_SHT_DESC}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="PROD_DESC" sortable="true"
+                             headerText="Product" id="c2" width="200">
+                    <af:outputText value="#{row.PROD_DESC}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="PROD_TYPE" sortable="true"
+                             headerText="Product Type" id="c3" width="200">
+                    <af:outputText value="#{row.PROD_TYPE}" id="ot3"/>
+                  </af:column>
+                </af:table>
+                <af:spacer width="10" height="10" id="spacer1"/>
+                <h:panelGrid columns="2" id="pg1"
+                             style="width:98%; border-style:solid; border-width:thin;">
+                  <h:panelGrid columns="1" id="pg2" title="Premium Masks">
+                    <af:outputLabel value="Premium Masks" id="outputLabel1"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:spacer width="10" height="10" id="spacer2"/>
+                    <af:table value="#{bindings.Setup7.collectionModel}"
+                              var="row" rows="#{bindings.Setup7.rangeSize}"
+                              emptyText="#{bindings.Setup7.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup7.rangeSize}"
+                              rowBandingInterval="0"
+                              selectionListener="#{SetupBean.MasksListener}"
+                              rowSelection="single" id="t8"
+                              inlineStyle="width:100.0%; height:100px; border-style:none;"
+                              binding="#{SetupBean.masksLOV}">
+                      <af:column sortProperty="PMAS_SHT_DESC" sortable="true"
+                                 headerText="Short Desc" id="c32">
+                        <af:outputText value="#{row.PMAS_SHT_DESC}" id="ot33"/>
+                      </af:column>
+                      <af:column sortProperty="PMAS_DESC" sortable="true"
+                                 headerText="Premium Mask" id="c31" width="200">
+                        <af:outputText value="#{row.PMAS_DESC}" id="ot32"/>
+                      </af:column>
+                    </af:table>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="panelGrid1">
+                    <af:outputLabel value="Cover Type Dependants"
+                                    id="outputLabel2"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:spacer width="10" height="10" id="spacer3"/>
+                    <af:table value="#{bindings.Setup2.collectionModel}"
+                              var="row" rows="#{bindings.Setup2.rangeSize}"
+                              emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup2.rangeSize}"
+                              rowBandingInterval="0"
+                              selectionListener="#{SetupBean.ProductDependantListener}"
+                              rowSelection="single" id="t3"
+                              inlineStyle="width:100.0%; height:100px; border-style:none;"
+                              binding="#{SetupBean.dependantsLOV}">
+                      <af:column sortProperty="PCD_PROD_DESC" sortable="true"
+                                 headerText="Cover Type" id="c6">
+                        <af:outputText value="#{row.PCD_PROD_DESC}" id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="PCD_DTY_DESCRIPTION"
+                                 sortable="true" headerText="Dependant Type"
+                                 id="c7" width="200">
+                        <af:outputText value="#{row.PCD_DTY_DESCRIPTION}"
+                                       id="ot7"/>
+                      </af:column>
+                    </af:table>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="panelGrid2">
+                    <af:outputLabel value="Life Classes" id="outputLabel3"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:spacer width="10" height="10" id="spacer4"/>
+                    <af:table value="#{bindings.Setup3.collectionModel}"
+                              var="row" rows="#{bindings.Setup3.rangeSize}"
+                              emptyText="#{bindings.Setup3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup3.rangeSize}"
+                              rowBandingInterval="0"
+                              selectionListener="#{SetupBean.lifeClassListener}"
+                              rowSelection="single" id="t4"
+                              inlineStyle="width:100.0%; height:100px; border-style:none;"
+                              binding="#{SetupBean.lifeClassLOV}">
+                      <af:column sortProperty="LC_DESC" sortable="true"
+                                 headerText="life Class" id="c8" width="200">
+                        <af:outputText value="#{row.LC_DESC}" id="ot9"/>
+                      </af:column>
+                    </af:table>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="panelGrid3">
+                    <h:panelGrid columns="2" id="pg3">
+                      <h:panelGrid columns="1" id="pg4">
+                        <h:panelGrid columns="3" id="pg7">
+                          <af:commandButton id="cb2"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{SetupBean.AddLoanInterestRate}"/>
+                          <af:commandButton id="cb3"
+                                            icon="/images/update_ena.png"
+                                            action="#{SetupBean.EditLoanTerm}"/>
+                          <af:commandButton id="cb4"
+                                            icon="/images/delete_ena.png"
+                                            action="#{SetupBean.DeleteLoanTerm}"/>
+                          <af:popup id="LoanTermsPopup">
+                            <af:dialog id="d3" type="none"
+                                       title="Add/Edit Loan Terms">
+                              <h:panelGrid columns="2" id="pg8">
+                                <af:outputLabel value="*Term From" id="ol3"/>
+                                <af:inputText label="Label 2" id="it2"
+                                              simple="true"
+                                              shortDesc="Loan Term From"
+                                              binding="#{SetupBean.loanTermFrom}"/>
+                                <af:outputLabel value="*Term To" id="ol4"/>
+                                <af:inputText label="Label 3" id="it3"
+                                              simple="true"
+                                              shortDesc="Loan Term To"
+                                              binding="#{SetupBean.loanTermTo}"/>
+                                <af:commandButton text="OK" id="cb5"
+                                                  action="#{SetupBean.SaveLoanTerm}"/>
+                                <af:commandButton text="Cancel" id="cb6"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:outputLabel value="Loan Terms" id="outputLabel4"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:spacer width="10" height="10" id="spacer5"/>
+                        <af:table value="#{bindings.Setup4.collectionModel}"
+                                  var="row" rows="#{bindings.Setup4.rangeSize}"
+                                  emptyText="#{bindings.Setup4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.Setup4.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.Setup4.collectionModel.selectedRow}"
+                                  selectionListener="#{SetupBean.PremiumTermsListener}"
+                                  rowSelection="single" id="t5"
+                                  inlineStyle="width:100.0%; height:100px; border-style:none;"
+                                  binding="#{SetupBean.termsLOV}">
+                          <af:column sortProperty="GRPT_TERM_FROM"
+                                     sortable="true" headerText="Term From"
+                                     id="c10">
+                            <af:outputText value="#{row.GRPT_TERM_FROM}"
+                                           id="ot11"/>
+                          </af:column>
+                          <af:column sortProperty="GRPT_TERM_TO" sortable="true"
+                                     headerText="Term To" id="c9">
+                            <af:outputText value="#{row.GRPT_TERM_TO}"
+                                           id="ot10"/>
+                          </af:column>
+                        </af:table>
+                      </h:panelGrid>
+                      <h:panelGrid columns="1" id="panelGrid4">
+                        <h:panelGrid columns="3" id="pg9">
+                          <af:commandButton id="cb7"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{SetupBean.AddLoanInterestRates}"/>
+                          <af:commandButton id="cb8"
+                                            icon="/images/update_ena.png"
+                                            action="#{SetupBean.EditLoanInterestRates}"/>
+                          <af:commandButton id="cb9"
+                                            icon="/images/delete_ena.png"
+                                            action="#{SetupBean.DeleteLoanInterestRate}"/>
+                          <af:popup id="LoanInterestPopup">
+                            <af:dialog id="d4" type="none"
+                                       title="Add/Edit Loan Interest Rates">
+                              <h:panelGrid columns="2" id="pg10">
+                                <af:outputLabel value="*Rate From" id="ol5"/>
+                                <af:inputText label="Label 4" id="it4"
+                                              simple="true"
+                                              binding="#{SetupBean.rateFrom}"
+                                              shortDesc="Loan Interest Rate From"/>
+                                <af:outputLabel value="*Rate To" id="ol6"/>
+                                <af:inputText label="Label 5" id="it5"
+                                              simple="true"
+                                              shortDesc="Loan Interest Rate To"
+                                              binding="#{SetupBean.rateTo}"/>
+                                <af:commandButton text="OK" id="cb10"
+                                                  action="#{SetupBean.SaveLoanInterestRate}"/>
+                                <af:commandButton text="Cancel" id="cb11"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:outputLabel value="Loan Interest Rate"
+                                        id="outputLabel5"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:spacer width="10" height="10" id="spacer6"/>
+                        <af:table value="#{bindings.Setup5.collectionModel}"
+                                  var="row" rows="#{bindings.Setup5.rangeSize}"
+                                  emptyText="#{bindings.Setup5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.Setup5.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.Setup5.collectionModel.selectedRow}"
+                                  selectionListener="#{SetupBean.PremiumInterestRatesListener}"
+                                  rowSelection="single" id="t6"
+                                  inlineStyle="width:100.0%; height:100px; border-style:none;"
+                                  binding="#{SetupBean.interestLOV}">
+                          <af:column sortProperty="GPIR_RATE_FROM"
+                                     sortable="true" headerText="Rate From"
+                                     id="c11">
+                            <af:outputText value="#{row.GPIR_RATE_FROM}"
+                                           id="ot13"/>
+                          </af:column>
+                          <af:column sortProperty="GPIR_RATE_TO" sortable="true"
+                                     headerText="Rate To" id="c12">
+                            <af:outputText value="#{row.GPIR_RATE_TO}"
+                                           id="ot12"/>
+                          </af:column>
+                        </af:table>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                  </h:panelGrid>
+                </h:panelGrid>
+                <af:spacer width="10" height="20" id="spacer7"/>
+                <af:outputLabel value="Premium Rates For Policies Above Group Minimum"
+                                id="outputLabel6"
+                                inlineStyle="font-weight:bold;"/>
+                <h:panelGrid columns="3" id="pg12">
+                  <af:commandButton id="cb19"
+                                    icon="/images/field_group_plus_ena.png"
+                                    action="#{SetupBean.AddPremiumRate}"/>
+                  <af:commandButton icon="/images/update_ena.png"
+                                    id="commandButton11"
+                                    action="#{SetupBean.EditPremiumRate}"/>
+                  <af:commandButton id="cb22" icon="/images/delete_ena.png"
+                                    action="#{SetupBean.DeletePremiumRate}"/>
+                </h:panelGrid>
+                <af:popup id="premRates">
+                  <af:dialog id="d1" title="Premium Rates" type="none">
+                    <h:panelGrid columns="4" id="pg5">
+                      <af:outputLabel value="ANB From" id="ol2"/>
+                      <af:inputText label="Label 1" id="it1" simple="true"
+                                    binding="#{SetupBean.anbFrom}"/>
+                      <af:outputLabel value="ANB To" id="outputLabel7"/>
+                      <af:inputText label="Label 1" id="inputText1"
+                                    simple="true" binding="#{SetupBean.anbTo}"/>
+                      <af:outputLabel value="Range From" id="outputLabel8"/>
+                      <af:inputText label="Label 1" id="inputText2"
+                                    simple="true"
+                                    binding="#{SetupBean.rangeFrom}"/>
+                      <af:outputLabel value="Range To" id="outputLabel9"/>
+                      <af:inputText label="Label 1" id="inputText3"
+                                    simple="true"
+                                    binding="#{SetupBean.rangeTo}"/>
+                      <af:outputLabel value="Rate" id="outputLabel10"/>
+                      <af:inputText label="Label 1" id="inputText4"
+                                    simple="true" binding="#{SetupBean.rate}"/>
+                      <af:outputLabel value="Annual Rate" id="outputLabel11"/>
+                      <af:inputText label="Label 1" id="inputText5"
+                                    simple="true"
+                                    binding="#{SetupBean.annualRate}"/>
+                      <af:outputLabel value="Single Rate" id="outputLabel12"/>
+                      <af:inputText label="Label 1" id="inputText6"
+                                    simple="true"
+                                    binding="#{SetupBean.singleRate}"/>
+                      <af:outputLabel value="Rate Description"
+                                      id="outputLabel13"/>
+                      <af:selectOneChoice label="Label 1" id="soc1"
+                                          simple="true"
+                                          binding="#{SetupBean.rateDesc}">
+                        <af:selectItem label="Percent" value="Percent"
+                                       id="si4"/>
+                        <af:selectItem label="Per Mille" value="Per Mille"
+                                       id="si3"/>
+                        <af:selectItem label="Amount" value="Amount" id="si2"/>
+                        <af:selectItem label="Others" value="Others" id="si1"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Division Factor"
+                                      id="outputLabel14"/>
+                      <af:inputText label="Label 1" id="inputText7"
+                                    simple="true"
+                                    binding="#{SetupBean.divFactor}"/>
+                      <af:outputLabel value="Rate Type" id="outputLabel15"/>
+                      <af:selectOneChoice label="Label 1" id="selectOneChoice1"
+                                          simple="true"
+                                          binding="#{SetupBean.rateType}">
+                        <af:selectItem label="Fixed" value="FXD"
+                                       id="selectItem1"/>
+                        <af:selectItem label="Recurring" value="RCU"
+                                       id="selectItem2"/>
+                        <af:selectItem label="Range(Step)" value="SRG"
+                                       id="selectItem3"/>
+                        <af:selectItem label="Range(Abs)" value="ARG"
+                                       id="selectItem4"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Prorated/Full" id="outputLabel16"/>
+                      <af:selectOneChoice label="Label 2" id="soc2"
+                                          simple="true"
+                                          binding="#{SetupBean.prorate}">
+                        <af:selectItem label="Prorated" value="P" id="si6"/>
+                        <af:selectItem label="Full" value="F" id="si5"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Multiplier Rate"
+                                      id="outputLabel17"/>
+                      <af:inputText label="Label 1" id="inputText8"
+                                    simple="true"
+                                    binding="#{SetupBean.multiRate}"/>
+                      <af:outputLabel value="Multiplier Div Factor"
+                                      id="outputLabel18"/>
+                      <af:inputText label="Label 1" id="inputText9"
+                                    simple="true"
+                                    binding="#{SetupBean.multiDivFac}"/>
+                      <af:outputLabel value="Constant" id="outputLabel19"/>
+                      <af:inputText label="Label 1" id="inputText10"
+                                    simple="true"
+                                    binding="#{SetupBean.constant}"/>
+                      <af:outputLabel value="Constant Div Factor"
+                                      id="outputLabel20"/>
+                      <af:inputText label="Label 1" id="inputText11"
+                                    simple="true"
+                                    binding="#{SetupBean.constantDivFac}"/>
+                      <af:outputLabel value="Premium  Applicable At"
+                                      id="outputLabel21"/>
+                      <af:selectOneChoice label="Label 3" id="soc3"
+                                          simple="true"
+                                          binding="#{SetupBean.refund}">
+                        <af:selectItem label="Normal" value="N" id="si8"/>
+                        <af:selectItem label="Refund" value="R" id="si7"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="WEF" id="outputLabel22"/>
+                      <af:inputDate label="Label 1" id="id1" simple="true"
+                                    binding="#{SetupBean.wef}"
+                                    value="#{bindings.sysDate.inputValue}">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:inputDate>
+                      <af:outputLabel value="WET" id="outputLabel23"/>
+                      <af:inputDate label="Label 1" id="inputDate1"
+                                    simple="true" binding="#{SetupBean.wet}">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:inputDate>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg6">
+                      <af:commandButton text="Save" id="cb1"
+                                        action="#{SetupBean.SaveGroupPremiumRates}"/>
+                      <af:commandButton text="Cancel" id="commandButton1"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+                <af:panelCollection id="pc1" inlineStyle="width:99%;">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.Setup6.collectionModel}" var="row"
+                            rows="#{bindings.Setup6.rangeSize}"
+                            emptyText="#{bindings.Setup6.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.Setup6.rangeSize}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.Setup6.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.Setup6.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t7"
+                            inlineStyle="width:99.0%; height:130px; border-style:none;"
+                            binding="#{SetupBean.ratesLOV}">
+                    <af:column sortProperty="GPR_ANB_FROM" sortable="true"
+                               headerText="ANB From" id="c21" width="70">
+                      <af:outputText value="#{row.GPR_ANB_FROM}" id="ot17"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_ANB_TO" sortable="true"
+                               headerText="ANB To" id="c28" width="70">
+                      <af:outputText value="#{row.GPR_ANB_TO}" id="ot19"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_RANGE_FROM" sortable="true"
+                               headerText="Range From" id="c16">
+                      <af:outputText value="#{row.GPR_RANGE_FROM}" id="ot22"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_RANGE_TO" sortable="true"
+                               headerText="Range To" id="c18">
+                      <af:outputText value="#{row.GPR_RANGE_TO}" id="ot14"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_RATE" sortable="true"
+                               headerText="Rate" id="c20">
+                      <af:outputText value="#{row.GPR_RATE}" id="ot28"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_ANNUAL_RATE" sortable="true"
+                               headerText="Annual Rate" id="c24">
+                      <af:outputText value="#{row.GPR_ANNUAL_RATE}" id="ot20"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_SINGLE_RATE" sortable="true"
+                               headerText="Single Rate" id="c22">
+                      <af:outputText value="#{row.GPR_SINGLE_RATE}" id="ot29"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_RATE_DESC" sortable="true"
+                               headerText="Rate Desc" id="c23">
+                      <af:outputText value="#{row.GPR_RATE_DESC}" id="ot25"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_DIVISION_FACTOR"
+                               sortable="true" headerText="Div Fac" id="c19"
+                               width="70">
+                      <af:outputText value="#{row.GPR_DIVISION_FACTOR}"
+                                     id="ot30"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_RATE_TYPE_DESC" sortable="true"
+                               headerText="Rate Type" id="c29" width="70">
+                      <af:outputText value="#{row.GPR_RATE_TYPE_DESC}"
+                                     id="ot23"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_PRORATED_FULL" sortable="true"
+                               headerText="Prorate/Full?" id="c30">
+                      <af:outputText value="#{row.GPR_PRORATED_FULL}"
+                                     id="ot16"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_MULTIPLIER_RATE"
+                               sortable="true" headerText="Multipler Rate"
+                               id="c26">
+                      <af:outputText value="#{row.GPR_MULTIPLIER_RATE}"
+                                     id="ot15"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_MULTPLIER_DIV_FACT"
+                               sortable="true" headerText="Multipler Div Fac"
+                               id="c27">
+                      <af:outputText value="#{row.GPR_MULTPLIER_DIV_FACT}"
+                                     id="ot26"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_CONSTANT" sortable="true"
+                               headerText="Constant" id="c17">
+                      <af:outputText value="#{row.GPR_CONSTANT}" id="ot18"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_CONSTANT_DIV_FACT"
+                               sortable="true" headerText="Constant Div Fac"
+                               id="c14">
+                      <af:outputText value="#{row.GPR_CONSTANT_DIV_FACT}"
+                                     id="ot21"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_NORMAL_REFUND_DESC"
+                               sortable="true"
+                               headerText="Premium  Applicable At" id="c25"
+                               width="120">
+                      <af:outputText value="#{row.GPR_NORMAL_REFUND_DESC}"
+                                     id="ot31"/>
+                    </af:column>
+                    <af:column sortProperty="GPR_WEF" sortable="true"
+                               headerText="WEF" id="c15" width="50">
+                      <af:outputText value="#{row.GPR_WEF}" id="ot24">
+                        <af:convertDateTime pattern="#{bindings.Setup6.hints.GPR_WEF.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="GPR_WET" sortable="true"
+                               headerText="WET" id="c13" width="50">
+                      <af:outputText value="#{row.GPR_WET}" id="ot27">
+                        <af:convertDateTime pattern="#{bindings.Setup6.hints.GPR_WET.format}"/>
+                      </af:outputText>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

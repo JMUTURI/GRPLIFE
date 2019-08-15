@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="undcoversPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindCoverTypes.result"
+                    DataControl="policyCoverTypesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policyCoverTypes"
+                    id="FindCoverTypesIterator"/>
+    <methodIterator Binds="FindProductCovers.result"
+                    DataControl="policyCoverTypesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.ProdCovers"
+                    id="FindProductCoversIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCoverTypes"
+                  IsViewObjectMethod="false" DataControl="policyCoverTypesDAO"
+                  InstanceName="policyCoverTypesDAO.dataProvider"
+                  ReturnName="policyCoverTypesDAO.methodResults.FindCoverTypes_policyCoverTypesDAO_dataProvider_FindCoverTypes_result"/>
+    <tree IterBinding="FindCoverTypesIterator" id="policyCoverTypes">
+      <nodeDefinition DefName="view.Policy.policyCoverTypes"
+                      Name="policyCoverTypes0">
+        <AttrNames>
+          <Item Value="PCVT_CVT_SHT_DESC"/>
+          <Item Value="PCVT_SA"/>
+          <Item Value="PCVT_PREMIUM"/>
+          <Item Value="PCVT_BUT_CHARGE_PREMIUM"/>
+          <Item Value="CVT_DEPEND_DISP"/>
+          <Item Value="PCVT_TOT_MEMBERS"/>
+          <Item Value="PCVT_LOAD_DISC"/>
+          <Item Value="PCVT_DISC_LOAD_RATE"/>
+          <Item Value="PCVT_SA_PER_MEMBER"/>
+          <Item Value="PCVT_UNIT_RATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindProductCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProductCovers"
+                  IsViewObjectMethod="false" DataControl="policyCoverTypesDAO"
+                  InstanceName="policyCoverTypesDAO.dataProvider"
+                  ReturnName="policyCoverTypesDAO.methodResults.FindProductCovers_policyCoverTypesDAO_dataProvider_FindProductCovers_result"/>
+    <tree IterBinding="FindProductCoversIterator" id="ProdCovers">
+      <nodeDefinition DefName="view.Policy.ProdCovers" Name="ProdCovers0">
+        <AttrNames>
+          <Item Value="cvt_sht_desc"/>
+          <Item Value="cvt_desc"/>
+          <Item Value="cvt_main_cover"/>
+          <Item Value="cvt_duration_type"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

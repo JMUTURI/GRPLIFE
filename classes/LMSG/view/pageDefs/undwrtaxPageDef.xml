@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="undwrtaxPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="findTaxes.result" DataControl="PolicyTaxesDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotationTaxes"
+                    id="findTaxesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findTaxes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTaxes"
+                  IsViewObjectMethod="false" DataControl="PolicyTaxesDAO"
+                  InstanceName="PolicyTaxesDAO.dataProvider"
+                  ReturnName="PolicyTaxesDAO.methodResults.findTaxes_PolicyTaxesDAO_dataProvider_findTaxes_result"/>
+    <tree IterBinding="findTaxesIterator" id="quotationTaxes">
+      <nodeDefinition DefName="view.Quot.quotationTaxes" Name="quotationTaxes0">
+        <AttrNames>
+          <Item Value="quoTaxDesc"/>
+          <Item Value="quoTaxRate"/>
+          <Item Value="quoTaxAmt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="prod_cvtPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findProdCoverTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProdCoverTypesIterator"/>
+    <methodIterator Binds="findCoverTypesLOV.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findCoverTypesLOVIterator"/>
+    <methodIterator Binds="FindProductCoverLoadings.result"
+                    DataControl="SettingsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Base.Settings"
+                    id="FindProductCoverLoadingsIterator"/>
+    <methodIterator Binds="findPremiumMask.result" DataControl="quotPremMaskDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.quotPremMask"
+                    id="findPremiumMaskIterator"/>
+    <searchRegion Binds="findPremiumMaskIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="quotPremMaskQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="findClassesofBusiness" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClassesofBusiness"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findClassesofBusiness_SetupsDAO_dataProvider_findClassesofBusiness_result"/>
+    <methodAction id="findAllProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAllProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findAllProducts_SetupsDAO_dataProvider_findAllProducts_result"/>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <methodAction id="findProdCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProdCoverTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProdCoverTypes_SetupsDAO_dataProvider_findProdCoverTypes_result"/>
+    <tree IterBinding="findProdCoverTypesIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="PCT_CODE"/>
+          <Item Value="PCT_CVT_DESC"/>
+          <Item Value="PCT_MAX_ASSUREDS"/>
+          <Item Value="PCT_MAX_AGE"/>
+          <Item Value="PCT_FORMULAR_DESC"/>
+          <Item Value="PCT_REFUND_FORMULAR_DESC"/>
+          <Item Value="PCT_MAIN_SA_PERC"/>
+          <Item Value="PCT_MAX_SA"/>
+          <Item Value="PCT_RATE_DEPEND_ON_CLASS_DESC"/>
+          <Item Value="PCT_INBUILT_DESC"/>
+          <Item Value="PCT_ACCELERATOR_DESC"/>
+          <Item Value="PCT_MANDATORY_DESC"/>
+          <Item Value="PCT_GRP_OR_SINGLE_RATES_DESC"/>
+          <Item Value="CLA_CODE"/>
+          <Item Value="PCT_SA_DEPEND_ON_LIMIT_DESC"/>
+          <Item Value="PCT_THIRTEEN_MONTH"/>
+          <Item Value="PCT_EM"/>
+          <Item Value="PCT_PROFIT_MARGIN"/>
+          <Item Value="PCT_MNGT_EXPENSES"/>
+          <Item Value="PCT_PHCF"/>
+          <Item Value="PCT_ADR_RATE"/>
+          <Item Value="PCT_ADR_RATE_DIV_FACT"/>
+          <Item Value="PCT_MED_COST"/>
+          <Item Value="PCT_STAMP_DUTY"/>
+          <Item Value="PCT_COMM_RATE"/>
+          <Item Value="PMAS_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCoverTypesLOV" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCoverTypesLOV"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findCoverTypesLOV_SetupsDAO_dataProvider_findCoverTypesLOV_result"/>
+    <tree IterBinding="findCoverTypesLOVIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="CVT_SHT_DESC"/>
+          <Item Value="CVT_DESCRIPTION"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findProductsIterator" id="Setup4">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup40">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindProductCoverLoadings" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProductCoverLoadings"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindProductCoverLoadings_SettingsDAO_dataProvider_FindProductCoverLoadings_result"/>
+    <tree IterBinding="FindProductCoverLoadingsIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="pctl_code"/>
+          <Item Value="pctl_rate"/>
+          <Item Value="pctl_rate_div_factor"/>
+          <Item Value="pctl_name"/>
+          <Item Value="pctl_rate_type"/>
+          <Item Value="pctl_load_method"/>
+          <Item Value="pctl_load_desc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPremiumMask" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMask"
+                  IsViewObjectMethod="false" DataControl="quotPremMaskDAO"
+                  InstanceName="quotPremMaskDAO.dataProvider"
+                  ReturnName="quotPremMaskDAO.methodResults.findPremiumMask_quotPremMaskDAO_dataProvider_findPremiumMask_result"/>
+    <tree IterBinding="findPremiumMaskIterator" id="quotPremMask">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.quotPremMask"
+                      Name="quotPremMask0">
+        <AttrNames>
+          <Item Value="PMAS_CODE"/>
+          <Item Value="PMAS_SHT_DESC"/>
+          <Item Value="PMAS_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

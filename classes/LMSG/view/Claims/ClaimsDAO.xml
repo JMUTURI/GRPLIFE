@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="ClaimsDAO" Package="LMSG.view.Claims"
+          BeanClass="LMSG.view.Claims.ClaimsDAO" isJavaBased="true">
+  <Attribute Name="templateTranSeq" Type="int"/>
+  <Attribute Name="templateType" Type="java.lang.String"/>
+  <Attribute Name="templayeTypeInt" Type="int"/>
+  <Attribute Name="quotationNo" Type="java.lang.String"/>
+  <Attribute Name="emailCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="UWYear" Type="java.lang.String"/>
+  <Attribute Name="prpDesc" Type="java.lang.String"/>
+  <Attribute Name="gcoDesc" Type="java.lang.String"/>
+  <Attribute Name="policyNumberSel" Type="java.lang.String"/>
+  <Attribute Name="taskselName" Type="java.lang.String"/>
+  <Attribute Name="taskselAssignee" Type="java.lang.String"/>
+  <Attribute Name="taskselDueDate" Type="java.util.Date"/>
+  <Attribute Name="taskselID" Type="java.lang.String"/>
+  <Attribute Name="taskselCreateDate" Type="java.util.Date"/>
+  <Attribute Name="pmasCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="pmasshtdesc" Type="java.lang.String"/>
+  <Attribute Name="brnName" Type="java.lang.String"/>
+  <Attribute Name="agnName" Type="java.lang.String"/>
+  <Attribute Name="taskActivityName" Type="java.lang.String"/>
+  <Attribute Name="deathDisabilityCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="loanCalcType" Type="java.lang.String"/>
+  <Attribute Name="dependantNo" Type="java.lang.String"/>
+  <Attribute Name="beneficiaryNo" Type="java.lang.String"/>
+  <Attribute Name="coverageArea" Type="java.lang.String"/>
+  <Attribute Name="locName" Type="java.lang.String"/>
+  <Attribute Name="jointMemberNo" Type="java.lang.String"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="FindMembersByTransactions" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindCausationCauses"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindCausations"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindClaimFacilitators"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindClaimDocuments"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="FindClaimTreatyCessions" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="FindClaimRITreatyCessions" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindClaimTransactions"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="FindClaimForReopenContra" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="FindClaimTransForReopenContra" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindClaimCoverTypes"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindClaims"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findClaimVouchers"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findClaimVouchDtls"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findClaimVchrtrtRI"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findClaimVchrpartRI"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String" id="parseDate"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="somedate" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="FindClaimPensionDetails" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findClaimExceptions"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="findClaimDisabilityLosses" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="findMemberDisabilityLosses" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="findClaimBeneficaryPayments" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="findPendingClaimTransactions" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindPensionMaturities"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindMaturityDocuments"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findProductTaxes"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findPensionTaxes"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="findClaimAnnBeneficaryPayments" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="FindClaimCoinsuranceRecoveries" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="FindExgratiaMembersByTransactions" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindClaimAuthorisation"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindVchrAuthorised"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindMultipleClaimsMem"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="FindMultiClaimCoverTypes" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindMultiClaims"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="findMultipleClaimVouchers" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim"
+                  id="findMultipleClaimVouchDtls" ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindClientBankDetails"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindClaimInstDetails"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findClaimSubVouchers"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="FindClaimRemarks"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findMobileProviders"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String"
+                  id="findPolMemberNo" ReturnNodeName="Return">
+    <ParameterInfo id="type" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Claims.ClaimsDAO"
+                     BeanClass="LMSG.view.Claims.ClaimsDAO" id="ClaimsDAO"/>
+</JavaBean>

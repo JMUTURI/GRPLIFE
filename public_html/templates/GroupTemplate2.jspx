@@ -1,0 +1,435 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>
+          tagDemoTemplate
+        </display-name>
+        <facet>
+          <facet-name>
+            center
+          </facet-name>
+        </facet>
+      </component>
+    </af:xmlContent>
+    <af:form id="pt_f1" usesUpload="true">
+      <af:panelStretchLayout startWidth="190px" id="pt_psl1">
+        <f:facet name="center">
+          <af:panelStretchLayout topHeight="145px" id="pt_psl2">
+            <f:facet name="top">
+              <af:panelGroupLayout xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                   id="pt_pgl4" valign="middle">
+                <div style="position:fixed; top:0px; left:0px; height:30px; width:100%; background-color:Black; z-index: 2;"
+                     align="center">
+                  <h:panelGrid columns="10" id="pt_pg2">
+                    <af:outputLabel value="Logged In As:" id="pt_ol1"
+                                    inlineStyle="font-weight:bold; color:White;"/>
+                    <af:outputText value="#{currUser.username}"
+                                   id="outputText134345"
+                                   inlineStyle="color:White;"/>
+                    <af:spacer width="40" height="10" id="pt_s3"/>
+                    <af:outputLabel value="Last Login:" id="pt_ol2"
+                                    inlineStyle="color:White; font-weight:bold;"/>
+                    <af:outputText value="#{currUser.loginDate}"
+                                   id="outputText24543"
+                                   inlineStyle="color:White;"/>
+                    <af:spacer width="200" height="10" id="pt_s2"/>
+                    <af:commandLink text="[Log Out]" id="commandLink13453465"
+                                    inlineStyle="color:White; text-align:right; text-decoration:underline;"
+                                    action="#{login.logOut}"/>
+                  </h:panelGrid>
+                </div>
+                <af:spacer width="10" height="25" id="pt_s4"/>
+                <h:panelGrid columns="4" id="pt_pg3">
+                  <af:panelBox text="PanelBox2" id="pt_pb1" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:image source="/images/CompanyLogo.jpg" id="pt_i2"
+                              shortDesc="Organizational Logo"/>
+                  </af:panelBox>
+                  <af:panelBox text="PanelBox3" id="pt_pb2" showHeader="never">
+                    <f:facet name="toolbar"/>
+					<h:panelGrid columns="3">
+                    <af:image source="../images/Group Life Banner.png"
+                              id="pt_i1"/>
+					<af:spacer width="100" height="25" id="pt_s4x"/>		  
+				    <af:commandImageLink id="cil3xc"
+                                               inlineStyle="width:50.0px; height:20px;"
+                                               icon="/images/dms.png"
+                                               action="#{transNavDocs.showTransDocs}"/>
+											   
+                   	</h:panelGrid>			  
+                  </af:panelBox>
+                </h:panelGrid>
+              </af:panelGroupLayout>
+            </f:facet>
+            <f:facet name="center">
+              <af:panelGroupLayout id="pt_pgl1" layout="scroll">
+                <af:separator id="pt_s1"/>
+                <af:panelGroupLayout xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                     id="pt_pgl5">
+                  <table cellspacing="1" cellpadding="1" border="0" width="100%"
+                         align="left">
+                    <tr>
+                      <td width="14%" valign="top">
+                        <h:panelGrid columns="1" id="pt_pg1">
+                          <af:commandImageLink id="cil1"
+                                               icon="/images/Home2.png"
+                                               inlineStyle="width:163.0px; height:31px;"
+                                               action="#{Links.goHome}"/>
+                          <h:panelGrid columns="1" id="pt_pg4"/>
+                          <af:commandImageLink id="cil3"
+                                               inlineStyle="width:163.0px; height:31px;"
+                                               icon="/images/Quotations2.png"
+                                               action="#{Links.QuotationsPanelRendered}"/>
+                          <h:panelGrid columns="1" id="pt_pg5">
+                            <af:panelBox text="PanelBox4" id="pt_pb3"
+                                         showHeader="never" rendered="false"
+                                         binding="#{Links.quotePanel}"
+                                         inlineStyle="width:163.0px;">
+                              <f:facet name="toolbar"/>
+                              <h:panelGrid columns="2" id="pt_pg6">
+                                <af:spacer width="10" height="10" id="pt_s5"/>
+                                <af:commandLink text="Quotation Processing"
+                                                id="pt_cl1"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.getQuotations}"/>
+                                <af:spacer width="10" height="10" id="pt_s7"/>
+                                <af:commandLink text="Quotation Enquiry"
+                                                id="pt_cl2"
+                                                action="#{Links.goToQuotationEnquiry}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s8"/>
+                                <af:commandLink text="Manage Quote Statuses"
+                                                id="pt_cl23"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.goToQuotationStatuses}"/>
+                                <af:spacer width="10" height="10" id="pt_s32"/>
+                              </h:panelGrid>
+                            </af:panelBox>
+                          </h:panelGrid>
+                          <af:commandImageLink id="commandImageLink1"
+                                               inlineStyle="width:163.0px; height:31px;"
+                                               icon="/images/Underwriting1.png"
+                                               action="#{Links.UWPanelRendered}"/>
+                          <h:panelGrid columns="1" id="pt_pg7">
+                            <af:panelBox text="PanelBox5" id="pt_pb4"
+                                         showHeader="never" rendered="false"
+                                         binding="#{Links.uwPanel}"
+                                         inlineStyle="width:163.0px;">
+                              <f:facet name="toolbar"/>
+                              <h:panelGrid columns="2" id="pt_pg8">
+                                <af:spacer width="10" height="10" id="pt_s9"/>
+                                <af:commandLink text="Convert Quotation To Policy"
+                                                id="pt_cl3"
+                                                action="#{Links.ConvertQuot}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s10"/>
+                                <af:commandLink text="Policy Transactions"
+                                                id="pt_cl4"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.ShowPolicyTransactions}"/>
+                                <af:spacer width="10" height="10" id="pt_s11"/>
+                                <af:commandLink text="Payments Administration"
+                                                id="pt_cl5"
+                                                action="#{Links.ShowPremiumCard}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s12"/>
+                                <af:commandLink text="Policy Medicals"
+                                                id="pt_cl6"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.PolicyMedicals}"/>
+                                <af:spacer width="10" height="10" id="pt_s13"/>
+                                <af:commandLink text="Medical Payments"
+                                                id="pt_cl14"
+                                                action="#{Links.MedicalPayments}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s21"/>
+                                <af:commandLink text="Renewals Processing"
+                                                id="pt_cl7"
+                                                action="#{Links.Renewals}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s14"/>
+                                <af:commandLink text="Renewal Working Area"
+                                                id="pt_cl22"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.RenewalWorkingArea}"/>
+                                <af:spacer width="10" height="10" id="pt_s31"/>
+                                <af:commandLink text="Pension Administration"
+                                                id="pt_cl8"
+                                                action="#{Links.PensionAdministration}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s33"/>
+                                <af:commandLink text="Emass Valuation"
+                                                id="pt_cl24"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.EmassValuation}"/>
+                                     <af:spacer width="10" height="10"
+                                                id="pt_s35"/>
+                             <af:commandLink text="Member Balance Enquiry"
+                                                id="pt_cl27"
+                                                inlineStyle="text-decoration:underline;"
+                                             action="#{Links.memBalEnquiry}"/>                   
+                              </h:panelGrid>
+                            </af:panelBox>
+                          </h:panelGrid>
+                          <af:commandImageLink id="commandImageLink19"
+                                               inlineStyle="width:163.0px; height:31px;"
+                                               icon="/images/Claims1.png"
+                                               action="#{Links.ClaimsPanelRendered}"/>
+                          <h:panelGrid columns="1" id="pt_pg9">
+                            <af:panelBox text="PanelBox6" id="pt_pb5"
+                                         showHeader="never" rendered="false"
+                                         binding="#{Links.claimsPanel}"
+                                         inlineStyle="width:163.0px;">
+                              <f:facet name="toolbar"/>
+                              <h:panelGrid columns="2" id="pt_pg10">
+                                <af:spacer width="10" height="10" id="pt_s15"/>
+                                <af:commandLink text="Claims Booking"
+                                                id="pt_cl9"
+                                                action="#{Links.goToClaimsBooking}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                 <af:spacer width="10" height="10" id="pt_s16" 
+                                 rendered="#{Rendering.aiicoVisible}"/>
+                                 <af:commandLink text="Multiple Claims Booking"
+                                                id="pt_cl31"
+                                                action="#{Links.goToMultipleClaimsBooking}"
+                                                rendered="#{Rendering.aiicoVisible}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s39"/>
+                                <af:commandLink text="Claim Tracking" id="pt_cl10"
+                                                action="#{Links.goToClaimsEnquiry}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s17"/>
+                                
+                               
+                              <!--<af:commandLink text="Claims Enquiry"
+                                                id="pt_cl18"
+                                                action="#{Links.goToClaimsEnquiryII}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s26"/>-->
+                                <!--<af:commandLink text="Claims Tracking"
+                                                id="pt_cl26"                                               
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.goToClaimsAuthorisation}"/>
+							    <af:spacer width="10" height="10" id="pt_s26X"/>-->
+								<af:commandLink text="Payment Tracking"
+                                                id="pt_cl26R"                                               
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.getToChequeTracking}"/>
+                              </h:panelGrid>
+                            </af:panelBox>
+                          </h:panelGrid>
+                          <af:commandImageLink id="commandImageLink22"
+                                               inlineStyle="width:163.0px; height:31px;"
+                                               icon="/images/Accounting1.png"
+                                               action="#{Links.AccountingPanelRendered}"/>
+                          <h:panelGrid columns="1" id="pt_pg11">
+                            <af:panelBox text="PanelBox7" id="pt_pb6"
+                                         showHeader="never" rendered="false"
+                                         binding="#{Links.accountingPanel}"
+                                         inlineStyle="width:163.0px;">
+                              <f:facet name="toolbar"/>
+                              <h:panelGrid columns="2" id="pt_pg16">
+                                <af:spacer width="10" height="10" id="pt_s18"/>
+                                <af:commandLink text="Transactions Allocation"
+                                                id="pt_cl11"
+                                                action="#{Links.TransactionAllocation}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s19"/>
+                                <af:commandLink text="Receipting" id="pt_cl12"
+                                                action="#{Links.Receipting}"
+                                                inlineStyle="text-decoration:underline;"
+                                                rendered="false"/>
+                                <af:spacer width="10" height="10" id="pt_s22"
+                                           rendered="false"/>
+                                <af:commandLink text="Opening Balances"
+                                                id="pt_cl15"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.GoToOpeningBalances}"/>
+                                <af:spacer width="10" height="10" id="pt_s23"/>
+                                <af:commandLink text="Commission Payments"
+                                                id="pt_cl16"
+                                                action="#{Links.GoToCommissionPayments}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s24"/>
+                                <af:commandLink text="load Clients"
+                                                id="pt_cl29"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.goToLoadClients}"/>
+                                <af:spacer width="10" height="10" id="pt_s37"/>
+                                <af:commandLink text="Load enmass Policies"
+                                                id="pt_cl17"                                                
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.goToEnmassPolLoading}"/>
+                                <af:spacer width="10" height="10" id="pt_s25"/>
+                                
+                                <af:commandLink text="Load Policies"
+                                                id="pt_cl30"
+                                                action="#{Links.GoToLoadPolicies}"
+                                                inlineStyle="text-decoration:underline;"/>                                                
+                                <af:spacer width="10" height="10" id="pt_s38"/>
+                                <af:commandLink text="Cheque Tracking"
+                                                id="pt_cl34"
+                                                action="#{Links.getToChequeTracking}"
+                                                inlineStyle="text-decoration:underline;"/>                                                
+                                <af:spacer width="10" height="10" id="pt_s42"/>
+                                <af:commandLink text="Reinsurance Portfolio"
+                                                id="pt_cl39"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.goToPortfolioPocessing}"/>
+                                <af:spacer width="10" height="10" id="pt_s43"/>
+                                <af:commandLink text="UPR Processing"
+                                                id="pt_cl36"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.goToUprPocessing}"/>
+                              </h:panelGrid>
+                            </af:panelBox>
+                          </h:panelGrid>
+                          <af:commandImageLink id="commandImageLink25"
+                                               inlineStyle="width:163.0px; height:31px;"
+                                               icon="/images/TManagement1.png"
+                                               action="#{Links.TicketPanelRendered}"/>
+                          <h:panelGrid columns="1" id="pt_pg13">
+                            <af:panelBox text="PanelBox8" id="pt_pb7"
+                                         showHeader="never" rendered="false"
+                                         binding="#{Links.ticketsPanel}"
+                                         inlineStyle="width:163.0px;">
+                              <f:facet name="toolbar"/>
+                              <h:panelGrid columns="2" id="pt_pg17">
+                                <af:spacer width="10" height="10" id="pt_s20"/>
+                                <af:commandLink text="Pending Tickets"
+                                                id="pt_cl13"
+                                                action="#{Links.goToTickets}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s34"/>
+                                <af:commandLink text="Ticket Management"
+                                                id="pt_cl25"
+                                                action="#{Links.goToTicketManagement}"
+                                                inlineStyle="text-decoration:underline;"/>
+                              </h:panelGrid>
+                            </af:panelBox>
+                          </h:panelGrid>
+                          <af:commandImageLink id="commandImageLink27"
+                                               inlineStyle="width:163.0px; height:31px;"
+                                               icon="/images/Setups1.png"
+                                               action="#{Links.ShowGeneralSetups}"/>
+                          <h:panelGrid columns="1" id="pt_pg14">
+                            <af:panelBox text="PanelBox9" id="pt_pb8"
+                                         showHeader="never" rendered="false"
+                                         binding="#{Links.setupsPanel}">
+                              <f:facet name="toolbar"/>
+                            </af:panelBox>
+                          </h:panelGrid>
+                          <af:commandImageLink id="commandImageLink60"
+                                               inlineStyle="width:163.0px; height:31px;"
+                                               icon="/images/Reporting1.png"
+                                               action="#{Links.ReportsPanelRendered}"/>
+                          <h:panelGrid columns="1" id="pt_pg15">
+                            <af:panelBox text="PanelBox10" id="pt_pb9"
+                                         showHeader="never" rendered="false"
+                                         binding="#{Links.reportingPanel}"
+                                         inlineStyle="width:163.0px;">
+                              <f:facet name="toolbar"/>
+                              <h:panelGrid columns="2" id="pt_pg18">
+                               <af:spacer width="10" height="10" id="pt_s27"/>
+                               <af:commandLink text="Core SetUp"
+                                                id="pt_cl19"
+                                                inlineStyle="text-decoration:underline;"
+                                               action="#{Links.showCoreReports}"/>
+                                <af:spacer width="10" height="10" id="pt_s40"/>                              
+                               <af:commandLink text="Underwriting Reports"
+                                                id="pt_cl32"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.ShowUWReports}"/>                                                
+                                <af:spacer width="10" height="10" id="pt_s28"/>
+                                <af:commandLink text="Claims Reports"
+                                                id="pt_cl21"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.ShowClaimsReports}"/>
+                                 <af:spacer width="10" height="10" id="pt_s30"/>
+                                <af:commandLink text="Reinsurance Reports"
+                                                id="pt_cl20"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.showReinsuranceReports}"/>
+                                <af:spacer width="10" height="10" id="pt_s41"/>
+                                <af:commandLink text="Management Reports"
+                                                id="pt_cl35"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.showManagementReports}"/>
+                                <af:spacer width="10" height="10" id="pt_s41m"/>
+                                <af:commandLink text="Other Reports"
+                                                id="pt_cl33"
+                                                action="#{Links.ShowProductionReports}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s29"
+                                 rendered="#{Rendering.nigeria}" />
+                                <af:commandLink text="NAICOM Reports"
+                                                id="pt_cl28"
+                                                action="#{Links.ShowNaicomReports}"
+                                                rendered="#{Rendering.nigeria}"
+                                                inlineStyle="text-decoration:underline;"/>
+                                <af:spacer width="10" height="10" id="pt_s36"/>
+                              </h:panelGrid>
+                            </af:panelBox>
+                          </h:panelGrid>
+                          <af:popup id="error" contentDelivery="lazyUncached"
+                                    binding="#{GlobalCC.errorPop}">
+                            <af:dialog id="dialog2000" type="ok"
+                                       closeIconVisible="false" title="Error">
+                              <af:panelBox text="PanelBox1" id="dtls"
+                                           showHeader="never"
+                                           inlineStyle="width:300.0px;">
+                                <f:facet name="toolbar"/>
+                                <h:panelGrid columns="3" id="pt_pg12">
+                                  <af:message id="pt_m1"
+                                              inlineStyle="font-weight:bold;"
+                                              messageType="error"/>
+                                  <af:spacer width="10" height="10" id="pt_s6"/>
+                                  <af:message id="m5"
+                                              binding="#{GlobalCC.errText}"/>
+                                </h:panelGrid>
+                                <af:separator id="s4000"/>
+                                <af:panelBox text="More Details" id="moreDtls"
+                                             disclosed="false">
+                                  <f:facet name="toolbar"/>
+                                  <af:message id="m3"
+                                              binding="#{GlobalCC.errCode}"/>
+                                  <af:message id="m4"
+                                              binding="#{GlobalCC.errName}"/>
+                                  <af:message id="m6"
+                                              binding="#{GlobalCC.syserrCode}"/>
+                                  <af:message id="m7"
+                                              binding="#{GlobalCC.sysErrMsg}"/>
+                                  <af:message id="m8"
+                                              binding="#{GlobalCC.rcmdendation}"/>
+                                  <af:message id="m9"
+                                              binding="#{GlobalCC.errStack}"/>
+                                  <af:message id="m10"
+                                              binding="#{GlobalCC.callStack}"/>
+                                  <af:message id="m11"
+                                              binding="#{GlobalCC.envirment}"/>
+                                </af:panelBox>
+                              </af:panelBox>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                      </td>
+                      <td width="80%" valign="top">
+                          <af:facetRef facetName="center"/>
+                      </td>
+                    </tr>
+                  </table>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+            </f:facet>
+          </af:panelStretchLayout>
+        </f:facet>
+      </af:panelStretchLayout>
+    </af:form>
+  </af:pageTemplateDef>
+</jsp:root>

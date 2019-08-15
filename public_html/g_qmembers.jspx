@@ -1,0 +1,739 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Group Life | Quotations Members" id="d15">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout id="pgl2">
+            <af:panelBox text="Member Details" showHeader="never"
+                         binding="#{manipulation.singleMember}" id="pb10">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Principal Member Details"
+                              inlineStyle="width:inherit; font-weight:bold;"
+                              id="ol85"/>
+              <af:separator inlineStyle="width:inherit;" id="s17"/>
+              <h:panelGrid columns="6" id="pg55">
+                <af:outputLabel value="Payroll/Mem No." id="ol86"
+                                showRequired="#{!Rendering.expressVisible}"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.memNo}" id="it51"/>
+                <af:outputLabel value="Surname" id="ol87" showRequired="true"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.memSurname}" id="it52"/>
+                <af:outputLabel value="Other Names" id="ol88"
+                                showRequired="true"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.memOtherNames}"
+                              id="it53"/>
+                <af:outputLabel value="ID No." id="ol89"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.idNo}" id="it54"/>
+                <af:outputLabel value="Year" id="ol90"/>
+                <af:inputText label="Label 1" simple="true" id="it55"
+                              binding="#{manipulation.yeat}"
+                              valueChangeListener="#{manipulation.YearChangeListener}"
+                              autoSubmit="true"/>
+                <af:outputLabel value="Date of Birth" id="ol91"
+                                showRequired="true"/>
+                <af:inputDate label="Label 1" simple="true"
+                              binding="#{manipulation.memdob}"
+                              valueChangeListener="#{manipulation.dobListener}"
+                              autoSubmit="true" id="id3">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+                <af:outputLabel value="ANB" id="ol92"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.quotememANB}" id="it56"
+                              valueChangeListener="#{manipulation.ANBDateListener}"
+                              autoSubmit="true"/>                          
+                <af:outputLabel value="PIN No." id="outputLabe16438"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.pinNo}"
+                              id="it4087"/>                              
+                <af:outputLabel value="Address." id="ol7124"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.addrss}"
+                              id="it3532"/>                              
+                              
+                              
+                <af:outputLabel value="Weight (kgs)" id="ol93"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.weight}" id="it57"/>
+                <af:outputLabel value="Height (cms)" id="ol94"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.height}" id="it58"/>
+                <af:outputLabel value="Dep Type" id="ol95"/>
+                <h:panelGrid columns="2" id="pg56">
+                  <af:inputText label="Label 1" simple="true"
+                                binding="#{manipulation.depTypeDesc}"
+                                disabled="true" value="SELF" id="it59"/>
+                  <af:commandButton icon="/images/dropdown.gif" rendered="false"
+                                    id="cb70">
+                    <af:showPopupBehavior popupId="deps"/>
+                  </af:commandButton>
+                  <af:popup id="deps" rendered="false">
+                    <af:dialog type="none" id="d17">
+                      <af:table value="#{bindings.Settings2.collectionModel}"
+                                var="row" rows="#{bindings.Settings2.rangeSize}"
+                                emptyText="#{bindings.Settings2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Settings2.rangeSize}"
+                                selectedRowKeys="#{bindings.Settings2.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Settings2.collectionModel.makeCurrent}"
+                                rowSelection="single" width="212"
+                                binding="#{member.depTypeLOV}" id="t22">
+                        <af:column sortProperty="DTY_SHT_DESC" sortable="true"
+                                   headerText="ID" id="c92">
+                          <af:outputText value="#{row.DTY_SHT_DESC}"
+                                         id="ot102"/>
+                        </af:column>
+                        <af:column sortProperty="DTY_DESCRIPTION"
+                                   sortable="true" headerText="DESCRIPTION"
+                                   id="c93">
+                          <af:outputText value="#{row.DTY_DESCRIPTION}"
+                                         id="ot103"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg57">
+                        <af:commandButton text="OK"
+                                          action="#{member.findDepTypeSelected}"
+                                          id="cb71"/>
+                        <af:commandButton text="Cancel" id="cb72"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Category"
+                                binding="#{manipulation.categoryDisplay}"
+                                id="ol96" showRequired="true"/>
+                <h:panelGrid columns="2" binding="#{manipulation.categoryPanel}"
+                             id="pg58">
+                  <af:inputText label="Label 1" simple="true"
+                                binding="#{manipulation.categoryDesc}"
+                                disabled="true" id="it60"/>
+                  <af:commandButton icon="/images/dropdown.gif" id="cb73">
+                    <af:showPopupBehavior popupId="cat"/>
+                  </af:commandButton>
+                  <af:popup id="cat">
+                    <af:dialog type="none" id="d18">
+                      <af:table value="#{bindings.Quotations.collectionModel}"
+                                var="row"
+                                rows="#{bindings.Quotations.rangeSize}"
+                                emptyText="#{bindings.Quotations.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Quotations.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.QuotationsQuery.queryDescriptor}"
+                                queryListener="#{bindings.QuotationsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Quotations.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Quotations.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t15"
+                                binding="#{manipulation.memcategoryLOV}"
+                                width="350">
+                        <af:column sortProperty="catShtDesc" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="ID" id="c1">
+                          <af:outputText value="#{row.catShtDesc}" id="ot4"/>
+                        </af:column>
+                        <af:column sortProperty="catDesc" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Description"
+                                   id="c2">
+                          <af:outputText value="#{row.catDesc}" id="ot3"/>
+                        </af:column>
+                        <af:column sortProperty="catPeriod" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Period" id="c3">
+                          <af:outputText value="#{row.catPeriod}" id="ot2"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg59">
+                        <af:commandButton text="OK"
+                                          action="#{manipulation.findQuoteCategorySelected}"
+                                          id="cb74"/>
+                        <af:commandButton text="Cancel" id="cb75"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Sys Pres." id="ol97"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.sysPres}" id="it61"/>
+                <af:outputLabel value="Dia Pres." id="ol98"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.diaPres}" id="it62"/>
+                <af:outputLabel value="Occupation" id="ol99"
+                                showRequired="true"/>
+                <h:panelGrid columns="2" id="pg60">
+                  <af:inputText label="Label 1" simple="true" disabled="true"
+                                binding="#{manipulation.occupationDesc}"
+                                id="it63"/>
+                  <af:commandButton icon="/images/dropdown.gif" id="cb76">
+                    <af:showPopupBehavior popupId="occ"/>
+                  </af:commandButton>
+                  <af:popup id="occ">
+                    <af:dialog type="none" id="d19">
+                      <af:table value="#{bindings.Settings.collectionModel}"
+                                var="row" rows="#{bindings.Settings.rangeSize}"
+                                emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Settings.rangeSize}"
+                                filterModel="#{bindings.SettingsQuery.queryDescriptor}"
+                                queryListener="#{bindings.SettingsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                rowSelection="single"
+                                binding="#{manipulation.occupationLOV}" id="t24"
+                                rowBandingInterval="0" width="325">
+                        <af:column sortProperty="gco_code" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Code" id="c4">
+                          <af:outputText value="#{row.gco_code}" id="ot6"/>
+                        </af:column>
+                        <af:column sortProperty="GCO_DESC" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Description"
+                                   id="c5" width="200">
+                          <af:outputText value="#{row.GCO_DESC}" id="ot5"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg61">
+                        <af:commandButton text="OK"
+                                          action="#{manipulation.findOccupationSelected}"
+                                          id="cb77"/>
+                        <af:commandButton text="Cancel" id="cb78"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Sex" id="ol100" showRequired="true"/>
+                <af:selectOneChoice label="Label 1" simple="true"
+                                    binding="#{manipulation.memSex}"
+                                    autoSubmit="true" id="soc13">
+                  <af:selectItem label="Male" value="M" id="si37"/>
+                  <af:selectItem label="Female" value="F" id="si38"/>
+                </af:selectOneChoice>
+                <af:outputLabel value="Loan Date"
+                                rendered="#{Rendering.loansProduct}"
+                                showRequired="true" id="ol101"/>
+                <af:inputDate label="Label 1" simple="true"
+                              binding="#{manipulation.memloanDate}"
+                              rendered="#{Rendering.loansProduct}" id="id4">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+                <af:outputLabel value="Original Loan Amt"
+                                rendered="#{Rendering.loansProduct}"
+                                showRequired="true" id="ol102"/>
+                <af:inputNumberSpinbox label="Label 1" simple="true"
+                                       binding="#{manipulation.origloanAmt}"
+                                       rendered="#{Rendering.loansProduct}"
+                                       id="ins1"/>
+                <af:outputLabel value="Original Repay Period(Months)"
+                                rendered="#{Rendering.loansProduct}"
+                                showRequired="true" id="ol103"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.origRepayPeriod}"
+                              rendered="#{Rendering.loansProduct}" id="it64"/>
+                <af:outputLabel value="Loan int"
+                                rendered="#{Rendering.loansProduct}" id="ol104"
+                                showRequired="true"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.loanInt}"
+                              rendered="#{Rendering.loansProduct}" id="it65"/>
+                <af:outputLabel value="Savings Amt"
+                                rendered="#{Rendering.loansProduct}"
+                                id="ol105"/>
+                <af:inputNumberSpinbox label="Label 1" simple="true"
+                                       binding="#{manipulation.savingAmt}"
+                                       rendered="#{Rendering.loansProduct}"
+                                       id="ins2"/>
+                <af:outputLabel value="Loan Installment Amount" id="ol1r"
+                                rendered="#{Rendering.loansProduct}"/>
+                <af:inputText label="Label 4" id="it1r" simple="true"
+                              rendered="#{Rendering.loansProduct}"
+                              binding="#{manipulation.loanInstallmentAmt}"/>
+                <af:outputLabel value="Installment Repay Freq." id="ol2r"
+                                rendered="#{Rendering.loansProduct}"/>
+                <af:selectOneChoice label="Label 4" id="soc1r" simple="true"
+                                    rendered="#{Rendering.loansProduct}"
+                                    value="M"
+                                    binding="#{manipulation.loanInstRepayFreq}">
+                  <af:selectItem label="Annually" value="A" id="si83"/>
+                  <af:selectItem label="Semi Annually" value="S" id="si84"/>
+                  <af:selectItem label="Quartely" value="Q" id="si85"/>
+                  <af:selectItem label="Monthly" value="M" id="si86"/>
+                  <af:selectItem label="Bi-Weekly" value="BW" id="si5"/>
+                  <af:selectItem label="Weekly" value="W" id="si6"/>
+                  <af:selectItem label="Daily" value="D" id="si7"/>
+                </af:selectOneChoice>
+                <af:outputLabel value="Annual Earnings" id="ol106"/>
+                <af:inputNumberSpinbox label="Label 1" simple="true"
+                                       binding="#{manipulation.annualEarnings}"
+                                       autoSubmit="true"
+                                       valueChangeListener="#{manipulation.annEarningsListener}"
+                                       id="ins3"/>
+                <af:outputLabel value="Monthly Earnings" id="ol107"
+                                rendered="#{!Rendering.loansProduct}"
+                                showRequired="true"/>
+                <af:outputLabel value="Monthly Earnings" id="ool31077"
+                                rendered="#{Rendering.loansProduct}"/>
+                <af:inputNumberSpinbox label="Label 1" simple="true"
+                                       binding="#{manipulation.monthlyEarnings}"
+                                       autoSubmit="true"
+                                       valueChangeListener="#{manipulation.monthEarningsListener}"
+                                       id="ins4"/>
+                <af:outputLabel value="multiple of earnings" id="ol108"
+                                rendered="#{!Rendering.loansProduct}"
+                                showRequired="true"/>
+                <af:outputLabel value="multiple of earnings" id="oo2l1088"
+                                rendered="#{Rendering.loansProduct}"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.memEarnprds}" id="it66"/>
+                <af:outputLabel value="Joining Date" id="ool1099"
+                                rendered="#{Rendering.loansProduct}"/>
+                <af:outputLabel value="Joining Date" id="ol109"
+                                rendered="#{!Rendering.loansProduct}"
+                                showRequired="true"/>
+                <af:inputDate label="Label 1" simple="true"
+                              binding="#{manipulation.joinDate}" id="id5">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+                <af:outputLabel value="Yr of Service"
+                                rendered="#{Rendering.pensionproduct}"
+                                id="ol110"/>
+                <af:inputText label="Label 1" simple="true"
+                              rendered="#{Rendering.pensionproduct}" id="it67"
+                              binding="#{manipulation.yrsOfService}"/>
+                <af:outputLabel value="Fut.Serv.Yrs"
+                                rendered="#{Rendering.pensionproduct}"
+                                id="ol111"/>
+                <af:inputText label="Label 1" simple="true"
+                              rendered="#{Rendering.pensionproduct}" id="it68"
+                              binding="#{manipulation.futYearSrv}"/>
+                <af:outputLabel value="Tot.Serv.Yrs"
+                                rendered="#{Rendering.pensionproduct}"
+                                id="ol112"/>
+                <af:inputText label="Label 1" simple="true"
+                              rendered="#{Rendering.pensionproduct}" id="it69"
+                              binding="#{manipulation.totSrvYears}"/>
+                <af:outputLabel value="Vol Cont.Type"
+                                rendered="#{Rendering.pensionproduct}"
+                                id="ol113"/>
+                <af:selectOneChoice label="Label 1" simple="true"
+                                    binding="#{manipulation.memcontrType}"
+                                    autoSubmit="true"
+                                    rendered="#{Rendering.pensionproduct}"
+                                    id="soc14">
+                  <af:selectItem label="Percentage" value="P" id="si39"/>
+                  <af:selectItem label="Amount" value="A" id="si40"/>
+                </af:selectOneChoice>
+                <af:outputLabel value="Employee Vol Contr"
+                                rendered="#{Rendering.pensionproduct}"
+                                id="ol114"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.empeContr}"
+                              rendered="#{Rendering.pensionproduct}" id="it70"/>
+                <af:outputLabel value="Employer Vol Contr"
+                                rendered="#{Rendering.pensionproduct}"
+                                id="ol115"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.emprContr}"
+                              rendered="#{Rendering.pensionproduct}" id="it71"/>
+                <af:outputLabel value="Employee Pension B/F"
+                                rendered="#{Rendering.pensionproduct}"
+                                id="ol116"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.empeBF}"
+                              rendered="#{Rendering.pensionproduct}" id="it72"/>
+                <af:outputLabel value="Employer Pension B/F"
+                                rendered="#{Rendering.pensionproduct}"
+                                id="ol117"/>
+                <af:inputText label="Label 1" simple="true"
+                              binding="#{manipulation.emprBF}"
+                              rendered="#{Rendering.pensionproduct}" id="it73"/>
+                <af:outputLabel value="Total Pens B/F"
+                                rendered="#{Rendering.pensionproduct}"
+                                id="ol118"/>
+                <af:inputText label="Label 1" simple="true"
+                              rendered="#{Rendering.pensionproduct}" id="it74"
+                              binding="#{manipulation.totalPen}"/>
+                <af:selectBooleanCheckbox label="Add Life Rider"
+                                          binding="#{manipulation.grpLifeRider}"
+                                          autoSubmit="true"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          valueChangeListener="#{manipulation.glifeListener}"
+                                          id="sbc2"/>
+              </h:panelGrid>
+              <h:panelGrid columns="3" id="pg62">
+                <af:commandButton text="Save Member"
+                                  action="#{manipulation.SaveQuoteMember}"
+                                  binding="#{manipulation.addMember}"
+                                  id="cb79"/>
+                <af:commandButton text="Add Another Member"
+                                  binding="#{manipulation.anotherMem2}"
+                                  action="#{manipulation.RefreshComponents}"
+                                  id="cb80"/>
+                <af:commandButton text="Back "
+                                  action="#{manipulation.BackToLangingScreen}"
+                                  id="cb81"/>
+              </h:panelGrid>
+              <af:panelTabbed inlineStyle="width:100.0%; height:210px;"
+                              id="pt2">
+                <af:showDetailItem text="Dependants" id="sdi5">
+                  <h:panelGrid columns="2" id="pg63">
+                    <af:commandButton actionListener="#{member.dependantsListener}"
+                                      id="cb82"
+                                      icon="/images/field_group_plus_ena.png">
+                      <af:showPopupBehavior popupId="depInfo"/>
+                    </af:commandButton>
+                    <af:commandButton id="cb83" icon="/images/delete_ena.png"
+                                      action="#{manipulation.DeleteDependantsSelected}"/>
+                  </h:panelGrid>
+                  <af:panelCollection inlineStyle="width:99.0%;"
+                                      id="panelCollection4">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="statusbar"/>
+                    <af:table value="#{bindings.members1.collectionModel}"
+                              var="row" rows="#{bindings.members1.rangeSize}"
+                              emptyText="#{bindings.members1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.members1.rangeSize}"
+                              selectedRowKeys="#{bindings.members1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.members1.collectionModel.makeCurrent}"
+                              rowSelection="single"
+                              inlineStyle="width:99.0%; height:120px;"
+                              binding="#{manipulation.memDependantsLOV}"
+                              id="t25">
+                      <af:column sortProperty="MEM_SURNAME" sortable="true"
+                                 headerText="Surname" id="c100">
+                        <af:outputText value="#{row.MEM_SURNAME}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="MEM_OTHER_NAMES" sortable="true"
+                                 headerText="Other Names" id="c101" width="200">
+                        <af:outputText value="#{row.MEM_OTHER_NAMES}"
+                                       id="ot10"/>
+                      </af:column>
+                      <af:column sortProperty="MEM_DOB" sortable="true"
+                                 headerText="Date of Birth" id="c102"
+                                 width="150">
+                        <af:outputText value="#{row.MEM_DOB}" id="ot11">
+                          <af:convertDateTime pattern="#{bindings.members1.hints.MEM_DOB.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="DTY_DESCRIPTION" sortable="true"
+                                 headerText="Dep Type" id="c103" width="150">
+                        <af:outputText value="#{row.DTY_DESCRIPTION}"
+                                       id="ot12"/>
+                      </af:column>
+                      <af:column sortProperty="MEM_NO" sortable="true"
+                                 headerText="Member Number" id="c104"
+                                 width="120">
+                        <af:outputText value="#{row.MEM_NO}" id="ot113"/>
+                      </af:column>
+                      <af:column sortProperty="MEM_SEX" sortable="true"
+                                 headerText="Sex" id="c105">
+                        <af:outputText value="#{row.MEM_SEX}" id="ot114"/>
+                      </af:column>
+                      <af:column sortProperty="MEM_IDENTITY_NO" sortable="true"
+                                 headerText="Identity No" id="c106">
+                        <af:outputText value="#{row.MEM_IDENTITY_NO}"
+                                       id="ot115"/>
+                      </af:column>
+                      <af:column sortProperty="memPinNO"
+                                   sortable="true" headerText="Pin No"
+                                   id="c106r">
+                          <af:outputText value="#{row.memPinNO}"
+                                         id="ot115r"/>
+                        </af:column>
+                          <af:column sortProperty="memAddress"
+                                   sortable="true" headerText="Address"
+                                   id="c106x">
+                          <af:outputText value="#{row.memAddress}"
+                                         id="ot115x"/>
+                        </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:showDetailItem>
+                <af:showDetailItem text="Joint Members" id="sdi6"
+                                   rendered="#{sessionScope['depCovered']=='J'}">
+                  <h:panelGrid columns="2" id="pg64">
+                    <af:commandButton actionListener="#{member.jointMemListener}"
+                                      id="cb84"
+                                      icon="/images/field_group_plus_ena.png">
+                          <af:showPopupBehavior popupId="JointPopup"/>
+                    </af:commandButton>
+                    <af:commandButton rendered="true" 
+                                      icon="/images/delete_ena.png"
+                                      action="#{manipulation.deleteJointMember}"
+                                      id="cb85"/>
+                  </h:panelGrid>
+                  <af:panelCollection inlineStyle="width:99.0%;"
+                                      id="panelCollection5">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="statusbar"/>
+                    <af:table value="#{bindings.members12.collectionModel}"
+                              var="row" rows="#{bindings.members12.rangeSize}"
+                              emptyText="#{bindings.members12.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.members12.rangeSize}"
+                              rowBandingInterval="0" id="t2"
+                              rowSelection="single"
+                              inlineStyle="width:99.0%; height:120px;"
+                              binding="#{manipulation.jointMemLOV}">
+                      <af:column sortProperty="j_MEM_SURNAME" sortable="false"
+                                 headerText="Surname"
+                                 id="c14">
+                        <af:outputText value="#{row.j_MEM_SURNAME}" id="ot15"/>
+                      </af:column>
+                      <af:column sortProperty="j_MEM_OTHER_NAMES"
+                                 sortable="false"
+                                 headerText="Other Names"
+                                 id="c9">
+                        <af:outputText value="#{row.j_MEM_OTHER_NAMES}"
+                                       id="ot14"/>
+                      </af:column>
+                      <af:column sortProperty="j_MEM_DOB" sortable="false"
+                                 headerText="DOB"
+                                 id="c15">
+                        <af:outputText value="#{row.j_MEM_DOB}" id="ot18">
+                          <af:convertDateTime pattern="#{bindings.members12.hints.j_MEM_DOB.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="j_DTY_DESCRIPTION"
+                                 sortable="false"
+                                 headerText="Dependant Type"
+                                 id="c13">
+                        <af:outputText value="#{row.j_DTY_DESCRIPTION}"
+                                       id="ot17"/>
+                      </af:column>
+                      <af:column sortProperty="j_MEM_NO" sortable="false"
+                                 headerText="Mem No"
+                                 id="c11">
+                        <af:outputText value="#{row.j_MEM_NO}" id="ot20"/>
+                      </af:column>
+                      <af:column sortProperty="j_MEM_SEX" sortable="false"
+                                 headerText="Gender"
+                                 id="c12">
+                        <af:outputText value="#{row.j_MEM_SEX}" id="ot19"/>
+                      </af:column>
+                      <af:column sortProperty="j_MEM_IDENTITY_NO"
+                                 sortable="false"
+                                 headerText="Identity No"
+                                 id="c8">
+                        <af:outputText value="#{row.j_MEM_IDENTITY_NO}"
+                                       id="ot16"/>
+                      </af:column>
+                      <af:column sortProperty="jMemPinNO"
+                                   sortable="true" headerText="Pin No"
+                                   id="c113x">
+                          <af:outputText value="#{row.jMemPinNO}"
+                                         id="ot122x"/>
+                        </af:column>
+                        <af:column sortProperty="jMemAddress"
+                                   sortable="true" headerText="Pin No"
+                                   id="c113xx">
+                          <af:outputText value="#{row.jMemAddress}"
+                                         id="ot122xx"/>
+                        </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:showDetailItem>
+                <af:showDetailItem text="Beneficiaries" rendered="false"
+                                   id="sdi7">
+                  <h:panelGrid columns="3" id="pg65">
+                    <af:commandButton text="Add" id="cb86">
+                      <af:showPopupBehavior popupId="beneficiaries"/>
+                    </af:commandButton>
+                    <af:popup id="beneficiaries">
+                      <af:dialog type="none" title="Beneficiaries Details"
+                                 id="d20">
+                        <h:panelGrid columns="2" id="pg66">
+                          <af:outputLabel value="Surname" id="ol119"/>
+                          <af:inputText label="Label 3" simple="true"
+                                        id="it75"/>
+                          <af:outputLabel value="Other Names" id="ol120"/>
+                          <af:inputText label="Label 3" simple="true"
+                                        id="it76"/>
+                          <af:outputLabel value="Type" id="ol121"/>
+                          <af:selectOneChoice label="Label 3" simple="true"
+                                              id="soc15">
+                            <af:selectItem label="Contigent" value="CON"
+                                           id="si41"/>
+                            <af:selectItem label="Beneficiary" value="BEN"
+                                           id="si42"/>
+                          </af:selectOneChoice>
+                          <af:outputLabel value="DOB" id="ol122"/>
+                          <af:inputText label="Label 3" simple="true"
+                                        id="it77"/>
+                          <af:outputLabel value="Tel No." id="ol123"/>
+                          <af:inputText label="Label 3" simple="true"
+                                        id="it78"/>
+                          <af:outputLabel value="%" id="ol124"/>
+                          <af:inputText label="Label 3" simple="true"
+                                        id="it79"/>
+                          <af:outputLabel value="Remarks" id="ol125"/>
+                          <af:inputText label="Label 3" simple="true"
+                                        id="it80"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="pg67">
+                          <af:commandButton text="Save" id="cb87"/>
+                          <af:commandButton text="Cancel" id="cb88"/>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                    <af:commandButton text="Remove" id="cb89"/>
+                  </h:panelGrid>
+                </af:showDetailItem>
+              </af:panelTabbed>
+              <af:popup id="saveinfo">
+                <af:dialog type="none" id="d23" title="Dependant Details"
+                           binding="#{manipulation.dependantDialog}">
+                  <h:panelGrid columns="2" id="pg68">
+                    <af:outputLabel value="Payroll/Mem No." id="ol126"
+                    showRequired="#{!Rendering.expressVisible}"/>
+                    <af:inputText label="Label 2" simple="true"
+                                  binding="#{manipulation.djMemNo}"
+                                  autoSubmit="true" id="it81" 
+                                  value="#{LOVCCBean.dependantNo}"/>
+                    <af:outputLabel value="Surname" id="ol127"/>
+                    <af:inputText label="Label 2" simple="true"
+                                  binding="#{manipulation.djSurname}"
+                                  autoSubmit="true" id="it82"/>
+                    <af:outputLabel value="Other Names" id="ol128"/>
+                    <af:inputText label="Label 2" simple="true"
+                                  binding="#{manipulation.djOtherNames}"
+                                  autoSubmit="true" id="it83"/>
+                    <af:outputLabel value="Sex" id="ol129"/>
+                    <af:selectOneChoice label="Label 2" simple="true"
+                                        binding="#{manipulation.djSex}"
+                                        autoSubmit="true" id="soc16">
+                      <af:selectItem label="Male" value="M" id="si43"/>
+                      <af:selectItem label="Female" value="F" id="si44"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="ID No." id="ol130"/>
+                    <af:inputText label="Label 2" simple="true"
+                                  binding="#{manipulation.djIDNo}"
+                                  autoSubmit="true" id="it84"/>
+                    <af:outputLabel value="DOB" id="ol131"/>
+                    <af:inputDate label="Label 2" simple="true"
+                                  autoSubmit="true"
+                                  binding="#{manipulation.djDOB}" id="id6">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                    <af:outputLabel value="Pin No" id="ol163"/>
+                      <af:inputText label="Label 416" id="it118"
+                                    binding="#{manipulation.dpinNo}"
+                                    simple="true"/>
+                      <af:outputLabel value="Address" id="ol164"/>
+                      <af:inputText label="Label 417" id="it119"
+                                    binding="#{manipulation.djAddress}"
+                                    simple="true"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg72">
+                    <af:commandButton text="Save"
+                                      action="#{manipulation.saveDependants}"
+                                      id="cb93"/>
+                    <af:commandButton text="Cancel" id="cb94"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="JointPopup">
+                <af:dialog type="none" id="d21" title="Joint Member Details">
+                  <h:panelGrid columns="2" id="pg71">
+                    <af:outputLabel value="Payroll/Mem No." id="ol132"/>
+                    <af:inputText label="Label 2" simple="true"
+                                  binding="#{manipulation.djntMemNo}"
+                                  autoSubmit="true" id="it85"
+                                  value="#{LOVCCBean.jointMemberNo}"/>
+                    <af:outputLabel value="Surname" id="ol133"/>
+                    <af:inputText label="Label 2" simple="true"
+                                  binding="#{manipulation.djntSurname}"
+                                  autoSubmit="true" id="it86"/>
+                    <af:outputLabel value="Other Names" id="ol134"/>
+                    <af:inputText label="Label 2" simple="true"
+                                  binding="#{manipulation.djntOtherNames}"
+                                  autoSubmit="true" id="it87"/>
+                    <af:outputLabel value="Sex" id="ol135"/>
+                    <af:selectOneChoice label="Label 2" simple="true"
+                                        binding="#{manipulation.djntSex}"
+                                        autoSubmit="true" id="soc17">
+                      <af:selectItem label="Male" value="M" id="si45"/>
+                      <af:selectItem label="Female" value="F" id="si46"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="ID No." id="ol136"/>
+                    <af:inputText label="Label 2" simple="true"
+                                  binding="#{manipulation.djntIDNo}"
+                                  autoSubmit="true" id="it88"/>
+                    <af:outputLabel value="DOB" id="ol137"/>
+                    <af:inputDate label="Label 2" simple="true"
+                                  binding="#{manipulation.djntDOB}"
+                                  autoSubmit="true" id="id7">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>                    
+                      <af:outputLabel value="Pin No" id="ol163j"/>
+                      <af:inputText label="Label 416" id="it118j"
+                                    binding="#{manipulation.djntPinNo}"
+                                    simple="true"/>
+                      <af:outputLabel value="Address" id="ol164j"/>
+                      <af:inputText label="Label 417" id="it119j"
+                                    binding="#{manipulation.djntAddress}"
+                                    simple="true"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg69">
+                    <af:commandButton text="Save"
+                                      action="#{manipulation.saveJointMembers}"
+                                      id="cb90"/>
+                    <af:commandButton text="Cancel" id="cb91"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="depInfo">
+                <af:dialog type="none" title="Dependant Types" id="d22">
+                  <af:table value="#{bindings.Settings1.collectionModel}"
+                            var="row" rows="#{bindings.Settings1.rangeSize}"
+                            emptyText="#{bindings.Settings1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.Settings1.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.Settings1Query.queryDescriptor}"
+                            queryListener="#{bindings.Settings1Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.Settings1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.Settings1.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t1"
+                            binding="#{manipulation.depTypeLOV2}">
+                    <af:column sortProperty="DTY_SHT_DESC" filterable="true"
+                               filterFeatures="caseInsensitive" sortable="true"
+                               headerText="Short Desc" id="c6">
+                      <af:outputText value="#{row.DTY_SHT_DESC}" id="ot8"/>
+                    </af:column>
+                    <af:column sortProperty="DTY_DESCRIPTION" filterable="true"
+                               filterFeatures="caseInsensitive" sortable="true"
+                               headerText="Dependant Type" id="c7" width="200">
+                      <af:outputText value="#{row.DTY_DESCRIPTION}" id="ot7"/>
+                    </af:column>
+                  </af:table>
+                  <h:panelGrid columns="3" id="pg70">
+                    <af:commandButton text="Next>>" id="cb92"
+                                      action="#{manipulation.findDependantsSelected}"/>
+                    <af:commandButton text="Cancel" id="cb95"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

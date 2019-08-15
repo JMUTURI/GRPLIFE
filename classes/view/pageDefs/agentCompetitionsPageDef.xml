@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="agentCompetitionsPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findAgentCompetionRates.result"
+                    DataControl="agentCompetitionsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.agentCompetitions"
+                    id="findAgentCompetionRatesIterator"/>
+    <methodIterator Binds="findGroupProducts.result"
+                    DataControl="ProductSetupDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.ProductSetup"
+                    id="findGroupProductsIterator"/>
+    <methodIterator Binds="FindBranches.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindBranchesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findAgentCompetionRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAgentCompetionRates"
+                  IsViewObjectMethod="false" DataControl="agentCompetitionsDAO"
+                  InstanceName="agentCompetitionsDAO.dataProvider"
+                  ReturnName="data.agentCompetitionsDAO.methodResults.findAgentCompetionRates_agentCompetitionsDAO_dataProvider_findAgentCompetionRates_result"/>
+    <tree IterBinding="findAgentCompetionRatesIterator" id="agentCompetitions">
+      <nodeDefinition DefName="com.turnkey.setups.agentCompetitions"
+                      Name="agentCompetitions0">
+        <AttrNames>
+          <Item Value="agcpCode"/>
+          <Item Value="agcpTotalPolicies"/>
+          <Item Value="agcpTotalPremium"/>
+          <Item Value="agcpWef"/>
+          <Item Value="agcpWet"/>
+          <Item Value="agcpRewardAmnt"/>
+          <Item Value="agcpProdCode"/>
+          <Item Value="agcpBrnCode"/>
+          <Item Value="agcpCompetitionDesc"/>
+          <Item Value="agcpCodeTrans"/>
+          <Item Value="agcpCompetitionDescTrans"/>
+          <Item Value="agnCodeComp"/>
+          <Item Value="agnShtDescComp"/>
+          <Item Value="amtCollectedComp"/>
+          <Item Value="policyCntComp"/>
+          <Item Value="agnName"/>
+          <Item Value="dateFrom"/>
+          <Item Value="dateTo"/>
+          <Item Value="agnChecked"/>
+          <Item Value="select"/>
+          <Item Value="agcpProddesc"/>
+          <Item Value="agcpLevel"/>
+          <Item Value="agcpPersitency"/>
+          <Item Value="persistency"/>
+          <Item Value="agcpPersitencyParam"/>
+          <Item Value="agcpBrnName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGroupProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGroupProducts"
+                  IsViewObjectMethod="false" DataControl="ProductSetupDAO"
+                  InstanceName="ProductSetupDAO.dataProvider"
+                  ReturnName="data.ProductSetupDAO.methodResults.findGroupProducts_ProductSetupDAO_dataProvider_findGroupProducts_result"/>
+    <tree IterBinding="findGroupProductsIterator" id="ProductSetup">
+      <nodeDefinition DefName="com.turnkey.setups.ProductSetup"
+                      Name="ProductSetup0">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+          <Item Value="PROD_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindBranches"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="data.SettingsDAO.methodResults.FindBranches_SettingsDAO_dataProvider_FindBranches_result"/>
+    <list IterBinding="FindBranchesIterator" ListOperMode="navigation"
+          ListIter="FindBranchesIterator" id="Settings" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="BRN_CODE"/>
+        <Item Value="BRN_NAME"/>
+      </AttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

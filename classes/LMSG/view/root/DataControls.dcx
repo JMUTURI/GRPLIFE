@@ -1,0 +1,1591 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DataControlConfigs xmlns="http://xmlns.oracle.com/adfm/configuration"
+                    version="11.1.1.51.56" id="DataControls"
+                    Package="LMSG.view.root">
+  <AdapterDataControl id="QuotationDetailsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Quotation.QuotationDetailsDAO"
+                      BeanClass="LMSG.view.Quotation.QuotationDetailsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Quotation.QuotationsDetails"/>
+      <TypeInfo FullName="LMSG.view.Quotation.QuotationDetailsDAO"/>
+      <TypeInfo FullName="oracle.adf.view.rich.render.ClientEvent"/>
+      <TypeInfo FullName="oracle.adf.view.rich.event.ClientListenerSet"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.bean.FacesBean.Type"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.event.AttributeChangeEvent"/>
+      <TypeInfo FullName="oracle.adf.view.rich.component.rich.input.RichInputText"/>
+      <TypeInfo FullName="oracle.adf.view.rich.model.Criterion"/>
+      <TypeInfo FullName="oracle.adf.view.rich.model.ConjunctionCriterion"/>
+      <TypeInfo FullName="oracle.adf.view.rich.model.AttributeDescriptor.Operator"/>
+      <TypeInfo FullName="oracle.adf.view.rich.model.AttributeDescriptor"/>
+      <TypeInfo FullName="oracle.adf.view.rich.model.AttributeCriterion"/>
+      <TypeInfo FullName="oracle.adf.view.rich.model.QueryDescriptor"/>
+      <TypeInfo FullName="oracle.adf.view.rich.event.QueryEvent"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.event.RowDisclosureEvent"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.event.SelectionEvent"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.event.RangeChangeEvent"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.model.SortCriterion"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.event.SortEvent"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.render.ClientRowKeyManager"/>
+      <TypeInfo FullName="oracle.adf.view.rich.component.rich.data.RichTable"/>
+      <TypeInfo FullName="oracle.adf.view.rich.component.rich.input.RichSelectOneChoice"/>
+      <TypeInfo FullName="oracle.adf.view.rich.component.rich.layout.RichPanelGroupLayout"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Quotation.QuotationDetailsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="ExistingQuot"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.ExistingQuot"
+                      BeanClass="LMSG.view.QuotationProcessing.ExistingQuot"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.ExistingQuot"/>
+      <TypeInfo FullName="oracle.adf.view.rich.render.ClientEvent"/>
+      <TypeInfo FullName="oracle.adf.view.rich.event.ClientListenerSet"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.bean.FacesBean.Type"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.event.AttributeChangeEvent"/>
+      <TypeInfo FullName="oracle.adf.view.rich.component.rich.input.RichSelectOneChoice"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.ExistingQuot"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="GenExistQuot"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.GenExistQuot"
+                      BeanClass="LMSG.view.QuotationProcessing.GenExistQuot"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.ExistingQuot"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.GenExistQuot"/>
+      <TypeInfo FullName="oracle.adf.view.rich.render.ClientEvent"/>
+      <TypeInfo FullName="oracle.adf.view.rich.event.ClientListenerSet"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.bean.FacesBean.Type"/>
+      <TypeInfo FullName="org.apache.myfaces.trinidad.event.AttributeChangeEvent"/>
+      <TypeInfo FullName="oracle.adf.view.rich.component.rich.input.RichSelectOneChoice"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.GenExistQuot"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="quotCoverTypes"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.quotCoverTypes"
+                      BeanClass="LMSG.view.QuotationProcessing.quotCoverTypes"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotCoverTypes"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.quotCoverTypes"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="GenQoutCoverTypes"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.GenQoutCoverTypes"
+                      BeanClass="LMSG.view.QuotationProcessing.GenQoutCoverTypes"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotCoverTypes"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.GenQoutCoverTypes"/>
+      <TypeInfo FullName="LMSG.view.Policy.ProdCovers"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.GenQoutCoverTypes"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="quotationTaxes"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.quotationTaxes"
+                      BeanClass="LMSG.view.QuotationProcessing.quotationTaxes"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotationTaxes"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.quotationTaxes"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="GenQuotTaxes"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.GenQuotTaxes"
+                      BeanClass="LMSG.view.QuotationProcessing.GenQuotTaxes"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotationTaxes"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.GenQuotTaxes"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.GenQuotTaxes"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="GenQuotCat"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.GenQuotCat"
+                      BeanClass="LMSG.view.QuotationProcessing.GenQuotCat"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotCategory"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.GenQuotCat"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.GenQuotCat"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="quotCategory"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.quotCategory"
+                      BeanClass="LMSG.view.QuotationProcessing.quotCategory"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotCategory"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.quotCategory"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="QuotMembers"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.QuotMembers"
+                      BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.QuotMembers"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="GenQuotMem"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.GenQuotMem"
+                      BeanClass="LMSG.view.QuotationProcessing.GenQuotMem"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.QuotMembers"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.GenQuotMem"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.GenQuotMem"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="proposerDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.proposerDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.proposerDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.proposers"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.proposerDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.proposerDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="branchesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.branchesDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.branchesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.branches"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.branchesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.branchesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="quotPremMaskDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.quotPremMaskDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.quotPremMaskDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotPremMask"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotPremMaskDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.quotPremMaskDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="GenQuotProvisions"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.GenQuotProvisions"
+                      BeanClass="LMSG.view.QuotationProcessing.GenQuotProvisions"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotationProvision"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.GenQuotProvisions"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.GenQuotProvisions"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="prodProvisionDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.prodProvisionDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.prodProvisionDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.productProvisions"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.prodProvisionDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.prodProvisionDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="dependentsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.dependentsDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.dependentsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.dependents"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.dependentsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.dependentsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="dependentLimitsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.dependentLimitsDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.dependentLimitsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.dependentLimits"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.dependentLimitsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.dependentLimitsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="prodDependentsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.prodDependentsDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.prodDependentsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.prodDependents"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.prodDependentsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.prodDependentsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="occupationsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.occupationsDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.occupationsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.occupations"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.occupationsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.occupationsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="memberDependentsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.memberDependentsDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.memberDependentsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.memberDependents"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.memberDependentsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.memberDependentsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="memPensionDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.memPensionDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.memPensionDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.memPension"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.memPensionDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.memPensionDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="memCoverTypesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.memCoverTypesDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.memCoverTypesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.memCoverTypes"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.memCoverTypesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.memCoverTypesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="agentsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.agentsDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.agentsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.agents"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.agentsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.agentsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="prodTaxesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.prodTaxesDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.prodTaxesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.prodTaxes"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.prodTaxesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.prodTaxesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="okQuotations"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.okQuotations"
+                      BeanClass="LMSG.view.QuotationProcessing.okQuotations"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.okQuotations"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.okQuotations"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="okQuotationsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.okQuotationsDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.okQuotationsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.okQuotations"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.okQuotationsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.okQuotationsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="policiesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.policiesDAO"
+                      BeanClass="LMSG.view.Policy.policiesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.policies"/>
+      <TypeInfo FullName="LMSG.view.Policy.policiesDAO"/>
+      <TypeInfo FullName="LMSG.view.Policy.PolicyPremiums"/>
+      <TypeInfo FullName="LMSG.view.Policy.PremiumCard"/>
+      <TypeInfo FullName="LMSG.view.Policy.PolicyReceipts"/>
+      <TypeInfo FullName="LMSG.view.Policy.PolicyRecptInstlmnts"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.policiesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="endorsementsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.endorsementsDAO"
+                      BeanClass="LMSG.view.Policy.endorsementsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.endorsements"/>
+      <TypeInfo FullName="LMSG.view.Policy.endorsementsDAO"/>
+      <TypeInfo FullName="LMSG.view.Base.Settings"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.endorsementsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="checkOffAgentsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.checkOffAgentsDAO"
+                      BeanClass="LMSG.view.Policy.checkOffAgentsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.checkOffAgents"/>
+      <TypeInfo FullName="LMSG.view.Policy.checkOffAgentsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.checkOffAgentsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="policyCoverTypesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.policyCoverTypesDAO"
+                      BeanClass="LMSG.view.Policy.policyCoverTypesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.policyCoverTypes"/>
+      <TypeInfo FullName="LMSG.view.Policy.policyCoverTypesDAO"/>
+      <TypeInfo FullName="LMSG.view.Policy.ProdCovers"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.policyCoverTypesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="prodProvisionsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.prodProvisionsDAO"
+                      BeanClass="LMSG.view.QuotationProcessing.prodProvisionsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.prodProvisions"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.prodProvisionsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.prodProvisionsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="JointMembers"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.QuotationProcessing.JointMembers"
+                      BeanClass="LMSG.view.QuotationProcessing.JointMembers"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.QuotMembers"/>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.JointMembers"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.QuotationProcessing.JointMembers"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="contraPoliciesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.contraPoliciesDAO"
+                      BeanClass="LMSG.view.Policy.contraPoliciesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.contraPolicies"/>
+      <TypeInfo FullName="LMSG.view.Policy.contraPoliciesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.contraPoliciesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="PolicyTaxesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.PolicyTaxesDAO"
+                      BeanClass="LMSG.view.Policy.PolicyTaxesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotationTaxes"/>
+      <TypeInfo FullName="LMSG.view.Policy.PolicyTaxesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.PolicyTaxesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="policyProvisionsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.policyProvisionsDAO"
+                      BeanClass="LMSG.view.Policy.policyProvisionsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.productProvisions"/>
+      <TypeInfo FullName="LMSG.view.Policy.policyProvisionsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.policyProvisionsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="coverProvisionsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.coverProvisionsDAO"
+                      BeanClass="LMSG.view.Policy.coverProvisionsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.productProvisions"/>
+      <TypeInfo FullName="LMSG.view.Policy.coverProvisionsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.coverProvisionsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="polCvtProvisionsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.polCvtProvisionsDAO"
+                      BeanClass="LMSG.view.Policy.polCvtProvisionsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.productProvisions"/>
+      <TypeInfo FullName="LMSG.view.Policy.polCvtProvisionsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.polCvtProvisionsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="GenPolicyCategories"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.GenPolicyCategories"
+                      BeanClass="LMSG.view.Policy.GenPolicyCategories"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.quotCategory"/>
+      <TypeInfo FullName="LMSG.view.Policy.GenPolicyCategories"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.GenPolicyCategories"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="PolDependentLimits"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.PolDependentLimits"
+                      BeanClass="LMSG.view.Policy.PolDependentLimits"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.QuotationProcessing.dependentLimits"/>
+      <TypeInfo FullName="LMSG.view.Policy.PolDependentLimits"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.PolDependentLimits"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="documentsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.documentsDAO"
+                      BeanClass="LMSG.view.Policy.documentsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.documents"/>
+      <TypeInfo FullName="LMSG.view.Policy.documentsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.documentsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="groupPolicyDocsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.groupPolicyDocsDAO"
+                      BeanClass="LMSG.view.Policy.groupPolicyDocsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.groupPolicyDocs"/>
+      <TypeInfo FullName="LMSG.view.Policy.groupPolicyDocsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.groupPolicyDocsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="RiTreatyDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.RiTreatyDAO"
+                      BeanClass="LMSG.view.Policy.RiTreatyDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.RiTreaty"/>
+      <TypeInfo FullName="LMSG.view.Policy.RiTreatyDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.RiTreatyDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="membersDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Members.membersDAO"
+                      BeanClass="LMSG.view.Members.membersDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Members.members1"/>
+      <TypeInfo FullName="LMSG.view.Members.membersDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Members.membersDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="SettingsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Base.SettingsDAO"
+                      BeanClass="LMSG.view.Base.SettingsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Base.Settings"/>
+      <TypeInfo FullName="LMSG.view.Base.SettingsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Base.SettingsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="policyMembersDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.policyMembersDAO"
+                      BeanClass="LMSG.view.Policy.policyMembersDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.policyMembers"/>
+      <TypeInfo FullName="LMSG.view.Policy.policyMembersDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.policyMembersDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="ri_detailsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.ri_detailsDAO"
+                      BeanClass="LMSG.view.Policy.ri_detailsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.ri_details"/>
+      <TypeInfo FullName="LMSG.view.Policy.ri_detailsDAO"/>
+      <TypeInfo FullName="LMSG.view.Policy.memRiTrtDetails"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.ri_detailsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="memRiTrtDetails"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Policy.memRiTrtDetails"
+                      BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Policy.memRiTrtDetails"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Policy.memRiTrtDetails"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="ClaimsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Claims.ClaimsDAO"
+                      BeanClass="LMSG.view.Claims.ClaimsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Claims.Claim"/>
+      <TypeInfo FullName="LMSG.view.Claims.ClaimsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Claims.ClaimsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="importDetailsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Importation.importDetailsDAO"
+                      BeanClass="LMSG.view.Importation.importDetailsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Importation.importDetails"/>
+      <TypeInfo FullName="LMSG.view.Importation.importDetailsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Importation.importDetailsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="ProductsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.GroupProducts.ProductsDAO"
+                      BeanClass="LMSG.view.GroupProducts.ProductsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.GroupProducts.productDetails"/>
+      <TypeInfo FullName="LMSG.view.GroupProducts.ProductsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.GroupProducts.ProductsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="QuotationsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Quotation.QuotationsDAO"
+                      BeanClass="LMSG.view.Quotation.QuotationsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Quotation.Quotations"/>
+      <TypeInfo FullName="LMSG.view.Quotation.QuotationsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Quotation.QuotationsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="ProposersDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Clients.ProposersDAO"
+                      BeanClass="LMSG.view.Clients.ProposersDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Clients.Proposer"/>
+      <TypeInfo FullName="LMSG.view.Clients.ProposersDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Clients.ProposersDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="medicalsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Medicals.medicalsDAO"
+                      BeanClass="LMSG.view.Medicals.medicalsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Medicals.medical"/>
+      <TypeInfo FullName="LMSG.view.Medicals.medicalsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Medicals.medicalsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="CorrespondenceDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Correspondents.CorrespondenceDAO"
+                      BeanClass="LMSG.view.Correspondents.CorrespondenceDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Correspondents.Correspondence"/>
+      <TypeInfo FullName="LMSG.view.Correspondents.CorrespondenceDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Correspondents.CorrespondenceDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="emailDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.utilities.emailDAO"
+                      BeanClass="LMSG.view.utilities.emailDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.utilities.emails"/>
+      <TypeInfo FullName="LMSG.view.utilities.emailDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.utilities.emailDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="pensionsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Pensions.pensionsDAO"
+                      BeanClass="LMSG.view.Pensions.pensionsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Pensions.pension"/>
+      <TypeInfo FullName="LMSG.view.Pensions.pensionsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Pensions.pensionsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="ClientDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Clients.ClientDAO"
+                      BeanClass="LMSG.view.Clients.ClientDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Clients.Client"/>
+      <TypeInfo FullName="LMSG.view.Clients.ClientDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Clients.ClientDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="workflowDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.BPM.workflowDAO"
+                      BeanClass="LMSG.view.BPM.workflowDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.BPM.workflow"/>
+      <TypeInfo FullName="LMSG.view.BPM.workflowDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.BPM.workflowDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="AccountDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Accounts.AccountDAO"
+                      BeanClass="LMSG.view.Accounts.AccountDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Accounts.Account"/>
+      <TypeInfo FullName="LMSG.view.Accounts.AccountDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Accounts.AccountDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="RenewalDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.Renewals.RenewalDAO"
+                      BeanClass="LMSG.view.Renewals.RenewalDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.Renewals.Renewal"/>
+      <TypeInfo FullName="LMSG.view.Renewals.RenewalDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.Renewals.RenewalDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="sessionAuthenticator"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.authenticator.sessionAuthenticator"
+                      BeanClass="LMSG.view.authenticator.sessionAuthenticator"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.authenticator.sessionAuthenticator"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.authenticator.sessionAuthenticator"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="SetupsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.SetupsDAO"
+                      BeanClass="com.turnkey.setups.SetupsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.Setup"/>
+      <TypeInfo FullName="com.turnkey.setups.SetupsDAO"/>
+      <TypeInfo FullName="LMSG.view.setups.PremiumMaskItems"/>
+      <TypeInfo FullName="com.turnkey.setups.SchoolClassItems"/>
+      <TypeInfo FullName="com.turnkey.setups.TreatyGroupItems"/>
+      <TypeInfo FullName="com.turnkey.setups.ProductCoverTypes"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.SetupsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="treatyArrangementsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.setups.treatyArrangementsDAO"
+                      BeanClass="LMSG.view.setups.treatyArrangementsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.setups.treatyArrangements"/>
+      <TypeInfo FullName="LMSG.view.setups.treatyArrangementsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.setups.treatyArrangementsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="arrangementSetupsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.setups.arrangementSetupsDAO"
+                      BeanClass="LMSG.view.setups.arrangementSetupsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.setups.arrangementSetups"/>
+      <TypeInfo FullName="LMSG.view.setups.arrangementSetupsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.setups.arrangementSetupsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="treatyProductsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.setups.treatyProductsDAO"
+                      BeanClass="LMSG.view.setups.treatyProductsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.setups.treatyProducts"/>
+      <TypeInfo FullName="LMSG.view.setups.treatyProductsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.setups.treatyProductsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="treatyProdCoverTypesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.setups.treatyProdCoverTypesDAO"
+                      BeanClass="LMSG.view.setups.treatyProdCoverTypesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.setups.treatyProdCoverTypes"/>
+      <TypeInfo FullName="LMSG.view.setups.treatyProdCoverTypesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.setups.treatyProdCoverTypesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="ProductSetupDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.ProductSetupDAO"
+                      BeanClass="com.turnkey.setups.ProductSetupDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.ProductSetup"/>
+      <TypeInfo FullName="com.turnkey.setups.ProductSetupDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.ProductSetupDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="treatySetupDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.setups.treatySetupDAO"
+                      BeanClass="LMSG.view.setups.treatySetupDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.setups.treatySetups"/>
+      <TypeInfo FullName="LMSG.view.setups.treatySetupDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.setups.treatySetupDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="treatiesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.setups.treatiesDAO"
+                      BeanClass="LMSG.view.setups.treatiesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.setups.treaties"/>
+      <TypeInfo FullName="LMSG.view.setups.treatiesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.setups.treatiesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="treatyParticipantsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.treatyParticipantsDAO"
+                      BeanClass="com.turnkey.setups.treatyParticipantsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.TreatyParticipants"/>
+      <TypeInfo FullName="com.turnkey.setups.treatyParticipantsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.treatyParticipantsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="ArrangementCoverTypesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.ArrangementCoverTypesDAO"
+                      BeanClass="com.turnkey.setups.ArrangementCoverTypesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.ArrangementCoverTypes"/>
+      <TypeInfo FullName="com.turnkey.setups.ArrangementCoverTypesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.ArrangementCoverTypesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="accountTypesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.accountTypesDAO"
+                      BeanClass="com.turnkey.setups.accountTypesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.accountTypes"/>
+      <TypeInfo FullName="com.turnkey.setups.accountTypesDAO"/>
+      <TypeInfo FullName="com.turnkey.setups.agencies"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.accountTypesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="annFactrDescDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.annFactrDescDAO"
+                      BeanClass="com.turnkey.setups.annFactrDescDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.annuityFacDesc"/>
+      <TypeInfo FullName="com.turnkey.setups.annFactrDescDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.annFactrDescDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="productCvtDependentsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.productCvtDependentsDAO"
+                      BeanClass="com.turnkey.setups.productCvtDependentsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.productCvtDependants"/>
+      <TypeInfo FullName="com.turnkey.setups.productCvtDependentsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.productCvtDependentsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="relationTypesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.relationTypesDAO"
+                      BeanClass="com.turnkey.setups.relationTypesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.relationTypes"/>
+      <TypeInfo FullName="com.turnkey.setups.relationTypesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.relationTypesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="interestRatesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.interestRatesDAO"
+                      BeanClass="com.turnkey.setups.interestRatesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.interestRates"/>
+      <TypeInfo FullName="com.turnkey.setups.interestRatesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.interestRatesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="pensionCostingFactorsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition=""
+                      BeanClass=""
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName=""/>
+      <TypeInfo FullName=""/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass=""
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="productTransactionsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.productTransactionsDAO"
+                      BeanClass="com.turnkey.setups.productTransactionsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.productTransactions"/>
+      <TypeInfo FullName="com.turnkey.setups.productTransactionsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.productTransactionsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="causationsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.causationsDAO"
+                      BeanClass="com.turnkey.setups.causationsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.causations"/>
+      <TypeInfo FullName="com.turnkey.setups.causationsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.causationsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="ordReinRatesDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.ordReinRatesDAO"
+                      BeanClass="com.turnkey.setups.ordReinRatesDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.ordReinRates"/>
+      <TypeInfo FullName="com.turnkey.setups.ordReinRatesDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.ordReinRatesDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="periodsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.periodsDAO"
+                      BeanClass="com.turnkey.setups.periodsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.periods"/>
+      <TypeInfo FullName="com.turnkey.setups.periodsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.periodsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="annuityFacDesc"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="com.turnkey.setups.annuityFacDesc"
+                      BeanClass="com.turnkey.setups.annuityFacDesc"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="com.turnkey.setups.annuityFacDesc"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="com.turnkey.setups.annuityFacDesc"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="TicketsDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.BPM.TicketsDAO"
+                      BeanClass="LMSG.view.BPM.TicketsDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.BPM.Tickets"/>
+      <TypeInfo FullName="LMSG.view.BPM.TicketsDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.BPM.TicketsDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="EcmUtilDAO"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.ecm.EcmUtilDAO"
+                      BeanClass="LMSG.view.ecm.EcmUtilDAO"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.ecm.EcmBean"/>
+      <TypeInfo FullName="LMSG.view.ecm.EcmUtilDAO"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.ecm.EcmUtilDAO"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="IEDMSDocsDao"
+                      FactoryClass="oracle.adf.model.adapter.bean.BeanDCFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="LMSG.view.dms.IEDMSDocsDao"
+                      BeanClass="LMSG.view.dms.IEDMSDocsDao"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="LMSG.view.dms.DocumentDTO"/>
+      <TypeInfo FullName="LMSG.view.dms.AlfrescoAuthor"/>
+      <TypeInfo FullName="LMSG.view.dms.Permissions"/>
+      <TypeInfo FullName="LMSG.view.dms.AlfrescoCommentItem"/>
+      <TypeInfo FullName="LMSG.view.dms.IEDMSDocsDao"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="LMSG.view.dms.IEDMSDocsDao"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+</DataControlConfigs>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="treatyArrangements" Package="LMSG.view.setups"
+          BeanClass="LMSG.view.setups.treatyArrangements" isJavaBased="true">
+  <Attribute Name="ta_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="TA_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TA_DESC" Type="java.lang.String"/>
+  <Attribute Name="TA_TYPE" Type="java.lang.String"/>
+  <Attribute Name="TA_CUR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TA_CUR_SYMBOL" Type="java.lang.String"/>
+  <Attribute Name="TA_CLA_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TA_CLA_SHT_DESC" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.setups.treatyArrangements"
+                     BeanClass="LMSG.view.setups.treatyArrangements"
+                     id="treatyArrangements"/>
+</JavaBean>

@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Premium Structures" id="d2">
+    <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                             id="pgl4">
+            <af:inputText id="it2"
+                          helpTopicId="LmsGrp_PREMMASK" readOnly="true"/>
+            <af:panelBox text="Premium Structures" showHeader="never" id="pb15">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Premium Structures" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1"/>
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:outputLabel value="Class of Business" id="outputLabel1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                      rows="#{bindings.Setup.rangeSize}"
+                      emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.Setup.rangeSize}"
+                      rowBandingInterval="0"
+                      selectionListener="#{SetupBean.class1Listener}"
+                      rowSelection="single" id="t1"
+                      inlineStyle="width:98%; height:100px; border-style:none;">
+              <af:column sortProperty="CLA_SHT_DESC" sortable="true"
+                         headerText="Short Desc" id="c1">
+                <af:outputText value="#{row.CLA_SHT_DESC}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="CLA_DESC" sortable="true"
+                         headerText="Class of Business" id="c2" width="200">
+                <af:outputText value="#{row.CLA_DESC}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="CLA_TYPE" sortable="true"
+                         headerText="Type" id="c3" width="200">
+                <af:outputText value="#{row.CLA_TYPE}" id="ot2"/>
+              </af:column>
+            </af:table>
+            <af:spacer width="10" height="10" id="spacer1"/>
+            <af:outputLabel value="Products" id="outputLabel2"
+                            inlineStyle="font-weight:bold;"/>
+            <af:table value="#{bindings.Setup1.collectionModel}" var="row"
+                      rows="#{bindings.Setup1.rangeSize}"
+                      emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.Setup1.rangeSize}"
+                      rowBandingInterval="0"
+                      selectionListener="#{SetupBean.productsListener}"
+                      rowSelection="single" id="t2"
+                      inlineStyle="width:98%; height:150px; border-style:none;"
+                      binding="#{SetupBean.productsLOV}">
+              <af:column sortProperty="PROD_SHT_DESC" sortable="true"
+                         headerText="Short Desc" id="c5">
+                <af:outputText value="#{row.PROD_SHT_DESC}" id="ot7"/>
+              </af:column>
+              <af:column sortProperty="PROD_DESC" sortable="true"
+                         headerText="Product" id="c6" width="200">
+                <af:outputText value="#{row.PROD_DESC}" id="ot5"/>
+              </af:column>
+              <af:column sortProperty="PROD_TYPE" sortable="true"
+                         headerText="Type" id="c4" width="200">
+                <af:outputText value="#{row.PROD_TYPE}" id="ot6"/>
+              </af:column>
+            </af:table>
+            <af:spacer width="10" height="20" id="spacer2"/>
+            <af:outputLabel value="Applicable Premium Structures" id="outputLabel3"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="separator1"/>
+            <h:panelGrid columns="3" id="pg12">
+              <af:commandButton id="cb19"
+                                icon="/images/field_group_plus_ena.png"
+                                action="#{SetupBean.AddPremiumMask}"/>
+              <af:commandButton icon="/images/update_ena.png"
+                                id="commandButton11"
+                                action="#{SetupBean.EditPremiumMask}"/>
+              <af:commandButton id="cb22" icon="/images/delete_ena.png"
+                               action="#{SetupBean.performPremiumMaskDelete}"/>
+            </h:panelGrid>
+            <af:popup id="premMask">
+              <af:dialog id="d1" type="none" title="Premium Structures">
+                <h:panelGrid columns="2" id="pg1">
+                  <af:outputLabel value="*Id." id="ol2"/>
+                  <af:inputText label="Label 1" id="it1" simple="true"
+                                binding="#{SetupBean.pmID}"
+                                shortDesc="Mask ID"/>
+                  <af:outputLabel value="*Prem Mask Description" id="outputLabel4"/>
+                  <af:inputText label="Label 1" id="inputText1" simple="true"
+                                binding="#{SetupBean.pmDesc}"
+                                shortDesc="Mask Description"/>
+                    <af:outputLabel value="*Rate Type" id="ol3"/>
+                    <af:selectOneChoice label="Label 2" id="soc2" simple="true" value="G"
+                                        binding="#{SetupBean.pmRateType}">
+                      <af:selectItem label="Gross Rates" value="G" id="si3"/>
+                      <af:selectItem label="Pure Rates" value="P" id="si4"/>
+                      <af:selectItem label="Base Mortality Rates" value="B" id="sbase"/>
+                      <af:selectItem label="Risk Premium Rates" value="R" id="si5"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="*Default" id="outputLabel5"/>
+                  <af:selectOneChoice label="Label 1" id="soc1" value="N"
+                                      simple="true"
+                                      binding="#{SetupBean.pmDefault}"
+                                      shortDesc="Is It Default Premium Structure for Product">
+                    <af:selectItem label="Yes" value="Y" id="si1"/>
+                    <af:selectItem label="No" value="N" id="si2"/>
+                  </af:selectOneChoice>
+                  <af:outputLabel value="Comments" id="outputLabel6"/>
+                  <af:inputText label="Label 1" id="inputText2" simple="true"
+                                rows="3" binding="#{SetupBean.pmComments}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg2">
+                  <af:commandButton text="Save" id="cb1"
+                                    action="#{SetupBean.SavePremiumMask}"/>
+                  <af:commandButton text="Cancel" id="commandButton1"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+             <af:popup id="confirmDelete">
+                              <af:dialog id="d8" title="Confirm Delete Action"
+                                         type="yesNo"
+                                         dialogListener="#{SetupBean.actionConfirmDelete}">
+                                <af:outputText value="Are you sure you want to delete the selected row?"
+                                               id="ot32"/>
+                              </af:dialog>
+                            </af:popup>
+            <af:table value="#{bindings.Setup2.collectionModel}" var="row"
+                      rows="#{bindings.Setup2.rangeSize}"
+                      emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.Setup2.rangeSize}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t3"
+                      inlineStyle="width:98%; height:150px; border-style:none;"
+                      binding="#{SetupBean.premiumMasksLOV}">
+              <af:column sortProperty="PMAS_SHT_DESC" sortable="true"
+                         headerText="Short Desc" id="c9">
+                <af:outputText value="#{row.PMAS_SHT_DESC}" id="ot8"/>
+              </af:column>
+              <af:column sortProperty="PMAS_DESC" sortable="true"
+                         headerText="Premium Structures" id="c7" width="200">
+                <af:outputText value="#{row.PMAS_DESC}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="PMAS_DEFAULT_DESC" sortable="true"
+                         headerText="Default" id="c8">
+                <af:outputText value="#{row.PMAS_DEFAULT_DESC}" id="ot11"/>
+              </af:column>
+              <af:column sortProperty="PMAS_RATE_TYPE" sortable="true"
+                         headerText="Rate Type" id="c11" width="200">
+                <af:outputText value="#{row.PMAS_RATE_TYPE}" id="ot12"/>
+              </af:column>
+              <af:column sortProperty="PMAS_COMMENT" sortable="true"
+                         headerText="Comment" id="c10" width="200">
+                <af:outputText value="#{row.PMAS_COMMENT}" id="ot9"/>
+              </af:column>
+               
+            </af:table>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

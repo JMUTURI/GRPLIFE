@@ -1,0 +1,1029 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Load Policies">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:460.0px;">
+              <af:showDetailItem text="Loaded Group Business Policies"
+                                 id="sdi1">
+                <af:panelGroupLayout id="pgl4" layout="scroll">
+                  <af:panelBox id="pb1" binding="#{PolicyLoad.policiesTab}"
+                               text="Policy Details" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Select An Action" id="ol1"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="s1"/>
+                    <h:panelGrid columns="3" id="pg1">
+                      <af:selectOneRadio label="Label 1" id="sor1"
+                                         layout="vertical" simple="true"
+                                         value="A" autoSubmit="true"
+                                         valueChangeListener="#{PolicyLoad.loadOptionListener}"
+                                         binding="#{PolicyLoad.loadOptions}">
+                        <af:selectItem label="Add a Policy" value="A"
+                                       id="si1"/>
+                        <af:selectItem label="Edit a Policy" value="E"
+                                       id="si2"/>
+                        <af:selectItem label="View a Loaded Policy" value="V"
+                                       id="selectItem5"/>
+                      </af:selectOneRadio>
+                      <af:panelGroupLayout id="pgl2" partialTriggers="sor1">
+                        <h:panelGrid columns="2" id="pg5"
+                                     binding="#{PolicyLoad.policiesPanel}"
+                                     rendered="false">
+                          <af:outputLabel value="Select A Policy" id="ol3"/>
+                          <h:panelGrid columns="2" id="panelGrid6">
+                            <af:inputText label="Label 1" id="inputText16"
+                                          simple="true"
+                                          binding="#{PolicyLoad.policyDesc}"
+                                          disabled="true"/>
+                            <af:commandButton id="commandButton7"
+                                              icon="/images/dropdown.gif">
+                              <af:showPopupBehavior popupId="popup1"/>
+                            </af:commandButton>
+                            <af:popup id="popup1">
+                              <af:dialog type="none" title="Select Proposer"
+                                         id="dialog2">
+                                <af:panelBox text="PanelBox2" id="panelBox1"
+                                             showHeader="never">
+                                  <f:facet name="toolbar"/>
+                                  <af:table value="#{bindings.Account.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.Account.rangeSize}"
+                                            emptyText="#{bindings.Account.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.Account.rangeSize}"
+                                            rowBandingInterval="0"
+                                            filterModel="#{bindings.AccountQuery.queryDescriptor}"
+                                            queryListener="#{bindings.AccountQuery.processQuery}"
+                                            filterVisible="true" varStatus="vs"
+                                            selectedRowKeys="#{bindings.Account.collectionModel.selectedRow}"
+                                            selectionListener="#{bindings.Account.collectionModel.makeCurrent}"
+                                            rowSelection="single" id="t1"
+                                            binding="#{PolicyLoad.policyLOV}">
+                                    <af:column sortProperty="LGPL_POL_NO"
+                                               filterable="true" sortable="true"
+                                               headerText="Policy No." id="c1"
+                                               width="200">
+                                      <af:outputText value="#{row.LGPL_POL_NO}"
+                                                     id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="LGPL_CLIENT"
+                                               filterable="true" sortable="true"
+                                               headerText="Client" id="c2"
+                                               width="200">
+                                      <af:outputText value="#{row.LGPL_CLIENT}"
+                                                     id="ot2"/>
+                                    </af:column>
+                                  </af:table>
+                                </af:panelBox>
+                                <h:panelGrid columns="2" id="panelGrid7">
+                                  <af:commandButton text="OK"
+                                                    action="#{PolicyLoad.PopulatePolicy}"
+                                                    id="commandButton8"/>
+                                  <af:commandButton text="Cancel"
+                                                    id="commandButton9"/>
+                                </h:panelGrid>
+                              </af:dialog>
+                            </af:popup>
+                          </h:panelGrid>
+                        </h:panelGrid>
+                      </af:panelGroupLayout>
+                      <af:panelGroupLayout id="pgl6" partialTriggers="sor1">
+                        <h:panelGrid columns="2" id="pg14"
+                                     binding="#{PolicyLoad.loadedPoliciesPanel}"
+                                     rendered="false">
+                          <af:outputLabel value="Select A Loaded Policy"
+                                          id="outputLabel25"/>
+                          <h:panelGrid columns="2" id="pg15">
+                            <af:inputText label="Label 4" id="it4" simple="true"
+                                          disabled="true"
+                                          binding="#{PolicyLoad.loadedPolDesc}"/>
+                            <af:commandButton id="cb6"
+                                              icon="/images/dropdown.gif">
+                              <af:showPopupBehavior popupId="p3"/>
+                            </af:commandButton>
+                            <af:popup id="p3">
+                              <af:dialog id="d8" type="none"
+                                         title="Available Loaded Policies">
+                                <af:table value="#{bindings.policies.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.policies.rangeSize}"
+                                          emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.policies.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.policiesQuery.queryDescriptor}"
+                                          queryListener="#{bindings.policiesQuery.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t9"
+                                          binding="#{PolicyLoad.loadedPoliciesLOV}">
+                                  <af:column sortProperty="LTR_POL_POLICY_NO"
+                                             filterable="true" sortable="true"
+                                             headerText="Policy No." id="c33">
+                                    <af:outputText value="#{row.LTR_POL_POLICY_NO}"
+                                                   id="ot36"/>
+                                  </af:column>
+                                  <af:column sortProperty="LTR_Client"
+                                             filterable="true" sortable="true"
+                                             headerText="Client" id="c34">
+                                    <af:outputText value="#{row.LTR_Client}"
+                                                   id="ot35"/>
+                                  </af:column>
+                                  <af:column sortProperty="LTR_BUSN_TYPE"
+                                             filterable="true" sortable="true"
+                                             headerText="Transaction" id="c32">
+                                    <af:outputText value="#{row.LTR_BUSN_TYPE}"
+                                                   id="ot37"/>
+                                  </af:column>
+                                </af:table>
+                                <h:panelGrid columns="2" id="panelGrid9">
+                                  <af:commandButton text="OK"
+                                                    action="#{PolicyLoad.findPoliciesSelected}"
+                                                    id="commandButton15"/>
+                                  <af:commandButton text="Cancel"
+                                                    id="commandButton16"/>
+                                </h:panelGrid>
+                              </af:dialog>
+                            </af:popup>
+                          </h:panelGrid>
+                        </h:panelGrid>
+                      </af:panelGroupLayout>
+                    </h:panelGrid>
+                    <af:spacer width="10" height="10" id="s2"/>
+                    <af:panelGroupLayout id="pgl3" partialTriggers="sor1">
+                      <h:panelGrid columns="6" id="pg2"
+                                   binding="#{PolicyLoad.polDetailsPanel}">
+                        <af:outputLabel value="Client" id="ol2"/>
+                        <h:panelGrid columns="2" id="pg3">
+                          <af:inputText label="Label 1" id="it1" simple="true"
+                                        binding="#{PolicyLoad.proposerDisplay}"/>
+                          <af:commandButton id="cb1"
+                                            icon="/images/dropdown.gif">
+                            <af:showPopupBehavior popupId="clientsPopup"/>
+                          </af:commandButton>
+                          <af:popup id="clientsPopup">
+                            <af:dialog type="none" title="Select Proposer"
+                                       id="d2">
+                              <af:panelBox text="PanelBox2" id="pb16"
+                                           showHeader="never">
+                                <f:facet name="toolbar"/>
+                                <af:table value="#{bindings.proposers.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.proposers.rangeSize}"
+                                          emptyText="#{bindings.proposers.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.proposers.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.proposersQuery.queryDescriptor}"
+                                          queryListener="#{bindings.proposersQuery.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.proposers.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.proposers.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t2"
+                                          binding="#{PolicyLoad.proposersLOV}">
+                                  <af:column sortProperty="CLIENT"
+                                             filterable="true" sortable="true"
+                                             headerText="Proposer" id="c4"
+                                             width="200">
+                                    <af:outputText value="#{row.CLIENT}"
+                                                   id="ot4"/>
+                                  </af:column>
+                                  <af:column sortProperty="GCO_DESC"
+                                             filterable="true" sortable="true"
+                                             headerText="Occupation" id="c3">
+                                    <af:outputText value="#{row.GCO_DESC}"
+                                                   id="ot5"/>
+                                  </af:column>
+                                </af:table>
+                              </af:panelBox>
+                              <h:panelGrid columns="2" id="panelGrid5">
+                                <af:commandButton text="OK"
+                                                  action="#{PolicyLoad.AttachProposers}"
+                                                  id="cb7"/>
+                                <af:commandButton text="Cancel" id="cb8"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:outputLabel value="Product sht Desc"
+                                        id="outputLabel1"/>
+                        <h:panelGrid columns="2" id="panelGrid1">
+                          <af:inputText label="Label 1" id="inputText1"
+                                        simple="true"
+                                        binding="#{PolicyLoad.undProdDisplay}"/>
+                          <af:commandButton id="commandButton1"
+                                            icon="/images/dropdown.gif">
+                            <af:showPopupBehavior popupId="NBProductsPopup"/>
+                          </af:commandButton>
+                          <af:popup id="NBProductsPopup">
+                            <af:dialog type="none" title="Select Product Type"
+                                       id="dialog1">
+                              <af:panelBox text="PanelBox1" id="pb10"
+                                           showHeader="never">
+                                <f:facet name="toolbar"/>
+                                <af:table value="#{bindings.productDetails.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.productDetails.rangeSize}"
+                                          emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.productDetails.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                          queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t4"
+                                          binding="#{PolicyLoad.productsLOV}"
+                                          width="425">
+                                  <af:column sortProperty="prodshtDesc"
+                                             filterable="true" sortable="true"
+                                             headerText="Short Desc" id="c79">
+                                    <af:outputText value="#{row.prodshtDesc}"
+                                                   id="ot88"/>
+                                  </af:column>
+                                  <af:column sortProperty="prodDesc"
+                                             filterable="true" sortable="true"
+                                             headerText="Product" id="c8"
+                                             width="200">
+                                    <af:outputText value="#{row.prodDesc}"
+                                                   id="ot12"/>
+                                  </af:column>
+                                  <af:column sortProperty="prodType"
+                                             filterable="true" sortable="true"
+                                             headerText="Product Type" id="c9">
+                                    <af:outputText value="#{row.prodType}"
+                                                   id="ot11"/>
+                                  </af:column>
+                                </af:table>
+                              </af:panelBox>
+                              <h:panelGrid columns="2" id="pg69">
+                                <af:commandButton text="OK"
+                                                  action="#{PolicyLoad.AttachProducts}"
+                                                  id="commandButton6"/>
+                                <af:commandButton text="Cancel" id="cb3"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:outputLabel value="Agent sht Desc"
+                                        id="outputLabel2"/>
+                        <h:panelGrid columns="2" id="panelGrid2">
+                          <af:inputText label="Label 1" id="inputText2"
+                                        simple="true"
+                                        binding="#{PolicyLoad.agentsDisplay}"/>
+                          <af:commandButton id="commandButton2"
+                                            icon="/images/dropdown.gif">
+                            <af:showPopupBehavior popupId="agentsPopup"/>
+                          </af:commandButton>
+                          <af:popup id="agentsPopup">
+                            <af:dialog type="none" title="Select Agent" id="d4">
+                              <af:panelBox text="PanelBox4" id="pb19"
+                                           showHeader="never">
+                                <f:facet name="toolbar"/>
+                                <af:table value="#{bindings.agents1.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.agents1.rangeSize}"
+                                          emptyText="#{bindings.agents1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.agents1.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.agents1Query.queryDescriptor}"
+                                          queryListener="#{bindings.agents1Query.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.agents1.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.agents1.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t24"
+                                          binding="#{PolicyLoad.agentDisplayLOV}"
+                                          width="420">
+                                  <af:column sortProperty="AGN_SHT_DESC"
+                                             filterable="true" sortable="true"
+                                             headerText="Short Desc" id="c55">
+                                    <af:outputText value="#{row.AGN_SHT_DESC}"
+                                                   id="ot86"/>
+                                  </af:column>
+                                  <af:column sortProperty="AGN_NAME"
+                                             filterable="true" sortable="true"
+                                             headerText="Agent" id="c74"
+                                             width="200">
+                                    <af:outputText value="#{row.AGN_NAME}"
+                                                   id="ot87"/>
+                                  </af:column>
+                                  <af:column sortProperty="AGN_POSTAL_ADDRESS"
+                                             filterable="true" sortable="true"
+                                             headerText="Address" id="c75">
+                                    <af:outputText value="#{row.AGN_POSTAL_ADDRESS}"
+                                                   id="ot75"/>
+                                  </af:column>
+                                </af:table>
+                              </af:panelBox>
+                              <h:panelGrid columns="2" id="pg9">
+                                <af:commandButton text="OK"
+                                                  action="#{PolicyLoad.AttachAgents}"
+                                                  id="cb16"/>
+                                <af:commandButton text="Cancel" id="cb17"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:outputLabel value="Branch" id="outputLabel3"/>
+                        <h:panelGrid columns="2" id="panelGrid3">
+                          <af:inputText label="Label 1" id="inputText3"
+                                        simple="true"
+                                        binding="#{PolicyLoad.branchesDisplay}"/>
+                          <af:commandButton id="commandButton3"
+                                            icon="/images/dropdown.gif">
+                            <af:showPopupBehavior popupId="branchesPopup"/>
+                          </af:commandButton>
+                          <af:popup id="branchesPopup">
+                            <af:dialog type="none" title="Select Branch"
+                                       id="d3">
+                              <af:panelBox text="PanelBox3" id="pb17"
+                                           showHeader="never">
+                                <f:facet name="toolbar"/>
+                                <af:table value="#{bindings.branches1.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.branches1.rangeSize}"
+                                          emptyText="#{bindings.branches1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.branches1.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.branches1Query.queryDescriptor}"
+                                          queryListener="#{bindings.branches1Query.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.branches1.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.branches1.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="table1"
+                                          binding="#{PolicyLoad.branchesLOV}">
+                                  <af:column sortProperty="BRN_SHT_DESC"
+                                             filterable="true" sortable="true"
+                                             headerText="Short Desc"
+                                             id="column1">
+                                    <af:outputText value="#{row.BRN_SHT_DESC}"
+                                                   id="ot7"/>
+                                  </af:column>
+                                  <af:column sortProperty="BRN_NAME"
+                                             filterable="true" sortable="true"
+                                             headerText="Branch" id="column2"
+                                             width="200">
+                                    <af:outputText value="#{row.BRN_NAME}"
+                                                   id="ot6"/>
+                                  </af:column>
+                                </af:table>
+                              </af:panelBox>
+                              <h:panelGrid columns="2" id="pg7">
+                                <af:commandButton text="OK"
+                                                  action="#{PolicyLoad.AttachBranches}"
+                                                  id="cb10"/>
+                                <af:commandButton text="Cancel" id="cb11"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:outputLabel value="Premium Mask" id="outputLabel4"/>
+                        <h:panelGrid columns="2" id="panelGrid4">
+                          <af:inputText label="Label 1" id="inputText4"
+                                        simple="true"
+                                        binding="#{PolicyLoad.maskDisplay}"/>
+                          <af:commandButton id="commandButton4"
+                                            icon="/images/dropdown.gif">
+                            <af:showPopupBehavior popupId="masksPopup"/>
+                          </af:commandButton>
+                          <af:popup id="masksPopup">
+                            <af:dialog type="none" title="Select Premium Mask"
+                                       id="d6">
+                              <af:panelBox text="PanelBox5" id="pb22"
+                                           showHeader="never">
+                                <f:facet name="toolbar"/>
+                                <af:table value="#{bindings.quotPremMask.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.quotPremMask.rangeSize}"
+                                          emptyText="#{bindings.quotPremMask.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.quotPremMask.rangeSize}"
+                                          selectedRowKeys="#{bindings.quotPremMask.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.quotPremMask.collectionModel.makeCurrent}"
+                                          rowSelection="single"
+                                          binding="#{PolicyLoad.masksLOV}"
+                                          id="t6">
+                                  <af:column sortProperty="PMAS_DESC"
+                                             sortable="true"
+                                             headerText="Premium Mask"
+                                             width="275" id="c12">
+                                    <af:outputText value="#{row.PMAS_DESC}"
+                                                   id="ot15"/>
+                                  </af:column>
+                                </af:table>
+                              </af:panelBox>
+                              <h:panelGrid columns="2" id="pg10">
+                                <af:commandButton text="OK"
+                                                  action="#{PolicyLoad.AttachPremiumMasks}"
+                                                  id="cb22"/>
+                                <af:commandButton text="Cancel" id="cb23"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:outputLabel value="Policy No." id="outputLabel5"/>
+                        <af:inputText label="Label 2" id="it2" simple="true"
+                                      binding="#{PolicyLoad.policyNo}"/>
+                        <af:outputLabel value="Commencement Date"
+                                        id="outputLabel6"/>
+                        <af:inputDate label="Label 1" id="id1" simple="true"
+                                      binding="#{PolicyLoad.commenceDate}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                        <af:outputLabel value="Renewal Date" id="outputLabel7"/>
+                        <af:inputDate label="Label 1" id="inputDate1"
+                                      simple="true"
+                                      binding="#{PolicyLoad.renewalDate}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                        <af:outputLabel value="Next Renewal Date"
+                                        id="outputLabel8"/>
+                        <af:inputDate label="Label 1" id="inputDate2"
+                                      simple="true"
+                                      binding="#{PolicyLoad.nextRenewalDate}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                        <af:outputLabel value="Coinsurance" id="outputLabel9"/>
+                        <af:selectOneChoice label="Label 1" id="soc1"
+                                            simple="true"
+                                            binding="#{PolicyLoad.coinsurance}"
+                                            autoSubmit="true"
+                                            valueChangeListener="#{PolicyLoad.coinsuranceListener}"
+                                            value="N">
+                          <af:selectItem label="Yes" value="Y" id="si4"/>
+                          <af:selectItem label="No" value="N" id="si3"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Coinsurance Share"
+                                        id="outputLabel10"/>
+                        <af:panelGroupLayout id="pgl5" partialTriggers="soc1">
+                          <af:inputText label="Label 2" id="inputText5"
+                                        simple="true" value="100"
+                                        disabled="true"
+                                        binding="#{PolicyLoad.coinShare}"/>
+                        </af:panelGroupLayout>
+                        <af:outputLabel value="No. of Members"
+                                        id="outputLabel11"/>
+                        <af:inputText label="Label 2" id="inputText6"
+                                      simple="true"
+                                      binding="#{PolicyLoad.noMembers}"/>
+                        <af:outputLabel value="Total S.A" id="outputLabel12"
+                                        binding="#{PolicyLoad.earningsSALab}"/>
+                        <af:inputText label="Label 2" id="inputText7"
+                                      simple="true"
+                                      binding="#{PolicyLoad.totSA}"/>
+                        <af:outputLabel value="Total Premium"
+                                        id="outputLabel13"
+                                        binding="#{PolicyLoad.totPremLab}"/>
+                        <af:inputText label="Label 2" id="inputText8"
+                                      simple="true"
+                                      binding="#{PolicyLoad.totPrem}"/>
+                        <af:outputLabel value="Total Premium Paid"
+                                        id="outputLabel14"
+                                        binding="#{PolicyLoad.toPremPaidLab}"/>
+                        <af:inputText label="Label 2" id="inputText9"
+                                      simple="true"
+                                      binding="#{PolicyLoad.totPremPaid}"/>
+                        <af:outputLabel value="outstanding Premium"
+                                        id="outputLabel15"
+                                        binding="#{PolicyLoad.outsPremLab}"/>
+                        <af:inputText label="Label 2" id="inputText10"
+                                      simple="true"
+                                      binding="#{PolicyLoad.outsPrem}"/>
+                        <af:outputLabel value="Commission Rate"
+                                        id="outputLabel16"
+                                        binding="#{PolicyLoad.commRateLab}"/>
+                        <af:inputText label="Label 2" id="inputText11"
+                                      simple="true"
+                                      binding="#{PolicyLoad.commRate}"/>
+                                      
+                        <af:outputLabel value="Pension Comm Rate" id="ol15"
+                                        binding="#{PolicyLoad.pensCommRateLab}" rendered="false"/>
+                        <af:inputText simple="true" label="Label 10" id="it10"
+                                      binding="#{PolicyLoad.pensCommRateTF}" rendered="false"/>
+                                      
+                        <af:outputLabel value="VAT Rate" id="outputLabel17"/>
+                        <af:inputText label="Label 2" id="inputText12"
+                                      simple="true"
+                                      binding="#{PolicyLoad.vatRate}"/>
+                        <af:outputLabel value="FCL Amount" id="outputLabel18"/>
+                        <af:inputText label="Label 2" id="inputText13"
+                                      simple="true"
+                                      binding="#{PolicyLoad.fclAmount}"/>
+                        <af:outputLabel value="Category" id="outputLabel19"/>
+                        <af:inputText label="Label 2" id="inputText14"
+                                      simple="true"
+                                      binding="#{PolicyLoad.category}"/>
+                        <af:outputLabel value="Multi Prd" id="outputLabel20"/>
+                        <af:inputText label="Label 2" id="inputText15"
+                                      simple="true"
+                                      binding="#{PolicyLoad.multiPrd}"/>
+                        <af:outputLabel value="Frequency Of Payment" id="ol9"
+                                        binding="#{PolicyLoad.freqPaymentLab}"/>
+                        <af:selectOneChoice label="Label 1" simple="true"
+                                            autoSubmit="true"
+                                            id="selectOneChoice1"
+                                            binding="#{PolicyLoad.freqPayment}">
+                          <af:selectItem label="Monthly" value="MONTHLY"
+                                         id="selectItem1"/>
+                          <af:selectItem label="Bi - Monthly" value="BI-MONTHLY"
+                                         id="selectItem2"/>
+                          <af:selectItem label="Quarterly" value="QUARTERLY"
+                                         id="selectItem3"/>
+                          <af:selectItem label="Annually" value="ANNUAL"
+                                         id="selectItem4"/>
+                          <af:selectItem label="Semi - Annually"
+                                         value="SEMI-ANNUAL" id="si5"/>
+                          <af:selectItem label="Single Payment" id="si56"
+                                         value="SINGLE-PAYMENT"/>
+                        </af:selectOneChoice>
+                   <af:outputLabel value="Pension Frequency Of Payment"
+                                   id="ol27"
+                                   binding="#{PolicyLoad.pensPaymentFreqLab}" rendered="false"/>
+                        <af:selectOneChoice label="Label 1" simple="true"
+                                            autoSubmit="true"
+                                            id="soc10"
+                                            binding="#{PolicyLoad.pensPaymentFreq}" rendered="false">
+                          <af:selectItem label="Monthly" value="MONTHLY"
+                                         id="si27"/>
+                          <af:selectItem label="Bi - Monthly" value="BI-MONTHLY"
+                                         id="si28"/>
+                          <af:selectItem label="Quarterly" value="QUARTERLY"
+                                         id="si29"/>
+                          <af:selectItem label="Annually" value="ANNUAL"
+                                         id="si30"/>
+                          <af:selectItem label="Semi - Annually"
+                                         value="SEMI-ANNUAL" id="si31"/>
+                          <af:selectItem label="Single Payment" id="si32"
+                                         value="SINGLE-PAYMENT"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Duration Type" id="ol14"/>
+                        <af:selectOneChoice label="Label 5" autoSubmit="true"
+                                            simple="true" id="soc4"
+                                            binding="#{PolicyLoad.durationType}">
+                          <af:selectItem label="Open" value="OPEN" id="si12"/>
+                          <af:selectItem label="Annual" value="ANNUAL"
+                                         id="si13"/>
+                          <af:selectItem label="Semi Annual" value="SEMI-ANNUAL"
+                                         id="si14"/>
+                          <af:selectItem label="Quater Annual" value="QUARTERLY"
+                                         id="si15"/>
+                          <af:selectItem label="Other" value="OTHER" id="si16"/>
+                          <af:selectItem label="Termly" id="si57"
+                                         value="TERMLY"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Registered" id="ol5"
+                                        binding="#{PolicyLoad.pensionRegisteredLab}"
+                                        rendered="false"/>
+                        <af:selectOneChoice label="Label 6" simple="true" id="soc2"
+                                            binding="#{PolicyLoad.pensionRegisteredCombo}"
+                                            rendered="false">
+                          <af:selectItem label="Yes" value="Y" id="si6"/>
+                          <af:selectItem label="No" value="N" id="si7"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Registration Number" id="ol6"
+                                        binding="#{PolicyLoad.pensRegNoLab}"
+                                        rendered="false"/>
+                        <af:inputText label="Label 5" simple="true" id="it5"
+                                      binding="#{PolicyLoad.pensRegNoTF}"
+                                      rendered="false"/>
+                        <af:outputLabel value="Pension Type" id="ol7"
+                                        binding="#{PolicyLoad.pensTypeLab}"
+                                        rendered="false"/>
+                        <af:selectOneChoice simple="true"  label="Label 7" id="soc3"
+                                            binding="#{PolicyLoad.pensTypeCombo}"
+                                            rendered="false">
+                          <af:selectItem label="Defined Benefit" value="DB"
+                                         id="si8"/>
+                          <af:selectItem label="Defined Contribution"
+                                         value="DC" id="si9"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Contribution Type" id="ol8"
+                                        binding="#{PolicyLoad.pensContriTypeLab}" rendered="false"/>
+                        <af:selectOneChoice label="Label 8" simple="true" id="soc5"
+                                            binding="#{PolicyLoad.pensContriTypeCombo}" rendered="false">
+                          <af:selectItem label="Percentage" value="P"
+                                         id="si10"/>
+                          <af:selectItem label="Amount" value="A" id="si11"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Employee Contri Rate" id="ol10"
+                                        binding="#{PolicyLoad.empyeContriRate}" rendered="false"/>
+                        <af:inputText label="Label 6" simple="true" id="it6"
+                                      binding="#{PolicyLoad.empyeContriRateTF}" rendered="false"/>
+                        <af:outputLabel value="Employer Contri Rate"  id="ol11"
+                                        binding="#{PolicyLoad.empyrContriRateLab}" rendered="false"/>
+                        <af:inputText simple="true" label="Label 7" id="it7"
+                                      binding="#{PolicyLoad.empyrContriRateTF}" rendered="false"/>
+                        <af:outputLabel value="Male Retire Age" id="ol12"
+                                        binding="#{PolicyLoad.maleRetireAgeLab}" rendered="false"/>
+                        <af:inputText simple="true"  label="Label 8" id="it8"
+                                      binding="#{PolicyLoad.maleRetireAgeTF}" rendered="false"/>
+                        <af:outputLabel value="Female Retire Age" id="ol13"
+                                        binding="#{PolicyLoad.femaleRetireAgeLabel}" rendered="false"/>
+                        <af:inputText simple="true"  label="Label 9" id="it9"
+                                      binding="#{PolicyLoad.femaleRetireAgeTF}" rendered="false"/>                        
+                        <af:outputLabel value="Guaranteed Period" id="ol16"
+                                        binding="#{PolicyLoad.pensGuaranPRDLab}" rendered="false"/>                        
+                        <af:inputText simple="true" label="Label 11" id="it11"
+                                      binding="#{PolicyLoad.pensGuaranPRDTF}" rendered="false"/>
+                        <af:outputLabel value="Earnings Esc %" id="ol17"
+                                        binding="#{PolicyLoad.pensEarningEscLab}"
+                                        rendered="false"/>                        
+                        <af:inputText simple="true" label="Label 12" id="it12"
+                                      binding="#{PolicyLoad.pensEarningsEscTF}" rendered="false"/>
+                        <af:outputLabel value="Last Valuation Year" id="ol18"
+                                        binding="#{PolicyLoad.pensValuationYrTF}" rendered="false"/>
+                        <af:inputText simple="true" label="Label 13" id="it13"
+                                      binding="#{PolicyLoad.pensValuationLab}" rendered="false"/>
+                        <af:outputLabel value="Aggregate Policy" id="ol19"
+                                        binding="#{PolicyLoad.aggregatePolLab}" rendered="false"/>
+                        <af:selectOneChoice  simple="true" label="Label 9" id="soc6"
+                                            binding="#{PolicyLoad.aggregatePolicyCombo}" rendered="false">
+                          <af:selectItem label="Yes" value="Y" id="si18"/>
+                          <af:selectItem label="No" value="N" id="si17"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Fund Balance" id="ol20"
+                                        binding="#{PolicyLoad.fundBalLab}" rendered="false"/>
+                        <af:inputText simple="true" label="Label 14" id="it14"
+                                      binding="#{PolicyLoad.fundBalTF}" rendered="false"/>
+                        <af:outputLabel value="Loan Calculation" id="ol21"
+                                        binding="#{PolicyLoad.loanCalcLab}" rendered="false"/>
+                        <af:selectOneChoice simple="true" label="Label 10" id="soc7"
+                                            binding="#{PolicyLoad.loanCalcTypeCombo}" rendered="false">
+                          <af:selectItem label="Ammortization" value="A"
+                                         id="si20"/>
+                          <af:selectItem label="Outstanding Period" value="O"
+                                         id="si19"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Term" id="ol22"
+                                        binding="#{PolicyLoad.termLab}" rendered="false"/>
+                        <af:selectOneChoice simple="true"  label="Label 11" id="soc8"
+                                            binding="#{PolicyLoad.termCombo}" rendered="false">
+                          <af:selectItem label="Jan-Apr" value="Jan-Apr"
+                                         id="si22"/>
+                          <af:selectItem label="May-Aug" value="May-Aug"
+                                         id="si25"/>
+                          <af:selectItem label="Sept-Dec" value="Sept-Dec"
+                                         id="si23"/>
+                          <af:selectItem label="All" value="All" id="si21"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Annuity Payment Structure" id="ol23"
+                                        binding="#{PolicyLoad.annuityPaymentStructLab}" rendered="false"/>
+                        <af:selectOneChoice simple="true"  label="Label 12" id="soc9"
+                                            binding="#{PolicyLoad.annuityPaymentStructCombo}" rendered="false">
+                          <af:selectItem label="Immediate" value="I" id="si26"/>
+                          <af:selectItem label="Deferred" value="D" id="si24"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Benefit Investment Rate" id="ol24"
+                                        binding="#{PolicyLoad.benefitInvRateLab}" rendered="false"/>
+                        <af:inputText simple="true" label="Label 15" id="it15"
+                                      binding="#{PolicyLoad.benefitInvRateTF}" rendered="false"/>
+                        <af:outputLabel value="Terminal Payout Rate" id="ol25"
+                                        binding="#{PolicyLoad.payoutRateLab}" rendered="false"/>
+                        <af:inputText simple="true" label="Label 17" id="it17"
+                                      binding="#{PolicyLoad.payoutRateTF}" rendered="false"/>
+                        <af:outputLabel value="Administration Charge" id="ol26"
+                                        binding="#{PolicyLoad.adminChargeLab}" rendered="false"/>
+                        <af:inputText simple="true" label="Label 16" id="it16"
+                                      binding="#{PolicyLoad.adminChargeTF}" rendered="false"/>
+                        <af:outputText value="Scheme Legal Age" id="ot38"
+                                       binding="#{PolicyLoad.schemeLegalAgeLab}" rendered="false"/>
+                        <af:inputText  simple="true"   label="Label 18" id="it18"
+                                      binding="#{PolicyLoad.schemeLegalAgeTF}" rendered="false"/>
+                        <af:panelLabelAndMessage  id="plam1"/>
+                      </h:panelGrid>
+                    </af:panelGroupLayout>
+                  </af:panelBox>
+                  <af:panelBox text="Policy Member Details" id="pb2"
+                               binding="#{PolicyLoad.membersTab}"
+                               rendered="false" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Policy Members." id="outputLabel21"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="separator1"/>
+                    <af:table value="#{bindings.Account1.collectionModel}"
+                              var="row" rows="#{bindings.Account1.rangeSize}"
+                              emptyText="#{bindings.Account1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Account1.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Account1Query.queryDescriptor}"
+                              queryListener="#{bindings.Account1Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectionListener="#{bindings.Account1.collectionModel.makeCurrent}"
+                              rowSelection="multiple" id="t3"
+                              inlineStyle="width:100%; height:260.0px; border-style:none;"
+                              binding="#{PolicyLoad.membersTable}">
+                      <af:column sortProperty="LGMD_SN" filterable="true"
+                                 sortable="true" headerText="Member No."
+                                 id="c18">
+                        <af:outputText value="#{row.LGMD_SN}" id="ot13"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_SURNAME" filterable="true"
+                                 sortable="true" headerText="Member Name"
+                                 id="c14">
+                        <af:outputText value="#{row.LGMD_SURNAME}" id="ot16"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_DOB" filterable="true"
+                                 sortable="true" headerText="DOB" id="c21">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.LGMD_DOB}"
+                                        id="id4"/>
+                        </f:facet>
+                        <af:outputText value="#{row.LGMD_DOB}" id="ot24">
+                          <af:convertDateTime pattern="#{bindings.Account1.hints.LGMD_DOB.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="LGMD_ANB" filterable="true"
+                                 sortable="true" headerText="ANB" id="c19">
+                        <af:outputText value="#{row.LGMD_ANB}" id="ot20"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_SA" filterable="true"
+                                 sortable="true" headerText="S.A" id="c15">
+                        <af:outputText value="#{row.LGMD_SA}" id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_TOT_EMUL" filterable="true"
+                                 sortable="true" headerText="Tot Emuloment"
+                                 id="c5">
+                        <af:outputText value="#{row.LGMD_TOT_EMUL}" id="ot21"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_PREM" filterable="true"
+                                 sortable="true" headerText="Premium" id="c6">
+                        <af:outputText value="#{row.LGMD_PREM}" id="ot17"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_PREM_RATE" filterable="true"
+                                 sortable="true" headerText="Premium Rate"
+                                 id="c13">
+                        <af:outputText value="#{row.LGMD_PREM_RATE}" id="ot22"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_DOJ" filterable="true"
+                                 sortable="true" headerText="Date of Join"
+                                 id="c11">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.LGMD_DOJ}"
+                                        id="id3"/>
+                        </f:facet>
+                        <af:outputText value="#{row.LGMD_DOJ}" id="ot18">
+                          <af:convertDateTime pattern="#{bindings.Account1.hints.LGMD_DOJ.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="LGMD_COVER_FROM_DATE"
+                                 filterable="true" sortable="true"
+                                 headerText="Cover From Date" id="c16">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.LGMD_COVER_FROM_DATE}"
+                                        id="id2"/>
+                        </f:facet>
+                        <af:outputText value="#{row.LGMD_COVER_FROM_DATE}"
+                                       id="ot9">
+                          <af:convertDateTime pattern="#{bindings.Account1.hints.LGMD_COVER_FROM_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="LGMD_BASIC" filterable="true"
+                                 sortable="true" headerText="Basic Sal"
+                                 id="c10">
+                        <af:outputText value="#{row.LGMD_BASIC}" id="ot14"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_HOUSING" filterable="true"
+                                 sortable="true" headerText="Housing" id="c17">
+                        <af:outputText value="#{row.LGMD_HOUSING}" id="ot23"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_TRANSPORT" filterable="true"
+                                 sortable="true" headerText="Transport" id="c7">
+                        <af:outputText value="#{row.LGMD_TRANSPORT}" id="ot19"/>
+                      </af:column>
+                      <af:column sortProperty="LGMD_MONTH_SAL" filterable="true"
+                                 sortable="true" headerText="Monthly Sal"
+                                 id="c20">
+                        <af:outputText value="#{row.LGMD_MONTH_SAL}" id="ot10"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg6">
+                      <af:inputFile label="File To Upload" autoSubmit="true"
+                                    binding="#{PolicyLoad.upFile}"
+                                    valueChangeListener="#{PolicyLoad.fileChangeForMemberLoading}"
+                                    immediate="true" id="if1"/>
+                      <af:commandButton
+                                        id="commandButton10"
+                                        icon="/images/delete_ena.png"
+                                        text="Delete"
+                                        action="#{PolicyLoad.DeleteMembers}"/>
+                    </h:panelGrid>
+                    
+                  </af:panelBox>
+                  <af:panelBox text="Coinsurer/Rider Details" id="pb4" rendered="false"
+                               showHeader="never"
+                               binding="#{PolicyLoad.coinsRiderPanel}">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Policy Coinsurers" id="outputLabel22"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="separator2"/>
+                    <h:panelGrid columns="4" id="pg8"
+                                 binding="#{PolicyLoad.coinsurerPanel}">
+                      <af:commandButton id="cb12"
+                                        icon="/images/field_group_plus_ena.png"
+                                        action="#{PolicyLoad.AddCoinsurer}"/>
+                      <af:commandButton icon="/images/update_ena.png"
+                                        id="commandButton21"
+                                        action="#{PolicyLoad.EditCoinsurer}"/>
+                      <af:commandButton
+                                        id="cb18"
+                                        icon="/images/delete_ena.png"
+                                        action="#{PolicyLoad.DeleteCoinsurer}"/>
+                    </h:panelGrid>
+                    <af:popup id="p1">
+                      <af:dialog id="d5" type="none" title="Coinsurer Details">
+                        <af:panelBox text="PanelBox7" id="pb5"
+                                     showHeader="never">
+                          <f:facet name="toolbar"/>
+                          <h:panelGrid columns="2" id="pg11">
+                            <af:outputLabel value="Coinsurer" id="ol4"/>
+                            <h:panelGrid columns="2" id="pg12">
+                              <af:inputText label="Label 3" id="it3"
+                                            simple="true"
+                                            binding="#{PolicyLoad.coinsurerLabel}"/>
+                              <af:commandButton
+                                                id="cb4"
+                                                icon="/images/dropdown.gif">
+                                <af:showPopupBehavior popupId="p2"/>
+                              </af:commandButton>
+                              <af:popup id="p2">
+                                <af:dialog id="d7" type="none"
+                                           title="Available Coinsurers">
+                                  <af:table value="#{bindings.Settings.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.Settings.rangeSize}"
+                                            emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.Settings.rangeSize}"
+                                            rowBandingInterval="0"
+                                            filterModel="#{bindings.SettingsQuery.queryDescriptor}"
+                                            queryListener="#{bindings.SettingsQuery.processQuery}"
+                                            filterVisible="true" varStatus="vs"
+                                            selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                            selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                            rowSelection="single" id="t8"
+                                            binding="#{PolicyLoad.coinsurersLOV}">
+                                    <af:column sortProperty="CO_agn_name"
+                                               filterable="true" sortable="true"
+                                               headerText="Coinsurer" id="c31"
+                                               width="300">
+                                      <af:outputText value="#{row.CO_agn_name}"
+                                                     id="ot34"/>
+                                    </af:column>
+                                  </af:table>
+                                  <h:panelGrid columns="2" id="pg52">
+                                    <af:commandButton text="OK"
+                                                      id="commandButton33"
+                                                      action="#{PolicyLoad.findCoinsurersSel}"
+                                                      partialSubmit="true"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton34"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                            </h:panelGrid>
+                            <af:outputLabel value="Coinsurer Share"
+                                            id="outputLabel24"/>
+                            <af:inputNumberSpinbox label="Label 1" id="ins1"
+                                                   simple="true"
+                                                   binding="#{PolicyLoad.coinsShare}"/>
+                          </h:panelGrid>
+                          <h:panelGrid columns="2" id="pg13">
+                            <af:commandButton text="Save" id="cb5"
+                                              action="#{PolicyLoad.SaveCoinsurer}"
+                                              partialSubmit="true"/>
+                            <af:commandButton text="Cancel" id="commandButton14"/>
+                          </h:panelGrid>
+                        </af:panelBox>
+                      </af:dialog>
+                    </af:popup>
+                    <af:table value="#{bindings.Account2.collectionModel}"
+                              var="row" rows="#{bindings.Account2.rangeSize}"
+                              emptyText="#{bindings.Account2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Account2.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Account2Query.queryDescriptor}"
+                              queryListener="#{bindings.Account2Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Account2.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Account2.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t5"
+                              inlineStyle="width:100%; height:70.0px; border-style:none;"
+                              binding="#{PolicyLoad.coinsurersTable}">
+                      <af:column sortProperty="LGCA_COINSURER"
+                                 sortable="true" headerText="Coinsurer"
+                                 id="c22" width="300">
+                        <af:outputText value="#{row.LGCA_COINSURER}" id="ot26"/>
+                      </af:column>
+                      <af:column sortProperty="LGCA_COIN_SHARE" sortable="true"
+                                 headerText="Share" id="c23">
+                        <af:outputText value="#{row.LGCA_COIN_SHARE}"
+                                       id="ot25"/>
+                      </af:column>
+                    </af:table>
+                    <af:outputLabel value="Policy Member Riders." id="outputLabel23"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="separator3"/>
+                    <h:panelGrid columns="2" id="panelGrid8">
+                      <af:inputFile label="File To Upload" autoSubmit="true"
+                                    immediate="true" id="inputFile1"
+                                    binding="#{PolicyLoad.upFile2}"
+                                    valueChangeListener="#{PolicyLoad.fileChangeForRiderLoading}"/>
+                      <af:commandButton id="commandButton13"
+                                        icon="/images/delete_ena.png"
+                                        text="Delete"
+                                        action="#{PolicyLoad.DeleteMembersRiders}"/>
+                    </h:panelGrid>
+                    <af:table value="#{bindings.Account3.collectionModel}"
+                              var="row" rows="#{bindings.Account3.rangeSize}"
+                              emptyText="#{bindings.Account3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Account3.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Account3Query.queryDescriptor}"
+                              queryListener="#{bindings.Account3Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Account3.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Account3.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t7"
+                              inlineStyle="width:100%; height:130.0px; border-style:none;"
+                              binding="#{PolicyLoad.ridersTable}">
+                      <af:column sortProperty="LGRA_MEM_NO" filterable="true"
+                                 sortable="true" headerText="Member No."
+                                 id="c28">
+                        <af:outputText value="#{row.LGRA_MEM_NO}" id="ot33"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_SA" filterable="true"
+                                 sortable="true" headerText="Main S.A" id="c26">
+                        <af:outputText value="#{row.LGRA_SA}" id="ot27"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_CODE" filterable="true"
+                                 sortable="true" headerText="Benefit Code"
+                                 id="c25">
+                        <af:outputText value="#{row.LGRA_BEN_CODE}" id="ot29"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_TYPE" filterable="true"
+                                 sortable="true" headerText="Benefit Type"
+                                 id="c29">
+                        <af:outputText value="#{row.LGRA_BEN_TYPE}" id="ot31"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_SA" filterable="true"
+                                 sortable="true" headerText="Benefit S.A."
+                                 id="c24">
+                        <af:outputText value="#{row.LGRA_BEN_SA}" id="ot30"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_RATE" filterable="true"
+                                 sortable="true" headerText="Benefit Rate."
+                                 id="c30">
+                        <af:outputText value="#{row.LGRA_BEN_RATE}" id="ot28"/>
+                      </af:column>
+                      <af:column sortProperty="LGRA_BEN_PREM" filterable="true"
+                                 sortable="true" headerText="Benefit Premium"
+                                 id="c27">
+                        <af:outputText value="#{row.LGRA_BEN_PREM}" id="ot32"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelBox>
+                  <af:panelBox text="PanelBox6" id="pb3" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="6" id="pg4">
+                      <af:commandButton text="Previous" id="commandButton11"
+                                        binding="#{PolicyLoad.prevButton}"
+                                        action="#{PolicyLoad.PrevTransition}"
+                                        inlineStyle="width:100.0px;"/>
+                      <af:commandButton text="Next" id="cb2"
+                                        action="#{PolicyLoad.NextTransition}"
+                                        binding="#{PolicyLoad.nextButton}"
+                                        inlineStyle="width:100.0px;"/>
+                      <af:spacer width="600" height="10" id="s3"/>
+                      <af:commandButton text="Load Policy" id="commandButton12"
+                                        inlineStyle="width:100.0px;"
+                                        disabled="true"
+                                        binding="#{PolicyLoad.loadPolicy}"
+                                        action="#{PolicyLoad.LoadPolicy}"/>
+                      <af:commandButton text="Delete Policy" id="commandButton5"
+                                        inlineStyle="width:100.0px;"
+                                        disabled="true"
+                                        binding="#{PolicyLoad.deletePolicy}"
+                                        action="#{PolicyLoad.DeletePolicy}"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

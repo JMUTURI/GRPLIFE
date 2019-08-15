@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="RiTreaty" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.RiTreaty"
+          isJavaBased="true">
+  <Attribute Name="TA_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TA_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TA_DESC" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.RiTreaty"
+                     BeanClass="LMSG.view.Policy.RiTreaty" id="RiTreaty"/>
+</JavaBean>

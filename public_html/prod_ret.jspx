@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    
+      <af:document title="Product Cover Types Dependents" id="d8">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:group id="g1">
+            <table border="0" width="100%">
+              <tr>
+                <td width="50%">
+                  <af:inputText id="it6" simple="false"
+                                helpTopicId="LMSGrpProd_Ret" readOnly="true"/>
+                </td>
+                <td width="50%"> </td>
+              </tr>
+            </table>
+            <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:panelBox text="PanelBox1" id="pb1" showHeader="never">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Products" id="ol1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s1"/>
+                <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                          rows="#{bindings.Setup.rangeSize}"
+                          emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{agents.ProductsDpsListener}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:100.0%; height:100px; border-style:none;"
+                          binding="#{agents.cvtDpdProductsLOV}">
+                  <af:column sortProperty="PROD_SHT_DESC" sortable="true"
+                             headerText="Id." id="c1">
+                    <af:outputText value="#{row.PROD_SHT_DESC}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="PROD_DESC" sortable="true"
+                             headerText="Description" id="c2">
+                    <af:outputText value="#{row.PROD_DESC}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="PROD_TYPE" sortable="true"
+                             headerText="Product Type" id="c3">
+                    <af:outputText value="#{row.PROD_TYPE}" id="ot4"/>
+                  </af:column>
+                </af:table>
+                <af:outputLabel value="Product Cover Types" id="ol2"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s2"/>
+                <af:table value="#{bindings.Setup1.collectionModel}" var="row"
+                          rows="#{bindings.Setup1.rangeSize}"
+                          emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup1.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{agents.ProductCoverTypesListener}"
+                          rowSelection="single" id="t2"
+                          inlineStyle="width:100%; height:100px; border-style:none;"
+                          binding="#{agents.coverTypesLOV}">
+                  <af:column sortProperty="PCT_CVT_DESC" sortable="true"
+                             headerText="Cover Type" id="c4"
+                             inlineStyle="width:100.0%;" width="300">
+                    <af:outputText value="#{row.PCT_CVT_DESC}" id="ot5"/>
+                  </af:column>
+                </af:table>
+                <af:outputLabel value="Product Cover Type Dependents" id="ol3"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s3"/>
+                <h:panelGrid columns="3" id="pg1">
+                  <af:commandButton id="cb1"
+                                    icon="/images/field_group_plus_dwn.png"
+                                    action="#{agents.AddDependentType}"/>
+                  <af:commandButton id="cb2" icon="/images/update.gif"
+                                    action="#{agents.EditDependentType}"/>
+                  <af:commandButton id="cb3" icon="/images/delete.gif"
+                                    action="#{agents.DeleteDependentType}"/>
+                  <af:popup id="CreateDepTypePopup">
+                    <af:dialog id="d1" type="none"
+                               title="Add/Edit Dependent Type">
+                      <h:panelGrid columns="2" id="pg2">
+                        <af:outputLabel value="Dependent Type" id="ol4"/>
+                        <h:panelGrid columns="2" id="pg3">
+                          <af:inputText label="Label 1" id="it1" simple="true"
+                                        binding="#{agents.dependentType}"
+                                        disabled="true"/>
+                          <af:commandButton id="cb4"
+                                            icon="/images/dropdown.gif">
+                            <af:showPopupBehavior popupId="DependentTypesPopup"/>
+                          </af:commandButton>
+                          <af:popup id="DependentTypesPopup">
+                            <af:dialog id="d2" type="none"
+                                       title="Select Dependent Type">
+                              <af:table value="#{bindings.productCvtDependants1.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.productCvtDependants1.rangeSize}"
+                                        emptyText="#{bindings.productCvtDependants1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.productCvtDependants1.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.productCvtDependants1.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.productCvtDependants1.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t4"
+                                        binding="#{agents.dependentsLOV}">
+                                <af:column sortProperty="dtyShtDesc"
+                                           sortable="true" headerText="ID"
+                                           id="c11">
+                                  <af:outputText value="#{row.dtyShtDesc}"
+                                                 id="ot12"/>
+                                </af:column>
+                                <af:column sortProperty="dtyDesc"
+                                           sortable="true"
+                                           headerText="DESCRIPTION" id="c10">
+                                  <af:outputText value="#{row.dtyDesc}"
+                                                 id="ot11"/>
+                                </af:column>
+                              </af:table>
+                              <af:commandButton text="OK" id="cb5"
+                                                action="#{agents.AssignDependentType}"/>
+                              <af:commandButton text="Cancel" id="cb6"/>
+                            </af:dialog>
+                          </af:popup>
+                        </h:panelGrid>
+                        <af:outputLabel value="Max No Allowed" id="ol5"/>
+                        <af:inputText label="Label 2" id="it2" simple="true"
+                                      binding="#{agents.maxNoAllowed}"/>
+                        <af:outputLabel value="Min Age" id="ol6"/>
+                        <af:inputText label="Label 3" id="it3" simple="true"
+                                      binding="#{agents.minimumAge}"/>
+                        <af:outputLabel value="Maximum Age" id="ol7"/>
+                        <af:inputText label="Label 4" id="it4" simple="true"
+                                      binding="#{agents.maximumAge}"/>
+                        <af:outputLabel value="Minimum Sum Assured"
+                                        id="outputLabel2"/>
+                        <af:inputText label="Label 5" id="inputText1"
+                                      simple="true"
+                                      binding="#{agents.minSumAssured}"/>
+                        <af:outputLabel value="Maximum Sum Assured" id="ol8"/>
+                        <af:inputText label="Label 5" id="it5" simple="true"
+                                      binding="#{agents.maxSumAssured}"/>
+                        <af:outputLabel value="Default?"
+                                        id="outputLabel1"/>
+                        <af:selectOneChoice id="soc1"
+                                            simple="true" value="N"
+                                            binding="#{agents.defaultVal}">
+                          <af:selectItem label="Yes" value="Y" id="si1"/>
+                          <af:selectItem label="No" value="N" id="si2"/>
+                        </af:selectOneChoice>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg4">
+                        <af:commandButton text="OK" id="cb7"
+                                          action="#{agents.SaveDependentType}"/>
+                        <af:commandButton text="Cancel" id="cb8"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:table value="#{bindings.productCvtDependants.collectionModel}"
+                          var="row"
+                          rows="#{bindings.productCvtDependants.rangeSize}"
+                          emptyText="#{bindings.productCvtDependants.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.productCvtDependants.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{bindings.productCvtDependants.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t3"
+                          inlineStyle="width:100%; height:100.0px; border-style:none;"
+                          binding="#{agents.prodCvtDependantsLOV}">
+                  <af:column sortProperty="dtyDescription" sortable="true"
+                             headerText="Dependant Type" id="c6">
+                    <af:outputText value="#{row.dtyDescription}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="pcdMaxnoallowed" sortable="true"
+                             headerText="Max No. Allowed" id="c5">
+                    <af:outputText value="#{row.pcdMaxnoallowed}" id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="pcdMinage" sortable="true"
+                             headerText="Min Age" id="c7">
+                    <af:outputText value="#{row.pcdMinage}" id="ot8"/>
+                  </af:column>
+                  <af:column sortProperty="pcdMaxage" sortable="true"
+                             headerText="Max Age" id="c8">
+                    <af:outputText value="#{row.pcdMaxage}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="pcdMinsumassrd" sortable="false"
+                             headerText="Min Sum Assured." id="c13">
+                    <af:outputText value="#{row.pcdMinsumassrd}" id="ot14"
+                                   converter="javax.faces.Number"/>
+                  </af:column>
+                  <af:column sortProperty="pcdMaxsumassured" sortable="true"
+                             headerText="Max Sum Assured." id="c9">
+                    <af:outputText value="#{row.pcdMaxsumassured}" id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="pcd_default" sortable="false"
+                             headerText="Default"
+                             id="c12">
+                    <af:outputText value="#{row.pcd_default}" id="ot13"/>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:group>
+      </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

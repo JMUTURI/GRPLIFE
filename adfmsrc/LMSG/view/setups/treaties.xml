@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="treaties" Package="LMSG.view.setups"
+          BeanClass="LMSG.view.setups.treaties"
+          isJavaBased="true">
+  <Attribute Name="TRS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TRS_TRT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TRS_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TRS_TRT_SHT_DESC" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.setups.treaties"
+                     BeanClass="LMSG.view.setups.treaties" id="treaties"/>
+</JavaBean>

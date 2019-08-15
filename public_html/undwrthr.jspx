@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelBox text="Enter Agent's And Policy Payment Details" inlineStyle="width:445px; height:329px;"
+                     id="pb1">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="2" width="80%" id="pg1">
+            <af:outputLabel value="Payment Method" id="ol1"/>
+            <af:selectOneChoice label="Label 1" simple="true"
+                                valueChangeListener="#{underwritingManipulation.GetPaymentMethod}"
+                                binding="#{underwritingManipulation.paymentMethodDisplay}"
+                                id="soc1">
+              <af:selectItem label="Cash" value="C" id="si1"/>
+              <af:selectItem label="Cheque" value="Q" id="si2"/>
+              <af:selectItem label="Standing Order" value="S" id="si3"/>
+              <af:selectItem label="Check Off" value="K" id="si4"/>
+              <af:selectItem label="Staff Remittance" value="R" id="si5"/>
+            </af:selectOneChoice>
+            <af:outputLabel value="Agent" id="ol2"/>
+            <h:panelGrid columns="3" id="pg2">
+              <af:inputText label="Label 1" simple="true" columns="25"
+                            binding="#{underwritingManipulation.agentsDisplay}"
+                            id="it1"/>
+              <af:commandButton icon="/dropdown.gif" id="cb1">
+                <af:showPopupBehavior popupId="agentsPopup"/>
+              </af:commandButton>
+              <af:popup id="agentsPopup">
+                <af:dialog type="none" title="Select Agent"
+                           inlineStyle="width:400%;" id="d2">
+                  <af:table value="#{bindings.agents.collectionModel}" var="row"
+                            rows="#{bindings.agents.rangeSize}"
+                            emptyText="#{bindings.agents.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.agents.rangeSize}"
+                            selectedRowKeys="#{bindings.agents.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.agents.collectionModel.makeCurrent}"
+                            rowSelection="single" width="209"
+                            binding="#{underwritingManipulation.agentDisplayLOV}"
+                            id="t1">
+                    <af:column sortProperty="agent" sortable="true"
+                               headerText="AGENT" width="200" id="c1">
+                      <af:outputText value="#{row.agent}" id="ot1"/>
+                    </af:column>
+                    <af:column sortProperty="AGN_POSTAL_ADDRESS" sortable="true"
+                               headerText="AGENT POSTAL ADDRESS" width="200"
+                               id="c2">
+                      <af:outputText value="#{row.AGN_POSTAL_ADDRESS}"
+                                     id="ot2"/>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{underwritingManipulation.AttachAgents}"
+                                    id="cb2"/>
+                  <af:commandButton text="Cancel" id="cb3"/>
+                </af:dialog>
+              </af:popup>
+            </h:panelGrid>
+            <af:outputLabel value="Check Off Inst/Bank" id="ol3"/>
+            <h:panelGrid columns="2" id="pg3">
+              <af:inputText label="Label 2" simple="true" columns="25"
+                            binding="#{underwritingManipulation.checkOffDisplay}"
+                            id="it2"/>
+              <af:commandButton icon="/dropdown.gif" id="cb4">
+                <af:showPopupBehavior popupId="checkOffPopup"/>
+              </af:commandButton>
+              <af:popup id="checkOffPopup">
+                <af:dialog type="none"
+                           title="Select Check Off Institution/Bank" id="d3">
+                  <af:table value="#{bindings.checkOffAgents.collectionModel}"
+                            var="row"
+                            rows="#{bindings.checkOffAgents.rangeSize}"
+                            emptyText="#{bindings.checkOffAgents.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.checkOffAgents.rangeSize}"
+                            selectedRowKeys="#{bindings.checkOffAgents.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.checkOffAgents.collectionModel.makeCurrent}"
+                            rowSelection="single" width="212"
+                            binding="#{underwritingManipulation.checkOffAgentsDisplay}"
+                            id="t2">
+                    <af:column sortProperty="AGN_NAME" sortable="true"
+                               headerText="AGENT " id="c3">
+                      <af:outputText value="#{row.AGN_NAME}" id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="AGN_AGENT_COMMISSION"
+                               sortable="true" headerText="AGENT COMMISSION"
+                               id="c4">
+                      <af:outputText value="#{row.AGN_AGENT_COMMISSION}"
+                                     id="ot4"/>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{underwritingManipulation.AttachCheckOffAgents}"
+                                    id="cb5"/>
+                  <af:commandButton text="Cancel" id="cb6"/>
+                </af:dialog>
+              </af:popup>
+            </h:panelGrid>
+            <af:outputLabel value="Premium Mask" id="ol4"/>
+            <h:panelGrid columns="2" id="pg4">
+              <af:inputText label="Label 3" columns="15" simple="true"
+                            binding="#{underwritingManipulation.maskDisplay}"
+                            id="it3"/>
+              <af:commandButton icon="/dropdown.gif" id="cb7">
+                <af:showPopupBehavior popupId="masksPopup"/>
+              </af:commandButton>
+              <af:popup id="masksPopup">
+                <af:dialog type="none" title="Select Premium Mask" id="d4">
+                  <af:table value="#{bindings.quotPremMask.collectionModel}"
+                            var="row" rows="#{bindings.quotPremMask.rangeSize}"
+                            emptyText="#{bindings.quotPremMask.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.quotPremMask.rangeSize}"
+                            selectedRowKeys="#{bindings.quotPremMask.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.quotPremMask.collectionModel.makeCurrent}"
+                            rowSelection="single" width="109"
+                            inlineStyle="height:104px;"
+                            binding="#{underwritingManipulation.masksLOV}"
+                            id="t3">
+                    <af:column sortProperty="PMAS_DESC" sortable="true"
+                               headerText="PREMIUM MASK" id="c5">
+                      <af:outputText value="#{row.PMAS_DESC}" id="ot5"/>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{underwritingManipulation.AttachPremiumMasks}"
+                                    id="cb8"/>
+                  <af:commandButton text="Cancel" id="cb9"/>
+                </af:dialog>
+              </af:popup>
+            </h:panelGrid>
+            <af:outputLabel value="Commission Rate" id="ol5"/>
+            <af:inputText label="Label 4" columns="15" simple="true"
+                          binding="#{underwritingManipulation.commissionRateDisplay}"
+                          id="it4"/>
+            <af:commandButton text="Next"
+                              action="#{underwritingManipulation.ShowPolicyCovers}"
+                              id="cb10"/>
+            <af:commandButton text="Cancel" id="cb11"/>
+          </h:panelGrid>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

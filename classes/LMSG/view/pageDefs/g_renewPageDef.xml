@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="g_renewPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findRenewalProducts.result" DataControl="RenewalDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Renewals.Renewal"
+                    id="findRenewalProductsIterator"/>
+    <searchRegion Binds="findRenewalProductsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="RenewalQuery"/>
+    <methodIterator Binds="findRenewalQuery.result" DataControl="RenewalDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Renewals.Renewal"
+                    id="findRenewalQueryIterator"/>
+    <methodIterator Binds="FindPendingTransactions.result"
+                    DataControl="endorsementsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.endorsements"
+                    id="FindPendingTransactionsIterator"/>
+    <methodIterator Binds="findTicketAssignee.result" DataControl="workflowDAO"
+                    RangeSize="25" BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketAssigneeIterator"/>
+    <methodIterator Binds="findTicketDetailsByUser.result"
+                    DataControl="workflowDAO" RangeSize="25"
+                    BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketDetailsByUserIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="findProposers1.result" DataControl="ProposersDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Clients.Proposer"
+                    id="findProposers1Iterator"/>
+    <searchRegion Binds="findProposers1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ProposerQuery"/>
+    <methodIterator Binds="findRenewalPolicies.result" DataControl="RenewalDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Renewals.Renewal"
+                    id="findRenewalPoliciesIterator"/>
+    <searchRegion Binds="findRenewalPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Renewal2Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <methodAction id="findProposers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProposers"
+                  IsViewObjectMethod="false" DataControl="proposerDAO"
+                  InstanceName="proposerDAO.dataProvider"
+                  ReturnName="proposerDAO.methodResults.findProposers_proposerDAO_dataProvider_findProposers_result"/>
+    <methodAction id="findRenewalProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRenewalProducts"
+                  IsViewObjectMethod="false" DataControl="RenewalDAO"
+                  InstanceName="RenewalDAO.dataProvider"
+                  ReturnName="RenewalDAO.methodResults.findRenewalProducts_RenewalDAO_dataProvider_findRenewalProducts_result"/>
+    <tree IterBinding="findRenewalProductsIterator" id="Renewal">
+      <nodeDefinition DefName="LMSG.view.Renewals.Renewal" Name="Renewal0">
+        <AttrNames>
+          <Item Value="prodshtDesc"/>
+          <Item Value="prodDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findRenewalQuery" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRenewalQuery"
+                  IsViewObjectMethod="false" DataControl="RenewalDAO"
+                  InstanceName="RenewalDAO.dataProvider"
+                  ReturnName="RenewalDAO.methodResults.findRenewalQuery_RenewalDAO_dataProvider_findRenewalQuery_result"/>
+    <tree IterBinding="findRenewalQueryIterator" id="Renewal1">
+      <nodeDefinition DefName="LMSG.view.Renewals.Renewal" Name="Renewal10">
+        <AttrNames>
+          <Item Value="RN_POL_POLICY_NO"/>
+          <Item Value="RN_CLIENT"/>
+          <Item Value="RN_POL_PROD_SHT_DESC"/>
+          <Item Value="RN_BRANCH_NAME"/>
+          <Item Value="RN_POL_INCEPTION_DATE"/>
+          <Item Value="RN_ENDR_RENEWAL_DATE"/>
+          <Item Value="prodCode"/>
+          <Item Value="selected"/>
+          <Item Value="RN_POL_CODE"/>
+          <Item Value="RN_POL_RENEWAL_AREA_STATUS"/>
+          <Item Value="RN_ENDR_CODE"/>
+          <Item Value="RN_POL_UMBRELLA"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPendingTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPendingTransactions"
+                  IsViewObjectMethod="false" DataControl="endorsementsDAO"
+                  InstanceName="endorsementsDAO.dataProvider"
+                  ReturnName="endorsementsDAO.methodResults.FindPendingTransactions_endorsementsDAO_dataProvider_FindPendingTransactions_result"/>
+    <tree IterBinding="FindPendingTransactionsIterator" id="endorsements1">
+      <nodeDefinition DefName="LMSG.view.Policy.endorsements"
+                      Name="endorsements10">
+        <AttrNames>
+          <Item Value="ENDR_NO"/>
+          <Item Value="ENDR_DURATION_TYPE"/>
+          <Item Value="ENDR_STATUS"/>
+          <Item Value="ENDR_TYPE"/>
+          <Item Value="ENDR_PAY_METHOD"/>
+          <Item Value="AGENT_DISPLAY"/>
+          <Item Value="ENDR_FREQ_OF_PAYMENT"/>
+          <Item Value="MASK_DISPLAY"/>
+          <Item Value="CHECK_AGENT_DISPLAY"/>
+          <Item Value="ENDR_CALC_TYPE"/>
+          <Item Value="ENDR_PENS_TYPE"/>
+          <Item Value="ENDR_SCHEME_TYPE"/>
+          <Item Value="ENDR_REG_NO"/>
+          <Item Value="ENDR_SCHEME_TRUSTEES"/>
+          <Item Value="ENDR_NSSF_INCLUDE"/>
+          <Item Value="ENDR_PENS_TAX_COMPLIA"/>
+          <Item Value="ENDR_PENS_PAY_FREQ"/>
+          <Item Value="ENDR_CONTRIBTN_TYPE"/>
+          <Item Value="ENDR_TOT_SA"/>
+          <Item Value="ENDR_TOT_PREMIUM"/>
+          <Item Value="ENDR_PREV_SA"/>
+          <Item Value="ENDR_PREV_PREM"/>
+          <Item Value="ENDR_ADD_REF_PREM"/>
+          <Item Value="ENDR_MALE_NRD"/>
+          <Item Value="ENDR_ADD_REF_PERC_VARIANCE"/>
+          <Item Value="ENDR_FEMALE_NRD"/>
+          <Item Value="ENDR_COMM_RATE"/>
+          <Item Value="ENDR_CHECKOFF_RATE"/>
+          <Item Value="ENDR_NOF_MEMBERS"/>
+          <Item Value="ENDR_INST_PREM"/>
+          <Item Value="ENDR_COMM_AMT"/>
+          <Item Value="ENDR_PENS_ESC"/>
+          <Item Value="ENDR_EARN_ESCALATION"/>
+          <Item Value="ENDR_NSSF_AMOUNT"/>
+          <Item Value="ENDR_GUARANT_PRD"/>
+          <Item Value="ENDR_EMPYER_CONTR_RATE"/>
+          <Item Value="ENDR_EMPYEE_CONTR_RATE"/>
+          <Item Value="ENDR_PENS_ADMIN_FEE"/>
+          <Item Value="ENDR_EMPYR_PENS_BF"/>
+          <Item Value="ENDR_EMPYE_PENS_BF"/>
+          <Item Value="ENDR_TOT_PENS_BF"/>
+          <Item Value="ENDR_PENS_COMM_RATE"/>
+          <Item Value="ENDR_FNDING_RATE"/>
+          <Item Value="ENDR_EFFECTIVE_DATE"/>
+          <Item Value="ENDR_COVER_TO_DATE"/>
+          <Item Value="ENDR_REG_DATE"/>
+          <Item Value="FCL_ENDR_CODE"/>
+          <Item Value="FCL_ENDR_POL_POLICY_NO"/>
+          <Item Value="FCL_ENDR_NO"/>
+          <Item Value="FCL_ENDR_TYPE"/>
+          <Item Value="FCL_ENDR_FCL_DATE"/>
+          <Item Value="FCL_ENDR_FCL_AMT"/>
+          <Item Value="PT_ENDR_CODE"/>
+          <Item Value="PT_ENDR_NO"/>
+          <Item Value="PT_ENDR_POL_POLICY_NO"/>
+          <Item Value="PT_client"/>
+          <Item Value="PT_AgentName"/>
+          <Item Value="PT_ENDR_STATUS"/>
+          <Item Value="PT_ENDR_EFFECTIVE_DATE"/>
+          <Item Value="PT_ENDR_LTR_TRANS_NO"/>
+          <Item Value="PENSTYPE"/>
+          <Item Value="CONTRIBTYPE"/>
+          <Item Value="NSSF_INCL"/>
+          <Item Value="PAYFREQ"/>
+          <Item Value="ENDR_UNIT_RATE_FORMULA"/>
+          <Item Value="ENDR_VAT_RATE"/>
+          <Item Value="ENDR_OV_COMM_RATE"/>
+          <Item Value="FCL_CALC_TYPE"/>
+          <Item Value="ENDR_FCL_AMT"/>
+          <Item Value="ENDR_OVERRIDE_FCL_AMT"/>
+          <Item Value="BTR_TRANS_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTicketAssignee" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketAssignee"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketAssignee_workflowDAO_dataProvider_findTicketAssignee_result"/>
+    <tree IterBinding="findTicketAssigneeIterator" id="workflow">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow0">
+        <AttrNames>
+          <Item Value="taskUserID"/>
+          <Item Value="taskUserShtDesc"/>
+          <Item Value="taskUserDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTicketDetailsByUser" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketDetailsByUser"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketDetailsByUser_workflowDAO_dataProvider_findTicketDetailsByUser_result"/>
+    <tree IterBinding="findTicketDetailsByUserIterator" id="workflow1">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow10">
+        <AttrNames>
+          <Item Value="taskID"/>
+          <Item Value="taskActivityName"/>
+          <Item Value="taskAssignee"/>
+          <Item Value="taskDuedate"/>
+          <Item Value="taskCreateDate"/>
+          <Item Value="TCKT_CODE"/>
+          <Item Value="USRSYSTEM"/>
+          <Item Value="SYSMODULE"/>
+          <Item Value="TCKT_CLNT_CODE"/>
+          <Item Value="CLIENT"/>
+          <Item Value="TCKT_AGN_CODE"/>
+          <Item Value="AGENT"/>
+          <Item Value="TCKT_POL_CODE"/>
+          <Item Value="TCKT_POL_NO"/>
+          <Item Value="TCKT_CLM_NO"/>
+          <Item Value="TCKT_QUOT_CODE"/>
+          <Item Value="QUO_NO"/>
+          <Item Value="TCKT_DATE"/>
+          <Item Value="TCKT_BY"/>
+          <Item Value="TCKT_PROCESS_ID"/>
+          <Item Value="TCKT_SYS_MODULE_CODE"/>
+          <Item Value="TCKT_ENDR_CODE"/>
+          <Item Value="taskUserID"/>
+          <Item Value="taskUserShtDesc"/>
+          <Item Value="taskUserDesc"/>
+          <Item Value="TCKT_PROD_TYPE"/>
+          <Item Value="TCKT_TO"/>
+          <Item Value="TCKT_REMARKS"/>
+          <Item Value="TCKT_NAME"/>
+          <Item Value="TCKT_DUE_DATE"/>
+          <Item Value="TCKT_CDE"/>
+          <Item Value="TCKT_ENDORSEMENT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="findProposers1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProposers"
+                  IsViewObjectMethod="false" DataControl="ProposersDAO"
+                  InstanceName="ProposersDAO.dataProvider"
+                  ReturnName="ProposersDAO.methodResults.findProposers_ProposersDAO_dataProvider_findProposers_result"/>
+    <tree IterBinding="findProposers1Iterator" id="Proposer">
+      <nodeDefinition DefName="LMSG.view.Clients.Proposer" Name="Proposer0">
+        <AttrNames>
+          <Item Value="CLIENT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findRenewalPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRenewalPolicies"
+                  IsViewObjectMethod="false" DataControl="RenewalDAO"
+                  InstanceName="RenewalDAO.dataProvider"
+                  ReturnName="RenewalDAO.methodResults.findRenewalPolicies_RenewalDAO_dataProvider_findRenewalPolicies_result"/>
+    <tree IterBinding="findRenewalPoliciesIterator" id="Renewal2">
+      <nodeDefinition DefName="LMSG.view.Renewals.Renewal" Name="Renewal20">
+        <AttrNames>
+          <Item Value="RN_POL_POLICY_NO"/>
+          <Item Value="RN_CLIENT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

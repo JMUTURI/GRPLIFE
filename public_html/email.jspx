@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+  <af:document title="TurnQuest Group Life | Email">
+    <af:pageTemplate id="demoTemplate"
+                     viewId="/templates/dialogTemplate.jspx">
+      <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl2">
+          <af:outputText value="Global Layer" id="ot6"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:panelBox text="PanelBox1" showHeader="never"
+                       inlineStyle="padding:1%;" id="pb1">
+            <f:facet name="toolbar"/>
+            <table cellspacing="0" cellpadding="3" border="0" width="100%">
+              <tr>
+                <td width="100%" align="right">
+                  <af:statusIndicator id="si1"/>
+                </td>
+              </tr>
+            </table>
+            <af:outputLabel value="Send Email" inlineStyle="font-weight:bold;"
+                            id="ol10"/>
+            <af:popup id="msgTemplate">
+              <af:dialog type="none" title="Select Message Template" id="d1">
+                <af:panelGroupLayout id="pgl3">
+                  <h:panelGrid columns="1" id="pg4">
+                    <af:table value="#{bindings.Correspondence1.collectionModel}"
+                              var="row"
+                              rows="#{bindings.Correspondence1.rangeSize}"
+                              emptyText="#{bindings.Correspondence1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Correspondence1.rangeSize}"
+                              rowBandingInterval="1"
+                              filterModel="#{bindings.CorrespondenceQuery.queryDescriptor}"
+                              queryListener="#{bindings.CorrespondenceQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Correspondence1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Correspondence1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t1"
+                              binding="#{systems.msgTemplate}" width="450">
+                      <af:column sortProperty="msgCode" sortable="true"
+                                 headerText="Code" id="c6" width="30">
+                        <af:outputText value="#{row.msgCode}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="msgShtDesc" sortable="true"
+                                 headerText="Sht Desc" id="c5">
+                        <af:outputText value="#{row.msgShtDesc}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="msgDesc" sortable="true"
+                                 headerText="Message" id="c4" width="300">
+                        <af:outputText value="#{row.msgDesc}" id="ot9"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg8">
+                      <af:commandButton text="OK"
+                                        action="#{systems.msgTemplateSelected}"
+                                        id="cb7"/>
+                      <af:commandButton text="Cancel" id="cb3"/>
+                    </h:panelGrid>
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </af:dialog>
+            </af:popup>
+            <af:panelBox text="Msg Template" showHeader="never"
+                         binding="#{Correspondence.emailTemplateMessage}"
+                         id="pb4">
+              <f:facet name="toolbar"/>
+              <h:panelGrid columns="2" id="pg2">
+                <h:panelGrid columns="1" id="pg13">
+                  <af:outputLabel value="Email Template" id="ol5"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg15">
+                  <af:inputText simple="true" disabled="true"
+                                binding="#{systems.msgTemplateDesc}" id="it1"/>
+                  <af:commandButton icon="/images/dropdown.gif" id="cb1"
+                                    action="#{systems.RenderTemplatePopup}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="pg14">
+                  <af:outputLabel value="Send To Client" id="ol15"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="pg12">
+                  <af:selectBooleanCheckbox simple="true" selected="true"
+                                            id="sbc1"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="pg5">
+                  <af:outputLabel value="Send To Agent" id="ol6"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="pg6">
+                  <af:selectBooleanCheckbox simple="true" id="sbc2"/>
+                </h:panelGrid>
+              </h:panelGrid>
+              <h:panelGrid columns="2" id="pg10">
+                <af:commandButton text="Cancel" action="#{Links.closeDialog}"
+                                  id="cb6"/>
+                <af:commandButton text="Next"
+                                  action="#{Correspondence.saveEmailMessage}"
+                                  id="cb4"/>
+              </h:panelGrid>
+            </af:panelBox>
+            <af:panelBox text="Msg Details" showHeader="never"
+                         binding="#{Correspondence.emailDetails}"
+                         rendered="false" id="pb2">
+              <f:facet name="toolbar"/>
+              <af:panelBox inlineStyle="width:inherit;" showHeader="never"
+                           id="pb3">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="2" id="pg3">
+                  <af:outputLabel value="Client" id="ol2"/>
+                  <af:outputText value="#{bindings.CLIENT.inputValue}"
+                                 inlineStyle="font-weight:bold;" id="ot8"/>
+                  <af:outputLabel value="Agent" id="ol11"/>
+                  <af:outputText value="#{bindings.AGN_NAME.inputValue}"
+                                 inlineStyle="font-weight:bold;" id="ot2"/>
+                  <af:outputLabel value="Quotation Code"
+                                  rendered="#{Rendering.quoteModule}" id="ol9"/>
+                  <af:outputText value="#{bindings.CODE.inputValue}"
+                                 inlineStyle="font-weight:bold;"
+                                 rendered="#{Rendering.quoteModule}" id="ot3"/>
+                  <af:outputLabel value="Quotation Number"
+                                  rendered="#{Rendering.quoteModule}" id="ol7"/>
+                  <af:outputText value="#{bindings.VAL.inputValue}"
+                                 inlineStyle="font-weight:bold;"
+                                 rendered="#{Rendering.quoteModule}" id="ot10"/>
+                  <af:outputLabel value="Policy Number"
+                                  rendered="#{Rendering.underwritingModule}"
+                                  id="ol14"/>
+                  <af:outputText value="#{bindings.VAL.inputValue}"
+                                 inlineStyle="font-weight:bold;"
+                                 rendered="#{Rendering.underwritingModule}"
+                                 id="ot1"/>
+                  <af:outputLabel value="Claim Number"
+                                  rendered="#{Rendering.claimsModule}"
+                                  id="ol3"/>
+                  <af:outputText value="#{bindings.VAL.inputValue}"
+                                 inlineStyle="font-weight:bold;"
+                                 rendered="#{Rendering.claimsModule}" id="ot4"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="pg9">
+                  <af:inputFile simple="true"
+                                binding="#{Correspondence.fileUpload}"
+                                autoSubmit="true"
+                                valueChangeListener="#{Correspondence.fileUploadedValue}"
+                                id="if1"/>
+                </h:panelGrid>
+                <af:separator id="s1"/>
+                <h:panelGrid columns="1" id="pg1">
+                  <af:outputLabel value="Message Details"
+                                  inlineStyle="font-weight:bold;" id="ol13"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg11">
+                  <af:outputLabel value="To:" id="ol1"/>
+                  <af:inputText simple="true"
+                                binding="#{Correspondence.toEmail}" columns="60"
+                                id="it4"/>
+                  <af:outputLabel value="C.c" id="ol4"/>
+                  <af:inputText columns="60" simple="true"
+                                binding="#{Correspondence.ccEmail}" id="it5"/>
+                  <af:outputLabel value="Subject" id="ol8"/>
+                  <af:inputText columns="60" simple="true"
+                                binding="#{Correspondence.subjectEmail}"
+                                id="it2"/>
+                  <af:outputLabel value="Message" id="ol12"/>
+                  <af:inputText simple="true" rows="10"
+                                binding="#{Correspondence.message}" columns="60"
+                                id="it3"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg7">
+                  <af:commandButton text="Send Email"
+                                    action="#{Correspondence.updateEmailMessage}"
+                                    id="cb2"/>
+                  <af:commandButton text="Done" action="#{Links.closeDialog}"
+                                    rendered="false" id="cb5"/>
+                </h:panelGrid>
+              </af:panelBox>
+            </af:panelBox>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

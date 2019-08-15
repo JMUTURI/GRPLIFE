@@ -1,0 +1,1603 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="gquoedtPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="findProposers.result" DataControl="proposerDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.proposers"
+                    id="findProposersIterator"/>
+    <methodIterator Binds="findBranches.result" DataControl="branchesDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.branches"
+                    id="findBranchesIterator"/>
+    <methodIterator Binds="FindAgents.result" DataControl="agentsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.agents"
+                    id="FindAgentsIterator"/>
+    <searchRegion Binds="FindAgentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AgentsQuery"/>
+    <methodIterator Binds="FindProvision1.result"
+                    DataControl="prodProvisionsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.prodProvisions"
+                    id="FindProvision1Iterator"/>
+    <methodIterator Binds="findQuoteCoverTypes.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteCoverTypesIterator"/>
+    <methodIterator Binds="FindTaxes.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindTaxesIterator"/>
+    <searchRegion Binds="FindTaxesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+    <methodIterator Binds="findQuotation1.result"
+                    DataControl="QuotationDetailsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                    id="findQuotation1Iterator"/>
+    <methodIterator Binds="findQuotationTaxes.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuotationTaxesIterator"/>
+    <methodIterator Binds="findQuoteCategories.result"
+                    DataControl="QuotationsDAO" RangeSize="-1"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteCategoriesIterator"/>
+    <searchRegion Binds="findQuoteCoverTypesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Quotations3Query"/>
+    <methodIterator Binds="findProductProvisions.result"
+                    DataControl="ProductsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductProvisionsIterator"/>
+    <methodIterator Binds="findQuoteProvisions.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteProvisionsIterator"/>
+    <methodIterator Binds="findProductCoverDependants.result"
+                    DataControl="ProductsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductCoverDependantsIterator"/>
+    <searchRegion Binds="findProductCoverDependantsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetails1Query"/>
+    <methodIterator Binds="findQuoteDependantLimits.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteDependantLimitsIterator"/>
+    <methodIterator Binds="findQuoteMembers.result" DataControl="QuotationsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteMembersIterator"/>
+    <methodIterator Binds="FindCoinsurers.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindCoinsurersIterator"/>
+    <searchRegion Binds="FindCoinsurersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings1Query"/>
+    <methodIterator Binds="findQuoteCoinsurers.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteCoinsurersIterator"/>
+    <methodIterator Binds="findQuoteAgencies.result" DataControl="QuotationsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteAgenciesIterator"/>
+    <methodIterator Binds="findTicketAssignee.result" DataControl="workflowDAO"
+                    RangeSize="25" BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketAssigneeIterator"/>
+    <searchRegion Binds="findTicketAssigneeIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="workflowQuery"/>
+    <methodIterator Binds="findQuoteExceptions.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteExceptionsIterator"/>
+    <methodIterator Binds="findPremiumMask1.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findPremiumMask1Iterator"/>
+    <searchRegion Binds="findPremiumMask1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetails2Query"/>
+    <methodIterator Binds="FindDependantTypes.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindDependantTypesIterator"/>
+    <methodIterator Binds="findProductCovers1.result" DataControl="ProductsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.GroupProducts.productDetails"
+                    id="findProductCovers1Iterator"/>
+    <searchRegion Binds="findProductCovers1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="productDetails3Query"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="FindMarketers.result" DataControl="agentsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.agents"
+                    id="FindMarketersIterator"/>
+    <searchRegion Binds="FindMarketersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="agents1Query"/>
+    <methodIterator Binds="findSchClasses.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findSchClassesIterator"/>
+    <searchRegion Binds="findSchClassesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SetupQuery"/>
+    <methodIterator Binds="findQuoteSubdivisions.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteSubdivisionsIterator"/>
+    <searchRegion Binds="findQuoteSubdivisionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Quotations11Query"/>
+    <iterator Binds="root" RangeSize="25" DataControl="QuotationsDAO"
+              id="QuotationsDAOIterator"/>
+    <iterator Binds="root" RangeSize="25" DataControl="SettingsDAO"
+              id="SettingsDAOIterator"/>
+    <methodIterator Binds="FindGroupSubdivisions.result"
+                    DataControl="SettingsDAO" RangeSize="-1"
+                    BeanClass="LMSG.view.Base.Settings"
+                    id="FindGroupSubdivisionsIter"/>
+    <methodIterator Binds="findClientClaimExp.result"
+                    DataControl="QuotationDetailsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                    id="findClientClaimExpIterator"/>
+    <searchRegion Binds="findQuoteAgenciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Quotations12Query"/>
+    <searchRegion Binds="findQuotationTaxesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Quotations14Query"/>
+    <methodIterator Binds="FindQuoPremRateLoadings.result"
+                    DataControl="SettingsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Base.Settings"
+                    id="FindQuoPremRateLoadingsIterator"/>
+    <methodIterator Binds="findOccupationCategory.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findOccupationCategoryIterator"/>
+    <searchRegion Binds="findOccupationCategoryIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup1Query"/>
+    <methodIterator Binds="findDiscountTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findDiscountTypesIterator"/>
+    <methodIterator Binds="findQuoteRemarks.result" DataControl="QuotationsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteRemarksIterator"/>
+    <searchRegion Binds="findQuoteRemarksIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Quotations15Query"/>
+    <methodIterator Binds="FindOccupation1.result" DataControl="documentsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.documents"
+                    id="FindOccupation1Iterator"/>
+    <methodIterator Binds="findQuotationDocs.result" DataControl="EcmUtilDAO"
+                    RangeSize="25" BeanClass="LMSG.view.ecm.EcmBean"
+                    id="findQuotationDocsIterator"/>
+    <searchRegion Binds="findQuotationDocsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="EcmBeanQuery"/>
+    <methodIterator Binds="findQuotationTaxes1.result"
+                    DataControl="QuotationDetailsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                    id="findQuotationTaxes1Iterator"/>
+    <methodIterator Binds="findQuoteForFcl.result" DataControl="QuotationsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteForFclIterator"/>
+    <methodIterator Binds="findQuoteForFclNew.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteForFclNewIterator"/>
+    <methodIterator Binds="FindSBUDetails.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSBUDetailsIterator"/>
+    <searchRegion Binds="FindSBUDetailsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings4Query"/>
+    <methodIterator Binds="FindOrgLocationsDetails.result"
+                    DataControl="SettingsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Base.Settings"
+                    id="FindOrgLocationsDetailsIterator"/>
+    <searchRegion Binds="FindOrgLocationsDetailsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings5Query"/>
+    <methodIterator Binds="FindSystemUsers.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSystemUsersIterator"/>
+    <searchRegion Binds="FindSystemUsersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings16Query"/>              
+  </executables>
+  <bindings>
+    <methodAction id="findQuotation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotation"
+                  IsViewObjectMethod="false" DataControl="GenExistQuot"
+                  InstanceName="GenExistQuot.dataProvider"
+                  ReturnName="GenExistQuot.methodResults.findQuotation_GenExistQuot_dataProvider_findQuotation_result"/>
+    <methodAction id="findQuotation1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotation"
+                  IsViewObjectMethod="false" DataControl="QuotationDetailsDAO"
+                  InstanceName="QuotationDetailsDAO.dataProvider"
+                  ReturnName="QuotationDetailsDAO.methodResults.findQuotation_QuotationDetailsDAO_dataProvider_findQuotation_result"/>
+    <methodAction id="findCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCoverTypes"
+                  IsViewObjectMethod="false" DataControl="GenQoutCoverTypes"
+                  InstanceName="GenQoutCoverTypes.dataProvider"
+                  ReturnName="GenQoutCoverTypes.methodResults.findCoverTypes_GenQoutCoverTypes_dataProvider_findCoverTypes_result"/>
+    <methodAction id="findTaxes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTaxes"
+                  IsViewObjectMethod="false" DataControl="GenQuotTaxes"
+                  InstanceName="GenQuotTaxes.dataProvider"
+                  ReturnName="GenQuotTaxes.methodResults.findTaxes_GenQuotTaxes_dataProvider_findTaxes_result"/>
+    <methodAction id="findCategory" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCategory"
+                  IsViewObjectMethod="false" DataControl="GenQuotCat"
+                  InstanceName="GenQuotCat.dataProvider"
+                  ReturnName="GenQuotCat.methodResults.findCategory_GenQuotCat_dataProvider_findCategory_result"/>
+    <methodAction id="findMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMembers"
+                  IsViewObjectMethod="false" DataControl="GenQuotMem"
+                  InstanceName="GenQuotMem.dataProvider"
+                  ReturnName="GenQuotMem.methodResults.findMembers_GenQuotMem_dataProvider_findMembers_result"/>
+    <attributeValues IterBinding="findQuotation1Iterator" id="quoNo">
+      <AttrNames>
+        <Item Value="quoNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_DATE">
+      <AttrNames>
+        <Item Value="QUO_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="client">
+      <AttrNames>
+        <Item Value="client"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findProposers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProposers"
+                  IsViewObjectMethod="false" DataControl="proposerDAO"
+                  InstanceName="proposerDAO.dataProvider"
+                  ReturnName="proposerDAO.methodResults.findProposers_proposerDAO_dataProvider_findProposers_result"/>
+    <tree IterBinding="findProposersIterator" id="proposers">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.proposers"
+                      Name="proposers0">
+        <AttrNames>
+          <Item Value="CLIENT"/>
+          <Item Value="GCO_DESC"/>
+          <Item Value="hazard"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findBranches"
+                  IsViewObjectMethod="false" DataControl="branchesDAO"
+                  InstanceName="branchesDAO.dataProvider"
+                  ReturnName="branchesDAO.methodResults.findBranches_branchesDAO_dataProvider_findBranches_result"/>
+    <tree IterBinding="findBranchesIterator" id="branches">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.branches"
+                      Name="branches0">
+        <AttrNames>
+          <Item Value="BRN_NAME"/>
+          <Item Value="BRN_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuotation1Iterator" id="BRN_NAME">
+      <AttrNames>
+        <Item Value="BRN_NAME"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_PROD_SHT_DESC">
+      <AttrNames>
+        <Item Value="QUO_PROD_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_PMAS_SHT_DESC">
+      <AttrNames>
+        <Item Value="QUO_PMAS_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findPremiumMask" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMask"
+                  IsViewObjectMethod="false" DataControl="quotPremMaskDAO"
+                  InstanceName="quotPremMaskDAO.dataProvider"
+                  ReturnName="quotPremMaskDAO.methodResults.findPremiumMask_quotPremMaskDAO_dataProvider_findPremiumMask_result"/>
+    <attributeValues IterBinding="findQuotation1Iterator" id="GCO_DESC">
+      <AttrNames>
+        <Item Value="GCO_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_AVG_ANB">
+      <AttrNames>
+        <Item Value="QUO_AVG_ANB"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="quo_avg_int">
+      <AttrNames>
+        <Item Value="quo_avg_int"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_COVER_TO_DATE">
+      <AttrNames>
+        <Item Value="QUO_COVER_TO_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_FREQ_OF_PAYMENT">
+      <AttrNames>
+        <Item Value="QUO_FREQ_OF_PAYMENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_TOT_PREMIUM">
+      <AttrNames>
+        <Item Value="QUO_TOT_PREMIUM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_TOT_SA">
+      <AttrNames>
+        <Item Value="QUO_TOT_SA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_FCL_AMT">
+      <AttrNames>
+        <Item Value="QUO_FCL_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_OVERRIDE_FCL_AMT">
+      <AttrNames>
+        <Item Value="QUO_OVERRIDE_FCL_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_TYPE">
+      <AttrNames>
+        <Item Value="QUO_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_GUARANT_PRD">
+      <AttrNames>
+        <Item Value="QUO_GUARANT_PRD"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_EARN_ESCALATION">
+      <AttrNames>
+        <Item Value="QUO_EARN_ESCALATION"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_PENS_ESC">
+      <AttrNames>
+        <Item Value="QUO_PENS_ESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_TOT_SALARIES">
+      <AttrNames>
+        <Item Value="QUO_TOT_SALARIES"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_MALE_NRD">
+      <AttrNames>
+        <Item Value="QUO_MALE_NRD"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_FEMALE_NRD">
+      <AttrNames>
+        <Item Value="QUO_FEMALE_NRD"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_PENS_ADMIN_FEE">
+      <AttrNames>
+        <Item Value="QUO_PENS_ADMIN_FEE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_EMPYER_CONTR">
+      <AttrNames>
+        <Item Value="QUO_EMPYER_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_EMPYEE_CONTR">
+      <AttrNames>
+        <Item Value="QUO_EMPYEE_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_FNDING_RATE">
+      <AttrNames>
+        <Item Value="QUO_FNDING_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_PENS_COMM_RATE">
+      <AttrNames>
+        <Item Value="QUO_PENS_COMM_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_EMPLOYER_VOL_CONTR">
+      <AttrNames>
+        <Item Value="QUO_EMPLOYER_VOL_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_EMPLOYEE_VOL_CONTR">
+      <AttrNames>
+        <Item Value="QUO_EMPLOYEE_VOL_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_EMPYR_PENS_BF">
+      <AttrNames>
+        <Item Value="QUO_EMPYR_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_EMPYE_PENS_BF">
+      <AttrNames>
+        <Item Value="QUO_EMPYE_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_TOT_PENS_BF">
+      <AttrNames>
+        <Item Value="QUO_TOT_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_PENS_INT_RATE">
+      <AttrNames>
+        <Item Value="QUO_PENS_INT_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_TOT_CONTR">
+      <AttrNames>
+        <Item Value="QUO_TOT_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindProvision" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProvision"
+                  IsViewObjectMethod="false" DataControl="GenQuotProvisions"
+                  InstanceName="GenQuotProvisions.dataProvider"
+                  ReturnName="GenQuotProvisions.methodResults.FindProvision_GenQuotProvisions_dataProvider_FindProvision_result"/>
+    <methodAction id="FindProdProvision" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProdProvision"
+                  IsViewObjectMethod="false" DataControl="prodProvisionDAO"
+                  InstanceName="prodProvisionDAO.dataProvider"
+                  ReturnName="prodProvisionDAO.methodResults.FindProdProvision_prodProvisionDAO_dataProvider_FindProdProvision_result"/>
+    <methodAction id="FindDependents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindDependents"
+                  IsViewObjectMethod="false" DataControl="dependentsDAO"
+                  InstanceName="dependentsDAO.dataProvider"
+                  ReturnName="dependentsDAO.methodResults.FindDependents_dependentsDAO_dataProvider_FindDependents_result"/>
+    <methodAction id="FindDependentsLimits" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindDependentsLimits"
+                  IsViewObjectMethod="false" DataControl="dependentLimitsDAO"
+                  InstanceName="dependentLimitsDAO.dataProvider"
+                  ReturnName="dependentLimitsDAO.methodResults.FindDependentsLimits_dependentLimitsDAO_dataProvider_FindDependentsLimits_result"/>
+    <methodAction id="findProdDependents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProdDependents"
+                  IsViewObjectMethod="false" DataControl="prodDependentsDAO"
+                  InstanceName="prodDependentsDAO.dataProvider"
+                  ReturnName="prodDependentsDAO.methodResults.findProdDependents_prodDependentsDAO_dataProvider_findProdDependents_result"/>
+    <methodAction id="FindOccupation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindOccupation"
+                  IsViewObjectMethod="false" DataControl="occupationsDAO"
+                  InstanceName="occupationsDAO.dataProvider"
+                  ReturnName="occupationsDAO.methodResults.FindOccupation_occupationsDAO_dataProvider_FindOccupation_result"/>
+    <methodAction id="findMemberDependents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMemberDependents"
+                  IsViewObjectMethod="false" DataControl="memberDependentsDAO"
+                  InstanceName="memberDependentsDAO.dataProvider"
+                  ReturnName="memberDependentsDAO.methodResults.findMemberDependents_memberDependentsDAO_dataProvider_findMemberDependents_result"/>
+    <methodAction id="findMemberPensionDtls" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMemberPensionDtls"
+                  IsViewObjectMethod="false" DataControl="memPensionDAO"
+                  InstanceName="memPensionDAO.dataProvider"
+                  ReturnName="memPensionDAO.methodResults.findMemberPensionDtls_memPensionDAO_dataProvider_findMemberPensionDtls_result"/>
+    <methodAction id="findMemberCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMemberCoverTypes"
+                  IsViewObjectMethod="false" DataControl="memCoverTypesDAO"
+                  InstanceName="memCoverTypesDAO.dataProvider"
+                  ReturnName="memCoverTypesDAO.methodResults.findMemberCoverTypes_memCoverTypesDAO_dataProvider_findMemberCoverTypes_result"/>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_EFFECTIVE_DATE">
+      <AttrNames>
+        <Item Value="QUO_EFFECTIVE_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindAgents"
+                  IsViewObjectMethod="false" DataControl="agentsDAO"
+                  InstanceName="agentsDAO.dataProvider"
+                  ReturnName="agentsDAO.methodResults.FindAgents_agentsDAO_dataProvider_FindAgents_result"/>
+    <tree IterBinding="FindAgentsIterator" id="agents">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.agents"
+                      Name="agents0">
+        <AttrNames>
+          <Item Value="agent"/>
+          <Item Value="AGN_POSTAL_ADDRESS"/>
+          <Item Value="AGN_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductTaxes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductTaxes"
+                  IsViewObjectMethod="false" DataControl="prodTaxesDAO"
+                  InstanceName="prodTaxesDAO.dataProvider"
+                  ReturnName="prodTaxesDAO.methodResults.findProductTaxes_prodTaxesDAO_dataProvider_findProductTaxes_result"/>
+    <attributeValues IterBinding="findQuotation1Iterator" id="HAZARD">
+      <AttrNames>
+        <Item Value="HAZARD"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindProvision1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProvision"
+                  IsViewObjectMethod="false" DataControl="prodProvisionsDAO"
+                  InstanceName="prodProvisionsDAO.dataProvider"
+                  ReturnName="prodProvisionsDAO.methodResults.FindProvision_prodProvisionsDAO_dataProvider_FindProvision_result"/>
+    <tree IterBinding="FindProvision1Iterator" id="prodProvisions">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.prodProvisions"
+                      Name="prodProvisions0">
+        <AttrNames>
+          <Item Value="PROV_SHT_DESC"/>
+          <Item Value="PROV_DESC"/>
+          <Item Value="PPROV_EDITABLE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_CALC_TYPE">
+      <AttrNames>
+        <Item Value="QUO_CALC_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_DEPENDT_COVERED">
+      <AttrNames>
+        <Item Value="QUO_DEPENDT_COVERED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_DURATION_TYPE">
+      <AttrNames>
+        <Item Value="QUO_DURATION_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_COVER_DEPENDANTS">
+      <AttrNames>
+        <Item Value="QUO_COVER_DEPENDANTS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_SAVINGS_RIDER">
+      <AttrNames>
+        <Item Value="QUO_SAVINGS_RIDER"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_GRP_LIFE_RIDER">
+      <AttrNames>
+        <Item Value="QUO_GRP_LIFE_RIDER"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_HIST_PENS_INT_RATE">
+      <AttrNames>
+        <Item Value="QUO_HIST_PENS_INT_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findProductCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductCovers"
+                  IsViewObjectMethod="false" DataControl="GenQoutCoverTypes"
+                  InstanceName="GenQoutCoverTypes.dataProvider"
+                  ReturnName="GenQoutCoverTypes.methodResults.findProductCovers_GenQoutCoverTypes_dataProvider_findProductCovers_result"/>
+    <methodAction id="findQuoteCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteCoverTypes"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteCoverTypes_QuotationsDAO_dataProvider_findQuoteCoverTypes_result"/>
+    <tree IterBinding="findQuoteCoverTypesIterator" id="Quotations">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations0">
+        <AttrNames>
+          <Item Value="cover_display"/>
+          <Item Value="quoQcvtSa"/>
+          <Item Value="quoButChargePrem"/>
+          <Item Value="QCVT_PREMIUM"/>
+          <Item Value="quoButChargePrem2"/>
+          <Item Value="quoDependents"/>
+          <Item Value="quoMembers"/>
+          <Item Value="discLoadRate"/>
+          <Item Value="QCVT_DISC_LOAD_DIV_FACT"/>
+          <Item Value="client"/>
+          <Item Value="QCVT_LOAD_DISC"/>
+          <Item Value="quoCode"/>
+          <Item Value="quoQcvtRate"/>
+          <Item Value="quoNo"/>
+          <Item Value="quoAvganb"/>
+          <Item Value="quoRevNo"/>
+          <Item Value="quoQCVTwetDate"/>
+          <Item Value="agnshtDesc"/>
+          <Item Value="quoQcvtAvgprd"/>
+          <Item Value="agnName"/>
+          <Item Value="quoSaPerMember"/>
+          <Item Value="quoType"/>
+          <Item Value="quoUnitRate"/>
+          <Item Value="QCVT_CODE"/>
+          <Item Value="quoUseUnitRate"/>
+          <Item Value="QCVT_DTY_DESCRIPTION"/>
+          <Item Value="QCVT_AVG_EARN_PER_MEM"/>
+          <Item Value="QCVT_STAFF_DESC"/>
+          <Item Value="QCVT_MULT_EARNINGS_PRD"/>
+          <Item Value="QCVT_FCL_AMT"/>
+          <Item Value="QCVT_OVERRIDE_FCL_AMT"/>
+          <Item Value="MAIN_COVER_DESC"/>
+          <Item Value="QCVT_MAIN_SA_PERC"/>
+          <Item Value="QCVT_LOANAMT_PER_MEM"/>
+          <Item Value="QCVT_LOAN_RPYMT_PRD"/>
+          <Item Value="QCVT_LOANINT_PER_MEM"/>
+          <Item Value="QCVT_SAVINGS_PER_MEM"/>
+          <Item Value="QCVT_DISC"/>
+          <Item Value="QCVT_DISC_RATE"/>
+          <Item Value="QCVT_DISC_DIV_FACT"/>
+          <Item Value="QCVT_LIMIT"/>
+          <Item Value="QCVT_TOT_MEMBER_EARNINGS"/>
+          <Item Value="QCVT_TOT_ORIG_LOAN_AMT"/>
+          <Item Value="QCVT_AV_CVR_PER_MEMBER"/>
+          <Item Value="qcvt_use_cvr_rate"/>
+          <Item Value="coverRateDesc"/>
+          <Item Value="qcvt_pmas_sht_desc"/>
+          <Item Value="qcvt_rate_div_fact"/>
+          <Item Value="qcvt_load_age_fact"/>
+          <Item Value="QCVT_AGG_PLAN"/>
+          <Item Value="qcvtPctInbuilt"/>
+          <Item Value="qcvtAccelerator"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindTaxes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindTaxes"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindTaxes_SettingsDAO_dataProvider_FindTaxes_result"/>
+    <tree IterBinding="FindTaxesIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="TT_SHT_DESC"/>
+          <Item Value="TT_DESC"/>
+          <Item Value="CVT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuotationTaxes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotationTaxes"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuotationTaxes_QuotationsDAO_dataProvider_findQuotationTaxes_result"/>
+    <tree IterBinding="findQuotationTaxesIterator" id="Quotations1">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations10">
+        <AttrNames>
+          <Item Value="tt_desc"/>
+          <Item Value="qtax_rate"/>
+          <Item Value="qtax_tax_amt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteCategories" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteCategories"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteCategories_QuotationsDAO_dataProvider_findQuoteCategories_result"/>
+    <tree IterBinding="findQuoteCategoriesIterator" id="Quotations2">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations20">
+        <AttrNames>
+          <Item Value="catShtDesc"/>
+          <Item Value="catDesc"/>
+          <Item Value="catPeriod"/>
+          <Item Value="client"/>
+          <Item Value="CTL_FEE_AMOUNT"/>
+          <Item Value="quoCode"/>
+          <Item Value="CTL_AV_STUDENTS"/>
+          <Item Value="pmas_sht_desc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findQuoteCoverTypesIterator" id="Quotations3">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations30">
+        <AttrNames>
+          <Item Value="cover_display"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductProvisions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductProvisions"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProductProvisions_ProductsDAO_dataProvider_findProductProvisions_result"/>
+    <tree IterBinding="findProductProvisionsIterator" id="productDetails">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails0">
+        <AttrNames>
+          <Item Value="PROV_SHT_DESC"/>
+          <Item Value="PROV_DESC"/>
+          <Item Value="PPROV_EDITABLE"/>
+          <Item Value="prodCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteProvisions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteProvisions"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteProvisions_QuotationsDAO_dataProvider_findQuoteProvisions_result"/>
+    <tree IterBinding="findQuoteProvisionsIterator" id="Quotations4">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations40">
+        <AttrNames>
+          <Item Value="quotProvshtDesc"/>
+          <Item Value="quotProvDesc"/>
+          <Item Value="quotProvEditable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductCoverDependants" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductCoverDependants"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProductCoverDependants_ProductsDAO_dataProvider_findProductCoverDependants_result"/>
+    <tree IterBinding="findProductCoverDependantsIterator" id="productDetails1">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails10">
+        <AttrNames>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="max_allowed"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteDependantLimits" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteDependantLimits"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteDependantLimits_QuotationsDAO_dataProvider_findQuoteDependantLimits_result"/>
+    <tree IterBinding="findQuoteDependantLimitsIterator" id="Quotations5">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations50">
+        <AttrNames>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="QDL_MAX_TYPE_ALLOWED"/>
+          <Item Value="QDL_CODE"/>
+          <Item Value="QDL_LIMIT_AMT"/>
+          <Item Value="client"/>
+          <Item Value="LCA_CATEG_DESC"/>
+          <Item Value="cover_display"/>
+          <Item Value="coverDescription"/>
+          <Item Value="QDL_MIN_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteMembers"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteMembers_QuotationsDAO_dataProvider_findQuoteMembers_result"/>
+    <tree IterBinding="findQuoteMembersIterator" id="Quotations6">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations60">
+        <AttrNames>
+          <Item Value="quoMemNo"/>
+          <Item Value="quoMemNo"/>
+          <Item Value="quoMemName"/>
+          <Item Value="quoDepMemType"/>
+          <Item Value="quoMemAnb"/>
+          <Item Value="quoJointMem"/>
+          <Item Value="quoOccupation"/>
+          <Item Value="lca_categ_desc"/>
+          <Item Value="memSurname"/>
+          <Item Value="memOtherNames"/>
+          <Item Value="memSex"/>
+          <Item Value="memDOB"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindCoinsurers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCoinsurers"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindCoinsurers_SettingsDAO_dataProvider_FindCoinsurers_result"/>
+    <tree IterBinding="FindCoinsurersIterator" id="Settings1">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings10">
+        <AttrNames>
+          <Item Value="CO_agn_name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteCoinsurers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteCoinsurers"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteCoinsurers_QuotationsDAO_dataProvider_findQuoteCoinsurers_result"/>
+    <tree IterBinding="findQuoteCoinsurersIterator" id="Quotations7">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations70">
+        <AttrNames>
+          <Item Value="coinsurer_display"/>
+          <Item Value="QCOIN_SHARE_PCT"/>
+          <Item Value="QCOIN_ADMIN_FEE"/>
+          <Item Value="client"/>
+          <Item Value="QCOIN_PREMIUM"/>
+          <Item Value="quoCode"/>
+          <Item Value="QCOIN_SRVCE_FEE"/>
+          <Item Value="FOLLOWER_LEADER"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuoteCoinsurersIterator"
+                     id="QCOIN_LEAD_FOLLOW">
+      <AttrNames>
+        <Item Value="QCOIN_LEAD_FOLLOW"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuoteCoinsurersIterator"
+                     id="QCOIN_COIN_LEADER_SHARE">
+      <AttrNames>
+        <Item Value="QCOIN_COIN_LEADER_SHARE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_EMPYEE_CONTR_RATE">
+      <AttrNames>
+        <Item Value="QUO_EMPYEE_CONTR_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_FCL_CALC_TYPE">
+      <AttrNames>
+        <Item Value="QUO_FCL_CALC_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_NOF_MEMBERS">
+      <AttrNames>
+        <Item Value="QUO_NOF_MEMBERS"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findQuoteAgencies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteAgencies"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteAgencies_QuotationsDAO_dataProvider_findQuoteAgencies_result"/>
+    <tree IterBinding="findQuoteAgenciesIterator" id="Quotations8">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations80">
+        <AttrNames>
+          <Item Value="qua_agn_code"/>
+          <Item Value="qua_agn_asgn"/>
+          <Item Value="qua_authorized"/>
+          <Item Value="qua_agn_name"/>
+          <Item Value="qua_agn_leader_follower"/>
+          <Item Value="qua_agn_share"/>
+          <Item Value="client"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTicketAssignee" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketAssignee"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketAssignee_workflowDAO_dataProvider_findTicketAssignee_result"/>
+    <tree IterBinding="findTicketAssigneeIterator" id="workflow">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow0">
+        <AttrNames>
+          <Item Value="taskUserID"/>
+          <Item Value="taskUserShtDesc"/>
+          <Item Value="taskUserDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteExceptions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteExceptions"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteExceptions_QuotationsDAO_dataProvider_findQuoteExceptions_result"/>
+    <tree IterBinding="findQuoteExceptionsIterator" id="Quotations9">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations90">
+        <AttrNames>
+          <Item Value="QEXC_DESC"/>
+          <Item Value="QEXC_AUTHORISED"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPremiumMask1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMask"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findPremiumMask_ProductsDAO_dataProvider_findPremiumMask_result"/>
+    <tree IterBinding="findPremiumMask1Iterator" id="productDetails2">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails20">
+        <AttrNames>
+          <Item Value="PMAS_DESC"/>
+          <Item Value="PMAS_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindDependantTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindDependantTypes"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindDependantTypes_SettingsDAO_dataProvider_FindDependantTypes_result"/>
+    <tree IterBinding="FindDependantTypesIterator" id="Settings2">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings20">
+        <AttrNames>
+          <Item Value="DTY_DESCRIPTION"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductCovers1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductCovers"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProductCovers_ProductsDAO_dataProvider_findProductCovers_result"/>
+    <tree IterBinding="findProductCovers1Iterator" id="productDetails3">
+      <nodeDefinition DefName="LMSG.view.GroupProducts.productDetails"
+                      Name="productDetails30">
+        <AttrNames>
+          <Item Value="cvt_sht_desc"/>
+          <Item Value="cvt_desc"/>
+          <Item Value="cvt_main_cover"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_CONTRIBTN_TYPE">
+      <AttrNames>
+        <Item Value="QUO_CONTRIBTN_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="EMYR_PA">
+      <AttrNames>
+        <Item Value="EMYR_PA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="EMPYE_PA">
+      <AttrNames>
+        <Item Value="EMPYE_PA"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_UNIT_RATE_FORMULA">
+      <AttrNames>
+        <Item Value="QUO_UNIT_RATE_FORMULA"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="findQuotation1Iterator" id="annEscalation"
+          DTSupportsMRU="true" StaticList="true">
+      <AttrNames>
+        <Item Value="annEscalation"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <list IterBinding="findQuotation1Iterator" id="annOption"
+          DTSupportsMRU="true" StaticList="true">
+      <AttrNames>
+        <Item Value="annOption"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="OPTION 1"/>
+        <Item Value="OPTION 2"/>
+        <Item Value="OPTION 3"/>
+        <Item Value="OPTION 4"/>
+        <Item Value="OPTION 5"/>
+      </ValueList>
+    </list>
+    <list IterBinding="findQuotation1Iterator" id="annType" DTSupportsMRU="true"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="annType"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="IMMEDIATE"/>
+        <Item Value="DEFERRED"/>
+      </ValueList>
+    </list>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_ANN_AMOUNT">
+      <AttrNames>
+        <Item Value="QUO_ANN_AMOUNT"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="findQuotation1Iterator" id="QUO_PENS_PAY_FREQ"
+          DTSupportsMRU="true" StaticList="true">
+      <AttrNames>
+        <Item Value="QUO_PENS_PAY_FREQ"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="A"/>
+        <Item Value="Q"/>
+        <Item Value="S"/>
+        <Item Value="M"/>
+        <Item Value="F"/>
+      </ValueList>
+    </list>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_ANN_INVESTMENT">
+      <AttrNames>
+        <Item Value="QUO_ANN_INVESTMENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="MARKETER">
+      <AttrNames>
+        <Item Value="MARKETER"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_ANN_TERM_BENEFITS">
+      <AttrNames>
+        <Item Value="QUO_ANN_TERM_BENEFITS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_ANN_SCHEME_LEGAL_AGE">
+      <AttrNames>
+        <Item Value="QUO_ANN_SCHEME_LEGAL_AGE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_ANN_ADMIN_CHARGE">
+      <AttrNames>
+        <Item Value="QUO_ANN_ADMIN_CHARGE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_ANN_INVEST_INTR_RATE">
+      <AttrNames>
+        <Item Value="QUO_ANN_INVEST_INTR_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_ANN_INVESTMENT_RATE">
+      <AttrNames>
+        <Item Value="QUO_ANN_INVESTMENT_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_ANN_TERMINAL_PAYOUT_RATE">
+      <AttrNames>
+        <Item Value="QUO_ANN_TERMINAL_PAYOUT_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="annOption1">
+      <AttrNames>
+        <Item Value="annOption"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="annEscalation1">
+      <AttrNames>
+        <Item Value="annEscalation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="annType1">
+      <AttrNames>
+        <Item Value="annType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_PENS_PAY_FREQ1">
+      <AttrNames>
+        <Item Value="QUO_PENS_PAY_FREQ"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_PAY_METHOD">
+      <AttrNames>
+        <Item Value="QUO_PAY_METHOD"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_LOSS_RATIO">
+      <AttrNames>
+        <Item Value="QUO_LOSS_RATIO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_UNIT_RATE">
+      <AttrNames>
+        <Item Value="QUO_UNIT_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="quo_pens_mode">
+      <AttrNames>
+        <Item Value="quo_pens_mode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="quo_pens_type">
+      <AttrNames>
+        <Item Value="quo_pens_type"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindMarketers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMarketers"
+                  IsViewObjectMethod="false" DataControl="agentsDAO"
+                  InstanceName="agentsDAO.dataProvider"
+                  ReturnName="agentsDAO.methodResults.FindMarketers_agentsDAO_dataProvider_FindMarketers_result"/>
+    <tree IterBinding="FindMarketersIterator" id="agents1">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.agents"
+                      Name="agents10">
+        <AttrNames>
+          <Item Value="AGN_SHT_DESC"/>
+          <Item Value="AGN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findSchClasses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findSchClasses"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="data.SetupsDAO.methodResults.findSchClasses_SetupsDAO_dataProvider_findSchClasses_result"/>
+    <tree IterBinding="findSchClassesIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="SCH_SHT_DESC"/>
+          <Item Value="SCH_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findQuoteCategoriesIterator" id="Quotations10">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations100">
+        <AttrNames>
+          <Item Value="catDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteSubdivisions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteSubdivisions"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="data.QuotationsDAO.methodResults.findQuoteSubdivisions_QuotationsDAO_dataProvider_findQuoteSubdivisions_result"/>
+    <tree IterBinding="findQuoteSubdivisionsIterator" id="Quotations11">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations110">
+        <AttrNames>
+          <Item Value="QGSUB_CODE"/>
+          <Item Value="QGSUB_GSUB_CODE"/>
+          <Item Value="GSUB_DESC"/>
+          <Item Value="QGSUB_SHT_DESC"/>
+          <Item Value="QGSUB_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="QuotationsDAOIterator" id="lcaCode" DTSupportsMRU="true"
+          StaticList="false" ListIter="findQuoteCategoriesIterator">
+      <AttrNames>
+        <Item Value="lcaCode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="lcaCode"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="catDesc"/>
+      </ListDisplayAttrNames>
+    </list>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_UMBRELLADESC">
+      <AttrNames>
+        <Item Value="QUO_UMBRELLADESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_UMBRELLA_DURATION">
+      <AttrNames>
+        <Item Value="QUO_UMBRELLA_DURATION"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_CUR_SYMBOL">
+      <AttrNames>
+        <Item Value="QUO_CUR_SYMBOL"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_CURR_RATE_TYPE">
+      <AttrNames>
+        <Item Value="QUO_CURR_RATE_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_CUR_RATE">
+      <AttrNames>
+        <Item Value="QUO_CUR_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_TENDER">
+      <AttrNames>
+        <Item Value="QUO_TENDER"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_TENDER_PRD">
+      <AttrNames>
+        <Item Value="QUO_TENDER_PRD"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SettingsDAOIterator" id="subDivCode" DTSupportsMRU="true"
+          StaticList="false" ListIter="FindGroupSubdivisionsIter">
+      <AttrNames>
+        <Item Value="subDivCode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="GSUB_CODE"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="GSUB_DESC"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="FindGroupSubdivisions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindGroupSubdivisions"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="data.SettingsDAO.methodResults.FindGroupSubdivisions_SettingsDAO_dataProvider_FindGroupSubdivisions_result"/>
+    <methodAction id="findClientClaimExp" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClientClaimExp"
+                  IsViewObjectMethod="false" DataControl="QuotationDetailsDAO"
+                  InstanceName="QuotationDetailsDAO.dataProvider"
+                  ReturnName="QuotationDetailsDAO.methodResults.findClientClaimExp_QuotationDetailsDAO_dataProvider_findClientClaimExp_result"/>
+    <tree IterBinding="findClientClaimExpIterator" id="QuotationsDetails1">
+      <nodeDefinition DefName="LMSG.view.Quotation.QuotationsDetails"
+                      Name="QuotationsDetails10">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+          <Item Value="LTR_CLM_NO"/>
+          <Item Value="CLIENT"/>
+          <Item Value="LTR_POL_POLICY_NO"/>
+          <Item Value="MEMBER_DISP"/>
+          <Item Value="LTR_TRANS_NO"/>
+          <Item Value="LTR_BTR_TRANS_CODE"/>
+          <Item Value="CLM_CAUS_TYPE"/>
+          <Item Value="CLM_AUTHORISED"/>
+          <Item Value="CLAIM_STATUS"/>
+          <Item Value="AMT_CLAIMED"/>
+          <Item Value="AMT_TO_PAY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findQuoteAgenciesIterator" id="Quotations12">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations120">
+        <AttrNames>
+          <Item Value="qua_code"/>
+          <Item Value="qua_agn_code"/>
+          <Item Value="qua_agn_name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findQuoteAgenciesIterator" id="Quotations13">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations130">
+        <AttrNames>
+          <Item Value="qua_agn_leader_follower"/>
+          <Item Value="qua_agn_share"/>
+          <Item Value="qua_code"/>
+          <Item Value="qua_agn_asgn"/>
+          <Item Value="qua_authorized"/>
+          <Item Value="client"/>
+          <Item Value="agnName"/>
+          <Item Value="quoCode"/>
+          <Item Value="quoNo"/>
+          <Item Value="qua_agn_name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findQuotationTaxesIterator" id="Quotations14">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations140">
+        <AttrNames>
+          <Item Value="tt_desc"/>
+          <Item Value="ptx_appl_level"/>
+          <Item Value="cvt_desc"/>
+          <Item Value="qtax_rate"/>
+          <Item Value="qtax_tax_amt"/>
+          <Item Value="tax_plan"/>
+          <Item Value="taxPremium"/>
+          <Item Value="taxSa"/>
+          <Item Value="totaPremium"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindQuoPremRateLoadings" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindQuoPremRateLoadings"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindQuoPremRateLoadings_SettingsDAO_dataProvider_FindQuoPremRateLoadings_result"/>
+    <tree IterBinding="FindQuoPremRateLoadingsIterator" id="Settings3">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings30">
+        <AttrNames>
+          <Item Value="cvtDesc"/>
+          <Item Value="qoctl_code"/>
+          <Item Value="qoctl_rate"/>
+          <Item Value="qoctl_rate_div_factor"/>
+          <Item Value="qoctl_name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findOccupationCategory" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOccupationCategory"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findOccupationCategory_SetupsDAO_dataProvider_findOccupationCategory_result"/>
+    <tree IterBinding="findOccupationCategoryIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="gcoDesc"/>
+          <Item Value="gocCategory"/>
+          <Item Value="gocClass"/>
+          <Item Value="gcoShtDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteRemarks" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteRemarks"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteRemarks_QuotationsDAO_dataProvider_findQuoteRemarks_result"/>
+    <tree IterBinding="findQuoteRemarksIterator" id="Quotations15">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations150">
+        <AttrNames>
+          <Item Value="qrmCode"/>
+          <Item Value="qrmRemarks"/>
+          <Item Value="qrmRemarksType"/>
+          <Item Value="qrmRemarksBy"/>
+          <Item Value="qrmRemarksDesc"/>
+          <Item Value="qrmRemarksDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_AVG_EARNINGS">
+      <AttrNames>
+        <Item Value="QUO_AVG_EARNINGS"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="findOccupationCategoryIterator" id="Setup5">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup50">
+        <AttrNames>
+          <Item Value="gcoDesc"/>
+          <Item Value="gocCategory"/>
+          <Item Value="gocClass"/>
+          <Item Value="gcoShtDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="FindAgentsIterator" id="agents2">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.agents"
+                      Name="agents20">
+        <AttrNames>
+          <Item Value="AGN_CODE"/>
+          <Item Value="AGN_SHT_DESC"/>
+          <Item Value="AGN_POSTAL_ADDRESS"/>
+          <Item Value="agent"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_TOT_CLAIM_PAID">
+      <AttrNames>
+        <Item Value="QUO_TOT_CLAIM_PAID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_TOT_PREM_PAID">
+      <AttrNames>
+        <Item Value="QUO_TOT_PREM_PAID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_PRD_TYPE">
+      <AttrNames>
+        <Item Value="QUO_PRD_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="QUO_CLM_EXP_RATE">
+      <AttrNames>
+        <Item Value="QUO_CLM_EXP_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_ASSIGNEE_NAME">
+      <AttrNames>
+        <Item Value="QUO_ASSIGNEE_NAME"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator"
+                     id="QUO_ASSIGNEE_PHY_ADDR">
+      <AttrNames>
+        <Item Value="QUO_ASSIGNEE_PHY_ADDR"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindOccupation1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindOccupation"
+                  IsViewObjectMethod="false" DataControl="documentsDAO"
+                  InstanceName="documentsDAO.dataProvider"
+                  ReturnName="data.documentsDAO.methodResults.FindOccupation_documentsDAO_dataProvider_FindOccupation_result"/>
+    <list IterBinding="FindOccupation1Iterator" ListOperMode="navigation"
+          ListIter="FindOccupation1Iterator" id="documents"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="RD_DESC"/>
+      </AttrNames>
+    </list>
+    <methodAction id="findQuotationDocs" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotationDocs"
+                  IsViewObjectMethod="false" DataControl="EcmUtilDAO"
+                  InstanceName="EcmUtilDAO.dataProvider"
+                  ReturnName="data.EcmUtilDAO.methodResults.findQuotationDocs_EcmUtilDAO_dataProvider_findQuotationDocs_result"/>
+    <tree IterBinding="findQuotationDocsIterator" id="EcmBean">
+      <nodeDefinition DefName="LMSG.view.ecm.EcmBean" Name="EcmBean0">
+        <AttrNames>
+          <Item Value="actualName"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="versionLabel"/>
+          <Item Value="id"/>
+          <Item Value="mimeType"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuotationTaxes1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotationTaxes"
+                  IsViewObjectMethod="false" DataControl="QuotationDetailsDAO"
+                  InstanceName="QuotationDetailsDAO.dataProvider"
+                  ReturnName="data.QuotationDetailsDAO.methodResults.findQuotationTaxes_QuotationDetailsDAO_dataProvider_findQuotationTaxes_result"/>
+    <tree IterBinding="findQuotationTaxes1Iterator" id="Quotations16">
+      <nodeDefinition DefName="LMSG.view.Quotation.QuotationsDetails"
+                      Name="Quotations160">
+        <AttrNames>
+          <Item Value="qtax_code"/>
+          <Item Value="qtax_rate"/>
+          <Item Value="qtax_tax_amt"/>
+          <Item Value="tt_desc"/>
+          <Item Value="qtax_rate_desc"/>
+          <Item Value="cvt_desc"/>
+          <Item Value="ptx_appl_level"/>
+          <Item Value="tax_plan"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteForFcl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteForFcl"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="data.QuotationsDAO.methodResults.findQuoteForFcl_QuotationsDAO_dataProvider_findQuoteForFcl_result"/>
+    <tree IterBinding="findQuoteForFclIterator" id="Quotations17">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations170">
+        <AttrNames>
+          <Item Value="QCVT_PREMIUM1"/>
+          <Item Value="QCVT_CODE1"/>
+          <Item Value="QCVT_CVT_CODE1"/>
+          <Item Value="QCVT_STAFF_DESC1"/>
+          <Item Value="QCVT_MULT_EARNINGS_PRD1"/>
+          <Item Value="QCVT_FCL_AMT1"/>
+          <Item Value="QCVT_OVERRIDE_FCL_AMT1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findQuoteForFclIterator" id="Quotations18">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations180">
+        <AttrNames>
+          <Item Value="QCVT_CODE1"/>
+          <Item Value="QCVT_CVT_CODE1"/>
+          <Item Value="QCVT_STAFF_DESC1"/>
+          <Item Value="QCVT_MULT_EARNINGS_PRD1"/>
+          <Item Value="QCVT_FCL_AMT1"/>
+          <Item Value="QCVT_OVERRIDE_FCL_AMT1"/>
+          <Item Value="QCVT_AGG_PLAN"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findQuoteForFclIterator" id="Quotations19">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations190">
+        <AttrNames>
+          <Item Value="QCVT_CODE1"/>
+          <Item Value="QCVT_STAFF_DESC1"/>
+          <Item Value="QCVT_MULT_EARNINGS_PRD1"/>
+          <Item Value="QCVT_FCL_AMT1"/>
+          <Item Value="QCVT_OVERRIDE_FCL_AMT1"/>
+          <Item Value="QCVT_AGG_PLAN"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findQuoteForFclIterator" id="Quotations20">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations200">
+        <AttrNames>
+          <Item Value="QCVT_CODE1"/>
+          <Item Value="QCVT_CVT_CODE1"/>
+          <Item Value="QCVT_STAFF_DESC1"/>
+          <Item Value="QCVT_MULT_EARNINGS_PRD1"/>
+          <Item Value="QCVT_FCL_AMT1"/>
+          <Item Value="QCVT_OVERRIDE_FCL_AMT1"/>
+          <Item Value="QCVT_AGG_PLAN"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteForFclNew" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteForFclNew"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="data.QuotationsDAO.methodResults.findQuoteForFclNew_QuotationsDAO_dataProvider_findQuoteForFclNew_result"/>
+    <tree IterBinding="findQuoteForFclNewIterator" id="Quotations21">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations210">
+        <AttrNames>
+          <Item Value="QCVT_CODEFCL"/>
+          <Item Value="QCVT_CVT_CODEFCL"/>
+          <Item Value="QCVT_STAFF_DESCFCL"/>
+          <Item Value="QCVT_LIMITFCL"/>
+          <Item Value="QCVT_AGG_PLANFCL"/>
+          <Item Value="QCVT_FCL_AMTFCL"/>
+          <Item Value="QCVT_OVERRIDE_FCL_AMTFCL"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindSBUDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSBUDetails"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="data.SettingsDAO.methodResults.FindSBUDetails_SettingsDAO_dataProvider_FindSBUDetails_result"/>
+    <tree IterBinding="FindSBUDetailsIterator" id="Settings4">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings40">
+        <AttrNames>
+          <Item Value="COVERAGE_AREA"/>
+          <Item Value="SBU"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindOrgLocationsDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindOrgLocationsDetails"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="data.SettingsDAO.methodResults.FindOrgLocationsDetails_SettingsDAO_dataProvider_FindOrgLocationsDetails_result"/>
+    <tree IterBinding="FindOrgLocationsDetailsIterator" id="Settings5">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings50">
+        <AttrNames>
+          <Item Value="LOCATION"/>
+          <Item Value="ORGANIZATION"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+       <methodAction id="FindSystemUsers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSystemUsers"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSystemUsers_SettingsDAO_dataProvider_FindSystemUsers_result"/>
+    <tree IterBinding="FindSystemUsersIterator" id="Settings16">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings160">
+        <AttrNames>
+          <Item Value="USR_CODE"/>
+          <Item Value="USR_NAME"/>
+          <Item Value="USR_USERNAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findQuotation1Iterator" id="COVERAGE_AREA">
+      <AttrNames>
+        <Item Value="COVERAGE_AREA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotation1Iterator" id="LOCATION">
+      <AttrNames>
+        <Item Value="LOCATION"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

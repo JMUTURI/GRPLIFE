@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="AlfrescoCommentItem" Package="LMSG.view.dms"
+          BeanClass="LMSG.view.dms.AlfrescoCommentItem" isJavaBased="true">
+  <Attribute Name="url" Type="java.lang.String"/>
+  <Attribute Name="nodeRef" Type="java.lang.String"/>
+  <Attribute Name="name" Type="java.lang.String"/>
+  <Attribute Name="title" Type="java.lang.String"/>
+  <Attribute Name="content" Type="java.lang.String"/>
+  <Attribute Name="createdOn" Type="java.lang.String"/>
+  <Attribute Name="modifiedOn" Type="java.lang.String"/>
+  <Attribute Name="createdOnISO" Type="java.lang.String"/>
+  <Attribute Name="modifiedOnISO" Type="java.lang.String"/>
+  <Attribute Name="isUpdated" Type="java.lang.Boolean"/>
+  <AccessorAttribute id="author" IsCollection="false"
+                     BeanClass="LMSG.view.dms.AlfrescoAuthor"
+                     CollectionBeanClass="UpdateableSingleValue"/>
+  <AccessorAttribute id="permissions" IsCollection="false"
+                     BeanClass="LMSG.view.dms.Permissions"
+                     CollectionBeanClass="UpdateableSingleValue"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.dms.AlfrescoCommentItem"
+                     BeanClass="LMSG.view.dms.AlfrescoCommentItem"
+                     id="AlfrescoCommentItem"/>
+</JavaBean>

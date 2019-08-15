@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest LMS Ordinary">
+        <af:messages id="m1"/>
+        <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="demoTemplate">
+          <f:facet name="center">
+            <af:group id="g1">
+              <af:popup id="competitionDtlsPop">
+                <af:dialog id="d2" type="none"
+                           title="Agent Competition Details">
+                  <af:panelBox id="pb3" showDisclosure="false">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="2" id="pg3">
+                    <af:outputLabel value="Competition Desc" id="ol8"/>
+                    <af:inputText label="Label 1" id="it2" simple="true"
+                                  binding="#{agentCompetitionsManip.competitionDesc}"/>
+                    <af:outputLabel value="Competition Level" id="ol9"/>
+                    <af:selectOneChoice label="Label 1" id="smc1" simple="true"
+                                        binding="#{agentCompetitionsManip.competitionLevel}">
+                      <af:selectItem label="All Products" value="A" id="si4"/>
+                      <af:selectItem label="Specific Product" value="N"
+                                     id="si3"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="No.of Policies" id="ol2"/>
+                      <af:inputNumberSpinbox label="Label 1" id="ins1"
+                                             simple="true"
+                                             binding="#{agentCompetitionsManip.numberOfPols}"/>
+                      <af:outputLabel value="Premium Income" id="ol3"/>
+                      <af:inputNumberSpinbox label="Label 2" id="ins2"
+                                             simple="true"
+                                             binding="#{agentCompetitionsManip.premiumIncome}"/>
+                      <af:outputLabel value="Reward Amount" id="ol4"/>
+                      <af:inputNumberSpinbox label="Label 3" id="ins3"
+                                             simple="true"
+                                             binding="#{agentCompetitionsManip.rewardAmount}"/>
+                      <af:outputLabel value="Persitency" id="ol10"/>
+                      <af:inputNumberSpinbox label="Label 3" id="ins4"
+                                             simple="true"
+                                             binding="#{agentCompetitionsManip.persitency}"/>
+                      <af:outputLabel value="Persitency Parameter(Years)" id="ol11"/>
+                      <af:inputNumberSpinbox label="Label 3" id="ins5"
+                                             simple="true"
+                                             binding="#{agentCompetitionsManip.persitencyParam}"/>
+                      <af:outputLabel value="Wef" id="ol5"/>
+                      <af:inputDate label="Label 1" id="id1" simple="true"
+                                    binding="#{agentCompetitionsManip.wef}"/>
+                      <af:outputLabel value="Wet" id="ol6"/>
+                      <af:inputDate label="Wet" id="id2" simple="true"
+                                    binding="#{agentCompetitionsManip.wet}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg4">
+                      <af:commandButton text="Save" id="cb4"
+                                        action="#{agentCompetitionsManip.saveAgentCompetionDtls}"/>
+                      <af:commandButton text="Cancel" id="cb5"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <h:outputText escape="false"
+                            value='&lt;link rel="icon" type="image/png" href="#{facesContext.externalContext.requestContextPath}/images/favicon.png">'
+                            id="ot1"/>
+              <af:panelBox id="pb1" showHeader="never">
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tr>
+                    <td width="50%">
+                      <af:inputText id="it1" simple="false" readOnly="true"
+                                    helpTopicId="LMSOrdCommRateDef"/>
+                    </td>
+                    <td width="50%" align="right">
+                      <af:statusIndicator id="si1"/>
+                    </td>
+                  </tr>
+                </table>
+                <h:panelGrid columns="1" id="pg29">
+                  <af:outputLabel value="Agent Competition Rates" id="ol98"
+                                  inlineStyle="font-weight:bold;"/>
+                </h:panelGrid>
+                <af:separator id="s11"/>
+                <af:panelSplitter id="ps1"
+                                  inlineStyle="width:99%; height:550px;"
+                                  splitterPosition="250">
+                  <f:facet name="first">
+                    <af:panelGroupLayout xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                         id="pgl2">
+                      <h:panelGrid columns="1" id="pg1">
+                        <af:outputLabel value="Products" id="ol1"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="s1"/>
+                      <af:tree value="#{bindings.ProductSetup.treeModel}"
+                               var="node"
+                               binding="#{agentCompetitionsManip.productsDefination}"
+                               selectionListener="#{agentCompetitionsManip.selectedProduct}"
+                               rowSelection="single" id="t3">
+                        <f:facet name="nodeStamp">
+                          <af:outputText value="#{node.PROD_DESC}" id="ot17"/>
+                        </f:facet>
+                      </af:tree>
+                      </h:panelGrid>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  <f:facet name="second">
+                    <af:panelBox id="pb2" showDisclosure="false">
+                      <f:facet name="toolbar"/>
+                    <af:separator id="s3"/>
+                    <h:panelGrid columns="2" id="pg5">
+                        <af:outputLabel value="Branch" id="ol7"/>
+                      <af:selectOneChoice value="#{bindings.Settings.inputValue}"
+                                          required="#{bindings.Settings.hints.mandatory}"
+                                          shortDesc="#{bindings.Settings.hints.tooltip}"
+                                          valueChangeListener="#{agentCompetitionsManip.selectedBranch}"
+                                          binding="#{agentCompetitionsManip.branchesVal}"
+                                          autoSubmit="true"
+                                          id="soc2">
+                        <f:selectItems value="#{bindings.Settings.items}"
+                                       id="si5"/>
+                      </af:selectOneChoice>
+                             
+                      </h:panelGrid>
+                    <af:separator id="s2"/>
+                    <h:panelGrid columns="3" id="pg2">
+                        <af:commandButton text="New" id="cb1"
+                                          icon="/images/create.gif"
+                                          action="#{agentCompetitionsManip.newAgentCompetionDetails}"/>
+                        <af:commandButton text="Edit" id="cb2"
+                                          icon="/images/update.gif"
+                                          action="#{agentCompetitionsManip.updateAgentCompetionDtls}"/>
+                        <af:commandButton text="Delete" id="cb3"
+                                          icon="/images/delete.gif"
+                                          action="#{agentCompetitionsManip.deleteCompRates}"/>
+                      </h:panelGrid>
+                      <af:panelCollection id="pc1"
+                                          inlineStyle="width:99%; height:200.0px;">
+                        <f:facet name="menus"/>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="statusbar"/>
+                        <af:table value="#{bindings.agentCompetitions.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.agentCompetitions.rangeSize}"
+                                  emptyText="#{bindings.agentCompetitions.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.agentCompetitions.rangeSize}"
+                                  rowBandingInterval="0"
+                                 
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.agentCompetitions.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.agentCompetitions.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t1"
+                                  binding="#{agentCompetitionsManip.agentCompetionsTab}"
+                                  inlineStyle="width:99%;">
+                          <af:column sortProperty="agcpCode" filterable="false"
+                                     sortable="true"
+                                     headerText="#{bindings.agentCompetitions.hints.agcpCode.label}"
+                                     id="c7" rendered="false">
+                            <af:outputText value="#{row.agcpCode}" id="ot8"/>
+                          </af:column>
+                          <af:column sortProperty="agcpLevel"
+                                     filterable="false" sortable="true"
+                                     headerText="Competition Level" id="c903">
+                            <af:outputText value="#{row.agcpLevel}"
+                                           id="ot919"/>
+                          </af:column>
+                          <af:column sortProperty="agcpbrnName"
+                                     filterable="false" sortable="true"
+                                     headerText="Branch" id="c1">
+                            <af:outputText value="#{row.agcpbrnName}"
+                                           id="ot12"/>
+                          </af:column>
+                          <af:column sortProperty="agcpProddesc"
+                                     filterable="false" sortable="true"
+                                     headerText="Product" id="c13">
+                            <af:outputText value="#{row.agcpProddesc}"
+                                           id="ot16"/>
+                          </af:column>
+                          <af:column sortProperty="agcpCompetitionDesc"
+                                     filterable="false" sortable="true"
+                                     headerText="Competition Type" id="c10">
+                            <af:outputText value="#{row.agcpCompetitionDesc}"
+                                           id="ot13"/>
+                          </af:column>
+                          <af:column sortProperty="agcpTotalPolicies"
+                                     filterable="false" sortable="true"
+                                     headerText="No.of Policies" id="c3">
+                            <af:outputText value="#{row.agcpTotalPolicies}"
+                                           id="ot9"/>
+                          </af:column>
+                          <af:column sortProperty="agcpTotalPremium"
+                                     filterable="false" sortable="true"
+                                     headerText="Premium Income Amount" id="c8">
+                            <af:outputText value="#{row.agcpTotalPremium}"
+                                           id="ot10"/>
+                          </af:column>
+                          <af:column sortProperty="agcpPersitency"
+                                     filterable="false" sortable="true"
+                                     headerText="Agent Persistency" id="c11">
+                            <af:outputText value="#{row.agcpPersitency}"
+                                           id="ot14"/>
+                          </af:column>
+                          <af:column sortProperty="agcpPersitencyParam"
+                                     filterable="false" sortable="true"
+                                     headerText="Persistency Parameter(Years)"
+                                     id="c12">
+                            <af:outputText value="#{row.agcpPersitencyParam}"
+                                           id="ot15"/>
+                          </af:column>
+                          <af:column sortProperty="agcpWef" filterable="false"
+                                     sortable="true" headerText="Wef" id="c5">
+                            <af:outputText value="#{row.agcpWef}" id="ot7">
+                              <af:convertDateTime pattern="#{bindings.agentCompetitions.hints.agcpWef.format}"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="agcpWet" filterable="false"
+                                     sortable="true" headerText="Wet" id="c4">
+                            <af:outputText value="#{row.agcpWet}" id="ot5">
+                              <af:convertDateTime pattern="#{bindings.agentCompetitions.hints.agcpWet.format}"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="agcpRewardAmnt"
+                                     filterable="false" sortable="true"
+                                     headerText="Amount To Award" id="c9">
+                            <af:outputText value="#{row.agcpRewardAmnt}"
+                                           id="ot6"/>
+                          </af:column>
+                          <af:column sortProperty="agcpProdCode"
+                                     filterable="true" sortable="true"
+                                     headerText="#{bindings.agentCompetitions.hints.agcpProdCode.label}"
+                                     id="c2" rendered="false">
+                            <af:outputText value="#{row.agcpProdCode}"
+                                           id="ot3"/>
+                          </af:column>
+                          <af:column sortProperty="agcpBrnCode"
+                                     filterable="true" sortable="true"
+                                     headerText="#{bindings.agentCompetitions.hints.agcpBrnCode.label}"
+                                     id="c6" rendered="false">
+                            <af:outputText value="#{row.agcpBrnCode}" id="ot4"/>
+                          <af:outputText value="#{bindings.agcpCompetitionDesc.inputValue}"
+                                         id="ot2"/>
+                        </af:column>
+                        </af:table>
+                   
+                    </af:panelCollection>
+                    </af:panelBox>
+                  </f:facet>
+                </af:panelSplitter>
+              </af:panelBox>
+            </af:group>
+          </f:facet>
+        </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

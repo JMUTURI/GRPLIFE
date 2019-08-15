@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.56"
+          id="quotCoverTypes" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.quotCoverTypes" isJavaBased="true">
+  <Attribute Name="quocvtShtDesc" Type="java.lang.String"/>
+  <Attribute Name="quoQcvtSa" Type="java.lang.Double"/>
+  <Attribute Name="quoButChargePrem" Type="java.lang.Double"/>
+  <Attribute Name="quoDependents" Type="java.lang.String"/>
+  <Attribute Name="quoMembers" Type="java.lang.Integer"/>
+  <Attribute Name="discLoadRate" Type="java.lang.Integer"/>
+  <Attribute Name="quoQcvtRate" Type="java.lang.Double"/>
+  <Attribute Name="quoAvganb" Type="java.lang.Double"/>
+  <Attribute Name="quoQCVTwetDate" Type="java.util.Date"/>
+  <Attribute Name="quoQcvtAvgprd" Type="java.lang.Integer"/>
+  <Attribute Name="quoSaPerMember" Type="java.lang.Double"/>
+  <Attribute Name="quoUseUnitRate" Type="java.lang.String"/>
+  <Attribute Name="quoUnitRate" Type="java.lang.Double"/>
+  <Attribute Name="QCVT_PREMIUM" Type="java.lang.Double"/>
+  <Attribute Name="QCVT_LOAD_DISC" Type="java.lang.String"/>
+  <Attribute Name="QCVT_DISC_LOAD_DIV_FACT" Type="java.lang.Integer"/>
+  <Attribute Name="QCVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="cover_display" Type="java.lang.String"/>
+  <Attribute Name="QCVT_CVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="quoButChargePrem2" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.quotCoverTypes"
+                     BeanClass="LMSG.view.QuotationProcessing.quotCoverTypes" id="quotCoverTypes"/>
+</JavaBean>

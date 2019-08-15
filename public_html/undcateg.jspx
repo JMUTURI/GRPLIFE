@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+      </af:form>
+      <af:panelBox text="PanelBox1" id="pb1">
+        <f:facet name="toolbar"/>
+        <af:panelBox inlineStyle="width:627px; height:195px;"
+                     text="Policy Category And Depedent Limits Details"
+                     id="pb2">
+          <f:facet name="toolbar"/>
+          <af:table value="#{bindings.quotCategory.collectionModel}" var="row"
+                    rows="#{bindings.quotCategory.rangeSize}"
+                    emptyText="#{bindings.quotCategory.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.quotCategory.rangeSize}"
+                    selectedRowKeys="#{bindings.quotCategory.collectionModel.selectedRow}"
+                    selectionListener="#{underwritingManipulation.GetSelectedCategory}"
+                    rowSelection="single" inlineStyle="height:108px;"
+                    binding="#{underwritingManipulation.policyCategoriesLOV}"
+                    width="555" id="t1">
+            <af:column sortProperty="catShtDesc" sortable="true"
+                       headerText="ID" id="c1">
+              <af:outputText value="#{row.catShtDesc}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="catDesc" sortable="true"
+                       headerText="CATEGORY" width="200" id="c2">
+              <af:outputText value="#{row.catDesc}" id="ot2"/>
+            </af:column>
+            <af:column sortProperty="catPeriod" sortable="true"
+                       headerText="PERIOD" id="c3">
+              <af:outputText value="#{row.catPeriod}" id="ot3"/>
+            </af:column>
+            <af:column id="c4">
+              <af:commandButton icon="/icon_delete.gif"
+                                action="#{underwritingManipulation.DeletePolicyCategory}"
+                                id="cb1"/>
+            </af:column>
+          </af:table>
+          <h:panelGrid columns="3" width="10%" id="pg1">
+            <af:commandButton text="Add" id="cb2">
+              <af:showPopupBehavior popupId="polCategPopup"/>
+            </af:commandButton>
+            <af:commandButton text="Edit"
+                              action="#{underwritingManipulation.AttachCategories}"
+                              id="cb3">
+              <af:showPopupBehavior popupId="polCategPopup"/>
+            </af:commandButton>
+            <af:popup id="polCategPopup">
+              <af:dialog type="none" title="Enter Category Details" id="d2">
+                <h:panelGrid columns="2" id="pg2">
+                  <af:outputLabel value="ID" id="ol1"/>
+                  <af:inputText label="Label 1" simple="true" columns="15"
+                                binding="#{underwritingManipulation.categIDDisplay}"
+                                id="it1"/>
+                  <af:outputLabel value="Description" id="ol2"/>
+                  <af:inputText label="Label 2" columns="15" simple="true"
+                                binding="#{underwritingManipulation.categDescriptionDisplay}"
+                                id="it2"/>
+                  <af:outputLabel value="Period" id="ol3"/>
+                  <af:inputText label="Label 3"
+                                binding="#{underwritingManipulation.categPeriodDisplay}"
+                                simple="true" columns="15" id="it3"/>
+                  <af:commandButton text="Save"
+                                    action="#{underwritingManipulation.SavePolicyCategory}"
+                                    id="cb4"/>
+                  <af:commandButton text="Cancel" id="cb5"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+          </h:panelGrid>
+        </af:panelBox>
+        <af:panelBox text="Policy Dependent Limits"
+                     inlineStyle="width:623px; height:167px;" id="pb3">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="3" width="10%" id="pg3">
+            <af:commandButton text="Add" id="cb6">
+              <af:showPopupBehavior popupId="RelationsPopup"/>
+            </af:commandButton>
+            <af:commandButton text="Edit" id="cb7"/>
+            <af:popup id="RelationsPopup">
+              <af:dialog type="none" title="Select Dependent Type" id="d3">
+                <h:panelGrid columns="3" id="pg4">
+                  <af:outputLabel value="Category" id="ol4"/>
+                  <af:inputText label="Label 8" columns="15" simple="true"
+                                id="dpdCategory"
+                                binding="#{underwritingManipulation.dpdCatDescDisp}"/>
+                  <h:panelGrid columns="2" id="pg5">
+                    <af:commandButton icon="/dropdown.gif" id="cb8">
+                      <af:showPopupBehavior popupId="dpdCategoryPopup"/>
+                    </af:commandButton>
+                    <af:popup id="dpdCategoryPopup">
+                      <af:dialog type="none" title="Select Category" id="d4">
+                        <af:table value="#{bindings.quotCategory1.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.quotCategory1.rangeSize}"
+                                  emptyText="#{bindings.quotCategory1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.quotCategory1.rangeSize}"
+                                  selectedRowKeys="#{bindings.quotCategory1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.quotCategory1.collectionModel.makeCurrent}"
+                                  rowSelection="single"
+                                  inlineStyle="height:196px;" width="280"
+                                  binding="#{underwritingManipulation.dpdCategoryLOV}"
+                                  id="t2">
+                          <af:column sortProperty="catDesc" sortable="true"
+                                     headerText="CATEGORY" width="150" id="c5">
+                            <af:outputText value="#{row.catDesc}" id="ot4"/>
+                          </af:column>
+                          <af:column sortProperty="catPeriod" sortable="true"
+                                     headerText="PERIOD" width="120" id="c6">
+                            <af:outputText value="#{row.catPeriod}" id="ot5"/>
+                          </af:column>
+                        </af:table>
+                        <af:commandButton text="OK"
+                                          action="#{underwritingManipulation.AssignDependentCategory}"
+                                          id="dpdCategorybtn"/>
+                        <af:commandButton text="Cancel" id="cb9"/>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:outputLabel value="Cover Type" id="ol5"/>
+                  <af:inputText label="Label 7" columns="15" simple="true"
+                                binding="#{underwritingManipulation.dpdCoverType}"
+                                id="dpdCoverTypesDisp"/>
+                  <h:panelGrid columns="2" id="pg6">
+                    <af:commandButton icon="/dropdown.gif" id="cb10">
+                      <af:showPopupBehavior popupId="dpdCoverTypesPopup"/>
+                    </af:commandButton>
+                    <af:popup id="dpdCoverTypesPopup">
+                      <af:dialog type="none" title="Select Cover Type" id="d5">
+                        <af:table value="#{bindings.policyCoverTypes.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.policyCoverTypes.rangeSize}"
+                                  emptyText="#{bindings.policyCoverTypes.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.policyCoverTypes.rangeSize}"
+                                  selectedRowKeys="#{bindings.policyCoverTypes.collectionModel.selectedRow}"
+                                  rowSelection="single"
+                                  inlineStyle="height:63px;" width="224"
+                                  binding="#{underwritingManipulation.dpdsCoverTypesLOV}"
+                                  id="dpdCoverTypes">
+                          <af:column sortProperty="PCVT_CVT_SHT_DESC"
+                                     sortable="true"
+                                     headerText="COVER DESCRIPTION"
+                                     inlineStyle="width:100%;" width="200"
+                                     id="c7">
+                            <af:outputText value="#{row.PCVT_CVT_SHT_DESC}"
+                                           id="ot6"/>
+                          </af:column>
+                        </af:table>
+                        <af:commandButton text="OK"
+                                          action="#{underwritingManipulation.AttachDependentCoverTypes}"
+                                          id="cb11"/>
+                        <af:commandButton text="Cancel" id="cb12"/>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:outputLabel value="Dependent Type" id="ol6"/>
+                  <af:inputText label="Label 4" columns="15" simple="true"
+                                binding="#{underwritingManipulation.dependentTypeDisplay}"
+                                id="it4"/>
+                  <af:commandButton icon="/dropdown.gif" id="cb13">
+                    <af:showPopupBehavior popupId="dependentTypesPopup"/>
+                  </af:commandButton>
+                  <af:outputLabel value="Limit Amount" id="ol7"/>
+                  <af:inputText label="Label 5" simple="true" columns="15"
+                                binding="#{underwritingManipulation.limitAmountDisplay}"
+                                id="it5"/>
+                  <af:popup id="dependentTypesPopup">
+                    <af:dialog type="none" id="d6">
+                      <af:table value="#{bindings.dependents.collectionModel}"
+                                var="row"
+                                rows="#{bindings.dependents.rangeSize}"
+                                emptyText="#{bindings.dependents.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.dependents.rangeSize}"
+                                selectedRowKeys="#{bindings.dependents.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.dependents.collectionModel.makeCurrent}"
+                                rowSelection="single"
+                                inlineStyle="height:109px;" width="214"
+                                binding="#{underwritingManipulation.dependentTypesLOV}"
+                                id="t3">
+                        <af:column sortProperty="DTY_DESCRIPTION"
+                                   sortable="true" headerText="DESCRIPTION"
+                                   id="c8">
+                          <af:outputText value="#{row.DTY_DESCRIPTION}"
+                                         id="ot7"/>
+                        </af:column>
+                        <af:column sortProperty="PCD_MAX_NO_ALLOWED"
+                                   sortable="true" headerText="MAX ALLOWED"
+                                   id="c9">
+                          <af:outputText value="#{row.PCD_MAX_NO_ALLOWED}"
+                                         id="ot8"/>
+                        </af:column>
+                      </af:table>
+                      <af:commandButton text="Save"
+                                        action="#{underwritingManipulation.AttachDependentTypes}"
+                                        id="cb14"/>
+                      <af:commandButton text="Cancel" id="cb15"/>
+                    </af:dialog>
+                  </af:popup>
+                  <af:outputLabel value="Number" id="ol8"/>
+                  <af:inputText label="Label 6" simple="true" columns="15"
+                                binding="#{underwritingManipulation.maxTypeDisplay}"
+                                id="it6"/>
+                </h:panelGrid>
+                <af:commandButton text="OK"
+                                  action="#{underwritingManipulation.SaveDependentLimit}"
+                                  id="cb16"/>
+                <af:commandButton text="Cancel" id="cb17"/>
+              </af:dialog>
+            </af:popup>
+          </h:panelGrid>
+          <h:panelGrid columns="2" id="pg7">
+            <af:table value="#{bindings.dependentLimits.collectionModel}"
+                      var="row" rows="#{bindings.dependentLimits.rangeSize}"
+                      emptyText="#{bindings.dependentLimits.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.dependentLimits.rangeSize}"
+                      selectedRowKeys="#{bindings.dependentLimits.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.dependentLimits.collectionModel.makeCurrent}"
+                      rowSelection="single" inlineStyle="height:94px;"
+                      binding="#{underwritingManipulation.policyDependentLimitsLOV}"
+                      width="600" id="t4">
+              <af:column sortProperty="DTY_DESCRIPTION" sortable="true"
+                         headerText="RELATION DISPLAY" width="200" id="c10">
+                <af:outputText value="#{row.DTY_DESCRIPTION}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="QDL_MAX_TYPE_ALLOWED" sortable="true"
+                         headerText="MAX TYPE NO " id="c11">
+                <af:outputText value="#{row.QDL_MAX_TYPE_ALLOWED}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="QDL_LIMIT_AMT" sortable="true"
+                         headerText="LIMIT AMOUNT" id="c12">
+                <af:outputText value="#{row.QDL_LIMIT_AMT}" id="ot11"/>
+              </af:column>
+              <af:column id="c13">
+                <af:commandButton icon="/icon_delete.gif"
+                                  action="#{underwritingManipulation.DeletePolicyDependentLimits}"
+                                  id="cb18"/>
+              </af:column>
+            </af:table>
+            <af:outputText id="ot12"/>
+          </h:panelGrid>
+          <af:commandButton text="Next"
+                            action="#{underwritingManipulation.ShowPolicyDocuments}"
+                            id="cb19"/>
+          <af:commandButton text="Back" id="cb20"/>
+        </af:panelBox>
+      </af:panelBox>
+    </af:document>
+  </f:view>
+</jsp:root>

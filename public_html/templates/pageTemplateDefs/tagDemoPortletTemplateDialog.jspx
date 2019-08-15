@@ -1,0 +1,387 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:afh="http://myfaces.apache.org/trinidad/html"
+          version="1.2" xmlns:h="http://java.sun.com/jsf/html">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+   <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <description>This component lays out an entire page.</description>
+        <facet>
+          <description>
+            <![CDATA[Content to be rendered as meta data inside the "head" section.]]>
+          </description>
+          <facet-name>metaContainer</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The center content.]]>
+          </description>
+          <facet-name>center</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The auxiliary content for the global layer.]]>
+          </description>
+          <facet-name>auxiliaryGlobal</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[The global contextual region of the page.]]>
+          </description>
+          <facet-name>contextGlobal</facet-name>
+        </facet>
+        <facet>
+          <description>
+            <![CDATA[An optional horizontally oriented region of contexual components for the main content.]]>
+          </description>
+          <facet-name>contextLocal</facet-name>
+        </facet>
+        <attribute>
+          <description>The title of the HTML document</description>
+          <attribute-name>documentTitle</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>If true, the margin and padding are set to 0px.</description>
+          <attribute-name>maximized</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>true</default-value>
+        </attribute>
+        <attribute>
+          <description>the id attribute of the command button inside the form whose action should be
+                       invoked by default, when the enter key is pressed with focus inside the form.
+                       Identifiers are relative to the form component, and must account for
+                       NamingContainers. You can use a single colon to start the search from the
+                       root.</description>
+          <attribute-name>defaultCommand</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>the id of the component to which you want the focus to be when the full page
+                       renders. The accessibility-mode must not be set to "screenReader" for this
+                       feature to be on.</description>
+          <attribute-name>initialFocusId</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>whether the form supports file upload.</description>
+          <attribute-name>usesUpload</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the name of the component tag.</description>
+          <attribute-name>tagName</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>Specifies the name of the visual design demo.</description>
+          <attribute-name>visualDesignName</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels that the editor content should consume (this
+                       is a width if the orientationis "start" or "end" or a height if the
+                       orientation is "bottom").</description>
+          <attribute-name>editorSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>340</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels that the auxiliaryGlobal content should
+                       consume (this is a width if the orientationis "start" or "end" or a height if
+                       the orientation is "bottom").</description>
+          <attribute-name>auxiliaryGlobalSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>200</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the global content should consume.</description>
+          <attribute-name>headerGlobalSize</attribute-name>
+          <attribute-class>int</attribute-class>
+          <default-value>30</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the number of pixels tall that the secondary header content should
+                       consume.</description>
+          <attribute-name>header2Size</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>18</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies whether or not to hide the built-in editor.</description>
+          <attribute-name>customEditorPresent</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <description>Specifies the kind of demo the tag represents.</description>
+          <attribute-name>demoKind</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>Specifies a custom inlineStyle for the visible root element of the layout.</description>
+          <attribute-name>rootInlineStyle</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+        </attribute>
+        <attribute>
+          <description>For purposes of the component demo, if the current page is the document demo
+                       page.</description>
+          <attribute-name>editingDocument</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+        <attribute>
+          <description>For purposes of the component demo, if the current page is the form demo page.</description>
+          <attribute-name>editingForm</attribute-name>
+          <attribute-class>boolean</attribute-class>
+          <default-value>false</default-value>
+        </attribute>
+      </component>
+       </af:xmlContent>
+         <af:document
+      theme="dark"
+                 inlineStyle="width:100%; height:100%;"
+                      title="TurnQuest Group life">
+      <af:messages/>
+      <f:facet name="metaContainer">
+        <af:group>
+          <h:outputText value="&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;#{facesContext.externalContext.requestContextPath}/images/favicon.png&quot;>"
+                        escape="false"/>
+          <h:outputText value="&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;#{facesContext.externalContext.requestContextPath}/images/touchicon.png&quot;>"
+                        escape="false"/>
+          
+          <af:facetRef facetName="metaContainer"/>
+        </af:group>
+      </f:facet>
+      <af:form usesUpload="true">
+        <af:panelStretchLayout
+          theme="dark"
+          styleClass="AFVisualRoot"
+          inlineStyle="#{attrs.rootInlineStyle}">
+          <f:facet name="center">
+            <af:panelSplitter orientation="vertical" splitterPosition="56"
+                              collapsed="true">
+              <f:facet name="first">
+                <af:panelGroupLayout layout="scroll">
+                  <afh:tableLayout width="100%">
+                    <afh:rowLayout>
+                      <afh:cellFormat styleClass="AFBranding">
+                        <af:panelGroupLayout layout="horizontal" shortDesc="branding">
+                          <af:icon shortDesc="Oracle"/>
+                          <af:image shortDesc="Turnkey Africa"
+                                    source="/images/logo.gif"
+                                    inlineStyle="background-color:White;"/>
+                        </af:panelGroupLayout>
+                      </afh:cellFormat>
+                    </afh:rowLayout>
+                  </afh:tableLayout>
+                  <af:facetRef facetName="contextGlobal"/>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="second">
+                <af:panelSplitter orientation="horizontal"
+                                  splitterPosition="#{attrs.auxiliaryGlobalSize}"
+                                  collapsed="true">
+                  <f:facet name="first">
+                    <af:facetRef facetName="auxiliaryGlobal"/>
+                  </f:facet>
+                  <f:facet name="second">
+                    <af:decorativeBox
+                      topHeight="26"
+                      theme="light">
+                      <f:facet name="top">
+                        <af:panelStretchLayout
+                          startWidth="5px">
+                          <f:facet name="start">
+                            <af:spacer/>
+                          </f:facet>
+                          <f:facet name="center">
+                            <af:group>
+                              <table cellspacing="3" cellpadding="2" border="0"
+                                     width="100%">
+                                <tr>
+                                  <td width="100%" valign="top" align="right">
+                                   <h:panelGrid columns="7"
+                                                 style="text-align:right; vertical-align:top; border-color:White; border-width:thin;">
+                                      <af:outputLabel value="Logged in As:"
+                                                      inlineStyle="font-weight:bold; color:rgb(158,199,243);"/>
+                                      <af:outputText value="#{login.usernameValue}"
+                                                     inlineStyle="font-weight:bold; color:ActiveBorder;"/>
+                                      <af:spacer width="10" height="10"/>
+                                      <af:outputLabel value="Last Login:"
+                                                      inlineStyle="font-weight:bold; color:rgb(158,199,243);"/>
+                                      <af:outputText value="#{login.loginDate}"
+                                                     inlineStyle="font-weight:bold; color:ActiveBorder;">
+                                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                      </af:outputText>
+                                      <af:spacer width="50" height="10"/>
+                                      <af:commandLink text="[ Log Out ]"
+                                                      inlineStyle="color:White; text-decoration:underline; font-weight:bold;"
+                                                      action="#{authentication.logOut}"/>
+                                    </h:panelGrid>
+                                  </td>
+                                </tr>
+                              </table>
+                              <af:spacer width="10" height="10"/>
+                            </af:group>
+                          </f:facet>
+                          </af:panelStretchLayout>
+                        </f:facet>
+                        <f:facet name="center">
+                          <!-- skinning changes splitter not available in portlet version -->
+                          <af:panelStretchLayout topHeight="#{attrs.header2Size}">
+                            <f:facet name="top">
+                              <af:panelGroupLayout layout="vertical">
+                                <af:breadCrumbs inlineStyle="margin: 0 6px 0 6px; display: block;">
+                               
+                                  <!--
+                                  <af:menu text="Document Management"
+                                           inlineStyle="color:Black;">
+                                    <af:commandMenuItem text="My Documents"
+                                                        action="#{navigation.documentManagement}"/>
+                                                       
+                                  </af:menu>
+                                  </af:menuBar>-->
+                                  <!--<af:menu text="Quotations"
+                                           inlineStyle="color:Black;">
+                                    <af:commandMenuItem text="Create Quotation"
+                                                        action="#{navigation.createQuotation}"/>
+                                    <af:commandMenuItem text="View All Successful Quotations"
+                                                        action="#{navigation.viewSuccessfulQuotations}"/>
+                                    <af:commandMenuItem text="View All Authorised but not Successful Quotations"
+                                                        action="#{navigation.viewAllAuthorisedButNotSuccessfulQuotations}"/>
+                                    <af:commandMenuItem text="View UnAuthorised Quotations"
+                                                        action="#{navigation.viewUnAuthorisedQuotations}"/>
+                                    
+                                  </af:menu>
+                                  <af:menu text="Policy Management">
+                                    <af:commandMenuItem text="Create New Policy"
+                                                        action="#{navigation.createPolicy}"/>
+                                    <af:commandMenuItem text="Search Policy"
+                                                        action="#{navigation.policyEnquiry}"/>
+                                  </af:menu>
+                                  <af:menu text="Claims">
+                                    <af:commandMenuItem text="Create Claim"
+                                                        action="#{navigation.createClaim}"/>
+                                    <af:commandMenuItem text="View Claims"
+                                                        action="#{navigation.viewClaims}"/>
+                                  </af:menu>
+                                  <af:menu text="Renewal Management"
+                                           id="renewalManagement">
+                                    <af:commandMenuItem text="Policies Due For Renewal"
+                                                        action="#{navigation.policiesDueForRenewal}"/>
+                                    <af:commandMenuItem text="Policies Cleared For Renewal"
+                                                        action="#{navigation.policiesClearedForRenewal}"/>
+                                  </af:menu>
+                                  <af:menu text="Accounts">
+                                    <af:commandMenuItem text="View Authorised Transactions"
+                                                        action="#{navigation.viewAuthorisedTransactions}"/>
+                                    <af:commandMenuItem text="View UnAuthorised Transactions"
+                                                        action="#{navigation.viewUnauthorisedTransactions}"/>
+                                    <af:commandMenuItem text="Account Statement"
+                                                        action="#{navigation.accountStatement}"/>
+                                  </af:menu>
+                                  <af:menu text="Inbox">
+                                    <af:commandMenuItem text="My Incidences"/>
+                                  </af:menu>
+                                </af:menuBar>-->
+                                
+                              </af:breadCrumbs>
+                                <af:facetRef facetName="contextLocal"/>
+                              <af:outputLabel value="outputLabel1"/>
+                            </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="center">
+                              <af:panelSplitter orientation="horizontal"
+                                                splitterPosition="#{Rendering.splitterPos}"
+                                                positionedFromEnd="true"
+                                                collapsed="true">
+                                <f:facet name="second">
+                                  <af:panelGroupLayout layout="scroll"
+                                                       rendered="#{!attrs.customEditorPresent}">
+                                    <f:subview id="editor" rendered="#{attrs.demoKind!='styles'}">
+                                    <table cellspacing="0"
+                                           border="0" width="80%"
+                                           align="center">
+                                      <tr>
+                                        <td width="100%">
+                                          <af:panelFormLayout>
+                                            <af:outputLabel value="#{bindings.header.inputValue}"
+                                                            inlineStyle="font-size:small; font-weight:bold; color:Black;"
+                                                            rendered="false"/>
+                                            <af:inputText id="contents"
+                                                          contentStyle="font-weight:bold;background: rgb(198,198,255);"
+                                                          value="#{bindings.content.inputValue}"
+                                                          simple="true"
+                                                          readOnly="true"
+                                                          rows="30"
+                                                          columns="50"
+                                                          disabled="true"
+                                                          inlineStyle="font-weight:bold;"
+                                                          rendered="false"/>
+                                          </af:panelFormLayout>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                    <!--<af:panelBox text="PanelBox1"
+                                                 showHeader="never">
+                                      <f:facet name="toolbar"/>
+                                      <h:panelGrid columns="3">
+                                        <af:outputText value="#{bindings.tasks.inputValue}"
+                                                       inlineStyle="font-weight:bold;"/>
+                                        <af:spacer width="10" height="10"/>
+                                        <af:image source="/images/email.gif"
+                                                  rendered="#{Rendering.tasksRendered}"/>
+                                      </h:panelGrid>
+                                    </af:panelBox>-->
+                                  </f:subview>
+                                    <!-- styles editor not available in portlet version -->
+                                  </af:panelGroupLayout>
+                                </f:facet>
+                                <f:facet name="first">
+                                  <af:decorativeBox
+                                    theme="default">
+                                    <f:facet name="center">
+                                      <af:panelStretchLayout inlineStyle="background-color:transparent;"
+                                                             bottomHeight="20px"
+                                                             endWidth="20px">
+                                        <!-- skipLinkTarget not available in portlet version -->
+                                        <f:facet name="center">
+                                          <af:facetRef facetName="center"/>
+                                        </f:facet>
+                                        <f:facet name="bottom">
+                                          <!-- Don't stretch the button -->
+                                          <af:panelGroupLayout layout="vertical"
+                                                               halign="center"
+                                                               theme="light"
+                                                               inlineStyle="background-color:transparent;">
+                                          <af:outputLabel value="Turnkey Africa"/>
+                                        </af:panelGroupLayout>
+                                        </f:facet>
+                                      </af:panelStretchLayout>
+                                    </f:facet>
+                                  </af:decorativeBox>
+                                </f:facet>
+                              </af:panelSplitter>
+                              <!-- end of secondary auxiliary splitter -->
+                            </f:facet>
+                          </af:panelStretchLayout>
+                          <!-- end of secondary header layout -->
+                          <!-- skinning changes splitter not available in portlet version -->
+                      </f:facet>
+                    </af:decorativeBox>
+                  </f:facet>
+                </af:panelSplitter>
+              </f:facet>
+            </af:panelSplitter>
+            <!-- end of global top splitter -->
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </af:pageTemplateDef>
+</jsp:root>

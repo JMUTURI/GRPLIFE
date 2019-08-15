@@ -1,0 +1,7 @@
+1) Navigate to the following path on the deployment,
+   classes\LMSG\view\QuotationProcessing
+2) Update the file QuotManipulation.class with the one in the folder named GRP-1638.
+
+****************************************
+GOOD LUCK
+****************************************

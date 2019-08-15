@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Underwriting Reports">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="height:600px; width:100.0%;">
+              <af:showDetailItem text="System Reports" id="sdi1">
+                <f:facet name="toolbar">
+                  <af:group id="g1">
+                    <h:panelGrid columns="2" id="pg23">
+                      <af:inputText id="inputText2" columns="13"
+                                    helpTopicId="GISReports" shortDesc="Help"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si1"/>
+                    </h:panelGrid>
+                  </af:group>
+                </f:facet>
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                  <af:panelBox text="Select Report" id="pb1"
+                               inlineStyle="width:98.0%;" showDisclosure="false"
+                               showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="3" id="pg1" columnClasses="UWWidth">
+                      <h:panelGrid columns="1" id="pg8">
+                        <h:panelGrid columns="1" id="pg2">
+                          <af:separator id="separator12"/>
+                          <af:outputLabel value="Underwriting Reports"
+                                          id="outputLabel6"
+                                          inlineStyle="font-weight:bold;"/>
+                          <af:separator id="separator13"/>
+                        </h:panelGrid>
+                        <af:spacer id="s1"/>
+                        <af:commandLink text="AKI Listed Risks" id="rpt2446"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Cancelled Policies summary"
+                                        id="rpt2166"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Current Loan Balances"
+                                        id="rpt1094"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                         rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Earnings Costing Schedule"
+                                        id="rpt224"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="EGL, FE Premium Schedule"
+                                        id="rpt1119"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="EGL Funeral Expense Document"
+                                        id="rpt1120"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="EGL Schedule Adjustments Report"
+                                        id="rpt1127"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Funeral Expense Schedule of Members"
+                                        id="rpt1117"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Group Valuation Report"
+                                        id="rpt2251"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Loans Costing Schedule"
+                                        id="rpt1095"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="LOANS Shedule Adjustments Report"
+                                        id="rpt1129"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="LG/MEPIP &amp; Funeral Expense Document"
+                                        id="rpt1121"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="LG/MEPIP Savings Benefit Document"
+                                        id="rpt1122"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="MF - Underwriting" id="rpt1126"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Monthly Schedule" id="rpt1098"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="New Entrant Schedule" id="rpt2154"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                       <af:commandLink text="Activity Tracker" id="rpt4270"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.expressVisible}"/>                
+                      </h:panelGrid>
+                      <h:panelGrid columns="1">
+                        <af:spacer id="spc2"/>
+                        <af:spacer id="spc3"/>
+                        <af:commandLink text="Outstanding Monthly Schedules"
+                                        id="rpt1125"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Policy Report" id="rpt1097"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Policy Schedules" id="prpt1087"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Premium Listing Per Product"
+                                        id="rpt1096"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Premium Summary Per Policy"
+                                        id="rpt1941"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Register of Lives" id="rpt2227"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Renewal Summary" id="rpt2161"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Savings/Share Schedule"
+                                        id="rpt1123"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Schedules due" id="rpt1116"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Scheme Register" id="rpt2032"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Submitted Schedule Position Report"
+                                        id="rpt1115"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Cheque Dispatcher Report"
+                                                    id="rpt4517"
+                                                    actionListener="#{reportParameterBean.paramReport}"
+													rendered="#{Rendering.mickVisible}"/>
+						<af:commandLink text="Sum Assured Report" id="rpt2237"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Underwriting Costing Schedule"
+                                        id="rpt1124"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Unutilised Premium Report"
+                                        id="rpt2246"
+                                        actionListener="#{reportParameterBean.paramReport}"
+										rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Withdrawn Member Schedule"
+                                        id="rpt2156"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Medical Cheque Requisiton Form" id="rpt327603"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Medical Cheque Dispatch Letter" id="rpt327604"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                         <af:commandLink text="Group Business Valuation Report" id="rpt25522"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Written Premium" id="rpt2257"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                        rendered="#{Rendering.expressVisible}"/>
+                       <af:commandLink text="UWritten Premium" id="rpt4242"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                        rendered="#{Rendering.expressVisible}"/>    
+                       <af:commandLink text="Current Loan Balances" id="rpt2250133496"
+                                        actionListener="#{reportParameterBean.paramReport}"/>               
+                      </h:panelGrid>
+                      <!--<af:spacer width="20px" id="s1"/>
+                     <h:panelGrid id="pg2" columns="1">
+                      <af:commandLink text="Group Life New Scheme Register"
+                                        id="cl1"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                      </h:panelGrid>-->
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+            <af:popup id="paramReport">
+              <af:dialog id="d13" title="Report Parameters" type="none"
+                         closeIconVisible="false">
+                <af:panelGroupLayout id="pgl4" layout="scroll"
+                                     binding="#{reportParameterBean.dtls}">
+                  <h:panelGrid id="pg2541"
+                               binding="#{reportParameterBean.mainParent}"/>
+                  <af:selectOneRadio label="Label 1" id="selectOneRadio1"
+                                     binding="#{reportParameterBean.reportType}"
+                                     simple="true" layout="horizontal"
+                                     autoSubmit="true"
+                                     valueChangeListener="#{reportParameterBean.changeReportType}"
+                                     value="pdf">
+                    <af:selectItem label="Html" value="html" id="si51"/>
+                    <af:selectItem label="Pdf" value="pdf" id="si21"/>
+                    <af:selectItem label="Excel" value="xls" id="si41"/>
+                    <af:selectItem label="Word Document (rtf)" value="rtf"
+                                   id="si31"/>
+                  </af:selectOneRadio>
+                  <h:panelGrid columns="2" id="pg3">
+                    <af:commandButton text="Print" id="cb1"
+                                      action="#{reportParameterBean.genRpt}"/>
+                    <af:commandButton text="Cancel" id="cb40"
+                                      action="#{reportParameterBean.RemoveReportComponents}"/>
+                    <af:inputDate label="Label 1" id="id1"
+                                  binding="#{reportParameterBean.myTest}"
+                                  visible="false">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </af:dialog>
+            </af:popup>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

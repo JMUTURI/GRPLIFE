@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="okQuotationsDAO" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.okQuotationsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.okQuotations"
+                  BeanClass="LMSG.view.QuotationProcessing.okQuotations" id="FindOkQuotations"
+                  ReturnNodeName="okQuotations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.okQuotationsDAO"
+                     BeanClass="LMSG.view.QuotationProcessing.okQuotationsDAO"
+                     id="okQuotationsDAO"/>
+</JavaBean>

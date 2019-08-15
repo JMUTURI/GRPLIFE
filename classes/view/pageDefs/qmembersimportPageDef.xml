@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="qmembersimportPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="root" RangeSize="25" DataControl="policiesDAO"
+              id="policiesDAOIterator"/>
+    <methodIterator Binds="findPolicyImportBatches.result"
+                    DataControl="policiesDAO" RangeSize="-1"
+                    BeanClass="LMSG.view.Policy.policies"
+                    id="findPolicyImportBatchesIter"/>
+    <methodIterator Binds="findInvalidMembers.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="findInvalidMembersIterator"/>
+    <searchRegion Binds="findInvalidMembersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+  </executables>
+  <bindings>
+    <list IterBinding="policiesDAOIterator" id="lmitCode" DTSupportsMRU="true"
+          StaticList="false" ListIter="findPolicyImportBatchesIter">
+      <AttrNames>
+        <Item Value="lmitCode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="LMIT_CODE"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="DESCRIPTION"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="findPolicyImportBatches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolicyImportBatches"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="data.policiesDAO.methodResults.findPolicyImportBatches_policiesDAO_dataProvider_findPolicyImportBatches_result"/>
+    <methodAction id="findInvalidMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findInvalidMembers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="data.policiesDAO.methodResults.findInvalidMembers_policiesDAO_dataProvider_findInvalidMembers_result"/>
+    <tree IterBinding="findInvalidMembersIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="LMID_MEM_NO"/>
+          <Item Value="LMID_MEM_SURNAME"/>
+          <Item Value="LMID_MEM_OTHERNAMES"/>
+          <Item Value="LMID_MEM_DOB"/>
+          <Item Value="LMID_MEM_ANB"/>
+          <Item Value="LMID_MEM_SEX"/>
+          <Item Value="LMID_MEM_CATEGORY"/>
+          <Item Value="LMID_EARNINGS"/>
+          <Item Value="LMID_CODE"/>
+          <Item Value="LMID_LMIT_CODE"/>
+          <Item Value="LMID_MAIN_MEM_NO"/>
+          <Item Value="LMID_DEP_TYPE"/>
+          <Item Value="LMID_ID_NO"/>
+          <Item Value="LMID_MULT_EARNINGS_PRD"/>
+          <Item Value="LIMD_DATE_JOINED"/>
+          <Item Value="LMID_MEM_OCCUPATION"/>
+          <Item Value="LMID_REMARKS"/>
+          <Item Value="LMID_STATUS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

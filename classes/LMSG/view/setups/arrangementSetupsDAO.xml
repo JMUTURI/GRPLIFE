@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="arrangementSetupsDAO" Package="LMSG.view.setups"
+          BeanClass="LMSG.view.setups.arrangementSetupsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.setups.arrangementSetups"
+                  BeanClass="LMSG.view.setups.arrangementSetups"
+                  id="findArrangementSetups" ReturnNodeName="arrangementSetups"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.setups.arrangementSetupsDAO"
+                     BeanClass="LMSG.view.setups.arrangementSetupsDAO"
+                     id="arrangementSetupsDAO"/>
+</JavaBean>

@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="RI Rates" id="d3">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                               id="pgl4">
+            <af:panelBox text="Reinsurance Rates" showHeader="never" id="pb15">
+              <f:facet name="toolbar"/>
+              <af:inputText id="it3" helpTopicId="LmsGrp_RIREDBAL"
+                            readOnly="true"/>
+              <af:outputLabel value="Reinsurance Rates" id="ol1"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator id="s1"/>
+              <af:spacer width="10" height="10" id="s2"/>
+              <h:panelGrid columns="1" id="panelGrid2"
+                           rendered="#{Rendering.classSpecific}">
+                <af:outputLabel value="Class" id="outputLabel5"
+                                inlineStyle="font-weight:bold;"/>
+                <af:spacer width="10" height="10" id="spacer5"/>
+              </h:panelGrid>
+              <h:panelGrid columns="3" id="pg3"
+                           rendered="#{Rendering.classSpecific}">
+                <af:outputLabel value="Id." id="ol2"/>
+                <af:inputText label="Label 1" id="it1" simple="true"
+                              disabled="true" binding="#{otherSetups.classId}"/>
+                <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="p1"/>
+                </af:commandButton>
+                <af:popup id="p1">
+                  <af:dialog id="d1" type="none" title="Life Classes">
+                    <af:table value="#{bindings.Setup2.collectionModel}"
+                              var="row" rows="#{bindings.Setup2.rangeSize}"
+                              emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Setup2.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t3"
+                              binding="#{otherSetups.groupLOV}">
+                      <af:column sortProperty="LC_DESC" sortable="true"
+                                 headerText="Description" id="c10" width="300">
+                        <af:outputText value="#{row.LC_DESC}" id="ot11"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg4">
+                      <af:commandButton text="OK" id="cb2"
+                                        action="#{otherSetups.findGroupSelected}"/>
+                      <af:commandButton text="Cancel" id="commandButton1"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </h:panelGrid>
+              <h:panelGrid columns="2" id="pg1">
+                <af:outputLabel value="Rates Description" id="outputLabel1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:spacer width="10" height="10" id="spacer3"/>
+              </h:panelGrid>
+              <h:panelGrid columns="3" id="pg12">
+                <af:commandButton id="cb19" icon="/images/new_dwn_rtl.png"
+                                  action="#{otherSetups.AddRIRateDesc}"
+                                  text="New"/>
+                <af:commandButton icon="/images/update_ena.png"
+                                  id="commandButton11"
+                                  action="#{otherSetups.EditRIRateDesc}"
+                                  text="Edit"/>
+                <af:commandButton id="cb22" icon="/images/delete_ena.png"
+                                  action="#{otherSetups.DeleteRIRateDesc}"
+                                  text="Delete"/>
+              </h:panelGrid>
+              <af:popup id="rirate">
+                <af:dialog id="d2" type="none" title="RI Rate Description">
+                  <h:panelGrid columns="2" id="pg5">
+                    <af:outputLabel value="Id." id="ol3"/>
+                    <af:inputText label="Label 2" id="it2" simple="true"
+                                  binding="#{otherSetups.id}"
+                                  shortDesc="RI Rate ID"/>
+                    <af:outputLabel value="Description" id="outputLabel3"/>
+                    <af:inputText label="Label 2" id="inputText1" simple="true"
+                                  binding="#{otherSetups.desc}"
+                                  shortDesc="RI Rate Description"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg6">
+                    <af:commandButton text="Save" id="cb3"
+                                      action="#{otherSetups.SaveRIRateDesc}"/>
+                    <af:commandButton text="Cancel" id="commandButton5"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+              <h:panelGrid columns="2" id="pg2" style="width:100.0%;">
+                <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                          rows="#{bindings.Setup.rangeSize}"
+                          emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup.rangeSize}"
+                          rowBandingInterval="0"
+                          selectionListener="#{otherSetups.RIRatesListener}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:100%; height:100px; border-style:none;"
+                          binding="#{otherSetups.riRatesDescLOV}">
+                  <af:column sortProperty="ORRP_SHT_DESC" sortable="true"
+                             headerText="Id." id="c1">
+                    <af:outputText value="#{row.ORRP_SHT_DESC}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="ORRP_DESC" sortable="true"
+                             headerText="Description" id="c2" width="300">
+                    <af:outputText value="#{row.ORRP_DESC}" id="ot2"/>
+                  </af:column>
+                </af:table>
+              </h:panelGrid>
+              <h:panelGrid columns="1" id="panelGrid1">
+                <af:outputLabel value="Rates" id="outputLabel2"
+                                inlineStyle="font-weight:bold;"/>
+                <af:spacer width="10" height="10" id="spacer2"/>
+              </h:panelGrid>
+              <h:panelGrid columns="3" id="panelGrid3">
+                <af:commandButton id="commandButton2"
+                                  icon="/images/new_dwn_rtl.png"
+                                  action="#{otherSetups.AddRIRates}"
+                                  text="New"/>
+                <af:commandButton icon="/images/update_ena.png"
+                                  id="commandButton3"
+                                  action="#{otherSetups.EditRIRates}"
+                                  text="Edit"/>
+                <af:commandButton id="commandButton4"
+                                  icon="/images/delete_ena.png"
+                                  action="#{otherSetups.DeleteRIRates}"
+                                  text="Delete"/>
+              </h:panelGrid>
+              <af:popup id="rirat">
+                <af:dialog id="dialog1" type="none" title="RI Rates">
+                  <h:panelGrid columns="2" id="panelGrid4">
+                    <af:outputLabel value="ANB From" id="outputLabel4"/>
+                    <af:inputText label="Label 2" id="inputText2" simple="true"
+                                  binding="#{otherSetups.anbFrom}"
+                                  shortDesc="Age Next Birthday From"/>
+                    <af:outputLabel value="ANB To" id="outputLabel6"/>
+                    <af:inputText label="Label 2" id="inputText3" simple="true"
+                                  binding="#{otherSetups.anbTo}"
+                                  shortDesc="Age Next Birthday To"/>
+                    <af:outputLabel value="Rate" id="outputLabel7"/>
+                    <af:inputText label="Label 2" id="inputText4" simple="true"
+                                  binding="#{otherSetups.rate}"
+                                  shortDesc="Rate"/>
+                    <af:outputLabel value="Division Factor" id="outputLabel8"/>
+                    <af:inputText label="Label 2" id="inputText5" simple="true"
+                                  binding="#{otherSetups.divFac}"
+                                  shortDesc="Division factor"/>
+                    <af:outputLabel value="Rate Type" id="outputLabel9"/>
+                    <af:selectOneChoice label="Label 1" id="soc1" simple="true"
+                                        binding="#{otherSetups.rateType}"
+                                        shortDesc="Rate Type">
+                      <af:selectItem label="Fixed" value="FXD" id="si2"/>
+                      <af:selectItem label="Recurring" value="RCU" id="si3"/>
+                      <af:selectItem label="Range(Step)" value="SRG" id="si1"/>
+                      <af:selectItem label="Range(Abs)" value="ARG" id="si4"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="WEF" id="outputLabel10"/>
+                    <af:inputDate label="Label 1" id="id1" simple="true"
+                                  value="#{bindings.sysDate.inputValue}"
+                                  binding="#{otherSetups.wef}"
+                                  shortDesc="With Effect From Date">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                    <af:outputLabel value="WET" id="outputLabel11"/>
+                    <af:inputDate label="Label 2" id="id2" simple="true"
+                                  binding="#{otherSetups.wet}"
+                                  shortDesc="With Effect To Date">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="panelGrid5">
+                    <af:commandButton text="Save" id="commandButton6"
+                                      action="#{otherSetups.SaveRIRates}"/>
+                    <af:commandButton text="Cancel" id="commandButton7"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+              <af:table value="#{bindings.Setup1.collectionModel}" var="row"
+                        rows="#{bindings.Setup1.rangeSize}"
+                        emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Setup1.rangeSize}"
+                        rowBandingInterval="0"
+                        selectionListener="#{bindings.Setup1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t2"
+                        inlineStyle="width:100%; height:150.0px; border-style:none;"
+                        binding="#{otherSetups.riRatesLOV}">
+                <af:column sortProperty="ORRT_ANB_FROM" sortable="true"
+                           headerText="ANB From" id="c4">
+                  <af:outputText value="#{row.ORRT_ANB_FROM}" id="ot4"/>
+                </af:column>
+                <af:column sortProperty="ORRT_ANB_TO" sortable="true"
+                           headerText="ANB To" id="c6">
+                  <af:outputText value="#{row.ORRT_ANB_TO}" id="ot9"/>
+                </af:column>
+                <af:column sortProperty="ORRT_RATE" sortable="true"
+                           headerText="Rate" id="c9">
+                  <af:outputText value="#{row.ORRT_RATE}" id="ot7"/>
+                </af:column>
+                <af:column sortProperty="ORRT_DIVISION_FACTOR" sortable="true"
+                           headerText="Division Factor" id="c3">
+                  <af:outputText value="#{row.ORRT_DIVISION_FACTOR}" id="ot8"/>
+                </af:column>
+                <af:column sortProperty="ORRT_RATE_TYPE_DESC" sortable="true"
+                           headerText="Rate Type" id="c7">
+                  <af:outputText value="#{row.ORRT_RATE_TYPE_DESC}" id="ot5"/>
+                </af:column>
+                <af:column sortProperty="ORRT_WEF" sortable="true"
+                           headerText="WEF" id="c5">
+                  <af:outputText value="#{row.ORRT_WEF}" id="ot6">
+                    <af:convertDateTime pattern="#{bindings.Setup1.hints.ORRT_WEF.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="ORRT_WET" sortable="true"
+                           headerText="WET" id="c8">
+                  <af:outputText value="#{row.ORRT_WET}" id="ot10">
+                    <af:convertDateTime pattern="#{bindings.Setup1.hints.ORRT_WET.format}"/>
+                  </af:outputText>
+                </af:column>
+              </af:table>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

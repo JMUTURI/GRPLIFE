@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="annrttypPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findAnnuityTypes.result"
+                    DataControl="annFactrDescDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.annuityFacDesc"
+                    id="findAnnuityTypesIterator"/>
+    <methodIterator Binds="findAnnuityTypesRates.result"
+                    DataControl="annFactrDescDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.annuityFacDesc"
+                    id="findAnnuityTypesRatesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <methodAction id="findAnnuityTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAnnuityTypes"
+                  IsViewObjectMethod="false" DataControl="annFactrDescDAO"
+                  InstanceName="annFactrDescDAO.dataProvider"
+                  ReturnName="annFactrDescDAO.methodResults.findAnnuityTypes_annFactrDescDAO_dataProvider_findAnnuityTypes_result"/>
+    <tree IterBinding="findAnnuityTypesIterator" id="annuityFacDesc">
+      <nodeDefinition DefName="com.turnkey.setups.annuityFacDesc"
+                      Name="annuityFacDesc0">
+        <AttrNames>
+          <Item Value="atyType"/>
+          <Item Value="atyGuaranteePeriod"/>
+          <Item Value="atyOption"/>
+          <Item Value="ANNFD_CODE"/>
+          <Item Value="ATY_RETIREMENT_AGE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAnnuityTypesRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAnnuityTypesRates"
+                  IsViewObjectMethod="false" DataControl="annFactrDescDAO"
+                  InstanceName="annFactrDescDAO.dataProvider"
+                  ReturnName="annFactrDescDAO.methodResults.findAnnuityTypesRates_annFactrDescDAO_dataProvider_findAnnuityTypesRates_result"/>
+    <tree IterBinding="findAnnuityTypesRatesIterator" id="annuityFacDesc1">
+      <nodeDefinition DefName="com.turnkey.setups.annuityFacDesc"
+                      Name="annuityFacDesc10">
+        <AttrNames>
+          <Item Value="anntrAnb"/>
+          <Item Value="anntrRate"/>
+          <Item Value="ANNFD_CODE"/>
+          <Item Value="ATY_RETIREMENT_AGE"/>
+          <Item Value="anntrGender"/>
+          <Item Value="anntrGenderDesc"/>
+          <Item Value="ANNFD_INT_RATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findProductsIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

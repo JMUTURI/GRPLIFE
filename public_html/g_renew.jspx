@@ -1,0 +1,503 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Policy Renewals" id="d2">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout id="pgl2">
+            <af:panelGroupLayout id="pgl3" partialTriggers="sbc2">
+              <af:popup id="p2">
+                <af:dialog id="d3" type="none" title="Policies">
+                  <af:table value="#{bindings.Renewal2.collectionModel}"
+                            var="row" rows="#{bindings.Renewal2.rangeSize}"
+                            emptyText="#{bindings.Renewal2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.Renewal2.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.Renewal2Query.queryDescriptor}"
+                            queryListener="#{bindings.Renewal2Query.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.Renewal2.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.Renewal2.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t3"
+                            binding="#{renManip.policiesLOV}">
+                    <af:column sortProperty="RN_POL_POLICY_NO" filterable="true" filterFeatures="caseInsensitive"
+                               sortable="true" headerText="Policy No." id="c6">
+                      <af:outputText value="#{row.RN_POL_POLICY_NO}" id="ot7"/>
+                    </af:column>
+                    <af:column sortProperty="RN_CLIENT" filterable="true" filterFeatures="caseInsensitive"
+                               sortable="true" headerText="Client" id="c20"
+                               width="200">
+                      <af:outputText value="#{row.RN_CLIENT}" id="ot17"/>
+                    </af:column>
+                  </af:table>
+                  <h:panelGrid columns="2" id="panelGrid3">
+                    <af:commandButton text="OK"
+                                      action="#{renManip.findPoliciesSelected}"
+                                      id="cb5"/>
+                    <af:commandButton text="Cancel" id="cb6"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+            </af:panelGroupLayout>
+            <af:popup id="duraPopup">
+              <af:dialog id="d27" title="New WET Date" type="none">
+                <h:panelGrid columns="2" id="pg49">
+                  <af:outputLabel value="WET Date" id="ol65"/>
+                  <af:inputDate label="Label 3" id="id8" simple="true"
+                                binding="#{renManip.wetDate}">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:inputDate>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg75">
+                  <af:commandButton text="OK" id="cb102"
+                                    action="#{renManip.saveWETDate}"/>
+                  <af:commandButton text="Cancel" id="commandButton13"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <af:popup id="users">
+              <af:dialog id="dialog12" type="none"
+                         title="Users To Assign the Next Task">
+                <af:table value="#{bindings.workflow.collectionModel}" var="row"
+                          rows="#{bindings.workflow.rangeSize}"
+                          emptyText="#{bindings.workflow.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.workflow.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.workflowQuery.queryDescriptor}"
+                          queryListener="#{bindings.workflowQuery.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.workflow.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.workflow.collectionModel.makeCurrent}"
+                          rowSelection="single" id="table4" width="410"
+                          binding="#{renManip.usersLOV}">
+                  <af:column sortProperty="taskUserID" filterable="true" filterFeatures="caseInsensitive"
+                             sortable="true" headerText="ID" id="column14">
+                    <af:outputText value="#{row.taskUserID}" id="outputText43"/>
+                  </af:column>
+                  <af:column sortProperty="taskUserShtDesc" filterable="true" filterFeatures="caseInsensitive"
+                             sortable="true" headerText="User Short Desc"
+                             id="column15">
+                    <af:outputText value="#{row.taskUserShtDesc}"
+                                   id="outputText44"/>
+                  </af:column>
+                  <af:column sortProperty="taskUserDesc" filterable="true" filterFeatures="caseInsensitive"
+                             sortable="true" headerText="User Name"
+                             id="column16" width="200">
+                    <af:outputText value="#{row.taskUserDesc}"
+                                   id="outputText45"/>
+                  </af:column>
+                </af:table>
+                <h:panelGrid columns="2" id="panelGrid26">
+                  <af:commandButton text="OK" id="commandButton49"
+                                    action="#{renManip.AssignTask}"/>
+                  <af:commandButton text="Cancel" id="commandButton50"
+                                    action="#{renManip.GetAssignee}"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <af:popup id="p1">
+              <af:dialog id="d5" type="none" title="Policy Tickets">
+                <af:panelBox text="My Tickets" id="panelBox1"
+                             binding="#{viewPolicy.myTickets}"
+                             showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <af:table value="#{bindings.workflow1.collectionModel}"
+                            var="row" rows="#{bindings.workflow1.rangeSize}"
+                            emptyText="#{bindings.workflow1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.workflow1.rangeSize}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.workflow1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.workflow1.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t5"
+                            binding="#{renManip.resultsLOV2}"
+                            inlineStyle="width:inherit; height:180.0px; border-style:none;">
+                    <af:column sortProperty="TCKT_CODE" sortable="true"
+                               headerText="Ticket Id." id="column4">
+                      <af:outputText value="#{row.TCKT_CODE}" id="outputText3"/>
+                    </af:column>
+                    <af:column sortProperty="TCKT_NAME" sortable="true"
+                               headerText="Ticket Name" id="column5"
+                               width="200">
+                      <af:outputText value="#{row.TCKT_NAME}" id="outputText4"/>
+                    </af:column>
+                    <af:column sortProperty="TCKT_TO" sortable="true"
+                               headerText="Ticket Assignee" id="c17"
+                               width="140">
+                      <af:outputText value="#{row.TCKT_TO}" id="outputText5"/>
+                    </af:column>
+                    <af:column sortProperty="TCKT_BY" sortable="true"
+                               headerText="Ticket From." id="column6">
+                      <af:outputText value="#{row.TCKT_BY}" id="outputText6"/>
+                    </af:column>
+                    <af:column sortProperty="TCKT_DATE" sortable="true"
+                               headerText="Ticket Created On." id="column7">
+                      <af:outputText value="#{row.TCKT_DATE}" id="outputText7">
+                        <af:convertDateTime pattern="#{bindings.workflow1.hints.TCKT_DATE.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="TCKT_REMARKS" sortable="true"
+                               headerText="Ticket Remarks." id="column8"
+                               width="200">
+                      <af:outputText value="#{row.TCKT_REMARKS}"
+                                     id="outputText8"/>
+                    </af:column>
+                    <af:column sortProperty="taskID" sortable="false" id="c18">
+                      <af:commandLink text="Process" id="commandLink2"
+                                      action="#{renManip.findTicket2Selected}"
+                                      rendered="#{row.TCKT_TO == currUser.username}"/>
+                    </af:column>
+                  </af:table>
+                </af:panelBox>
+              </af:dialog>
+            </af:popup>
+            <af:popup id="coverPopup">
+              <af:dialog id="d4" type="none" title="Alter Cover From Date">
+                <af:panelBox text="PanelBox1" id="pb3" showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <h:panelGrid columns="2" id="pg8">
+                    <af:outputLabel value="Cover From Date" id="ol5"/>
+                    <af:inputDate label="Label 4" id="id2" simple="true"
+                                  binding="#{renManip.coverFromDate}">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                    <af:outputLabel value="outputLabel1" id="ol6"
+                                    binding="#{renManip.durationType}"
+                                    visible="false"/>
+                  </h:panelGrid>
+                  <af:spacer width="10" height="10" id="s3"/>
+                  <h:panelGrid columns="2" id="pg7">
+                    <af:commandButton text="Next" id="cb7"
+                                      action="#{renManip.GetPendingTransAndRenew}"/>
+                    <af:commandButton text="Cancel" id="commandButton6"/>
+                  </h:panelGrid>
+                </af:panelBox>
+              </af:dialog>
+            </af:popup>
+            <af:panelBox text="search" id="pb1" showHeader="never">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="POLICY RENEWALS" id="ol1"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator id="s1"/>
+              <h:panelGrid columns="2" id="pg1">
+                <af:outputLabel value="Umbrella Policies?" id="ol2"/>
+                <af:selectBooleanCheckbox label="Label 2" id="sbc2"
+                                          simple="true"
+                                          binding="#{renManip.umbrellaCbox}"
+                                          autoSubmit="true"
+                                          valueChangeListener="#{renManip.umbrellaPolicyListner}"/>
+                <af:outputLabel value="Product" id="outputLabel4"/>
+                <h:panelGrid columns="2" id="pg2">
+                  <af:panelGroupLayout id="pgl6" partialTriggers="sbc2">
+                    <af:inputText label="Label 1" id="it1" simple="true"
+                                  disabled="true"
+                                  binding="#{renManip.productDesc}"/>
+                  </af:panelGroupLayout>
+                  <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="prod"/>
+                  </af:commandButton>
+                  <af:popup id="prod">
+                    <af:dialog id="d1" type="none" title="Select Product">
+                      <af:table value="#{bindings.Renewal.collectionModel}"
+                                var="row" rows="#{bindings.Renewal.rangeSize}"
+                                emptyText="#{bindings.Renewal.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Renewal.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.RenewalQuery.queryDescriptor}"
+                                queryListener="#{bindings.RenewalQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Renewal.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Renewal.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t2"
+                                binding="#{renManip.productLOV}">
+                        <af:column sortProperty="prodshtDesc" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Short Desc."
+                                   id="c4">
+                          <af:outputText value="#{row.prodshtDesc}" id="ot5"/>
+                        </af:column>
+                        <af:column sortProperty="prodDesc" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Product" id="c3"
+                                   width="200">
+                          <af:outputText value="#{row.prodDesc}" id="ot4"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg3">
+                        <af:commandButton text="OK" id="cb2"
+                                          action="#{renManip.findProductSelected}"/>
+                        <af:commandButton text="Cancel" id="commandButton1"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Client" id="outputLabel1"/>
+                <h:panelGrid columns="2" id="panelGrid1">
+                  <af:panelGroupLayout id="pgl5" partialTriggers="sbc2">
+                    <af:inputText label="Label 1" id="inputText1" simple="true"
+                                  disabled="true"
+                                  binding="#{renManip.proposerDesc}"/>
+                  </af:panelGroupLayout>
+                  <af:commandButton id="commandButton2"
+                                    icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="poli"/>
+                  </af:commandButton>
+                  <af:popup id="poli">
+                    <af:dialog id="dialog1" type="none" title="Select Client">
+                      <af:table value="#{bindings.Proposer.collectionModel}"
+                                var="row" rows="#{bindings.Proposer.rangeSize}"
+                                emptyText="#{bindings.Proposer.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Proposer.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.ProposerQuery.queryDescriptor}"
+                                queryListener="#{bindings.ProposerQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Proposer.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Proposer.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t6"
+                                binding="#{renManip.proposerLOV}">
+                        <af:column sortProperty="CLIENT" filterable="true" filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Client" id="c19"
+                                   width="270">
+                          <af:outputText value="#{row.CLIENT}" id="ot16"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="panelGrid2">
+                        <af:commandButton text="OK" id="commandButton3"
+                                          action="#{renManip.findProposerSelected}"/>
+                        <af:commandButton text="Cancel" id="commandButton4"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                <af:outputLabel value="Policy No." id="ol4"/>
+                <h:panelGrid columns="2" id="pg6">
+                  <af:panelGroupLayout id="pgl4" partialTriggers="sbc2">
+                    <af:inputText label="Label 2" id="it2" simple="true"
+                                  disabled="true"
+                                  binding="#{renManip.policiesDesc}"/>
+                  </af:panelGroupLayout>
+                  <af:commandButton id="cb4" icon="/images/dropdown.gif">
+                    <af:showPopupBehavior popupId="p2"/>
+                  </af:commandButton>
+                </h:panelGrid>
+                <af:outputLabel value="Date From" id="ol3"/>
+                <h:panelGrid columns="5" id="pg10">
+                  <af:inputDate label="Label 1" id="id1" simple="true"
+                                valueChangeListener="#{renManip.dateFromListener}"
+                                binding="#{renManip.dateFrom}"
+                                autoSubmit="true">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:inputDate>
+                  <af:outputLabel value="Date To" id="outputLabel2"/>
+                  <af:inputDate label="Label 1" id="inputDate1" simple="true"
+                                valueChangeListener="#{renManip.dateToListener}"
+                                binding="#{renManip.dateTo}" autoSubmit="true">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:inputDate>
+                </h:panelGrid>
+              </h:panelGrid>
+              <h:panelGrid columns="4" id="pg5"/>
+              <h:panelGrid columns="2" id="pg4">
+                <af:commandButton text="Search" id="cb3"
+                                  binding="#{polTransactions.searchButton}"
+                                  action="#{renManip.ShowResults}"
+                                  immediate="true"/>
+                <af:commandButton text="Clear" id="commandButton5"
+                                  action="#{renManip.ClearResults}"/>
+              </h:panelGrid>
+            </af:panelBox>
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:panelBox text="Search Results" id="pb2"
+                         binding="#{renManip.resultsTab}" showHeader="never"
+                         rendered="false">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Search Results" id="outputLabel3"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator id="separator1"/>
+              <h:panelGrid columns="2" id="pg9"
+                           rendered="#{sessionScope['renewDirect']=='N'}">
+                <af:commandButton text="Transfer Selected Policies" id="cb8"
+                                  action="#{renManip.TransferSelectedPolicies}"
+                                  partialSubmit="true"/>
+              </h:panelGrid>
+              <af:table value="#{bindings.Renewal1.collectionModel}" var="row"
+                        rows="#{bindings.Renewal1.rangeSize}"
+                        emptyText="#{bindings.Renewal1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.Renewal1.rangeSize}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.Renewal1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.Renewal1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t1"
+                        binding="#{renManip.resultsLOV}"
+                        inlineStyle="width:100.0%; height:130px; border-style:none;">
+                <af:column sortProperty="RN_POL_POLICY_NO" sortable="true"
+                           headerText="Policy No." id="c5" width="150">
+                  <af:outputText value="#{row.RN_POL_POLICY_NO}" id="ot9"/>
+                </af:column>
+                <af:column sortProperty="RN_CLIENT" sortable="true"
+                           headerText="Client" id="c9" width="180">
+                  <af:outputText value="#{row.RN_CLIENT}" id="ot2"/>
+                </af:column>
+                <af:column sortProperty="RN_POL_PROD_SHT_DESC" sortable="true"
+                           headerText="Product ID." id="c8">
+                  <af:outputText value="#{row.RN_POL_PROD_SHT_DESC}" id="ot6"/>
+                </af:column>
+                <af:column sortProperty="RN_BRANCH_NAME" sortable="true"
+                           headerText="Branch" id="c1" width="200">
+                  <af:outputText value="#{row.RN_BRANCH_NAME}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="RN_POL_INCEPTION_DATE" sortable="true"
+                           headerText="Inception Date" id="c7">
+                  <af:outputText value="#{row.RN_POL_INCEPTION_DATE}" id="ot8">
+                    <af:convertDateTime pattern="#{bindings.Renewal1.hints.RN_POL_INCEPTION_DATE.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="RN_ENDR_RENEWAL_DATE" sortable="true"
+                           headerText="Renewal Date" id="c2">
+                  <af:outputText value="#{row.RN_ENDR_RENEWAL_DATE}" id="ot3">
+                    <af:convertDateTime pattern="#{bindings.Renewal1.hints.RN_ENDR_RENEWAL_DATE.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="prodCode" sortable="false" id="c10"
+                           rendered="#{sessionScope['renewDirect']=='Y'}"
+                           width="150">
+                  <af:commandLink text="Renew Policy" id="cl1"
+                                  action="#{renManip.RenewCoverDate}"
+                                  rendered="#{row.RN_POL_UMBRELLA=='N'}"/>
+                  <af:commandLink text="Renew Umbrella Policy" id="commandLink3"
+                                  action="#{renManip.RenewUmbrellaPolicy}"
+                                  rendered="#{row.RN_POL_UMBRELLA=='Y'}"/>
+                </af:column>
+                <af:column sortProperty="selected" sortable="false"
+                           headerText="Transfer to Renewal Area" id="c21"
+                           rendered="#{sessionScope['renewDirect']=='N'}">
+                  <af:selectBooleanCheckbox label="Label 1" id="sbc1"
+                                            value="#{row.selected}"
+                                            simple="true" autoSubmit="true"
+                                            valueChangeListener="#{renManip.TransferRenewalListener}"
+                                            binding="#{renManip.transferCbox}"/>
+                </af:column>
+                <af:column sortProperty="RN_POL_RENEWAL_AREA_STATUS"
+                           sortable="false" id="c23"
+                           rendered="#{sessionScope['renewDirect']=='N'}"
+                           width="70">
+                  <af:commandLink text="View" id="cl3"
+                                  rendered="#{row.RN_POL_RENEWAL_AREA_STATUS!='N'}"
+                                  action="#{renManip.ViewTransferredPolicy}"/>
+                </af:column>
+                <af:column sortProperty="RN_POL_CODE" sortable="false"
+                           headerText="#{bindings.Renewal1.hints.RN_POL_CODE.label}"
+                           id="c22" visible="false">
+                  <af:outputText value="#{row.RN_POL_CODE}" id="ot18"/>
+                </af:column>
+                <af:column sortProperty="RN_ENDR_CODE" sortable="false"
+                           headerText="#{bindings.Renewal1.hints.RN_ENDR_CODE.label}"
+                           id="c24" visible="false">
+                  <af:outputText value="#{row.RN_ENDR_CODE}" id="ot19"/>
+                </af:column>
+                <af:column sortProperty="RN_POL_UMBRELLA" sortable="false"
+                           headerText="#{bindings.Renewal1.hints.RN_POL_UMBRELLA.label}"
+                           id="c25" visible="false">
+                  <af:outputText value="#{row.RN_POL_UMBRELLA}" id="ot20"/>
+                </af:column>
+              </af:table>
+            </af:panelBox>
+            <af:spacer width="10" height="10" id="spacer1"/>
+            <af:panelBox text="pending Transactions" rendered="false"
+                         showHeader="never" binding="#{renManip.transactions}"
+                         id="pb5">
+              <f:facet name="toolbar"/>
+              <af:outputLabel value="Pending Transactions"
+                              inlineStyle="font-weight:bold;" id="ol30"/>
+              <af:separator id="s9"/>
+              <af:table value="#{bindings.endorsements1.collectionModel}"
+                        var="row" rows="#{bindings.endorsements1.rangeSize}"
+                        emptyText="#{bindings.endorsements1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.endorsements1.rangeSize}"
+                        selectedRowKeys="#{bindings.endorsements1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.endorsements1.collectionModel.makeCurrent}"
+                        rowSelection="single" binding="#{renManip.transLOV}"
+                        inlineStyle="width:100.0%; height:100px; border-style:none;"
+                        id="t4">
+                <af:column sortProperty="PT_ENDR_NO" sortable="true"
+                           headerText="Endorsement No." id="column1">
+                  <af:outputText value="#{row.PT_ENDR_NO}" id="outputText1"/>
+                </af:column>
+                <af:column sortProperty="PT_ENDR_POL_POLICY_NO" sortable="true"
+                           headerText="Policy Number" id="column2">
+                  <af:outputText value="#{row.PT_ENDR_POL_POLICY_NO}"
+                                 id="outputText2"/>
+                </af:column>
+                <af:column sortProperty="PT_client" sortable="true"
+                           headerText="Client" id="column3">
+                  <af:outputText value="#{row.PT_client}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="PT_AgentName" sortable="true"
+                           headerText="Agent " id="c11">
+                  <af:outputText value="#{row.PT_AgentName}" id="ot12"/>
+                </af:column>
+                <af:column sortProperty="BTR_TRANS_TYPE" sortable="false"
+                           headerText="Endorsement Type" id="c16" width="130">
+                  <af:outputText value="#{row.BTR_TRANS_TYPE}" id="ot15"/>
+                </af:column>
+                <af:column sortProperty="PT_ENDR_STATUS" sortable="true"
+                           headerText="Status" id="c12" width="70">
+                  <af:outputText value="#{row.PT_ENDR_STATUS}" id="ot13"/>
+                </af:column>
+                <af:column sortProperty="PT_ENDR_EFFECTIVE_DATE" sortable="true"
+                           headerText="Effective Date" id="c13">
+                  <af:outputText value="#{row.PT_ENDR_EFFECTIVE_DATE}"
+                                 id="ot14">
+                    <af:convertDateTime pattern="#{bindings.endorsements1.hints.PT_ENDR_EFFECTIVE_DATE.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="ENDR_NO" sortable="false" id="c14">
+                  <af:inputText value="#{row.bindings.ENDR_NO.inputValue}"
+                                label="#{bindings.endorsements1.hints.ENDR_NO.label}"
+                                required="#{bindings.endorsements1.hints.ENDR_NO.mandatory}"
+                                columns="#{bindings.endorsements1.hints.ENDR_NO.displayWidth}"
+                                maximumLength="#{bindings.endorsements1.hints.ENDR_NO.precision}"
+                                shortDesc="#{bindings.endorsements1.hints.ENDR_NO.tooltip}"
+                                visible="false" id="it7">
+                    <f:validator binding="#{row.bindings.ENDR_NO.validator}"/>
+                  </af:inputText>
+                  <af:commandLink text="Select"
+                                  action="#{renManip.ShowPolicyTickets}"
+                                  id="commandLink1"/>
+                </af:column>
+                <af:column sortProperty="ENDR_NO" sortable="false" id="c15">
+                  <af:inputText value="#{row.bindings.ENDR_NO.inputValue}"
+                                label="#{bindings.endorsements1.hints.ENDR_NO.label}"
+                                required="#{bindings.endorsements1.hints.ENDR_NO.mandatory}"
+                                columns="#{bindings.endorsements1.hints.ENDR_NO.displayWidth}"
+                                maximumLength="#{bindings.endorsements1.hints.ENDR_NO.precision}"
+                                shortDesc="#{bindings.endorsements1.hints.ENDR_NO.tooltip}"
+                                visible="false" id="it8">
+                    <f:validator binding="#{row.bindings.ENDR_NO.validator}"/>
+                  </af:inputText>
+                  <af:commandLink text="Delete"
+                                  action="#{renManip.DeletePendingEndorsementSelected}"
+                                  id="cl2"/>
+                </af:column>
+              </af:table>
+              <h:panelGrid columns="2" id="pg17"/>
+              <af:commandButton text="Cancel"
+                                action="#{renManip.CancelEndorsement}"
+                                id="cb21"/>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="Settings" Package="LMSG.view.Base"
+          BeanClass="LMSG.view.Base.Settings" isJavaBased="true">
+  <Attribute Name="DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="DTY_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="DTY_DESCRIPTION" Type="java.lang.String"/>
+  <Attribute Name="gco_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="GCO_DESC" Type="java.lang.String"/>
+  <Attribute Name="TT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TRT_RATE" Type="java.lang.String"/>
+  <Attribute Name="TRT_DIVISION_FACTOR" Type="java.lang.String"/>
+  <Attribute Name="TT_RENEWAL_ENDOS" Type="java.lang.String"/>
+  <Attribute Name="TRT_RATE_TYPE" Type="java.lang.String"/>
+  <Attribute Name="TRT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="sysDate" Type="java.util.Date"/>
+  <Attribute Name="FAC_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="FAC_NAME" Type="java.lang.String"/>
+  <Attribute Name="FAC_POST_ADD" Type="java.lang.String"/>
+  <Attribute Name="FAC_TOWN" Type="java.lang.String"/>
+  <Attribute Name="FAC_COUNTRY" Type="java.lang.String"/>
+  <Attribute Name="ACT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="ACT_ACTIVITY" Type="java.lang.String"/>
+  <Attribute Name="FACT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="BRN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="BRN_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="BRN_NAME" Type="java.lang.String"/>
+  <Attribute Name="AGN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_NAME" Type="java.lang.String"/>
+  <Attribute Name="AGN_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="AGN_POSTAL_ADDRESS" Type="java.lang.String"/>
+  <Attribute Name="agent" Type="java.lang.String"/>
+  <Attribute Name="CO_agn_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="CO_agn_name" Type="java.lang.String"/>
+  <Attribute Name="SPR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="SPR_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="SPR_NAME" Type="java.lang.String"/>
+  <Attribute Name="SPR_SPT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TWN_NAME" Type="java.lang.String"/>
+  <Attribute Name="toDay" Type="java.util.Date"/>
+  <Attribute Name="DD_tt_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="DD_tt_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="DD_tt_type" Type="java.lang.String"/>
+  <Attribute Name="DD_tt_applicable_at_prod" Type="java.lang.String"/>
+  <Attribute Name="DD_tt_renewal_endos" Type="java.lang.String"/>
+  <Attribute Name="DD_tt_application_level" Type="java.lang.String"/>
+  <Attribute Name="countryCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="countryShtDesc" Type="java.lang.String"/>
+  <Attribute Name="countryName" Type="java.lang.String"/>
+  <Attribute Name="townCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="postalDesc" Type="java.lang.String"/>
+  <Attribute Name="townShtDesc" Type="java.lang.String"/>
+  <Attribute Name="townName" Type="java.lang.String"/>
+  <Attribute Name="postalZIPCode" Type="java.lang.String"/>
+  <Attribute Name="sectorShtDesc" Type="java.lang.String"/>
+  <Attribute Name="sectorName" Type="java.lang.String"/>
+  <Attribute Name="sectorCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="PAYEE_SPT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PAYEE_SPR_NAME" Type="java.lang.String"/>
+  <Attribute Name="USR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="USR_NAME" Type="java.lang.String"/>
+  <Attribute Name="USR_USERNAME" Type="java.lang.String"/>
+  <Attribute Name="STS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="STS_COU_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="STS_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="STS_NAME" Type="java.lang.String"/>
+  <Attribute Name="SPR_PHYSICAL_ADDRESS" Type="java.lang.String"/>
+  <Attribute Name="SPR_POSTAL_ADDRESS" Type="java.lang.String"/>
+  <Attribute Name="SPT_NAME" Type="java.lang.String"/>
+  <Attribute Name="trt_division_factor" Type="java.lang.String"/>
+  <Attribute Name="trt_rate" Type="java.lang.String"/>
+  <Attribute Name="GSUB_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GSUB_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="GSUB_DESC" Type="java.lang.String"/>
+  <Attribute Name="CVT_DESC" Type="java.lang.String"/>
+  <Attribute Name="SPR_PHONE" Type="java.lang.String"/>
+  <Attribute Name="SPR_CONTACT_PERSON" Type="java.lang.String"/>
+  <Attribute Name="SPR_CONTACT_PERSON_PHONE" Type="java.lang.String"/>
+  <Attribute Name="SPR_WEF" Type="java.util.Date"/>
+  <Attribute Name="SPR_WET" Type="java.util.Date"/>
+  <Attribute Name="poctl_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="poctl_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="poctl_rate_div_factor" Type="java.math.BigDecimal"/>
+  <Attribute Name="cvtDesc" Type="java.lang.String"/>
+  <Attribute Name="poctl_name" Type="java.lang.String"/>
+  <Attribute Name="qoctl_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="qoctl_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="qoctl_rate_div_factor" Type="java.math.BigDecimal"/>
+  <Attribute Name="qoctl_name" Type="java.lang.String"/>
+  <Attribute Name="pctl_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="pctl_rate" Type="java.math.BigDecimal"/>
+  <Attribute Name="pctl_rate_div_factor" Type="java.math.BigDecimal"/>
+  <Attribute Name="pctl_name" Type="java.lang.String"/>
+  <Attribute Name="pctl_rate_type" Type="java.lang.String"/>
+  <Attribute Name="pctl_load_method" Type="java.lang.String"/>
+  <Attribute Name="pctl_load_desc" Type="java.lang.String"/>
+  <Attribute Name="emd_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="emd_msgt_narr" Type="java.lang.String"/>
+  <Attribute Name="emd_rpt_name" Type="java.lang.String"/>
+  <Attribute Name="usr_email" Type="java.lang.String"/>
+  <Attribute Name="USB_CODE" IsUpdateable="0" Type="java.math.BigDecimal"/>
+  <Attribute Name="USB" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="COVERAGE_AREA" Type="java.lang.String"/>
+  <Attribute Name="LOCATION_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LOCATION" Type="java.lang.String"/>
+  <Attribute Name="ORGANIZATION" Type="java.lang.String"/>
+  <Attribute Name="prodCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="prodDesc" Type="java.lang.String"/>
+  <MethodAccessor IsCollection="false" Type="void" id="setSBU_CODE"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="SBU_CODE" Type="java.math.BigDecimal"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="setSBU"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="SBU" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="setCOVERAGE_AREA_CODE"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="COVERAGE_AREA_CODE" Type="java.math.BigDecimal"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="setSPOKE_CODE"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="SPOKE_CODE" Type="java.math.BigDecimal"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="setSPOKE"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="SPOKE" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Base.Settings"
+                     BeanClass="LMSG.view.Base.Settings" id="Settings"/>
+</JavaBean>

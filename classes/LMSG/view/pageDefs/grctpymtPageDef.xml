@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="grctpymtPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="FindPremiumCardDetails.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.PremiumCard"
+                    id="FindPremiumCardDetailsIterator"/>
+    <methodIterator Binds="FindPolicyReceipts.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.PolicyReceipts"
+                    id="FindPolicyReceiptsIterator"/>
+    <methodIterator Binds="FindPolicyRecptInstlmnts.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.PolicyRecptInstlmnts"
+                    id="FindPolicyRecptInstlmntsIterator"/>
+    <methodIterator Binds="FindPolicyPremiums.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.PolicyPremiums"
+                    id="FindPolicyPremiumsIterator"/>
+    <methodIterator Binds="FindPensionDepositsByReceipt.result"
+                    DataControl="pensionsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Pensions.pension"
+                    id="FindPensionDepositsByReceiptIterator"/>
+    <methodIterator Binds="FindMembersPensionDeposits.result"
+                    DataControl="pensionsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Pensions.pension"
+                    id="FindMembersPensionDepositsIterator"/>
+    <methodIterator Binds="findDistributionCriteria.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findDistributionCriteriaIterator"/>
+    <searchRegion Binds="findDistributionCriteriaIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AccountQuery"/>
+    <methodIterator Binds="findPremiumMemberCovers_All.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findPremiumMemberCovers_AllIterator"/>
+    <searchRegion Binds="findPremiumMemberCovers_AllIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account1Query"/>
+    <methodIterator Binds="FindReceiptTransfers.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.PremiumCard"
+                    id="FindReceiptTransfersIterator"/>
+    <searchRegion Binds="FindReceiptTransfersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="PremiumCardQuery"/>
+    <searchRegion Binds="FindPolicyPremiumsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="PolicyPremiums1Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPremiumCardDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPremiumCardDetails"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPremiumCardDetails_policiesDAO_dataProvider_FindPremiumCardDetails_result"/>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="POL_POLICY_NO">
+      <AttrNames>
+        <Item Value="POL_POLICY_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator" id="CLIENT">
+      <AttrNames>
+        <Item Value="CLIENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="PRODUCT_DISPLAY">
+      <AttrNames>
+        <Item Value="PRODUCT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="BRANCH_DISPLAY">
+      <AttrNames>
+        <Item Value="BRANCH_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="POL_FREQ_OF_PAYMENT">
+      <AttrNames>
+        <Item Value="POL_FREQ_OF_PAYMENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="AGENT_DISPLAY">
+      <AttrNames>
+        <Item Value="AGENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="POL_TOT_INSTLMT">
+      <AttrNames>
+        <Item Value="POL_TOT_INSTLMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="POL_PAID_TO_DATE">
+      <AttrNames>
+        <Item Value="POL_PAID_TO_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="POL_PAID_INSTLMT_NO">
+      <AttrNames>
+        <Item Value="POL_PAID_INSTLMT_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="OS_INSTALMENTS">
+      <AttrNames>
+        <Item Value="OS_INSTALMENTS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="POL_OS_INSTLMT_NO">
+      <AttrNames>
+        <Item Value="POL_OS_INSTLMT_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="POL_OS_PREM_BAL_AMT">
+      <AttrNames>
+        <Item Value="POL_OS_PREM_BAL_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindPolicyReceipts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyReceipts"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyReceipts_policiesDAO_dataProvider_FindPolicyReceipts_result"/>
+    <tree IterBinding="FindPolicyReceiptsIterator" id="PolicyReceipts">
+      <nodeDefinition DefName="LMSG.view.Policy.PolicyReceipts"
+                      Name="PolicyReceipts0">
+        <AttrNames>
+          <Item Value="GRCT_RECEIPT_NO"/>
+          <Item Value="GRCT_RECEIPT_DATE"/>
+          <Item Value="GRCT_PAY_METHOD"/>
+          <Item Value="GRCT_CHEQUE_NO"/>
+          <Item Value="GRCT_AMT"/>
+          <Item Value="GRCT_COMM_INCLUSIVE"/>
+          <Item Value="GRCT_GROSS_AMNT"/>
+          <Item Value="GRCT_PREM_PYMNT_AMT"/>
+          <Item Value="GRCT_PENS_PYMT_AMT"/>
+          <Item Value="BALANCE_AMT"/>
+          <Item Value="GRCT_PREM_ALLOCATE"/>
+          <Item Value="GRCT_PENS_ALLOCATE"/>
+          <Item Value="GRCT_CODE"/>
+          <Item Value="grct_drcr"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyRecptInstlmnts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyRecptInstlmnts"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyRecptInstlmnts_policiesDAO_dataProvider_FindPolicyRecptInstlmnts_result"/>
+    <tree IterBinding="FindPolicyRecptInstlmntsIterator"
+          id="PolicyRecptInstlmnts">
+      <nodeDefinition DefName="LMSG.view.Policy.PolicyRecptInstlmnts"
+                      Name="PolicyRecptInstlmnts0">
+        <AttrNames>
+          <Item Value="GRCI_INSTLMT_NO"/>
+          <Item Value="GRCI_AMT"/>
+          <Item Value="GRCI_COMM_RATE"/>
+          <Item Value="GRCI_COMM_AMT"/>
+          <Item Value="GRCI_CHK_COMM_RATE"/>
+          <Item Value="GRCI_CHK_COMM_AMT"/>
+          <Item Value="GRCI_PREM_TAX_RATE"/>
+          <Item Value="GRCI_PREM_TAX_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyPremiums" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyPremiums"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyPremiums_policiesDAO_dataProvider_FindPolicyPremiums_result"/>
+    <tree IterBinding="FindPolicyPremiumsIterator" id="PolicyPremiums">
+      <nodeDefinition DefName="LMSG.view.Policy.PolicyPremiums"
+                      Name="PolicyPremiums0">
+        <AttrNames>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="client"/>
+          <Item Value="PROD_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPensionDepositsByReceipt" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="FindPensionDepositsByReceipt"
+                  IsViewObjectMethod="false" DataControl="pensionsDAO"
+                  InstanceName="pensionsDAO.dataProvider"
+                  ReturnName="pensionsDAO.methodResults.FindPensionDepositsByReceipt_pensionsDAO_dataProvider_FindPensionDepositsByReceipt_result"/>
+    <tree IterBinding="FindPensionDepositsByReceiptIterator" id="pension">
+      <nodeDefinition DefName="LMSG.view.Pensions.pension" Name="pension0">
+        <AttrNames>
+          <Item Value="PNDP_DATE"/>
+          <Item Value="PNDP_MNTH"/>
+          <Item Value="PNDP_YEAR"/>
+          <Item Value="PNDP_AMOUNT"/>
+          <Item Value="PNDP_EMPYR_AMT"/>
+          <Item Value="PNDP_EMPYE_AMT"/>
+          <Item Value="PNDP_EMPYE_VOL_AMT"/>
+          <Item Value="PNDP_EMPYR_VOL_AMT"/>
+          <Item Value="PNDP_TOT_AMT"/>
+          <Item Value="PNDP_REG_AMT"/>
+          <Item Value="PNDP_NON_REG_AMT"/>
+          <Item Value="PNDP_STATUS"/>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="PNDP_CHQ_RCPT_NO"/>
+          <Item Value="PNDP_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMembersPensionDeposits" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMembersPensionDeposits"
+                  IsViewObjectMethod="false" DataControl="pensionsDAO"
+                  InstanceName="pensionsDAO.dataProvider"
+                  ReturnName="pensionsDAO.methodResults.FindMembersPensionDeposits_pensionsDAO_dataProvider_FindMembersPensionDeposits_result"/>
+    <tree IterBinding="FindMembersPensionDepositsIterator" id="pension1">
+      <nodeDefinition DefName="LMSG.view.Pensions.pension" Name="pension10">
+        <AttrNames>
+          <Item Value="MEM_NO_DISPLAY"/>
+          <Item Value="MEM_NAME"/>
+          <Item Value="PNMDP_EMPYR_AMT"/>
+          <Item Value="PNMDP_EMPYE_AMT"/>
+          <Item Value="PNMDP_EMPYE_VOL_AMT"/>
+          <Item Value="PNMDP_EMPYR_VOL_AMT"/>
+          <Item Value="PNMDP_TOT_AMT"/>
+          <Item Value="PNMDP_REG_AMT"/>
+          <Item Value="PNMDP_NON_REG_AMT"/>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="PNMDP_EMPYR_REG_AMT"/>
+          <Item Value="CLIENT"/>
+          <Item Value="PNMDP_EMPYE_NON_REG_AMT"/>
+          <Item Value="PNMDP_EMPYE_REG_AMT"/>
+          <Item Value="POL_CODE"/>
+          <Item Value="POL_INCEPTION_UWYR"/>
+          <Item Value="PNMDP_EMPYR_NON_REG_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findDistributionCriteria" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findDistributionCriteria"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findDistributionCriteria_AccountDAO_dataProvider_findDistributionCriteria_result"/>
+    <tree IterBinding="findDistributionCriteriaIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="DIS_ENDR_TRANS_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="findPremiumMemberCovers_All" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPremiumMemberCovers_All"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="data.AccountDAO.methodResults.findPremiumMemberCovers_All_AccountDAO_dataProvider_findPremiumMemberCovers_All_result"/>
+    <tree IterBinding="findPremiumMemberCovers_AllIterator" id="Account1">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account10">
+        <AttrNames>
+          <Item Value="MEM_NO"/>
+          <Item Value="MEMBER_DISPLAY"/>
+          <Item Value="PCM_EARNINGS"/>
+          <Item Value="PCM_PREMIUM"/>
+          <Item Value="PCM_PAID_AMOUNT"/>
+          <Item Value="PCM_ALLOCATED_PREMIUM"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindPolicyReceiptsIterator"
+                     id="mem_alloc_amt">
+      <AttrNames>
+        <Item Value="mem_alloc_amt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPolicyReceiptsIterator"
+                     id="mem_alloc_balance">
+      <AttrNames>
+        <Item Value="mem_alloc_balance"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="PREM_ALLOC">
+      <AttrNames>
+        <Item Value="PREM_ALLOC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="PENS_ALLOC">
+      <AttrNames>
+        <Item Value="PENS_ALLOC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPremiumCardDetailsIterator"
+                     id="ALL_ALLOC">
+      <AttrNames>
+        <Item Value="ALL_ALLOC"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindReceiptTransfers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindReceiptTransfers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="data.policiesDAO.methodResults.FindReceiptTransfers_policiesDAO_dataProvider_FindReceiptTransfers_result"/>
+    <tree IterBinding="FindReceiptTransfersIterator" id="PremiumCard">
+      <nodeDefinition DefName="LMSG.view.Policy.PremiumCard"
+                      Name="PremiumCard0">
+        <AttrNames>
+          <Item Value="GGTRAN_DTLS_TRAN_CODE"/>
+          <Item Value="GRCT_RECEIPT_NO"/>
+          <Item Value="GTRAN_POL_POLICY_FROM"/>
+          <Item Value="GTRAN_POL_POLICY_TO"/>
+          <Item Value="GTRAN_DTLS_PREM_ALLOC"/>
+          <Item Value="GTRAN_DTLS_PENS_ALLOC"/>
+          <Item Value="GTRAN_DTLS_TOT_ALLOC"/>
+          <Item Value="GTRAN_DTLS_STATUS"/>
+          <Item Value="GTRAN_DTLS_REMARKS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="FindPolicyPremiumsIterator" id="PolicyPremiums1">
+      <nodeDefinition DefName="LMSG.view.Policy.PolicyPremiums"
+                      Name="PolicyPremiums10">
+        <AttrNames>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="client"/>
+          <Item Value="POL_INCEPTION_UWYR"/>
+          <Item Value="POL_STATUS"/>
+          <Item Value="POL_CODE"/>
+          <Item Value="PROD_TYPE"/>
+          <Item Value="ENDR_CODE"/>
+          <Item Value="ENDR_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

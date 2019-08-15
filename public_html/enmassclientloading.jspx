@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Load Clients">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:460.0px;">
+              <af:showDetailItem text="Loaded Group Clients"
+                                 id="sdi1">
+              <af:panelGroupLayout id="pgl2">
+              <af:panelBox id="pb1">
+                   <af:outputLabel value="Client Details"
+                                    id="ol3"
+                                    inlineStyle="font-weight:bold;"/>
+                    <af:separator id="s6"/>
+                    <h:panelGrid columns="2" id="pg3">
+                      <af:inputFile label="File To Upload" autoSubmit="true"
+                                    immediate="true" id="if4"
+                                    binding="#{PolicyLoad.upClientFile}"
+                                    valueChangeListener="#{PolicyLoad.fileChangeForClients}"/>
+                      <af:commandButton id="cb3"
+                                        icon="/images/delete_ena.png"
+                                        text="Delete"/>
+                    </h:panelGrid>
+                    <af:table value="#{bindings.Account.collectionModel}"
+                              var="row" rows="#{bindings.Account.rangeSize}"
+                              emptyText="#{bindings.Account.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Account.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.AccountQuery.queryDescriptor}"
+                              queryListener="#{bindings.AccountQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Account.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Account.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t1"
+                              width="100%">
+                      <af:column sortProperty="LGCD_SN" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_SN.label}"
+                                 id="c7">
+                        <af:outputText value="#{row.LGCD_SN}" id="ot2"/>
+                      </af:column>
+                       <af:column sortProperty="LGCD_CLIENT_ID" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_CLIENT_ID.label}"
+                                 id="c1">
+                        <af:outputText value="#{row.LGCD_CLIENT_ID}" id="ot15"/>
+                      </af:column>
+                      <af:column sortProperty="LGCD_NAME" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_NAME.label}"
+                                 id="c11"
+                                 width="200px">
+                        <af:outputText value="#{row.LGCD_NAME}" id="ot7"/>
+                      </af:column> 
+                      <af:column sortProperty="LGCD_CLIENT_ADDRESS"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_CLIENT_ADDRESS.label}"
+                                 id="c10">
+                        <af:outputText value="#{row.LGCD_CLIENT_ADDRESS}"
+                                       id="ot14"/>
+                      </af:column>   
+                      <af:column sortProperty="LGCD_AGENT_ADDRESS"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_AGENT_ADDRESS.label}"
+                                 id="c14">
+                        <af:outputText value="#{row.LGCD_AGENT_ADDRESS}"
+                                       id="ot3"/>
+                      </af:column> 
+                    
+                            <af:column sortProperty="LGCD_CLIENT_TOWN"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_CLIENT_TOWN.label}"
+                                 id="c9">
+                        <af:outputText value="#{row.LGCD_CLIENT_TOWN}"
+                                       id="ot12"/>
+                      </af:column>
+                      <af:column sortProperty="LGCD_CLIENT_COUNTRY"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_CLIENT_COUNTRY.label}"
+                                 id="c12">
+                        <af:outputText value="#{row.LGCD_CLIENT_COUNTRY}"
+                                       id="ot6"/>
+                      </af:column>
+                    
+                      <af:column sortProperty="LGCD_OCCUPATION"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_OCCUPATION.label}"
+                                 id="c2">
+                        <af:outputText value="#{row.LGCD_OCCUPATION}"
+                                       id="ot13"/>
+                      </af:column>
+                      <af:column sortProperty="LGCD_CLIENT_FAX"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_CLIENT_FAX.label}"
+                                 id="c13">
+                        <af:outputText value="#{row.LGCD_CLIENT_FAX}"
+                                       id="ot10"/>
+                      </af:column>
+                      <af:column sortProperty="LGCD_AGENT_TEL" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_AGENT_TEL.label}"
+                                 id="c4">
+                        <af:outputText value="#{row.LGCD_AGENT_TEL}" id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="LGCD_CLIENT_TEL"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_CLIENT_TEL.label}"
+                                 id="c6">
+                        <af:outputText value="#{row.LGCD_CLIENT_TEL}"
+                                       id="ot11"/>
+                      </af:column>               
+                   
+                      
+                         <af:column sortProperty="LGCD_CLIENT_BANK_NAME"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_CLIENT_BANK_NAME.label}"
+                                 id="c3">
+                        <af:outputText value="#{row.LGCD_CLIENT_BANK_NAME}"
+                                       id="ot4"/>
+                      </af:column>
+                      <af:column sortProperty="LGCD_BANK_BRANCH"
+                                 filterable="true" sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_BANK_BRANCH.label}"
+                                 id="c8">
+                        <af:outputText value="#{row.LGCD_BANK_BRANCH}"
+                                       id="ot8"/>
+                      </af:column>  
+                                        
+                      <af:column sortProperty="LGCD_ACC_NO" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.Account.hints.LGCD_ACC_NO.label}"
+                                 id="c5">
+                        <af:outputText value="#{row.LGCD_ACC_NO}" id="ot5"/>
+                      </af:column>
+                    </af:table>                
+                  </af:panelBox>
+                  <af:panelBox id="pb2">
+                  <h:panelGrid columns="3" id="pg1">
+                      <af:commandButton text="Load Clients" id="cb1" inlineStyle="font-size:15px"
+                                        action="#{PolicyLoad.loadClientsAction}"/>
+                    </h:panelGrid>
+                  
+                  </af:panelBox>
+              </af:panelGroupLayout>
+                
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

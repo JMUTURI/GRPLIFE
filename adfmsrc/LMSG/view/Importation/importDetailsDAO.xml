@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="importDetailsDAO" Package="LMSG.view.Importation"
+          BeanClass="LMSG.view.Importation.importDetailsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Importation.importDetails"
+                  BeanClass="LMSG.view.Importation.importDetails" id="FindImportedDate"
+                  ReturnNodeName="importDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Importation.importDetails"
+                  BeanClass="LMSG.view.Importation.importDetails"
+                  id="FindExportMemberDetails" ReturnNodeName="importDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Importation.importDetailsDAO"
+                     BeanClass="LMSG.view.Importation.importDetailsDAO"
+                     id="importDetailsDAO"/>
+</JavaBean>

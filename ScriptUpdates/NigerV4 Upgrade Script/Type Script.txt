@@ -1,0 +1,32 @@
+DROP TYPE LMS_PENSION_OBJ;
+
+CREATE OR REPLACE TYPE        "LMS_PENSION_OBJ"                                          AS OBJECT (
+      PMPNS_CODE          NUMBER(15),
+      PMPNS_POLM_CODE     NUMBER(15),
+      PMPNS_MEM_NO        VARCHAR2(15),
+      PAID_AMOUNT         NUMBER(22,5),
+      GRCT_CODE           NUMBER(15),
+      CHQ_RCT_NO          VARCHAR2 (50),
+      PAID_ER_AMT         NUMBER(22,5),
+      PAID_EE_AMT         NUMBER(22,5),
+      PAID_EE_VOL_AMT     NUMBER(22,5),
+      PAID_ER_VOL_AMT     NUMBER(22,5),
+      PMPNS_TOTAL_CONTR   NUMBER(22,5),
+      GRCT_LTR_TRANS_NO   NUMBER(22),
+      GRCT_DATE           DATE,
+      CONTR_MONTH         VARCHAR2(10),
+      CONTR_YEAR          NUMBER(5),
+      PAID_EMPYR_BAL_BF   NUMBER(22,5),
+      PAID_EMPYE_BAL_BF   NUMBER(22,5),
+      EMPYR_REG_AMT        NUMBER(22,5),
+      EMPYE_REG_AMT        NUMBER(22,5),
+      EMPYR_UNREG_AMT        NUMBER(22,5),
+      EMPYE_UNREG_AMT        NUMBER(22,5)
+   )
+/
+
+=====================================================================
+DROP TYPE LMS_PENSION_OBJ_TAB;
+
+CREATE OR REPLACE TYPE        "LMS_PENSION_OBJ_TAB"                                          AS TABLE OF LMS_PENSION_OBJ;
+/

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="AlfrescoAuthor" Package="LMSG.view.dms"
+          BeanClass="LMSG.view.dms.AlfrescoAuthor" isJavaBased="true">
+  <Attribute Name="username" Type="java.lang.String"/>
+  <Attribute Name="firstName" Type="java.lang.String"/>
+  <Attribute Name="lastName" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.dms.AlfrescoAuthor"
+                     BeanClass="LMSG.view.dms.AlfrescoAuthor"
+                     id="AlfrescoAuthor"/>
+</JavaBean>

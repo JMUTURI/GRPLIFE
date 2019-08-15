@@ -1,0 +1,456 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Group Life | Transaction Types">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                       id="demoTemplate">
+        <f:facet name="center">
+          <af:group id="g1">
+            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+              <tr>
+                <td width="50%"> </td>
+                <td width="50%" align="right">
+                  <af:statusIndicator id="si1"/>
+                </td>
+              </tr>
+            </table>
+            <h:panelGrid columns="1" id="pg8" frame="0" border="0"
+                         cellpadding="0" cellspacing="0">
+              <af:outputLabel value="Transaction Types" id="ol8"
+                              inlineStyle="font-weight:bold;"/>
+              <af:separator id="s3"/>
+              <af:spacer width="10" height="10" id="s2"/>
+            </h:panelGrid>
+            <af:panelBox text="Transaction Types" id="pb1" showHeader="never">
+              <f:facet name="toolbar"/>
+              <af:popup id="contraGlAccLovPopUp" contentDelivery="lazyUncached">
+                <af:dialog id="d4" title="Select Contra GL Account" type="none">
+                  <af:panelBox text="PanelBox1" id="pb2" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:table value="#{bindings.productTransactions.collectionModel}"
+                              var="row"
+                              rows="#{bindings.productTransactions.rangeSize}"
+                              emptyText="#{bindings.productTransactions.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.productTransactions.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.productTransactionsQuery.queryDescriptor}"
+                              queryListener="#{bindings.productTransactionsQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.productTransactions.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.productTransactions.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t1"
+                              binding="#{coreSetups.contraGlAccLovTab}">
+                      <af:column sortProperty="accName" filterable="true"
+                                 sortable="true" headerText="Account Name"
+                                 id="c15">
+                        <af:outputText value="#{row.accName}" id="ot16"/>
+                      </af:column>
+                      <af:column sortProperty="accNumber" filterable="true"
+                                 sortable="true" headerText="Account Number"
+                                 id="c14" width="200">
+                        <af:outputText value="#{row.accNumber}" id="ot15"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg7" width="100">
+                      <af:commandButton text="Select" id="commandButton1"
+                                        action="#{coreSetups.selectContraGLCode}"
+                                        partialSubmit="true"/>
+                      <af:commandButton text="Cancel" id="commandButton2"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="transTypePopUp">
+                <af:dialog id="d2" title="Transaction Type" type="none">
+                  <af:panelBox text="PanelBox2" id="pb3" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="2" id="pg2" width="420">
+                      <af:outputLabel value="Code" id="ol1"/>
+                      <af:inputText label="Label 3" id="it3" simple="true"
+                                    binding="#{coreSetups.trntCode}"
+                                    shortDesc="Code"/>
+                      <af:outputLabel value="GL Account Code" id="ol2"
+                                      showRequired="true"/>
+                      <h:panelGrid columns="2" id="pg3" width="100" frame="0"
+                                   border="0" cellpadding="0" cellspacing="0">
+                        <af:inputText label="Label 4" id="it4" simple="true"
+                                      binding="#{coreSetups.trntGlCode}"
+                                      disabled="true"
+                                      shortDesc="GL Account Code"/>
+                        <af:commandButton id="cb8" partialSubmit="true"
+                                          icon="/images/dropdown.gif"
+                                          inlineStyle="height:15.0px;">
+                          <af:showPopupBehavior popupId="glAccLovPopUp"/>
+                        </af:commandButton>
+                      </h:panelGrid>
+                      <af:outputLabel value="Contra GL Code" id="ol3"/>
+                      <h:panelGrid columns="2" id="pg5" width="100" frame="0"
+                                   border="0" cellpadding="0" cellspacing="0">
+                        <af:inputText label="Label 5" id="it5" simple="true"
+                                      binding="#{coreSetups.trntConGlCode}"
+                                      disabled="true"
+                                      shortDesc="Contra GL Code"/>
+                        <af:commandButton id="cb9" icon="/images/dropdown.gif"
+                                          inlineStyle="height:15.0px;">
+                          <af:showPopupBehavior popupId="contraGlAccLovPopUp"/>
+                        </af:commandButton>
+                      </h:panelGrid>
+                      <af:outputLabel value="Description" id="ol4"
+                                      showRequired="true"/>
+                      <af:inputText label="Label 1" id="it2" simple="true"
+                                    binding="#{coreSetups.trntDesc}"
+                                    shortDesc="Description"/>
+                      <af:outputLabel value="Type" id="ol5"
+                                      showRequired="true"/>
+                      <af:selectOneChoice label="Label 6" id="soc6"
+                                          simple="true"
+                                          binding="#{coreSetups.trntType}"
+                                          unselectedLabel="---select---"
+                                          shortDesc="Transaction Type"
+                                          autoSubmit="true">
+                        <af:selectItem label="U/w Tax" value="UTX" id="si117"/>
+                        <af:selectItem label="U/W comm with-holding tax"
+                                       value="WTHTX1" id="si119"/>
+                        <!--<af:selectItem label="U/w commission" value="UC"
+                                       id="si183"/>-->
+                        <af:selectItem label="R/I Commission" value="RC_GB"
+                                       id="si110"/>
+                        <af:selectItem label="RI comm with-holding tax"
+                                       value="RWHT" id="si169"/>
+                        <af:selectItem label="RI premium tax" id="si118"
+                                       value="RPTAX"/>
+                        <af:selectItem label="RI Rein premium tax"
+                                       value="WTHTX4" id="si112"/>
+                        <af:selectItem label="Reinsurance Premium" id="si201"
+                                       value="RP_GB"/>
+                        <!--<af:selectItem label="U/w Premium -OLife" id="si165"
+                                       value="UP"/>-->
+                        <af:selectItem label="U/W Premium Tax" id="si164"
+                                       value="UPTAX"/>
+                        <af:selectItem label="U/W Stamp Duty" id="si136"
+                                       value="SD"/>
+                        <af:selectItem label="U/W Training Levy" id="si154"
+                                       value="TL"/>
+                        <af:selectItem label="Claim Payment Ord. (Death)"
+                                       id="si178" value="CP_DTH"/>
+                        <af:selectItem label="Agent Advance" id="si160"
+                                       value="AGNADV"/>
+                        <af:selectItem label="Medicals (Required)" id="si124"
+                                       value="MED"/>
+                        <af:selectItem label="Medicals (Non Required)"
+                                       id="si146" value="NRMED"/>
+                        <af:selectItem label="Check Off Commission" id="si176"
+                                       value="CHKC"/>
+                        <af:selectItem label="Loan Repayment" id="si170"
+                                       value="NL"/>
+                        <af:selectItem label="Deposit Admin" id="si148"
+                                       value="DA"/>
+                        <af:selectItem label="Pension Commission" id="si145"
+                                       value="DC"/>
+                        <af:selectItem label="Claim Tax" id="si159"
+                                       value="CLMTX"/>
+                        <af:selectItem label="Proposal Receipts" id="si156"
+                                       value="PRRCT"/>
+                        <af:selectItem label="Medicals Refund (Required)"
+                                       id="si162" value="RMEDR"/>
+                        <af:selectItem label="Proposal Refund" id="si182"
+                                       value="PRREF"/>
+                        <af:selectItem label="Policy Maturities" id="si151"
+                                       value="POL_SURR"/>
+                        <af:selectItem label="Policy Surrenders" id="si122"
+                                       value="POL_SURR"/>
+                        <af:selectItem label="Policy Loan" id="si150"
+                                       value="POL_LOAN"/>
+                        <af:selectItem label="Loan Tax" id="si179"
+                                       value="LNTAX"/>
+                        <af:selectItem label="Loan Commission" id="si158"
+                                       value="LNCOMM"/>
+                        <af:selectItem label="NF Loan" id="si135" value="NF"/>
+                        <af:selectItem label="Double Sure - Payments" id="si120"
+                                       value="DS"/>
+                        <af:selectItem label="Group Receipts" id="si174"
+                                       value="GRCT"/>
+                        <af:selectItem label="Loan Interest" id="si177"
+                                       value="LOAN_INT"/>
+                        <af:selectItem label="Policy Refund" id="si142"
+                                       value="PLREF"/>
+                        <af:selectItem label="Deposit Admin with rider"
+                                       id="si137" value="DA/GL"/>
+                        <af:selectItem label="U/W Premium GBusiness" id="si167"
+                                       value="UP_GB"/>
+                        <af:selectItem label="U/W Commission - GBusiness"
+                                       id="si143" value="UC_GB"/>
+                        <af:selectItem label="RI Premium Retained" id="si107"
+                                       value="RPR_GB"/>
+                        <af:selectItem label="RI Stamp Duty" id="si199"
+                                       value="RSD_GB"/>
+                        <af:selectItem label="Commission WithHeld - GBusiness"
+                                       id="si200" value="UCP_GB"/>
+                        <af:selectItem label="DA Comm WithHeld" id="si198"
+                                       value="DC_P"/>
+                        <af:selectItem label="Claim Payment - Group Business"
+                                       id="si108" value="CP_GB"/>
+                        <af:selectItem label="Checkoff Control" id="si161"
+                                       value="CHKCTL"/>
+                        <af:selectItem label="Investment Premium" id="si186"
+                                       value="INVPREM"/>
+                        <af:selectItem label="Investment Fee" id="si132"
+                                       value="INVFEE"/>
+                        <af:selectItem label="Investment Administration"
+                                       id="si196" value="INVADM"/>
+                        <af:selectItem label="Compensation Fund" id="si140"
+                                       value="CMPFND"/>
+                        <af:selectItem label="Claim Payment (Pensions)"
+                                       id="si184" value="CP_DA"/>
+                        <af:selectItem label="Management Expense" id="si152"
+                                       value="MNGEX"/>
+                        <af:selectItem label="Sundry Income" id="si191"
+                                       value="SNINC"/>
+                        <af:selectItem label="Sundry Expense" id="si115"
+                                       value="SNEXP"/>
+                        <af:selectItem label="NF Loan Repayment" id="si125"
+                                       value="NFINC"/>
+                        <af:selectItem label="Investment Reserve" id="si181"
+                                       value="INVRSV"/>
+                        <af:selectItem label="Loan Stamp Duty" id="si180"
+                                       value="LSD"/>
+                        <af:selectItem label="Loan Service Charge" id="si123"
+                                       value="LSC"/>
+                        <af:selectItem label="Investment Penalty" id="si121"
+                                       value="INVPEN"/>
+                        <af:selectItem label="Investment SAR" id="si185"
+                                       value="INVSAR"/>
+                        <af:selectItem label="Investment BO" id="si155"
+                                       value="INVBO"/>
+                        <af:selectItem label="Pension Contribution-ORD"
+                                       id="si195" value="PN"/>
+                        <af:selectItem label="Unknown Receipt Amounts"
+                                       id="si173" value="UNK"/>
+                        <af:selectItem label="Unknown Checkoff Receipt Amounts"
+                                       id="si141" value="UNK_CHKC"/>
+                        <af:selectItem label="Unrecoverable Amounts" id="si194"
+                                       value="UNRC"/>
+                        <af:selectItem label="Reinstatement Interest" id="si188"
+                                       value="REIN_INT"/>
+                        <af:selectItem label="Endorsement Add/Refnd Premium"
+                                       id="si129" value="END_PREM"/>
+                        <af:selectItem label="Direct Receipts" id="si139"
+                                       value="DR_RCT"/>
+                        <af:selectItem label="Unprocessed Premium" id="si190"
+                                       value="UNP_PR"/>
+                        <af:selectItem label="Unprocessed Loan" id="si187"
+                                       value="UNP_LN"/>
+                        <af:selectItem label="Unprocessed Pension/Investment"
+                                       id="si114" value="UNP_PN"/>
+                        <af:selectItem label="Withholding Tax" id="si109"
+                                       value="WHTX"/>
+                        <af:selectItem label="Investment Control" id="si168"
+                                       value="INVCTRL"/>
+                        <af:selectItem label="Risk Premium" id="si131"
+                                       value="RSKPRM"/>
+                        <af:selectItem label="Receipt Refund" id="si113"
+                                       value="RCTREF"/>
+                        <af:selectItem label="Unprocessed Refund" id="si134"
+                                       value="UNP_REF"/>
+                        <af:selectItem label="Investment Batch" id="si111"
+                                       value="INVBCH"/>
+                        <af:selectItem label="JV Receipt" id="si130"
+                                       value="JV_RCT"/>
+                        <af:selectItem label="PA. Premium" id="si193"
+                                       value="PAPREM"/>
+                        <af:selectItem label="Miscellaneous Receipt" id="si197"
+                                       value="MISC_RCT"/>
+                        <af:selectItem label="Report Reprinting Charge"
+                                       id="si133" value="RPNT_CHG"/>
+                        <af:selectItem label="OS Premium Recovery" id="si128"
+                                       value="OS_PREC"/>
+                        <af:selectItem label="Liquidated Units" id="si189"
+                                       value="LQUNITS"/>
+                        <af:selectItem label="Paid-Up Charge" id="si153"
+                                       value="PUCHRG"/>
+                        <af:selectItem label="Claim Payment Ord. (Disability)"
+                                       id="si126" value="CP_DIS"/>
+                        <af:selectItem label="Primium Waiver" id="si166"
+                                       value="PRWAIV"/>
+                        <af:selectItem label="Maturities Balance" id="si192"
+                                       value="MATR_BAL"/>
+                        <af:selectItem label="Surrender Charges" id="si172"
+                                       value="SURRCHRG"/>
+                        <af:selectItem label="Capital Injection Withdrawal"
+                                       id="si138" value="CAPINWTH"/>
+                        <af:selectItem label="Valuation Charge-Group Business"
+                                       id="si149" value="VA_GB"/>
+                        <af:selectItem label="Cancellation Admin Charge"
+                                       id="si144" value="ADMN_AMT"/>
+                        <af:selectItem label="Policy Bonus Surrender" id="si157"
+                                       value="POL_BSUR"/>
+                        <af:selectItem label="Direct Receipt-Group Business"
+                                       id="si175" value="DR_RCTGB"/>
+                        <af:selectItem label="Claim Recoveries"
+                                       id="selectItem1" value="CR_GB"/>
+                        <af:selectItem label="Shortages And Overages" id="si10"
+                                       value="SHT_OVG_GB"/>
+                        <af:selectItem label="IBNR (Intimated But Not Reported); " 
+                        id="si12" value="IBNR_GB"/>
+                        <af:selectItem label="Premium Installment Premium" 
+                        id="si13" value="UPI_GB"/>
+                        <af:selectItem label="Unearned Premium GBusiness" 
+                        id="si15" value="UPR_GB"/>
+                        <af:selectItem label="Earned Premium GB" id="si20" 
+                        value="EPR_GB"/>
+                        <af:selectItem label="Deferred Acquisition Cost(Group)" 
+                        id="si21" value="DAC_G"/>
+                        <af:selectItem label="Commission(Group) on Earned Premium" 
+                        id="si22" value="EC_G"/>
+                        <af:selectItem label="Costed Reinsurance Premium" 
+                        id="sii2233" value="CRP_GB"/>
+                        <af:selectItem label="Earned Reinsurance Commission" 
+                        id="sii2434" value="ERC_GB"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value=" Applicable At Product Level"
+                                      id="ol6"/>
+                      <af:selectOneChoice label="Label 1" id="soc1"
+                                          simple="true"
+                                          unselectedLabel="---select---"
+                                          binding="#{coreSetups.trntProdApplicable}"
+                                          shortDesc="Is It Applicable At Product Level?">
+                        <af:selectItem label="Yes" value="Y" id="si2"/>
+                        <af:selectItem label="No" value="N" id="si116"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Application Level" id="ol7"/>
+                      <af:selectOneChoice label="Label 2" id="soc2"
+                                          simple="true"
+                                          unselectedLabel="---select---"
+                                          binding="#{coreSetups.trntAppLevel}"
+                                          shortDesc="Application Level">
+                        <af:selectItem label="Own" value="OWN" id="si5"/>
+                        <af:selectItem label="Mandatory" value="MAN" id="si4"/>
+                        <af:selectItem label="Quota Share" value="QUOTA"
+                                       id="si3"/>
+                        <af:selectItem label="First Surplus" id="si6"
+                                       value="FSTSUP"/>
+                        <af:selectItem label="Seceond Surplus" id="si7"
+                                       value="SECSUP"/>
+                        <af:selectItem label="Facultative Out" id="si8"
+                                       value="FO"/>
+                        <af:selectItem label="Shortages And Overages" id="si9"
+                                       value="SHT_OVG"/>
+                      </af:selectOneChoice>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg4" width="100">
+                      <af:commandButton text="Save" id="cb4"
+                                        action="#{coreSetups.saveTransType}"
+                                        partialSubmit="true"/>
+                      <af:commandButton text="Cancel" id="cb5"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="glAccLovPopUp" contentDelivery="lazyUncached">
+                <af:dialog id="d3" title="Select GL Account" type="none">
+                  <af:panelBox text="PanelBox3" id="pb4" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:table value="#{bindings.productTransactions.collectionModel}"
+                              var="row"
+                              rows="#{bindings.productTransactions.rangeSize}"
+                              emptyText="#{bindings.productTransactions.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.productTransactions.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.productTransactionsQuery.queryDescriptor}"
+                              queryListener="#{bindings.productTransactionsQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.productTransactions.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.productTransactions.collectionModel.makeCurrent}"
+                              rowSelection="single" id="table1"
+                              binding="#{coreSetups.glAccLovTab}">
+                      <af:column sortProperty="accName" filterable="true"
+                                 sortable="true" headerText="Account Name"
+                                 id="column1">
+                        <af:outputText value="#{row.accName}" id="outputText1"/>
+                      </af:column>
+                      <af:column sortProperty="accNumber" filterable="true"
+                                 sortable="true" headerText="Account Number"
+                                 id="column2" width="200">
+                        <af:outputText value="#{row.accNumber}"
+                                       id="outputText2"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg6" width="100">
+                      <af:commandButton text="Select" id="cb6"
+                                        action="#{coreSetups.selectGLCode}"
+                                        partialSubmit="true"/>
+                      <af:commandButton text="Cancel" id="cb7"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <h:panelGrid columns="3" id="pg1">
+                <af:commandButton text="New" id="cb1" icon="/images/create.gif"
+                                  action="#{coreSetups.AddTransType}"/>
+                <af:commandButton text="Edit" id="cb2"
+                                  action="#{coreSetups.viewTransType}"
+                                  icon="/images/update.gif"/>
+                <af:commandButton text="Delete" id="cb3"
+                                  action="#{coreSetups.deleteTransType}"
+                                  icon="/images/delete.gif"/>
+              </h:panelGrid>
+              <af:table value="#{bindings.productTransactions1.collectionModel}"
+                        var="row"
+                        rows="#{bindings.productTransactions1.rangeSize}"
+                        emptyText="#{bindings.productTransactions1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.productTransactions1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.productTransactions1Query.queryDescriptor}"
+                        queryListener="#{bindings.productTransactions1Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.productTransactions1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.productTransactions1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t2"
+                        binding="#{coreSetups.transTypesTab}"
+                        inlineStyle="width:100.0%;">
+                <af:column sortProperty="trntCode" filterable="true"
+                           sortable="true" headerText="Code" id="c11"
+                           width="150">
+                  <af:outputText value="#{row.trntCode}" id="ot1"/>
+                </af:column>
+                <af:column sortProperty="trntDesc" filterable="true"
+                           sortable="true" headerText="Description" id="c13"
+                           width="200">
+                  <af:outputText value="#{row.trntDesc}" id="ot8"/>
+                </af:column>
+                <af:column sortProperty="trntType" filterable="true"
+                           sortable="true" headerText="Type" id="c1">
+                  <af:outputText value="#{row.trntType}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="trntProdApplcb" filterable="true"
+                           sortable="true" headerText="Product Applicable"
+                           id="c12">
+                  <af:outputText value="#{row.trntProdApplcb}" id="ot13"/>
+                </af:column>
+                <af:column sortProperty="trntGlCode" filterable="true"
+                           sortable="true" headerText="GL Account" id="c9">
+                  <af:outputText value="#{row.trntGlCode}" id="ot9"/>
+                </af:column>
+                <af:column sortProperty="trntConGlCode" filterable="true"
+                           sortable="true" headerText="Contra GL Account"
+                           id="c10">
+                  <af:outputText value="#{row.trntConGlCode}" id="ot12"/>
+                </af:column>
+                <af:column sortProperty="trntLevel" filterable="true"
+                           sortable="true" headerText="Application Level"
+                           id="c8">
+                  <af:outputText value="#{row.trntLevel}" id="ot11"/>
+                </af:column>
+              </af:table>
+            </af:panelBox>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

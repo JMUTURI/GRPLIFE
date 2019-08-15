@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="RiTreatyDAO" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.RiTreatyDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Policy.RiTreaty"
+                  BeanClass="LMSG.view.Policy.RiTreaty" id="findRITreaties"
+                  ReturnNodeName="RiTreaty"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.RiTreatyDAO"
+                     BeanClass="LMSG.view.Policy.RiTreatyDAO" id="RiTreatyDAO"/>
+</JavaBean>

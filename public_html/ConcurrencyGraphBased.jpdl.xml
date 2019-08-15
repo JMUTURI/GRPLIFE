@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<process name="ConcurrencyGraphBased" xmlns="http://jbpm.org/4.0/jpdl">
+
+   <start>
+      <transition to="fork"/>
+   </start>
+   
+   <fork name="fork">
+      <transition to="send invoice" />
+      <transition to="load truck"/>
+      <transition to="print shipping documents" />
+   </fork>
+   
+   <state name="send invoice" >
+      <transition to="final join" />
+   </state>
+   
+   <state name="load truck" >
+      <transition to="shipping join" />
+   </state>
+   
+   <state name="print shipping documents">
+      <transition to="shipping join" />
+   </state>
+   
+   <join name="shipping join" >
+      <transition to="drive truck to destination" />
+   </join>
+   
+   <state name="drive truck to destination" >
+      <transition to="final join" />
+   </state>
+   
+   <join name="final join" >
+      <transition to="end"/>
+   </join>
+   
+   <end name="end" />
+
+</process>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="PolicyReceipts" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.PolicyReceipts" isJavaBased="true">
+  <Attribute Name="GRCT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_RECEIPT_NO" Type="java.lang.String"/>
+  <Attribute Name="GRCT_RECEIPT_DATE" Type="java.util.Date"/>
+  <Attribute Name="GRCT_PAY_METHOD" Type="java.lang.String"/>
+  <Attribute Name="GRCT_CHEQUE_NO" Type="java.lang.String"/>
+  <Attribute Name="GRCT_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_COMM_INCLUSIVE" Type="java.lang.String"/>
+  <Attribute Name="GRCT_GROSS_AMNT" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_PREM_PYMNT_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_PENS_PYMT_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="BALANCE_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_PREM_ALLOCATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCT_PENS_ALLOCATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="grct_status" Type="java.lang.String"/>
+  <Attribute Name="grct_drcr" Type="java.lang.String"/>
+  <Attribute Name="mem_alloc_amt" Type="java.math.BigDecimal"/>
+  <Attribute Name="mem_alloc_balance" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Policy.PolicyReceipts"
+                     BeanClass="LMSG.view.Policy.PolicyReceipts"
+                     id="PolicyReceipts"/>
+</JavaBean>

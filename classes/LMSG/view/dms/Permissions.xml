@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="Permissions" Package="LMSG.view.dms"
+          BeanClass="LMSG.view.dms.Permissions" isJavaBased="true">
+  <Attribute Name="edit" Type="java.lang.Boolean"/>
+  <Attribute Name="delete" Type="java.lang.Boolean"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.dms.Permissions"
+                     BeanClass="LMSG.view.dms.Permissions" id="Permissions"/>
+</JavaBean>

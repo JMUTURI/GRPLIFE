@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="treatyParticipantsDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.treatyParticipantsDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.TreatyParticipants"
+                  BeanClass="com.turnkey.setups.TreatyParticipants"
+                  id="findTreatyParticipants"
+                  ReturnNodeName="TreatyParticipants"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.TreatyParticipants"
+                  BeanClass="com.turnkey.setups.TreatyParticipants"
+                  id="findReinsurers" ReturnNodeName="TreatyParticipants"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.treatyParticipantsDAO"
+                     BeanClass="com.turnkey.setups.treatyParticipantsDAO"
+                     id="treatyParticipantsDAO"/>
+</JavaBean>

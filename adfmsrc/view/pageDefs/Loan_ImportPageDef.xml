@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="Loan_ImportPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findLnRepayInvalidMembers.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policies"
+                    id="findLnRepayInvalidMembersIterator"/>
+    <searchRegion Binds="findLnRepayInvalidMembersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+    <iterator Binds="root" RangeSize="25" DataControl="policiesDAO"
+              id="policiesDAOIterator"/>
+    <methodIterator Binds="findPolicyImportBatches.result"
+                    DataControl="policiesDAO" RangeSize="-1"
+                    BeanClass="LMSG.view.Policy.policies"
+                    id="findPolicyImportBatchesIter"/>
+  </executables>
+  <bindings>
+    <methodAction id="findLnRepayInvalidMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findLnRepayInvalidMembers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="data.policiesDAO.methodResults.findLnRepayInvalidMembers_policiesDAO_dataProvider_findLnRepayInvalidMembers_result"/>
+    <tree IterBinding="findLnRepayInvalidMembersIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="LIRM_CODE"/>
+          <Item Value="LIRM_LMIT_CODE"/>
+          <Item Value="LIRM_MEM_NO"/>
+          <Item Value="LIRM_MEM_SURNAME"/>
+          <Item Value="LIRM_MEM_OTHER_NAMES"/>
+          <Item Value="LIRM_LOAN_BAL"/>
+          <Item Value="LIRM_LOAN_RPYMT_PRD"/>
+          <Item Value="LIRM_MEM_EFFECTIVE_DATE"/>
+          <Item Value="LIRM_REMARKS"/>
+          <Item Value="LIRM_STATUS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="policiesDAOIterator" id="lmitCode" DTSupportsMRU="true"
+          StaticList="false" ListIter="findPolicyImportBatchesIter">
+      <AttrNames>
+        <Item Value="lmitCode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="LMIT_CODE"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="DESCRIPTION"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="findPolicyImportBatches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolicyImportBatches"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="data.policiesDAO.methodResults.findPolicyImportBatches_policiesDAO_dataProvider_findPolicyImportBatches_result"/>
+  </bindings>
+</pageDefinition>

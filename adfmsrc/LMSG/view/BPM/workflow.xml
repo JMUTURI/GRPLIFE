@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="workflow" Package="LMSG.view.BPM"
+          BeanClass="LMSG.view.BPM.workflow" isJavaBased="true">
+  <Attribute Name="taskID" Type="java.lang.String"/>
+  <Attribute Name="taskActivityName" Type="java.lang.String"/>
+  <Attribute Name="taskAssignee" Type="java.lang.String"/>
+  <Attribute Name="taskDuedate" Type="java.util.Date"/>
+  <Attribute Name="taskCreateDate" Type="java.util.Date"/>
+  <Attribute Name="TCKT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="USRSYSTEM" Type="java.lang.String"/>
+  <Attribute Name="SYSMODULE" Type="java.lang.String"/>
+  <Attribute Name="TCKT_CLNT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="CLIENT" Type="java.lang.String"/>
+  <Attribute Name="TCKT_AGN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGENT" Type="java.lang.String"/>
+  <Attribute Name="TCKT_POL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TCKT_POL_NO" Type="java.lang.String"/>
+  <Attribute Name="TCKT_CLM_NO" Type="java.lang.String"/>
+  <Attribute Name="TCKT_QUOT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QUO_NO" Type="java.lang.String"/>
+  <Attribute Name="TCKT_DATE" Type="java.util.Date"/>
+  <Attribute Name="TCKT_BY" Type="java.lang.String"/>
+  <Attribute Name="TCKT_PROCESS_ID" Type="java.lang.String"/>
+  <Attribute Name="TCKT_SYS_MODULE_CODE" Type="java.lang.String"/>
+  <Attribute Name="TCKT_ENDR_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="taskUserID" Type="java.math.BigDecimal"/>
+  <Attribute Name="taskUserShtDesc" Type="java.lang.String"/>
+  <Attribute Name="taskUserDesc" Type="java.lang.String"/>
+  <Attribute Name="TCKT_PROD_TYPE" Type="java.lang.String"/>
+  <Attribute Name="TCKT_TO" Type="java.lang.String"/>
+  <Attribute Name="TCKT_REMARKS" Type="java.lang.String"/>
+  <Attribute Name="TCKT_NAME" Type="java.lang.String"/>
+  <Attribute Name="TCKT_DUE_DATE" Type="java.util.Date"/>
+  <Attribute Name="TCKT_CDE" Type="java.lang.String"/>
+  <Attribute Name="TCKT_ENDORSEMENT" Type="java.lang.String"/>
+  <Attribute Name="TCKT_REF_NO" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.BPM.workflow"
+                     BeanClass="LMSG.view.BPM.workflow" id="workflow"/>
+</JavaBean>

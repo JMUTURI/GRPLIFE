@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Policy Lapsation" id="d2">
+    <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="pt1">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout id="pgl2">
+          <af:outputLabel value="POLICY LAPSATION" id="ol1"
+                          inlineStyle="font-weight:bold;"/>
+          <af:separator id="s1"/>
+          <af:popup id="p1">
+            <af:dialog id="d1" type="none" title="Select Product">
+              <af:table value="#{bindings.productDetails.collectionModel}"
+                        var="row" rows="#{bindings.productDetails.rangeSize}"
+                        emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.productDetails.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                        queryListener="#{bindings.productDetailsQuery.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t1"
+                        binding="#{lapsation.productLOV}">
+                <af:column sortProperty="lp_prod_desc" filterable="true"
+                           sortable="true" headerText="Product" id="c2"
+                           width="200">
+                  <af:outputText value="#{row.lp_prod_desc}" id="ot2"/>
+                </af:column>
+                <af:column sortProperty="lp_PROD_LAPSE_PRD_DAYS"
+                           filterable="true" sortable="true"
+                           headerText="Lapse Days" id="c1">
+                  <af:outputText value="#{row.lp_PROD_LAPSE_PRD_DAYS}"
+                                 id="ot3"/>
+                </af:column>
+              </af:table>
+              <h:panelGrid columns="2" id="pg3">
+                <af:commandButton text="OK" id="cb2"
+                                  action="#{lapsation.findProductSelected}"/>
+                <af:commandButton text="Cancel" id="commandButton1"/>
+              </h:panelGrid>
+            </af:dialog>
+          </af:popup>
+          <af:panelBox text="Search Criteria" id="pb2" showHeader="never">
+            <f:facet name="toolbar"/>
+            <h:panelGrid columns="2" id="pg1">
+              <af:outputLabel value="Lapse Type" id="outputLabel1"/>
+              <af:selectOneChoice label="Label 1" id="soc1" simple="true"
+                                  valueChangeListener="#{lapsation.lapselistener}"
+                                  binding="#{lapsation.lapseType}"
+                                  autoSubmit="true">
+                <af:selectItem label="Premium" value="P" id="si1"/>
+                <af:selectItem label="Schedule" value="S" id="si3"/>
+                <af:selectItem label="Both (Premium &amp; Schedule)" value="B"
+                               id="si2"/>
+              </af:selectOneChoice>
+              <af:outputLabel value="Product" id="ol2"/>
+              <h:panelGrid columns="2" id="pg2">
+                <af:inputText label="Label 1" id="it1" simple="true"
+                              disabled="true"
+                              binding="#{lapsation.productDesc}"/>
+                <af:commandButton id="cb1" icon="/images/dropdown.gif">
+                  <af:showPopupBehavior popupId="p1"/>
+                </af:commandButton>
+              </h:panelGrid>
+            </h:panelGrid>
+            <h:panelGrid columns="2" id="pg4">
+              <af:commandButton text="Search" id="cb3"
+                                action="#{lapsation.ShowResults}"/>
+              <af:commandButton text="Exit" id="commandButton2"
+                                action="#{Links.goHome}"/>
+            </h:panelGrid>
+          </af:panelBox>
+          <af:spacer width="10" height="10" id="s2"/>
+          <af:panelBox text="Search Results" id="pb1" showHeader="never"
+                       rendered="false" binding="#{lapsation.searchResults}">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Policies Available For Lapsation" id="outputLabel2"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="separator1"/>
+            <af:table value="#{bindings.policies.collectionModel}" var="row"
+                      rows="#{bindings.policies.rangeSize}"
+                      emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.policies.rangeSize}"
+                      rowBandingInterval="0"
+                      filterModel="#{bindings.policiesQuery.queryDescriptor}"
+                      queryListener="#{bindings.policiesQuery.processQuery}"
+                      filterVisible="true" varStatus="vs"
+                      selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t2"
+                      inlineStyle="width:100.0%;"
+                      binding="#{lapsation.lapsationsLOV}">
+              <af:column sortable="false"
+                         id="c14" width="40">
+                <af:selectBooleanCheckbox id="sbc1" simple="true"
+                                          valueChangeListener="#{lapsation.toLapseListener}"
+                                          binding="#{lapsation.lapseCbox}"
+                                          autoSubmit="true"/>
+              </af:column>
+              <af:column sortProperty="PL_pol_policy_no" filterable="true"
+                         sortable="true" headerText="Policy No." id="c8">
+                <af:outputText value="#{row.PL_pol_policy_no}" id="ot12"/>
+              </af:column>
+              <af:column sortProperty="PL_client" filterable="true"
+                         sortable="true" headerText="Client" id="c9">
+                <af:outputText value="#{row.PL_client}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="PL_brn_sht_desc" filterable="true"
+                         sortable="true" headerText="Branch" id="c12">
+                <af:outputText value="#{row.PL_brn_sht_desc}" id="ot7"/>
+              </af:column>
+              <af:column sortProperty="PL_pol_freq_of_payment" filterable="true"
+                         sortable="true" headerText="Pay Freq" id="c10">
+                <af:outputText value="#{row.PL_pol_freq_of_payment}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="PL_pol_last_add_sched_date"
+                         filterable="true" sortable="true"
+                         headerText="Last Sch Date" id="c13" visible="false">
+                <af:outputText value="#{row.PL_pol_last_add_sched_date}"
+                               id="ot14"/>
+              </af:column>
+              <af:column sortProperty="PL_pol_effective_date" filterable="true"
+                         sortable="true" headerText="Effective Date" id="c4">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.PL_pol_effective_date}"
+                                id="id1"/>
+                </f:facet>
+                <af:outputText value="#{row.PL_pol_effective_date}" id="ot10">
+                  <af:convertDateTime pattern="#{bindings.policies.hints.PL_pol_effective_date.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="PL_pol_paid_to_date" filterable="true"
+                         sortable="true" headerText="Paid To Date" id="c6"
+                         visible="false">
+                <af:outputText value="#{row.PL_pol_paid_to_date}" id="ot13"/>
+              </af:column>
+              <af:column sortProperty="PL_pol_paid_instlmt_no" filterable="true"
+                         sortable="true" headerText="Paid Inst No." id="c7"
+                         width="70">
+                <af:outputText value="#{row.PL_pol_paid_instlmt_no}" id="ot6"/>
+              </af:column>
+              <af:column sortProperty="PL_pol_instlmt_prem" filterable="true"
+                         sortable="true" headerText="Prem Per Instal" id="c3">
+                <af:outputText value="#{row.PL_pol_instlmt_prem}" id="ot8"/>
+              </af:column>
+              <af:column sortProperty="PL_os_instals" filterable="true"
+                         sortable="true" headerText="OS Instal" id="c5">
+                <af:outputText value="#{row.PL_os_instals}" id="ot11"/>
+              </af:column>
+              <af:column sortProperty="PL_os_prem" filterable="true"
+                         sortable="true" headerText="OS Balance" id="c11">
+                <af:outputText value="#{row.PL_os_prem}" id="ot5"/>
+              </af:column>
+            </af:table>
+            <af:spacer width="10" height="10" id="spacer1"/>
+            <af:commandButton text="Lapse Policies" id="cb4"
+                              action="#{lapsation.LapsePolicies}"/>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

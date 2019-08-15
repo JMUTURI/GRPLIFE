@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="medTestsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findMedicalTests.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findMedicalTestsIterator"/>
+    <methodIterator Binds="findFacilitators.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findFacilitatorsIterator"/>
+    <searchRegion Binds="findFacilitatorsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup1Query"/>
+    <methodIterator Binds="findFacilitatorTests.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findFacilitatorTestsIterator"/>
+    <searchRegion Binds="findMedicalTestsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup3Query"/>
+	 <methodIterator Binds="findOrgCurrencies.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findOrgCurrenciesIterator"/>
+    <searchRegion Binds="findOrgCurrenciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup4Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findMedicalTests" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMedicalTests"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findMedicalTests_SetupsDAO_dataProvider_findMedicalTests_result"/>
+    <tree IterBinding="findMedicalTestsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="MTL_SHT_DESC"/>
+          <Item Value="MTL_DESC"/>
+          <Item Value="MTL_FEES"/>
+          <Item Value="MTL_WEF"/>
+          <Item Value="MTL_WET"/>
+          <Item Value="MTL_VALIDITY_PRD"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findFacilitators" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findFacilitators"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findFacilitators_SetupsDAO_dataProvider_findFacilitators_result"/>
+    <tree IterBinding="findFacilitatorsIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="SPR_NAME"/>
+          <Item Value="TWN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findFacilitatorTests" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findFacilitatorTests"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findFacilitatorTests_SetupsDAO_dataProvider_findFacilitatorTests_result"/>
+    <tree IterBinding="findFacilitatorTestsIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="MEDICAL_DISPLAY"/>
+          <Item Value="FTL_FEES"/>
+          <Item Value="FTL_WEF"/>
+          <Item Value="FTL_WET"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findMedicalTestsIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="MTL_DESC"/>
+          <Item Value="MTL_FEES"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+ <methodAction id="findOrgCurrencies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findOrgCurrencies"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="data.SetupsDAO.methodResults.findOrgCurrencies_SetupsDAO_dataProvider_findOrgCurrencies_result"/>
+    <tree IterBinding="findOrgCurrenciesIterator" id="Setup4">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup40">
+        <AttrNames>
+          <Item Value="cur_code"/>
+          <Item Value="cur_symbol"/>
+          <Item Value="cur_desc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

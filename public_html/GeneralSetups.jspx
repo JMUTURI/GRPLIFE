@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Setups">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="pt1">
+        <f:facet name="center">
+          <af:panelGroupLayout id="pgl1">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:520.0px;">
+              <af:showDetailItem text="Group Life Setups" id="sdi1">
+                <af:panelGroupLayout id="pgl2" layout="scroll">
+                  <af:panelBox text="Select A Setup" id="pb1"
+                               inlineStyle="width:100.0%;">
+                    <f:facet name="toolbar"/>
+                    <af:separator id="separator1"/>
+                    <h:panelGrid columns="7" id="pg1">
+                      <h:panelGrid columns="1" id="pg2">
+                        <af:outputLabel value="Company Parameters" id="ol1"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="s1"/>
+                        <af:commandLink text="Number Formats" id="cl1"
+                                        action="#{Links.goToNumberFormats}"/>
+                        <af:commandLink text="System Parameters" id="cl2"
+                                        action="#{Links.goToParameters}"/>
+                        <af:commandLink text="Transaction Codes" id="cl3"
+                                        action="#{Links.goToTransactionCodes}"/>
+                        <af:commandLink text="Narratives" id="cl4"
+                                        action="#{Links.goToNarratives}"/>
+                        <af:commandLink text="Valuation Periods" id="cl5"
+                                        action="#{Links.goToPeriods}"/>
+                        <af:commandLink text="Product Import Templates"
+                                        id="commandLink7"
+                                        action="#{Links.goToProductImportTemplates}"/>
+                        <af:commandLink text="Report Emailing"
+                                        id="cl39"
+                                        action="#{Links.goToEmailSettingPage}"/>               
+                        <af:commandLink text="Access Groups"
+                                        id="commandLink5"
+                                        action="#{Links.goToAccessGroups}"
+                                        rendered="#{sessionScope['AccessGrpRights']=='Y'}"/>
+                      </h:panelGrid>
+                      <af:spacer width="60" height="10" id="s2"/>
+                      <h:panelGrid columns="1" id="pg5">
+                        <af:outputLabel value="Medical Tests Definition"
+                                        id="outputLabel2"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator3"/>
+                        <af:commandLink text="Medical Tests" id="cl8"
+                                        action="#{Links.goToMedicalTests}"/>
+                        <af:commandLink text="Medical Tests Groups" id="cl9"
+                                        action="#{Links.goToMedicalGroups}"/>
+                        <af:commandLink text="Medical Requirements" id="cl10"
+                                        action="#{Links.goToMedicalRequirements}"/>
+                        <af:commandLink text="Renewal Medical Rating" id="cl11"
+                                        action="#{Links.goToRenewalMedicalRatings}"/>
+                        <af:commandLink text="Product Provisions" id="cl37"
+                                        action="#{Links.goToProductProvisions}"/>
+                      </h:panelGrid>
+                      <af:spacer width="50" height="10" id="spacer1"/>
+                      <h:panelGrid columns="1" id="pg3">
+                        <af:outputLabel value="Agents, Brokers &amp; Reins Co's"
+                                        id="outputLabel1"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator2"/>
+                        <af:commandLink text="Agencies Definition" id="cl6"
+                                        action="#{Links.gotToAgents}"/>
+                        <af:commandLink text="Commission Rates Definition" id="cl7"
+                                        action="#{Links.goToCommRates}"/>
+                        <af:commandLink text="Override Commission Rate"
+                                        id="cl40"
+                                        action="#{Links.goToOvrCommRates}"/>  
+                        <af:commandLink text="Budgets"
+                                        id="cl41"
+                                        action="#{Links.getToBudgetPage}"/>                 
+                                        
+                        <af:spacer width="10" height="45" id="s4"/>
+                      </h:panelGrid>
+                      <af:spacer width="60" height="10" id="spacer2"/>
+                      <h:panelGrid columns="1" id="pg6">
+                        <af:outputLabel value="Proposers, Clients &amp; Insureds"
+                                        id="outputLabel3"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator4"/>
+                        <af:commandLink text="Clients Definition" id="cl12"
+                                        action="#{Links.CreateClient}"/>
+                        <af:spacer width="10" height="60" id="spacer8"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="1" id="pg7">
+                        <af:outputLabel value="U/W &amp; Quotations Rates "
+                                        id="outputLabel4"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator5"/>
+                        <af:commandLink text="Premium Structures" id="cl13"
+                                        action="#{Links.goToPremiumMasks}"/>
+                        <af:commandLink text="Premium Rates" id="cl14"
+                                        action="#{Links.goToPremiumRates}"/>
+                        <af:commandLink text="Free Cover Limit Factors" id="cl15"
+                                        action="#{Links.goToFCLFactors}"/>
+                        <af:commandLink text="Annuity Factors" id="cl16"
+                                        action="#{Links.goToAnnuityFactors}"/>
+                        <af:commandLink text="Annuity Rate By Types" id="cl17"
+                                        action="#{Links.goToAnnuityRatesByType}"/>
+                        <af:commandLink text="Interest Rates" id="cl18"
+                                        action="#{Links.gotoInterestRates}"/>
+                        <af:commandLink text="Pension Costing Factors" id="cl19"
+                                        action="#{Links.goToPensionFactors}"/>                                        
+                       <af:commandLink text="Premium Loadings" id="cl38"
+                                        action="#{Links.goToPremLoadings}"/>                 
+                        <af:spacer width="0" height="30" id="spacer10"/>
+                      </h:panelGrid>
+                      <af:spacer width="60" height="10" id="spacer3"/>
+                      <h:panelGrid columns="1" id="pg8">
+                        <af:outputLabel value="U/W &amp; Quotations Setups"
+                                        id="outputLabel5"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator6"/>
+                        <af:commandLink text="Group Life Occupations" id="cl20"
+                                        action="#{Links.goToOccupations}"/>
+                        <af:commandLink text="Cover Types" id="cl21"
+                                        action="#{Links.CoverTypes}"/>
+                        <af:commandLink text="Product Cover Types Definition" id="cl22"
+                                        action="#{Links.ProdCoverTypes}"/>
+                        <af:commandLink text="Cover Type Dependants" id="cl23"
+                                        action="#{Links.ProdCoverDependants}"/>
+                        <af:commandLink text="Product &amp; Classes Definition" id="cl24"
+                                        action="#{Links.ProductsAndClasses}"/>
+                        <af:commandLink text="Relation Types" id="cl25"
+                                        action="#{Links.goToDependentTypes}"/>
+                        <af:commandLink text="Required Policy Documents" id="cl26"
+                                        action="#{Links.goToPolicyDocuments}"/>
+                        <af:commandLink text="Education Classes"
+                                        id="commandLink3"
+                                        action="#{Links.goToEducationClasses}"/>
+                        <af:commandLink text="Group Subdivisions"
+                                        id="commandLink6"
+                                        action="#{Links.goToGroupSubDivisions}"/>
+                      </h:panelGrid>
+                      <af:spacer width="60" height="10" id="spacer4"/>
+                      <h:panelGrid columns="1" id="pg9">
+                        <af:outputLabel value="Reinsurance Definition"
+                                        id="outputLabel6"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator7"/>
+                        <af:commandLink text="Treaties" id="cl27"
+                                        action="#{Links.goToTreaties}"/>
+                        <af:commandLink text="Treaty Setups" id="cl28"
+                                        action="#{Links.goToTreatySetups}"/>
+                        <af:commandLink text="RI Rates Table" id="cl29"
+                                        action="#{Links.goToRIRates}"/>
+                        <af:commandLink text="RI Rider Rates Table" id="cl30"
+                                        action="#{Links.goToRIRiderRates}"/>
+                        <af:commandLink text="RI OS Balance Table" id="cl31"
+                                        action="#{Links.goToRIOSTables}"/>
+                        <af:spacer width="10" height="65" id="s5"/>
+                      </h:panelGrid>
+                      <af:spacer width="60" height="10" id="spacer5"/>
+                      <h:panelGrid columns="1" id="pg10">
+                        <af:outputLabel value="Taxes Definition" id="outputLabel7"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator8"/>
+                        <af:commandLink text="Tax Types" id="cl32"
+                                        action="#{Links.goToTaxTypes}"/>
+                        <af:commandLink text="Tax Rate By Product Tax Type" id="cl33"
+                                        action="#{Links.goToTaxRatesByProduct}"/>
+                        <af:spacer width="10" height="120" id="spacer9"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="1" id="pg11">
+                        <af:outputLabel value="Credit Management"
+                                        id="outputLabel8"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator9"/>
+                        <af:commandLink text="Credit Creterion/Groups" id="cl34"
+                                        action="#{Links.goToClientCriterion}"/>
+                        <af:commandLink text="Client/Agent Credit Grouping" id="cl35"
+                                        action="#{Links.goToClientAgentGrouping}"/>
+                      </h:panelGrid>
+                      <af:spacer width="60" height="10" id="spacer6"/>
+                      <h:panelGrid columns="1" id="pg12">
+                        <af:outputLabel value="Accounts Setups"
+                                        id="outputLabel9"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator10"/>
+                        <af:commandLink text="Product Transactions" id="cl36"
+                                        action="#{Links.goToProductTransactions}"/>
+                        <af:commandLink text="Transaction Types"
+                                        id="commandLink4"
+                                        action="#{Links.goToTransactionsTypes}"/>
+                      </h:panelGrid>
+                      <af:spacer width="60" height="10" id="spacer7"/>
+                      <h:panelGrid columns="1" id="panelGrid1">
+                        <af:outputLabel value="Claims Setups"
+                                        id="outputLabel10"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator11"/>
+                        <af:commandLink text="Causations And Causes"
+                                        id="commandLink1"
+                                        action="#{Links.goToCausationsCauses}"/>
+                        <af:commandLink text="Claim Causations (Group Life)"
+                                        id="commandLink2"
+                                        action="#{Links.goToClaimsGroupLife}"/>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+                <f:facet name="toolbar">
+                  <h:panelGrid columns="2" id="pg4">
+                    <af:inputText id="it5" helpTopicId="LmsGrp_g_gtrans"
+                                  readOnly="true"/>
+                    <af:statusIndicator id="si1"/>
+                  </h:panelGrid>
+                </f:facet>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

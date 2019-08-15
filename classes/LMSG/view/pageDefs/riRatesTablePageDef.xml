@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="riRatesTablePageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findRIRatesDescription.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findRIRatesDescriptionIterator"/>
+    <methodIterator Binds="findRIRates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findRIRatesIterator"/>
+    <methodIterator Binds="findLifeClasses.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findLifeClassesIterator"/>
+    <methodIterator Binds="FindSysDate.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSysDateIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findRIRatesDescription" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRIRatesDescription"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findRIRatesDescription_SetupsDAO_dataProvider_findRIRatesDescription_result"/>
+    <tree IterBinding="findRIRatesDescriptionIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="ORRP_SHT_DESC"/>
+          <Item Value="ORRP_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findRIRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRIRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findRIRates_SetupsDAO_dataProvider_findRIRates_result"/>
+    <tree IterBinding="findRIRatesIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="ORRT_ANB_FROM"/>
+          <Item Value="ORRT_ANB_TO"/>
+          <Item Value="ORRT_RATE"/>
+          <Item Value="ORRT_DIVISION_FACTOR"/>
+          <Item Value="ORRT_RATE_TYPE_DESC"/>
+          <Item Value="ORRT_WEF"/>
+          <Item Value="ORRT_WET"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findLifeClasses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findLifeClasses"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findLifeClasses_SetupsDAO_dataProvider_findLifeClasses_result"/>
+    <tree IterBinding="findLifeClassesIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="LC_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindSysDate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSysDate"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSysDate_SettingsDAO_dataProvider_FindSysDate_result"/>
+    <attributeValues IterBinding="FindSysDateIterator" id="sysDate">
+      <AttrNames>
+        <Item Value="sysDate"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

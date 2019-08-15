@@ -1,0 +1,2 @@
+delete from lms_policy_categories
+where pca_code=20121801

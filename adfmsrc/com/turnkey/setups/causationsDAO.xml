@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="causationsDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.causationsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.causations"
+                  BeanClass="com.turnkey.setups.causations" id="findCausations"
+                  ReturnNodeName="causations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.causations"
+                  BeanClass="com.turnkey.setups.causations"
+                  id="findDeathDisabilityCauses" ReturnNodeName="causations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.causations"
+                  BeanClass="com.turnkey.setups.causations"
+                  id="findCausationCauses" ReturnNodeName="causations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.causations"
+                  BeanClass="com.turnkey.setups.causations"
+                  id="findNonMedicalsSA" ReturnNodeName="causations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.causations"
+                  BeanClass="com.turnkey.setups.causations"
+                  id="findCoverTypeCausations" ReturnNodeName="causations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.causations"
+                  BeanClass="com.turnkey.setups.causations"
+                  id="findPolicyDocuments" ReturnNodeName="causations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.causations"
+                  BeanClass="com.turnkey.setups.causations"
+                  id="findProductReuiredDocs" ReturnNodeName="causations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.causations"
+                  BeanClass="com.turnkey.setups.causations"
+                  id="findDrCrNarratives" ReturnNodeName="causations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="com.turnkey.setups.causations"
+                  BeanClass="com.turnkey.setups.causations"
+                  id="findDisabilityLosses" ReturnNodeName="causations"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="com.turnkey.setups.causationsDAO"
+                     BeanClass="com.turnkey.setups.causationsDAO"
+                     id="causationsDAO"/>
+</JavaBean>

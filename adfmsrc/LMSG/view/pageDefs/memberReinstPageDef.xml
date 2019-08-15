@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="memberReinstPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+    <methodIterator Binds="FindEndorsements.result"
+                    DataControl="endorsementsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.endorsements"
+                    id="FindEndorsementsIterator"/>
+    <methodIterator Binds="FindMembersToReinstate.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindMembersToReinstateIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_POLICY_NO">
+      <AttrNames>
+        <Item Value="POL_POLICY_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="CLIENT_DISPLAY">
+      <AttrNames>
+        <Item Value="CLIENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_PROD_SHT_DESC">
+      <AttrNames>
+        <Item Value="POL_PROD_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="BRANCH_DISPLAY">
+      <AttrNames>
+        <Item Value="BRANCH_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindEndorsements" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindEndorsements"
+                  IsViewObjectMethod="false" DataControl="endorsementsDAO"
+                  InstanceName="endorsementsDAO.dataProvider"
+                  ReturnName="endorsementsDAO.methodResults.FindEndorsements_endorsementsDAO_dataProvider_FindEndorsements_result"/>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="AGENT_DISPLAY">
+      <AttrNames>
+        <Item Value="AGENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_NO">
+      <AttrNames>
+        <Item Value="ENDR_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_EFFECTIVE_DATE">
+      <AttrNames>
+        <Item Value="ENDR_EFFECTIVE_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="MASK_DISPLAY">
+      <AttrNames>
+        <Item Value="MASK_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_TOT_SA">
+      <AttrNames>
+        <Item Value="ENDR_TOT_SA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator"
+                     id="ENDR_TOT_PREMIUM">
+      <AttrNames>
+        <Item Value="ENDR_TOT_PREMIUM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindEndorsementsIterator" id="ENDR_COMM_AMT">
+      <AttrNames>
+        <Item Value="ENDR_COMM_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindMembersToReinstate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMembersToReinstate"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindMembersToReinstate_membersDAO_dataProvider_FindMembersToReinstate_result"/>
+    <tree IterBinding="FindMembersToReinstateIterator" id="members1">
+      <nodeDefinition DefName="LMSG.view.Members.members1" Name="members10">
+        <AttrNames>
+          <Item Value="POLM_CODE"/>
+          <Item Value="MEM_POLM_MEM_NO"/>
+          <Item Value="MEM_MEMBER_DISPLAY"/>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="PCM_EARNINGS"/>
+          <Item Value="PCM_MULT_EARNINGS_PRD"/>
+          <Item Value="PCM_LOAN_ISSUE_DATE"/>
+          <Item Value="PCM_SAVING_AMT"/>
+          <Item Value="selected"/>
+          <Item Value="MEM_POLM_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

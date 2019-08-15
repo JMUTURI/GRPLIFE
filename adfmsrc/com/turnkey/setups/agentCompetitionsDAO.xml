@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.59.23"
+          id="agentCompetitionsDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.agentCompetitionsDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.agentCompetitions"
+                  BeanClass="com.turnkey.setups.agentCompetitions"
+                  id="findAgentCompetionRates"
+                  ReturnNodeName="agentCompetitions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.agentCompetitions"
+                  BeanClass="com.turnkey.setups.agentCompetitions"
+                  id="findAgentCompeRates" ReturnNodeName="agentCompetitions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.agentCompetitions"
+                  BeanClass="com.turnkey.setups.agentCompetitions"
+                  id="findAgentCompetionTrans"
+                  ReturnNodeName="agentCompetitions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.agentCompetitions"
+                  BeanClass="com.turnkey.setups.agentCompetitions"
+                  id="findAgentCommissionReceived"
+                  ReturnNodeName="agentCompetitions"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.agentCompetitionsDAO"
+                     BeanClass="com.turnkey.setups.agentCompetitionsDAO"
+                     id="agentCompetitionsDAO"/>
+</JavaBean>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="Correspondence" Package="LMSG.view.Correspondents"
+          BeanClass="LMSG.view.Correspondents.Correspondence"
+          isJavaBased="true">
+  <Attribute Name="msgCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="msgShtDesc" Type="java.lang.String"/>
+  <Attribute Name="msgDesc" Type="java.lang.String"/>
+  <Attribute Name="CLIENT" Type="java.lang.String"/>
+  <Attribute Name="AGN_NAME" Type="java.lang.String"/>
+  <Attribute Name="CODE" Type="java.lang.String"/>
+  <Attribute Name="VAL" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Correspondents.Correspondence"
+                     BeanClass="LMSG.view.Correspondents.Correspondence"
+                     id="Correspondence"/>
+</JavaBean>

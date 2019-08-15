@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Free Cover Limit Factors" id="d2">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                             id="pgl4">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:400.0px;">
+              <af:showDetailItem text="FCL Factor Limits" id="sdi1"
+                                 inlineStyle="width:100.0%;">
+                <af:panelGroupLayout id="pgl2" layout="scroll">
+                  <af:panelBox text="PanelBox1" id="pb3" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:panelSplitter id="ps1" inlineStyle="width:100.0%;">
+                      <f:facet name="first">
+                        <af:panelBox text="Products" id="pb1">
+                          <f:facet name="toolbar"/>
+                          <af:tree value="#{bindings.Setup3.treeModel}"
+                                   var="node"
+                                   selectionListener="#{SetupBean.ProductTreeListener}"
+                                   rowSelection="single" id="t4"
+                                   binding="#{SetupBean.productsTree}">
+                            <f:facet name="nodeStamp">
+                              <af:outputText value="#{node}" id="ot14"/>
+                            </f:facet>
+                          </af:tree>
+                        </af:panelBox>
+                      </f:facet>
+                      <f:facet name="second">
+                        <af:panelBox text="Applicable FCL Factor Limits"
+                                     id="pb2">
+                          <f:facet name="toolbar"/>
+                          <h:panelGrid columns="4" id="pg12">
+                            <af:commandButton id="cb19"
+                                              icon="/images/field_group_plus_ena.png"
+                                              action="#{SetupBean.AddFCLFactor}"/>
+                            <af:commandButton icon="/images/update_ena.png"
+                                              id="commandButton11"
+                                              action="#{SetupBean.EditFCLFactor}"/>
+                            <af:commandButton id="cb22"
+                                              icon="/images/delete_ena.png"
+                                              action="#{SetupBean.performFCLFactorDelete}"/>
+                            <af:commandButton id="commandButton10"
+                                              icon="/images/folders.gif"
+                                              text="Clone Factors"
+                                              action="#{SetupBean.CloneFactors}"/>
+                          </h:panelGrid>
+                          <af:popup id="confirmDelete">
+                              <af:dialog id="d8" title="Confirm Delete Action"
+                                         type="yesNo"
+                                         dialogListener="#{SetupBean.actionConfirmDelete}">
+                                <af:outputText value="Are you sure you want to delete the selected row?"
+                                               id="ot32"/>
+                              </af:dialog>
+                            </af:popup>
+                          <af:popup id="fclfactors">
+                            <af:dialog id="d1" type="none"
+                                       title="FCL Factor Limit">
+                              <h:panelGrid columns="2" id="pg1">
+                                <af:outputLabel value="Lives From" id="ol2"/>
+                                <af:inputText label="Label 1" id="it1"
+                                              simple="true"
+                                              binding="#{SetupBean.fcLivesFrom}"/>
+                                <af:outputLabel value="Lives To"
+                                                id="outputLabel9"/>
+                                <af:inputText label="Label 1" id="inputText1"
+                                              simple="true"
+                                              binding="#{SetupBean.fcLivesTo}"/>
+                                <af:outputLabel value="FCL Factor"
+                                                id="outputLabel4"/>
+                                <af:inputText label="Label 1" id="inputText2"
+                                              simple="true"
+                                              binding="#{SetupBean.fcLFactor}"/>
+                                <af:outputLabel value="Max Limit"
+                                                id="outputLabel5"/>
+                                <af:inputText label="Label 1" id="inputText3"
+                                              simple="true"
+                                              binding="#{SetupBean.fcLimit}"/>
+                                <af:outputLabel value="W.E.F"
+                                                id="outputLabel6"/>
+                                <af:inputDate label="Label 1" id="id1"
+                                              simple="true"
+                                              binding="#{SetupBean.fcLWef}">
+                                   <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                                <af:outputLabel value="W.E.T"
+                                                id="outputLabel7"/>
+                                <af:inputDate label="Label 1" id="inputDate1"
+                                              simple="true"
+                                              binding="#{SetupBean.fcLWet}">
+                                  <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>                
+                              </h:panelGrid>
+                              <h:panelGrid columns="2" id="pg2">
+                                <af:commandButton text="Save" id="cb1"
+                                                  action="#{SetupBean.SaveFCLFactor}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="commandButton1"/>
+                              </h:panelGrid>
+                            </af:dialog>
+                          </af:popup>
+                          <af:popup id="clonepopup">
+                            <af:dialog id="d17" type="none"
+                                       title="Clone FCL Factors">
+                              <af:panelBox id="pb10" showHeader="never">
+                                <f:facet name="toolbar"/>
+                                <af:panelGroupLayout id="pgl12"
+                                                     partialTriggers="commandButton14">
+                                  <h:panelGrid columns="2" id="pg41">
+                                    <af:outputLabel id="ol55"
+                                                    value="Selected Product Factors to Clone"/>
+                                    <af:outputText id="ot123"
+                                                   inlineStyle="font-weight:bold;"
+                                                   binding="#{SetupBean.cloneFCLProduct}"/>
+                                    <af:outputLabel id="outputLabel1"
+                                                    value="Select Product to Populate Factors"/>
+                                    <af:selectOneChoice value="#{bindings.cloneProductCode.inputValue}"
+                                                        label="#{bindings.cloneProductCode.label}"
+                                                        required="#{bindings.cloneProductCode.hints.mandatory}"
+                                                        shortDesc="#{bindings.cloneProductCode.hints.tooltip}"
+                                                        id="soc2"
+                                                        binding="#{SetupBean.newFCLProduct}"
+                                                        simple="true"
+                                                        autoSubmit="true">
+                                      <f:selectItems value="#{bindings.cloneProductCode.items}"
+                                                     id="si3"/>
+                                    </af:selectOneChoice>
+                                  </h:panelGrid>
+                                  <af:panelGroupLayout id="pgl14"
+                                                       partialTriggers="cb57">
+                                    <h:panelGrid columns="2" id="pg42"
+                                                 binding="#{SetupBean.clonePanel}">
+                                      <af:commandButton text="Next" id="cb57"
+                                                        action="#{SetupBean.ValidateCloneFactors}"
+                                                        partialSubmit="true"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="commandButton12"/>
+                                    </h:panelGrid>
+                                  </af:panelGroupLayout>
+                                  <af:spacer width="10" height="10" id="s2"/>
+                                  <af:panelGroupLayout id="pgl13"
+                                                       partialTriggers="cb57">
+                                    <h:panelGrid columns="1" id="pg43"
+                                                 rendered="false"
+                                                 binding="#{SetupBean.confirmPanel}">
+                                      <af:outputLabel value="Confirmation"
+                                                      id="ol56"
+                                                      inlineStyle="font-weight:bold;"/>
+                                      <af:separator id="s7"/>
+                                      <h:panelGrid columns="2" id="pg44">
+                                        <af:outputLabel value="Note:" id="ol57"
+                                                        inlineStyle="font-weight:bold;"/>
+                                        <af:outputLabel value="Are you sure you want to proceed?"
+                                                        id="outputLabel2"
+                                                        inlineStyle="font-weight:bold; color:Red;"/>
+                                      </h:panelGrid>
+                                      <h:panelGrid columns="2" id="panelGrid5">
+                                        <af:commandButton text="Proceed"
+                                                          id="commandButton13"
+                                                          partialSubmit="true"
+                                                          action="#{SetupBean.ProceedToCloneFCLFactors}"/>
+                                        <af:commandButton text="Cancel"
+                                                          id="commandButton14"
+                                                          partialSubmit="true"
+                                                          action="#{SetupBean.CancelValidate}"/>
+                                      </h:panelGrid>
+                                    </h:panelGrid>
+                                  </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                              </af:panelBox>
+                            </af:dialog>
+                          </af:popup>
+                          <af:table value="#{bindings.Setup2.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.Setup2.rangeSize}"
+                                    emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.Setup2.rangeSize}"
+                                    rowBandingInterval="0"
+                                    selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t3"
+                                    inlineStyle="width:98%; height:200.0px; border-style:none;"
+                                    binding="#{SetupBean.FCLLOV}">
+                            <af:column sortProperty="FCL_LIVES_FROM"
+                                       sortable="true" headerText="Lives From"
+                                       id="c7">
+                              <af:outputText value="#{row.FCL_LIVES_FROM}"
+                                             id="ot9"/>
+                            </af:column>
+                            <af:column sortProperty="FCL_LIVE_TO"
+                                       sortable="true" headerText="Live To"
+                                       id="c12">
+                              <af:outputText value="#{row.FCL_LIVE_TO}"
+                                             id="ot10"/>
+                            </af:column>
+                            <af:column sortProperty="FCL_FCL_FACTOR"
+                                       sortable="true" headerText="FCL Factor"
+                                       id="c11">
+                              <af:outputText value="#{row.FCL_FCL_FACTOR}"
+                                             id="ot11"/>
+                            </af:column>
+                            <af:column sortProperty="FCL_LIMIT" sortable="true"
+                                       headerText="Max Limit" id="c10"
+                                       width="150">
+                              <af:outputText value="#{row.FCL_LIMIT}"
+                                             id="ot13"/>
+                            </af:column>
+                            <af:column sortProperty="FCL_WEF" sortable="true"
+                                       headerText="W.E.F" id="c8">
+                              <af:outputText value="#{row.FCL_WEF}" id="ot8">
+                                <af:convertDateTime pattern="#{bindings.Setup2.hints.FCL_WEF.format}"/>
+                              </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="FCL_WET" sortable="true"
+                                       headerText="W.E.T" id="c9">
+                              <af:outputText value="#{row.FCL_WET}" id="ot12">
+                                <af:convertDateTime pattern="#{bindings.Setup2.hints.FCL_WET.format}"/>
+                              </af:outputText>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                      </f:facet>
+                    </af:panelSplitter>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+                <f:facet name="toolbar">
+                  <h:panelGrid columns="2" id="pg3">
+                    <af:inputText id="it2" helpTopicId="LmsGrp_fclfactors"
+                                  readOnly="true"/>
+                    <af:statusIndicator id="si1"/>
+                  </h:panelGrid>
+                </f:facet>
+              </af:showDetailItem>
+            </af:panelAccordion>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

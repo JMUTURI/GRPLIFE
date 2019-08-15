@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="undwrdocPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindOccupation.result" DataControl="documentsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.documents"
+                    id="FindOccupationIterator"/>
+    <methodIterator Binds="FindPolicyDocs.result"
+                    DataControl="groupPolicyDocsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.groupPolicyDocs"
+                    id="FindPolicyDocsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindOccupation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindOccupation"
+                  IsViewObjectMethod="false" DataControl="documentsDAO"
+                  InstanceName="documentsDAO.dataProvider"
+                  ReturnName="documentsDAO.methodResults.FindOccupation_documentsDAO_dataProvider_FindOccupation_result"/>
+    <tree IterBinding="FindOccupationIterator" id="documents">
+      <nodeDefinition DefName="view.Policy.documents" Name="documents0">
+        <AttrNames>
+          <Item Value="RD_SHT_DESC"/>
+          <Item Value="RD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicyDocs" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyDocs"
+                  IsViewObjectMethod="false" DataControl="groupPolicyDocsDAO"
+                  InstanceName="groupPolicyDocsDAO.dataProvider"
+                  ReturnName="groupPolicyDocsDAO.methodResults.FindPolicyDocs_groupPolicyDocsDAO_dataProvider_FindPolicyDocs_result"/>
+    <tree IterBinding="FindPolicyDocsIterator" id="groupPolicyDocs">
+      <nodeDefinition DefName="view.Policy.groupPolicyDocs"
+                      Name="groupPolicyDocs0">
+        <AttrNames>
+          <Item Value="GPD_RD_SHT_DESC"/>
+          <Item Value="DOCUMENT_DISPLAY"/>
+          <Item Value="DOCUMENT_SUBMITTED"/>
+          <Item Value="dateGiven"/>
+          <Item Value="GPD_DOC_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

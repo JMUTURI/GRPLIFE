@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="chqTrackingPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findChqStatuses.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findChqStatusesIterator"/>
+    <methodIterator Binds="findPoliciesToAllocate.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findPoliciesToAllocateIterator"/>
+    <searchRegion Binds="findChqStatusesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AccountQuery"/>
+	<searchRegion Binds="findPoliciesToAllocateIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account6Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findChqStatuses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findChqStatuses"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findChqStatuses_AccountDAO_dataProvider_findChqStatuses_result"/>
+    <tree IterBinding="findChqStatusesIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="cqrRefNo"/>
+          <Item Value="cqrNarrative"/>
+          <Item Value="cqrFmsRemarks"/>
+          <Item Value="crqPayee"/>
+          <Item Value="cqrChqNo"/>
+          <Item Value="cqrPmtVchno"/>
+          <Item Value="cstDescription"/>
+          <Item Value="cqrAmount"/>
+          <Item Value="cqrChequeDate"/>          
+          <Item Value="policy_no"/>
+          <Item Value="client"/>
+	  <Item Value="cpvDateAuth"/>
+	  <Item Value="cqrChqDispactDate"/>
+          <Item Value="totalChequeAmt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+	<methodAction id="findPoliciesToAllocate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPoliciesToAllocate"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPoliciesToAllocate_AccountDAO_dataProvider_findPoliciesToAllocate_result"/>
+    <tree IterBinding="findPoliciesToAllocateIterator" id="Account6">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account60">
+        <AttrNames>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="PRP_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Business Transactions" id="d1">
+    <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                             id="pgl4">
+          <af:panelBox text="Business Transactions" showHeader="never" id="pb15">
+            <f:facet name="toolbar"/>
+            <af:outputLabel value="Business Transactions" id="ol1"
+                            inlineStyle="font-weight:bold;"/>
+            <af:separator id="s1"/>
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                      rows="#{bindings.Setup.rangeSize}"
+                      emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.Setup.rangeSize}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t1"
+                      inlineStyle="width:98%; height:400.0px; border-style:none;">
+              <af:column sortProperty="BTR_TRANS_CODE" sortable="true"
+                         headerText="Code" id="c4">
+                <af:outputText value="#{row.BTR_TRANS_CODE}" id="ot5"/>
+              </af:column>
+              <af:column sortProperty="BTR_TRANS_TYPE" sortable="true"
+                         headerText="Transaction Type" id="c3" width="300">
+                <af:outputText value="#{row.BTR_TRANS_TYPE}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="BTR_DEBIT_CODE" sortable="true"
+                         headerText="Debit Code" id="c2">
+                <af:outputText value="#{row.BTR_DEBIT_CODE}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="BTR_CREDIT_CODE" sortable="true"
+                         headerText="Credit Code" id="c1">
+                <af:outputText value="#{row.BTR_CREDIT_CODE}" id="ot2"/>
+              </af:column>
+            </af:table>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

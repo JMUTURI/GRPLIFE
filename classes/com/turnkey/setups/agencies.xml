@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="agencies" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.agencies" isJavaBased="true">
+  <Attribute Name="agn_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="agn_sht_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_name" Type="java.lang.String"/>
+  <Attribute Name="agn_id_no" Type="java.lang.String"/>
+  <Attribute Name="agn_phone_no" Type="java.lang.String"/>
+  <Attribute Name="agn_pin_no" Type="java.lang.String"/>
+  <Attribute Name="agn_comm_allowed" Type="java.lang.String"/>
+  <Attribute Name="agn_comm_allowed_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_contracted" Type="java.lang.String"/>
+  <Attribute Name="agn_contracted_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_proficiency_cert_no" Type="java.lang.String"/>
+  <Attribute Name="agn_contract_date" Type="java.util.Date"/>
+  <Attribute Name="agn_date_joined" Type="java.util.Date"/>
+  <Attribute Name="agn_date_terminated" Type="java.util.Date"/>
+  <Attribute Name="agn_bank" Type="java.lang.String"/>
+  <Attribute Name="agn_bank_acc_no" Type="java.lang.String"/>
+  <Attribute Name="agn_sms_tel" Type="java.lang.String"/>
+  <Attribute Name="agn_email_address" Type="java.lang.String"/>
+  <Attribute Name="agn_reinsurer" Type="java.lang.String"/>
+  <Attribute Name="agn_reinsurer_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_acc_no" Type="java.lang.String"/>
+  <Attribute Name="agn_credit_allowed" Type="java.lang.String"/>
+  <Attribute Name="agn_credit_allowed_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_wht_tax" Type="java.lang.String"/>
+  <Attribute Name="agn_print_dbnote" Type="java.lang.String"/>
+  <Attribute Name="agn_print_dbnote_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_status" Type="java.lang.String"/>
+  <Attribute Name="agn_reg_status" Type="java.lang.String"/>
+  <Attribute Name="agn_reg_status_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_reg_number" Type="java.lang.String"/>
+  <Attribute Name="agn_comm_payable" Type="java.lang.String"/>
+  <Attribute Name="agn_comm_payable_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_comm_pymt_mthd" Type="java.lang.String"/>
+  <Attribute Name="agn_comm_pymt_mthd_desc" Type="java.lang.String"/>
+  <Attribute Name="agn_postal_address" Type="java.lang.String"/>
+  <Attribute Name="agn_retain_wthx" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="com.turnkey.setups.agencies"
+                     BeanClass="com.turnkey.setups.agencies" id="agencies"/>
+</JavaBean>

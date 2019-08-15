@@ -1,0 +1,125 @@
+---2.There are new changes from IT that are to be done on all mail servers. They were handled in ticket GIS-7037
+--These were:
+
+-------------------------------------------------------------------------------
+--To allow outgoing email the following Access control rights need to be added to the database.
+--1. Find out your SMTP outgoing mail server and configure the database parameter smtp_out_server.
+alter system set smtp_out_server= '10.176.18.143' ;
+
+--2. Create an access control list file :-
+begin
+DBMS_NETWORK_ACL_ADMIN
+.create_acl (
+acl => 'utl_smtp.xml',
+description => 'Enables mail to be sent',
+principal => 'TQ_FMS',-- - USERNAME to which access has to be granted TQ_GIS/TQ_CRM
+is_grant => true,
+privilege => 'connect');
+commit;
+end;
+/
+
+
+
+begin
+DBMS_NETWORK_ACL_ADMIN
+.create_acl (
+acl => 'utl_smtp.xml',
+description => 'Enables mail to be sent',
+principal => 'TQ_CRM',-- - USERNAME to which access has to be granted TQ_GIS/TQ_CRM
+is_grant => true,
+privilege => 'connect');
+commit;
+end;
+/
+
+
+/*
+BEGIN
+DBMS_NETWORK_ACL_ADMIN.drop_acl (
+acl         => '/sys/acls/utl_smtp1.xml');
+  COMMIT;
+END;
+*/
+---3. Assign this ACL to your SMTP network host (Same host as above) for your email server :-
+begin
+dbms_network_acl_admin.assign_acl (
+acl => 'utl_smtp.xml',
+host => '10.176.18.143',-- - SMTP network host as entered above. --10.176.18.56
+lower_port => 25);
+commit;
+end;
+/*
+begin
+dbms_network_acl_admin.unassign_acl (
+acl => 'utl_smtp.xml',
+host => '10.176.18.143',    -- SMTP network host
+lower_port => 25);
+COMMIT;
+end;
+*/
+
+-----4. Grant users permission to ACL file :--
+begin
+DBMS_NETWORK_ACL_ADMIN.add_privilege (
+acl => 'utl_smtp.xml',
+principal => 'TQ_FMS',
+is_grant => TRUE,
+privilege => 'connect');
+COMMIT;
+end;
+/
+
+
+begin
+DBMS_NETWORK_ACL_ADMIN.add_privilege (
+acl => 'utl_smtp.xml',
+principal => 'TQ_CRM',
+is_grant => TRUE,
+privilege => 'connect');
+COMMIT;
+end;
+/
+
+
+
+begin
+DBMS_NETWORK_ACL_ADMIN.add_privilege (
+acl => 'utl_smtp.xml',
+principal => 'TQ_FMS',
+is_grant => TRUE,
+privilege => 'connect');
+COMMIT;
+end;
+/
+
+begin
+DBMS_NETWORK_ACL_ADMIN.add_privilege (
+acl => 'utl_smtp.xml',
+principal => 'TQ_CRM',
+is_grant => TRUE,
+privilege => 'connect');
+COMMIT;
+end;
+/
+--drop
+/*
+BEGIN
+DBMS_NETWORK_ACL_ADMIN.delete_privilege (
+acl         => '/sys/acls/utl_smtp1.xml',
+principal   => 'TQ_CRM',
+is_grant    => TRUE,
+privilege   => 'connect');
+  COMMIT;
+END;*/
+--drop
+/*
+BEGIN
+DBMS_NETWORK_ACL_ADMIN.delete_privilege (
+acl         => '/sys/acls/utl_smtp1.xml',
+principal   => 'TQ_LMS',
+is_grant    => TRUE,
+privilege   => 'connect');
+COMMIT;
+END;*/
+---------------------------------------------------------------------------

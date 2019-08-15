@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="dependentLimits" Package="LMSG.view.QuotationProcessing"
+          BeanClass="LMSG.view.QuotationProcessing.dependentLimits"
+          isJavaBased="true">
+  <Attribute Name="QDL_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_QUO_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_MAX_TYPE_ALLOWED" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_LIMIT_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="DTY_DESCRIPTION" Type="java.lang.String"/>
+  <Attribute Name="PCA_CATEG_DESC" Type="java.lang.String"/>
+  <Attribute Name="cvt_desc" Type="java.lang.String"/>
+  <Attribute Name="QDL_MIN_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_DTY_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="QDL_PCVT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="CVT_CODE" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.QuotationProcessing.dependentLimits"
+                     BeanClass="LMSG.view.QuotationProcessing.dependentLimits"
+                     id="dependentLimits"/>
+</JavaBean>

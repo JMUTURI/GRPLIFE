@@ -1,0 +1,2 @@
+Update DBConnector.class to classes\LMSG\view\connect
+The Rest update them to:classes\LMSG\view\Login

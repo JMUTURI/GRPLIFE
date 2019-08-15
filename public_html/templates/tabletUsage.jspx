@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          version="1.2">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <f:view>
+    <af:pageTemplate
+      id="exampleTablet"
+      viewId="/templates/pageTemplateDefs/tabletTemplate.jspx">
+      <f:attribute name="documentTitle" value="tablet Sample Page Template"/>
+      <f:attribute name="headerGlobalSize" value="65"/>
+      <f:attribute name="auxiliaryGlobalSize" value="100"/>
+      <f:attribute name="auxiliary2Size" value="100"/>
+      <f:attribute name="navigation3Size" value="100"/>
+      <f:attribute name="header2Size" value="60"/>
+      <f:attribute name="footer2Size" value="30"/>
+      <f:attribute name="footerGlobalSize" value="30"/>
+      <f:facet name="branding">
+        <af:panelGroupLayout layout="horizontal" shortDesc="branding" id="pgl1">
+          <af:icon name="logo" shortDesc="Oracle" id="i1"/>
+          <af:outputText value="Product Name" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="navigationGlobal">
+        <af:navigationPane shortDesc="navigationGlobal" hint="buttons" id="np1">
+          <af:commandNavigationItem partialSubmit="true" text="Home"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni1"/>
+          <af:commandNavigationItem partialSubmit="true" text="Administration"
+            selected="true"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni2"/>
+          <af:commandNavigationItem partialSubmit="true" text="Preferences"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni3"/>
+          <af:commandNavigationItem partialSubmit="true" text="Help"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni4"/>
+          <af:commandNavigationItem text="Sign Out" destination="index.jspx"
+                                    id="cni5"/>
+        </af:navigationPane>
+      </f:facet>
+      <f:facet name="toolbarGlobal">
+        <af:outputText value="toolbarGlobal" id="ot2"/>
+      </f:facet>
+      <f:facet name="contextGlobal">
+        <af:outputText value="contextGlobal" id="ot3"/>
+      </f:facet>
+      <f:facet name="infoUser">
+        <af:outputText shortDesc="infoUser"
+          value="Logged in as Administrator" id="ot4"/>
+      </f:facet>
+      <f:facet name="auxiliaryGlobal">
+        <af:outputText value="auxiliaryGlobal" id="ot5"/>
+      </f:facet>
+      <f:facet name="navigation2">
+        <af:navigationPane shortDesc="shortDesc text" hint="tabs" id="np2">
+          <af:commandNavigationItem partialSubmit="true" text="Secondary Tab 1"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni6"/>
+          <af:commandNavigationItem partialSubmit="true" text="Secondary Tab 2"
+            selected="true"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni7"/>
+          <af:commandNavigationItem partialSubmit="true" text="Secondary Tab 3"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni8"/>
+          <af:commandNavigationItem partialSubmit="true" text="Secondary Tab 4"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni9"/>
+          <af:commandNavigationItem partialSubmit="true" text="Secondary Tab 5"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni10"/>
+        </af:navigationPane>
+      </f:facet>
+      <f:facet name="toolbar2">
+        <af:outputText value="toolbar2" id="ot6"/>
+      </f:facet>
+      <f:facet name="location">
+        <af:outputText value="location" id="ot7"/>
+      </f:facet>
+      <f:facet name="auxiliary2">
+        <af:outputText value="auxiliary2" id="ot8"/>
+      </f:facet>
+      <f:facet name="contextLocal">
+        <af:outputText value="contextLocal" id="ot9"/>
+      </f:facet>
+      <f:facet name="navigation3">
+        <af:navigationPane shortDesc="shortDesc text" hint="list" id="np3">
+          <af:commandNavigationItem partialSubmit="true" text="Local Item 1"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni11"/>
+          <af:commandNavigationItem partialSubmit="true" text="Local Item 2"
+            selected="true"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni12"/>
+          <af:commandNavigationItem partialSubmit="true" text="Local Item 3"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni13"/>
+          <af:commandNavigationItem partialSubmit="true" text="Local Item 4"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni14"/>
+          <af:commandNavigationItem partialSubmit="true" text="Local Item 5"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni15"/>
+        </af:navigationPane>
+      </f:facet>
+      <f:facet name="infoStatus">
+        <af:outputText value="infoStatus" id="ot10"/>
+      </f:facet>
+      <f:facet name="infoFootnote">
+        <af:outputText value="infoFootnote" id="ot11"/>
+      </f:facet>
+      <f:facet name="infoReturn">
+        <af:outputText value="infoReturn" id="ot12"/>
+      </f:facet>
+      <f:facet name="appCopyright">
+        <af:outputText value="appCopyright" id="ot13"/>
+      </f:facet>
+      <f:facet name="appAbout">
+        <af:outputText value="appAbout" id="ot14"/>
+      </f:facet>
+      <f:facet name="appPrivacy">
+        <af:outputText value="appPrivacy" id="ot15"/>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout layout="scroll" id="pgl2">
+          <af:goLink text="back to index"
+            destination="index.jspx" id="gl1"/>
+          <af:separator id="s1"/>
+          <af:outputText
+            value="This is a test case for the tablet page template."
+                         id="ot16"/>
+          <af:goLink
+            text="Usage Source"
+            destination="#{facesContext.viewRoot.viewId}.source"
+            targetFrame="demoSource" id="gl2"/>
+          <af:goLink
+            text="Template Definition Source"
+            destination="/templates/pageTemplateDefs/tabletTemplate.jspx.source"
+            targetFrame="templateSource" id="gl3"/>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate>
+  </f:view>
+</jsp:root>

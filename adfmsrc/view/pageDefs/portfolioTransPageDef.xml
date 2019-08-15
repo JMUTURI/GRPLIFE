@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="portfolioTransPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Type="boolean" Name="isPayRi_Return" IsQueriable="false"
+                IsUpdateable="0" DefaultValue="${bindings.isPayRi.result}"/>
+    </variableIterator>
+    <methodIterator Binds="findTreatyArrangements.result"
+                    DataControl="treatyArrangementsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.setups.treatyArrangements"
+                    id="findTreatyArrangementsIterator"/>
+    <searchRegion Binds="findTreatyArrangementsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="treatyArrangementsQuery"/>
+    <methodIterator Binds="findArrangementSetups.result"
+                    DataControl="arrangementSetupsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.setups.arrangementSetups"
+                    id="findArrangementSetupsIterator"/>
+    <searchRegion Binds="findArrangementSetupsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="arrangementSetupsQuery"/>
+    <methodIterator Binds="findTreatySetups.result" DataControl="treatySetupDAO"
+                    RangeSize="25" BeanClass="LMSG.view.setups.treatySetups"
+                    id="findTreatySetupsIterator"/>
+    <searchRegion Binds="findTreatySetupsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="treatySetupsQuery"/>
+    <methodIterator Binds="findPeriodTreatySumm.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPeriodTreatySummIterator"/>
+    <searchRegion Binds="findPeriodTreatySummIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AccountQuery"/>
+    <methodIterator Binds="findTreatySummary.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findTreatySummaryIterator"/>
+    <searchRegion Binds="findTreatySummaryIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account1Query"/>
+    <methodIterator Binds="findTreatyParticipants.result"
+                    DataControl="treatyParticipantsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.TreatyParticipants"
+                    id="findTreatyParticipantsIterator"/>
+    <methodIterator Binds="FindBranches.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindBranchesIterator"/>
+    <searchRegion Binds="FindBranchesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+    <methodIterator Binds="findRIReceipts.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findRIReceiptsIterator"/>
+    <searchRegion Binds="findRIReceiptsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account3Query"/>
+    <methodIterator Binds="findRecoveryPrdSumm.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findRecoveryPrdSummIterator"/>
+    <searchRegion Binds="findRecoveryPrdSummIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account4Query"/>
+    <methodIterator Binds="findCoinsurancePrdSumm.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findCoinsurancePrdSummIterator"/>
+    <searchRegion Binds="findCoinsurancePrdSummIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account5Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findTreatyArrangements" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyArrangements"
+                  IsViewObjectMethod="false" DataControl="treatyArrangementsDAO"
+                  InstanceName="treatyArrangementsDAO.dataProvider"
+                  ReturnName="treatyArrangementsDAO.methodResults.findTreatyArrangements_treatyArrangementsDAO_dataProvider_findTreatyArrangements_result"/>
+    <tree IterBinding="findTreatyArrangementsIterator" id="treatyArrangements">
+      <nodeDefinition DefName="LMSG.view.setups.treatyArrangements"
+                      Name="treatyArrangements0">
+        <AttrNames>
+          <Item Value="ta_code"/>
+          <Item Value="TA_SHT_DESC"/>
+          <Item Value="TA_DESC"/>
+          <Item Value="TA_TYPE"/>
+          <Item Value="TA_CUR_CODE"/>
+          <Item Value="TA_CUR_SYMBOL"/>
+          <Item Value="TA_CLA_CODE"/>
+          <Item Value="TA_CLA_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findArrangementSetups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findArrangementSetups"
+                  IsViewObjectMethod="false" DataControl="arrangementSetupsDAO"
+                  InstanceName="arrangementSetupsDAO.dataProvider"
+                  ReturnName="arrangementSetupsDAO.methodResults.findArrangementSetups_arrangementSetupsDAO_dataProvider_findArrangementSetups_result"/>
+    <tree IterBinding="findArrangementSetupsIterator" id="arrangementSetups">
+      <nodeDefinition DefName="LMSG.view.setups.arrangementSetups"
+                      Name="arrangementSetups0">
+        <AttrNames>
+          <Item Value="AS_UWYR"/>
+          <Item Value="AS_CODE"/>
+          <Item Value="AS_TA_CODE"/>
+          <Item Value="AS_RETENTION_LIMIT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTreatySetups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatySetups"
+                  IsViewObjectMethod="false" DataControl="treatySetupDAO"
+                  InstanceName="treatySetupDAO.dataProvider"
+                  ReturnName="treatySetupDAO.methodResults.findTreatySetups_treatySetupDAO_dataProvider_findTreatySetups_result"/>
+    <tree IterBinding="findTreatySetupsIterator" id="treatySetups">
+      <nodeDefinition DefName="LMSG.view.setups.treatySetups"
+                      Name="treatySetups0">
+        <AttrNames>
+          <Item Value="REI_TRS_SHT_DESC"/>
+          <Item Value="REI_RATE_TYPE"/>
+          <Item Value="CUR_DESCN"/>
+          <Item Value="REI_GEN_CONDITIONS"/>
+          <Item Value="REI_EXCLUSIONS"/>
+          <Item Value="REI_INFORMATION"/>
+          <Item Value="REI_WORDING"/>
+          <Item Value="REI_WARRANTY"/>
+          <Item Value="REI_TRS_CODE"/>
+          <Item Value="REI_TRT_CODE"/>
+          <Item Value="REI_CODE"/>
+          <Item Value="REI_UW_YEAR"/>
+          <Item Value="REI_PREM_RESV_INT"/>
+          <Item Value="REI_CEDE_RATE"/>
+          <Item Value="REI_AOFREINS_CODE"/>
+          <Item Value="REI_PROFIT_COMM"/>
+          <Item Value="REI_MGT_FEE"/>
+          <Item Value="REI_CASH_LOSS"/>
+          <Item Value="REI_PREM_PORTFOLIO"/>
+          <Item Value="REI_LOSS_PORTFOLIO"/>
+          <Item Value="REI_COMM_RATE"/>
+          <Item Value="REI_PRD_LOSSES_CARRIED_FRD"/>
+          <Item Value="REI_QUAKE_LIMIT"/>
+          <Item Value="REI_SI_START_FROM"/>
+          <Item Value="REI_WEF_DT"/>
+          <Item Value="REI_WET_DT"/>
+          <Item Value="REI_ACCOUNTS"/>
+          <Item Value="REI_ACCOUNTS_DESC"/>
+          <Item Value="REI_TRT_SHT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPeriodTreatySumm" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPeriodTreatySumm"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPeriodTreatySumm_AccountDAO_dataProvider_findPeriodTreatySumm_result"/>
+    <tree IterBinding="findPeriodTreatySummIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="prtsCode"/>
+          <Item Value="prtsUwYear"/>
+          <Item Value="prtsFiscalYear"/>
+          <Item Value="prtsFiscalMonth"/>
+          <Item Value="prtsCededPremium"/>
+          <Item Value="prtsReinComm"/>
+          <Item Value="prtsPremTax"/>
+          <Item Value="prtsReinPRemTax"/>
+          <Item Value="prtsClaimsIncurred"/>
+          <Item Value="prtsClaimsPaid"/>
+          <Item Value="prodDesc"/>
+          <Item Value="prtsTrtCode"/>
+          <Item Value="prtsTaCode"/>
+          <Item Value="prtsAsCode"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="refNo"/>
+          <Item Value="prtsFiscalYear"/>
+          <Item Value="prtsUwYear"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTreatySummary" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatySummary"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findTreatySummary_AccountDAO_dataProvider_findTreatySummary_result"/>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_CUMM_CEDED_CLAIMS">
+      <AttrNames>
+        <Item Value="TS_CUMM_CEDED_CLAIMS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_FISCAL_YEAR">
+      <AttrNames>
+        <Item Value="TS_FISCAL_YEAR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_CUMM_REIN_COMM">
+      <AttrNames>
+        <Item Value="TS_CUMM_REIN_COMM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_RESERVE_RETAINED">
+      <AttrNames>
+        <Item Value="TS_RESERVE_RETAINED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_CUMM_CEDED_PREMIUM">
+      <AttrNames>
+        <Item Value="TS_CUMM_CEDED_PREMIUM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_CUMM_CLAIMS_PAID">
+      <AttrNames>
+        <Item Value="TS_CUMM_CLAIMS_PAID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_RESERVE_RELEASED">
+      <AttrNames>
+        <Item Value="TS_RESERVE_RELEASED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_ENTRY_PREM_AMT">
+      <AttrNames>
+        <Item Value="TS_ENTRY_PREM_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_WITHDRAWAL_PREM_AMT">
+      <AttrNames>
+        <Item Value="TS_WITHDRAWAL_PREM_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator" id="TS_INTEREST">
+      <AttrNames>
+        <Item Value="TS_INTEREST"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_ENTRY_PORTFOLIO_LOSS">
+      <AttrNames>
+        <Item Value="TS_ENTRY_PORTFOLIO_LOSS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_WITHDRAWAL_CLAIM_AMT">
+      <AttrNames>
+        <Item Value="TS_WITHDRAWAL_CLAIM_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_INTEREST_TAX">
+      <AttrNames>
+        <Item Value="TS_INTEREST_TAX"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_CUMM_PREM_TAX">
+      <AttrNames>
+        <Item Value="TS_CUMM_PREM_TAX"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_CUMM_REIN_PREM_TAX">
+      <AttrNames>
+        <Item Value="TS_CUMM_REIN_PREM_TAX"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator"
+                     id="TS_MGT_EXPENSE_AMT">
+      <AttrNames>
+        <Item Value="TS_MGT_EXPENSE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator" id="PROFIT_LOSS">
+      <AttrNames>
+        <Item Value="PROFIT_LOSS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator" id="OUTGO">
+      <AttrNames>
+        <Item Value="OUTGO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findTreatySummaryIterator" id="INCOME">
+      <AttrNames>
+        <Item Value="INCOME"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findTreatyParticipants" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTreatyParticipants"
+                  IsViewObjectMethod="false" DataControl="treatyParticipantsDAO"
+                  InstanceName="treatyParticipantsDAO.dataProvider"
+                  ReturnName="treatyParticipantsDAO.methodResults.findTreatyParticipants_treatyParticipantsDAO_dataProvider_findTreatyParticipants_result"/>
+    <tree IterBinding="findTreatyParticipantsIterator" id="TreatyParticipants">
+      <nodeDefinition DefName="com.turnkey.setups.TreatyParticipants"
+                      Name="TreatyParticipants0">
+        <AttrNames>
+          <Item Value="trpa_agen_code"/>
+          <Item Value="agn_name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findTreatySummaryIterator" id="Account1">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account10">
+        <AttrNames>
+          <Item Value="TS_CODE"/>
+          <Item Value="TS_CUMM_CEDED_CLAIMS"/>
+          <Item Value="TS_CUMM_CLAIMS_PAID"/>
+          <Item Value="TS_ENTRY_CLAIM_AMT"/>
+          <Item Value="TS_CUMM_PREM_TAX"/>
+          <Item Value="INCOME"/>
+          <Item Value="OUTGO"/>
+          <Item Value="PROFIT_LOSS"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="TS_AMT_PAID"/>
+          <Item Value="status"/>
+          <Item Value="TS_DRCR_NO"/>
+          <Item Value="TS_DRCR"/>
+          <Item Value="TS_TRAN_DATE"/>
+          <Item Value="TS_VOUCHER_NO"/>
+          <Item Value="payRi"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindBranches" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindBranches"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindBranches_SettingsDAO_dataProvider_FindBranches_result"/>
+    <tree IterBinding="FindBranchesIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="BRN_CODE"/>
+          <Item Value="BRN_SHT_DESC"/>
+          <Item Value="BRN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findRIReceipts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRIReceipts"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="data.AccountDAO.methodResults.findRIReceipts_AccountDAO_dataProvider_findRIReceipts_result"/>
+    <tree IterBinding="findRIReceiptsIterator" id="Account2">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account20">
+        <AttrNames>
+          <Item Value="gtopReceiptNo"/>
+          <Item Value="gtopDoneBy"/>
+          <Item Value="gtopDrCr"/>
+          <Item Value="gtopReceiptDate"/>
+          <Item Value="gtopAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findRIReceiptsIterator" id="Account3">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account30">
+        <AttrNames>
+          <Item Value="gtopReceiptNo"/>
+          <Item Value="gtopDoneBy"/>
+          <Item Value="gtopDrCr"/>
+          <Item Value="gtopReceiptDate"/>
+          <Item Value="gtopAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction IterBinding="findTreatySummaryIterator" id="isPayRi"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="isPayRi" IsViewObjectMethod="false"
+                  DataControl="AccountDAO"
+                  InstanceName="bindings.findTreatySummaryIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.AccountDAO.methodResults.isPayRi_isPayRi_isPayRi_result"/>
+    <button IterBinding="variables" id="Return" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="isPayRi_Return"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <methodAction id="findRecoveryPrdSumm" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRecoveryPrdSumm"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="data.AccountDAO.methodResults.findRecoveryPrdSumm_AccountDAO_dataProvider_findRecoveryPrdSumm_result"/>
+    <tree IterBinding="findRecoveryPrdSummIterator" id="Account4">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account40">
+        <AttrNames>
+          <Item Value="crctdCode"/>
+          <Item Value="memNo"/>
+          <Item Value="memName"/>
+          <Item Value="client"/>
+          <Item Value="amtPaid"/>
+          <Item Value="amtPayable"/>
+          <Item Value="causDesc"/>
+          <Item Value="coverDesc"/>
+          <Item Value="refNo"/>
+          <Item Value="agnName"/>
+          <Item Value="riSelect"/>
+          <Item Value="riPeriod"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCoinsurancePrdSumm" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCoinsurancePrdSumm"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="data.AccountDAO.methodResults.findCoinsurancePrdSumm_AccountDAO_dataProvider_findCoinsurancePrdSumm_result"/>
+    <tree IterBinding="findCoinsurancePrdSummIterator" id="Account5">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account50">
+        <AttrNames>
+          <Item Value="ccrCode"/>
+          <Item Value="coinMemNo"/>
+          <Item Value="coinMemName"/>
+          <Item Value="coinClient"/>
+          <Item Value="coinAmtPaid"/>
+          <Item Value="coinAmtPayable"/>
+          <Item Value="coinCausDesc"/>
+          <Item Value="coinCoverDesc"/>
+          <Item Value="coinRefNo"/>
+          <Item Value="coinAgnName"/>
+          <Item Value="coinSelect"/>
+          <Item Value="coinPeriod"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findCoinsurancePrdSummIterator" id="Account6">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account60">
+        <AttrNames>
+          <Item Value="ccrCode"/>
+          <Item Value="coinAmtPaid"/>
+          <Item Value="coinAmtPayable"/>
+          <Item Value="coinMemNo"/>
+          <Item Value="coinMemName"/>
+          <Item Value="coinCausDesc"/>
+          <Item Value="coinCoverDesc"/>
+          <Item Value="coinRefNo"/>
+          <Item Value="coinAgnName"/>
+          <Item Value="coinClient"/>
+          <Item Value="coinSelect"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

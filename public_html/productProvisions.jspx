@@ -1,0 +1,739 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Group Life | Product Provisions">
+      <af:messages id="m1"/>
+      <af:pageTemplate id="lmsgroup" viewId="/templates/GroupTemplate2.jspx">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                                 id="pgl4">
+              <af:popup id="premRates">
+                <af:dialog id="dialog1" title="Premium Rates" type="none">
+                  <h:panelGrid columns="4" id="pg5">
+                    <af:outputLabel value="ANB From" id="ol2"/>
+                    <af:inputText label="Label 1" id="it1" simple="true"
+                                  binding="#{SetupBean.anbFrom}"/>
+                    <af:outputLabel value="ANB To" id="outputLabel7"/>
+                    <af:inputText label="Label 1" id="inputText1" simple="true"
+                                  binding="#{SetupBean.anbTo}"/>
+                    <af:outputLabel value="Range From" id="outputLabel8"/>
+                    <af:inputText label="Label 1" id="inputText2" simple="true"
+                                  binding="#{SetupBean.rangeFrom}"/>
+                    <af:outputLabel value="Range To" id="outputLabel9"/>
+                    <af:inputText label="Label 1" id="inputText3" simple="true"
+                                  binding="#{SetupBean.rangeTo}"/>
+                    <af:outputLabel value="Rate" id="outputLabel10"/>
+                    <af:inputText label="Label 1" id="inputText4" simple="true"
+                                  binding="#{SetupBean.rate}"/>
+                    <af:outputLabel value="Annual Rate" id="outputLabel11"/>
+                    <af:inputText label="Label 1" id="inputText5" simple="true"
+                                  binding="#{SetupBean.annualRate}"/>
+                    <af:outputLabel value="Single Rate" id="outputLabel12"/>
+                    <af:inputText label="Label 1" id="inputText6" simple="true"
+                                  binding="#{SetupBean.singleRate}"/>
+                    <af:outputLabel value="Rate Description"
+                                    id="outputLabel13"/>
+                    <af:selectOneChoice label="Label 1" id="soc1" simple="true"
+                                        binding="#{SetupBean.rateDesc}">
+                      <af:selectItem label="Percent" value="Percent" id="si4"/>
+                      <af:selectItem label="Per Mille" value="Per Mille"
+                                     id="si3"/>
+                      <af:selectItem label="Amount" value="Amount" id="si2"/>
+                      <af:selectItem label="Others" value="Others" id="si1"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="Division Factor" id="outputLabel14"/>
+                    <af:inputText label="Label 1" id="inputText7" simple="true"
+                                  binding="#{SetupBean.divFactor}"/>
+                    <af:outputLabel value="Rate Type" id="outputLabel15"/>
+                    <af:selectOneChoice label="Label 1" id="selectOneChoice1"
+                                        simple="true"
+                                        binding="#{SetupBean.rateType}">
+                      <af:selectItem label="Fixed" value="FXD"
+                                     id="selectItem1"/>
+                      <af:selectItem label="Recurring" value="RCU"
+                                     id="selectItem2"/>
+                      <af:selectItem label="Range(Step)" value="SRG"
+                                     id="selectItem3"/>
+                      <af:selectItem label="Range(Abs)" value="ARG"
+                                     id="selectItem4"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="Prorated/Full" id="outputLabel16"/>
+                    <af:selectOneChoice label="Label 2" id="soc2" simple="true"
+                                        binding="#{SetupBean.prorate}">
+                      <af:selectItem label="Prorated" value="P" id="si6"/>
+                      <af:selectItem label="Full" value="F" id="si5"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="Multiplier Rate" id="outputLabel17"/>
+                    <af:inputText label="Label 1" id="inputText8" simple="true"
+                                  binding="#{SetupBean.multiRate}"/>
+                    <af:outputLabel value="Multiplier Div Factor"
+                                    id="outputLabel18"/>
+                    <af:inputText label="Label 1" id="inputText9" simple="true"
+                                  binding="#{SetupBean.multiDivFac}"/>
+                    <af:outputLabel value="Constant" id="outputLabel19"/>
+                    <af:inputText label="Label 1" id="inputText10" simple="true"
+                                  binding="#{SetupBean.constant}"/>
+                    <af:outputLabel value="Constant Div Factor"
+                                    id="outputLabel20"/>
+                    <af:inputText label="Label 1" id="inputText11" simple="true"
+                                  binding="#{SetupBean.constantDivFac}"/>
+                    <af:outputLabel value="Premium  Applicable At"
+                                    id="outputLabel21"/>
+                    <af:selectOneChoice label="Label 3" id="soc3" simple="true"
+                                        binding="#{SetupBean.refund}">
+                      <af:selectItem label="Normal" value="N" id="si8"/>
+                      <af:selectItem label="Refund" value="R" id="si7"/>
+                    </af:selectOneChoice>
+                    <af:outputLabel value="WEF" id="outputLabel22"/>
+                    <af:inputDate label="Label 1" id="id1" simple="true"
+                                  binding="#{SetupBean.wef}"
+                                  value="#{bindings.sysDate.inputValue}">
+                       <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                    <af:outputLabel value="WET" id="outputLabel23"/>
+                    <af:inputDate label="Label 1" id="inputDate1" simple="true"
+                                  binding="#{SetupBean.wet}">
+                       <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg6">
+                    <af:commandButton text="Save" id="cb1"
+                                      action="#{SetupBean.SavePremiumRate}"/>
+                    <af:commandButton text="Cancel" id="commandButton1"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+              <af:panelAccordion id="pa1"
+                                 inlineStyle="width:100%; height:400.0px;">
+                                 
+                <af:showDetailItem text="Product Provisions" id="sdi1">
+                  <af:panelGroupLayout id="pgl2">
+                    <af:panelSplitter id="ps1"
+                                      inlineStyle="width:100%; height:370.0px;">
+                      <f:facet name="first">
+                        <af:panelBox text="Products" id="pb1">
+                          <f:facet name="toolbar"/>
+                          <af:tree value="#{bindings.Setup.treeModel}"
+                                   var="node"
+                                   selectionListener="#{otherSetups.productListener1}"
+                                   rowSelection="single" id="t1"
+                                   inlineStyle="width:100.0%;"
+                                   binding="#{otherSetups.productTree}">
+                            <f:facet name="nodeStamp">
+                              <af:outputText value="#{node}" id="ot2"/>
+                            </f:facet>
+                          </af:tree>
+                        </af:panelBox>
+                      </f:facet>
+                      <f:facet name="second">
+                        <af:panelGroupLayout layout="scroll"
+                                             xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                             id="pgl5">
+                          <af:panelTabbed id="pt1"
+                                          inlineStyle="width:100%; height:360.0px;">
+                            <af:showDetailItem text="Product Provisions"
+                                               id="sdi4">
+                             <h:panelGrid columns="3" id="pg14">
+                                <af:commandButton icon="/images/field_group_plus_ena.png"
+                                                  id="cb13"
+                                                  action="#{otherSetups.addProductProv}"/>
+                                <af:commandButton icon="/images/update_ena.png"
+                                                  id="cb14"
+                                                  action="#{otherSetups.editProductProv}"/>
+                                <af:commandButton icon="/images/delete_ena.png"
+                                                  id="cb15"
+                                                  action="#{otherSetups.deleteProductProvision}"/>
+                              </h:panelGrid>
+                              
+                              <af:popup id="p6">
+                                <af:dialog id="d7" type="none">
+                                <h:panelGrid id="pg16" columns="2">
+                                    <af:outputLabel value="Description"
+                                                    id="ol4" showRequired="true"/>
+                                    <h:panelGrid columns="2" id="pg17">                
+                                    <af:inputText label="Label 9" id="it10" simple="true"
+                                                  binding="#{otherSetups.provisionDescTF}"/>
+                                      <af:commandButton icon="/dropdown.gif"
+                                                        id="cb18">
+                                        <af:showPopupBehavior popupId="prov_popup"/>
+                                       </af:commandButton>
+                                    </h:panelGrid>
+                                    <af:outputLabel value="Default"
+                                                    id="ol5"/>
+                                    <af:selectOneChoice label="Label 6"
+                                                        id="soc6" simple="true" unselectedLabel="--select--"
+                                                        binding="#{otherSetups.prodProvDefault}">
+                                      <af:selectItem label="Yes" value="Y"
+                                                     id="si21"/>
+                                      <af:selectItem label="No" value="N"
+                                                     id="si22"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="Editable"
+                                                    id="ol6"/>
+                                    <af:selectOneChoice label="Label 7"
+                                                        id="soc7" simple="true" unselectedLabel="--select--"
+                                                        binding="#{otherSetups.prodProvisionEditable}">
+                                      <af:selectItem label="Yes" value="Y"
+                                                     id="si23"/>
+                                      <af:selectItem label="No" value="N"
+                                                     id="si24"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="Auto Populate"
+                                                    id="ol7" />
+                                    <af:selectOneChoice label="Label 8"
+                                                        id="soc8" simple="true"
+                                                        binding="#{otherSetups.prodProvAutoPopulate}">
+                                      <af:selectItem label="Yes" value="Y"
+                                                     id="si25"/>
+                                      <af:selectItem label="No" value="N"
+                                                     id="si26"/>
+                                    </af:selectOneChoice>
+                                    <af:spacer width="10" height="10" id="s3"/>
+                                    <h:panelGrid columns="2" id="pg18">
+                                      <af:commandButton text="Save"
+                                                        id="cb19"
+                                                        action="#{otherSetups.addProdProvision}"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="cb20"/>
+                                    </h:panelGrid>
+                                  </h:panelGrid>
+                               </af:dialog>
+                              </af:popup>
+                              
+                              <af:popup id="prov_popup">
+                                      <af:dialog id="dprov" type="none"
+                                                 title="Provisions">
+                                  <af:table value="#{bindings.Setup6.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.Setup6.rangeSize}"
+                                            emptyText="#{bindings.Setup6.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.Setup6.rangeSize}"
+                                            rowBandingInterval="0"
+                                            filterModel="#{bindings.Setup3Query.queryDescriptor}"
+                                            queryListener="#{bindings.Setup3Query.processQuery}"
+                                            filterVisible="true" varStatus="vs"
+                                            selectedRowKeys="#{bindings.Setup6.collectionModel.selectedRow}"
+                                            selectionListener="#{bindings.Setup6.collectionModel.makeCurrent}"
+                                            rowSelection="single" id="t7">
+                                    <af:column sortProperty="PROV_CODE"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Setup6.hints.PROV_CODE.label}"
+                                               visible="false"
+                                               id="c17">
+                                      <af:outputText value="#{row.PROV_CODE}"
+                                                     id="ot25"/>
+                                    </af:column>
+                                    <af:column sortProperty="PROV_DESC"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.Setup6.hints.PROV_DESC.label}"
+                                               id="c18"
+                                               width="300px">
+                                      <af:outputText value="#{row.PROV_DESC}"
+                                                     id="ot24"/>
+                                    </af:column>
+                                  </af:table>
+                                  <h:panelGrid columns="2" id="pg15">
+                                          <af:commandButton text="OK" 
+                                                            action="#{otherSetups.findProvisionSelected1}"
+                                                            id="cb16"/>
+                                          <af:commandButton text="Cancel"
+                                                            id="cb17"/>
+                                        </h:panelGrid>
+                                      </af:dialog>
+                                    </af:popup>
+                              <af:table value="#{bindings.Setup7.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup7.rangeSize}"
+                                        emptyText="#{bindings.Setup7.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup7.rangeSize}"
+                                        rowBandingInterval="0"
+                                        filterModel="#{bindings.Setup7Query.queryDescriptor}"
+                                        queryListener="#{bindings.Setup7Query.processQuery}"
+                                        filterVisible="true" varStatus="vs"
+                                        selectedRowKeys="#{bindings.Setup7.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Setup7.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t8"
+                                        binding="#{otherSetups.productProvisionLOV}"
+                                        inlineStyle="width:100%;height:250.0px">
+                                <af:column sortProperty="pprov_code"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.Setup7.hints.pprov_code.label}"
+                                           id="c20"
+                                           visible="false">
+                                  <af:outputText value="#{row.pprov_code}"
+                                                 id="ot27"/>
+                                </af:column>
+                               <af:column sortProperty="PROV_DESC"
+                                           filterable="true" sortable="true"
+                                           headerText="Provision Desc "
+                                           id="c22">
+                                       <af:outputText value="#{row.PROV_DESC}"
+                                                 id="ot30"/>
+                                </af:column>
+                                <af:column sortProperty="pprov_default"
+                                           filterable="true" sortable="true"
+                                           headerText="Default"
+                                           id="c23">
+                                  <af:outputText value="#{row.pprov_default}"
+                                                 id="ot29"/>
+                                </af:column>
+                                <af:column sortProperty="pprov_editable"
+                                           filterable="true" sortable="true"
+                                           headerText="Editable"
+                                           id="c19">
+                                  <af:outputText value="#{row.pprov_editable}"
+                                                 id="ot28"/>
+                                </af:column>
+                                <af:column sortProperty="pprov_auto_populate"
+                                           filterable="true" sortable="true"
+                                           headerText="Auto Populate"
+                                           id="c21">
+                                  <af:outputText value="#{row.pprov_auto_populate}"
+                                                 id="ot26"/>
+                                </af:column>
+                              </af:table>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Product Cover Provision Details"
+                                               id="sdi2">
+                              <af:panelGroupLayout id="pgl6">
+                                <af:panelBox text="Product Provision Details"
+                                             id="pb2"
+                                             inlineStyle="width:100.0%;"
+                                             showHeader="never">
+                                  <f:facet name="toolbar"/>
+                                  <af:panelGroupLayout id="pgl3"
+                                                       partialTriggers="t1">
+                                    <h:panelGrid columns="2" id="pg1">
+                                      <af:outputLabel value="Cover Type"
+                                                      id="ol1"/>
+                                      <h:panelGrid columns="2" id="pg2">
+                                        <af:inputText label="Label 2" id="it2"
+                                                      simple="true"
+                                                      disabled="true"
+                                                      binding="#{otherSetups.coverTypeDesc}"/>
+                                        <af:commandButton id="cb2"
+                                                          icon="/images/dropdown.gif">
+                                          <af:showPopupBehavior popupId="p1"/>
+                                        </af:commandButton>
+                                        <af:popup id="p1">
+                                          <af:dialog id="d2" type="none"
+                                                     title="Product Cover Types">
+                                            <af:table value="#{bindings.Setup1.collectionModel}"
+                                                      var="row"
+                                                      rows="#{bindings.Setup1.rangeSize}"
+                                                      emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.Setup1.rangeSize}"
+                                                      rowBandingInterval="0"
+                                                      filterModel="#{bindings.Setup1Query.queryDescriptor}"
+                                                      queryListener="#{bindings.Setup1Query.processQuery}"
+                                                      filterVisible="true"
+                                                      varStatus="vs"
+                                                      selectedRowKeys="#{bindings.Setup1.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.Setup1.collectionModel.makeCurrent}"
+                                                      rowSelection="single"
+                                                      id="t2"
+                                                      binding="#{otherSetups.coverTypesLOV}">
+                                              <af:column sortProperty="PCT_CVT_SHT_DESC"
+                                                         filterable="true"
+                                                         sortable="true"
+                                                         headerText="Short Desc"
+                                                         id="c2">
+                                                <af:outputText value="#{row.PCT_CVT_SHT_DESC}"
+                                                               id="ot4"/>
+                                              </af:column>
+                                              <af:column sortProperty="PCT_CVT_DESC"
+                                                         filterable="true"
+                                                         sortable="true"
+                                                         headerText="Description"
+                                                         id="c1" width="200">
+                                                <af:outputText value="#{row.PCT_CVT_DESC}"
+                                                               id="ot3"/>
+                                              </af:column>
+                                            </af:table>
+                                            <h:panelGrid columns="2" id="pg3">
+                                              <af:commandButton text="OK"
+                                                                id="cb3"
+                                                                action="#{otherSetups.findProductCoverTypes}"/>
+                                              <af:commandButton text="Cancel"
+                                                                id="commandButton2"/>
+                                            </h:panelGrid>
+                                          </af:dialog>
+                                        </af:popup>
+                                      </h:panelGrid>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1" id="pg4">
+                                      <af:spacer width="10" height="10"
+                                                 id="s1"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="3" id="pg7">
+                                      <af:commandButton id="cb4"
+                                                        icon="/images/field_group_plus_ena.png">
+                                        <af:showPopupBehavior popupId="p2"/>
+                                      </af:commandButton>
+                                      <af:commandButton id="commandButton3"
+                                                        icon="/images/update_ena.png"
+                                                        action="#{otherSetups.EditProvisionSelected}"/>
+                                      <af:commandButton id="commandButton4"
+                                                        icon="/images/delete_ena.png"
+                                                        action="#{otherSetups.DeleteProvisionSelected}"/>
+                                    </h:panelGrid>
+                                    <af:popup id="p2">
+                                      <af:dialog id="d3" type="none"
+                                                 title="Provisions">
+                                        <af:table value="#{bindings.Setup3.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.Setup3.rangeSize}"
+                                                  emptyText="#{bindings.Setup3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.Setup3.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  filterModel="#{bindings.Setup3Query.queryDescriptor}"
+                                                  queryListener="#{bindings.Setup3Query.processQuery}"
+                                                  filterVisible="true"
+                                                  varStatus="vs"
+                                                  selectedRowKeys="#{bindings.Setup3.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.Setup3.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t4"
+                                                  binding="#{otherSetups.provisionsLOV}">
+                                          <af:column sortProperty="PROV_SHT_DESC"
+                                                     filterable="true"
+                                                     sortable="true"
+                                                     headerText="Short Desc"
+                                                     id="c7">
+                                            <af:outputText value="#{row.PROV_SHT_DESC}"
+                                                           id="ot9"/>
+                                          </af:column>
+                                          <af:column sortProperty="PROV_DESC"
+                                                     filterable="true"
+                                                     sortable="true"
+                                                     headerText="Description"
+                                                     id="c6" width="200">
+                                            <af:outputText value="#{row.PROV_DESC}"
+                                                           id="ot8"/>
+                                          </af:column>
+                                        </af:table>
+                                        <h:panelGrid columns="2" id="pg8">
+                                          <af:commandButton text="OK" id="cb5"
+                                                            action="#{otherSetups.findProvisionSelected}"/>
+                                          <af:commandButton text="Cancel"
+                                                            id="commandButton5"/>
+                                        </h:panelGrid>
+                                      </af:dialog>
+                                    </af:popup>
+                                    <af:popup id="p3">
+                                      <af:dialog id="d4" type="none"
+                                                 title="Provision Details">
+                                        <h:panelGrid columns="2" id="pg9">
+                                          <af:outputLabel value="Provision"
+                                                          id="ol3"/>
+                                          <af:inputText label="Label 3" id="it3"
+                                                        columns="35" rows="5"
+                                                        binding="#{otherSetups.provDesc}"
+                                                        simple="true"/>
+                                          <af:outputLabel value="Default?"
+                                                          id="outputLabel1"/>
+                                          <af:selectOneChoice label="Label 4"
+                                                              id="soc4"
+                                                              simple="true"
+                                                              binding="#{otherSetups.provDefault}">
+                                            <af:selectItem label="Yes" value="Y"
+                                                           id="si11"/>
+                                            <af:selectItem label="No" value="N"
+                                                           id="si10"/>
+                                          </af:selectOneChoice>
+                                          <af:outputLabel value="Edit Allow?"
+                                                          id="outputLabel2"/>
+                                          <af:selectOneChoice label="Label 4"
+                                                              id="selectOneChoice2"
+                                                              simple="true"
+                                                              binding="#{otherSetups.provAllow}">
+                                            <af:selectItem label="Yes" value="Y"
+                                                           id="selectItem5"/>
+                                            <af:selectItem label="No" value="N"
+                                                           id="selectItem6"/>
+                                          </af:selectOneChoice>
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="2" id="pg10">
+                                          <af:commandButton text="Save" id="cb6"
+                                                            action="#{otherSetups.SaveProductProvision}"/>
+                                          <af:commandButton text="Cancel"
+                                                            id="commandButton6"/>
+                                        </h:panelGrid>
+                                      </af:dialog>
+                                    </af:popup>
+                                    <af:table value="#{bindings.Setup2.collectionModel}"
+                                              var="row"
+                                              rows="#{bindings.Setup2.rangeSize}"
+                                              emptyText="#{bindings.Setup2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.Setup2.rangeSize}"
+                                              rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.Setup2.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.Setup2.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="t3"
+                                              inlineStyle="width:100%; height:200.0px; border-style:none;"
+                                              binding="#{otherSetups.prodProvisions}">
+                                      <af:column sortProperty="PROV_DESC"
+                                                 sortable="true"
+                                                 headerText="Provision" id="c5"
+                                                 width="300">
+                                        <af:outputText value="#{row.PROV_DESC}"
+                                                       id="ot7"/>
+                                      </af:column>
+                                      <af:column sortProperty="PCPR_DEFAULT"
+                                                 sortable="true"
+                                                 headerText="Default?" id="c3">
+                                        <af:outputText value="#{row.PCPR_DEFAULT}"
+                                                       id="ot5"/>
+                                      </af:column>
+                                      <af:column sortProperty="PCPR_EDIT_ALLOW"
+                                                 sortable="true"
+                                                 headerText="Edit Allow?"
+                                                 id="c4">
+                                        <af:outputText value="#{row.PCPR_EDIT_ALLOW}"
+                                                       id="ot6"/>
+                                      </af:column>
+                                    </af:table>
+                                  </af:panelGroupLayout>
+                                </af:panelBox>
+                              </af:panelGroupLayout>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Provision Details"
+                                               id="sdi3">
+                              <h:panelGrid columns="3" id="pg11">
+                                <af:commandButton id="commandButton7"
+                                                  icon="/images/field_group_plus_ena.png"
+                                                  action="#{otherSetups.AddProvision}"/>
+                                <af:commandButton id="commandButton8"
+                                                  icon="/images/update_ena.png"
+                                                  action="#{otherSetups.EditProvision}"/>
+                                <af:commandButton id="commandButton9"
+                                                  icon="/images/delete_ena.png"
+                                                  action="#{otherSetups.DeleteProvision}"/>
+                              </h:panelGrid>
+                              <af:popup id="p4">
+                                <af:dialog id="d5" type="none"
+                                           title="Provision Details">
+                                  <h:panelGrid columns="2" id="panelGrid1">
+                                    <af:outputLabel value="Short Description"
+                                                    id="outputLabel6"/>
+                                    <af:inputText label="Label 4" id="it4"
+                                                  simple="true"
+                                                  binding="#{otherSetups.nprovShtDesc}"/>
+                                    <af:outputLabel value="Provision"
+                                                    id="outputLabel3"/>
+                                    <af:inputText label="Label 3"
+                                                  id="inputText12" columns="35"
+                                                  rows="5"
+                                                  simple="true"
+                                                  binding="#{otherSetups.nprovDesc}"/>
+                                    <af:outputLabel value="Type"
+                                                    id="outputLabel4"/>
+                                    <af:selectOneChoice label="Label 4"
+                                                        id="selectOneChoice3"
+                                                        simple="true"
+                                                        binding="#{otherSetups.nprovType}">
+                                      <af:selectItem label="COVER TYPE"
+                                                     value="COVER TYPE"
+                                                     id="selectItem7"/>
+                                      <af:selectItem label="PRODUCT"
+                                                     value="PRODUCT"
+                                                     id="selectItem8"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="Clause Class"
+                                                    id="outputLabel5"/>
+                                    <af:selectOneChoice label="Label 5"
+                                                        id="soc5" simple="true"
+                                                        binding="#{otherSetups.nprovClause}">
+                                      <af:selectItem label="HIV" value="H"
+                                                     id="si14"/>
+                                      <af:selectItem label="Critical Illness"
+                                                     value="C" id="si18"/>
+                                      <af:selectItem label="War" value="W"
+                                                     id="si19"/>
+                                      <af:selectItem label="Suicide" value="S"
+                                                     id="si20"/>
+                                      <af:selectItem label="Atomic/Nuclear"
+                                                     value="A" id="si15"/>
+                                      <af:selectItem label="Aviation"
+                                                     value="V" id="si13"/>
+                                      <af:selectItem label="Rock Climbing"
+                                                     value="R" id="si17"/>
+                                      <af:selectItem label="Alcoholism"
+                                                     value="L" id="si16"/>
+                                      <af:selectItem label="Natural" value="N"
+                                                     id="si12"/>
+                                    </af:selectOneChoice>
+                                  </h:panelGrid>
+                                  <h:panelGrid columns="2" id="pg12">
+                                    <af:commandButton text="Save"
+                                                      id="cb7"
+                                                      action="#{otherSetups.SaveProvision}"/>
+                                    <af:commandButton text="Cancel"
+                                                      id="commandButton10"/>
+                                  </h:panelGrid>
+                                </af:dialog>
+                              </af:popup>
+                              <af:table value="#{bindings.Setup4.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Setup4.rangeSize}"
+                                        emptyText="#{bindings.Setup4.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Setup4.rangeSize}"
+                                        rowBandingInterval="0"
+                                        selectionListener="#{otherSetups.setProvisionCode}"
+                                        rowSelection="single" id="t5"
+                                        binding="#{otherSetups.allProvisionsLOV}"
+                                        inlineStyle="width:100%; height:150.0px;">
+                                <af:column sortProperty="PROV_SHT_DESC"
+                                           sortable="true"
+                                           headerText="Short Description"
+                                           id="c9">
+                                  <af:outputText value="#{row.PROV_SHT_DESC}"
+                                                 id="ot11"/>
+                                </af:column>
+                                <af:column sortProperty="PROV_DESC"
+                                           sortable="true"
+                                           headerText="Provision" id="c11"
+                                           width="200">
+                                  <af:outputText value="#{row.PROV_DESC}"
+                                                 id="ot10"/>
+                                </af:column>
+                                <af:column sortProperty="PROV_TYPE"
+                                           sortable="true"
+                                           headerText="Provision Type" id="c10">
+                                  <af:outputText value="#{row.PROV_TYPE}"
+                                                 id="ot13"/>
+                                </af:column>
+                                <af:column sortProperty="PROV_HIV_CLAUSE_DESC"
+                                           sortable="true"
+                                           headerText="Clause Class" id="c8">
+                                  <af:outputText value="#{row.PROV_HIV_CLAUSE_DESC}"
+                                                 id="ot12"/>
+                                </af:column>
+                              </af:table>
+                                <af:outputText value="Provisions Ranges Payable" id="ot14" inlineStyle="font-weight:bold"/>
+                                <h:panelGrid columns="3">
+                                  <af:commandButton icon="/images/field_group_plus_ena.png"
+                                                    id="cb10"
+                                                    action="#{otherSetups.addProvLimit}"/>
+                                  <af:commandButton icon="/images/update_ena.png"
+                                                    id="cb11"
+                                                    action="#{otherSetups.editProvLimit}"/>
+                                  <af:commandButton icon="/images/delete_ena.png"
+                                                    id="cb12"
+                                                    action="#{otherSetups.deleteProvLimit}"/>
+                                </h:panelGrid>
+                                <af:popup id="p5">
+                                  <af:dialog id="d6" type="none" title="Provision Limits">
+                                  <h:panelGrid id="pg13" columns="2">
+                                      <af:outputText value="Year From"
+                                                     id="ot15"/>
+                                      <af:inputText label="Label 5" id="it5" simple="true"
+                                                    binding="#{otherSetups.limYrFrom}"/>
+                                      <af:outputText value="Year To"
+                                                     id="ot16"/>
+                                      <af:inputText label="Label 6" id="it7" simple="true"
+                                                    binding="#{otherSetups.limYrTo}"/>
+                                      
+                                      <af:outputText value="Percentage Payable"
+                                                     id="ot17"/>
+                                      <af:inputText label="Label 7" id="it8" simple="true"
+                                                    binding="#{otherSetups.limPercPayable}"/>
+                                      <af:outputText value="Waiting Period"
+                                                     id="ot18"/>
+                                      <af:inputText label="Label 8" id="it9" simple="true"
+                                                    binding="#{otherSetups.limWaitingPeriod}"/>
+                                      <af:spacer width="10" height="10"
+                                                 id="s2"/>
+                                      <h:panelGrid columns="2">
+                                        <af:commandButton text="Save"
+                                                          id="cb8"
+                                                          action="#{otherSetups.add_edit_prov_limits}"/>
+                                        <af:commandButton text="Cancel"
+                                                          id="cb9"/>
+                                      </h:panelGrid>
+                                    </h:panelGrid>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:table value="#{bindings.Setup5.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.Setup5.rangeSize}"
+                                          emptyText="#{bindings.Setup5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Setup5.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.Setup5Query.queryDescriptor}"
+                                          queryListener="#{bindings.Setup5Query.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectionListener="#{bindings.Setup5.collectionModel.makeCurrent}"
+                                          inlineStyle="width:100%;height:200px"
+                                          rowSelection="single" id="t6"
+                                          binding="#{otherSetups.provisionLimitsLOV}">
+                                  <af:column sortProperty="provl_code"
+                                             filterable="true" sortable="true"
+                                             headerText="#{bindings.Setup5.hints.provl_code.label}"
+                                             visible="false"
+                                             id="c13">
+                                    <af:outputText value="#{row.provl_code}"
+                                                   id="ot23"/>
+                                  </af:column>
+                                  <af:column sortProperty="provl_from"
+                                             filterable="true" sortable="true"
+                                             headerText="Year From"
+                                             id="c12">
+                                    <af:outputText value="#{row.provl_from}"
+                                                   id="ot22"/>
+                                  </af:column>
+                                  <af:column sortProperty="provl_to"
+                                             filterable="true" sortable="true"
+                                             headerText="Year To"
+                                             id="c16">
+                                    <af:outputText value="#{row.provl_to}"
+                                                   id="ot20"/>
+                                  </af:column>
+                                  <af:column sortProperty="provl_perc_payable"
+                                             filterable="true" sortable="true"
+                                             headerText="Percentage Payable"
+                                             id="c15">
+                                    <af:outputText value="#{row.provl_perc_payable}"
+                                                   id="ot19"/>
+                                  </af:column>
+                                  <af:column sortProperty="provl_waiting_prd"
+                                             filterable="true" sortable="true"
+                                             headerText="Waiting Period"
+                                             id="c14">
+                                    <af:outputText value="#{row.provl_waiting_prd}"
+                                                   id="ot21"/>
+                                  </af:column>
+                                </af:table>
+                            </af:showDetailItem>
+                          </af:panelTabbed>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                    </af:panelSplitter>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <h:panelGrid columns="2" id="pg20">
+                      <af:inputText id="it6" readOnly="true"
+                                    helpTopicId="LmsGrp_PRATES_G"/>
+                      <af:statusIndicator id="si9"/>
+                    </h:panelGrid>
+                  </f:facet>
+                </af:showDetailItem>
+              </af:panelAccordion>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

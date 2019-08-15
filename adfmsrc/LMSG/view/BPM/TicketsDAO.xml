@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.59.23"
+          id="TicketsDAO" Package="LMSG.view.BPM"
+          BeanClass="LMSG.view.BPM.TicketsDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.BPM.Tickets"
+                  BeanClass="LMSG.view.BPM.Tickets" id="findQuotation"
+                  ReturnNodeName="Tickets"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.BPM.Tickets"
+                  BeanClass="LMSG.view.BPM.Tickets" id="findPolicyTransactions"
+                  ReturnNodeName="Tickets"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.BPM.Tickets"
+                  BeanClass="LMSG.view.BPM.Tickets" id="ReadJPDLXml"
+                  ReturnNodeName="Tickets"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.BPM.TicketsDAO"
+                     BeanClass="LMSG.view.BPM.TicketsDAO" id="TicketsDAO"/>
+</JavaBean>

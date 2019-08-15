@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          version="1.2">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+  <f:view>
+    <af:pageTemplate
+      id="exampleFileExplorer"
+      viewId="/templates/pageTemplateDefs/fileExplorerTemplate.jspx">
+      <f:attribute name="documentTitle" value="fileExplorer Sample Page Template"/>
+      <f:attribute name="headerGlobalSize" value="30"/>
+      <f:attribute name="auxiliary2Size" value="210"/>
+      <f:attribute name="header2Size" value="30"/>
+      <f:facet name="branding">
+        <af:panelGroupLayout layout="horizontal" shortDesc="branding" id="pgl1">
+          <af:icon name="logo" shortDesc="Oracle" id="i1"/>
+          <af:outputText value="Product Name" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="navigationGlobal">
+        <af:navigationPane shortDesc="navigationGlobal" hint="buttons" id="np1">
+          <af:commandNavigationItem partialSubmit="true" text="Home"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni1"/>
+          <af:commandNavigationItem partialSubmit="true" text="Administration"
+            selected="true"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni2"/>
+          <af:commandNavigationItem partialSubmit="true" text="Preferences"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni3"/>
+          <af:commandNavigationItem partialSubmit="true" text="Help"
+            actionListener="#{demoCommandNavigationItem.navigationItemAction}"
+                                    id="cni4"/>
+          <af:commandNavigationItem text="Sign Out" destination="index.jspx"
+                                    id="cni5"/>
+        </af:navigationPane>
+      </f:facet>
+      <f:facet name="header2">
+        <af:outputText value="header2" id="ot2"/>
+      </f:facet>
+      <f:facet name="auxiliary2">
+        <af:outputText value="auxiliary2" id="ot3"/>
+      </f:facet>
+      <f:facet name="center">
+        <af:panelGroupLayout layout="scroll" id="pgl2">
+          <af:goLink text="back to index"
+            destination="index.jspx" id="gl1"/>
+          <af:separator id="s1"/>
+          <af:outputText
+            value="This is a test case for the file explorer page template."
+                         id="ot4"/>
+          <af:goLink
+            text="Usage Source"
+            destination="#{facesContext.viewRoot.viewId}.source"
+            targetFrame="demoSource" id="gl2"/>
+          <af:goLink
+            text="Template Definition Source"
+            destination="/templates/pageTemplateDefs/fileExplorerTemplate.jspx.source"
+            targetFrame="templateSource" id="gl3"/>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:pageTemplate>
+  </f:view>
+</jsp:root>

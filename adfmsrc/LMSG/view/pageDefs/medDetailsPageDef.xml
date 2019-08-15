@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="medDetailsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindMedicalGroups1.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="FindMedicalGroups1Iterator"/>
+    <methodIterator Binds="FindExistingPoliciesView.result"
+                    DataControl="medicalsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Medicals.medical"
+                    id="FindExistingPoliciesViewIterator"/>
+    <methodIterator Binds="FindClientMedicals.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="FindClientMedicalsIterator"/>
+    <methodIterator Binds="FindFacilitatorsView.result"
+                    DataControl="medicalsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Medicals.medical"
+                    id="FindFacilitatorsViewIterator"/>
+    <methodIterator Binds="FindUWDecisionView.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="FindUWDecisionViewIterator"/>
+    <methodIterator Binds="FindMedicalFacilitators.result"
+                    DataControl="SettingsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Base.Settings"
+                    id="FindMedicalFacilitatorsIterator"/>
+    <searchRegion Binds="FindMedicalFacilitatorsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+    <methodIterator Binds="FindMemberUWDecisionView.result"
+                    DataControl="medicalsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Medicals.medical"
+                    id="FindMemberUWDecisionViewIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="findMedTest.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="findMedTestIterator"/>
+    <searchRegion Binds="findMedTestIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="medical5Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindMedicalGroups" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMedicalGroups"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindMedicalGroups_medicalsDAO_dataProvider_FindMedicalGroups_result"/>
+    <methodAction id="FindMedicalGroups1" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMedicalGroups"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindMedicalGroups_medicalsDAO_dataProvider_FindMedicalGroups_result"/>
+    <attributeValues IterBinding="FindMedicalGroups1Iterator" id="MTG_DESC">
+      <AttrNames>
+        <Item Value="MTG_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindMedicalGroups1Iterator" id="CMI_ID_NO">
+      <AttrNames>
+        <Item Value="CMI_ID_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindMedicalGroups1Iterator"
+                     id="POLM_MED_TOT_SA">
+      <AttrNames>
+        <Item Value="POLM_MED_TOT_SA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindMedicalGroups1Iterator" id="MTG_SHT_DESC">
+      <AttrNames>
+        <Item Value="MTG_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindMedicalGroups1Iterator" id="memName">
+      <AttrNames>
+        <Item Value="memName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindExistingPoliciesView" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindExistingPoliciesView"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindExistingPoliciesView_medicalsDAO_dataProvider_FindExistingPoliciesView_result"/>
+    <tree IterBinding="FindExistingPoliciesViewIterator" id="medical">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical0">
+        <AttrNames>
+          <Item Value="PROPOSAL_NO"/>
+          <Item Value="POLICY_NO"/>
+          <Item Value="TOT_SA"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClientMedicals" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClientMedicals"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindClientMedicals_medicalsDAO_dataProvider_FindClientMedicals_result"/>
+    <tree IterBinding="FindClientMedicalsIterator" id="medical1">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical10">
+        <AttrNames>
+          <Item Value="MTL_DESC"/>
+          <Item Value="CML_LIMIT_AMT"/>
+          <Item Value="CML_REQUEST_DATE"/>
+          <Item Value="SPR_NAME"/>
+          <Item Value="CML_CLAIM_AMT"/>
+          <Item Value="CML_PAYABLE_AMT"/>
+          <Item Value="CML_RECEIVED"/>
+          <Item Value="CML_DATE_RECEIVED"/>
+          <Item Value="CML_INVCE_DATE"/>
+          <Item Value="CML_INVCE_NO"/>
+          <Item Value="CML_CHEQUE_NO"/>
+          <Item Value="CML_CHEQUE_DATE"/>
+          <Item Value="CML_MED_LOADING"/>
+          <Item Value="POL_PROPOSAL_NO"/>
+          <Item Value="CML_REMARKS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindFacilitatorsView" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindFacilitatorsView"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindFacilitatorsView_medicalsDAO_dataProvider_FindFacilitatorsView_result"/>
+    <tree IterBinding="FindFacilitatorsViewIterator" id="medical2">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical20">
+        <AttrNames>
+          <Item Value="FC_SPR_NAME"/>
+          <Item Value="FC_LIMIT_AMT"/>
+          <Item Value="FC_CLAIM_AMT"/>
+          <Item Value="FC_PAYABLE_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindUWDecisionView" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindUWDecisionView"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindUWDecisionView_medicalsDAO_dataProvider_FindUWDecisionView_result"/>
+    <tree IterBinding="FindUWDecisionViewIterator" id="medical3">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical30">
+        <AttrNames>
+          <Item Value="UD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMedicalFacilitators" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMedicalFacilitators"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindMedicalFacilitators_SettingsDAO_dataProvider_FindMedicalFacilitators_result"/>
+    <tree IterBinding="FindMedicalFacilitatorsIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="SPR_SHT_DESC"/>
+          <Item Value="SPR_NAME"/>
+          <Item Value="TWN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMemberUWDecisionView" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMemberUWDecisionView"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindMemberUWDecisionView_medicalsDAO_dataProvider_FindMemberUWDecisionView_result"/>
+    <tree IterBinding="FindMemberUWDecisionViewIterator" id="medical4">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical40">
+        <AttrNames>
+          <Item Value="MEM_UD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="findMedTest" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMedTest"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="data.medicalsDAO.methodResults.findMedTest_medicalsDAO_dataProvider_findMedTest_result"/>
+    <tree IterBinding="findMedTestIterator" id="medical5">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical50">
+        <AttrNames>
+          <Item Value="medicalTestDescription"/>
+          <Item Value="MTLFees"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

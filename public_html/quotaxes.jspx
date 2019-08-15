@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelBox text="Quotation Taxes"
+                     inlineStyle="width:500px; height:201px;" id="pb1">
+          <f:facet name="toolbar"/>
+          <af:table value="#{bindings.quotationTaxes.collectionModel}" var="row"
+                    rows="#{bindings.quotationTaxes.rangeSize}"
+                    emptyText="#{bindings.quotationTaxes.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.quotationTaxes.rangeSize}"
+                    selectedRowKeys="#{bindings.quotationTaxes.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.quotationTaxes.collectionModel.makeCurrent}"
+                    rowSelection="single"
+                    binding="#{manipulation.quotationTaxes}"
+                    inlineStyle="height:134px; width:480px;" id="t1">
+            <af:column sortProperty="quoTaxDesc" sortable="false"
+                       headerText="TAX " id="c1">
+              <af:outputText value="#{row.quoTaxDesc}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="quoTaxRate" sortable="false"
+                       headerText="RATE" id="c2">
+              <af:outputText value="#{row.quoTaxRate}" id="ot2">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.quotationTaxes.hints.quoTaxRate.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="quoTaxAmt" sortable="false"
+                       headerText="TAX AMOUNT" id="c3">
+              <af:outputText value="#{row.quoTaxAmt}" id="ot3">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.quotationTaxes.hints.quoTaxAmt.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c4">
+              <af:commandButton icon="/icon_delete.gif"
+                                action="#{manipulation.DeleteTaxes}" id="cb1"/>
+            </af:column>
+          </af:table>
+          <h:panelGrid columns="2" width="10%" id="pg1">
+            <af:commandButton text="Next"
+                              action="#{manipulation.ShowCategories}" id="cb2"/>
+            <af:commandButton text="Cancel" id="cb3"/>
+          </h:panelGrid>
+        </af:panelBox>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

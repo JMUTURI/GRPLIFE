@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="Proposer" Package="LMSG.view.Clients"
+          BeanClass="LMSG.view.Clients.Proposer"
+          isJavaBased="true">
+  <Attribute Name="PRP_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GCO_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="LC_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="CLIENT" Type="java.lang.String"/>
+  <Attribute Name="PRP_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="PRP_ID_REG_NO" Type="java.lang.String"/>
+  <Attribute Name="PRP_DOB" Type="java.lang.String"/>
+  <Attribute Name="GCO_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="GCO_DESC" Type="java.lang.String"/>
+  <Attribute Name="hazard" Type="java.lang.String"/>
+  <Attribute Name="prp_clnt_code" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Clients.Proposer"
+                     BeanClass="LMSG.view.Clients.Proposer" id="Proposer"/>
+</JavaBean>

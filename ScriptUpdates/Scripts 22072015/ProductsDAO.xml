@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="ProductsDAO" Package="LMSG.view.GroupProducts"
+          BeanClass="LMSG.view.GroupProducts.ProductsDAO" isJavaBased="true">
+  <Attribute Name="productCoverType" Type="java.math.BigDecimal"/>
+  <Attribute Name="coverTypeCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="cloneProductCode" Type="java.math.BigDecimal"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findProducts" ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findProductsByType" ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findPremiumMask" ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findProductCovers" ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findProductProvisions" ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findProductCoverDependants"
+                  ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findLapsedProducts" ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findOtherProducts" ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findMemberProvisions" ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.GroupProducts.productDetails"
+                  BeanClass="LMSG.view.GroupProducts.productDetails"
+                  id="findProductsSetUp" ReturnNodeName="productDetails"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Product.ProductsDAO"
+                     BeanClass="LMSG.view.Product.ProductsDAO"
+                     id="ProductsDAO"/>
+</JavaBean>

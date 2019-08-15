@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="ArrangementCoverTypesDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.ArrangementCoverTypesDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.ArrangementCoverTypes"
+                  BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+                  id="findArrangementCoverTypes"
+                  ReturnNodeName="ArrangementCoverTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.ArrangementCoverTypes"
+                  BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+                  id="findArrangementCoverTypesLOV"
+                  ReturnNodeName="ArrangementCoverTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.ArrangementCoverTypes"
+                  BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+                  id="findOrdReinRatesLOV"
+                  ReturnNodeName="ArrangementCoverTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.ArrangementCoverTypes"
+                  BeanClass="com.turnkey.setups.ArrangementCoverTypes"
+                  id="findArrangementCoverTypesCommRates"
+                  ReturnNodeName="ArrangementCoverTypes"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.ArrangementCoverTypesDAO"
+                     BeanClass="com.turnkey.setups.ArrangementCoverTypesDAO"
+                     id="ArrangementCoverTypesDAO"/>
+</JavaBean>

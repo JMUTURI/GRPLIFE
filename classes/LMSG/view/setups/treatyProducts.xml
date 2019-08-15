@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="treatyProducts" Package="LMSG.view.setups"
+          BeanClass="LMSG.view.setups.treatyProducts" isJavaBased="true">
+  <Attribute Name="TPRD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TPRD_PROD_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="PRODUCT_DISPLAY" Type="java.lang.String"/>
+  <Attribute Name="TPRD_TA_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TPRD_AS_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="TPRD_TA_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="TRPD_DEFAULT_TRTY" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.setups.treatyProducts"
+                     BeanClass="LMSG.view.setups.treatyProducts"
+                     id="treatyProducts"/>
+</JavaBean>

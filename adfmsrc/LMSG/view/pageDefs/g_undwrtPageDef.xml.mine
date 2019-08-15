@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="g_undwrtPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <attributeValues IterBinding="FindPoliciesIterator"
+                     id="POL_FREQ_OF_PAYMENT">
+      <AttrNames>
+        <Item Value="POL_FREQ_OF_PAYMENT"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="FindPoliciesIterator" id="policies">
+      <nodeDefinition DefName="view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="POL_CODE"/>
+          <Item Value="UW_YEAR"/>
+          <Item Value="POL_EFFECTIVE_DATE"/>
+          <Item Value="POL_INCEPTION_DATE"/>
+          <Item Value="CLIENT_DISPLAY"/>
+          <Item Value="POL_FREQ_OF_PAYMENT"/>
+          <Item Value="OCCUPATION_DISPLAY"/>
+          <Item Value="HARZARD_DISPLAY"/>
+          <Item Value="POL_PROD_SHT_DESC"/>
+          <Item Value="POL_PROD_TYPE"/>
+          <Item Value="BRANCH_DISPLAY"/>
+          <Item Value="POL_DEPENDT_COVERED"/>
+          <Item Value="POL_STATUS"/>
+          <Item Value="POL_SAVINGS_RIDER"/>
+          <Item Value="POL_PENS_CATEGORY"/>
+          <Item Value="POL_OS_LOAN_CALC"/>
+          <Item Value="POL_GRP_LIFE_RIDER"/>
+          <Item Value="POL_POLICY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_PENS_CATEGORY">
+      <AttrNames>
+        <Item Value="POL_PENS_CATEGORY"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+      </af:form>
+      <af:panelBox text="PanelBox1" id="pb1">
+        <f:facet name="toolbar"/>
+        <af:panelBox text="Submit Policy Members Details"
+                     inlineStyle="width:750px; height:253px;" id="pb2">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="3" width="10%" id="pg1">
+            <af:commandButton text="Add Member"
+                              action="#{underwritingManipulation.AddMember}"
+                              id="cb1"/>
+            <af:commandButton text="Import Template"
+                              action="#{underwritingManipulation.ImportTemplate}"
+                              id="cb2"/>
+            <af:commandButton text="Delete"
+                              action="#{underwritingManipulation.DeleteSchedule}"
+                              id="cb3"/>
+          </h:panelGrid>
+          <af:table value="#{bindings.policies.collectionModel}" var="row"
+                    rows="#{bindings.policies.rangeSize}"
+                    emptyText="#{bindings.policies.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.policies.rangeSize}"
+                    inlineStyle="height:98px; width:710px;"
+                    binding="#{underwritingManipulation.policyMembers}" id="t1">
+            <af:column sortProperty="POLM_MEM_NO" sortable="false"
+                       headerText="MEM NO" id="c1">
+              <af:outputText value="#{row.POLM_MEM_NO}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="POLM_client" sortable="false"
+                       headerText="NAME" id="c2">
+              <af:outputText value="#{row.POLM_client}" id="ot2"/>
+            </af:column>
+            <af:column sortProperty="POLM_ANB" sortable="false"
+                       headerText="ANB" id="c3">
+              <af:outputText value="#{row.POLM_ANB}" id="ot3"/>
+            </af:column>
+            <af:column sortProperty="POLM_JOINT_MEMBERS" sortable="false"
+                       headerText="With Joint Mem" id="c4">
+              <af:outputText value="#{row.POLM_JOINT_MEMBERS}" id="ot4"/>
+            </af:column>
+            <af:column sortProperty="OCCUPATION_DISPLAY" sortable="false"
+                       headerText="OCCUPATION" id="c5">
+              <af:outputText value="#{row.OCCUPATION_DISPLAY}" id="ot5"/>
+            </af:column>
+            <af:column sortProperty="POLM_MEM_STATUS" sortable="false"
+                       headerText="MEMBERS STATUS" id="c6">
+              <af:outputText value="#{row.POLM_MEM_STATUS}" id="ot6"/>
+            </af:column>
+            <af:column sortProperty="POLM_MEM_SCHEDULE_NO" sortable="false"
+                       headerText="SCHEDULE NO" id="c7">
+              <af:outputText value="#{row.POLM_MEM_SCHEDULE_NO}" id="ot7"/>
+            </af:column>
+            <af:column id="c8">
+              <af:commandButton icon="/icon_delete.gif"
+                                action="#{underwritingManipulation.DeletePolicyMembers}"
+                                id="cb4"/>
+            </af:column>
+          </af:table>
+        </af:panelBox>
+        <h:panelGrid columns="1" width="70%" id="pg2"/>
+        <af:panelBox text="Select Reinsurance Treaty"
+                     inlineStyle="width:447px; height:137px;" id="pb3">
+          <f:facet name="toolbar"/>
+          <h:panelGrid columns="3" width="10%" id="pg3">
+            <af:outputLabel value="Treaty Arrangement" id="ol1"/>
+            <af:inputText label="Label 1"
+                          binding="#{underwritingManipulation.arrangementDisplay}"
+                          simple="true" id="it1"/>
+            <h:panelGrid columns="2" id="pg4">
+              <af:commandButton icon="/dropdown.gif" id="cb5">
+                <af:showPopupBehavior popupId="treatyPopup"/>
+              </af:commandButton>
+              <af:popup id="treatyPopup">
+                <af:dialog type="none" title="Select Treaty Arrangement"
+                           id="d2">
+                  <af:table value="#{bindings.RiTreaty.collectionModel}"
+                            var="row" rows="#{bindings.RiTreaty.rangeSize}"
+                            emptyText="#{bindings.RiTreaty.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.RiTreaty.rangeSize}"
+                            selectedRowKeys="#{bindings.RiTreaty.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.RiTreaty.collectionModel.makeCurrent}"
+                            rowSelection="single" inlineStyle="height:93px;"
+                            width="183"
+                            binding="#{underwritingManipulation.treatyArrangementsLOV}"
+                            id="t2">
+                    <af:column sortProperty="TA_DESC" sortable="true"
+                               headerText="TREATY ARRANGEMENT"
+                               inlineStyle="width:100px;" id="c9">
+                      <af:outputText value="#{row.TA_DESC}"
+                                     inlineStyle="width:100px;" id="ot8"/>
+                    </af:column>
+                  </af:table>
+                  <af:commandButton text="OK"
+                                    action="#{underwritingManipulation.AttachTreaty}"
+                                    id="cb6"/>
+                  <af:commandButton text="Cancel" id="cb7"/>
+                </af:dialog>
+              </af:popup>
+            </h:panelGrid>
+            <af:commandButton text="Finish"
+                              action="#{underwritingManipulation.ComputePremium}"
+                              id="cb8"/>
+            <af:commandButton text="Cancel" id="cb9"/>
+          </h:panelGrid>
+        </af:panelBox>
+      </af:panelBox>
+    </af:document>
+  </f:view>
+</jsp:root>

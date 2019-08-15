@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Claims Report">
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="height:480px; width:100.0%;">
+              <af:showDetailItem text="System Reports" id="sdi1">
+                <f:facet name="toolbar">
+                  <af:group id="g1">
+                    <h:panelGrid columns="2" id="pg23">
+                      <af:inputText id="inputText2" columns="13"
+                                    helpTopicId="GISReports" shortDesc="Help"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si1"/>
+                    </h:panelGrid>
+                  </af:group>
+                </f:facet>
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                  <af:panelBox text="Select Report" id="pb1"
+                               inlineStyle="width:98.0%;" showDisclosure="false"
+                               showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="9" id="pg1" columnClasses="UWWidth">
+                      <h:panelGrid columns="1" id="pg8">
+                        <af:separator id="separator12"/>
+                        <af:outputLabel value="Claims Reports" id="outputLabel6"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator13"/>
+                        <af:commandLink text="Age Analysis Paid Claims"
+                                        id="rpt2028"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Age Analysis OS Claims"
+                                        id="rpt2022"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Creditors Claim Register"
+                                        id="rpt2281"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Claims Discharge Voucher"
+                                        id="rpt1106"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Claims Experience Per Scheme"
+                                        id="rpt947"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Claims Experience Per Scheme Per Status"
+                                        id="rpt1108"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Claims Experience Per Product"
+                                        id="rpt1109"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Claims Experience Per Product Per Status"
+                                        id="rpt1145"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Claims notification letter"
+                                        id="rpt1110"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Claim Paid Register" id="rpt2029"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Claim Register" id="rpt25329"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Claim Recovery Report"
+                                        id="rpt2036"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Claims Summary report" id="rpt950"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Monthly Summary of Claims"
+                                        id="rpt2291"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Monthly Summary of Claims(Long Term)"
+                                        id="rpt2395"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Outstanding Claims Recoveries"
+                                        id="rpt2213"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Paid Claims Recoveries"
+                                        id="rpt2255"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Paid Riders Claims Recoveries"
+                                        id="rpt2256"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Riders Claim Summary" id="rpt2169"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Riders Outstanding Claims"
+                                        id="rpt2172"
+                                        actionListener="#{reportParameterBean.paramReport}"
+                                        rendered="#{Rendering.mickVisible}"/>
+                        <af:commandLink text="Schemes Claims Ratios as of a particular date"
+                                        id="rpt327499"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="IRA Summary of Claims Returns"
+                                        id="rpt25517"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                          <af:commandLink text="Payees Report" id="rpt2250133497"
+                                            actionListener="#{reportParameterBean.paramReport}"/>               
+                         <af:commandLink text="Pending Claims" id="rpt780"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
+                         <af:commandLink text="Settled Claims" id="rpt2250133500"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Claim Tracker" id="rpt4439"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+            <af:popup id="paramReport">
+              <af:dialog id="d13" title="Report Parameters" type="none"
+                         closeIconVisible="false">
+                <af:panelGroupLayout id="pgl4" layout="scroll"
+                                     binding="#{reportParameterBean.dtls}">
+                  <h:panelGrid id="pg2541"
+                               binding="#{reportParameterBean.mainParent}"/>
+                  <af:selectOneRadio label="Label 1" id="selectOneRadio1"
+                                     binding="#{reportParameterBean.reportType}"
+                                     simple="true" layout="horizontal"
+                                     autoSubmit="true"
+                                     valueChangeListener="#{reportParameterBean.changeReportType}"
+                                     value="pdf">
+                    <af:selectItem label="Html" value="html" id="si51"/>
+                    <af:selectItem label="Pdf" value="pdf" id="si21"/>
+                    <af:selectItem label="Excel" value="xls" id="si41"/>
+                    <af:selectItem label="Word Document (rtf)" value="rtf"
+                                   id="si31"/>
+                  </af:selectOneRadio>
+                  <h:panelGrid columns="2" id="pg3">
+                    <af:commandButton text="Print" id="cb1"
+                                      action="#{reportParameterBean.genRpt}"/>
+                    <af:commandButton text="Cancel" id="cb40"
+                                      action="#{reportParameterBean.RemoveReportComponents}"/>
+                    <af:inputDate label="Label 1" id="id1"
+                                  binding="#{reportParameterBean.myTest}"
+                                  visible="false">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </af:dialog>
+            </af:popup>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

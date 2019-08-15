@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process xmlns="http://jbpm.org/4.0/jpdl"  name="UnderwriteProcess">
+	<start g="16,108,80,40">
+		<transition g="-48,-19" name="To start Position" to="NB without Quotation"></transition>
+	</start>
+	
+	<!--<task name="New Business Takeon" 
+        assignee="#{order}">
+     <transition name="To NB Decision" to="NB without Quotation"></transition>
+    </task>.-->
+	
+	<decision g="151,109,80,40" name="NB without Quotation" expr="#{UWStart}">
+	    <transition g="-25,-19" name="Yes" to="Client Exists"/>
+	</decision>
+	
+	<decision g="151,119,80,40" name="Client Exists" expr="#{Client}">
+	    <transition g="-35,-19" name="Yes" to="New Business Data Entry"/>
+	</decision>
+
+    <task name="New Business Data Entry"  g="162,149,80,40"
+        assignee="#{order}">
+     <transition g="-55,-19" name="Start Underwriting" to="Underwrite Policy"></transition>
+    </task>
+	
+	 <task name="Underwrite Policy" g="162,149,80,40"
+        assignee="#{order}">
+     <transition g="-55,-19" name="credit" to="Credit Terms"></transition>
+    </task>
+	
+<!--	<task name="Verify Policy Details" 
+        assignee="#{order}">
+     <transition name="Make Ready" to="Make Ready for Authorisation"></transition>
+    </task> 
+	
+	<task name="Make Ready for Authorisation" 
+        assignee="#{order}">
+		<transition name="credit" to="Credit Terms"></transition>
+    </task> -->
+	
+	<decision name="Credit Terms" g="162,149,80,40" expr="#{Credit}">
+	    <transition g="-55,-19" name="Yes" to="Next Transition"/>
+	    <transition g="-55,-19" name="No" to="Wait for Payment"/>
+	</decision>
+	
+	
+	
+	<task name="Wait for Payment" g="162,149,80,40"
+        assignee="#{order}">
+     <transition g="-55,-19" name="Determine Transition" to="Next Transition"></transition>
+    </task>
+	
+	<decision name="Next Transition" g="162,149,80,40" expr="#{NextTrans}">
+	    <transition g="-55,-19" name="A" to="Reinsurance Medical Underwriting"/>
+	    <transition g="-55,-19" name="N" to="Authorise Policy"/>
+		<transition g="-55,-19" name="M" to="Medical Underwriting"/>
+		<transition g="-55,-19" name="R" to="Perform Reinsurance"/>
+	</decision>
+	
+<!--	<task name="Reinsurance Medical Underwriting" 
+        assignee="#{order}">
+     <transition name="Do Reisure Medicals" to="Reinsurance Medicals"></transition>
+    </task>-->
+	
+	<fork name="Reinsurance Medical Underwriting" g="162,149,80,40">
+      <transition g="-55,-19" name="Reinsure" to="Perform Reinsurance" />
+      <transition g="-55,-19" name="Medicals" to="Medical Underwriting"/>
+   </fork>
+	
+	<task name="Perform Reinsurance" g="162,149,80,40"
+        assignee="#{order}">
+     <transition g="-55,-19" name="Complete Process" to="Policy Join"></transition>
+    </task>
+	
+	<task name="Medical Underwriting" g="162,149,80,40"
+        assignee="#{order}">
+      <transition g="-55,-19" name="Complete Process" to="Policy Join"></transition>
+    </task>
+	
+	<join name="Policy Join" g="162,149,80,40">
+      <transition g="-55,-19" name="auth Policy" to="Authorise Policy" />
+   </join> 
+	
+	<task name="Authorise Policy" g="162,149,80,40"
+        assignee="#{order}">
+     <transition name="disp Documents" to="Dispatch Policy Documents"></transition>
+    </task>
+	
+	<task name="Dispatch Policy Documents" g="162,149,80,40"
+        assignee="#{order}">
+     <transition g="-55,-19" name="end Policy" to="End-Policy-Process"></transition>
+    </task>
+	  
+	<end g="162,149,80,40" name="End-Policy-Process"></end>
+</process>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="periodsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findPeriods.result" DataControl="periodsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.periods"
+                    id="findPeriodsIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findPeriods" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPeriods"
+                  IsViewObjectMethod="false" DataControl="periodsDAO"
+                  InstanceName="periodsDAO.dataProvider"
+                  ReturnName="periodsDAO.methodResults.findPeriods_periodsDAO_dataProvider_findPeriods_result"/>
+    <tree IterBinding="findPeriodsIterator" id="periods">
+      <nodeDefinition DefName="com.turnkey.setups.periods" Name="periods0">
+        <AttrNames>
+          <Item Value="perId"/>
+          <Item Value="perName"/>
+          <Item Value="perValFreqDesc"/>
+          <Item Value="perWef"/>
+          <Item Value="perWet"/>
+          <Item Value="perCode"/>
+          <Item Value="perValFreq"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.59.23"
+          id="UprDAO" Package="LMSG.view.Accounts"
+          BeanClass="LMSG.view.Accounts.UprDAO" isJavaBased="true">
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Accounts.UprBean"
+                  BeanClass="LMSG.view.Accounts.UprBean" id="findUprs"
+                  ReturnNodeName="UprBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Accounts.UprBean"
+                  BeanClass="LMSG.view.Accounts.UprBean" id="findUprSummary"
+                  ReturnNodeName="UprBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Accounts.UprBean"
+                  BeanClass="LMSG.view.Accounts.UprBean" id="findUprDetails"
+                  ReturnNodeName="UprBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Accounts.UprBean"
+                  BeanClass="LMSG.view.Accounts.UprBean" id="findIbnr"
+                  ReturnNodeName="UprBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Accounts.UprBean"
+                  BeanClass="LMSG.view.Accounts.UprBean" id="findIbnrSummary"
+                  ReturnNodeName="UprBean"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Accounts.UprDAO"
+                     BeanClass="LMSG.view.Accounts.UprDAO" id="UprDAO"/>
+</JavaBean>

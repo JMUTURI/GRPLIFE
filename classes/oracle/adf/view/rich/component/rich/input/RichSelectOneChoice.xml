@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.56"
+          id="RichSelectOneChoice"
+          Package="oracle.adf.view.rich.component.rich.input"
+          BeanClass="oracle.adf.view.rich.component.rich.input.RichSelectOneChoice"
+          isJavaBased="true">
+  <Attribute Name="changed" Type="boolean"/>
+  <Attribute Name="changedDesc" Type="java.lang.String"/>
+  <Attribute Name="autoSubmit" Type="boolean"/>
+  <Attribute Name="accessKey" Type="char"/>
+  <Attribute Name="contentStyle" Type="java.lang.String"/>
+  <Attribute Name="helpTopicId" Type="java.lang.String"/>
+  <Attribute Name="disabled" Type="boolean"/>
+  <Attribute Name="label" Type="java.lang.String"/>
+  <Attribute Name="readOnly" Type="boolean"/>
+  <Attribute Name="showRequired" Type="boolean"/>
+  <Attribute Name="simple" Type="boolean"/>
+  <Attribute Name="inlineStyle" Type="java.lang.String"/>
+  <Attribute Name="styleClass" Type="java.lang.String"/>
+  <Attribute Name="shortDesc" Type="java.lang.String"/>
+  <Attribute Name="visible" Type="boolean"/>
+  <Attribute Name="customizationId" Type="java.lang.String"/>
+  <Attribute Name="clientComponent" Type="boolean"/>
+  <Attribute Name="valuePassThru" Type="boolean"/>
+  <Attribute Name="unselectedLabel" Type="java.lang.String"/>
+  <Attribute Name="mode" Type="java.lang.String"/>
+  <Attribute Name="family" IsUpdateable="0" Type="java.lang.String"/>
+  <Attribute Name="immediate" Type="boolean"/>
+  <Attribute Name="valid" Type="boolean"/>
+  <Attribute Name="required" Type="boolean"/>
+  <Attribute Name="localValueSet" Type="boolean"/>
+  <Attribute Name="submittedValue" Type="java.lang.Object"/>
+  <Attribute Name="requiredMessageDetail" Type="java.lang.String"/>
+  <Attribute Name="localValue" IsUpdateable="0" Type="java.lang.Object"/>
+  <Attribute Name="value" Type="java.lang.Object"/>
+  <Attribute Name="id" Type="java.lang.String"/>
+  <Attribute Name="rendered" Type="boolean"/>
+  <Attribute Name="transient" Type="boolean"/>
+  <Attribute Name="rendererType" Type="java.lang.String"/>
+  <Attribute Name="rendersChildren" IsUpdateable="0" Type="boolean"/>
+  <Attribute Name="childCount" IsUpdateable="0" Type="int"/>
+  <Attribute Name="facetNames" IsUpdateable="0"
+             Type="java.util.Iterator&lt;java.lang.String>"/>
+  <Attribute Name="facetsAndChildren" IsUpdateable="0"
+             Type="java.util.Iterator&lt;javax.faces.component.UIComponent>"/>
+  <Attribute Name="facetCount" IsUpdateable="0" Type="int"/>
+  <AccessorAttribute id="help" IsCollection="true"
+                     Type="javax.faces.component.UIComponent"
+                     CollectionBeanClass="UpdateableSingleValue">
+    <Attribute Name="element" Type="javax.faces.component.UIComponent"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="clientAttributes" IsCollection="true"
+                     Type="java.util.Set"
+                     CollectionBeanClass="UpdateableCollection"/>
+  <AccessorAttribute id="clientListeners" IsCollection="false"
+                     BeanClass="oracle.adf.view.rich.event.ClientListenerSet"
+                     CollectionBeanClass="UpdateableSingleValue"/>
+  <AccessorAttribute id="partialTriggers" IsCollection="true"
+                     Type="java.lang.String[]"
+                     CollectionBeanClass="UpdateableCollection">
+    <Attribute Name="element" Type="java.lang.String"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="validators" IsCollection="true"
+                     Type="javax.faces.validator.Validator[]"
+                     RemoveMethod="removeValidator" AddMethod="addValidator"
+                     CollectionBeanClass="UpdateableCollection">
+    <Properties>
+      <Property Name="RemoveMethod" Value="removeValidator"/>
+      <Property Name="AddMethod" Value="addValidator"/>
+    </Properties>
+    <Attribute Name="element" Type="javax.faces.validator.Validator"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="validator" IsCollection="true"
+                     Type="javax.faces.el.MethodBinding"
+                     CollectionBeanClass="UpdateableSingleValue">
+    <Attribute Name="element" Type="javax.faces.el.MethodBinding"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="valueChangeListener" IsCollection="true"
+                     Type="javax.faces.el.MethodBinding"
+                     CollectionBeanClass="UpdateableSingleValue">
+    <Attribute Name="element" Type="javax.faces.el.MethodBinding"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="valueChangeListeners" IsCollection="true"
+                     Type="javax.faces.event.ValueChangeListener[]"
+                     RemoveMethod="removeValueChangeListener"
+                     AddMethod="addValueChangeListener"
+                     CollectionBeanClass="UpdateableCollection">
+    <Properties>
+      <Property Name="RemoveMethod" Value="removeValueChangeListener"/>
+      <Property Name="AddMethod" Value="addValueChangeListener"/>
+    </Properties>
+    <Attribute Name="element" Type="javax.faces.event.ValueChangeListener"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="converter" IsCollection="true"
+                     Type="javax.faces.convert.Converter"
+                     CollectionBeanClass="UpdateableSingleValue">
+    <Attribute Name="element" Type="javax.faces.convert.Converter"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="facesBean" IsCollection="false"
+                     BeanClass="org.apache.myfaces.trinidad.bean.FacesBean"
+                     CollectionBeanClass="UpdateableSingleValue"/>
+  <AccessorAttribute id="attributeChangeListeners" IsCollection="true"
+                     RemoveMethod="removeAttributeChangeListener"
+                     AddMethod="addAttributeChangeListener"
+                     BeanClass="org.apache.myfaces.trinidad.event.AttributeChangeListener"
+                     CollectionBeanClass="UpdateableCollection">
+    <Properties>
+      <Property Name="RemoveMethod" Value="removeAttributeChangeListener"/>
+      <Property Name="AddMethod" Value="addAttributeChangeListener"/>
+    </Properties>
+  </AccessorAttribute>
+  <AccessorAttribute id="attributeChangeListener" IsCollection="true"
+                     Type="javax.el.MethodExpression"
+                     CollectionBeanClass="UpdateableSingleValue">
+    <Attribute Name="element" Type="javax.el.MethodExpression"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="attributes" IsCollection="true" Type="java.util.Map"
+                     CollectionBeanClass="UpdateableCollection">
+    <Attribute Name="element" Type="java.lang.String,java.lang.Object"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="parent" IsCollection="true"
+                     Type="javax.faces.component.UIComponent"
+                     CollectionBeanClass="UpdateableSingleValue">
+    <Attribute Name="element" Type="javax.faces.component.UIComponent"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="children" IsCollection="true" Type="java.util.List"
+                     CollectionBeanClass="UpdateableCollection">
+    <Attribute Name="element" Type="javax.faces.component.UIComponent"/>
+  </AccessorAttribute>
+  <AccessorAttribute id="facets" IsCollection="true" Type="java.util.Map"
+                     CollectionBeanClass="UpdateableCollection">
+    <Attribute Name="element"
+               Type="java.lang.String,javax.faces.component.UIComponent"/>
+  </AccessorAttribute>
+  <MethodAccessor IsCollection="false" Type="void" id="validateValue"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+    <ParameterInfo id="p1" Type="java.lang.Object" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="resetValue"
+                  ReturnNodeName="Return"/>
+  <MethodAccessor IsCollection="false" Type="void" id="addValidator"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.validator.Validator"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="removeValidator"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.validator.Validator"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="validate"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="broadcast"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.event.FacesEvent"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="processDecodes"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="processUpdates"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="processValidators"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="updateModel"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="addValueChangeListener"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.event.ValueChangeListener"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void"
+                  id="removeValueChangeListener" ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.event.ValueChangeListener"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="java.lang.String"
+                  id="getContainerClientId" ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+    <ParameterInfo id="p1" Type="javax.faces.component.UIComponent"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void"
+                  id="addAttributeChangeListener" ReturnNodeName="Return">
+    <ParameterInfo id="p0"
+                   Type="org.apache.myfaces.trinidad.event.AttributeChangeListener"
+                   isStructured="true"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void"
+                  id="removeAttributeChangeListener" ReturnNodeName="Return">
+    <ParameterInfo id="p0"
+                   Type="org.apache.myfaces.trinidad.event.AttributeChangeListener"
+                   isStructured="true"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void"
+                  id="setAttributeChangeListener" ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.el.MethodBinding"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="javax.el.ValueExpression"
+                  id="getValueExpression" ReturnNodeName="ValueExpression"
+                  CollectionBeanClass="ReadOnlySingleValue">
+    <ParameterInfo id="p0" Type="java.lang.String" isStructured="false"/>
+    <Attribute Name="element" Type="javax.el.ValueExpression"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="setValueExpression"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="java.lang.String" isStructured="false"/>
+    <ParameterInfo id="p1" Type="javax.el.ValueExpression"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="javax.faces.el.ValueBinding"
+                  id="getValueBinding" ReturnNodeName="ValueBinding"
+                  CollectionBeanClass="ReadOnlySingleValue">
+    <ParameterInfo id="p0" Type="java.lang.String" isStructured="false"/>
+    <Attribute Name="element" Type="javax.faces.el.ValueBinding"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="setValueBinding"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="java.lang.String" isStructured="false"/>
+    <ParameterInfo id="p1" Type="javax.faces.el.ValueBinding"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="java.lang.String" id="getClientId"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="javax.faces.component.UIComponent"
+                  id="findComponent" ReturnNodeName="UIComponent"
+                  CollectionBeanClass="ReadOnlySingleValue">
+    <ParameterInfo id="p0" Type="java.lang.String" isStructured="false"/>
+    <Attribute Name="element" Type="javax.faces.component.UIComponent"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="javax.faces.component.UIComponent"
+                  id="getFacet" ReturnNodeName="UIComponent"
+                  CollectionBeanClass="ReadOnlySingleValue">
+    <ParameterInfo id="p0" Type="java.lang.String" isStructured="false"/>
+    <Attribute Name="element" Type="javax.faces.component.UIComponent"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="decode"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="encodeBegin"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="encodeChildren"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="encodeEnd"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="encodeAll"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="queueEvent"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.event.FacesEvent"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="java.lang.Object"
+                  id="processSaveState" ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="processRestoreState"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+    <ParameterInfo id="p1" Type="java.lang.Object" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="markInitialState"
+                  ReturnNodeName="Return"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.Object" id="saveState"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="restoreState"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+    <ParameterInfo id="p1" Type="java.lang.Object" isStructured="false"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="java.lang.String" id="toString"
+                  ReturnNodeName="Return"/>
+  <MethodAccessor IsCollection="true" Type="javax.el.MethodExpression"
+                  id="adaptMethodBinding" ReturnNodeName="MethodExpression"
+                  CollectionBeanClass="ReadOnlySingleValue">
+    <ParameterInfo id="p0" Type="javax.faces.el.MethodBinding"
+                   isStructured="false"/>
+    <Attribute Name="element" Type="javax.el.MethodExpression"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="boolean"
+                  id="processFlattenedChildren" ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+    <ParameterInfo id="p1"
+                   Type="org.apache.myfaces.trinidad.component.ComponentProcessor&lt;S>"
+                   isStructured="true"/>
+    <ParameterInfo id="p2" Type="javax.faces.component.UIComponent"
+                   isStructured="false"/>
+    <ParameterInfo id="p3" Type="S" isStructured="true"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="boolean"
+                  id="processFlattenedChildren" ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+    <ParameterInfo id="p1"
+                   Type="org.apache.myfaces.trinidad.component.ComponentProcessingContext"
+                   isStructured="true"/>
+    <ParameterInfo id="p2"
+                   Type="org.apache.myfaces.trinidad.component.ComponentProcessor&lt;S>"
+                   isStructured="true"/>
+    <ParameterInfo id="p3" Type="javax.faces.component.UIComponent"
+                   isStructured="false"/>
+    <ParameterInfo id="p4" Type="S" isStructured="true"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="boolean"
+                  id="processFlattenedChildren" ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+    <ParameterInfo id="p1"
+                   Type="org.apache.myfaces.trinidad.component.ComponentProcessor&lt;S>"
+                   isStructured="true"/>
+    <ParameterInfo id="p2"
+                   Type="java.lang.Iterable&lt;javax.faces.component.UIComponent>"
+                   isStructured="false"/>
+    <ParameterInfo id="p3" Type="S" isStructured="true"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="boolean"
+                  id="processFlattenedChildren" ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.context.FacesContext"
+                   isStructured="false"/>
+    <ParameterInfo id="p1"
+                   Type="org.apache.myfaces.trinidad.component.ComponentProcessingContext"
+                   isStructured="true"/>
+    <ParameterInfo id="p2"
+                   Type="org.apache.myfaces.trinidad.component.ComponentProcessor&lt;S>"
+                   isStructured="true"/>
+    <ParameterInfo id="p3"
+                   Type="java.lang.Iterable&lt;javax.faces.component.UIComponent>"
+                   isStructured="false"/>
+    <ParameterInfo id="p4" Type="S" isStructured="true"/>
+  </MethodAccessor>
+  <ConstructorMethod IsCollection="true"
+                     Type="oracle.adf.view.rich.component.rich.input.RichSelectOneChoice"
+                     BeanClass="oracle.adf.view.rich.component.rich.input.RichSelectOneChoice"
+                     id="RichSelectOneChoice"/>
+</JavaBean>

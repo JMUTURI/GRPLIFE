@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Claims Authorization">
+      <af:messages id="m1"/>
+      <af:pageTemplate id="lmsgroup" viewId="/templates/GroupTemplate2.jspx">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal"/>
+        <f:facet name="center">
+          <af:panelGroupLayout id="pgl1" layout="scroll" rendered="true">
+            <af:panelBox text="" id="pb4">
+              <f:facet name="toolbar"/>
+              <af:panelBox text="Product" id="pb1" rendered="true">
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="3" id="pg2">
+                  <af:outputText value="Product" id="ot1"/>
+                  <af:inputText label="Label 1" simple="true" disabled="true"
+                                id="it1"
+                                binding="#{ClaimsAuthorisationManipulation.prodDesc}"/>
+                  <af:commandButton icon="/images/dropdown.gif" id="cb1">
+                    <af:showPopupBehavior popupId="product"/>
+                  </af:commandButton>
+                </h:panelGrid>
+                <af:popup id="product">
+                  <af:dialog type="none" title="Products" id="d2">
+                    <af:panelBox text="PanelBox1" id="pb2" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <af:table value="#{bindings.productDetails.collectionModel}"
+                                var="row"
+                                rows="#{bindings.productDetails.rangeSize}"
+                                emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.productDetails.rangeSize}"
+                                rowBandingInterval="0" id="t1"
+                                rowSelection="single"
+                                binding="#{ClaimsAuthorisationManipulation.productLOV}"
+                                filterVisible="true"
+                                filterModel="#{bindings.productDetailsQuery.queryDescriptor}">
+                        <af:column sortProperty="prodDesc" sortable="false"
+                                   headerText="#{bindings.productDetails.hints.prodDesc.label}"
+                                   id="c2" filterable="true" width="180">
+                          <af:outputText value="#{row.prodDesc}" id="ot2"/>
+                        </af:column>
+                        <af:column sortProperty="prodshtDesc" sortable="false"
+                                   headerText="#{bindings.productDetails.hints.prodshtDesc.label}"
+                                   id="c1" filterable="true">
+                          <af:outputText value="#{row.prodshtDesc}" id="ot3"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                    <h:panelGrid columns="2" id="pg3">
+                      <af:commandButton text="OK" id="cb2"
+                                        action="#{ClaimsAuthorisationManipulation.getSelectedProduct}"/>
+                      <af:commandButton text="Cancel" id="cb3"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+              </af:panelBox>
+              <af:panelBox text="Claims Transaction For Authorisation" id="pb3">
+                <f:facet name="toolbar"/>
+                <af:table value="#{bindings.Claim.collectionModel}" var="row"
+                          rows="#{bindings.Claim.rangeSize}"
+                          emptyText="#{bindings.Claim.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Claim.rangeSize}"
+                          rowBandingInterval="0" id="t2" width="65%"
+                          rowSelection="single"
+                          binding="#{ClaimsAuthorisationManipulation.clmAuthLOV}"
+                          filterModel="#{bindings.claimsAuthorisedQuery.queryDescriptor}">
+                  <af:column sortProperty="LTR_CLM_NO" sortable="false"
+                             headerText="Claim No" id="c4">
+                    <af:outputText value="#{row.LTR_CLM_NO}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="MEM_NO_DISP" sortable="false"
+                             headerText="Mem No." id="c3">
+                    <af:outputText value="#{row.MEM_NO_DISP}" id="ot5"/>
+                  </af:column>
+                  <af:column sortProperty="MEM_NAME_DISP" sortable="false"
+                             headerText="Mem. Name" id="c8" width="150">
+                    <af:outputText value="#{row.MEM_NAME_DISP}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="LTR_TRANS_NO" sortable="false"
+                             headerText="Trans No" id="c6">
+                    <af:outputText value="#{row.LTR_TRANS_NO}" id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="LTR_POL_POLICY_NO" sortable="false"
+                             headerText="Policy No." id="c5">
+                    <af:outputText value="#{row.LTR_POL_POLICY_NO}" id="ot8"/>
+                  </af:column>
+                  <af:column sortProperty="LTR_DONE_BY" sortable="false"
+                             headerText="Done By" id="c7">
+                    <af:outputText value="#{row.LTR_DONE_BY}" id="ot9"/>
+                  </af:column>
+                  <af:column sortable="false" headerText="Authorise" id="c9">
+                    <af:selectBooleanCheckbox text="" label="Label 1" id="sbc1"
+                                              valueChangeListener="#{ClaimsAuthorisationManipulation.getRowChecked}"
+                                              binding="#{ClaimsAuthorisationManipulation.clmAuthCheck}"
+                                              autoSubmit="true"/>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+            </af:panelBox>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

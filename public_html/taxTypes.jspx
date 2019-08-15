@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Tax Types" id="d2">
+    <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+        <af:panelGroupLayout layout="scroll" id="pgl1">
+          <af:outputText value="Global Layer" id="ot1"/>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="center">
+          <af:group id="g1">
+            <af:inputText id="it2" helpTopicId="LmsGrp_taxTypes"
+                          readOnly="true"/>
+            <af:panelGroupLayout binding="#{underwritingManipulation.membersImport}"
+                                 id="pgl4">
+              <af:popup id="confirmDel">
+                <af:dialog id="d7" type="none" title="Delete Confirmation">
+                  <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="Are you sure you want to Delete?"
+                                    id="ol86" inlineStyle="font-weight:bold;"/>
+                    <h:panelGrid columns="2" id="pg8">
+                      <af:spacer width="10" height="10" id="s3"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg19">
+                      <af:commandButton text="Yes" id="cb24"
+                                        action="#{SetupBean.DeleteObject}"
+                                        partialSubmit="true"/>
+                      <af:commandButton text="No" id="commandButton9"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:panelBox text="Tax Types" showHeader="never" id="pb15">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Tax Types" id="ol1"
+                                inlineStyle="font-weight:bold;"/>
+                <af:separator id="s1"/>
+                <af:spacer width="10" height="10" id="s2"/>
+                <h:panelGrid columns="3" id="pg12">
+                  <af:commandButton id="cb19" icon="/images/new_dwn_rtl.png"
+                                    action="#{SetupBean.AddTaxTypes}"
+                                    text="New"/>
+                  <af:commandButton icon="/images/update_ena.png"
+                                    id="commandButton11"
+                                    action="#{SetupBean.EditTaxTypes}"
+                                    text="Edit"/>
+                  <af:commandButton id="delTaxTypes" icon="/images/delete_ena.png"
+                                    text="Delete"
+                                    actionListener="#{SetupBean.DeleteListener}"/>
+                </h:panelGrid>
+                <af:popup id="taxTypes">
+                  <af:dialog id="d1" type="none" title="Tax Types">
+                    <h:panelGrid columns="2" id="pg1">
+                      <af:outputLabel value="Id." id="ol2"/>
+                      <af:inputText label="Label 1" id="it1" simple="true"
+                                    binding="#{SetupBean.ttId}"/>
+                      <af:outputLabel value="Description" id="outputLabel1"/>
+                      <af:inputText label="Label 1" id="inputText1"
+                                    simple="true"
+                                    binding="#{SetupBean.ttDesc}"/>
+                      <af:outputLabel value="Tax Type" id="outputLabel2"/>
+                      <af:selectOneChoice label="Label 1" id="soc1"
+                                          simple="true"
+                                          binding="#{SetupBean.ttTaxType}">
+                        <af:selectItem label="Withholding Tax" value="WHTX"
+                                       id="si5"/>
+                        <af:selectItem label="Stamp Duty" value="SD" id="si4"/>
+                        <af:selectItem label="Compensation Levy" value="CL"
+                                       id="si1"/>
+                        <af:selectItem label="Fees" value="FE" id="si2"/>
+                        <af:selectItem label="Value Added Tax" value="VAT"
+                                       id="si3"/>
+                        <af:selectItem label="Pay As You Earn" id="si19"
+                                       value="PAYE"/>
+                        <af:selectItem label="Income Tax" id="si20" value="IT"/>
+                        <af:selectItem label="Other Taxes" id="si21"
+                                       value="OT"/>
+                        <af:selectItem label="Other Levies" id="si22"
+                                       value="OL"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Applicable at  Product Level"
+                                      id="outputLabel3"/>
+                      <af:selectOneChoice label="Label 2" id="soc2"
+                                          binding="#{SetupBean.ttApplProd}"
+                                          simple="true">
+                        <af:selectItem label="Yes" value="Y" id="si6"/>
+                        <af:selectItem label="No" value="N" id="si7"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Applicable at  Endorsement"
+                                      id="outputLabel4"/>
+                      <af:selectOneChoice label="Label 2" id="selectOneChoice1"
+                                          binding="#{SetupBean.ttApplEndr}"
+                                          simple="true">
+                        <af:selectItem label="Yes" value="Y" id="selectItem1"/>
+                        <af:selectItem label="No" value="N" id="selectItem2"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Excise Duty Applicable" id="ol3"/>
+                      <af:selectOneChoice label="Label 4" id="soc4" simple="true" value="N"
+                                          binding="#{SetupBean.exciseDuty}">
+                        <af:selectItem label="Yes" value="Y" id="si24"/>
+                        <af:selectItem label="No" value="N" id="si25"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Application  Level"
+                                      id="outputLabel5"/>
+                      <af:selectOneChoice label="Label 3" id="soc3"
+                                          binding="#{SetupBean.ttApplLevel}"
+                                          simple="true">
+                        <af:selectItem label="SA Computation" value="SC"
+                                       id="si11"/>
+                        <af:selectItem label="Loan Computation" value="LC"
+                                       id="si9"/>
+                        <af:selectItem label="Loan Repayment" value="LR"
+                                       id="si10"/>
+                        <af:selectItem label="Receipting (Premium)" value="RP"
+                                       id="si12"/>
+                        <af:selectItem label="Claim Computation" value="CC"
+                                       id="si8"/>
+                        <af:selectItem label="Maturity Computation" id="si13"
+                                       value="MC"/>
+                        <af:selectItem label="Refund Computation" id="si14"
+                                       value="RC"/>
+                        <af:selectItem label="Pension Valuation" id="si15"
+                                       value="PV"/>
+                        <af:selectItem label="Client Payment" id="si16"
+                                       value="CP"/>
+                        <af:selectItem label="Premium Computation" id="si17"
+                                       value="PC"/>
+                        <af:selectItem label="MIPP Partial Withdrawal" id="si18"
+                                       value="PW"/>
+                        <af:selectItem label="All Levels" id="si23"
+                                       value="AL"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel value="Refund On  Cancellation"
+                                      id="outputLabel6"/>
+                      <af:selectOneChoice label="Label 2" id="selectOneChoice2"
+                                          binding="#{SetupBean.ttRefund}"
+                                          simple="true">
+                        <af:selectItem label="Yes" value="Y" id="selectItem3"/>
+                        <af:selectItem label="No" value="N" id="selectItem4"/>
+                      </af:selectOneChoice>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg2">
+                      <af:commandButton text="Save" id="cb1"
+                                        action="#{SetupBean.SaveTaxTypes}"/>
+                      <af:commandButton text="Cancel" id="commandButton1"/>
+                    </h:panelGrid>
+                  </af:dialog>
+                </af:popup>
+                <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                          rows="#{bindings.Setup.rangeSize}"
+                          emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Setup.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:98%; height:400.0px; border-style:none;"
+                          binding="#{SetupBean.taxesLOV}">
+                  <af:column sortProperty="TT_SHT_DESC" sortable="true"
+                             headerText="Id." id="c8">
+                    <af:outputText value="#{row.TT_SHT_DESC}" id="ot6"/>
+                  </af:column>
+                  <af:column sortProperty="TT_DESC" sortable="true"
+                             headerText="Description" id="c7" width="200">
+                    <af:outputText value="#{row.TT_DESC}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="TT_TYPE_DESC" sortable="true"
+                             headerText="Tax Type" id="c1" width="100">
+                    <af:outputText value="#{row.TT_TYPE_DESC}" id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="TT_APPLICABLE_DESC" sortable="true"
+                             headerText="Applicable at Product Level" id="c6"
+                             width="100">
+                    <af:outputText value="#{row.TT_APPLICABLE_DESC}" id="ot5"/>
+                  </af:column>
+                  <af:column sortProperty="TT_RENEWAL_ENDOS_DESC"
+                             sortable="true"
+                             headerText="Applicable at Endorsement" id="c4"
+                             width="100">
+                    <af:outputText value="#{row.TT_RENEWAL_ENDOS_DESC}"
+                                   id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="exciseDuty"
+                             sortable="true"
+                             headerText="Excise Duty Applicable" id="c10r"
+                             width="100">
+                    <af:outputText value="#{row.exciseDuty}"
+                                   id="ot11r"/>
+                  </af:column>
+                  <af:column sortProperty="TT_APPLICATION_LEVEL_DESC"
+                             sortable="true" headerText="Applicable Level"
+                             id="c3" width="100">
+                    <af:outputText value="#{row.TT_APPLICATION_LEVEL_DESC}"
+                                   id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="TT_REFUND_ON_CANC_DESC"
+                             sortable="true" headerText="Refund On Cancellation"
+                             id="c5">
+                    <af:outputText value="#{row.TT_REFUND_ON_CANC_DESC}"
+                                   id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="TT_ACC_NO" sortable="true"
+                             headerText="Acc. No." id="c9">
+                    <af:outputText value="#{row.TT_ACC_NO}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="TT_CONTRA_ACC" sortable="true"
+                             headerText="Contra Acc. No." id="c2">
+                    <af:outputText value="#{row.TT_CONTRA_ACC}" id="ot8"/>
+                  </af:column>
+                </af:table>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+    </af:pageTemplate></af:document>
+  </f:view>
+</jsp:root>

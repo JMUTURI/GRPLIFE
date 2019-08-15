@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="g_alloctransPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findCreditTrans.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findCreditTransIterator"/>
+    <methodIterator Binds="findCreditToAlloc.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findCreditToAllocIterator"/>
+    <methodIterator Binds="findDebitTransactions.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findDebitTransactionsIterator"/>
+    <methodIterator Binds="findDebitToAlloc.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findDebitToAllocIterator"/>
+    <methodIterator Binds="findTransactionsSettled.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findTransactionsSettledIterator"/>
+    <methodIterator Binds="findPolicyCommission.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findPolicyCommissionIterator"/>
+    <methodIterator Binds="findPoliciesToAllocate.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findPoliciesToAllocateIterator"/>
+    <searchRegion Binds="findPoliciesToAllocateIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account6Query"/>
+    <invokeAction Binds="Authenticate" id="Auth" Refresh="always"/>
+    <methodIterator Binds="FindPolicyCoinsurers.result"
+                    DataControl="policiesDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Policy.policies"
+                    id="FindPolicyCoinsurersIterator"/>
+    <searchRegion Binds="FindPolicyCoinsurersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
+    <methodIterator Binds="findCoinAllocRefunds.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findCoinAllocRefundsIterator"/>
+    <searchRegion Binds="findCoinAllocRefundsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account7Query"/>
+    <methodIterator Binds="findAccountTypes.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findAccountTypesIterator"/>
+    <searchRegion Binds="findAccountTypesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account8Query"/>
+    <methodIterator Binds="findAgentByAcc.result" DataControl="AccountDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Accounts.Account"
+                    id="findAgentByAccIterator"/>
+    <searchRegion Binds="findAgentByAccIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account9Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="ProductsDAO"
+                  InstanceName="ProductsDAO.dataProvider"
+                  ReturnName="ProductsDAO.methodResults.findProducts_ProductsDAO_dataProvider_findProducts_result"/>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <methodAction id="findCreditTrans" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCreditTrans"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findCreditTrans_AccountDAO_dataProvider_findCreditTrans_result"/>
+    <tree IterBinding="findCreditTransIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="MTRAN_REF_NO"/>
+          <Item Value="MTRAN_DATE"/>
+          <Item Value="MTRAN_DC"/>
+          <Item Value="MTRAN_AMOUNT"/>
+          <Item Value="MTRAN_COMMISSION"/>
+          <Item Value="MTRAN_COMM_PAID"/>
+          <Item Value="MTRAN_COMM_PAYABLE"/>
+          <Item Value="MTRAN_BALANCE"/>
+          <Item Value="amount"/>
+          <Item Value="MTRAN_TRAN_TYPE"/>
+          <Item Value="MTRAN_POL_POLCY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCreditToAlloc" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCreditToAlloc"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findCreditToAlloc_AccountDAO_dataProvider_findCreditToAlloc_result"/>
+    <tree IterBinding="findCreditToAllocIterator" id="Account1">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account10">
+        <AttrNames>
+          <Item Value="CRA_MTRAN_REF_NO"/>
+          <Item Value="CRA_MTRAN_DATE"/>
+          <Item Value="CRA_MTRAN_DC"/>
+          <Item Value="CRA_MTRAN_AMOUNT"/>
+          <Item Value="CRA_MTRAN_COMMISSION"/>
+          <Item Value="CRA_MTRAN_COMM_PAID"/>
+          <Item Value="CRA_MTRAN_COMM_PAYABLE"/>
+          <Item Value="CRA_MTRAN_BALANCE"/>
+          <Item Value="MTRAN_REF_NO"/>
+          <Item Value="CRA_MTRAN_TRAN_TYPE"/>
+          <Item Value="CRA_amount"/>
+          <Item Value="CRA_MTRAN_CODE"/>
+          <Item Value="CRA_MTRAN_ALLOC_MODE_DESC"/>
+          <Item Value="MTRAN_DATE"/>
+          <Item Value="MTRAN_COMM_PAYABLE"/>
+          <Item Value="CRA_MTRAN_ALLOC_MODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findDebitTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findDebitTransactions"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findDebitTransactions_AccountDAO_dataProvider_findDebitTransactions_result"/>
+    <tree IterBinding="findDebitTransactionsIterator" id="Account2">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account20">
+        <AttrNames>
+          <Item Value="DBT_MTRAN_REF_NO"/>
+          <Item Value="DBT_MTRAN_DATE"/>
+          <Item Value="DBT_MTRAN_DC"/>
+          <Item Value="DBT_GROSS_AMOUNT"/>
+          <Item Value="DBT_NET_AMOUNT"/>
+          <Item Value="DBT_MTRAN_SETTLED_AMT"/>
+          <Item Value="DBT_MTRAN_BALANCE"/>
+          <Item Value="DBT_MTRAN_COMMISSION"/>
+          <Item Value="DBT_MTRAN_COMM_PAID"/>
+          <Item Value="DBT_MTRAN_COMM_PAYABLE"/>
+          <Item Value="MTRAN_REF_NO"/>
+          <Item Value="DBT_MTRAN_TRAN_TYPE"/>
+          <Item Value="MTRAN_POL_POLCY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findDebitToAlloc" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findDebitToAlloc"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findDebitToAlloc_AccountDAO_dataProvider_findDebitToAlloc_result"/>
+    <tree IterBinding="findDebitToAllocIterator" id="Account3">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account30">
+        <AttrNames>
+          <Item Value="DBA_MTRAN_REF_NO"/>
+          <Item Value="DBA_MTRAN_DATE"/>
+          <Item Value="DBA_MTRAN_DC"/>
+          <Item Value="DBA_GROSS_AMOUNT"/>
+          <Item Value="DBA_NET_AMOUNT"/>
+          <Item Value="DBA_MTRAN_SETTLED_AMT"/>
+          <Item Value="DBA_MTRAN_BALANCE"/>
+          <Item Value="DBA_MTRAN_COMMISSION"/>
+          <Item Value="DBA_MTRAN_COMM_PAID"/>
+          <Item Value="DBA_MTRAN_COMM_PAYABLE"/>
+          <Item Value="MTRAN_REF_NO"/>
+          <Item Value="DBA_MTRAN_TRAN_TYPE"/>
+          <Item Value="selected"/>
+          <Item Value="DBA_MTRAN_CODE"/>
+          <Item Value="MTRAN_POL_POLCY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTransactionsSettled" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTransactionsSettled"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findTransactionsSettled_AccountDAO_dataProvider_findTransactionsSettled_result"/>
+    <tree IterBinding="findTransactionsSettledIterator" id="Account4">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account40">
+        <AttrNames>
+          <Item Value="TMAP_DR_MTRAN_REF_NO"/>
+          <Item Value="TMAP_AMOUNT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPolicyCommission" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPolicyCommission"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPolicyCommission_AccountDAO_dataProvider_findPolicyCommission_result"/>
+    <tree IterBinding="findPolicyCommissionIterator" id="Account5">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account50">
+        <AttrNames>
+          <Item Value="AGENT_DISPLAY"/>
+          <Item Value="PCP_AGN_UNIT_MGR"/>
+          <Item Value="BRANCH_DISPLAY"/>
+          <Item Value="PCP_COMM_AMT"/>
+          <Item Value="PCP_WHDTAX_AMT"/>
+          <Item Value="PCP_OVRIDE_COMM_AMT"/>
+          <Item Value="PCP_OVRIDE_WHDTAX_AMT"/>
+          <Item Value="PCP_NET_COMM"/>
+          <Item Value="PCP_PAID"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPoliciesToAllocate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPoliciesToAllocate"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findPoliciesToAllocate_AccountDAO_dataProvider_findPoliciesToAllocate_result"/>
+    <tree IterBinding="findPoliciesToAllocateIterator" id="Account6">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account60">
+        <AttrNames>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="PRP_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="FindPolicyCoinsurers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicyCoinsurers"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicyCoinsurers_policiesDAO_dataProvider_FindPolicyCoinsurers_result"/>
+    <tree IterBinding="FindPolicyCoinsurersIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="btr_trans_type"/>
+          <Item Value="coinsurer_display"/>
+          <Item Value="POL_COIN_SHARE_PCT"/>
+          <Item Value="pol_coin_admin_fee"/>
+          <Item Value="POL_COIN_PREMIUM"/>
+          <Item Value="pol_coin_comm_amt"/>
+          <Item Value="POL_COIN_SRVCE_FEE"/>
+          <Item Value="pol_coin_settled"/>
+          <Item Value="pol_coin_balance"/>
+          <Item Value="POL_CODE"/>
+          <Item Value="selected"/>
+          <Item Value="UW_YEAR"/>
+          <Item Value="fully_settled"/>
+          <Item Value="pol_coin_code"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCoinAllocRefunds" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCoinAllocRefunds"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findCoinAllocRefunds_AccountDAO_dataProvider_findCoinAllocRefunds_result"/>
+    <tree IterBinding="findCoinAllocRefundsIterator" id="Account7">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account70">
+        <AttrNames>
+          <Item Value="LPR_CODE"/>
+          <Item Value="LPR_VOUCHER_NO"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="LPR_AMOUNT_TO_PAY"/>
+          <Item Value="LPR_RAISED_BY"/>
+          <Item Value="LPR_DATE_DONE"/>
+          <Item Value="LPR_PAID"/>
+          <Item Value="LPR_AUTHORISED_BY"/>
+          <Item Value="LPR_AUTHORISED_DATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAccountTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAccountTypes"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findAccountTypes_AccountDAO_dataProvider_findAccountTypes_result"/>
+    <tree IterBinding="findAccountTypesIterator" id="Account8">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account80">
+        <AttrNames>
+          <Item Value="ACT_CODE"/>
+          <Item Value="ACT_ACCOUNT_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAgentByAcc" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAgentByAcc"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findAgentByAcc_AccountDAO_dataProvider_findAgentByAcc_result"/>
+    <tree IterBinding="findAgentByAccIterator" id="Account9">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account90">
+        <AttrNames>
+          <Item Value="AGN_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findAgentByAccIterator" id="Account10">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account100">
+        <AttrNames>
+          <Item Value="AGN_CODE"/>
+          <Item Value="AGN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

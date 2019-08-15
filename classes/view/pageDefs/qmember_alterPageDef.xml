@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="qmember_alterPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="FindMemberDependants.result" DataControl="membersDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Members.members1"
+                    id="FindMemberDependantsIterator"/>
+    <methodIterator Binds="FindDependantTypes.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindDependantTypesIterator"/>
+    <methodIterator Binds="FindIndivudualMemberDetails.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindIndivudualMemberDetailsIterator"/>
+    <methodIterator Binds="FindIndivudualMemberCovers.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindIndivudualMemberCoversIterator"/>
+    <methodIterator Binds="FindIndivudualMemberPensions.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindIndivudualMemberPensionsIterator"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="FindMembersBeneficiariesCoversII.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindMembersBeneficiariesCoversIIIterator"/>
+    <searchRegion Binds="FindMembersBeneficiariesCoversIIIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="members12Query"/>
+    <methodIterator Binds="findGroupOccupationsCategories.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findGroupOccupationsCategoriesIterator"/>
+    <searchRegion Binds="findGroupOccupationsCategoriesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SetupQuery"/>
+    <methodIterator Binds="findGroupOccupations.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findGroupOccupationsIterator"/>
+    <searchRegion Binds="findGroupOccupationsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup1Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindMemberDependants" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMemberDependants"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindMemberDependants_membersDAO_dataProvider_FindMemberDependants_result"/>
+    <tree IterBinding="FindMemberDependantsIterator" id="members1">
+      <nodeDefinition DefName="LMSG.view.Members.members1" Name="members10">
+        <AttrNames>
+          <Item Value="POLM_CODE"/>
+          <Item Value="MEM_SURNAME"/>
+          <Item Value="MEM_OTHER_NAMES"/>
+          <Item Value="MEM_DOB"/>
+          <Item Value="DTY_DESCRIPTION"/>
+          <Item Value="MEM_NO"/>
+          <Item Value="MEM_SEX"/>
+          <Item Value="MEM_IDENTITY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindDependantTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindDependantTypes"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindDependantTypes_SettingsDAO_dataProvider_FindDependantTypes_result"/>
+    <tree IterBinding="FindDependantTypesIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="DTY_CODE"/>
+          <Item Value="DTY_SHT_DESC"/>
+          <Item Value="DTY_DESCRIPTION"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindIndivudualMemberDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindIndivudualMemberDetails"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindIndivudualMemberDetails_membersDAO_dataProvider_FindIndivudualMemberDetails_result"/>
+    <attributeValues IterBinding="FindIndivudualMemberDetailsIterator"
+                     id="MEM_POLM_MEM_NO">
+      <AttrNames>
+        <Item Value="MEM_POLM_MEM_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberDetailsIterator"
+                     id="MEM_MEM_SURNAME">
+      <AttrNames>
+        <Item Value="MEM_MEM_SURNAME"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberDetailsIterator"
+                     id="MEM_MEM_SEX">
+      <AttrNames>
+        <Item Value="MEM_MEM_SEX"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberDetailsIterator"
+                     id="MEM_MEM_DOB">
+      <AttrNames>
+        <Item Value="MEM_MEM_DOB"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberDetailsIterator"
+                     id="MEM_MEMBER_DISPLAY">
+      <AttrNames>
+        <Item Value="MEM_MEMBER_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberDetailsIterator"
+                     id="MEM_MEM_OTHER_NAMES">
+      <AttrNames>
+        <Item Value="MEM_MEM_OTHER_NAMES"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberDetailsIterator"
+                     id="gcoDesc">
+      <AttrNames>
+        <Item Value="gcoDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberDetailsIterator"
+                     id="polmLcCode">
+      <AttrNames>
+        <Item Value="polmLcCode"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindMemberCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMemberCoverTypes"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindMemberCoverTypes_membersDAO_dataProvider_FindMemberCoverTypes_result"/>
+    <methodAction id="FindIndivudualMemberCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindIndivudualMemberCovers"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindIndivudualMemberCovers_membersDAO_dataProvider_FindIndivudualMemberCovers_result"/>
+    <tree IterBinding="FindIndivudualMemberCoversIterator" id="members11">
+      <nodeDefinition DefName="LMSG.view.Members.members1" Name="members110">
+        <AttrNames>
+          <Item Value="CVT_CVT_DESC"/>
+          <Item Value="CVT_PCM_COVER_WEF_DATE"/>
+          <Item Value="CVT_PCM_COVER_WET_DATE"/>
+          <Item Value="CVT_PCM_SA"/>
+          <Item Value="CVT_PCM_PREMIUM"/>
+          <Item Value="CVT_PCM_EARNINGS"/>
+          <Item Value="CVT_PCM_MULT_EARNINGS_PRD"/>
+          <Item Value="CVT_PCM_RATE"/>
+          <Item Value="CVT_PCM_LOAN_ISSUE_DATE"/>
+          <Item Value="CVT_PCM_ORIGINAL_LOAN_AMT"/>
+          <Item Value="CVT_PCM_ORIG_LOAN_REPAYMENT_PRD"/>
+          <Item Value="CVT_PCM_SAVING_AMT"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="PCM_LOAN_INT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindIndivudualMemberPensions" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="FindIndivudualMemberPensions"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindIndivudualMemberPensions_membersDAO_dataProvider_FindIndivudualMemberPensions_result"/>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_EARNINGS">
+      <AttrNames>
+        <Item Value="PMPNS_EARNINGS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_EMPLOYER_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_EMPLOYER_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_EMPLOYEE_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_EMPLOYEE_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_EMPLYE_VOLU_TYPE">
+      <AttrNames>
+        <Item Value="PMPNS_EMPLYE_VOLU_TYPE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_EMPLYE_VOLU_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_EMPLYE_VOLU_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_TOTAL_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_TOTAL_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_COMP_INT_RATE">
+      <AttrNames>
+        <Item Value="PMPNS_COMP_INT_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_ANNTY_FAC_RATE">
+      <AttrNames>
+        <Item Value="PMPNS_ANNTY_FAC_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_NET_ANNUAL_FUND">
+      <AttrNames>
+        <Item Value="PMPNS_NET_ANNUAL_FUND"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_PENS_ANNUM">
+      <AttrNames>
+        <Item Value="PMPNS_PENS_ANNUM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindIndivudualMemberPensionsIterator"
+                     id="PMPNS_CODE">
+      <AttrNames>
+        <Item Value="PMPNS_CODE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="FindMembersBeneficiariesCoversII"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="FindMembersBeneficiariesCoversII"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="data.membersDAO.methodResults.FindMembersBeneficiariesCoversII_membersDAO_dataProvider_FindMembersBeneficiariesCoversII_result"/>
+    <tree IterBinding="FindMembersBeneficiariesCoversIIIterator" id="members12">
+      <nodeDefinition DefName="LMSG.view.Members.members1" Name="members120">
+        <AttrNames>
+          <Item Value="qmemBenMemNo"/>
+          <Item Value="qmemBenSurname"/>
+          <Item Value="qmemBenOtherNames"/>
+          <Item Value="qmem_ben_sex"/>
+          <Item Value="pmem_dob"/>
+          <Item Value="classDisplay"/>
+          <Item Value="benTerm"/>
+          <Item Value="feeDisplay"/>
+          <Item Value="qmemBenCode"/>
+          <Item Value="qmemBenClass"/>
+          <Item Value="spr_name"/>
+          <Item Value="pmem_rsa_pin"/>
+          <Item Value="pmem_share_pct"/>
+          <Item Value="spr_code"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGroupOccupationsCategories" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findGroupOccupationsCategories"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findGroupOccupationsCategories_SetupsDAO_dataProvider_findGroupOccupationsCategories_result"/>
+    <tree IterBinding="findGroupOccupationsCategoriesIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="gcoDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findGroupOccupations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findGroupOccupations"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findGroupOccupations_SetupsDAO_dataProvider_findGroupOccupations_result"/>
+    <tree IterBinding="findGroupOccupationsIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="LC_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

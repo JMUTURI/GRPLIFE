@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.54.7"
+          id="pensionCostingFactorsDAO" Package="com.turnkey.setups"
+          BeanClass="com.turnkey.setups.pensionCostingFactorsDAO"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.pensionCostingFactors"
+                  BeanClass="com.turnkey.setups.pensionCostingFactors"
+                  id="findPensionCostingFactors"
+                  ReturnNodeName="pensionCostingFactors"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.pensionCostingFactors"
+                  BeanClass="com.turnkey.setups.pensionCostingFactors"
+                  id="findPensionContributionFactors"
+                  ReturnNodeName="pensionCostingFactors"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.pensionCostingFactors"
+                  BeanClass="com.turnkey.setups.pensionCostingFactors"
+                  id="findRetirementAges" ReturnNodeName="pensionCostingFactors"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.pensionCostingFactors"
+                  BeanClass="com.turnkey.setups.pensionCostingFactors"
+                  id="findEmvErRates" ReturnNodeName="pensionCostingFactors"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.pensionCostingFactors"
+                  BeanClass="com.turnkey.setups.pensionCostingFactors"
+                  id="findEmvEERates" ReturnNodeName="pensionCostingFactors"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.pensionCostingFactors"
+                  BeanClass="com.turnkey.setups.pensionCostingFactors"
+                  id="findGratuityPensionrates"
+                  ReturnNodeName="pensionCostingFactors"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.pensionCostingFactors"
+                  BeanClass="com.turnkey.setups.pensionCostingFactors"
+                  id="findPensionCostingFactorRates"
+                  ReturnNodeName="pensionCostingFactors"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="com.turnkey.setups.pensionCostingFactors"
+                  BeanClass="com.turnkey.setups.pensionCostingFactors"
+                  id="findPensionVestingScales"
+                  ReturnNodeName="pensionCostingFactors"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="com.turnkey.setups.pensionCostingFactorsDAO"
+                     BeanClass="com.turnkey.setups.pensionCostingFactorsDAO"
+                     id="pensionCostingFactorsDAO"/>
+</JavaBean>

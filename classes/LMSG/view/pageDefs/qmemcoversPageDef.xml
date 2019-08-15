@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="qmemcoversPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findQuotation.result"
+                    DataControl="QuotationDetailsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.QuotationsDetails"
+                    id="findQuotationIterator"/>
+    <methodIterator Binds="findQuoteMembers.result" DataControl="QuotationsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteMembersIterator"/>
+    <methodIterator Binds="findMemberPensionDtls.result"
+                    DataControl="memPensionDAO" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.memPension"
+                    id="findMemberPensionDtlsIterator"/>
+    <methodIterator Binds="FindQuoteJointMembers.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindQuoteJointMembersIterator"/>
+    <methodIterator Binds="findMemberBeneficiaries.result"
+                    DataControl="GenQuotMem" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                    id="findMemberBeneficiariesIterator"/>
+    <methodIterator Binds="FindQuoteMemberCovers.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindQuoteMemberCoversIterator"/>
+    <iterator Binds="root" RangeSize="25" DataControl="QuotationsDAO"
+              id="QuotationsDAOIterator"/>
+    <methodIterator Binds="findQuoteCategories.result"
+                    DataControl="QuotationsDAO" RangeSize="-1"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteCategoriesIter"/>
+    <methodIterator Binds="findMemberDependents.result" DataControl="GenQuotMem"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                    id="findMemberDependentsIterator"/>
+    <methodIterator Binds="findDependentsAnnuityPayments.result"
+                    DataControl="GenQuotMem" RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.QuotMembers"
+                    id="findDependentsAnnuityPaymentsIterator"/>
+    <methodIterator Binds="FindQuoteMembersExceptions.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindQuoteMembersExceptionsIterator"/>
+    <methodIterator Binds="findQuoteMemberSubdivisions.result"
+                    DataControl="QuotationsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Quotation.Quotations"
+                    id="findQuoteMemberSubdivisionsIterator"/>
+    <searchRegion Binds="findQuoteMemberSubdivisionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="QuotationsQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="findQuotation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuotation"
+                  IsViewObjectMethod="false" DataControl="QuotationDetailsDAO"
+                  InstanceName="QuotationDetailsDAO.dataProvider"
+                  ReturnName="QuotationDetailsDAO.methodResults.findQuotation_QuotationDetailsDAO_dataProvider_findQuotation_result"/>
+    <attributeValues IterBinding="findQuotationIterator" id="quoNo">
+      <AttrNames>
+        <Item Value="quoNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="client">
+      <AttrNames>
+        <Item Value="client"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="agnName">
+      <AttrNames>
+        <Item Value="agnName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="QUO_CLA_SHT_DESC">
+      <AttrNames>
+        <Item Value="QUO_CLA_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="QUO_PROD_SHT_DESC">
+      <AttrNames>
+        <Item Value="QUO_PROD_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findQuotationIterator" id="BRN_NAME">
+      <AttrNames>
+        <Item Value="BRN_NAME"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findQuoteMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteMembers"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteMembers_QuotationsDAO_dataProvider_findQuoteMembers_result"/>
+    <methodAction id="FindQuoteMemberCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindQuoteMemberCovers"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindQuoteMemberCovers_membersDAO_dataProvider_FindQuoteMemberCovers_result"/>
+    <tree IterBinding="FindQuoteMemberCoversIterator" id="members1">
+      <nodeDefinition DefName="LMSG.view.Members.members1" Name="members10">
+        <AttrNames>
+          <Item Value="cover_display"/>
+          <Item Value="QCM_COVER_WEF_DATE"/>
+          <Item Value="QCM_COVER_WET_DATE"/>
+          <Item Value="QCM_SA"/>
+          <Item Value="QCM_PREMIUM"/>
+          <Item Value="QCM_LOAD_DISC_PREM"/>
+          <Item Value="QCM_ORIGINAL_LOAN_AMT"/>
+          <Item Value="QCM_LOAN_ISSUE_DATE"/>
+          <Item Value="QCM_ORIG_LOAN_REPAYMENT_PRD"/>
+          <Item Value="QCM_SAVING_AMT"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="QCM_EARNINGS"/>
+          <Item Value="MEM_SURNAME"/>
+          <Item Value="QCM_MULT_EARNINGS_PRD"/>
+          <Item Value="QCM_BASIC_SAL"/>
+          <Item Value="QCM_HOUSE_ALLOW"/>
+          <Item Value="MEM_OTHER_NAMES"/>
+          <Item Value="QCM_TRANS_ALLOW"/>
+          <Item Value="MEM_DOB"/>
+          <Item Value="QCM_OTHER_ALLOW"/>
+          <Item Value="QCM_RATE"/>
+          <Item Value="qcm_disc_prem"/>
+          <Item Value="qcm_pure_rate"/>
+          <Item Value="qcm_pure_premium"/>
+           
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+     <attributeValues IterBinding="FindQuoteMemberCoversIterator" id="totPrem" >
+      <AttrNames>
+        <Item Value="totPrem"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findMemberPensionDtls" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMemberPensionDtls"
+                  IsViewObjectMethod="false" DataControl="memPensionDAO"
+                  InstanceName="memPensionDAO.dataProvider"
+                  ReturnName="memPensionDAO.methodResults.findMemberPensionDtls_memPensionDAO_dataProvider_findMemberPensionDtls_result"/>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_WEF_DATE">
+      <AttrNames>
+        <Item Value="QMPNS_WEF_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EARNINGS">
+      <AttrNames>
+        <Item Value="QMPNS_EARNINGS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_TOTAL_CONTR">
+      <AttrNames>
+        <Item Value="QMPNS_TOTAL_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_WET_DATE">
+      <AttrNames>
+        <Item Value="QMPNS_WET_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLOYER_CONTR">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLOYER_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLOYEE_CONTR">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLOYEE_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYE_VOLU_CONTR">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYE_VOLU_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_ADMIN_FEE_RATE">
+      <AttrNames>
+        <Item Value="QMPNS_ADMIN_FEE_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_NET_ANNUAL_FUND">
+      <AttrNames>
+        <Item Value="QMPNS_NET_ANNUAL_FUND"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_COMP_INT_RATE">
+      <AttrNames>
+        <Item Value="QMPNS_COMP_INT_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_ANNTY_FAC_RATE">
+      <AttrNames>
+        <Item Value="QMPNS_ANNTY_FAC_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_PENS_ANNUM">
+      <AttrNames>
+        <Item Value="QMPNS_PENS_ANNUM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EST_MAT_VAL">
+      <AttrNames>
+        <Item Value="QMPNS_EST_MAT_VAL"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindQuoteJointMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindQuoteJointMembers"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindQuoteJointMembers_membersDAO_dataProvider_FindQuoteJointMembers_result"/>
+    <tree IterBinding="FindQuoteJointMembersIterator" id="members11">
+      <nodeDefinition DefName="LMSG.view.Members.members1" Name="members110">
+        <AttrNames>
+          <Item Value="j_MEM_SURNAME"/>
+          <Item Value="j_MEM_OTHER_NAMES"/>
+          <Item Value="j_MEM_DOB"/>
+          <Item Value="j_DTY_DESCRIPTION"/>
+          <Item Value="j_MEM_NO"/>
+          <Item Value="j_MEM_SEX"/>
+          <Item Value="j_MEM_IDENTITY_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EE_EST_MAT_VAL">
+      <AttrNames>
+        <Item Value="QMPNS_EE_EST_MAT_VAL"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_ER_EST_EMV_VAL">
+      <AttrNames>
+        <Item Value="QMPNS_ER_EST_EMV_VAL"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="findQuoteMembersIterator" id="Quotations1">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations10">
+        <AttrNames>
+          <Item Value="quoMemNo"/>
+          <Item Value="quoMemName"/>
+          <Item Value="quoMemAnb"/>
+          <Item Value="QMEM_HEIGHT"/>
+          <Item Value="QMEM_WEIGHT"/>
+          <Item Value="QMEM_WEIGHT_LOADING"/>
+          <Item Value="QMEM_SYSTOLIC_PR"/>
+          <Item Value="QMEM_DIASTOLIC_PR"/>
+          <Item Value="quoOccupation"/>
+          <Item Value="QMEM_LOADING_TYPE"/>
+          <Item Value="QMEM_LOADING_RATE"/>
+          <Item Value="QMEM_LOADING_DIV_FACT"/>
+          <Item Value="client"/>
+          <Item Value="QMEM_TOT_SA"/>
+          <Item Value="quoDepMemType"/>
+          <Item Value="lca_categ_desc"/>
+          <Item Value="QMEM_BMI_RATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_PAST_LIABILITY">
+      <AttrNames>
+        <Item Value="QMPNS_PAST_LIABILITY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_TOTAL_LIABILITY">
+      <AttrNames>
+        <Item Value="QMPNS_TOTAL_LIABILITY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_FUTURE_LIABILITY">
+      <AttrNames>
+        <Item Value="QMPNS_FUTURE_LIABILITY"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findMemberBeneficiaries" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMemberBeneficiaries"
+                  IsViewObjectMethod="false" DataControl="GenQuotMem"
+                  InstanceName="GenQuotMem.dataProvider"
+                  ReturnName="GenQuotMem.methodResults.findMemberBeneficiaries_GenQuotMem_dataProvider_findMemberBeneficiaries_result"/>
+    <tree IterBinding="findMemberBeneficiariesIterator" id="QuotMembers">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.QuotMembers"
+                      Name="QuotMembers0">
+        <AttrNames>
+          <Item Value="qmemBenCode"/>
+          <Item Value="qmemBenMemNo"/>
+          <Item Value="qmemBenSurname"/>
+          <Item Value="qmemBenOtherNames"/>
+          <Item Value="classDisplay"/>
+          <Item Value="benTerm"/>
+          <Item Value="feeDisplay"/>
+          <Item Value="quoMemNo"/>
+          <Item Value="qmemBenClass"/>
+          <Item Value="qmem_ben_sex"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_ANNUITY_AMOUNT">
+      <AttrNames>
+        <Item Value="QMPNS_ANNUITY_AMOUNT"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="QuotationsDAOIterator" id="quoteCategoryShtDesc"
+          DTSupportsMRU="true" StaticList="false"
+          ListIter="findQuoteCategoriesIter">
+      <AttrNames>
+        <Item Value="quoteCategoryShtDesc"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="catShtDesc"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="catDesc"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="findQuoteCategories" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteCategories"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="QuotationsDAO.methodResults.findQuoteCategories_QuotationsDAO_dataProvider_findQuoteCategories_result"/>
+    <methodAction id="findMemberDependents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMemberDependents"
+                  IsViewObjectMethod="false" DataControl="GenQuotMem"
+                  InstanceName="GenQuotMem.dataProvider"
+                  ReturnName="GenQuotMem.methodResults.findMemberDependents_GenQuotMem_dataProvider_findMemberDependents_result"/>
+    <tree IterBinding="findMemberDependentsIterator" id="QuotMembers1">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.QuotMembers"
+                      Name="QuotMembers10">
+        <AttrNames>
+          <Item Value="qabMemNo"/>
+          <Item Value="qabSurname"/>
+          <Item Value="qabOtherNames"/>
+          <Item Value="qabAnb"/>
+          <Item Value="qabSharePct"/>
+          <Item Value="quoMemNo"/>
+          <Item Value="qab_dob"/>
+          <Item Value="quoMemName"/>
+          <Item Value="qab_ann_purchase_amt"/>
+          <Item Value="quoDepMemType"/>
+          <Item Value="qab_ben_terminal_amt"/>
+          <Item Value="qab_number"/>
+          <Item Value="qabCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_ANN_PURCHASE_PRICE">
+      <AttrNames>
+        <Item Value="QMPNS_ANN_PURCHASE_PRICE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findDependentsAnnuityPayments" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findDependentsAnnuityPayments"
+                  IsViewObjectMethod="false" DataControl="GenQuotMem"
+                  InstanceName="GenQuotMem.dataProvider"
+                  ReturnName="GenQuotMem.methodResults.findDependentsAnnuityPayments_GenQuotMem_dataProvider_findDependentsAnnuityPayments_result"/>
+    <tree IterBinding="findDependentsAnnuityPaymentsIterator" id="QuotMembers2">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.QuotMembers"
+                      Name="QuotMembers20">
+        <AttrNames>
+          <Item Value="QABP_CODE"/>
+          <Item Value="QABP_NO"/>
+          <Item Value="QABP_DATE_DUE"/>
+          <Item Value="QABP_AMOUNT"/>
+          <Item Value="QABP_PAID_DESC"/>
+          <Item Value="QABP_PAID_DATE"/>
+          <Item Value="QABP_VOUCHER_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYE_PENS_BF">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYE_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYR_PENS_BF">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYR_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYR_REG_BAL_BF">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYR_REG_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYR_UNREG_BAL_BF">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYR_UNREG_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYE_REG_BAL_BF">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYE_REG_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYE_UNREG_BAL_BF">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYE_UNREG_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYR_REG_CONTRI_AMT">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYR_REG_CONTRI_AMT"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYR_UNREG_CONTRI_AMT">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYR_UNREG_CONTRI_AMT"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYE_REG_CONTRI_AMT">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYE_REG_CONTRI_AMT"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYE_UNREG_CONTRI_AMT">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYE_UNREG_CONTRI_AMT"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EMPLYR_LUMPSUM">
+      <AttrNames>
+        <Item Value="QMPNS_EMPLYR_LUMPSUM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_ER_HIST_EST_EMV_VAL">
+      <AttrNames>
+        <Item Value="QMPNS_ER_HIST_EST_EMV_VAL"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findMemberPensionDtlsIterator"
+                     id="QMPNS_EE_HIST_EST_EMV_VAL">
+      <AttrNames>
+        <Item Value="QMPNS_EE_HIST_EST_EMV_VAL"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindQuoteMembersExceptions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindQuoteMembersExceptions"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="data.membersDAO.methodResults.FindQuoteMembersExceptions_membersDAO_dataProvider_FindQuoteMembersExceptions_result"/>
+    <tree IterBinding="FindQuoteMembersExceptionsIterator" id="members12">
+      <nodeDefinition DefName="LMSG.view.Members.members1" Name="members120">
+        <AttrNames>
+          <Item Value="POLME_CODE"/>
+          <Item Value="POLME_LGE_CODE"/>
+          <Item Value="POLME_LGE_SHT_DESC"/>
+          <Item Value="LGE_DESC"/>
+          <Item Value="POLME_AUTHORISED"/>
+          <Item Value="POLME_AUTHORISED_BY"/>
+          <Item Value="POLME_BLOCK"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findQuoteMemberSubdivisions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findQuoteMemberSubdivisions"
+                  IsViewObjectMethod="false" DataControl="QuotationsDAO"
+                  InstanceName="QuotationsDAO.dataProvider"
+                  ReturnName="data.QuotationsDAO.methodResults.findQuoteMemberSubdivisions_QuotationsDAO_dataProvider_findQuoteMemberSubdivisions_result"/>
+    <tree IterBinding="findQuoteMemberSubdivisionsIterator" id="Quotations">
+      <nodeDefinition DefName="LMSG.view.Quotation.Quotations"
+                      Name="Quotations0">
+        <AttrNames>
+          <Item Value="GSUB_DESC"/>
+          <Item Value="QGSUB_SHT_DESC"/>
+          <Item Value="QGSUB_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

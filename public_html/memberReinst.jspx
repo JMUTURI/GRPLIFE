@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Group Life | Member Reinstatement">
+      <af:messages id="m2"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:popup id="users">
+              <af:dialog id="dialog12" type="none"
+                         title="Users To Assign the Next Task">
+                <af:table value="#{bindings.workflow.collectionModel}" var="row"
+                          rows="#{bindings.workflow.rangeSize}"
+                          emptyText="#{bindings.workflow.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.workflow.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.workflowQuery.queryDescriptor}"
+                          queryListener="#{bindings.workflowQuery.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.workflow.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.workflow.collectionModel.makeCurrent}"
+                          rowSelection="single" id="table4" width="410"
+                          binding="#{polManipulation.usersLOV}">
+                  <af:column sortProperty="taskUserID" filterable="true"
+                             sortable="true" headerText="ID" id="column14">
+                    <af:outputText value="#{row.taskUserID}" id="outputText43"/>
+                  </af:column>
+                  <af:column sortProperty="taskUserShtDesc" filterable="true"
+                             sortable="true" headerText="User Short Desc"
+                             id="column15">
+                    <af:outputText value="#{row.taskUserShtDesc}"
+                                   id="outputText44"/>
+                  </af:column>
+                  <af:column sortProperty="taskUserDesc" filterable="true"
+                             sortable="true" headerText="User Name"
+                             id="column16" width="200">
+                    <af:outputText value="#{row.taskUserDesc}"
+                                   id="outputText45"/>
+                  </af:column>
+                </af:table>
+                <h:panelGrid columns="2" id="panelGrid26">
+                  <af:commandButton text="OK" id="commandButton49"
+                                    action="#{polManipulation.AssignTask}"/>
+                  <af:commandButton text="Cancel" id="commandButton50"
+                                    action="#{polManipulation.GetAssignee}"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:410.0px;">
+              <af:showDetailItem text="Member Reinstatements"
+                                 id="sdi5">
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                  <af:panelBox text="PanelBox1" id="pb3" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:panelBox text="Policy Details" id="pb1"
+                                 inlineStyle="width:100.0%;">
+                      <f:facet name="toolbar"/>
+                      <h:panelGrid columns="11" id="panelGrid2">
+                        <af:outputLabel value="Policy Number" id="ol1"/>
+                        <af:outputText value="#{bindings.POL_POLICY_NO.inputValue}"
+                                       id="outputText1"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:spacer width="10" height="10" id="s3"/>
+                        <af:outputLabel value="Client Name" id="ol2"/>
+                        <af:outputText value="#{bindings.CLIENT_DISPLAY.inputValue}"
+                                       id="outputText2"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:spacer width="10" height="10" id="spacer2"/>
+                        <af:outputLabel value="Agent Name" id="ol7"/>
+                        <af:outputText value="#{bindings.AGENT_DISPLAY.inputValue}"
+                                       id="outputText7"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:spacer width="10" height="10" id="spacer8"/>
+                        <af:outputLabel value="Product Description" id="ol3"/>
+                        <af:outputText value="#{bindings.POL_PROD_SHT_DESC.inputValue}"
+                                       id="outputText3"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:outputLabel value="Branch Name" id="ol4"/>
+                        <af:outputText value="#{bindings.BRANCH_DISPLAY.inputValue}"
+                                       id="outputText4"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:spacer width="10" height="10" id="spacer4"/>
+                        <af:outputLabel value="Endr No" id="ol5"/>
+                        <af:outputText value="#{bindings.ENDR_NO.inputValue}"
+                                       id="outputText5"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:spacer width="10" height="10" id="spacer3"/>
+                        <af:outputLabel value="Effective Date" id="ol6"/>
+                        <af:outputText value="#{bindings.ENDR_EFFECTIVE_DATE.inputValue}"
+                                       id="outputText6"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:spacer width="10" height="10" id="spacer5"/>
+                        <af:outputLabel value="Premium Mask" id="ol8"/>
+                        <af:outputText value="#{bindings.MASK_DISPLAY.inputValue}"
+                                       id="outputText8"
+                                       inlineStyle="font-weight:bold;"/>
+                        <af:outputLabel value="Sum Assured" id="ol9"/>
+                        <af:outputText value="#{bindings.ENDR_TOT_SA.inputValue}"
+                                       id="outputText9"
+                                       inlineStyle="font-weight:bold;"
+                                       binding="#{underwritingManipulation.endrSA}"
+                                       converter="javax.faces.Number"/>
+                        <af:spacer width="10" height="10" id="spacer6"/>
+                        <af:outputLabel value="Premium" id="ol10"/>
+                        <af:outputText value="#{bindings.ENDR_TOT_PREMIUM.inputValue}"
+                                       id="outputText10"
+                                       inlineStyle="font-weight:bold;"
+                                       converter="javax.faces.Number"/>
+                        <af:spacer width="10" height="10" id="spacer7"/>
+                        <af:outputLabel value="Commission Amount" id="ol11"/>
+                        <af:outputText value="#{bindings.ENDR_COMM_AMT.inputValue}"
+                                       id="outputText11"
+                                       inlineStyle="font-weight:bold;"
+                                       converter="javax.faces.Number"/>
+                      </h:panelGrid>
+                    </af:panelBox>
+                    <af:panelBox text="Members To Reinstate" id="pb2"
+                                 inlineStyle="width:100.0%;">
+                      <f:facet name="toolbar"/>
+                      <h:panelGrid columns="2" id="pg1">
+                        <af:commandButton text="Process" id="cb1"
+                                          action="#{endorseBean.ReinstateMembers}"/>
+                        <af:commandButton text="Back To Policy"
+                                          id="commandButton1"
+                                          action="#{underwritingManipulation.BackToPolicy}"/>
+                      </h:panelGrid>
+                      <af:table value="#{bindings.members1.collectionModel}"
+                                var="row" rows="#{bindings.members1.rangeSize}"
+                                emptyText="#{bindings.members1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.members1.rangeSize}"
+                                rowBandingInterval="0"
+                                selectedRowKeys="#{bindings.members1.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.members1.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t1"
+                                inlineStyle="width:100%; height:200.0px;"
+                                binding="#{endorseBean.memberReinstatements}">
+                        <af:column sortProperty="POLM_CODE" sortable="false"
+                                   headerText="Select" id="c9">
+                          <af:selectBooleanCheckbox id="sbc1" simple="true"
+                                                    value="#{row.selected}"
+                                                    valueChangeListener="#{endorseBean.MemberReinstListener}"
+                                                    binding="#{endorseBean.reinstCbox}"
+                                                    autoSubmit="true"/>
+                        </af:column>
+                        <af:column sortProperty="MEM_POLM_CODE" sortable="true"
+                                   headerText="Code" id="c8" visible="false">
+                          <af:outputText value="#{row.MEM_POLM_CODE}" id="ot2"/>
+                        </af:column>
+                        <af:column sortProperty="MEM_POLM_MEM_NO"
+                                   sortable="true" headerText="Member No."
+                                   id="c3">
+                          <af:outputText value="#{row.MEM_POLM_MEM_NO}"
+                                         id="ot7"/>
+                        </af:column>
+                        <af:column sortProperty="MEM_MEMBER_DISPLAY"
+                                   sortable="true" headerText="Name" id="c2"
+                                   width="200">
+                          <af:outputText value="#{row.MEM_MEMBER_DISPLAY}"
+                                         id="ot5"/>
+                        </af:column>
+                        <af:column sortProperty="DTY_DESCRIPTION"
+                                   sortable="true" headerText="Dependant Type"
+                                   id="c6">
+                          <af:outputText value="#{row.DTY_DESCRIPTION}"
+                                         id="ot6"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_EARNINGS" sortable="true"
+                                   headerText="Earnings Amount" id="c5"
+                                   width="150">
+                          <af:inputNumberSpinbox label="#{bindings.members1.hints.PCM_EARNINGS.label}" id="ins1"
+                                                 value="#{row.bindings.PCM_EARNINGS.inputValue}"
+                                                 simple="true"
+                                                 required="#{bindings.members1.hints.PCM_EARNINGS.mandatory}"
+                                                 binding="#{endorseBean.earningsAmount}"
+                                                 converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_MULT_EARNINGS_PRD"
+                                   sortable="true" headerText="Period" id="c7">
+                          <af:inputNumberSpinbox label="#{bindings.members1.hints.PCM_MULT_EARNINGS_PRD.label}"
+                                                 id="inputNumberSpinbox1"
+                                                 value="#{row.bindings.PCM_MULT_EARNINGS_PRD.inputValue}"
+                                                 simple="true"
+                                                 required="#{bindings.members1.hints.PCM_MULT_EARNINGS_PRD.mandatory}"
+                                                 binding="#{endorseBean.earningsPrd}"
+                                                 converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_LOAN_ISSUE_DATE"
+                                   sortable="true" headerText="Loan Issue Date"
+                                   id="c4" visible="#{Rendering.loansProduct}">
+                          <af:inputDate value="#{row.bindings.PCM_LOAN_ISSUE_DATE.inputValue}"
+                                        label="#{bindings.members1.hints.PCM_LOAN_ISSUE_DATE.label}"
+                                        required="#{bindings.members1.hints.PCM_LOAN_ISSUE_DATE.mandatory}"
+                                        shortDesc="#{bindings.members1.hints.PCM_LOAN_ISSUE_DATE.tooltip}"
+                                        id="id1" simple="true"
+                                        binding="#{endorseBean.loanIssueDate}">
+                            <f:validator binding="#{row.bindings.PCM_LOAN_ISSUE_DATE.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.members1.hints.PCM_LOAN_ISSUE_DATE.format}"/>
+                          </af:inputDate>
+                        </af:column>
+                        <af:column sortProperty="PCM_SAVING_AMT" sortable="true"
+                                   headerText="Savings Amount" id="c1"
+                                   visible="#{Rendering.loansProduct}">
+                          <af:inputNumberSpinbox label="#{bindings.members1.hints.PCM_SAVING_AMT.label}"
+                                                 id="inputNumberSpinbox2"
+                                                 value="#{row.bindings.PCM_SAVING_AMT.inputValue}"
+                                                 simple="true"
+                                                 required="#{bindings.members1.hints.PCM_SAVING_AMT.mandatory}"
+                                                 binding="#{endorseBean.savingsAmount}"
+                                                 converter="javax.faces.Number"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

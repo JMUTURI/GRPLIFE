@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Group Life | Education Classes">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout layout="scroll" id="pgl2">
+              <af:panelAccordion id="pa1"
+                                 inlineStyle="width:100%; height:350.0px;">
+                <af:showDetailItem text="School Classes Definition" id="sdi6">
+                  <af:panelGroupLayout id="pgl3">
+                    <af:panelSplitter id="ps2"
+                                      inlineStyle="width:100%; height:330.0px;">
+                      <f:facet name="first">
+                        <af:panelBox text="Products" id="pb2">
+                          <f:facet name="toolbar"/>
+                          <af:tree value="#{bindings.Setup1.treeModel}"
+                                   var="node"
+                                   selectionListener="#{SetupBean.ProductSchClassesTreeListener}"
+                                   rowSelection="single" id="t8"
+                                   binding="#{SetupBean.classesTree}">
+                            <f:facet name="nodeStamp">
+                              <af:outputText value="#{node}" id="ot40"/>
+                            </f:facet>
+                          </af:tree>
+                        </af:panelBox>
+                      </f:facet>
+                      <f:facet name="second">
+                        <af:panelGroupLayout
+                                             xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                             id="pgl7" layout="scroll"
+                                             partialTriggers="t8">
+                          <af:panelTabbed id="pt1"
+                                          inlineStyle="width:100%;">
+                            <af:showDetailItem text="Product School Classes"
+                                               id="sdi1">
+                              <af:panelGroupLayout id="pgl5" layout="scroll">
+                                <af:panelBox text="Product School Classes"
+                                             id="pb3">
+                                  <f:facet name="toolbar"/>
+                                  <h:panelGrid columns="3" id="pg14">
+                                    <af:commandButton id="cb31"
+                                                      icon="/images/field_group_plus_ena.png"
+                                                      action="#{SetupBean.AddSchoolClass}"/>
+                                    <af:commandButton id="commandButton1"
+                                                      icon="/images/save.gif"
+                                                      action="#{SetupBean.SaveSchoolClass}"/>
+                                    <af:commandButton id="commandButton2"
+                                                      icon="/images/delete_ena.png"
+                                                      action="#{SetupBean.DeleteSchoolClass}"/>
+                                  </h:panelGrid>
+                                  <h:panelGrid columns="2" id="pg13">
+                                    <af:outputLabel value="School Level"
+                                                    id="outputLabel4"/>
+                                    <af:selectOneChoice value="#{bindings.classSchLevel.inputValue}"
+                                                        required="#{bindings.classSchLevel.hints.mandatory}"
+                                                        shortDesc="#{bindings.classSchLevel.hints.tooltip}"
+                                                        id="soc1"
+                                                        binding="#{SetupBean.classSchLevel}"
+                                                        label="#{bindings.classSchLevel.label}"
+                                                        simple="true">
+                                      <f:selectItems value="#{bindings.classSchLevel.items}"
+                                                     id="si2"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="Short Description"
+                                                    id="ol3"/>
+                                    <af:inputText label="Label 24" id="it25"
+                                                  simple="true"
+                                                  binding="#{SetupBean.shortDesc}"/>
+                                    <af:outputLabel value="Class"
+                                                    id="outputLabel1"/>
+                                    <af:inputText label="Label 25" id="it26"
+                                                  binding="#{SetupBean.desc}"
+                                                  simple="true"/>
+                                    <af:outputLabel value="Current Class"
+                                                    id="outputLabel5"/>
+                                    <af:inputText label="Label 29" id="it6"
+                                                  simple="true"
+                                                  binding="#{SetupBean.currentClass}"/>
+                                  </h:panelGrid>
+                                </af:panelBox>
+                              </af:panelGroupLayout>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="School Levels" id="sdi2">
+                              <af:panelGroupLayout id="pgl4">
+                                <af:panelBox text="School Levels" id="pb1"
+                                             inlineStyle="width:100%;">
+                                  <f:facet name="toolbar"/>
+                                  <af:table value="#{bindings.Setup.collectionModel}"
+                                            var="row"
+                                            rows="#{bindings.Setup.rangeSize}"
+                                            emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                            fetchSize="#{bindings.Setup.rangeSize}"
+                                            rowBandingInterval="0"
+                                            selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                                            selectionListener="#{SetupBean.schoolLevelListener}"
+                                            rowSelection="single" id="t1"
+                                            inlineStyle="width:100%; height:100px; border-style:none;"
+                                            binding="#{SetupBean.schoolLevels}">
+                                    <af:column sortProperty="SLVL_SHT_DESC"
+                                               sortable="true"
+                                               headerText="Short Description"
+                                               id="c1" width="200">
+                                      <af:outputText value="#{row.SLVL_SHT_DESC}"
+                                                     id="ot4"/>
+                                    </af:column>
+                                    <af:column sortProperty="SLVL_DESC"
+                                               sortable="true"
+                                               headerText="School Level" id="c3"
+                                               width="200">
+                                      <af:outputText value="#{row.SLVL_DESC}"
+                                                     id="ot2"/>
+                                    </af:column>
+                                    <af:column sortProperty="SLVL_PERIOD"
+                                               sortable="true"
+                                               headerText="Period (Years)" id="c2">
+                                      <af:outputText value="#{row.SLVL_PERIOD}"
+                                                     id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="SLVL_NO_TERMS"
+                                               sortable="false"
+                                               headerText="No of Terms in Year" id="c5">
+                                      <af:outputText value="#{row.SLVL_NO_TERMS}"
+                                                     id="ot5"/>
+                                    </af:column>
+                                    <af:column sortProperty="SLVL_TERM_DURATION"
+                                               sortable="false"
+                                               headerText="Term Duration (Months)"
+                                               id="c6">
+                                      <af:outputText value="#{row.SLVL_TERM_DURATION}"
+                                                     id="ot6"/>
+                                    </af:column>
+                                    <af:column sortProperty="SLVL_CODE"
+                                               sortable="false"
+                                               headerText="#{bindings.Setup.hints.SLVL_CODE.label}"
+                                               id="c4" visible="false">
+                                      <af:inputText value="#{row.bindings.SLVL_CODE.inputValue}"
+                                                    label="#{bindings.Setup.hints.SLVL_CODE.label}"
+                                                    required="#{bindings.Setup.hints.SLVL_CODE.mandatory}"
+                                                    columns="#{bindings.Setup.hints.SLVL_CODE.displayWidth}"
+                                                    maximumLength="#{bindings.Setup.hints.SLVL_CODE.precision}"
+                                                    shortDesc="#{bindings.Setup.hints.SLVL_CODE.tooltip}"
+                                                    id="it5">
+                                        <f:validator binding="#{row.bindings.SLVL_CODE.validator}"/>
+                                      </af:inputText>
+                                    </af:column>
+                                  </af:table>
+                                  <af:panelGroupLayout id="pgl6" layout="scroll"
+                                                       partialTriggers="t1"
+                                                       inlineStyle="width:100.0%;">
+                                    <h:panelGrid columns="3" id="panelGrid1">
+                                      <af:commandButton id="commandButton3"
+                                                        icon="/images/field_group_plus_ena.png"
+                                                        action="#{SetupBean.AddSchoollevel}"/>
+                                      <af:commandButton id="commandButton4"
+                                                        icon="/images/save.gif"
+                                                        action="#{SetupBean.SaveSchoolLevel}"/>
+                                      <af:commandButton id="commandButton5"
+                                                        icon="/images/delete_ena.png"
+                                                        action="#{SetupBean.DeleteSchoollevel}"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="4" id="pg2">
+                                      <af:outputLabel value="Short Description"
+                                                      id="ol1"/>
+                                      <af:inputText label="Label 26" id="it1"
+                                                    simple="true"
+                                                    binding="#{SetupBean.levelShtDesc}"/>
+                                      <af:outputLabel value="School Level"
+                                                      id="outputLabel2"/>
+                                      <af:inputText label="Label 27" id="it2"
+                                                    simple="true"
+                                                    binding="#{SetupBean.levelDesc}"/>
+                                      <af:outputLabel value="Total Period(Yrs)"
+                                                      id="outputLabel3"/>
+                                      <af:inputText label="Label 28" id="it4"
+                                                    simple="true"
+                                                    binding="#{SetupBean.levelPeriod}"/>
+                                      <af:outputLabel value="No of Terms in Year"
+                                                      id="outputLabel6"/>
+                                      <af:inputText label="Label 28"
+                                                    id="inputText1"
+                                                    simple="true"
+                                                    binding="#{SetupBean.levelTerms}"/>
+                                      <af:outputLabel value="Term Duration (Months)"
+                                                      id="outputLabel7"/>
+                                      <af:inputText label="Label 28"
+                                                    id="inputText2"
+                                                    simple="true"
+                                                    binding="#{SetupBean.levelTermDuration}"/>
+                                    </h:panelGrid>
+                                  </af:panelGroupLayout>
+                                </af:panelBox>
+                              </af:panelGroupLayout>
+                            </af:showDetailItem>
+                          </af:panelTabbed>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                    </af:panelSplitter>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <h:panelGrid columns="2" id="pg1">
+                      <af:inputText id="it3" simple="false"
+                                    helpTopicId="LmsGrp_pencfac"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si1"/>
+                    </h:panelGrid>
+                  </f:facet>
+                </af:showDetailItem>
+              </af:panelAccordion>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

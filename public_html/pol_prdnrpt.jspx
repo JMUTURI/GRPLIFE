@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="Policy Transactions Listing">
+   <af:messages id="m1"/>
+   <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+                     id="lmsgroup">
+      <f:attribute name="documentTitle" value="TurnQuest LMS"/>
+      <f:attribute name="mode" value="index"/>
+      <f:facet name="auxiliaryGlobal">
+          <af:group id="g1">
+            <af:panelGroupLayout layout="scroll" id="pgl1">
+              <af:outputText value="Global Layer" id="ot1"/>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      <f:facet name="center">
+       <af:panelGroupLayout layout="scroll" id="pgl2">
+      <af:outputLabel value="Policy Transactions Listing" id="ol1"
+                      inlineStyle="font-weight:bold;"/>
+      <af:separator id="s1" inlineStyle="width:99.0%;"/>
+      <h:panelGrid columns="3" id="pg1">
+       <af:outputLabel value="Product" id="ol2"/>
+       <af:inputText label="Label 1" id="it1" simple="true"
+                     binding="#{CoreReports.polProductsDesc}"/>
+       <h:panelGrid columns="2" id="pg2">
+        <af:commandButton id="cb1" icon="/images/dropdown.gif"
+                          action="#{CoreReports.ShowProductionProducts}"/>
+        <af:popup id="prodnProductsPopup">
+         <af:dialog id="d2" type="none" title="Select Products">
+          <af:table value="#{bindings.Setup.collectionModel}" var="row"
+                    rows="#{bindings.Setup.rangeSize}"
+                    emptyText="#{bindings.Setup.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.Setup.rangeSize}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.Setup.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.Setup.collectionModel.makeCurrent}"
+                    rowSelection="single" id="t1"
+                    binding="#{CoreReports.prodnProductsLOV}">
+           <af:column sortProperty="PROD_CODE" sortable="true"
+                      headerText="#{bindings.Setup.hints.PROD_CODE.label}"
+                      id="c4" visible="false">
+            <af:outputText value="#{row.PROD_CODE}" id="ot3"/>
+           </af:column>
+           <af:column sortProperty="PROD_SHT_DESC" sortable="true"
+                      headerText="ID" id="c1">
+            <af:outputText value="#{row.PROD_SHT_DESC}" id="ot4"/>
+           </af:column>
+           <af:column sortProperty="PROD_DESC" sortable="true"
+                      headerText="DESCRIPTION" id="c2">
+            <af:outputText value="#{row.PROD_DESC}" id="ot2"/>
+           </af:column>
+           <af:column sortProperty="PROD_TYPE" sortable="true" headerText="TYPE"
+                      id="c3">
+            <af:outputText value="#{row.PROD_TYPE}" id="ot5"/>
+           </af:column>
+          </af:table>
+          <af:commandButton text="OK" id="cb2"
+                            action="#{CoreReports.AssignProductionProducts}"/>
+          <af:commandButton text="Cancel" id="cb3"/>
+         </af:dialog>
+        </af:popup>
+       </h:panelGrid>
+       <af:outputLabel value="Policy" id="ol4"/>
+       <af:inputText label="Label 2" id="it2" simple="true"
+                     binding="#{CoreReports.productionPolicy}" rendered="true"/>
+       <h:panelGrid columns="3" id="pg3">
+        <af:commandButton id="cb4" icon="/images/dropdown.gif"
+                          action="#{CoreReports.ShowProdctionPolicies}"
+                          binding="#{CoreReports.policiesBtn}"
+                          rendered="true"/>
+        <af:popup id="productionPolicies">
+         <af:dialog id="d3" type="none" title="Select Policy">
+          <af:table value="#{bindings.policies.collectionModel}" var="row"
+                    rows="#{bindings.policies.rangeSize}"
+                    emptyText="#{bindings.policies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.policies.rangeSize}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                    rowSelection="single" id="t2"
+                    binding="#{CoreReports.prodctionPoliciesLOV}">
+           <af:column sortProperty="POL_CODE" sortable="true"
+                      headerText="#{bindings.policies.hints.POL_CODE.label}"
+                      id="c7" visible="false">
+            <af:outputText value="#{row.POL_CODE}" id="ot7"/>
+           </af:column>
+           <af:column sortProperty="CLIENT_DISPLAY" sortable="true"
+                      headerText="CLIENT" id="c6">
+            <af:outputText value="#{row.CLIENT_DISPLAY}" id="ot6"/>
+           </af:column>
+           <af:column sortProperty="POL_POLICY_NO" sortable="true"
+                      headerText="POLICY NUMBER" id="c8">
+            <af:outputText value="#{row.POL_POLICY_NO}" id="ot9"/>
+           </af:column>
+           <af:column sortProperty="UW_YEAR" sortable="true"
+                      headerText="UNDERWRITING YEAR" id="c5">
+            <af:outputText value="#{row.UW_YEAR}" id="ot8"/>
+           </af:column>
+          </af:table>
+          <af:commandButton text="OK" id="cb5"
+                            action="#{CoreReports.AssignProductionPolicies}"/>
+          <af:commandButton text="Cancel" id="cb6"/>
+         </af:dialog>
+        </af:popup>
+       </h:panelGrid>
+       <af:outputLabel value="Transactions" id="ol3"/>
+       <af:inputText label="Label 3" id="it3" simple="true"
+                     binding="#{CoreReports.productionTransactions}"
+                     rendered="true"/>
+       <h:panelGrid columns="2" id="pg5">
+        <af:commandButton id="cb7" icon="/images/dropdown.gif"
+                          binding="#{CoreReports.transactionsBtn}"
+                          rendered="true"
+                          action="#{CoreReports.ShowProductionTransactions}"/>
+        <af:popup id="prodnTransactionsPopup">
+         <af:dialog id="d4" type="none" title="Select Transactions">
+          <af:table value="#{bindings.Setup1.collectionModel}" var="row"
+                    rows="#{bindings.Setup1.rangeSize}"
+                    emptyText="#{bindings.Setup1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.Setup1.rangeSize}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.Setup1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.Setup1.collectionModel.makeCurrent}"
+                    rowSelection="single" id="t3"
+                    binding="#{CoreReports.productionTransactionsLOV}">
+           <af:column sortProperty="BTR_TRANS_CODE" sortable="true"
+                      headerText="ID" id="c9">
+            <af:outputText value="#{row.BTR_TRANS_CODE}" id="ot11"/>
+           </af:column>
+           <af:column sortProperty="BTR_TRANS_TYPE" sortable="true"
+                      headerText="DESCRIPTION" id="c10">
+            <af:outputText value="#{row.BTR_TRANS_TYPE}" id="ot10"/>
+           </af:column>
+          </af:table>
+          <af:commandButton text="OK" id="cb8"
+                            action="#{CoreReports.AssignProductionTransactions}"/>
+          <af:commandButton text="Cancel" id="cb9"/>
+         </af:dialog>
+        </af:popup>
+       </h:panelGrid>
+       <af:commandButton text="Run Report" id="cb10"
+                         action="#{CoreReports.RunProductionReport}"/>
+      </h:panelGrid>
+     </af:panelGroupLayout>
+         
+       
+      </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

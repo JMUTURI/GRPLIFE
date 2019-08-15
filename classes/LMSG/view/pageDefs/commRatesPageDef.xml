@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.54.7" id="commRatesPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findAccountTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findAccountTypesIterator"/>
+    <searchRegion Binds="findAccountTypesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup2Query"/>
+    <methodIterator Binds="findAccountRates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findAccountRatesIterator"/>
+    <methodIterator Binds="findCommissionRates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findCommissionRatesIterator"/>
+    <methodIterator Binds="findPensionCommissionRates.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findPensionCommissionRatesIterator"/>
+    <methodIterator Binds="findCommissionAnnualisation.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findCommissionAnnualisationIterator"/>
+    <methodIterator Binds="findClawBackRates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findClawBackRatesIterator"/>
+    <methodIterator Binds="findinterfacePayElements.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findinterfacePayElementsIterator"/>
+    <methodIterator Binds="findAgentBonusRates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findAgentBonusRatesIterator"/>
+    <methodIterator Binds="findAgentRecoveryRates.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findAgentRecoveryRatesIterator"/>
+    <methodIterator Binds="findCommissionAllowances.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findCommissionAllowancesIterator"/>
+    <methodIterator Binds="FindSysDate.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSysDateIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findClassesofBusiness" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClassesofBusiness"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findClassesofBusiness_SetupsDAO_dataProvider_findClassesofBusiness_result"/>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <methodAction id="findAccountTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAccountTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findAccountTypes_SetupsDAO_dataProvider_findAccountTypes_result"/>
+    <tree IterBinding="findAccountTypesIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="ACT_TYPE_SHT_DESC"/>
+          <Item Value="ACT_ACCOUNT_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAccountRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAccountRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findAccountRates_SetupsDAO_dataProvider_findAccountRates_result"/>
+    <tree IterBinding="findAccountRatesIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="ATR_TYPE_DESC"/>
+          <Item Value="ATR_SHT_DESC"/>
+          <Item Value="ATR_DESC"/>
+          <Item Value="ATR_WEF"/>
+          <Item Value="ATR_WET"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCommissionRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCommissionRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findCommissionRates_SetupsDAO_dataProvider_findCommissionRates_result"/>
+    <tree IterBinding="findCommissionRatesIterator" id="Setup4">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup40">
+        <AttrNames>
+          <Item Value="CRAT_RANGE_FROM"/>
+          <Item Value="CRAT_RANGE_TO"/>
+          <Item Value="CRAT_RATE"/>
+          <Item Value="CRAT_RATE_DESC"/>
+          <Item Value="CRAT_DIVISION_FACTOR"/>
+          <Item Value="CRAT_RATE_TYPE"/>
+          <Item Value="CRAT_TERM_FROM"/>
+          <Item Value="CRAT_TERM_TO"/>
+          <Item Value="CRAT_YR_NO_FROM"/>
+          <Item Value="CRAT_YR_NO_TO"/>
+          <Item Value="CRAT_WEF_DATE"/>
+          <Item Value="CRAT_WET_DATE"/>
+          <Item Value="CRAT_ANB_FROM"/>
+          <Item Value="CRAT_ANB_TO"/>
+          <Item Value="CRAT_MATURITY_AGE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPensionCommissionRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionCommissionRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findPensionCommissionRates_SetupsDAO_dataProvider_findPensionCommissionRates_result"/>
+    <tree IterBinding="findPensionCommissionRatesIterator" id="Setup5">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup50">
+        <AttrNames>
+          <Item Value="CRAT_RANGE_FROM"/>
+          <Item Value="CRAT_RANGE_TO"/>
+          <Item Value="CRAT_RATE"/>
+          <Item Value="CRAT_RATE_DESC"/>
+          <Item Value="CRAT_DIVISION_FACTOR"/>
+          <Item Value="CRAT_RATE_TYPE"/>
+          <Item Value="CRAT_TERM_FROM"/>
+          <Item Value="CRAT_TERM_TO"/>
+          <Item Value="CRAT_YR_NO_FROM"/>
+          <Item Value="CRAT_WEF_DATE"/>
+          <Item Value="CRAT_WET_DATE"/>
+          <Item Value="CRAT_YR_NO_TO"/>
+          <Item Value="CRAT_ANB_FROM"/>
+          <Item Value="CRAT_ANB_TO"/>
+          <Item Value="CRAT_MATURITY_AGE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCommissionAnnualisation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCommissionAnnualisation"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findCommissionAnnualisation_SetupsDAO_dataProvider_findCommissionAnnualisation_result"/>
+    <tree IterBinding="findCommissionAnnualisationIterator" id="Setup6">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup60">
+        <AttrNames>
+          <Item Value="ACR_ANN_RATE"/>
+          <Item Value="ACR_ANN_BAL_RATE"/>
+          <Item Value="ACR_ANN_ANNUALISATION_DURATION"/>
+          <Item Value="ACR_ANN_BAL_PYMT_MNTH"/>
+          <Item Value="ACR_WEF_DATE"/>
+          <Item Value="ACR_WET_DATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findClawBackRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClawBackRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findClawBackRates_SetupsDAO_dataProvider_findClawBackRates_result"/>
+    <tree IterBinding="findClawBackRatesIterator" id="Setup7">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup70">
+        <AttrNames>
+          <Item Value="CCLR_MNTH_FROM"/>
+          <Item Value="CCLR_MNTH_TO"/>
+          <Item Value="CCLR_CLAWBCK_RATE"/>
+          <Item Value="CCLR_CLAWBCK_RATE_TYPE"/>
+          <Item Value="CCLR_CLAWBCK_DIV_FACT"/>
+          <Item Value="CCLR_WET_DATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findinterfacePayElements" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findinterfacePayElements"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findinterfacePayElements_SetupsDAO_dataProvider_findinterfacePayElements_result"/>
+    <tree IterBinding="findinterfacePayElementsIterator" id="Setup8">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup80">
+        <AttrNames>
+          <Item Value="CPE_PAY_ELEMENT"/>
+          <Item Value="CPE_CR"/>
+          <Item Value="CPE_DR"/>
+          <Item Value="CPE_WEF"/>
+          <Item Value="CPE_WET"/>
+          <Item Value="CPE_RATE"/>
+          <Item Value="CPE_RATE_DIV_FACTOR"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAgentBonusRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAgentBonusRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findAgentBonusRates_SetupsDAO_dataProvider_findAgentBonusRates_result"/>
+    <tree IterBinding="findAgentBonusRatesIterator" id="Setup9">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup90">
+        <AttrNames>
+          <Item Value="BRAT_PERSISTENCY_FROM"/>
+          <Item Value="BRAT_PERSISTENCY_TO"/>
+          <Item Value="BRAT_MNTH_FROM"/>
+          <Item Value="BRAT_MNTH_TO"/>
+          <Item Value="BRAT_CALC_PERIOD"/>
+          <Item Value="BRAT_BONUS_RATE"/>
+          <Item Value="BRAT_BONUS_RATE_TYPE"/>
+          <Item Value="BRAT_WEF_DATE"/>
+          <Item Value="BRAT_WET_DATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAgentRecoveryRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAgentRecoveryRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findAgentRecoveryRates_SetupsDAO_dataProvider_findAgentRecoveryRates_result"/>
+    <tree IterBinding="findAgentRecoveryRatesIterator" id="Setup10">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup100">
+        <AttrNames>
+          <Item Value="APR_INTEREST_RATE"/>
+          <Item Value="APR_INTEREST_DIV_FAC"/>
+          <Item Value="APR_COMM_RECVRY_PECT"/>
+          <Item Value="APR_COMM_RECVRY_DIV_FAC"/>
+          <Item Value="APR_MIN_ADV_ALLOWED"/>
+          <Item Value="APR_COMM_PAYBLE_PECT"/>
+          <Item Value="APR_COMM_PAYBLE_DIV_FAC"/>
+          <Item Value="APR_ADV_CALC_RANGE_FROM"/>
+          <Item Value="APR_ADV_CALC_RANGE_TO"/>
+          <Item Value="APR_AVER_SUM_GROSS_COMM"/>
+          <Item Value="APR_GROSS_COMM_PERIOD"/>
+          <Item Value="WEF"/>
+          <Item Value="WET"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCommissionAllowances" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCommissionAllowances"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findCommissionAllowances_SetupsDAO_dataProvider_findCommissionAllowances_result"/>
+    <tree IterBinding="findCommissionAllowancesIterator" id="Setup11">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup110">
+        <AttrNames>
+          <Item Value="CAL_ALLOWANCE_TYPE"/>
+          <Item Value="CAL_DESC"/>
+          <Item Value="CAL_ALLOWANCE_RATE"/>
+          <Item Value="CAL_ALLOWANCE_DIV_FAC"/>
+          <Item Value="CAL_WEF"/>
+          <Item Value="CAL_WET"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindSysDate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSysDate"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSysDate_SettingsDAO_dataProvider_FindSysDate_result"/>
+    <attributeValues IterBinding="FindSysDateIterator" id="sysDate">
+      <AttrNames>
+        <Item Value="sysDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="findProductsIterator" id="Setup12">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup120">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

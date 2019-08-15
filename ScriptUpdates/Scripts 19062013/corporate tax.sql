@@ -1,0 +1,12 @@
+ALTER  table lms_pension_balances_periods
+ADD(
+PNBALP_NON_REG_AMT_INT NUMBER;
+
+);
+
+
+ALTER  table LMS_PENSION_BALANCES
+ADD(
+PNBAL_UNREG_INT_AMT NUMBER;
+
+);

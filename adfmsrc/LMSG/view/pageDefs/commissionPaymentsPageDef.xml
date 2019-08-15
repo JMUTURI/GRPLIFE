@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="commissionPaymentsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findReceiptedPolicies.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findReceiptedPoliciesIterator"/>
+    <searchRegion Binds="findReceiptedPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AccountQuery"/>
+    <methodIterator Binds="findCommissionPayments.result"
+                    DataControl="AccountDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Accounts.Account"
+                    id="findCommissionPaymentsIterator"/>
+    <searchRegion Binds="findCommissionPaymentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Account1Query"/>
+    <methodIterator Binds="FindAgents.result" DataControl="agentsDAO"
+                    RangeSize="25"
+                    BeanClass="LMSG.view.QuotationProcessing.agents"
+                    id="FindAgentsIterator"/>
+    <searchRegion Binds="FindAgentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="agentsQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="findReceiptedPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findReceiptedPolicies"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findReceiptedPolicies_AccountDAO_dataProvider_findReceiptedPolicies_result"/>
+    <tree IterBinding="findReceiptedPoliciesIterator" id="Account">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account0">
+        <AttrNames>
+          <Item Value="pol_code"/>
+          <Item Value="pol_policy_no"/>
+          <Item Value="inst_no"/>
+          <Item Value="opr_receipt_date"/>
+          <Item Value="inst_amt"/>
+          <Item Value="comm_rate"/>
+          <Item Value="comm_amt"/>
+          <Item Value="whdtax_rate"/>
+          <Item Value="whdtax_amt"/>
+          <Item Value="tot_comm_display"/>
+          <Item Value="drcr"/>
+          <Item Value="MTRAN_REF_NO"/>
+          <Item Value="opr_receipt_no"/>
+          <Item Value="grct_code"/>
+          <Item Value="selected"/>
+          <Item Value="pcp_code"/>
+          <Item Value="MTRAN_DATE"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="v_empye_loan_repay"/>
+          <Item Value="CCL_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCommissionPayments" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCommissionPayments"
+                  IsViewObjectMethod="false" DataControl="AccountDAO"
+                  InstanceName="AccountDAO.dataProvider"
+                  ReturnName="AccountDAO.methodResults.findCommissionPayments_AccountDAO_dataProvider_findCommissionPayments_result"/>
+    <tree IterBinding="findCommissionPaymentsIterator" id="Account1">
+      <nodeDefinition DefName="LMSG.view.Accounts.Account" Name="Account10">
+        <AttrNames>
+          <Item Value="COP_CODE"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="COP_AGN_UNIT_MGR"/>
+          <Item Value="BRN_NAME"/>
+          <Item Value="COP_COMM_AMT"/>
+          <Item Value="COP_WHDTAX_AMT"/>
+          <Item Value="COP_OVRIDE_COMM_AMT"/>
+          <Item Value="COP_OVRIDE_WHDTAX_AMT"/>
+          <Item Value="COP_ADVANCE_PYMT"/>
+          <Item Value="COP_DEDUCTIONS"/>
+          <Item Value="COP_BONUS_AMT"/>
+          <Item Value="COP_BONUS_WHDTAX_AMT"/>
+          <Item Value="TOTAL_AMT_DISPLAY"/>
+          <Item Value="COP_DRCR"/>
+          <Item Value="MTRAN_REF_NO"/>
+          <Item Value="selected"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindAgents"
+                  IsViewObjectMethod="false" DataControl="agentsDAO"
+                  InstanceName="agentsDAO.dataProvider"
+                  ReturnName="agentsDAO.methodResults.FindAgents_agentsDAO_dataProvider_FindAgents_result"/>
+    <tree IterBinding="FindAgentsIterator" id="agents">
+      <nodeDefinition DefName="LMSG.view.QuotationProcessing.agents"
+                      Name="agents0">
+        <AttrNames>
+          <Item Value="AGN_SHT_DESC"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="AGN_POSTAL_ADDRESS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

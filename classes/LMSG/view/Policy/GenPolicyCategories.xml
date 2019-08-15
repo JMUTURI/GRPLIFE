@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="GenPolicyCategories" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.GenPolicyCategories" isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.quotCategory"
+                  BeanClass="LMSG.view.QuotationProcessing.quotCategory"
+                  id="findCategory" ReturnNodeName="quotCategory"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true"
+                  Type="LMSG.view.QuotationProcessing.quotCategory"
+                  BeanClass="LMSG.view.QuotationProcessing.quotCategory"
+                  id="findPolicyClassTermLimits" ReturnNodeName="quotCategory"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Policy.GenPolicyCategories"
+                     BeanClass="LMSG.view.Policy.GenPolicyCategories"
+                     id="GenPolicyCategories"/>
+</JavaBean>

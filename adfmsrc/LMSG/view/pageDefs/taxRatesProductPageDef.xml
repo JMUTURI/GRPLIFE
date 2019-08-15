@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="taxRatesProductPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findTaxRates.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findTaxRatesIterator"/>
+    <methodIterator Binds="findAllProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findAllProductsIterator"/>
+    <methodIterator Binds="findTaxTypesbyAppLevel.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findTaxTypesbyAppLevelIterator"/>
+    <searchRegion Binds="findTaxTypesbyAppLevelIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup3Query"/>
+    <methodIterator Binds="findCausations.result" DataControl="causationsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.causations"
+                    id="findCausationsIterator"/>
+    <searchRegion Binds="findCausationsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="causationsQuery"/>
+    <methodIterator Binds="findAllProductsAndCoverTypes.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findAllProductsAndCoverTypesIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="findTaxTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTaxTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTaxTypes_SetupsDAO_dataProvider_findTaxTypes_result"/>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <methodAction id="findTaxRates" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTaxRates"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTaxRates_SetupsDAO_dataProvider_findTaxRates_result"/>
+    <tree IterBinding="findTaxRatesIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="TRT_RANGE_FROM"/>
+          <Item Value="TRT_RANGE_TO"/>
+          <Item Value="TRT_AGE_FROM"/>
+          <Item Value="TRT_AGE_TO"/>
+          <Item Value="TRT_RATE"/>
+          <Item Value="TRT_DIVISION_FACTOR"/>
+          <Item Value="TRT_RATE_TYPE_DESC"/>
+          <Item Value="TRT_APPLIED_TO_DESC"/>
+          <Item Value="TRT_APPLICATION_FREQ_DESC"/>
+          <Item Value="TRT_TAX_DURATION"/>
+          <Item Value="CVT_DESC"/>
+          <Item Value="TRT_WEF_DATE"/>
+          <Item Value="TRT_WET_DATE"/>
+          <Item Value="CLA_CODE"/>
+          <Item Value="TRT_YRS_OF_SERVICE"/>
+          <Item Value="CLA_SHT_DESC"/>
+          <Item Value="CAUS_DESC"/>
+          <Item Value="TRT_YRS_OF_SERVICE_FROM"/>
+          <Item Value="TRT_YRS_OF_SERVICE_TO"/>
+          <Item Value="TRT_APPLICABLE_AT_CAUS"/>
+          <Item Value="TRT_APPLIED_ON"/>
+          <Item Value="TRT_APPLIED_ON_DESC"/>
+          
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAllProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findAllProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findAllProducts_SetupsDAO_dataProvider_findAllProducts_result"/>
+    <methodAction id="FindSysDate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSysDate"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSysDate_SettingsDAO_dataProvider_FindSysDate_result"/>
+    <tree IterBinding="findAllProductsIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTaxTypesbyAppLevel" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTaxTypesbyAppLevel"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findTaxTypesbyAppLevel_SetupsDAO_dataProvider_findTaxTypesbyAppLevel_result"/>
+    <tree IterBinding="findTaxTypesbyAppLevelIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="TT_SHT_DESC"/>
+          <Item Value="TT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findCausations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findCausations"
+                  IsViewObjectMethod="false" DataControl="causationsDAO"
+                  InstanceName="causationsDAO.dataProvider"
+                  ReturnName="data.causationsDAO.methodResults.findCausations_causationsDAO_dataProvider_findCausations_result"/>
+    <tree IterBinding="findCausationsIterator" id="causations">
+      <nodeDefinition DefName="com.turnkey.setups.causations"
+                      Name="causations0">
+        <AttrNames>
+          <Item Value="causShtdesc"/>
+          <Item Value="causDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAllProductsAndCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findAllProductsAndCoverTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="data.SetupsDAO.methodResults.findAllProductsAndCoverTypes_SetupsDAO_dataProvider_findAllProductsAndCoverTypes_result"/>
+    <tree IterBinding="findAllProductsAndCoverTypesIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="pctItem"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.turnkey.setups.ProductCoverTypes"
+                      Name="Setup1">
+        <AttrNames>
+          <Item Value="PCT_CVT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

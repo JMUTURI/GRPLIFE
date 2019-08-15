@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.51.88"
+          id="PolicyRecptInstlmnts" Package="LMSG.view.Policy"
+          BeanClass="LMSG.view.Policy.PolicyRecptInstlmnts" isJavaBased="true">
+  <Attribute Name="GRCI_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCI_INSTLMT_NO" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCI_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCI_COMM_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCI_COMM_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCI_CHK_COMM_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCI_CHK_COMM_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCI_PREM_TAX_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="GRCI_PREM_TAX_AMT" Type="java.math.BigDecimal"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="LMSG.view.Policy.PolicyRecptInstlmnts"
+                     BeanClass="LMSG.view.Policy.PolicyRecptInstlmnts"
+                     id="PolicyRecptInstlmnts"/>
+</JavaBean>

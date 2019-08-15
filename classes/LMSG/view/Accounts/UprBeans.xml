@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.59.23"
+          id="UprBeans" Package="LMSG.view.Accounts"
+          BeanClass="LMSG.view.Accounts.UprBeans" isJavaBased="true">
+  <Attribute Name="utrans_code" Type="java.math.BigDecimal"/>
+  <Attribute Name="utrans_year" Type="java.math.BigDecimal"/>
+  <Attribute Name="utrans_month" Type="java.math.BigDecimal"/>
+  <Attribute Name="monthName" Type="java.lang.String"/>
+  <Attribute Name="type" Type="java.lang.String"/>
+  <ConstructorMethod IsCollection="true" Type="LMSG.view.Accounts.UprBeans"
+                     BeanClass="LMSG.view.Accounts.UprBeans" id="UprBeans"/>
+</JavaBean>

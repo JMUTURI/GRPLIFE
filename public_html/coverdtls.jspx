@@ -1,0 +1,2358 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Group Life | Member Cover Details" id="d3">
+      <af:messages id="m2"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:popup id="users">
+              <af:dialog id="dialog12" type="none"
+                         title="Users To Assign the Next Task">
+                <af:table value="#{bindings.workflow.collectionModel}" var="row"
+                          rows="#{bindings.workflow.rangeSize}"
+                          emptyText="#{bindings.workflow.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.workflow.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.workflowQuery.queryDescriptor}"
+                          queryListener="#{bindings.workflowQuery.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.workflow.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.workflow.collectionModel.makeCurrent}"
+                          rowSelection="single" id="table4" width="410"
+                          binding="#{polManipulation.usersLOV}">
+                  <af:column sortProperty="taskUserID" filterable="true"
+                             sortable="true" headerText="ID" id="column14">
+                    <af:outputText value="#{row.taskUserID}" id="outputText43"/>
+                  </af:column>
+                  <af:column sortProperty="taskUserShtDesc" filterable="true"
+                             sortable="true" headerText="User Short Desc"
+                             id="column15">
+                    <af:outputText value="#{row.taskUserShtDesc}"
+                                   id="outputText44"/>
+                  </af:column>
+                  <af:column sortProperty="taskUserDesc" filterable="true"
+                             sortable="true" headerText="User Name"
+                             id="column16" width="200">
+                    <af:outputText value="#{row.taskUserDesc}"
+                                   id="outputText45"/>
+                  </af:column>
+                </af:table>
+                <h:panelGrid columns="2" id="panelGrid26">
+                  <af:commandButton text="OK" id="commandButton49"
+                                    action="#{polManipulation.AssignTask}"/>
+                  <af:commandButton text="Cancel" id="commandButton50"
+                                    action="#{polManipulation.GetAssignee}"/>
+                </h:panelGrid>
+              </af:dialog>
+            </af:popup>
+            <af:panelAccordion id="pa1"
+                               inlineStyle="width:100%; height:720.0px;">
+              <af:showDetailItem text="Underwriting Member Cover Details"
+                                 id="sdi5">
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                  <af:panelBox text="Policy Premium Computation Details"
+                               id="pb1">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="6" id="pg7">
+                      <af:outputLabel value="Policy Number"
+                                      inlineStyle="font-weight:bold;" id="ol1"/>
+                      <af:inputText simple="true"
+                                    value="#{bindings.POL_POLICY_NO.inputValue}"
+                                    required="#{bindings.POL_POLICY_NO.hints.mandatory}"
+                                    maximumLength="#{bindings.POL_POLICY_NO.hints.precision}"
+                                    disabled="true" id="coverPolPolicyNo">
+                        <f:validator binding="#{bindings.POL_POLICY_NO.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="Client"
+                                      inlineStyle="font-weight:bold;" id="ol2"/>
+                      <af:inputText label="#{bindings.CLIENT_DISPLAY.hints.label}"
+                                    disabled="true" simple="true"
+                                    value="#{bindings.CLIENT_DISPLAY.inputValue}"
+                                    required="#{bindings.CLIENT_DISPLAY.hints.mandatory}"
+                                    columns="#{bindings.CLIENT_DISPLAY.hints.displayWidth}"
+                                    maximumLength="#{bindings.CLIENT_DISPLAY.hints.precision}"
+                                    id="it1">
+                        <f:validator binding="#{bindings.CLIENT_DISPLAY.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="Product ID"
+                                      inlineStyle="font-weight:bold;" id="ol3"/>
+                      <af:inputText label="#{bindings.POL_PROD_SHT_DESC.hints.label}"
+                                    disabled="true" simple="true"
+                                    value="#{bindings.POL_PROD_SHT_DESC.inputValue}"
+                                    required="#{bindings.POL_PROD_SHT_DESC.hints.mandatory}"
+                                    maximumLength="#{bindings.POL_PROD_SHT_DESC.hints.precision}"
+                                    id="it2">
+                        <f:validator binding="#{bindings.POL_PROD_SHT_DESC.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="Branch"
+                                      inlineStyle="font-weight:bold;" id="ol4"/>
+                      <af:inputText label="#{bindings.BRANCH_DISPLAY.hints.label}"
+                                    disabled="true" simple="true"
+                                    value="#{bindings.BRANCH_DISPLAY.inputValue}"
+                                    required="#{bindings.BRANCH_DISPLAY.hints.mandatory}"
+                                    maximumLength="#{bindings.BRANCH_DISPLAY.hints.precision}"
+                                    id="it3">
+                        <f:validator binding="#{bindings.BRANCH_DISPLAY.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="Inception Date"
+                                      inlineStyle="font-weight:bold;" id="ol5"/>
+                      <af:inputText label="#{bindings.POL_INCEPTION_DATE.hints.label}"
+                                    disabled="true" simple="true"
+                                    value="#{bindings.POL_INCEPTION_DATE.inputValue}"
+                                    required="#{bindings.POL_INCEPTION_DATE.hints.mandatory}"
+                                    maximumLength="#{bindings.POL_INCEPTION_DATE.hints.precision}"
+                                    id="it4">
+                        <f:validator binding="#{bindings.POL_INCEPTION_DATE.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.POL_INCEPTION_DATE.format}"/>
+                      </af:inputText>
+                      <af:outputLabel value="U/W Year"
+                                      inlineStyle="font-weight:bold;" id="ol6"/>
+                      <af:inputText label="#{bindings.UW_YEAR.hints.label}"
+                                    simple="true" disabled="true"
+                                    value="#{bindings.UW_YEAR.inputValue}"
+                                    required="#{bindings.UW_YEAR.hints.mandatory}"
+                                    maximumLength="#{bindings.UW_YEAR.hints.precision}"
+                                    id="it5">
+                        <f:validator binding="#{bindings.UW_YEAR.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="Date"
+                                      inlineStyle="font-weight:bold;" id="ol7"/>
+                      <af:inputText label="#{bindings.ENDR_EFFECTIVE_DATE.hints.label}"
+                                    simple="true" disabled="true"
+                                    value="#{bindings.ENDR_EFFECTIVE_DATE.inputValue}"
+                                    required="#{bindings.ENDR_EFFECTIVE_DATE.hints.mandatory}"
+                                    maximumLength="#{bindings.ENDR_EFFECTIVE_DATE.hints.precision}"
+                                    id="it6">
+                        <f:validator binding="#{bindings.ENDR_EFFECTIVE_DATE.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.ENDR_EFFECTIVE_DATE.format}"/>
+                      </af:inputText>
+                      <af:outputLabel value="SA" inlineStyle="font-weight:bold;"
+                                      id="ol8"/>
+                      <af:inputText label="#{bindings.ENDR_TOT_SA.hints.label}"
+                                    simple="true" disabled="true"
+                                    value="#{bindings.ENDR_TOT_SA.inputValue}"
+                                    required="#{bindings.ENDR_TOT_SA.hints.mandatory}"
+                                    maximumLength="#{bindings.ENDR_TOT_SA.hints.precision}"
+                                    converter="javax.faces.Number" id="it7"
+                                    binding="#{underwritingManipulation.endrSA2}">
+                        <f:validator binding="#{bindings.ENDR_TOT_SA.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="Endr No"
+                                      inlineStyle="font-weight:bold;" id="ol9"/>
+                      <af:inputText label="#{bindings.ENDR_NO.hints.label}"
+                                    simple="true"
+                                    value="#{bindings.ENDR_NO.inputValue}"
+                                    required="#{bindings.ENDR_NO.hints.mandatory}"
+                                    maximumLength="#{bindings.ENDR_NO.hints.precision}"
+                                    disabled="true" id="it8">
+                        <f:validator binding="#{bindings.ENDR_NO.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="Premium"
+                                      inlineStyle="font-weight:bold;"
+                                      id="ol10"/>
+                      <af:inputText label="#{bindings.ENDR_ADD_REF_PREM.hints.label}"
+                                    simple="true" autoSubmit="true"
+                                    value="#{bindings.ENDR_ADD_REF_PREM.inputValue}"
+                                    required="#{bindings.ENDR_ADD_REF_PREM.hints.mandatory}"
+                                    maximumLength="#{bindings.ENDR_ADD_REF_PREM.hints.precision}"
+                                    disabled="true"
+                                    converter="javax.faces.Number" id="it9"
+                                    binding="#{underwritingManipulation.premium2}">
+                        <f:validator binding="#{bindings.ENDR_ADD_REF_PREM.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="Sch No"
+                                      inlineStyle="font-weight:bold;"
+                                      id="ol11"/>
+                      <af:inputText label="Label 1" disabled="true"
+                                    simple="true" id="it10"/>
+                      <af:outputLabel value="Comm Amt"
+                                      inlineStyle="font-weight:bold;"
+                                      id="ol12"/>
+                      <af:inputText label="#{bindings.ENDR_COMM_AMT.hints.label}"
+                                    simple="true" disabled="true"
+                                    value="#{bindings.ENDR_COMM_AMT.inputValue}"
+                                    required="#{bindings.ENDR_COMM_AMT.hints.mandatory}"
+                                    maximumLength="#{bindings.ENDR_COMM_AMT.hints.precision}"
+                                    converter="javax.faces.Number" id="it11"
+                                    binding="#{underwritingManipulation.commAmt2}">
+                        <f:validator binding="#{bindings.ENDR_COMM_AMT.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="FCL Calc Type"
+                                      inlineStyle="font-weight:bold;"
+                                      id="outputLabel18"/>
+                      <af:inputText simple="true" disabled="true"
+                                    value="#{bindings.FCL_CALC_TYPE.inputValue}"
+                                    required="#{bindings.FCL_CALC_TYPE.hints.mandatory}"
+                                    maximumLength="#{bindings.FCL_CALC_TYPE.hints.precision}"
+                                    converter="javax.faces.Number"
+                                    id="inputText14"
+                                    columns="#{bindings.FCL_CALC_TYPE.hints.displayWidth}">
+                        <f:validator binding="#{bindings.FCL_CALC_TYPE.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="FCL Amount"
+                                      inlineStyle="font-weight:bold;"
+                                      id="outputLabel19"/>
+                      <af:inputText simple="true" disabled="true"
+                                    value="#{bindings.ENDR_FCL_AMT.inputValue}"
+                                    required="#{bindings.ENDR_COMM_AMT.hints.mandatory}"
+                                    maximumLength="#{bindings.ENDR_COMM_AMT.hints.precision}"
+                                    converter="javax.faces.Number"
+                                    id="inputText15"
+                                    binding="#{underwritingManipulation.endrFCLAmt}">
+                        <f:validator binding="#{bindings.ENDR_FCL_AMT.validator}"/>
+                      </af:inputText>
+                      <af:outputLabel value="FCL Overide Amount"
+                                      inlineStyle="font-weight:bold;"
+                                      id="outputLabel20"/>
+                      <af:inputText simple="true" disabled="true"
+                                    value="#{bindings.ENDR_OVERRIDE_FCL_AMT.inputValue}"
+                                    required="#{bindings.ENDR_COMM_AMT.hints.mandatory}"
+                                    maximumLength="#{bindings.ENDR_COMM_AMT.hints.precision}"
+                                    converter="javax.faces.Number"
+                                    id="inputText16"
+                                    binding="#{underwritingManipulation.endrOvrFCLAmt}">
+                        <f:validator binding="#{bindings.ENDR_OVERRIDE_FCL_AMT.validator}"/>
+                      </af:inputText>
+                    </h:panelGrid>
+                  </af:panelBox>
+                  <af:panelBox text="Member Cover Details" id="pb2">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="2" id="pg13" rendered="false">
+                      <af:outputLabel value="Member Number" id="ol25"/>
+                      <af:inputText label="Label 24" id="it22" simple="true"
+                                    binding="#{underwritingManipulation.memNo_search}"
+                                    valueChangeListener="#{underwritingManipulation.memNoSearchEvent}"
+                                    autoSubmit="true"/>
+                      <af:outputLabel value="Member Name" id="ol26"/>
+                      <af:inputText label="Label 25" id="it23" simple="true"
+                                    binding="#{underwritingManipulation.memNameSearch}"
+                                    valueChangeListener="#{underwritingManipulation.memNameSeach}"
+                                    autoSubmit="true"/>
+                      <af:commandButton text="Search" id="cb7"
+                                        icon="/images/search.gif"
+                                        action="#{underwritingManipulation.memSearchAction}"/>
+                    </h:panelGrid>
+                    <af:panelBox text="Search Criteria" id="panelBox8"
+                                 showDisclosure="false">
+                      <f:facet name="toolbar"/>
+                      <af:outputLabel value="[Note: More Member Records Exist. Please Use the Search Criteria to Limit Your Search]"
+                                      id="ol155"
+                                      inlineStyle="font-weight:bold; color:Red;"
+                                      rendered="#{sessionScope['limitExceeded']=='Y'}"/>
+                      <af:separator id="separator8"/>
+                      <h:panelGrid columns="2" id="panelGrid16">
+                        <af:outputLabel value="Member Number:" id="ol156"/>
+                        <af:inputText label="Label 412" id="it115" simple="true"
+                                      binding="#{underwritingManipulation.srchMemNo}"/>
+                        <af:outputLabel value="Member Name:"
+                                        id="outputLabel146"/>
+                        <af:inputText label="Label 412" id="inputText33"
+                                      simple="true"
+                                      binding="#{underwritingManipulation.srchMemName}"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="panelGrid44">
+                        <af:commandButton text="Search Members" id="cb135"
+                                          action="#{underwritingManipulation.SearchMembersII}"/>
+                        <af:commandButton text="Clear Search" id="cb136"
+                                          action="#{underwritingManipulation.ClearSearchMembersII}"/>
+                      </h:panelGrid>
+                    </af:panelBox>
+                    <af:popup id="memotherdetails">
+                      <af:dialog id="dialog3" type="none"
+                                 title="Update Member Details">
+                        <h:panelGrid columns="2" id="panelGrid11">
+                          <af:outputLabel id="outputLabel49" value="Member"/>
+                          <af:outputText value="outputText1" id="outputText46"
+                                         binding="#{underwritingManipulation.memCoverDisplay}"
+                                         inlineStyle="font-weight:bold;"/>
+                          <af:outputLabel id="outputLabel50" value="Height"/>
+                          <af:inputText label="Label 1" id="inputText17"
+                                        simple="true"
+                                        binding="#{underwritingManipulation.memHeight}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{underwritingManipulation.heightChangeListener}"/>
+                          <af:outputLabel id="outputLabel51" value="Weight"/>
+                          <af:inputText label="Label 1" id="inputText18"
+                                        simple="true"
+                                        binding="#{underwritingManipulation.memWeight}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{underwritingManipulation.weightChangeListener}"/>
+                          <af:outputLabel id="outputLabel52"
+                                          value="Systolic P.R"/>
+                          <af:inputText label="Label 1" id="inputText19"
+                                        simple="true"
+                                        binding="#{underwritingManipulation.memSysPr}"/>
+                          <af:outputLabel id="outputLabel53"
+                                          value="Diastolic P.R"/>
+                          <af:inputText label="Label 1" id="inputText20"
+                                        simple="true"
+                                        binding="#{underwritingManipulation.memDiaPr}"/>
+                                        
+                          <af:outputLabel value="BMI Rate" id="ol41"/>
+                          <af:inputText label="Label 29" id="it36" simple="true"
+                                        binding="#{underwritingManipulation.bmiRate}"/>
+                          
+                          <af:outputLabel id="outputLabel54"
+                                          value="Weight Loading"
+                                          rendered="false"/>
+                          <af:inputText label="Label 1" id="inputText21"
+                                        simple="true"
+                                        binding="#{underwritingManipulation.weightlding}"
+                                        rendered="false"/>
+                          <af:outputLabel id="outputLabel55"
+                                          value="BPress Loading"
+                                          rendered="false"/>
+                          <af:inputText label="Label 1" id="inputText22"
+                                        simple="true"
+                                        binding="#{underwritingManipulation.memBPressLoading}"
+                                        rendered="false"/>
+                          <af:outputLabel id="outputLabel80" value="load Type"/>
+                          <af:selectOneChoice label="Label 1"
+                                              id="selectOneChoice3"
+                                              binding="#{underwritingManipulation.memLoadType}"
+                                              simple="true">
+                            <af:selectItem label="None" value="N"
+                                           id="selectItem7"/>
+                            <af:selectItem label="Rates" value="R"
+                                           id="selectItem8"/>
+                            <af:selectItem label="Rates (Main Cover)" value="M"
+                                           id="selectItem9"/>
+                            <af:selectItem label="Premium" value="P"
+                                           id="selectItem10"/>
+                            <af:selectItem label="Age" value="A"
+                                           id="selectItem11"/>
+                            <af:selectItem label="Rates (SA > FCL)" value="F"
+                                           id="selectItem6"/>
+                          </af:selectOneChoice>
+                          <af:outputLabel id="outputLabel81" value="Load Rate"/>
+                          <af:inputText label="Label 1" id="inputText23"
+                                        simple="true"
+                                        binding="#{underwritingManipulation.memloadRate}"/>
+                          <af:outputLabel id="outputLabel82"
+                                          value="Load Div Factor"/>
+                          <af:inputText label="Label 1" id="inputText24"
+                                        simple="true"
+                                        binding="#{underwritingManipulation.memloadDivFac}"/>
+                          <af:outputLabel value="Postponement Period" id="ol42"
+                                          visible="false"      
+                                          binding="#{underwritingManipulation.postponeLab}"/>
+                          <af:inputText label="Label 30" id="it39" simple="true"
+                                        binding="#{underwritingManipulation.postponePeriod}"
+                                        visible="false" />
+                          <af:outputLabel id="outputLabel21"
+                                          value="Cover Offered"/>
+                          <af:selectOneChoice label="Label 1"
+                                              id="selectOneChoice1"
+                                              binding="#{underwritingManipulation.covOffered}"
+                                              simple="true" autoSubmit="true"
+                                              valueChangeListener="#{underwritingManipulation.coverOfferedListener}">
+                            <af:selectItem label="Normal" value="N"
+                                           id="selectItem1"/>
+                            <af:selectItem label="Loaded" value="L"
+                                           id="selectItem2"/>                                           
+                             <af:selectItem label="Normal With Exclusion" value="NE"
+                                           id="si12"/>
+                            <af:selectItem label="Loaded With Exclusion" value="LE"
+                                           id="si13"/>
+                            <af:selectItem label="Loaded With Extra Mortality" id="si14" value="LM"/>
+                            <af:selectItem label="Free Cover Restricted"
+                                           value="F" id="selectItem3"/>
+                            <af:selectItem label="Postponed" value="P"
+                                           id="selectItem4"/>
+                            <af:selectItem label="Declined" value="D"
+                                           id="selectItem5"/>
+                          </af:selectOneChoice>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="panelGrid12">
+                          <af:commandButton text="OK" id="commandButton15"
+                                            action="#{underwritingManipulation.saveMemberOtherDetails}"/>
+                          <af:commandButton text="Cancel" id="commandButton16"/>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                    <af:popup id="p1">
+                      <af:dialog id="d2" type="none"
+                                 title="Available Members For Export">
+                        <af:panelBox id="pb6" showHeader="never">
+                          <f:facet name="toolbar"/>
+                          <af:panelCollection id="pc1">
+                            <f:facet name="menus">
+                              <af:menu text="Utilities" id="m1">
+                                <af:commandMenuItem text="Export To Excel"
+                                                    id="cmi1">
+                                  <af:exportCollectionActionListener exportedId="memberstab"
+                                                                     type="excelHTML"
+                                                                     filename="memberData"
+                                                                     title="memberData"/>
+                                </af:commandMenuItem>
+                              </af:menu>
+                            </f:facet>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="statusbar"/>
+                            <af:table value="#{bindings.members12.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.members12.rangeSize}"
+                                      emptyText="#{bindings.members12.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.members12.rangeSize}"
+                                      rowBandingInterval="0"
+                                      selectedRowKeys="#{bindings.members12.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.members12.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="memberstab"
+                                      binding="#{polManipulation.membersExportLOV}"
+                                      inlineStyle="width:100.0%;">
+                              <af:column sortProperty="EX_PCM_CODE"
+                                         sortable="true" headerText="SN"
+                                         id="c35">
+                                <af:outputText value="#{row.EX_PCM_CODE}"
+                                               id="ot42"/>
+                              </af:column>
+                              <af:column sortProperty="EX_POLM_MEM_NO"
+                                         sortable="false"
+                                         headerText="Member No." id="c34">
+                                <af:outputText value="#{row.EX_POLM_MEM_NO}"
+                                               id="ot38"/>
+                              </af:column>
+                              <af:column sortProperty="EX_MEM_SURNAME"
+                                         sortable="true" headerText="Surname"
+                                         id="c39">
+                                <af:outputText value="#{row.EX_MEM_SURNAME}"
+                                               id="ot43"/>
+                              </af:column>
+                              <af:column sortProperty="EX_MEM_OTHER_NAMES"
+                                         sortable="true"
+                                         headerText="Other Names" id="c43">
+                                <af:outputText value="#{row.EX_MEM_OTHER_NAMES}"
+                                               id="ot37"/>
+                              </af:column>
+                              <af:column sortProperty="EX_PCA_SHT_DESC"
+                                         sortable="true"
+                                         headerText="Category Description"
+                                         id="c41">
+                                <af:outputText value="#{row.EX_PCA_SHT_DESC}"
+                                               id="ot39"/>
+                              </af:column>
+                              <af:column sortProperty="EX_PCM_EARNINGS"
+                                         sortable="true" headerText="Earnings"
+                                         id="c38"
+                                         rendered="#{Rendering.earningsproduct}">
+                                <af:outputText value="#{row.EX_PCM_EARNINGS}"
+                                               id="ot36"/>
+                              </af:column>
+                              <af:column sortProperty="EX_PCM_MULT_EARNINGS_PRD"
+                                         sortable="true"
+                                         headerText="Multiple of Earnings" id="c36"
+                                         rendered="#{Rendering.earningsproduct}">
+                                <af:outputText value="#{row.EX_PCM_MULT_EARNINGS_PRD}"
+                                               id="ot35"/>
+                              </af:column>
+                              <af:column sortProperty="EX_original_loan_amt"
+                                         sortable="true"
+                                         headerText="Loan Amount" id="c37"
+                                         rendered="#{Rendering.loansProduct}">
+                                <af:outputText value="#{row.EX_original_loan_amt}"
+                                               id="ot41"/>
+                              </af:column>
+                              <af:column sortProperty="EX_loan_repayment_prd"
+                                         sortable="true"
+                                         headerText="Loan Period" id="c40"
+                                         rendered="#{Rendering.loansProduct}">
+                                <af:outputText value="#{row.EX_loan_repayment_prd}"
+                                               id="ot40"/>
+                              </af:column>
+                              <af:column sortProperty="EX_AddRemove"
+                                         sortable="true" headerText="Add/Remove"
+                                         id="c42">
+                                <af:outputText value="#{row.EX_AddRemove}"
+                                               id="ot34"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelCollection>
+                        </af:panelBox>
+                      </af:dialog>
+                    </af:popup>
+                    <h:panelGrid columns="2" id="pg10">
+                      <af:commandButton id="commandButton14"
+                                        icon="/images/update_ena.png"
+                                        action="#{underwritingManipulation.EditMemberDetailssel}"
+                                        rendered="#{Rendering.policyReadOnly}"/>
+                      <af:commandButton icon="/images/delete_ena.png"
+                                        action="#{underwritingManipulation.DeleteMemberCovers}"
+                                        id="cb1"
+                                        rendered="#{Rendering.policyReadOnly}"/>
+                    </h:panelGrid>
+                    <af:panelCollection id="pc2" inlineStyle="width:100%; height:141.0px;">
+                      <f:facet name="menus"/>
+                      <f:facet name="toolbar"/>
+                      <f:facet name="statusbar"/>
+                         <af:table value="#{bindings.policyMembers.collectionModel}"
+                              var="row"
+                              rows="#{bindings.policyMembers.rangeSize}"
+                              emptyText="#{bindings.policyMembers.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.policyMembers.rangeSize}"
+                              selectionListener="#{underwritingManipulation.GetSelectedPolicyNumber}"
+                              rowSelection="single" id="lmsPolicyMembersID"
+                              binding="#{underwritingManipulation.policyMembersLOV}"
+                              inlineStyle="width:100%; height:90.0px; border-style:none;"
+                              filterModel="#{bindings.policyMembersQuery.queryDescriptor}"
+                              queryListener="#{bindings.policyMembersQuery.processQuery}"
+                              filterVisible="true" autoHeightRows="1000"
+                              contentDelivery="immediate">
+                      <af:column sortProperty="POLM_MEM_NO" sortable="true"
+                                 headerText="Mem No." id="c1" filterable="true">
+                        <af:outputText value="#{row.POLM_MEM_NO}" id="ot2"/>
+                      </af:column>
+                      <af:column sortProperty="MEMBER_DISPLAY" sortable="true"
+                                 headerText="Member" id="c2" width="120"
+                                 filterable="true"
+                                 filterFeatures="caseInsensitive">
+                        <af:outputText value="#{row.MEMBER_DISPLAY}" id="ot3"/>
+                      </af:column>                      
+                      <af:column sortProperty="POLM_DTY_SHT_DESC" sortable="true"
+                                 headerText="Dependant Type" id="c94" width="120"
+                                 filterable="true"
+                                 filterFeatures="caseInsensitive">
+                        <af:outputText value="#{row.POLM_DTY_SHT_DESC}" id="ot94"/>
+                      </af:column>
+                      <af:column sortProperty="CATEGORY" sortable="true"
+                                 headerText="Category" id="c93" width="120"
+                                 filterable="true"
+                                 filterFeatures="caseInsensitive">
+                        <af:outputText value="#{row.CATEGORY}" id="ot95"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_TOT_SA" sortable="true"
+                                 headerText="S.A" id="c3" width="80"
+                                 filterable="true">
+                        <af:outputText value="#{row.POLM_TOT_SA}" id="ot4"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_ANB" sortable="true"
+                                 headerText="ANB" id="c4" width="50"
+                                 filterable="true">
+                        <af:outputText value="#{row.POLM_ANB}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_HEIGHT" sortable="true"
+                                 headerText="Hght" id="c5" width="50"
+                                 filterable="true">
+                        <af:outputText value="#{row.POLM_HEIGHT}" id="ot6"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_WEIGHT" sortable="true"
+                                 headerText="Wght" id="c6" width="50"
+                                 filterable="true">
+                        <af:outputText value="#{row.POLM_WEIGHT}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_SYSTOLIC_PR" sortable="true"
+                                 headerText="S.Pr." id="c7" width="50"
+                                 filterable="true">
+                        <af:outputText value="#{row.POLM_SYSTOLIC_PR}"
+                                       id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_DIASTOLIC_PR"
+                                 sortable="true" headerText="D.Pr" id="c8"
+                                 width="50" filterable="true">
+                        <af:outputText value="#{row.POLM_DIASTOLIC_PR}"
+                                       id="ot9"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_WEIGHT_LOADING"
+                                 sortable="true" headerText="W.Lo." id="c9"
+                                 width="50" filterable="true">
+                        <af:outputText value="#{row.POLM_WEIGHT_LOADING}"
+                                       id="ot10"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_BPRESS_LOADING"
+                                 sortable="true" headerText="B.P Lo" id="c10"
+                                 width="50" filterable="true">
+                        <af:outputText value="#{row.POLM_BPRESS_LOADING}"
+                                       id="ot11"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_LOADING_TYPE"
+                                 sortable="true" headerText="Lo.Type" id="c11"
+                                 width="50" filterable="true">
+                        <af:outputText value="#{row.POLM_LOADING_TYPE}"
+                                       id="ot12"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_LOADING_RATE"
+                                 sortable="true" headerText="Lo.Rate" id="c12"
+                                 width="50" filterable="true">
+                        <af:outputText value="#{row.POLM_LOADING_RATE}"
+                                       id="ot13"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_LOADING_DIV_FACT"
+                                 sortable="true" headerText="Lo.Div" id="c13"
+                                 width="50" filterable="true">
+                        <af:outputText value="#{row.POLM_LOADING_DIV_FACT}"
+                                       id="ot14"/>
+                      </af:column>
+                      <af:column sortProperty="POLM_COVER_OFFERED"
+                                 sortable="true" headerText="Cover Offered"
+                                 id="c14" width="90" filterable="true">
+                        <af:outputText value="#{row.POLM_COVER_OFFERED}"
+                                       id="ot15"/>
+                      </af:column>
+                       <af:column sortProperty="POLM_BMI_RATE"
+                                 sortable="true" headerText="BMI Rate"
+                                 id="c84" width="90" filterable="true">
+                        <af:outputText value="#{row.POLM_BMI_RATE}"
+                                       id="ot84"/>
+                      </af:column>
+                      <af:column id="c15" visible="false"/>
+                    </af:table>
+                    </af:panelCollection>
+                 
+                    <h:panelGrid columns="7" id="pg6">
+                      <af:outputLabel value="Total Members"
+                                      inlineStyle="font-weight:bold;"
+                                      id="ol18"/>
+                      <af:inputText label="#{bindings.ENDR_NOF_MEMBERS.hints.label}"
+                                    disabled="true" simple="true"
+                                    id="noOfMembersDisp"
+                                    value="#{bindings.ENDR_NOF_MEMBERS.inputValue}"
+                                    required="#{bindings.ENDR_NOF_MEMBERS.hints.mandatory}"
+                                    columns="15"
+                                    maximumLength="#{bindings.ENDR_NOF_MEMBERS.hints.precision}">
+                        <f:validator binding="#{bindings.ENDR_NOF_MEMBERS.validator}"/>
+                      </af:inputText>
+                      <af:commandButton text="Recompute Premium"
+                                        id="reCompPremBtn"
+                                        action="#{underwritingManipulation.subCompute}"
+                                        binding="#{underwritingManipulation.recomputePremium}"
+                                        rendered="#{Rendering.policyReadOnly}"/>
+                      <af:commandButton action="#{viewPolicy.ImportMemberFromCovers}"
+                                        id="commandButton12"
+                                        text="Import Members"
+                                        rendered="#{bindings.ENDR_TYPE.inputValue=='RN'}"/>
+                      <af:commandButton text="Export Member Earnings"
+                                        id="commandButton2"
+                                        action="#{polManipulation.ShowMembersForExport}"
+                                        rendered="#{Rendering.policyReadOnly}"/>
+                      <af:commandButton text="Import Member Earnings"
+                                        id="commandButton3"
+                                        action="#{polManipulation.ViewMemberForImport}"
+                                        rendered="#{Rendering.policyReadOnly}"/>
+                      <af:commandButton text="Back To Policy"
+                                        action="#{underwritingManipulation.BackToPolicy}"
+                                        id="BackToPolicy"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg1">
+                      <af:selectBooleanCheckbox text="Delete Existing Main Benefit"
+                                                label="Label 2" id="sbc2"
+                                                simple="true"
+                                                valueChangeListener="#{polManipulation.DelExistingMemberListener}"
+                                                binding="#{polManipulation.delMemCover}"
+                                                autoSubmit="true"
+                                                rendered="#{bindings.ENDR_TYPE.inputValue=='RN'}"
+                                                inlineStyle="font-weight:bold;"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                  <af:spacer width="10" height="10" id="s2"/>
+                  <af:panelTabbed inlineStyle="width:100%; height:310.0px;"
+                                  id="pt2">
+                    <af:showDetailItem text="Member Limits" id="sdi1">
+                      <af:popup id="coverdtlsPopups">
+                        <af:dialog id="dialog4" type="none"
+                                   title="Member Cover Details">
+                          <h:panelGrid columns="2" id="panelGrid13">
+                            <af:outputLabel value="Cover" id="outputLabel83"/>
+                            <af:outputText value="outputText2" id="outputText47"
+                                           inlineStyle="font-weight:bold;"
+                                           binding="#{underwritingManipulation.memCoverTypeDisplay}"/>
+                            <af:outputLabel value="Earnings Amount"
+                                            id="outputLabel84" rendered="#{Rendering.earningsproduct}"/>
+                            <af:inputText label="Label 2" id="inputText25"
+                                          simple="true"
+                                          binding="#{underwritingManipulation.memEarningAmt}"
+                                          rendered="#{Rendering.earningsproduct}"/>
+                            <af:outputLabel value="Multiple of earnings"
+                                            id="outputLabel85" rendered="#{Rendering.earningsproduct}"/>
+                            <af:inputText label="Label 2" id="inputText26"
+                                          simple="true"
+                                          binding="#{underwritingManipulation.memEarningPeriod}"
+                                          rendered="#{Rendering.earningsproduct}"/>
+                            <af:outputLabel value="Orig Loan Rpymt Period"
+                                            id="outputLabel86"
+                                            rendered="false"/>
+                            <af:inputText label="Label 2" id="inputText27"
+                                          simple="true"
+                                          binding="#{underwritingManipulation.memOrigLnAmt}"
+                                          rendered="false"/>
+                            <af:outputLabel value="Loan Amount"
+                                            id="outputLabel87"
+                                            rendered="false"/>
+                            <af:inputText label="Label 2" id="inputText28"
+                                          simple="true"
+                                          binding="#{underwritingManipulation.memLoanAmt}"
+                                          rendered="false"/>
+                            <af:outputLabel value="Loan Interest"
+                                            id="outputLabel88"
+                                            rendered="false"/>
+                            <af:inputText label="Label 2" id="inputText29"
+                                          simple="true"
+                                          binding="#{underwritingManipulation.memLoanInt}"
+                                          rendered="false"/>
+                            <af:outputLabel value="Loan Issue Date"
+                                            id="outputLabel89"
+                                            rendered="false"/>
+                            <af:inputDate label="Label 1" id="inputDate3"
+                                          simple="true"
+                                          binding="#{underwritingManipulation.memLoanIssDate}"
+                                          rendered="false">
+                                <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                            <af:outputLabel value="Savings Amount"
+                                            id="outputLabel90"
+                                            rendered="false"/>
+                            <af:inputText label="Label 2" id="inputText30"
+                                          simple="true"
+                                          binding="#{underwritingManipulation.memSavingAmt}"
+                                          rendered="false"/>
+                                                  
+                            <af:outputLabel value="Cover Loading Type" id="ol38"/>
+                            <af:selectOneChoice label="Label 4" id="soc4" simple="true"
+                                                binding="#{underwritingManipulation.cvrLoadType}" value="N"
+                                                valueChangeListener="#{underwritingManipulation.coverLoadingListener}">
+                                                
+                              <af:selectItem label="None" id="si11" value="N"/>
+                              <af:selectItem label="Premium" value="P"
+                                             id="si9"/>
+                              <af:selectItem label="Rates" value="R" id="si8"/>
+                              <af:selectItem label="Discount" value="D" id="si10"/>
+                              <af:selectItem label="Above Age Loading" id="si15" value="A"/>
+                              <af:selectItem label="Decline" id="si16" value="D"/>
+                            </af:selectOneChoice>
+                            <af:outputLabel value="Loading Rate" id="ol39"/>
+                            <af:inputText label="Label 27" id="it37" simple="true"
+                                          binding="#{underwritingManipulation.cvrLoadRate}"/>
+                            <af:outputLabel value="Load Div Factor" id="ol40"/>
+                            <af:inputText label="Label 28" id="it38" simple="true"
+                                          binding="#{underwritingManipulation.cvrLoadDivFactor}"/>
+                          </h:panelGrid>
+                          <h:panelGrid columns="2" id="panelGrid14">
+                            <af:commandButton text="OK" id="commandButton17"
+                                              action="#{underwritingManipulation.UpdateMemberCoverDetails}"/>
+                            <af:commandButton text="Cancel"
+                                              id="commandButton18"/>
+                          </h:panelGrid>
+                        </af:dialog>
+                      </af:popup>
+                       <af:commandButton id="commandButton19"
+                                        icon="/images/update_ena.png"
+                                        action="#{underwritingManipulation.EditMemberCoversSel}"/>
+                      <af:panelCollection id="pc3" inlineStyle="width:100%; height:200.0px;">
+                        <f:facet name="menus"/>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="statusbar"/>
+                           
+                        <af:table value="#{bindings.members1.collectionModel}"
+                                var="row" rows="#{bindings.members1.rangeSize}"
+                                emptyText="#{bindings.members1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.members1.rangeSize}"
+                                selectedRowKeys="#{bindings.members1.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.members1.collectionModel.makeCurrent}"
+                                rowSelection="single" id="policyMemberCoversID"
+                                binding="#{underwritingManipulation.policyMemberCoversLOV}"
+                                inlineStyle="width:100%; height:200.0px; border-style:none;">
+                        <af:column sortProperty="CVT_DESC" sortable="true"
+                                   headerText="Cvt" id="c16">
+                          <af:outputText value="#{row.CVT_DESC}" id="ot16"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_COVER_WEF_DATE"
+                                   sortable="true" headerText="Cover WEF"
+                                   id="c17" width="70">
+                          <af:outputText value="#{row.PCM_COVER_WEF_DATE}"
+                                         id="ot17">
+                            <af:convertDateTime pattern="#{bindings.members1.hints.PCM_COVER_WEF_DATE.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="PCM_COVER_WET_DATE"
+                                   sortable="true" headerText="Cover WET"
+                                   id="c18" width="70">
+                          <af:outputText value="#{row.PCM_COVER_WET_DATE}"
+                                         id="ot18">
+                            <af:convertDateTime pattern="#{bindings.members1.hints.PCM_COVER_WET_DATE.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="PCM_SA" sortable="true"
+                                   headerText="S.A" id="c19" width="50">
+                          <af:outputText value="#{row.PCM_SA}" id="ot19"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_RATE" sortable="true"
+                                   headerText="Rate" id="c20" width="50">
+                          <af:outputText value="#{row.PCM_RATE}" id="ot20"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_PREMIUM" sortable="true"
+                                   headerText="Premium" id="c22" width="70">
+                          <af:outputText value="#{row.PCM_PREMIUM}" id="ot22"
+                                         converter="javax.faces.Number"/>                         
+                          <f:facet name="footer">
+                            <af:outputText value="#{bindings.totPrem.inputValue}" id="ot93"/>
+                          </f:facet>                
+                        </af:column>
+                        <af:column sortProperty="PCM_ADD_REF_PREM"
+                                   sortable="true" headerText="Add/Ref Prem"
+                                   id="c23">
+                          <af:outputText value="#{row.PCM_ADD_REF_PREM}"
+                                         id="ot23"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_LOAD_DISC_PREM"
+                                   sortable="true" headerText="Loaded Prem"
+                                   id="c21">
+                          <af:outputText value="#{row.PCM_LOAD_DISC_PREM}"
+                                         id="ot21"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_DISC_PREM" sortable="false"
+                                   headerText="Discount Prem" id="c74">
+                          <af:outputText value="#{row.PCM_DISC_PREM}" id="ot74"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_PAY_PERIOD_PREMIUM"
+                                   sortable="true" headerText="Inst.Prem"
+                                   id="c24">
+                          <af:outputText value="#{row.PCM_PAY_PERIOD_PREMIUM}"
+                                         id="ot24"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_PURE_RATE" sortable="true"
+                                   headerText="Pure Prem Rate" id="c70"
+                                   rendered="#{!Rendering.expressVisible}">
+                          <af:outputText value="#{row.PCM_PURE_RATE}" id="ot70"/>
+                        </af:column>
+                         <af:column sortProperty="PCM_PURE_RATE" sortable="true"
+                                   headerText="Risk Prem Rate" id="c70e"
+                                   rendered="#{Rendering.expressVisible}">
+                          <af:outputText value="#{row.PCM_PURE_RATE}" id="ot70e"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_PURE_PREMIUM"
+                                   sortable="true" headerText="Pure Prem"
+                                   id="c71"
+                                   rendered="#{!Rendering.expressVisible}">
+                          <af:outputText value="#{row.PCM_PURE_PREMIUM}"
+                                         id="ot71"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_PURE_PREMIUM"
+                                   sortable="true" headerText="Risk Prem"
+                                   id="c71e"
+                                   rendered="#{Rendering.expressVisible}">
+                          <af:outputText value="#{row.PCM_PURE_PREMIUM}"
+                                         id="ot71e"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_ADR_RATE" sortable="true"
+                                   headerText="ADR Rate" id="c72">
+                          <af:outputText value="#{row.PCM_ADR_RATE}" id="ot72"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_ACCIDENTAL_PREM"
+                                   sortable="true" headerText="Accidental Prem"
+                                   id="c73">
+                          <af:outputText value="#{row.PCM_ACCIDENTAL_PREM}"
+                                         id="ot73"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_EARNINGS" sortable="true"
+                                   headerText="Earnings Amt" id="c25"
+                                   rendered="#{Rendering.earningsproduct}">
+                          <af:outputText value="#{row.PCM_EARNINGS}" id="ot25"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_MULT_EARNINGS_PRD"
+                                   sortable="true" headerText="Multiple of earnings"
+                                   id="c26" width="100"
+                                   rendered="#{Rendering.earningsproduct}">
+                          <af:outputText value="#{row.PCM_MULT_EARNINGS_PRD}"
+                                         id="ot26"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_BASIC_SAL" sortable="false"
+                                   headerText="Basic Salary" id="c44" width="70"
+                                   rendered="#{Rendering.earningsproduct}">
+                          <af:outputText value="#{row.PCM_BASIC_SAL}" id="ot44"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_HOUSE_ALLOW"
+                                   sortable="false" headerText="House Allowance"
+                                   id="c45" width="90"
+                                   rendered="#{Rendering.earningsproduct}">
+                          <af:outputText value="#{row.PCM_HOUSE_ALLOW}"
+                                         id="ot47"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_TRANS_ALLOW"
+                                   sortable="false"
+                                   headerText="Transport Allowance" id="c46"
+                                   rendered="#{Rendering.earningsproduct}">
+                          <af:outputText value="#{row.PCM_TRANS_ALLOW}"
+                                         id="ot46"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_OTHER_ALLOW"
+                                   sortable="false" headerText="Other Allowance"
+                                   id="c47" width="90"
+                                   rendered="#{Rendering.earningsproduct}">
+                          <af:outputText value="#{row.PCM_OTHER_ALLOW}"
+                                         id="ot45"
+                                         converter="javax.faces.Number"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_ORIG_LOAN_REPAYMENT_PRD"
+                                   sortable="true" headerText="Orig Loan Period(Months)"
+                                   id="c27"
+                                   rendered="#{Rendering.loansProduct}">
+                          <af:outputText value="#{row.PCM_ORIG_LOAN_REPAYMENT_PRD}"
+                                         id="ot27"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_ORIGINAL_LOAN_AMT"
+                                   sortable="true" headerText="Orig Loan Amt"
+                                   id="c28"
+                                   rendered="#{Rendering.loansProduct}">
+                          <af:outputText value="#{row.PCM_ORIGINAL_LOAN_AMT}"
+                                         id="ot28"/>
+                        </af:column>
+                        <af:column sortProperty="PCM_LOAN_ISSUE_DATE"
+                                   sortable="true" headerText="Loan Issue Date"
+                                   id="c30"
+                                   rendered="#{Rendering.loansProduct}">
+                          <af:outputText value="#{row.PCM_LOAN_ISSUE_DATE}"
+                                         id="ot30">
+                            <af:convertDateTime pattern="#{bindings.members1.hints.PCM_LOAN_ISSUE_DATE.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="PCM_SAVING_AMT" sortable="true"
+                                   headerText="Savings Amt" id="c29"
+                                   rendered="#{Rendering.loansProduct}">
+                          <af:outputText value="#{row.PCM_SAVING_AMT}"
+                                         id="ot29"/>
+                        </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                  
+                                        
+             
+                    </af:showDetailItem>
+                    <af:showDetailItem text="#{Rendering.productType}"
+                                       rendered="#{Rendering.pensAnnuityproduct}"
+                                       id="showDetailItem1">
+                      <af:panelGroupLayout id="pgl13"
+                                           partialTriggers="lmsPolicyMembersID"
+                                           layout="scroll">
+                        <af:panelBox text="PanelBox2" id="pb4"
+                                     showHeader="never"
+                                     inlineStyle="width:100.0%;">
+                          <f:facet name="toolbar"/>
+                          <h:panelGrid columns="6" id="panelGrid1">
+                            <af:outputLabel value="WEF" id="outputLabel3"/>
+                            <af:inputDate value="#{bindings.QMPNS_WEF_DATE.inputValue}"
+                                          required="#{bindings.QMPNS_WEF_DATE.hints.mandatory}"
+                                          shortDesc="#{bindings.QMPNS_WEF_DATE.hints.tooltip}"
+                                          id="inputDate1" disabled="true"
+                                          binding="#{underwritingManipulation.pensWEF}"
+                                          columns="30">
+                              <f:validator binding="#{bindings.QMPNS_WEF_DATE.validator}"/>
+                              <af:convertDateTime pattern="#{bindings.QMPNS_WEF_DATE.format}"/>
+                            </af:inputDate>
+                            <af:outputLabel value="Annual Earnings"
+                                            id="outputLabel4"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_EARNINGS.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_EARNINGS.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_EARNINGS.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_EARNINGS.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_EARNINGS.hints.tooltip}"
+                                          id="inputText1" disabled="true"
+                                          binding="#{underwritingManipulation.pensEarnings}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_EARNINGS.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Total Contr"
+                                            id="outputLabel5"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_TOTAL_CONTR.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_TOTAL_CONTR.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_TOTAL_CONTR.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_TOTAL_CONTR.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_TOTAL_CONTR.hints.tooltip}"
+                                          id="inputText2" disabled="true"
+                                          binding="#{underwritingManipulation.pensTotalContri}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_TOTAL_CONTR.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="WET" id="outputLabel6"/>
+                            <af:inputDate value="#{bindings.QMPNS_WET_DATE.inputValue}"
+                                          required="#{bindings.QMPNS_WET_DATE.hints.mandatory}"
+                                          shortDesc="#{bindings.QMPNS_WET_DATE.hints.tooltip}"
+                                          id="inputDate2"
+                                          binding="#{underwritingManipulation.pensWET}"
+                                          columns="30">
+                              <f:validator binding="#{bindings.QMPNS_WET_DATE.validator}"/>
+                              <af:convertDateTime pattern="#{bindings.QMPNS_WET_DATE.format}"/>
+                            </af:inputDate>
+                            <af:outputLabel value="Employer Contr"
+                                            id="outputLabel7"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_EMPLOYER_CONTR.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_EMPLOYER_CONTR.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_EMPLOYER_CONTR.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_EMPLOYER_CONTR.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_EMPLOYER_CONTR.hints.tooltip}"
+                                          id="inputText3" disabled="true"
+                                          binding="#{underwritingManipulation.pensEmprContr}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_EMPLOYER_CONTR.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Net Annual Fund"
+                                            id="outputLabel8"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_NET_ANNUAL_FUND.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_NET_ANNUAL_FUND.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_NET_ANNUAL_FUND.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_NET_ANNUAL_FUND.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_NET_ANNUAL_FUND.hints.tooltip}"
+                                          id="inputText4" disabled="true"
+                                          binding="#{underwritingManipulation.pensAnnFund}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_NET_ANNUAL_FUND.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Admin Fee Rate"
+                                            id="outputLabel9"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_ADMIN_FEE_RATE.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_ADMIN_FEE_RATE.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_ADMIN_FEE_RATE.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_ADMIN_FEE_RATE.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_ADMIN_FEE_RATE.hints.tooltip}"
+                                          id="inputText5" disabled="true"
+                                          binding="#{underwritingManipulation.pensAdminFee}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_ADMIN_FEE_RATE.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employee Contr"
+                                            id="outputLabel10"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_EMPLOYEE_CONTR.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_EMPLOYEE_CONTR.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_EMPLOYEE_CONTR.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_EMPLOYEE_CONTR.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_EMPLOYEE_CONTR.hints.tooltip}"
+                                          id="inputText6" disabled="true"
+                                          binding="#{underwritingManipulation.pensEmpeContri}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_EMPLOYEE_CONTR.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Interest Rate"
+                                            id="outputLabel11"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_COMP_INT_RATE.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_COMP_INT_RATE.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_COMP_INT_RATE.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_COMP_INT_RATE.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_COMP_INT_RATE.hints.tooltip}"
+                                          id="inputText7" disabled="true"
+                                          binding="#{underwritingManipulation.pensIntRate}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_COMP_INT_RATE.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Ann Fac Rate"
+                                            id="outputLabel12"
+                                            rendered="#{Rendering.pensAnnuityproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_ANNTY_FAC_RATE.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_ANNTY_FAC_RATE.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_ANNTY_FAC_RATE.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_ANNTY_FAC_RATE.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_ANNTY_FAC_RATE.hints.tooltip}"
+                                          id="inputText8" disabled="true"
+                                          binding="#{underwritingManipulation.pensAnnFac}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensAnnuityproduct}">
+                              <f:validator binding="#{bindings.QMPNS_ANNTY_FAC_RATE.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employee Vol Contr"
+                                            id="outputLabel13"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_EMPLYE_VOLU_CONTR.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_EMPLYE_VOLU_CONTR.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_EMPLYE_VOLU_CONTR.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_EMPLYE_VOLU_CONTR.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_EMPLYE_VOLU_CONTR.hints.tooltip}"
+                                          id="inputText9" disabled="true"
+                                          binding="#{underwritingManipulation.empeVolContr}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_EMPLYE_VOLU_CONTR.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Pens Annum"
+                                            id="outputLabel14"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_PENS_ANNUM.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_PENS_ANNUM.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_PENS_ANNUM.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_PENS_ANNUM.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_PENS_ANNUM.hints.tooltip}"
+                                          id="inputText10" disabled="true"
+                                          binding="#{underwritingManipulation.pensAnnum}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_PENS_ANNUM.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Est Mat Val"
+                                            id="outputLabel15"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_EST_MAT_VAL.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_EST_MAT_VAL.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_EST_MAT_VAL.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_EST_MAT_VAL.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_EST_MAT_VAL.hints.tooltip}"
+                                          id="inputText11" disabled="true"
+                                          binding="#{underwritingManipulation.pensEMV}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_EST_MAT_VAL.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employer EMV"
+                                            id="outputLabel16"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_ER_EST_EMV_VAL.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_EST_MAT_VAL.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_EST_MAT_VAL.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_EST_MAT_VAL.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_EST_MAT_VAL.hints.tooltip}"
+                                          id="inputText12" disabled="true"
+                                          binding="#{underwritingManipulation.pensEmprEMV}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_ER_EST_EMV_VAL.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employee EMV"
+                                            id="outputLabel17"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.QMPNS_EE_EST_MAT_VAL.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.QMPNS_EST_MAT_VAL.hints.mandatory}"
+                                          columns="#{bindings.QMPNS_EST_MAT_VAL.hints.displayWidth}"
+                                          maximumLength="#{bindings.QMPNS_EST_MAT_VAL.hints.precision}"
+                                          shortDesc="#{bindings.QMPNS_EST_MAT_VAL.hints.tooltip}"
+                                          id="inputText13" disabled="true"
+                                          binding="#{underwritingManipulation.pensEmpeEMV}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}">
+                              <f:validator binding="#{bindings.QMPNS_EE_EST_MAT_VAL.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employee Pension BF"
+                                            id="outputLabel33"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPYE_PENS_BF.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPYE_PENS_BF.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPYE_PENS_BF.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPYE_PENS_BF.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPYE_PENS_BF.hints.tooltip}"
+                                          id="it20" disabled="true">
+                              <f:validator binding="#{bindings.PMPNS_EMPYE_PENS_BF.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employer Pension BF"
+                                            id="outputLabel34"
+                                            rendered="#{Rendering.pensionproduct}"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPYR_PENS_BF.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPYR_PENS_BF.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPYR_PENS_BF.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPYR_PENS_BF.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPYR_PENS_BF.hints.tooltip}"
+                                          id="it21" disabled="true">
+                              <f:validator binding="#{bindings.PMPNS_EMPYR_PENS_BF.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employer Reg Bal BF"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol27"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPLYR_REG_BAL_BF.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPLYR_REG_BAL_BF.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPLYR_REG_BAL_BF.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPLYR_REG_BAL_BF.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPLYR_REG_BAL_BF.hints.tooltip}"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it24">
+                              <f:validator binding="#{bindings.PMPNS_EMPLYR_REG_BAL_BF.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employer UnReg Bal BF"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol28"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPLYR_UNREG_BAL_BF.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPLYR_UNREG_BAL_BF.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPLYR_UNREG_BAL_BF.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPLYR_UNREG_BAL_BF.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPLYR_UNREG_BAL_BF.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it25">
+                              <f:validator binding="#{bindings.PMPNS_EMPLYR_UNREG_BAL_BF.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employee Reg Bal BF"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol29"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPLYE_REG_BAL_BF.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPLYE_REG_BAL_BF.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPLYE_REG_BAL_BF.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPLYE_REG_BAL_BF.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPLYE_REG_BAL_BF.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it12">
+                              <f:validator binding="#{bindings.PMPNS_EMPLYE_REG_BAL_BF.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employee UnReg Bal BF"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol30"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPLYE_UNREG_BAL_BF.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPLYE_UNREG_BAL_BF.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPLYE_UNREG_BAL_BF.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPLYE_UNREG_BAL_BF.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPLYE_UNREG_BAL_BF.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it13">
+                              <f:validator binding="#{bindings.PMPNS_EMPLYE_UNREG_BAL_BF.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employer Reg. Contr amt"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol13"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPLYR_REG_CONTRI_AMT.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPLYR_REG_CONTRI_AMT.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPLYR_REG_CONTRI_AMT.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPLYR_REG_CONTRI_AMT.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPLYR_REG_CONTRI_AMT.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it15">
+                              <f:validator binding="#{bindings.PMPNS_EMPLYR_REG_CONTRI_AMT.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employer UnReg. Contr amt"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol31"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPLYR_UNREG_CONTRI_AMT.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPLYR_UNREG_CONTRI_AMT.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPLYR_UNREG_CONTRI_AMT.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPLYR_UNREG_CONTRI_AMT.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPLYR_UNREG_CONTRI_AMT.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it14">
+                              <f:validator binding="#{bindings.PMPNS_EMPLYR_UNREG_CONTRI_AMT.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employee Reg. Contr amt"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol14"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPLYE_REG_CONTRI_AMT.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPLYE_REG_CONTRI_AMT.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPLYE_REG_CONTRI_AMT.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPLYE_REG_CONTRI_AMT.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPLYE_REG_CONTRI_AMT.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it16">
+                              <f:validator binding="#{bindings.PMPNS_EMPLYE_REG_CONTRI_AMT.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employee UnReg. Contr amt"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol15"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPLYE_UNREG_CONTRI_AMT.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPLYE_UNREG_CONTRI_AMT.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPLYE_UNREG_CONTRI_AMT.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPLYE_UNREG_CONTRI_AMT.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPLYE_UNREG_CONTRI_AMT.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it17">
+                              <f:validator binding="#{bindings.PMPNS_EMPLYE_UNREG_CONTRI_AMT.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Employer Lumpsum"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol16"/>
+                            <af:inputText value="#{bindings.PMPNS_EMPLYR_LUMPSUM.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EMPLYR_LUMPSUM.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EMPLYR_LUMPSUM.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EMPLYR_LUMPSUM.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EMPLYR_LUMPSUM.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it18">
+                              <f:validator binding="#{bindings.PMPNS_EMPLYR_LUMPSUM.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Hist Empyr EMV"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol36"/>
+                            <af:inputText value="#{bindings.PMPNS_ER_HIST_EST_EMV_VAL.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_ER_HIST_EST_EMV_VAL.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_ER_HIST_EST_EMV_VAL.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_ER_HIST_EST_EMV_VAL.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_ER_HIST_EST_EMV_VAL.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          disabled="true" id="it33">
+                              <f:validator binding="#{bindings.PMPNS_ER_HIST_EST_EMV_VAL.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Hist Empye EMV"
+                                            rendered="#{Rendering.pensionproduct}"
+                                            id="ol37"/>
+                            <af:inputText value="#{bindings.PMPNS_EE_HIST_EST_EMV_VAL.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_EE_HIST_EST_EMV_VAL.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_EE_HIST_EST_EMV_VAL.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_EE_HIST_EST_EMV_VAL.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_EE_HIST_EST_EMV_VAL.hints.tooltip}"
+                                          converter="javax.faces.Number"
+                                          rendered="#{Rendering.pensionproduct}"
+                                          inlineStyle="font-weight:bold"
+                                          disabled="true" id="it35">
+                              <f:validator binding="#{bindings.PMPNS_EE_HIST_EST_EMV_VAL.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Purchase Price"
+                                            id="outputLabel25"
+                                            rendered="#{Rendering.annuityproduct}"/>
+                            <af:inputText value="#{bindings.PMPNS_ANN_PURCHASE_PRICE.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_ANN_PURCHASE_PRICE.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_ANN_PURCHASE_PRICE.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_ANN_PURCHASE_PRICE.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_ANN_PURCHASE_PRICE.hints.tooltip}"
+                                          id="it26"
+                                          rendered="#{Rendering.annuityproduct}"
+                                          converter="javax.faces.Number">
+                              <f:validator binding="#{bindings.PMPNS_ANN_PURCHASE_PRICE.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Annuity Amount" id="ol19"
+                                            rendered="#{Rendering.annuityproduct}"/>
+                            <af:inputText label="#{bindings.PMPNS_ANN_AMOUNT.hints.label}"
+                                          id="it27" simple="true"
+                                          shortDesc="#{bindings.PMPNS_ANN_AMOUNT.hints.tooltip}"
+                                          value="#{bindings.PMPNS_ANN_AMOUNT.inputValue}"
+                                          required="#{bindings.PMPNS_ANN_AMOUNT.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_ANN_AMOUNT.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_ANN_AMOUNT.hints.precision}"
+                                          converter="javax.faces.Number"
+                                          binding="#{underwritingManipulation.annuityAmount}"
+                                          rendered="#{Rendering.annuityproduct}">
+                              <f:validator binding="#{bindings.PMPNS_ANN_AMOUNT.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Total Terminal Benefits"
+                                            id="outputLabel26"
+                                            rendered="#{Rendering.annuityproduct}"/>
+                            <af:inputText value="#{bindings.PMPNS_TOTAL_TERMINAL_BEN.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_TOTAL_TERMINAL_BEN.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_TOTAL_TERMINAL_BEN.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_TOTAL_TERMINAL_BEN.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_TOTAL_TERMINAL_BEN.hints.tooltip}"
+                                          id="it28"
+                                          rendered="#{Rendering.annuityproduct}"
+                                          converter="javax.faces.Number">
+                              <f:validator binding="#{bindings.PMPNS_TOTAL_TERMINAL_BEN.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Total Investments"
+                                            id="outputLabel27"
+                                            rendered="#{Rendering.annuityproduct}"/>
+                            <af:inputText value="#{bindings.PMPNS_TOTAL_INVESTMENT.inputValue}"
+                                          simple="true"
+                                          required="#{bindings.PMPNS_TOTAL_INVESTMENT.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_TOTAL_INVESTMENT.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_TOTAL_INVESTMENT.hints.precision}"
+                                          shortDesc="#{bindings.PMPNS_TOTAL_INVESTMENT.hints.tooltip}"
+                                          id="it19"
+                                          rendered="#{Rendering.annuityproduct}"
+                                          converter="javax.faces.Number">
+                              <f:validator binding="#{bindings.PMPNS_TOTAL_INVESTMENT.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Past Liability" id="ol20"
+                                            rendered="#{Rendering.gratuityproduct}"/>
+                            <af:inputText label="#{bindings.PMPNS_PAST_LIABILITY.hints.label}"
+                                          id="it29" simple="true"
+                                          disabled="true"
+                                          converter="javax.faces.Number"
+                                          value="#{bindings.PMPNS_PAST_LIABILITY.inputValue}"
+                                          required="#{bindings.PMPNS_PAST_LIABILITY.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_PAST_LIABILITY.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_PAST_LIABILITY.hints.precision}"
+                                          binding="#{underwritingManipulation.pastLiability}"
+                                          rendered="#{Rendering.gratuityproduct}">
+                              <f:validator binding="#{bindings.PMPNS_PAST_LIABILITY.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Future Liability" id="ol21"
+                                            rendered="#{Rendering.gratuityproduct}"/>
+                            <af:inputText label="#{bindings.PMPNS_FUTURE_LIABILITY.hints.label}"
+                                          id="it30" simple="true"
+                                          disabled="true"
+                                          converter="javax.faces.Number"
+                                          value="#{bindings.PMPNS_FUTURE_LIABILITY.inputValue}"
+                                          required="#{bindings.PMPNS_FUTURE_LIABILITY.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_FUTURE_LIABILITY.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_FUTURE_LIABILITY.hints.precision}"
+                                          binding="#{underwritingManipulation.futureLiability}"
+                                          rendered="#{Rendering.gratuityproduct}">
+                              <f:validator binding="#{bindings.PMPNS_FUTURE_LIABILITY.validator}"/>
+                            </af:inputText>
+                            <af:outputLabel value="Total Liability" id="ol22"
+                                            rendered="#{Rendering.gratuityproduct}"/>
+                            <af:inputText label="#{bindings.PMPNS_TOTAL_LIABILITY.hints.label}"
+                                          id="it31" simple="true"
+                                          disabled="true"
+                                          value="#{bindings.PMPNS_TOTAL_LIABILITY.inputValue}"
+                                          required="#{bindings.PMPNS_TOTAL_LIABILITY.hints.mandatory}"
+                                          columns="#{bindings.PMPNS_TOTAL_LIABILITY.hints.displayWidth}"
+                                          maximumLength="#{bindings.PMPNS_TOTAL_LIABILITY.hints.precision}"
+                                          converter="javax.faces.Number"
+                                          binding="#{underwritingManipulation.totalLiability}"
+                                          rendered="#{Rendering.gratuityproduct}">
+                              <f:validator binding="#{bindings.PMPNS_TOTAL_LIABILITY.validator}"/>
+                            </af:inputText>
+                          </h:panelGrid>
+                        </af:panelBox>
+                      </af:panelGroupLayout>
+                    </af:showDetailItem>
+                    <af:showDetailItem text="Joint Members" id="sdi2"
+                                       rendered="#{sessionScope['depCovered']=='J' || sessionScope['depCovered']=='A'}">
+                      <h:panelGrid columns="1" id="pg2">
+                        <af:table value="#{bindings.members17.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.members17.rangeSize}"
+                                  emptyText="#{bindings.members17.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.members17.rangeSize}"
+                                  rowBandingInterval="0"
+                                  inlineStyle="width:100.0%; height:100px; border-style:none;"
+                                  selectedRowKeys="#{bindings.members17.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.members17.collectionModel.makeCurrent}"
+                                  binding="#{underwritingManipulation.jointMemTable}"
+                                  rowSelection="single" id="t1">
+                          <af:column sortProperty="j_MEM_NO" sortable="true"
+                                     headerText="Member No."
+                                     id="c32">
+                            <af:outputText value="#{row.j_MEM_NO}" id="ot31"/>
+                          </af:column>
+                          <af:column sortProperty="j_MEM_IDENTITY_NO"
+                                     sortable="true"
+                                     headerText="Identity No."
+                                     id="c31">
+                            <af:outputText value="#{row.j_MEM_IDENTITY_NO}"
+                                           id="ot96"/>
+                          </af:column>
+                          <af:column sortProperty="j_MEM_SURNAME"
+                                     sortable="true"
+                                     headerText="Surname"
+                                     id="c95">
+                            <af:outputText value="#{row.j_MEM_SURNAME}"
+                                           id="ot33"/>
+                          </af:column>
+                          <af:column sortProperty="j_MEM_OTHER_NAMES"
+                                     sortable="true"
+                                     headerText="Other Name"
+                                     id="c33">
+                            <af:outputText value="#{row.j_MEM_OTHER_NAMES}"
+                                           id="ot32"/>
+                          </af:column>
+                        </af:table>
+                      </h:panelGrid>
+                    </af:showDetailItem>
+                    <af:showDetailItem text="FCL &amp; Medicals" id="sdi3"
+                                       rendered="false">
+                      <af:popup id="detFCL">
+                        <af:dialog id="d1" type="none" title="Determine FCL">
+                          <h:panelGrid columns="2" id="pg4">
+                            <af:outputLabel value="FCL Calc Type"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol32"/>
+                            <af:selectOneChoice label="Label 1" simple="true"
+                                                autoSubmit="true"
+                                                valueChangeListener="#{underwritingManipulation.GetFCLType}"
+                                                id="fclCalcTypeSel"
+                                                binding="#{underwritingManipulation.fclCalcType}">
+                              <af:selectItem label="FCL Tables" value="T"
+                                             id="si1"/>
+                              <af:selectItem label="Formula" value="F"
+                                             id="si2"/>
+                            </af:selectOneChoice>
+                            <af:outputLabel value="Computed FCL Amount"
+                                            inlineStyle="font-weight:bold;"
+                                            id="ol33"/>
+                            <af:inputText label="Label 3" simple="true"
+                                          disabled="true" columns="13"
+                                          converter="javax.faces.Number"
+                                          id="comptdFCLAmt"
+                                          binding="#{underwritingManipulation.computedFCL}"/>
+                            <af:outputLabel value="Override FCL Amount"
+                                            id="ol35"/>
+                            <af:inputText label="Label 4" simple="true"
+                                          id="overrideFCLAmtDisp"
+                                          binding="#{underwritingManipulation.overrideFCL}"/>
+                            <af:outputLabel value="FCL Endrs Period(In Months)"
+                                            id="ol34" visible="false"/>
+                            <af:inputText label="Label 5" simple="true"
+                                          columns="15" id="fclEndrsperiodDispl"
+                                          visible="false"/>
+                            <af:outputLabel value="FCL Date" id="ol17"
+                                            visible="false"/>
+                            <af:inputText label="Label 6" id="fclDateDisp"
+                                          columns="15" simple="true"
+                                          disabled="true" visible="false"/>
+                          </h:panelGrid>
+                          <h:panelGrid columns="2" id="pg5">
+                            <af:commandButton text="Save" id="cb3"
+                                              action="#{underwritingManipulation.DetermineFCL}"/>
+                            <af:commandButton text="Cancel"
+                                              id="commandButton1"/>
+                          </h:panelGrid>
+                        </af:dialog>
+                      </af:popup>
+                      <h:panelGrid columns="3" id="pg8">
+                        <af:commandButton text="Determine FCL" id="cb2"
+                                          rendered="#{Rendering.policyReadOnly}">
+                          <af:showPopupBehavior popupId="detFCL"/>
+                        </af:commandButton>
+                        <af:commandButton text="View Member Medicals" id="cb4"
+                                          action="#{underwritingManipulation.ViewMemberMedicalDetails}"/>
+                        <af:commandButton text="Complete Member Medicals"
+                                          id="commandButton45"
+                                          action="#{underwritingManipulation.CompleteFCL}"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="3" id="pg9"/>
+                    </af:showDetailItem>
+                    <af:showDetailItem text="#{Rendering.beneficariesLabel}"
+                                       id="sdi4">
+                      <af:panelBox text="PanelBox9" id="pb8" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="7" id="pg3">
+                          <af:commandButton id="commandButton4"
+                                            icon="/images/field_group_plus_ena.png"
+                                            action="#{underwritingManipulation.AddStudent}"/>
+                          <af:commandButton id="cb5"
+                                            icon="/images/update_ena.png"
+                                            action="#{underwritingManipulation.EditStudent}"/>
+                          <af:commandButton id="commandButton5"
+                                            icon="/images/delete_ena.png"
+                                            action="#{underwritingManipulation.DeleteStudent}"/>
+                          <af:spacer width="10" height="10" id="s1"/>
+                          <af:commandLink text="[Download Template]" id="cl1"
+                                          inlineStyle="font-weight:bold;"
+                                          action="#{ImportTempBean.GenerateBeneficiaryTemplate}"/>
+                          <af:inputFile label="Import Beneficiaries"
+                                        autoSubmit="true"
+                                        binding="#{FileProcessor.upFile}"
+                                        valueChangeListener="#{FileProcessor.fileChangeForBeneficiaryImport}"
+                                        immediate="true" id="if1"
+                                        inlineStyle="font-weight:bold;"/>
+                        </h:panelGrid>
+                        <af:popup id="p5">
+                          <af:dialog id="d13" type="none"
+                                     title="Administrators">
+                            <af:panelBox text="PanelBox8" id="pb19"
+                                         showHeader="never">
+                              <f:facet name="toolbar"/>
+                              <af:table value="#{bindings.Settings.collectionModel}"
+                                        var="row"
+                                        rows="#{bindings.Settings.rangeSize}"
+                                        emptyText="#{bindings.Settings.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        fetchSize="#{bindings.Settings.rangeSize}"
+                                        rowBandingInterval="0"
+                                        filterModel="#{bindings.SettingsQuery.queryDescriptor}"
+                                        queryListener="#{bindings.SettingsQuery.processQuery}"
+                                        filterVisible="true" varStatus="vs"
+                                        selectedRowKeys="#{bindings.Settings.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.Settings.collectionModel.makeCurrent}"
+                                        rowSelection="single" id="t5"
+                                        binding="#{underwritingManipulation.agencyTable}">
+                                <af:column sortProperty="SPR_CODE"
+                                           filterable="true" sortable="true"
+                                           headerText="code" id="c76">
+                                  <af:outputText value="#{row.SPR_CODE}"
+                                                 id="ot76"/>
+                                </af:column>
+                                <af:column sortProperty="SPR_SHT_DESC"
+                                           filterable="true" sortable="true"
+                                           headerText="Short Desc" id="c78">
+                                  <af:outputText value="#{row.SPR_SHT_DESC}"
+                                                 id="ot75"/>
+                                </af:column>
+                                <af:column sortProperty="SPR_NAME"
+                                           filterable="true" sortable="true"
+                                           headerText="Description" id="c77">
+                                  <af:outputText value="#{row.SPR_NAME}"
+                                                 id="ot77"/>
+                                </af:column>
+                                <af:column sortProperty="SPT_NAME"
+                                           filterable="true" sortable="true"
+                                           headerText="Type" id="c75">
+                                  <af:outputText value="#{row.SPT_NAME}"
+                                                 id="ot78"/>
+                                </af:column>
+                              </af:table>
+                              <h:panelGrid columns="2" id="pg65">
+                                <af:commandButton text="OK" id="cb66"
+                                                  partialSubmit="true"
+                                                  action="#{underwritingManipulation.findGovtAgencySelected}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="commandButton63"/>
+                              </h:panelGrid>
+                            </af:panelBox>
+                          </af:dialog>
+                        </af:popup>
+                        <af:popup id="studentDetails">
+                          <af:dialog id="d4" type="none"
+                                     title="#{Rendering.beneficariesLabel}">
+                            <af:panelBox id="pb3" showHeader="never">
+                              <f:facet name="toolbar"/>
+                              <h:panelGrid columns="2" id="pg15">
+                                <af:outputLabel value="Names" id="ol23"/>
+                                <af:inputText label="Label 7" id="it32"
+                                              simple="true"
+                                              binding="#{underwritingManipulation.studentNames}"/>
+                                <af:outputLabel value="Surname"
+                                                id="outputLabel1"/>
+                                <af:inputText label="Label 7" id="inputText31"
+                                              simple="true"
+                                              binding="#{underwritingManipulation.studentSurname}"/>
+                                <af:outputLabel value="Type" id="ol24"/>
+                                <af:selectOneChoice label="Label 3" id="soc3"
+                                                    simple="true"
+                                                    value="select type"
+                                                    binding="#{underwritingManipulation.ben_type}">
+                                  <af:selectItem label="Beneficiary" value="B"
+                                                 id="si7"/>
+                                  <af:selectItem label="Contigent" value="C"
+                                                 id="si6"/>
+                                </af:selectOneChoice>
+                                <af:outputLabel value="Member No."
+                                                id="outputLabel2"/>
+                                <af:inputText label="Label 7" id="inputText32"
+                                              simple="true"
+                                              binding="#{underwritingManipulation.studentMemNo}" 
+                                              value="#{LOVCCBean.beneficiaryNo}"/>
+                                                              
+                                <af:outputLabel value="Date of Birth"
+                                                id="outputLabel22"/>
+                                <af:inputDate label="Label 2" id="id1"
+                                              simple="true"
+                                              binding="#{underwritingManipulation.studentDOB}">
+                                   <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>               
+                                <af:outputLabel value="Level of Study"
+                                                id="outputLabel23"
+                                                rendered="#{Rendering.educationproduct}"/>
+                                <af:selectOneChoice value="#{bindings.categoryShtDesc.inputValue}"
+                                                    required="#{bindings.categoryShtDesc.hints.mandatory}"
+                                                    shortDesc="#{bindings.categoryShtDesc.hints.tooltip}"
+                                                    id="soc2" simple="true"
+                                                    binding="#{underwritingManipulation.studentClass}"
+                                                    rendered="#{Rendering.educationproduct}">
+                                  <f:selectItems value="#{bindings.categoryShtDesc.items}"
+                                                 id="si4"/>
+                                </af:selectOneChoice>
+                                <af:outputLabel value="Sex" id="outputLabel24"/>
+                                <af:selectOneChoice label="Label 2" id="soc1"
+                                                    simple="true" value="M"
+                                                    binding="#{underwritingManipulation.studentSex}">
+                                  <af:selectItem label="Male" value="M"
+                                                 id="si5"/>
+                                  <af:selectItem label="Female" value="F"
+                                                 id="si3"/>
+                                </af:selectOneChoice>
+                                <af:outputLabel value="Fund Administrator"
+                                                id="outputLabel37"
+                                                rendered="#{Rendering.pensionproduct}"/>
+                                <h:panelGrid columns="2" id="pg40"
+                                             rendered="#{Rendering.pensionproduct}">
+                                  <af:inputText label="Label 23" id="it34"
+                                                simple="true" disabled="true"
+                                                binding="#{underwritingManipulation.agencyDesc}"/>
+                                  <af:commandButton id="cb37"
+                                                    icon="/images/dropdown.gif">
+                                    <af:showPopupBehavior popupId="p5"/>
+                                  </af:commandButton>
+                                </h:panelGrid>
+                                <af:outputLabel value="RSA Pin"
+                                                id="outputLabel71"
+                                                rendered="#{Rendering.pensionproduct}"/>
+                                <af:inputText label="Label 19" id="inputText51"
+                                              simple="true"
+                                              binding="#{underwritingManipulation.rsaPin}"
+                                              rendered="#{Rendering.pensionproduct}"/>
+                                <af:outputLabel value="Share Pct"
+                                                id="outputLabel68"/>
+                                <af:inputText label="Label 19" id="inputText48"
+                                              simple="true"
+                                              binding="#{underwritingManipulation.studentSharePct}"/>
+                               <af:outputLabel value="ID. No" id="ol44"/>
+                            <af:inputText label="Label 25" id="it41" simple="true"
+                                          binding="#{underwritingManipulation.benIdNo}"/>
+                            <af:outputLabel value="Relation Type" id="ol45"/>
+                            <h:panelGrid columns="2">
+                            <af:inputText label="Label 26" id="it42" simple="true"
+                                          binding="#{underwritingManipulation.benRelationType}"
+                                          disabled="true"/>
+                             <af:commandButton  id="cb13"
+                                               icon="/dropdown.gif">
+                             <af:showPopupBehavior popupId="relation_type" />
+                              </af:commandButton>
+                                 <af:popup id="relation_type">
+                                 <af:dialog type="none" title="Relation Type"
+                                            id="d6">
+                                      <af:table value="#{bindings.relationTypes.collectionModel}"
+                                                var="row"
+                                                rows="#{bindings.relationTypes.rangeSize}"
+                                                emptyText="#{bindings.relationTypes.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                fetchSize="#{bindings.relationTypes.rangeSize}"
+                                                rowBandingInterval="0" id="t8"
+                                                binding="#{underwritingManipulation.relationTypeLOV}"
+                                                filterVisible="true"
+                                                inlineStyle="width:100%;height:300px"
+                                                rowSelection="single">
+                                        <af:column sortProperty="retDesc"
+                                                   sortable="false"
+                                                   headerText="Relation Type"
+                                                   id="c100"
+                                                   width="200">
+                                          <af:outputText value="#{row.retDesc}"
+                                                         id="ot101"/>
+                                        </af:column>
+                                      </af:table>
+                                      <h:panelGrid columns="2">
+                                        <af:commandButton text="OK"
+                                                          id="cb14"
+                                                          partialSubmit="true"
+                                                          action="#{underwritingManipulation.addRelationType}"/>
+                                        <af:commandButton text="Cancel"
+                                                          id="cb15"/>
+                                      </h:panelGrid>
+                                    </af:dialog>
+                                 </af:popup>
+                                </h:panelGrid>              
+                            <af:outputLabel value="Comments" id="ol46"/>
+                            <af:inputText label="Label 27" id="it43" simple="true"
+                                          binding="#{underwritingManipulation.benComments}"/>
+                              </h:panelGrid>
+                              <h:panelGrid columns="2" id="pg11">
+                                <af:commandButton text="Save" id="cb6"
+                                                  partialSubmit="true"
+                                                  action="#{underwritingManipulation.SaveStudent}"/>
+                                <af:commandButton text="Cancel"
+                                                  id="commandButton6"/>
+                              </h:panelGrid>
+                            </af:panelBox>
+                          </af:dialog>
+                        </af:popup>                        
+                        <af:table value="#{bindings.members14.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.members14.rangeSize}"
+                                  emptyText="#{bindings.members14.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.members14.rangeSize}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.members14.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.members14.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t3"                                  
+                                  inlineStyle="height:100.0px; border-style:none;"
+                                  binding="#{underwritingManipulation.studentsLOV}"
+                                  styleClass="AFStretchWidth">
+                          <af:column sortProperty="qmemBenMemNo" sortable="true"
+                                     headerText=" Member No." id="c62">
+                            <af:outputText value="#{row.qmemBenMemNo}"
+                                           id="ot53"/>
+                          </af:column>
+                          <af:column sortProperty="qmemBenSurname"
+                                     sortable="true" headerText="Surname"
+                                     id="c63">
+                            <af:outputText value="#{row.qmemBenSurname}"
+                                           id="ot59"/>
+                          </af:column>
+                          <af:column sortProperty="qmemBenOtherNames"
+                                     sortable="true" headerText="Other Names"
+                                     id="c57">
+                            <af:outputText value="#{row.qmemBenOtherNames}"
+                                           id="ot62"/>
+                          </af:column>
+                          <af:column sortProperty="qmem_ben_sex" sortable="true"
+                                     headerText="Sex" id="c56">
+                            <af:outputText value="#{row.qmem_ben_sex}"
+                                           id="ot61"/>
+                          </af:column>
+                          <af:column sortProperty="pmem_dob" sortable="false"
+                                     headerText="Date of Birth" id="c83">
+                            <af:outputText value="#{row.pmem_dob}" id="ot83">
+                              <af:convertDateTime pattern="#{bindings.members14.hints.pmem_dob.format}"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="classDisplay" sortable="true"
+                                     headerText="Class" id="c54"
+                                     rendered="#{Rendering.educationproduct}">
+                            <af:outputText value="#{row.classDisplay}"
+                                           id="ot54"/>
+                          </af:column>
+                          <af:column sortProperty="benTerm" sortable="true"
+                                     headerText="Term" id="c58"
+                                     rendered="#{Rendering.educationproduct}">
+                            <af:outputText value="#{row.benTerm}" id="ot58"/>
+                          </af:column>
+                          <af:column sortProperty="feeDisplay" sortable="true"
+                                     headerText="Fees" id="c53"
+                                     rendered="#{Rendering.educationproduct}">
+                            <af:outputText value="#{row.feeDisplay}" id="ot56"/>
+                          </af:column>
+                          <af:column sortProperty="qmemBenCode" sortable="true"
+                                     headerText="Code" id="c59" visible="false">
+                            <af:outputText value="#{row.qmemBenCode}"
+                                           id="ot63"/>
+                          </af:column>
+                          <af:column sortProperty="qmemBenClass" sortable="true"
+                                     headerText="Class Code" id="c60"
+                                     visible="false">
+                            <af:outputText value="#{row.qmemBenClass}"
+                                           id="ot57"/>
+                          </af:column>
+                          <af:column sortProperty="spr_name" sortable="false"
+                                     headerText="Fund Administrator" id="c80"
+                                     rendered="#{Rendering.pensionproduct}">
+                            <af:outputText value="#{row.spr_name}" id="ot81"/>
+                          </af:column>
+                          <af:column sortProperty="pmem_rsa_pin"
+                                     sortable="false" headerText="RSA PIN."
+                                     id="c81"
+                                     rendered="#{Rendering.pensionproduct}">
+                            <af:outputText value="#{row.pmem_rsa_pin}"
+                                           id="ot80"/>
+                          </af:column>
+                          <af:column sortProperty="pmem_share_pct"
+                                     sortable="false" headerText="Share %"
+                                     id="c82">
+                            <af:outputText value="#{row.pmem_share_pct}"
+                                           id="ot82"/>
+                          </af:column>
+                          <af:column sortProperty="spr_code" sortable="false"
+                                     headerText="spr_code" id="c79"
+                                     visible="false">
+                            <af:outputText value="#{row.spr_code}" id="ot79"/>
+                          </af:column>
+                          
+                      <af:column sortable="true" headerText="ID Number" id="c97"
+                                 filterable="true">
+                        <af:outputText value="#{row.pmem_id_no}"
+                                       id="ot98"/>
+                      </af:column>
+                      <af:column sortable="true" headerText="Relation Type"
+                                 id="c98"
+                                  filterable="true">
+                        <af:outputText value="#{row.pmem_ret_desc}"
+                                       id="ot99"/>
+                      </af:column>
+                      <af:column sortable="true" headerText="Comments" id="c99"
+                                  filterable="true">
+                        <af:outputText value="#{row.pmem_comments}"
+                                       id="ot100"/>
+                      </af:column>
+                        </af:table>
+                      </af:panelBox>
+                    </af:showDetailItem>
+                    <af:showDetailItem text="Member Dependants"
+                                       id="showDetailItem2"
+                                       rendered="#{Rendering.pensAnnuityproduct}">
+                      <af:panelGroupLayout id="panelGroupLayout1">
+                        <af:panelBox text="PanelBox3" id="panelBox2"
+                                     showHeader="never"
+                                     inlineStyle="width:100.0%;">
+                          <f:facet name="toolbar"/>
+                          <h:panelGrid columns="3" id="panelGrid5">
+                            <af:commandButton id="commandButton13"
+                                              icon="/images/field_group_plus_ena.png"
+                                              action="#{underwritingManipulation.Addbeneficiary}"/>
+                            <af:commandButton id="commandButton20"
+                                              icon="/images/update_ena.png"
+                                              action="#{underwritingManipulation.EditBeneficiary}"/>
+                            <af:commandButton id="commandButton21"
+                                              icon="/images/delete_ena.png"
+                                              action="#{underwritingManipulation.DeleteBeneficiary}"/>
+                          </h:panelGrid>
+                          <af:popup id="popup1">
+                            <af:dialog id="dialog2" type="none"
+                                       title="Beneficiary Details">
+                              <af:panelBox text="PanelBox1" id="panelBox3"
+                                           showHeader="never">
+                                <f:facet name="toolbar"/>
+                                <h:panelGrid columns="2" id="panelGrid6">
+                                  <af:outputLabel value="Names"
+                                                  id="outputLabel38"/>
+                                  <af:inputText label="Label 7" id="inputText38"
+                                                simple="true"
+                                                binding="#{underwritingManipulation.benNames}"/>
+                                  <af:outputLabel value="Surname"
+                                                  id="outputLabel39"/>
+                                  <af:inputText label="Label 7" id="inputText39"
+                                                simple="true"
+                                                binding="#{underwritingManipulation.benSurname}"/>
+                                  <af:outputLabel value="Member No."
+                                                  id="outputLabel40"/>
+                                  <af:inputText label="Label 7" id="inputText40"
+                                                simple="true"
+                                                binding="#{underwritingManipulation.benMemNo}"/>
+                                  <af:outputLabel value="Date of Birth"
+                                                  id="outputLabel41"
+                                                  rendered="false"/>
+                                  <af:inputDate label="Label 2" id="inputDate5"
+                                                simple="true"
+                                                binding="#{underwritingManipulation.benDOB}"
+                                                rendered="false">
+                                      <af:convertDateTime pattern="dd-MMM-yyyy"/>               
+                                 </af:inputDate>              
+                                  <af:outputLabel value="Share %"
+                                                  id="outputLabel42"/>
+                                  <af:inputText label="Label 7" id="inputText41"
+                                                simple="true"
+                                                binding="#{underwritingManipulation.benShare}"/>
+                                  <af:outputLabel value="Terminal Share %"
+                                                  id="outputLabel43"/>
+                                  <af:inputText label="Label 7" id="inputText42"
+                                                simple="true"
+                                                binding="#{underwritingManipulation.benTerShare}"/>
+                                </h:panelGrid>
+                                <h:panelGrid columns="2" id="panelGrid7">
+                                  <af:commandButton text="Save"
+                                                    id="commandButton22"
+                                                    partialSubmit="true"
+                                                    action="#{underwritingManipulation.SaveBeneficiary}"/>
+                                  <af:commandButton text="Cancel"
+                                                    id="commandButton23"/>
+                                </h:panelGrid>
+                              </af:panelBox>
+                            </af:dialog>
+                          </af:popup>
+                          <af:table value="#{bindings.members13.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.members13.rangeSize}"
+                                    emptyText="#{bindings.members13.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.members13.rangeSize}"
+                                    rowBandingInterval="0"
+                                    selectionListener="#{underwritingManipulation.memberDependantListener}"
+                                    rowSelection="single" id="table1"
+                                    inlineStyle="width:100%; height:100.0px; border-style:none;"
+                                    binding="#{underwritingManipulation.annDependantsLOV}">
+                            <af:column sortProperty="pabMemberNumber"
+                                       sortable="true"
+                                       headerText="Member Number" id="column1">
+                              <af:outputText value="#{row.pabMemberNumber}"
+                                             id="outputText1"/>
+                            </af:column>
+                            <af:column sortProperty="pabSURNAME" sortable="true"
+                                       headerText="Surname" id="column2">
+                              <af:outputText value="#{row.pabSURNAME}"
+                                             id="outputText2"/>
+                            </af:column>
+                            <af:column sortProperty="pabOTHERNAMES"
+                                       sortable="true" headerText="Other Names"
+                                       id="column3">
+                              <af:outputText value="#{row.pabOTHERNAMES}"
+                                             id="outputText3"/>
+                            </af:column>
+                            <af:column sortProperty="pabDOB" sortable="true"
+                                       headerText="DOB" id="column4">
+                              <af:outputText value="#{row.pabDOB}"
+                                             id="outputText4">
+                                <af:convertDateTime pattern="#{bindings.members13.hints.pabDOB.format}"/>
+                              </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="pabANB" sortable="true"
+                                       headerText="ANB" id="column5">
+                              <af:outputText value="#{row.pabANB}"
+                                             id="outputText5"/>
+                            </af:column>
+                            <af:column sortProperty="pabBEN_PCT" sortable="true"
+                                       headerText="Share %" id="column6">
+                              <af:outputText value="#{row.pabBEN_PCT}"
+                                             id="outputText6"/>
+                            </af:column>
+                            <af:column sortProperty="pab_term_ben_pct"
+                                       sortable="false"
+                                       headerText="Terminal Share %"
+                                       id="column7">
+                              <af:outputText value="#{row.pab_term_ben_pct}"
+                                             id="outputText7"/>
+                            </af:column>
+                            <af:column sortProperty="pabANN_PURCHASE_AMT"
+                                       sortable="true"
+                                       headerText="Purchase Amount"
+                                       id="column8">
+                              <af:outputText value="#{row.pabANN_PURCHASE_AMT}"
+                                             id="outputText8"
+                                             converter="javax.faces.Number"/>
+                            </af:column>
+                            <af:column sortProperty="pabBEN_TERMINAL_AMT"
+                                       sortable="true"
+                                       headerText="Terminal Amount"
+                                       id="column9">
+                              <af:outputText value="#{row.pabBEN_TERMINAL_AMT}"
+                                             id="outputText9"
+                                             converter="javax.faces.Number"/>
+                            </af:column>
+                            <af:column sortProperty="pabNUmber" sortable="false"
+                                       headerText="code" id="column10"
+                                       visible="false">
+                              <af:outputText value="#{row.pabNUmber}"
+                                             id="outputText10"/>
+                            </af:column>
+                          </af:table>
+                          <af:outputLabel value="Beneficiary Partial Payments"
+                                          id="outputLabel44"
+                                          inlineStyle="font-weight:bold;"/>
+                          <af:separator id="separator1"/>
+                          <af:table value="#{bindings.members15.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.members15.rangeSize}"
+                                    emptyText="#{bindings.members15.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.members15.rangeSize}"
+                                    rowBandingInterval="0"
+                                    selectedRowKeys="#{bindings.members15.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.members15.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="table2"
+                                    binding="#{underwritingManipulation.annPartialPayments}"
+                                    inlineStyle="width:100%; height:100.0px; border-style:none;">
+                            <af:column sortProperty="QABP_CODE" sortable="true"
+                                       headerText="code" id="column11"
+                                       visible="false">
+                              <af:outputText value="#{row.QABP_CODE}"
+                                             id="outputText11"/>
+                            </af:column>
+                            <af:column sortProperty="QABP_NO" sortable="true"
+                                       headerText="Payment No." id="column12">
+                              <af:outputText value="#{row.QABP_NO}"
+                                             id="outputText12"/>
+                            </af:column>
+                            <af:column sortProperty="QABP_DATE_DUE"
+                                       sortable="true" headerText="Date Due"
+                                       id="column13">
+                              <af:outputText value="#{row.QABP_DATE_DUE}"
+                                             id="outputText13">
+                                <af:convertDateTime pattern="#{bindings.members15.hints.QABP_DATE_DUE.format}"/>
+                              </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="QABP_AMOUNT"
+                                       sortable="true" headerText="Amount"
+                                       id="column17">
+                              <af:outputText value="#{row.QABP_AMOUNT}"
+                                             id="outputText14"
+                                             converter="javax.faces.Number"/>
+                            </af:column>
+                            <af:column sortProperty="QABP_PAID_DESC"
+                                       sortable="true" headerText="Paid?"
+                                       id="column18">
+                              <af:outputText value="#{row.QABP_PAID_DESC}"
+                                             id="outputText15"/>
+                            </af:column>
+                            <af:column sortProperty="QABP_PAID_DATE"
+                                       sortable="true" headerText="Paid Date"
+                                       id="column19">
+                              <af:outputText value="#{row.QABP_PAID_DATE}"
+                                             id="outputText16">
+                                <af:convertDateTime pattern="#{bindings.members15.hints.QABP_PAID_DATE.format}"/>
+                              </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="QABP_VOUCHER_NO"
+                                       sortable="true" headerText="Voucher No."
+                                       id="column20">
+                              <af:outputText value="#{row.QABP_VOUCHER_NO}"
+                                             id="outputText17"/>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                      </af:panelGroupLayout>
+                    </af:showDetailItem>
+                    <af:showDetailItem text="Member Exceptions" id="sdi6">
+                      <af:panelGroupLayout id="pgl5">
+                        <af:panelBox text="PanelBox3" id="pb5"
+                                     showHeader="never"
+                                     inlineStyle="width:100.0%;">
+                          <f:facet name="toolbar"/>
+                          <h:panelGrid columns="3">
+                            <af:outputLabel value="Remarks" id="ol43" />
+                            <af:inputText label="Label 413" id="it40" simple="true" rows="3" columns="30"
+                                          binding="#{underwritingManipulation.exceptionRemarks}"/>
+                            <af:commandButton text="Authorise Exception" id="cb12"
+                                              action="#{underwritingManipulation.authoriseMemException}"/>
+                           <!-- <af:commandButton text="Alter Rate" id="cb13"
+                                              action="#{underwritingManipulation.alterCoverRate}"/>-->
+                          </h:panelGrid>
+                          <af:table value="#{bindings.members16.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.members16.rangeSize}"
+                                    emptyText="#{bindings.members16.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.members16.rangeSize}"
+                                    rowBandingInterval="0"
+                                    selectedRowKeys="#{bindings.members16.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.members16.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t2"
+                                    inlineStyle="width:100%; height:160.0px; border-style:none;"
+                                    binding="#{underwritingManipulation.polMemberExceptions}">
+                            <af:column sortProperty="POLME_CODE" sortable="true"
+                                       headerText="code" id="c50"
+                                       visible="false">
+                              <af:outputText value="#{row.POLME_CODE}"
+                                             id="ot52"/>
+                            </af:column>
+                            <af:column sortProperty="POLME_LGE_CODE"
+                                       sortable="true" headerText="lge_code"
+                                       id="c49" visible="false">
+                              <af:outputText value="#{row.POLME_LGE_CODE}"
+                                             id="ot60"/>
+                            </af:column>
+                            <af:column sortProperty="POLME_LGE_SHT_DESC"
+                                       sortable="true"
+                                       headerText="Short Description" id="c51">
+                              <af:outputText value="#{row.POLME_LGE_SHT_DESC}"
+                                             id="ot55"/>
+                            </af:column>
+                            <af:column sortProperty="LGE_DESC" sortable="true"
+                                       headerText="Exception" id="c61"
+                                       width="500">
+                              <af:outputText value="#{row.LGE_DESC}" id="ot49"/>
+                            </af:column>
+                            <af:column sortProperty="POLME_REMARKS" sortable="true"
+                                       headerText="Remarks" id="c96"
+                                       width="100">
+                              <af:outputText value="#{row.POLME_REMARKS}" id="ot97"/>
+                            </af:column>
+                            <af:column sortProperty="POLME_BLOCK"
+                                       sortable="true"
+                                       headerText="Blocked Cover Creation"
+                                       id="c48" width="120">
+                              <af:outputText value="#{row.POLME_BLOCK}"
+                                             id="ot50"/>
+                            </af:column>
+                            <af:column sortProperty="POLME_AUTHORISED"
+                                       sortable="true" headerText="Authorised"
+                                       id="c52">
+                              <af:outputText value="#{row.POLME_AUTHORISED}"
+                                             id="ot48"/>
+                            </af:column>
+                            <af:column sortProperty="POLME_AUTHORISED_BY"
+                                       sortable="true"
+                                       headerText="Authorised By" id="c55">
+                              <af:outputText value="#{row.POLME_AUTHORISED_BY}"
+                                             id="ot51"/>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                      </af:panelGroupLayout>
+                    </af:showDetailItem>
+                    <af:showDetailItem text="Member Sub-Divisions" id="sdi7">
+                      <af:panelGroupLayout id="pgl4">
+                        <af:panelBox id="pb7" showHeader="never">
+                          <f:facet name="toolbar"/>
+                          <af:table value="#{bindings.endorsements.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.endorsements.rangeSize}"
+                                    emptyText="#{bindings.endorsements.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.endorsements.rangeSize}"
+                                    rowBandingInterval="0"
+                                    filterModel="#{bindings.endorsementsQuery.queryDescriptor}"
+                                    queryListener="#{bindings.endorsementsQuery.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.endorsements.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.endorsements.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t4"
+                                    binding="#{underwritingManipulation.memberSDivTable}"
+                                    inlineStyle="width:100%; height:160.0px; border-style:none;">
+                            <af:column sortProperty="PGSUB_CODE"
+                                       filterable="true" sortable="true"
+                                       headerText="code" id="c67"
+                                       visible="false">
+                              <af:outputText value="#{row.PGSUB_CODE}"
+                                             id="ot69"/>
+                            </af:column>
+                            <af:column sortProperty="PGSUB_GSUB_CODE"
+                                       filterable="true" sortable="true"
+                                       headerText="gsub_code" id="c65"
+                                       visible="false">
+                              <af:outputText value="#{row.PGSUB_GSUB_CODE}"
+                                             id="ot67"/>
+                            </af:column>
+                            <af:column sortProperty="GSUB_DESC"
+                                       filterable="true" sortable="true"
+                                       headerText="Sub-Division Type" id="c64"
+                                       width="200">
+                              <af:outputText value="#{row.GSUB_DESC}"
+                                             id="ot64"/>
+                            </af:column>
+                            <af:column sortProperty="PGSUB_SHT_DESC"
+                                       filterable="true" sortable="true"
+                                       headerText="Short Description" id="c69">
+                              <af:outputText value="#{row.PGSUB_SHT_DESC}"
+                                             id="ot68"/>
+                            </af:column>
+                            <af:column sortProperty="PGSUB_DESC"
+                                       filterable="true" sortable="true"
+                                       headerText="Description" id="c66"
+                                       width="200">
+                              <af:outputText value="#{row.PGSUB_DESC}"
+                                             id="ot65"/>
+                            </af:column>
+                            <af:column sortProperty="PMEMS_CODE"
+                                       filterable="true" sortable="true"
+                                       headerText="pmem_code" id="c68"
+                                       visible="false">
+                              <af:outputText value="#{row.PMEMS_CODE}"
+                                             id="ot66"/>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                      </af:panelGroupLayout>
+                    </af:showDetailItem>
+                    <af:showDetailItem text="Member Provisions" id="sdi8">
+                      <af:panelGroupLayout id="pgl6">
+                      <h:panelGrid columns="2">
+                          <af:commandButton text="" id="cb8" icon="/images/field_group_plus_ena.png">
+                          <af:showPopupBehavior popupId="p2"/>
+                          </af:commandButton>                          
+                          <af:commandButton text="" id="cb9" icon="/images/delete_ena.png"
+                                            action="#{underwritingManipulation.deleteMemberProvision}"/>
+                        </h:panelGrid>
+                        <af:popup id="p2">
+                          <af:dialog id="d5" type="none" title="Provisions">
+                            <af:table value="#{bindings.productDetails.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.productDetails.rangeSize}"
+                                      emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.productDetails.rangeSize}"
+                                      rowBandingInterval="0"
+                                      filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                      queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t6"
+                                      binding="#{underwritingManipulation.memProvisionLOV}">
+                              <af:column sortProperty="PPROV_CODE"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.productDetails.hints.PPROV_CODE.label}"
+                                         visible="false"
+                                         id="c89">
+                                <af:outputText value="#{row.PPROV_CODE}"
+                                               id="ot89"/>
+                              </af:column>
+                              <af:column sortProperty="PROV_SHT_DESC"
+                                         filterable="true" sortable="true"
+                                         headerText="Provision Sht Desc."
+                                         id="c86">
+                                <af:outputText value="#{row.PROV_SHT_DESC}"
+                                               id="ot88"/>
+                              </af:column>
+                              <af:column sortProperty="PROV_DESC"
+                                         filterable="true" sortable="true"
+                                         headerText="Provision Desc"
+                                         id="c87">
+                                <af:outputText value="#{row.PROV_DESC}"
+                                               id="ot87"/>
+                              </af:column>
+                              <af:column sortProperty="PPROV_EDITABLE"
+                                         filterable="true" sortable="true"
+                                         headerText="editable"
+                                         id="c88">
+                                <af:outputText value="#{row.PPROV_EDITABLE}"
+                                               id="ot86"/>
+                              </af:column>
+                              <af:column sortProperty="PPROV_PROD_CODE"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.productDetails.hints.PPROV_PROD_CODE.label}"
+                                         visible="false"
+                                         id="c85">
+                                <af:outputText value="#{row.PPROV_PROD_CODE}"
+                                               id="ot85">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.productDetails.hints.PPROV_PROD_CODE.format}"/>
+                                </af:outputText>
+                              </af:column>
+                            </af:table>
+                            <h:panelGrid id="pg14" columns="2">
+                              <af:commandButton text="OK"
+                                                id="cb10"
+                                                action="#{underwritingManipulation.addMemberProvision}"/>
+                              <af:commandButton text="CANCEL"
+                                                id="cb11"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                        <af:table value="#{bindings.productDetails1.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.productDetails1.rangeSize}"
+                                  emptyText="#{bindings.productDetails1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.productDetails1.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.productDetails1Query.queryDescriptor}"
+                                  queryListener="#{bindings.productDetails1Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  selectedRowKeys="#{bindings.productDetails1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.productDetails1.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t7"
+                                  binding="#{underwritingManipulation.memberProvisionLOV}"
+                                  inlineStyle="height:200px;width:350px">
+                             <af:column sortProperty="mempCode"
+                                     filterable="true" sortable="true"
+                                     headerText="#{bindings.productDetails1.hints.mempCode.label}"
+                                     visible="false"
+                                     id="c90">
+                            <af:outputText value="#{row.mempCode}"
+                                           id="ot91"/>
+                          </af:column>         
+                          <af:column sortProperty="PROV_SHT_DESC"
+                                     filterable="true" sortable="true"
+                                     headerText="Provision sht Desc"
+                                     id="c92">
+                            <af:outputText value="#{row.PROV_SHT_DESC}"
+                                           id="ot92"/>
+                          </af:column>
+                          <af:column sortProperty="PROV_DESC" filterable="true"
+                                     sortable="true"
+                                     headerText="Provision Description"
+                                     width="200px"
+                                     id="c91">
+                            <af:outputText value="#{row.PROV_DESC}" id="ot90"/>
+                          </af:column>
+                        </af:table>
+                      </af:panelGroupLayout>
+                    </af:showDetailItem>
+                  </af:panelTabbed>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

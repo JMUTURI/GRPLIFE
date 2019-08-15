@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="productProvisionsPageDef"
+                Package="LMSG.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findProducts.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductsIterator"/>
+    <methodIterator Binds="findProdCoverTypes.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProdCoverTypesIterator"/>
+    <searchRegion Binds="findProdCoverTypesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup1Query"/>
+    <methodIterator Binds="findProdCoverProvisions.result"
+                    DataControl="SetupsDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.Setup"
+                    id="findProdCoverProvisionsIterator"/>
+    <methodIterator Binds="findProvisions.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProvisionsIterator"/>
+    <searchRegion Binds="findProvisionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup3Query"/>
+    <methodIterator Binds="findProvisionsLimit.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProvisionsLimitIterator"/>
+    <searchRegion Binds="findProvisionsLimitIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup5Query"/>
+    <methodIterator Binds="findProductProvisions.result" DataControl="SetupsDAO"
+                    RangeSize="25" BeanClass="com.turnkey.setups.Setup"
+                    id="findProductProvisionsIterator"/>
+    <searchRegion Binds="findProductProvisionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Setup7Query"/>
+  </executables>
+  <bindings>
+    <methodAction id="findProducts" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProducts"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProducts_SetupsDAO_dataProvider_findProducts_result"/>
+    <tree IterBinding="findProductsIterator" id="Setup">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup0">
+        <AttrNames>
+          <Item Value="PROD_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProdCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProdCoverTypes"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProdCoverTypes_SetupsDAO_dataProvider_findProdCoverTypes_result"/>
+    <tree IterBinding="findProdCoverTypesIterator" id="Setup1">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup10">
+        <AttrNames>
+          <Item Value="PCT_CVT_SHT_DESC"/>
+          <Item Value="PCT_CVT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProdCoverProvisions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProdCoverProvisions"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProdCoverProvisions_SetupsDAO_dataProvider_findProdCoverProvisions_result"/>
+    <tree IterBinding="findProdCoverProvisionsIterator" id="Setup2">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup20">
+        <AttrNames>
+          <Item Value="PROV_DESC"/>
+          <Item Value="PCPR_DEFAULT"/>
+          <Item Value="PCPR_EDIT_ALLOW"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProvisions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProvisions"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProvisions_SetupsDAO_dataProvider_findProvisions_result"/>
+    <tree IterBinding="findProvisionsIterator" id="Setup3">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup30">
+        <AttrNames>
+          <Item Value="PROV_SHT_DESC"/>
+          <Item Value="PROV_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findProvisionsIterator" id="Setup4">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup40">
+        <AttrNames>
+          <Item Value="PROV_SHT_DESC"/>
+          <Item Value="PROV_DESC"/>
+          <Item Value="PROV_TYPE"/>
+          <Item Value="PROV_HIV_CLAUSE_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProvisionsLimit" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProvisionsLimit"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProvisionsLimit_SetupsDAO_dataProvider_findProvisionsLimit_result"/>
+    <tree IterBinding="findProvisionsLimitIterator" id="Setup5">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup50">
+        <AttrNames>
+          <Item Value="provl_code"/>
+          <Item Value="provl_from"/>
+          <Item Value="provl_to"/>
+          <Item Value="provl_perc_payable"/>
+          <Item Value="provl_waiting_prd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findProvisionsIterator" id="Setup6">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup60">
+        <AttrNames>
+          <Item Value="PROV_CODE"/>
+          <Item Value="PROV_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductProvisions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductProvisions"
+                  IsViewObjectMethod="false" DataControl="SetupsDAO"
+                  InstanceName="SetupsDAO.dataProvider"
+                  ReturnName="SetupsDAO.methodResults.findProductProvisions_SetupsDAO_dataProvider_findProductProvisions_result"/>
+    <tree IterBinding="findProductProvisionsIterator" id="Setup7">
+      <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup70">
+        <AttrNames>
+          <Item Value="pprov_code"/>
+          <Item Value="pprov_default"/>
+          <Item Value="pprov_editable"/>
+          <Item Value="pprov_auto_populate"/>
+          <Item Value="PROV_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>
