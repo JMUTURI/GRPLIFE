@@ -108,6 +108,63 @@
                   </af:panelBox>
                 </af:dialog>
               </af:popup>
+              <af:popup id="p3">
+                <af:dialog id="d4" type="none" title="Claims">
+                  <af:table value="#{bindings.Claim.collectionModel}" var="row"
+                            rows="#{bindings.Claim.rangeSize}"
+                            emptyText="#{bindings.Claim.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.Claim.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.ClaimQuery.queryDescriptor}"
+                            queryListener="#{bindings.ClaimQuery.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.Claim.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.Claim.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t6" width="100%"
+                            binding="#{TicketsBean.claimsLOV}">
+                    <af:column sortProperty="LTR_CLM_NO" filterable="true"
+                               sortable="true"
+                               headerText="Claim Number"
+                               id="c14">
+                      <af:outputFormatted value="#{row.bindings.LTR_CLM_NO.inputValue}"
+                                          id="of2"/>
+                    </af:column>
+                    <af:column sortProperty="LTR_CLIENT" filterable="true"
+                               sortable="true"
+                               headerText="Client"
+                               id="c12">
+                      <af:outputFormatted value="#{row.bindings.LTR_CLIENT.inputValue}"
+                                          id="of1"/>
+                    </af:column>
+                    <af:column sortProperty="LTR_POL_POLICY_NO"
+                               filterable="true" sortable="true"
+                               headerText="Policy Number"
+                               id="c16">
+                      <af:outputFormatted value="#{row.bindings.LTR_POL_POLICY_NO.inputValue}"
+                                          id="of3"/>
+                    </af:column>
+                    <af:column sortProperty="LTR_MEMBER_DISP" filterable="true"
+                               sortable="true"
+                               headerText="Member Name"
+                               id="c13">
+                      <af:outputFormatted value="#{row.bindings.LTR_MEMBER_DISP.inputValue}"
+                                          id="of4"/>
+                    </af:column>
+                    <af:column sortProperty="LTR_MEM_NO" filterable="true"
+                               sortable="true"
+                               headerText="Member Number"
+                               id="c15">
+                      <af:outputFormatted value="#{row.bindings.LTR_MEM_NO.inputValue}"
+                                          id="of5"/>
+                    </af:column>
+                  </af:table>
+                  <h:panelGrid columns="2">
+                    <af:commandButton text="OK" id="cb11"
+                                      action="#{TicketsBean.selectClaim}"/>
+                    <af:commandButton text="Cancel" id="cb12"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
               <af:panelBox id="pb2"
                            text="Transaction Details.">
                 <f:facet name="toolbar"/>
@@ -131,8 +188,7 @@
                     <af:selectItem label="New Business Module" value="P" id="si5"/>
                     <af:selectItem label="Endorsements Module" value="E"
                                    id="si2"/>
-                    <af:selectItem label="Claims Module" value="C" id="si3"
-                                   disabled="true"/>
+                    <af:selectItem label="Claims Module" value="C" id="si3"/>
                   </af:selectOneChoice>
                 </h:panelGrid>
                 <af:spacer width="10" height="10" id="s1"/>
@@ -141,8 +197,10 @@
                     <f:facet name="toolbar"/>
                     <h:panelGrid columns="2" id="pg2">
                       <af:outputLabel value="Select A Product:"
-                                      id="outputLabel5"/>
-                      <h:panelGrid columns="2" id="panelGrid5">
+                                      id="outputLabel5"
+                                      binding="#{TicketsBean.productLabel}"/>
+                      <h:panelGrid columns="2" id="panelGrid5"
+                                   binding="#{TicketsBean.productPanel}">
                         <af:inputText label="Label 1" id="inputText3"
                                       simple="true" disabled="true"
                                       binding="#{TicketsBean.prodDesc}"/>
@@ -218,11 +276,75 @@
                           <af:showPopupBehavior popupId="popup1"/>
                         </af:commandButton>
                       </h:panelGrid>
+                      <af:outputLabel value="Select A Policy" id="ol5"
+                                      binding="#{TicketsBean.clmPolLabel}" rendered="false"/>
+              <h:panelGrid columns="2" id="pg11" binding="#{TicketsBean.clmPolPanel}" rendered="false">
+                  <af:inputText label="Label 1" simple="true" disabled="true"
+                                binding="#{TicketsBean.policiesDesc}" id="it2"/>
+                  <af:commandButton icon="/images/dropdown.gif" id="cb4">
+                    <af:showPopupBehavior popupId="policy"/>
+                  </af:commandButton>
+                  <af:popup id="policy">
+                    <af:dialog type="none" title="Policies" id="d5">
+                      <af:table value="#{bindings.policies.collectionModel}"
+                                var="row" rows="#{bindings.policies.rangeSize}"
+                                emptyText="#{bindings.policies.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.policies.rangeSize}"
+                                filterModel="#{bindings.policiesQuery.queryDescriptor}"
+                                queryListener="#{bindings.policiesQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                                rowSelection="single"
+                                binding="#{TicketsBean.policiesLOV}" id="t7"
+                                inlineStyle="width:100%">
+                        <af:column sortProperty="POL_POLICY_NO"
+                                   filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Policy Number"
+                                   id="c17">
+                          <af:outputText value="#{row.POL_POLICY_NO}"
+                                         id="ot14"/>
+                        </af:column>
+                        <af:column sortProperty="CLIENT_DISPLAY"
+                                   filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Client"
+                                   width="200" id="c18">
+                          <af:outputText value="#{row.CLIENT_DISPLAY}"
+                                         id="ot15"/>
+                        </af:column>
+                        <af:column sortProperty="AGN_NAME" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Agent/Broker"
+                                   width="200" id="c10">
+                          <af:outputText value="#{row.AGN_NAME}" id="ot11"/>
+                        </af:column>
+                      </af:table>
+                      <h:panelGrid columns="2" id="pg5">
+                        <af:commandButton text="OK"
+                                          action="#{TicketsBean.findPoliciesSelected}"
+                                          id="cb5"/>
+                        <af:commandButton text="Cancel" id="cb6"/>
+                      </h:panelGrid>
+                    </af:dialog>
+                  </af:popup>
+                </h:panelGrid>
+                      <af:outputLabel value="Select A Claim number" id="ol4"
+                                      binding="#{TicketsBean.clmLabel}" rendered="false"/>
+                      <h:panelGrid id="clmNoPG" columns="2"
+                                   binding="#{TicketsBean.clmPanel}" rendered="false">
+                      <af:inputText label="Label 2" id="it3" simple="true" disabled="true"
+                                    binding="#{TicketsBean.claimNoDesc}"/>
+                        <af:commandButton id="cb7"  icon="/images/dropdown.gif">
+                        <af:showPopupBehavior popupId="p3" />
+                        </af:commandButton>
+                      </h:panelGrid>
                     </h:panelGrid>
                   </af:panelBox>
                 </af:panelGroupLayout>
                 <af:spacer width="10" height="10" id="spacer1"/>
-                <h:panelGrid columns="2" id="pg5">
+                <h:panelGrid columns="2" id="pg12">
                   <af:commandButton text="Next" id="cb3"
                                     action="#{TicketsBean.NextTransition}"/>
                   <af:commandButton text="Cancel" id="commandButton5"
@@ -264,9 +386,9 @@
                 <h:panelGrid columns="2" id="pg7">
                   <af:outputLabel value="Select A Task:" id="ol3"/>
                   <h:panelGrid columns="2" id="pg8">
-                    <af:inputText id="it2" simple="true" disabled="true"
+                    <af:inputText id="it4" simple="true" disabled="true"
                                   binding="#{TicketsBean.taskDesc}"/>
-                    <af:commandButton id="cb4" icon="/images/dropdown.gif">
+                    <af:commandButton id="cb8" icon="/images/dropdown.gif">
                       <af:showPopupBehavior popupId="p2"/>
                     </af:commandButton>
                     <af:popup id="p2">
@@ -291,11 +413,11 @@
                             <af:column sortProperty="taskName" filterable="true"
                                        sortable="true" headerText="Task"
                                        id="c9" width="250">
-                              <af:outputText value="#{row.taskName}" id="ot11"/>
+                              <af:outputText value="#{row.taskName}" id="ot16"/>
                             </af:column>
                           </af:table>
                           <h:panelGrid columns="2" id="pg9">
-                            <af:commandButton text="OK" id="cb5"
+                            <af:commandButton text="OK" id="cb9"
                                               action="#{TicketsBean.findTaskSelected}"/>
                             <af:commandButton text="Cancel" id="commandButton6"/>
                           </h:panelGrid>
@@ -338,7 +460,7 @@
                             </af:column>
                             <af:column sortProperty="USR_NAME" filterable="true"
                                        sortable="true" headerText="Full Name"
-                                       id="c10" width="200">
+                                       id="c19" width="200">
                               <af:outputText value="#{row.USR_NAME}" id="ot13"/>
                             </af:column>
                           </af:table>
@@ -355,7 +477,7 @@
                   </h:panelGrid>
                 </h:panelGrid>
                 <h:panelGrid columns="2" id="pg10">
-                  <af:commandButton text="Attach Ticket" id="cb6"
+                  <af:commandButton text="Attach Ticket" id="cb10"
                                     action="#{TicketsBean.AttachTicket}"/>
                 </h:panelGrid>
               </af:panelBox>

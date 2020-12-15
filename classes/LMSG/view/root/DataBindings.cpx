@@ -170,6 +170,14 @@
     <page path="/portfolioTrans.jspx"
           usageId="LMSG_view_root_portfolioTransPageDef"/>
     <page path="/dmsDocView.jspx" usageId="LMSG_view_root_dmsDocViewPageDef"/>
+    <page path="/memberbalances.jspx"
+          usageId="LMSG_view_root_memberbalancesPageDef"/>
+    <page path="/captureClaim.jspx"
+          usageId="LMSG_view_root_captureClaimPageDef"/>
+    <page path="/clmBookingTransactions.jspx"
+          usageId="LMSG_view_root_clmBookingTransactionsPageDef"/>
+    <page path="/claimBooking.jspx"
+          usageId="LMSG_view_root_claimBookingPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="LMSG_view_root_PageDef" path="g_qtrans.PageDef"/>
@@ -396,9 +404,17 @@
           path="view.pageDefs.portfolioTransPageDef"/>
     <page id="LMSG_view_root_dmsDocViewPageDef"
           path="view.pageDefs.dmsDocViewPageDef"/>
+    <page id="LMSG_view_root_memberbalancesPageDef"
+          path="view.pageDefs.memberbalancesPageDef"/>
+    <page id="LMSG_view_root_captureClaimPageDef"
+          path="view.pageDefs.captureClaimPageDef"/>
+    <page id="LMSG_view_root_clmBookingTransactionsPageDef"
+          path="view.pageDefs.clmBookingTransactionsPageDef"/>
+    <page id="LMSG_view_root_claimBookingPageDef"
+          path="view.pageDefs.claimBookingPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
-   <dc id="IEDMSDocsDao" path="LMSG.view.root.IEDMSDocsDao"/>
+    <dc id="IEDMSDocsDao" path="LMSG.view.root.IEDMSDocsDao"/>
     <dc id="EcmUtilDAO" path="LMSG.view.root.EcmUtilDAO"/>
     <dc id="TicketsDAO" path="LMSG.view.root.TicketsDAO"/>
     <dc id="periodsDAO" path="LMSG.view.root.periodsDAO"/>

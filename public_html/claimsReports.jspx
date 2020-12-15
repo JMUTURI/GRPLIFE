@@ -46,9 +46,6 @@
                         <af:commandLink text="Age Analysis OS Claims"
                                         id="rpt2022"
                                         actionListener="#{reportParameterBean.paramReport}"/>
-                        <af:commandLink text="Creditors Claim Register"
-                                        id="rpt2281"
-                                        actionListener="#{reportParameterBean.paramReport}"/>
                         <af:commandLink text="Claims Discharge Voucher"
                                         id="rpt1106"
                                         actionListener="#{reportParameterBean.paramReport}"/>
@@ -60,7 +57,7 @@
                                         actionListener="#{reportParameterBean.paramReport}"
                                         rendered="#{Rendering.mickVisible}"/>
                         <af:commandLink text="Claims Experience Per Product"
-                                        id="rpt1109"
+                                        id="rpt2250133825"	
                                         actionListener="#{reportParameterBean.paramReport}"/>
                         <af:commandLink text="Claims Experience Per Product Per Status"
                                         id="rpt1145"
@@ -72,8 +69,11 @@
                                         rendered="#{Rendering.mickVisible}"/>
                         <af:commandLink text="Claim Paid Register" id="rpt2029"
                                         actionListener="#{reportParameterBean.paramReport}"/>
-                        <af:commandLink text="Claim Register" id="rpt25329"
-                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:commandLink text="Claim Booking Register" id="rpt25329"
+                                        actionListener="#{reportParameterBean.paramReport}"/>										
+                        <af:commandLink text="Claim Register"
+                                        id="rpt2281"
+                                        actionListener="#{reportParameterBean.paramReport}"/>										
                         <af:commandLink text="Claim Recovery Report"
                                         id="rpt2036"
                                         actionListener="#{reportParameterBean.paramReport}"/>

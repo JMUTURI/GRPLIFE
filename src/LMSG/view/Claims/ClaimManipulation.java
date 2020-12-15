@@ -69,6 +69,7 @@ import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.jbo.Key;
 import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
+import oracle.jbo.ViewObject;
 import oracle.jbo.uicli.binding.JUCtrlValueBinding;
 
 import oracle.jdbc.OracleConnection;
@@ -88,6 +89,8 @@ import org.apache.myfaces.trinidad.model.RowKeySet;
 import org.apache.myfaces.trinidad.model.UploadedFile;
 import org.apache.myfaces.trinidad.render.ExtendedRenderKitService;
 import org.apache.myfaces.trinidad.util.Service;
+
+import oracle.jdbc.OracleTypes;
 
 public class ClaimManipulation extends LOVCC {
     private RichTable productsLOV;
@@ -337,6 +340,21 @@ public class ClaimManipulation extends LOVCC {
     private RichOutputLabel transferToLB;
     private RichInputText transferToTF;
     private RichSelectOneChoice transferLockedBen;
+    private RichSelectOneChoice withAppliedOn;
+    private RichInputText withOverrideTaxAmt;
+    private RichCommandButton computeWithdrawalAmt;
+    private RichInputText withdrawalAmt;
+    private RichInputText withdrawalTaxExemptAmt;
+    private RichInputText withdrawalTaxAmt;
+    private RichInputText withdrawalNetPayable;
+    private RichInputText withEmpyrRegAmt;
+    private RichInputText withEmplyrUnregAmt;
+    private RichInputText withEmpyeRegAmt;
+    private RichInputText withEmpyeUnregAmt;
+    private RichInputText payeeTF;
+    private RichTable claimBookingLOV;
+    private RichTable bookingCoverTypeLOV;
+    private RichTable reinsuranceBookingLOV;
 
     public String findProductSelected() {
         DCIteratorBinding dciter =
@@ -3398,9 +3416,10 @@ conn.prepareCall("BEGIN LMS_WEB_CLAIMS_PKG.PROCESS_ANN_PAY_INSTLMNT(?);end;");
 
 
                 this.voucherLabel.setValue(r.getAttribute("cpvVouvherNo"));
-                this.payeeLabel.setValue(r.getAttribute("cpvPayee"));
+                this.payeeTF.setValue(r.getAttribute("cpvPayee"));
                 this.dispStatus.setValue(r.getAttribute("CPV_DISCHARGE_STATUS"));
-
+                System.out.println("Dispatch Status is " +
+                                   r.getAttribute("CPV_DISCHARGE_STATUS"));
                 this.vchrAccNo.setValue(r.getAttribute("cpv_bbr_acc_no"));
                 this.session.setAttribute("payMode",
                                           r.getAttribute("cpv_payment_mode"));
@@ -3646,7 +3665,7 @@ conn.prepareCall("BEGIN LMS_WEB_CLAIMS_PKG.PROCESS_ANN_PAY_INSTLMNT(?);end;");
 
 
                 String AddClaim =
-                    "begin LMS_WEB_CLAIMS_PKG.update_voucher_status(?,?);end;";
+                    "begin LMS_WEB_CLAIMS_PKG.update_voucher_status(?,?,?);end;";
 
 
                 cst = conn.prepareCall(AddClaim);
@@ -3655,6 +3674,8 @@ conn.prepareCall("BEGIN LMS_WEB_CLAIMS_PKG.PROCESS_ANN_PAY_INSTLMNT(?);end;");
 
 
                 cst.setString(2, this.dispStatus.getValue().toString());
+                cst.setString(3, (String)payeeTF.getValue());
+
                 if (this.vchrAccNo.getValue() != null) {
                     this.session.setAttribute("clientAccNo",
                                               this.vchrAccNo.getValue().toString());
@@ -8087,7 +8108,7 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
 
 
                 this.voucherLabel.setValue(r.getAttribute("cpvVouvherNo"));
-                this.payeeLabel.setValue(r.getAttribute("cpvPayee"));
+                this.payeeTF.setValue(r.getAttribute("cpvPayee"));
                 this.dispStatus.setValue(r.getAttribute("CPV_DISCHARGE_STATUS"));
 
                 ExtendedRenderKitService erkService =
@@ -9642,6 +9663,7 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
         Connection conn = new DBConnector().getDatabaseConn();
         CallableStatement cst3 = null;
         CorrespondenceManipulation mail = new CorrespondenceManipulation();
+        String priority = (String)session.getAttribute("priorityLevel");
         try {
             Object key2 = this.ticketsUserLOV.getSelectedRowData();
             if (key2 == null) {
@@ -9657,11 +9679,14 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
             if (this.tcktAsignee.getValue() != null) {
                 Remarks = this.tcktAsignee.getValue().toString();
             }
-            String Complete = "BEGIN TQC_WEB_PKG.reassign_task(?,?,?);END;";
+            String Complete =
+                "BEGIN TQC_WEB_PKG.reassign_task(?,?,?,?,?);END;";
             cst3 = conn.prepareCall(Complete);
             cst3.setString(1, (String)this.session.getAttribute("TaskID"));
             cst3.setString(2, (String)r.getAttribute("USR_USERNAME"));
             cst3.setString(3, Remarks);
+            cst3.setString(4, null);
+            cst3.setString(5, priority);
             cst3.execute();
             cst3.close();
             conn.close();
@@ -10459,5 +10484,568 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
         }
         AdfFacesContext.getCurrentInstance().addPartialTarget(this.transferToLB);
         AdfFacesContext.getCurrentInstance().addPartialTarget(this.transferToTF);
+    }
+
+    public void setWithAppliedOn(RichSelectOneChoice withAppliedOn) {
+        this.withAppliedOn = withAppliedOn;
+    }
+
+    public RichSelectOneChoice getWithAppliedOn() {
+        return withAppliedOn;
+    }
+
+    public void setWithOverrideTaxAmt(RichInputText withOverrideTaxAmt) {
+        this.withOverrideTaxAmt = withOverrideTaxAmt;
+    }
+
+    public RichInputText getWithOverrideTaxAmt() {
+        return withOverrideTaxAmt;
+    }
+
+    public void setComputeWithdrawalAmt(RichCommandButton computeWithdrawalAmt) {
+        this.computeWithdrawalAmt = computeWithdrawalAmt;
+    }
+
+    public RichCommandButton getComputeWithdrawalAmt() {
+        return computeWithdrawalAmt;
+    }
+
+    public String calculateWithdrawalAmt() {
+        DBConnector myConn = new DBConnector();
+        Connection conn = myConn.getDatabaseConn();
+        CallableStatement cst = null;
+        BigDecimal withdrawalAmount = null;
+        BigDecimal overrideTaxAmount = null;
+
+        if (withAppliedOn.getValue() == null) {
+            GlobalCC.INFORMATIONREPORTING("Please Select withdrawal applied on to proceed..");
+        }
+        if (withdrawalAmt.getValue() == null) {
+            GlobalCC.INFORMATIONREPORTING("Please provide the withdrawal amount to proceed...");
+        }
+
+        try {
+            String withdrawalQuery =
+                "begin LMS_PENSIONS.computewithdrawalamount(?,?,?,?);end;";
+            cst = conn.prepareCall(withdrawalQuery);
+            cst.setString(1, (String)this.session.getAttribute("ClaimNo"));
+            if (withdrawalAmt.getValue() == null) {
+                cst.setBigDecimal(2, null);
+            } else {
+                withdrawalAmount =
+                        new BigDecimal(withdrawalAmt.getValue().toString());
+                cst.setBigDecimal(2, withdrawalAmount);
+            }
+            if (withOverrideTaxAmt.getValue() == null) {
+                cst.setBigDecimal(3, null);
+            } else {
+                overrideTaxAmount =
+                        new BigDecimal(withOverrideTaxAmt.getValue().toString());
+                cst.setBigDecimal(3, overrideTaxAmount);
+            }
+            cst.setString(4, (String)withAppliedOn.getValue());
+            cst.execute();
+            cst.close();
+            conn.close();
+            ADFUtils.findIterator("findPartialWithdrawalIterator").executeQuery();
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.withEmpyrRegAmt);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.withEmplyrUnregAmt);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.withEmpyeRegAmt);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.withEmpyeUnregAmt);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.withdrawalNetPayable);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.withOverrideTaxAmt);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.withdrawalTaxAmt);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.withdrawalTaxExemptAmt);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.withdrawalAmt);
+            GlobalCC.INFORMATIONREPORTING("Withdrawal Amount Computed Successfully");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            GlobalCC.EXCEPTIONREPORTING(conn, ex);
+        }
+
+        return null;
+    }
+
+    public void setWithdrawalAmt(RichInputText withdrawalAmt) {
+        this.withdrawalAmt = withdrawalAmt;
+    }
+
+    public RichInputText getWithdrawalAmt() {
+        return withdrawalAmt;
+    }
+
+    public void setWithdrawalTaxExemptAmt(RichInputText withdrawalTaxExemptAmt) {
+        this.withdrawalTaxExemptAmt = withdrawalTaxExemptAmt;
+    }
+
+    public RichInputText getWithdrawalTaxExemptAmt() {
+        return withdrawalTaxExemptAmt;
+    }
+
+    public void setWithdrawalTaxAmt(RichInputText withdrawalTaxAmt) {
+        this.withdrawalTaxAmt = withdrawalTaxAmt;
+    }
+
+    public RichInputText getWithdrawalTaxAmt() {
+        return withdrawalTaxAmt;
+    }
+
+    public void setWithdrawalNetPayable(RichInputText withdrawalNetPayable) {
+        this.withdrawalNetPayable = withdrawalNetPayable;
+    }
+
+    public RichInputText getWithdrawalNetPayable() {
+        return withdrawalNetPayable;
+    }
+
+    public void setWithEmpyrRegAmt(RichInputText withEmpyrRegAmt) {
+        this.withEmpyrRegAmt = withEmpyrRegAmt;
+    }
+
+    public RichInputText getWithEmpyrRegAmt() {
+        return withEmpyrRegAmt;
+    }
+
+    public void setWithEmplyrUnregAmt(RichInputText withEmplyrUnregAmt) {
+        this.withEmplyrUnregAmt = withEmplyrUnregAmt;
+    }
+
+    public RichInputText getWithEmplyrUnregAmt() {
+        return withEmplyrUnregAmt;
+    }
+
+    public void setWithEmpyeRegAmt(RichInputText withEmpyeRegAmt) {
+        this.withEmpyeRegAmt = withEmpyeRegAmt;
+    }
+
+    public RichInputText getWithEmpyeRegAmt() {
+        return withEmpyeRegAmt;
+    }
+
+    public void setWithEmpyeUnregAmt(RichInputText withEmpyeUnregAmt) {
+        this.withEmpyeUnregAmt = withEmpyeUnregAmt;
+    }
+
+    public RichInputText getWithEmpyeUnregAmt() {
+        return withEmpyeUnregAmt;
+    }
+
+    public String CreatePensionWithdrawalVoucher() {
+        Connection conn = null;
+        CallableStatement cst = null;
+        try {
+            String str1;
+            String alert = "";
+            DBConnector myConn = new DBConnector();
+            conn = myConn.getDatabaseConn();
+
+            String Rights = null;
+            this.session.setAttribute("ProcessShtDesc", "CLMS");
+            this.session.setAttribute("ProcessAreaShtDesc", "ACCS");
+            this.session.setAttribute("ProcessSubAShtDesc", "ACCS");
+            workflowProcessing wf = new workflowProcessing();
+            Rights = wf.CheckUserRights();
+            if (Rights.equalsIgnoreCase("N")) {
+                alert = "You do not have rights to Perform this Task.";
+
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                              alert,
+                                                                              alert));
+
+
+                return null;
+            }
+            String NextUser = null;
+            this.session.setAttribute("ProcessShtDesc", "CLMS");
+            this.session.setAttribute("ProcessAreaShtDesc", "ACCS");
+            this.session.setAttribute("ProcessSubAShtDesc", "ACCS");
+            this.session.setAttribute("TaskAssignee", null);
+            this.session.setAttribute("NextTaskAssignee", "N");
+            ADFUtils.findIterator("findTicketAssigneeIterator").executeQuery();
+            NextUser = (String)this.session.getAttribute("NextTaskAssignee");
+            String TaskAss = (String)this.session.getAttribute("TaskAssignee");
+            if ((TaskAss == null) && (NextUser.equalsIgnoreCase("N"))) {
+                alert =
+                        "There is no User to Assign the Next Task. Consult the Administrator.";
+
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                              alert,
+                                                                              alert));
+
+
+                return null;
+            }
+            String Taske = (String)this.session.getAttribute("TaskID");
+            if (Taske == null) {
+                String Message = "No Task Selected";
+                FacesContext.getCurrentInstance().addMessage(null,
+                                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                              Message,
+                                                                              Message));
+
+
+                return null;
+            }
+            Taske = (String)this.session.getAttribute("TaskID");
+            String str5;
+            if (Taske != null) {
+                String MyTask = null;
+                CallableStatement cst3 = null;
+                String Complete =
+                    "BEGIN TQC_WEB_PKG.check_task_completion(?,?,?,?);END;";
+
+
+                cst3 = conn.prepareCall(Complete);
+                cst3.setString(1, "CLMVCHR");
+                cst3.setString(2, (String)this.session.getAttribute("TaskID"));
+                cst3.setInt(3,
+                            ((Integer)this.session.getAttribute("sysCode")).intValue());
+
+                cst3.registerOutParameter(4, 12);
+                cst3.execute();
+                MyTask = cst3.getString(4);
+                cst3.close();
+                if (MyTask.equalsIgnoreCase("N")) {
+                    alert =
+                            "the Task Selected Does not Correspond to the Activity being Performed. Cannot Complete please " +
+                            this.session.getAttribute("TaskActivityName");
+
+
+                    FacesContext.getCurrentInstance().addMessage(null,
+                                                                 new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                                  alert,
+                                                                                  alert));
+
+                    return null;
+                }
+            }
+            String AddClaim =
+                "begin LMS_WEB_CLAIMS_PKG.create_voucher(?,?,?,?,?,?,?,?,?,?,?,?,?);end;";
+
+
+            cst = conn.prepareCall(AddClaim);
+            cst.setBigDecimal(1,
+                              (BigDecimal)this.session.getAttribute("policyCode"));
+
+
+            cst.setString(2, (String)this.session.getAttribute("ClaimNo"));
+            cst.setString(3, "PM");
+            if (this.withdrawalNetPayable.getValue() == null) {
+                cst.setBigDecimal(4, null);
+            } else {
+                cst.setBigDecimal(4,
+                                  (BigDecimal)withdrawalNetPayable.getValue());
+            }
+            cst.setBigDecimal(5,
+                              (BigDecimal)this.session.getAttribute("MemberNumber"));
+
+
+            cst.setBigDecimal(6,
+                              (BigDecimal)this.session.getAttribute("PolmCode"));
+
+            cst.setBigDecimal(7,
+                              (BigDecimal)this.session.getAttribute("PMPNS_CODE"));
+            if (this.withdrawalTaxAmt.getValue() == null) {
+                cst.setBigDecimal(8, null);
+            } else {
+                cst.setBigDecimal(8,
+                                  (BigDecimal)this.withdrawalTaxAmt.getValue());
+            }
+            cst.setBigDecimal(9,
+                              (BigDecimal)this.session.getAttribute("ClaimTransNo"));
+            cst.setString(10, null);
+            cst.setString(11, null);
+            cst.setString(11, null);
+            cst.setString(12, null);
+            cst.setString(13, null);
+            cst.execute();
+            cst.close();
+            conn.close();
+
+            this.session.setAttribute("ProcessAreaShtDesc", "ACCS");
+            this.session.setAttribute("ProcessSubAShtDesc", "ACCS");
+            Rights = wf.CheckUserRights();
+            if (Rights.equalsIgnoreCase("N")) {
+                this.session.setAttribute("TaskAssignee", null);
+                ADFUtils.findIterator("findTicketAssigneeIterator").executeQuery();
+                TaskAss = (String)this.session.getAttribute("TaskAssignee");
+                if (TaskAss == null) {
+                    GetAssignee();
+                    return null;
+                }
+                this.session.setAttribute("TicketRemarks", null);
+                wf.CompleteTask();
+                String Message =
+                    "Current Task Complete. The Next Task " + (String)this.session.getAttribute("TaskActivityName") +
+                    " has been Successfully assigned to " +
+                    (String)this.session.getAttribute("TaskAssignee");
+
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                              Message,
+                                                                              Message));
+
+
+                this.session.setAttribute("TaskID", null);
+                return null;
+            }
+            wf.CompleteTask();
+
+            String Message = "Voucher Successfully Created";
+            FacesContext.getCurrentInstance().addMessage(null,
+                                                         new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                          Message,
+                                                                          Message));
+
+
+            return null;
+        } catch (Exception e) {
+            GlobalCC.EXCEPTIONREPORTING(conn, e);
+        } finally {
+            GlobalCC.CloseConnections(null, cst, conn);
+        }
+        return null;
+    }
+
+    public void setPayeeTF(RichInputText payeeTF) {
+        this.payeeTF = payeeTF;
+    }
+
+    public RichInputText getPayeeTF() {
+        return payeeTF;
+    }
+
+    public String claimOpening() {
+        Connection conn = null;
+        CallableStatement cst = null;
+        DBConnector connector = new DBConnector();
+        try {
+            String AddClaim =
+                "begin LMS_CLAIM_BOOKING.book_new_claim(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);end;";
+
+            conn = connector.getDatabaseConn();
+            cst = conn.prepareCall(AddClaim);
+            cst.setBigDecimal(1,
+                              (BigDecimal)this.session.getAttribute("PolicyMemCode"));
+            if (this.lossDate.getValue() == null) {
+                cst.setString(2, null);
+            } else {
+                cst.setString(2,
+                              GlobalCC.parseDate(this.lossDate.getValue().toString()));
+            }
+            if (this.reportDate.getValue() == null) {
+                cst.setString(3, null);
+            } else {
+                cst.setString(3,
+                              GlobalCC.parseDate(this.reportDate.getValue().toString()));
+            }
+            cst.setBigDecimal(4,
+                              (BigDecimal)this.session.getAttribute("policyCode"));
+
+
+            cst.setBigDecimal(5,
+                              (BigDecimal)this.session.getAttribute("CausationCode"));
+
+
+            cst.setString(6,
+                          (String)this.session.getAttribute("CausationShtDesc"));
+
+            cst.setString(7,
+                          (String)this.session.getAttribute("CausationType"));
+
+            cst.setString(8,
+                          (String)this.session.getAttribute("ClaimTransactionType"));
+
+
+            cst.setString(9, (String)this.session.getAttribute("Username"));
+            cst.setBigDecimal(10,
+                              (BigDecimal)this.session.getAttribute("CauseCode"));
+
+
+            cst.registerOutParameter(11, 12);
+            cst.registerOutParameter(12, 3);
+            cst.setString(13,
+                          this.minimumInformationProvided.getValue().toString());
+            if (this.xgratiaTransaction.isSelected()) {
+                cst.setString(14, "Y");
+            } else {
+                cst.setString(14, "N");
+            }
+            if (this.exgratiaRemarks.getValue() == null) {
+                cst.setString(15, "N");
+            } else {
+                cst.setString(15, this.exgratiaRemarks.getValue().toString());
+            }
+            if (this.deathLocation.getValue() == null) {
+                cst.setString(16, null);
+            } else {
+                cst.setString(16, this.deathLocation.getValue().toString());
+            }
+            cst.registerOutParameter(17, OracleTypes.NUMBER);
+            cst.execute();
+            session.setAttribute("cmbCode", cst.getBigDecimal(17));
+            GlobalCC.RedirectPage("/claimBooking.jspx");
+        } catch (Exception ex) {
+            GlobalCC.EXCEPTIONREPORTING(conn, ex);
+            ex.printStackTrace();
+            GlobalCC.CloseConnections(null, cst, conn);
+
+        } finally {
+            GlobalCC.CloseConnections(null, cst, conn);
+        }
+        return null;
+    }
+
+    public void setClaimBookingLOV(RichTable claimBookingLOV) {
+        this.claimBookingLOV = claimBookingLOV;
+    }
+
+    public RichTable getClaimBookingLOV() {
+        return claimBookingLOV;
+    }
+
+    public void selectClaimBookingRecord(SelectionEvent selectionEvent) {
+        // Add event code here...
+       Object key2 = this.claimBookingLOV.getSelectedRowData();
+        if (key2 == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+        }
+        JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
+        if (r == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+        }
+        session.setAttribute("cmbCode", r.getAttribute("cmb_code"));
+    }
+
+    public String goToBookingDetails() {
+        // Add event code here...
+        Object key2 = this.claimBookingLOV.getSelectedRowData();
+        if (key2 == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+        }
+        JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
+        if (r == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+        }
+        session.setAttribute("cmbCode", r.getAttribute("cmb_code"));
+        session.setAttribute("policyCode", r.getAttribute("POL_CODE"));
+
+        GlobalCC.RedirectPage("claimBooking.jspx");
+        return null;
+    }
+
+    public String goToBookingTransPage() {
+        // Add event code here...
+        GlobalCC.RedirectPage("captureClaim.jspx");
+        return null;
+    }
+
+    public void setBookingCoverTypeLOV(RichTable bookingCoverTypeLOV) {
+        this.bookingCoverTypeLOV = bookingCoverTypeLOV;
+    }
+
+    public RichTable getBookingCoverTypeLOV() {
+        return bookingCoverTypeLOV;
+    }
+
+    public String processClaimBooking() {
+        // Add event code here...
+        DCIteratorBinding dciter =
+            ADFUtils.findIterator("claimBookingCoversIterator");
+        ViewObject vo = dciter.getViewObject();
+        Row[] selectedCovers = vo.getFilteredRows("bookCoverCheck", true);
+        int count = 0;
+        for (Row row : selectedCovers) {
+            processBookingCovers((BigDecimal)row.getAttribute("CBVT_CODE"),
+                                 (BigDecimal)row.getAttribute("CBVT_RESERVE_AMT"));
+        }
+        this.totalReserveAmt();
+
+        ADFUtils.findIterator("claimBookingCoversIterator").executeQuery();
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingCoverTypeLOV);
+        
+        ADFUtils.findIterator("riRecoverableAmtIterator").executeQuery();
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.reinsuranceBookingLOV);
+
+        GlobalCC.INFORMATIONREPORTING("Cover processing successfull");
+        return null;
+    }
+
+    public void processBookingCovers(BigDecimal cbvtCode,
+                                     BigDecimal reserveAmt) {
+        Connection conn = null;
+        CallableStatement cst = null;
+        DBConnector connector = new DBConnector();
+        String sql =
+            "begin LMS_CLAIM_BOOKING.processclaimbookingcovers(?,?);end;";
+        try {
+            conn = connector.getDatabaseConn();
+            cst = conn.prepareCall(sql);
+            cst.setBigDecimal(1, cbvtCode);
+            cst.setBigDecimal(2, reserveAmt);
+            cst.execute();
+            GlobalCC.CloseConnections(null, cst, conn);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            GlobalCC.EXCEPTIONREPORTING(conn, ex);
+            GlobalCC.CloseConnections(null, cst, conn);
+        } finally {
+            GlobalCC.CloseConnections(null, cst, conn);
+        }
+    }
+
+    public void totalReserveAmt() {
+        Connection conn = null;
+        CallableStatement cst = null;
+        DBConnector connector = new DBConnector();
+        String sql = "begin LMS_CLAIM_BOOKING.processclaimbooking(?);end;";
+        try {
+            conn = connector.getDatabaseConn();
+            cst = conn.prepareCall(sql);
+            cst.setBigDecimal(1, (BigDecimal)session.getAttribute("cmbCode"));
+            cst.execute();
+            GlobalCC.CloseConnections(null, cst, conn);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            GlobalCC.EXCEPTIONREPORTING(conn, ex);
+            GlobalCC.CloseConnections(null, cst, conn);
+        } finally {
+            GlobalCC.CloseConnections(null, cst, conn);
+        }
+    }
+
+    public String deleteClaimBooking() {
+      Connection conn = null;
+      CallableStatement cst = null;
+      DBConnector connection = new DBConnector();
+        try {
+            String sql = "begin lms_claim_booking.deleteclaimbooking(?);end;";
+            conn = connection.getDatabaseConn();
+            cst = conn.prepareCall(sql);
+            cst.setBigDecimal(1,(BigDecimal)session.getAttribute("cmbCode"));
+            cst.execute();
+            GlobalCC.CloseConnections(null, cst, conn);
+            GlobalCC.INFORMATIONREPORTING("Record deleted successfully");
+        } catch (Exception ex) {
+            GlobalCC.CloseConnections(null, cst, conn);
+        } finally {
+            GlobalCC.CloseConnections(null, cst, conn);
+        }
+      ADFUtils.findIterator("pendingClaimBookingIterator").executeQuery();
+      AdfFacesContext.getCurrentInstance().addPartialTarget(this.claimBookingLOV);
+        return null;
+    }
+
+    public void setReinsuranceBookingLOV(RichTable reinsuranceBookingLOV) {
+        this.reinsuranceBookingLOV = reinsuranceBookingLOV;
+    }
+
+    public RichTable getReinsuranceBookingLOV() {
+        return reinsuranceBookingLOV;
     }
 }

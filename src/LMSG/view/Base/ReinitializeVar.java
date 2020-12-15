@@ -338,6 +338,7 @@ public class ReinitializeVar
     this.session.removeAttribute("taxType");
     this.session.removeAttribute("sourcePage");
     this.session.removeAttribute("COP_CODE");
+    this.session.removeAttribute("cmbCode");
   }
   
   public String ReinitializeVar2()
@@ -667,6 +668,7 @@ public class ReinitializeVar
     this.session.removeAttribute("taxType");
     this.session.removeAttribute("sourcePage");
     this.session.removeAttribute("COP_CODE");
+    this.session.removeAttribute("cmbCode");
     return null;
   }
 }

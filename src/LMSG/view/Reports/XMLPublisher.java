@@ -35,7 +35,7 @@ import oracle.apps.xdo.dataengine.Parameter;
 import oracle.apps.xdo.template.FOProcessor;
 import oracle.apps.xdo.template.RTFProcessor;
 import oracle.apps.xdo.template.fo.util.FOUtility;
-
+import oracle.apps.fnd.i18n.common.util.FormatMaskUtil;
 public class XMLPublisher {
     public XMLPublisher() {
         super();

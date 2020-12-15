@@ -87,6 +87,11 @@
                   id="findPolMemberNo" ReturnNodeName="Return">
     <ParameterInfo id="type" Type="java.lang.String" isStructured="false"/>
   </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Medicals.medical"
+                  BeanClass="LMSG.view.Medicals.medical"
+                  id="FindAuthorizedFacilitatorPayments"
+                  ReturnNodeName="medical"
+                  CollectionBeanClass="UpdateableCollection"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.Medicals.medicalsDAO"
                      BeanClass="LMSG.view.Medicals.medicalsDAO"
                      id="medicalsDAO"/>

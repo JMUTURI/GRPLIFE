@@ -28,6 +28,18 @@
   <Attribute Name="coverageArea" Type="java.lang.String"/>
   <Attribute Name="locName" Type="java.lang.String"/>
   <Attribute Name="jointMemberNo" Type="java.lang.String"/>
+  <AccessorAttribute id="pendingClaimBooking" IsCollection="true"
+                     BeanClass="LMSG.view.Claims.Claim"
+                     CollectionBeanClass="UpdateableCollection"/>
+  <AccessorAttribute id="pendingClaimBookingDtls" IsCollection="true"
+                     BeanClass="LMSG.view.Claims.Claim"
+                     CollectionBeanClass="UpdateableCollection"/>
+  <AccessorAttribute id="claimBookingCovers" IsCollection="true"
+                     BeanClass="LMSG.view.Claims.Claim"
+                     CollectionBeanClass="UpdateableCollection"/>
+  <AccessorAttribute id="riRecoverableAmt" IsCollection="true"
+                     BeanClass="LMSG.view.Claims.Claim"
+                     CollectionBeanClass="UpdateableCollection"/>
   <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
                   BeanClass="LMSG.view.Claims.Claim"
                   id="FindMembersByTransactions" ReturnNodeName="Claim"
@@ -200,6 +212,10 @@
                   id="findPolMemberNo" ReturnNodeName="Return">
     <ParameterInfo id="type" Type="java.lang.String" isStructured="false"/>
   </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
+                  BeanClass="LMSG.view.Claims.Claim" id="findPartialWithdrawal"
+                  ReturnNodeName="Claim"
+                  CollectionBeanClass="UpdateableCollection"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.Claims.ClaimsDAO"
                      BeanClass="LMSG.view.Claims.ClaimsDAO" id="ClaimsDAO"/>
 </JavaBean>

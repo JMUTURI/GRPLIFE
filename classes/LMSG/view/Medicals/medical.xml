@@ -76,6 +76,14 @@
   <Attribute Name="medqCode" Type="java.math.BigDecimal"/>
   <Attribute Name="medqDesc" Type="java.lang.String"/>
   <Attribute Name="FPMT_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="FPMT_AUTHORISED_DATE" Type="java.lang.String"/>
+  <Attribute Name="FPMT_PYMT_VCHR_NO" Type="java.lang.String"/>
+  <Attribute Name="FPMT_CHQ_DATE" Type="java.lang.String"/>
+  <Attribute Name="FPMT_CHQ_NO" Type="java.lang.String"/>
+  <Attribute Name="FPMT_WTHX_RATE" Type="java.math.BigDecimal"/>
+  <Attribute Name="FPMT_WTHX_AMT" Type="java.math.BigDecimal"/>
+  <Attribute Name="MP_CML_INVCE_NO" Type="java.lang.String"/>
+  <Attribute Name="MP_CML_INVCE_DATE" Type="java.util.Date"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.Medicals.medical"
                      BeanClass="LMSG.view.Medicals.medical" id="medical"/>
 </JavaBean>

@@ -2044,4 +2044,237 @@ public class ClaimsDAO extends LOVCC {
         }
         return claims;
     }
+
+    public List<Claim> findPartialWithdrawal() {
+        DBConnector myConn = new DBConnector();
+        Connection conn = myConn.getDatabaseConn();
+
+        CallableStatement cst = null;
+        List<Claim> claims = new ArrayList();
+        ResultSet rs = null;
+        try {
+            String partialWithdrawal =
+                "begin LMS_WEB_CURSOR_GRP.getpwithdrawaldetails(?,?); end;";
+
+            cst = conn.prepareCall(partialWithdrawal);
+
+
+            cst.registerOutParameter(1, OracleTypes.CURSOR);
+            cst.setString(2,
+                          String.valueOf(this.session.getAttribute("ClaimNo")));
+            cst.execute();
+            rs = (ResultSet)cst.getObject(1);
+            while (rs.next()) {
+                Claim claim = new Claim();
+                claim.setGPW_CODE(rs.getBigDecimal(1));
+                claim.setGPW_EMPYR_BAL_BF(rs.getBigDecimal(2));
+                claim.setGPW_EMPYR_AMT(rs.getBigDecimal(3));
+                claim.setGPW_EMPYR_INT(rs.getBigDecimal(4));
+                claim.setGPW_EMPYR_CF(rs.getBigDecimal(5));
+                claim.setGPW_EMPYR_WITHDRAWABLE_AMT(rs.getBigDecimal(6));
+                claim.setGPW_EMPYE_BAL_BF(rs.getBigDecimal(7));
+                claim.setGPW_EMPYE_AMT(rs.getBigDecimal(8));
+                claim.setGPW_EMPYE_INT(rs.getBigDecimal(9));
+                claim.setGPW_EMPYE_CF(rs.getBigDecimal(10));
+                claim.setGPW_EMPYE_WITHDRAWABLE_AMT(rs.getBigDecimal(11));
+                claim.setTOTAL_BAL_BF(rs.getBigDecimal(12));
+                claim.setTOTAL_AMOUNT(rs.getBigDecimal(13));
+                claim.setTOTAL_INT(rs.getBigDecimal(14));
+                claim.setTOTAL_BAL_CF(rs.getBigDecimal(15));
+                claim.setTOTAL_WITHDRAWABLE_AMT(rs.getBigDecimal(16));
+                claim.setGPW_WITH_APPLIED_ON(rs.getString(17));
+                claim.setGPW_TAX_EXEMP_AMT(rs.getBigDecimal(18));
+                claim.setGPW_AMT_APPLIED(rs.getBigDecimal(19));
+                claim.setGPW_YRS_OF_SERV(rs.getBigDecimal(20));
+                claim.setGPW_TAX_AMOUNT(rs.getBigDecimal(21));
+                claim.setGPW_OVERRIDE_TAX_AMT(rs.getBigDecimal(22));
+                claim.setNET_PAYABLE(rs.getBigDecimal(23));
+                claim.setGPW_EMPYE_REG_WITH_AMT(rs.getBigDecimal(24));
+                claim.setGPW_EMPYE_UNREG_WITH_AMT(rs.getBigDecimal(25));
+                claim.setGPW_EMPYR_REG_WITH_AMT(rs.getBigDecimal(26));
+                claim.setGPW_EMPYR_UNREG_WITH_AMT(rs.getBigDecimal(27));
+                claims.add(claim);
+            }
+            rs.close();
+            cst.close();
+            conn.close();
+        } catch (Exception e) {
+            GlobalCC.EXCEPTIONREPORTING(conn, e);
+        } finally {
+            GlobalCC.CloseConnections(rs, cst, conn);
+        }
+        return claims;
+    }
+
+    public List<Claim> getPendingClaimBooking() {
+        DBConnector myConn = new DBConnector();
+        Connection conn = myConn.getDatabaseConn();
+
+        CallableStatement cst = null;
+        List<Claim> pendingClaimBooking = new ArrayList();
+        ResultSet rs = null;
+        try {
+            String query =
+                "begin LMS_WEB_CURSOR_GRP.findclaimbooking(?); end;";
+
+            cst = conn.prepareCall(query);
+            cst.registerOutParameter(1, OracleTypes.CURSOR);
+            cst.execute();
+            rs = (ResultSet)cst.getObject(1);
+            while (rs.next()) {
+                Claim claim = new Claim();
+                claim.setCmb_code(rs.getBigDecimal(1));
+                claim.setCmb_date(rs.getDate(2));
+                claim.setCmb_date_death_accident(rs.getDate(3));
+                claim.setCmb_date_claim_reported(rs.getDate(4));
+                claim.setPol_policy_no(rs.getString(5));
+                claim.setPrp_surname(rs.getString(6));
+                claim.setMem_surname(rs.getString(7));
+                claim.setCmb_booked_by(rs.getString(8));
+                claim.setPOL_CODE(rs.getBigDecimal(9));
+                claim.setCmb_processed(rs.getString(10));
+                pendingClaimBooking.add(claim);
+            }
+            rs.close();
+            cst.close();
+            conn.close();
+        } catch (Exception e) {
+            GlobalCC.EXCEPTIONREPORTING(conn, e);
+        } finally {
+            GlobalCC.CloseConnections(rs, cst, conn);
+        }
+
+        return pendingClaimBooking;
+    }
+  public List<Claim> getPendingClaimBookingDtls() {
+      DBConnector myConn = new DBConnector();
+      Connection conn = myConn.getDatabaseConn();
+
+      CallableStatement cst = null;
+      List<Claim> pendingClaimBooking = new ArrayList<Claim>();
+      ResultSet rs = null;
+      try {
+          String query =
+              "begin LMS_CLAIM_BOOKING.findclaimbooking(?,?); end;";
+
+          cst = conn.prepareCall(query);
+          cst.registerOutParameter(1, OracleTypes.CURSOR);
+          cst.setBigDecimal(2, (BigDecimal)session.getAttribute("cmbCode"));
+          cst.execute();
+          rs = (ResultSet)cst.getObject(1);
+          while (rs.next()) {
+              Claim claim = new Claim();
+             claim.setMEM_NO_DISP(rs.getString(1));
+             claim.setMEM_NAME_DISP(rs.getString(2));
+             claim.setMEM_DOB(rs.getDate(3));
+             claim.setMEM_IDENTITY_NO(rs.getString(4));
+             claim.setCMB_DEATH_DISABILITY_AGE(rs.getInt(5));
+             claim.setCAUS_DESC(rs.getString(6));
+             claim.setDDC_DESC(rs.getString(7));
+             claim.setCMB_DATE(rs.getDate(8));
+             claim.setCMB_DATE_DEATH_ACCIDENT(rs.getDate(9));
+             claim.setCMB_DATE_CLAIM_REPORTED(rs.getDate(10));
+             claim.setCMB_BOOKED_BY(rs.getString(11));
+             claim.setCMB_EXGRATIA(rs.getString(12));
+             claim.setCMB_DEATH_LOCATION(rs.getString(13));
+             claim.setCMB_EXGRATIA_REMARKS(rs.getString(14));
+             claim.setCMB_REINSURANCE_SHARE(rs.getBigDecimal(15));
+             claim.setCMB_COINSURANCE_SHARE(rs.getBigDecimal(16));
+             claim.setCMB_RETENTION_SHARE(rs.getBigDecimal(17));
+             claim.setCMB_TOT_REINSURANCE_AMT(rs.getBigDecimal(18));
+             claim.setCMB_TOT_COINSURANCE_AMT(rs.getBigDecimal(19));
+             claim.setCMB_RETENTION_AMT(rs.getBigDecimal(20));
+             claim.setCMB_RESERVE_AMT(rs.getBigDecimal(21));
+              pendingClaimBooking.add(claim);
+          }
+          rs.close();
+          cst.close();
+          conn.close();
+      } catch (Exception e) {
+          GlobalCC.EXCEPTIONREPORTING(conn, e);
+      } finally {
+          GlobalCC.CloseConnections(rs, cst, conn);
+      }
+
+      return pendingClaimBooking;
+  }
+  public List<Claim> getClaimBookingCovers() {
+      DBConnector myConn = new DBConnector();
+      Connection conn = myConn.getDatabaseConn();
+
+      CallableStatement cst = null;
+      List<Claim> bookingCovers = new ArrayList<Claim>();
+      ResultSet rs = null;
+      try {
+          String query =
+              "begin LMS_CLAIM_BOOKING.findbookingcovers(?,?); end;";
+
+          cst = conn.prepareCall(query);
+          cst.registerOutParameter(1, OracleTypes.CURSOR);
+          cst.setBigDecimal(2,(BigDecimal)session.getAttribute("cmbCode"));
+          cst.execute();
+          rs = (ResultSet)cst.getObject(1);
+          while (rs.next()) {
+              Claim claim = new Claim();
+              claim.setBookCoverCheck(true);
+              claim.setCBVT_CODE(rs.getBigDecimal(1));
+              claim.setCVT_DESC(rs.getString(2));
+              claim.setCBVT_SA(rs.getBigDecimal(3));
+              claim.setCBVT_RESERVE_AMT(rs.getBigDecimal(4));
+              claim.setCBVT_EARNINGS(rs.getBigDecimal(5));
+              claim.setCBVT_MULT_EARNINGS_PRD(rs.getBigDecimal(6));
+              claim.setCBVT_ACCELERATOR(rs.getString(7));
+              claim.setCBVT_ORIGINAL_LOAN_AMT(rs.getBigDecimal(8));
+              claim.setCBVT_ORIG_LOAN_REPAYMENT_PRD(rs.getBigDecimal(9));
+              claim.setCBVT_SAVING_AMT(rs.getBigDecimal(10));
+              
+              bookingCovers.add(claim);
+          }
+          rs.close();
+          cst.close();
+          conn.close();
+      } catch (Exception e) {
+      e.printStackTrace();
+          GlobalCC.EXCEPTIONREPORTING(conn, e);
+      } finally {
+          GlobalCC.CloseConnections(rs, cst, conn);
+      }
+
+      return bookingCovers;
+  }
+  public List<Claim> getRiRecoverableAmt() {
+      DBConnector myConn = new DBConnector();
+      Connection conn = myConn.getDatabaseConn();
+
+      CallableStatement cst = null;
+      List<Claim> riRecoverableList = new ArrayList<Claim>();
+      ResultSet rs = null;
+      try {
+          String query =
+              "begin LMS_CLAIM_BOOKING.getrirecoverableamt(?,?); end;";
+
+          cst = conn.prepareCall(query);
+          cst.registerOutParameter(1, OracleTypes.CURSOR);
+          cst.setBigDecimal(2,(BigDecimal)session.getAttribute("cmbCode"));
+          cst.execute();
+          rs = (ResultSet)cst.getObject(1);
+          while (rs.next()) {
+              Claim claim = new Claim();
+              claim.setAgnName(rs.getString(1));
+              claim.setRiGlAccount(rs.getString(2));
+              claim.setRecoverableAmt(rs.getBigDecimal(3));
+              riRecoverableList.add(claim);
+          }
+          rs.close();
+          cst.close();
+          conn.close();
+      } catch (Exception e) {
+      e.printStackTrace();
+          GlobalCC.EXCEPTIONREPORTING(conn, e);
+      } finally {
+          GlobalCC.CloseConnections(rs, cst, conn);
+      }
+
+      return riRecoverableList;
+  }
 }

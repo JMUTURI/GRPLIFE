@@ -1612,7 +1612,7 @@ public class policiesDAO {
 
     List PolicyList = new ArrayList();
     try {
-      String polQuery = "begin LMS_WEB_CURSOR_GRP.get_pol_members(?,?,?);end;";
+      String polQuery = "begin LMS_WEB_CURSOR_GRP.get_pol_members(?,?,?,?,?,?);end;";
 
       cst = conn.prepareCall(polQuery);
       cst.registerOutParameter(1, OracleTypes.CURSOR);
@@ -1620,7 +1620,9 @@ public class policiesDAO {
                         (BigDecimal)this.session.getAttribute("policyCode"));
 
       cst.setBigDecimal(3, (BigDecimal)this.session.getAttribute("PolmCode"));
-
+      cst.setString(4, (String)this.session.getAttribute("srchMemName"));
+      cst.setString(5, (String)this.session.getAttribute("srchMemNo"));
+      cst.setInt(6, 1000);
       cst.execute();
       ResultSet rst = (ResultSet)cst.getObject(1);
       while (rst.next()) {

@@ -644,6 +644,9 @@ public class DocIEdmsBack {
             uploadDocument.setOriginalFileName(filename);
             Gson gson = new Gson();
             String json = gson.toJson(uploadDocument);
+            System.out.println("=====================================================");
+            System.out.println(json);
+            System.out.println("=====================================================");
             URL url = new URL(query);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setConnectTimeout(5000);
@@ -716,6 +719,8 @@ public class DocIEdmsBack {
 
             in.close();
             conn.disconnect();
+            session.setAttribute("fmptCode", null);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -297,13 +297,15 @@ public class DMSUtils {
             conn = datahandler.getDatabaseConn();
             CallableStatement callStmt1;
 
-            String query = "begin ? := DMS_DOCUMENTS.getmemberno(?); end;";
+            String query = "begin ? := DMS_DOCUMENTS.getmemberno(?,?); end;";
             callStmt1 = conn.prepareCall(query);
             //register out
             callStmt1.registerOutParameter(1, OracleTypes.VARCHAR);
-            callStmt1.setBigDecimal(2,(BigDecimal)session.getAttribute("MemberNumber"));
+            callStmt1.setBigDecimal(2,(BigDecimal)session.getAttribute("PolmCode"));
+            callStmt1.setString(3, (String)this.session.getAttribute("ClaimNo"));
             callStmt1.execute();
             memberNo = callStmt1.getString(1);
+            System.out.println("The member number is "+memberNo);
             conn.commit();
             conn.close();
         } catch (Exception e) {

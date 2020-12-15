@@ -900,8 +900,6 @@ public class PolicyManipulation
       
       cstmt.setBigDecimal(3, (BigDecimal)this.session.getAttribute("TaCode"));
       cstmt.execute();
-      
-
       ADFUtils.findIterator("FindEndorsementsIterator").executeQuery();
       AdfFacesContext.getCurrentInstance().addPartialTarget(this.endrTotalSA);
       AdfFacesContext.getCurrentInstance().addPartialTarget(this.endrTotPremium2);
@@ -914,10 +912,7 @@ public class PolicyManipulation
       ADFUtils.findIterator("FindPolicyTaxesIterator").executeQuery();
       String Message = "Premium Computed Successfully";
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, Message, Message));
-      
-
-
-      conn.close();
+       conn.close();
     }
     catch (Exception e)
     {

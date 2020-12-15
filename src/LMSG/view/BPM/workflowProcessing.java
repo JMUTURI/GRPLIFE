@@ -5,7 +5,9 @@ import java.math.BigDecimal;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+
 import LMSG.view.ecm.EcmUtil;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,6 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import java.sql.ResultSet;
+
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -55,8 +58,10 @@ import LMSG.view.Correspondents.CorrespondenceManipulation;
 import LMSG.view.connect.DBConnector;
 
 import javax.faces.event.ValueChangeEvent;
+
 import org.apache.chemistry.opencmis.client.api.Document;
 import org.apache.chemistry.opencmis.client.api.Session;
+
 import org.jbpm.pvm.internal.cfg.JbpmConfiguration;
 
 public class workflowProcessing extends LOVCC {
@@ -79,6 +84,7 @@ public class workflowProcessing extends LOVCC {
     private RichTable allUsers2LOV;
     private RichInputText ticketRemarks;
     private RichSelectOneChoice productCoverDropBox;
+    private RichSelectOneChoice priorityLevel;
 
     public String CreateWorkflowInstance() {
 
@@ -122,10 +128,10 @@ public class workflowProcessing extends LOVCC {
                 }
                 map.put("Credit", session.getAttribute("Credit"));
                 map.put("NextTrans", session.getAttribute("NextTransition"));
-                if(session.getAttribute("riMedicals")==null){
-                  map.put("riMedicals","N");
-                }else{
-                  map.put("riMedicals", session.getAttribute("riMedicals"));
+                if (session.getAttribute("riMedicals") == null) {
+                    map.put("riMedicals", "N");
+                } else {
+                    map.put("riMedicals", session.getAttribute("riMedicals"));
                 }
             } else {
                 if (TaskAss == null) {
@@ -135,10 +141,10 @@ public class workflowProcessing extends LOVCC {
                 }
                 map.put("Credit", session.getAttribute("Credit"));
                 map.put("NextTrans", session.getAttribute("NextTransition"));
-                if(session.getAttribute("riMedicals")==null){
-                  map.put("riMedicals","N");
-                }else{
-                  map.put("riMedicals", session.getAttribute("riMedicals"));
+                if (session.getAttribute("riMedicals") == null) {
+                    map.put("riMedicals", "N");
+                } else {
+                    map.put("riMedicals", session.getAttribute("riMedicals"));
                 }
                 map.put("VoucherDecision",
                         session.getAttribute("VoucherDecision"));
@@ -257,9 +263,12 @@ public class workflowProcessing extends LOVCC {
             List<Task> Tasks2 = new ArrayList<Task>();
             Tasks2 =
                     wf.findTasksForWorkflowPath((String)session.getAttribute("workflowID"));
-            System.out.println("Completing RI med "+(String)session.getAttribute("RIMed")+
-                               " The workflow Id is " + (String)session.getAttribute("workflowID")+
-                               " the task ID is " + (String)session.getAttribute("TaskID"));
+            System.out.println("Completing RI med " +
+                               (String)session.getAttribute("RIMed") +
+                               " The workflow Id is " +
+                               (String)session.getAttribute("workflowID") +
+                               " the task ID is " +
+                               (String)session.getAttribute("TaskID"));
             int i = 0;
             for (Iterator iter = Tasks2.iterator(); iter.hasNext(); ) {
                 Task task = Tasks2.get(i);
@@ -408,7 +417,7 @@ public class workflowProcessing extends LOVCC {
                 "BEGIN Tqc_Web_Pkg.get_bpm_task_srn(?,?,?);END;";
             cst = conn.prepareCall(TaskScreen);
             cst.setString(1, (String)session.getAttribute("taskselName"));
-        
+
             cst.registerOutParameter(2, OracleTypes.VARCHAR);
             cst.setBigDecimal(3, new BigDecimal(27));
             cst.execute();
@@ -419,7 +428,7 @@ public class workflowProcessing extends LOVCC {
             if (ScreenName.equalsIgnoreCase("dmsDocView.jspx")) {
                 Cursta = "DMS";
             }
-            
+
             if (postUnderwritingReinsurance().equals("Y")) {
                 session.setAttribute("postReinsure", "Y");
             } else {
@@ -462,7 +471,7 @@ public class workflowProcessing extends LOVCC {
             } else if (Cursta.equalsIgnoreCase("E")) {
                 BigDecimal endrCode =
                     (BigDecimal)session.getAttribute("endorsementCode");
-                 System.out.println("Endorsements Code="+endrCode);
+                System.out.println("Endorsements Code=" + endrCode);
                 if (endrCode != null) {
                     String auth =
                         "BEGIN LMS_WEB_CURSOR_GRP.get_pol_status(?,?,?);END;";
@@ -484,66 +493,78 @@ public class workflowProcessing extends LOVCC {
                     session.setAttribute("ProductCode", cst1.getBigDecimal(3));
                 }
                 cst1.close();
-                
-            //cater for DMS module
-            } else if (Cursta.equalsIgnoreCase("DMS")) {
-                  
-                  String dmsEnabled = GlobalCC.findDMSEnabled();
-                  if (dmsEnabled.equalsIgnoreCase("Y")){
-					
-                      String id=(String)session.getAttribute("docId");
-                      String docName=(String)session.getAttribute("docName");
-                try {
 
-                      EcmUtil ecmUtil = new EcmUtil();
-                      Session ecmSession = ecmUtil.Authentification();
-                      session.setAttribute("dmsDocId", id);
-                      Document document = (Document) ecmSession.getObject(id);
-                      session.setAttribute("docName", document.getName());
-                      session.setAttribute("dateCreated", new SimpleDateFormat("dd/MM/yyyy").format(document.getCreationDate().getTime()));
-                      session.setAttribute("createdBy", document.getCreatedBy());
-                      session.setAttribute("version", document.getVersionLabel());
-                      InputStream inputStream=document.getContentStream().getStream();
-                      String  file = "/Reports/" + docName;
-                      FacesContext context = FacesContext.getCurrentInstance();
-                      ServletContext sc = (ServletContext)context.getExternalContext().getContext();
-                      file=sc.getRealPath(file);
-                      File toPrint=new File(file);
-                      OutputStream out;
-                      
-                      out = new FileOutputStream(toPrint);
-                       int read = 0;
-                       byte[] bytes = new byte[1024];
-          
-                       while ((read = inputStream.read(bytes)) != -1) {
-                           out.write(bytes, 0, read);
-                       }
-          
-                       inputStream.close();
-                       out.flush();
-                       out.close();
-                    if(toPrint!=null){ 
-                      HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-                      String scheme = request.getScheme();
-                      String serverName = request.getServerName();
-                      int portNumber = request.getServerPort();
-                      String contextPath = request.getContextPath();
-                      String url = scheme+"://"+serverName+":"+portNumber+contextPath+"/viewer.html";
-                      String pdf= "?file="+scheme+"://"+serverName+":"+portNumber+contextPath+ "/Reports/" +  docName;
-                       session.setAttribute("toPrint", url+pdf);
-                      
-                      //GlobalCC.viewContext("marketingToUndewriting");
-                      GlobalCC.RedirectPage("/" + ScreenName);
+                //cater for DMS module
+            } else if (Cursta.equalsIgnoreCase("DMS")) {
+
+                String dmsEnabled = GlobalCC.findDMSEnabled();
+                if (dmsEnabled.equalsIgnoreCase("Y")) {
+
+                    String id = (String)session.getAttribute("docId");
+                    String docName = (String)session.getAttribute("docName");
+                    try {
+
+                        EcmUtil ecmUtil = new EcmUtil();
+                        Session ecmSession = ecmUtil.Authentification();
+                        session.setAttribute("dmsDocId", id);
+                        Document document = (Document)ecmSession.getObject(id);
+                        session.setAttribute("docName", document.getName());
+                        session.setAttribute("dateCreated",
+                                             new SimpleDateFormat("dd/MM/yyyy").format(document.getCreationDate().getTime()));
+                        session.setAttribute("createdBy",
+                                             document.getCreatedBy());
+                        session.setAttribute("version",
+                                             document.getVersionLabel());
+                        InputStream inputStream =
+                            document.getContentStream().getStream();
+                        String file = "/Reports/" + docName;
+                        FacesContext context =
+                            FacesContext.getCurrentInstance();
+                        ServletContext sc =
+                            (ServletContext)context.getExternalContext().getContext();
+                        file = sc.getRealPath(file);
+                        File toPrint = new File(file);
+                        OutputStream out;
+
+                        out = new FileOutputStream(toPrint);
+                        int read = 0;
+                        byte[] bytes = new byte[1024];
+
+                        while ((read = inputStream.read(bytes)) != -1) {
+                            out.write(bytes, 0, read);
+                        }
+
+                        inputStream.close();
+                        out.flush();
+                        out.close();
+                        if (toPrint != null) {
+                            HttpServletRequest request =
+                                (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+                            String scheme = request.getScheme();
+                            String serverName = request.getServerName();
+                            int portNumber = request.getServerPort();
+                            String contextPath = request.getContextPath();
+                            String url =
+                                scheme + "://" + serverName + ":" + portNumber +
+                                contextPath + "/viewer.html";
+                            String pdf =
+                                "?file=" + scheme + "://" + serverName + ":" +
+                                portNumber + contextPath + "/Reports/" +
+                                docName;
+                            session.setAttribute("toPrint", url + pdf);
+
+                            //GlobalCC.viewContext("marketingToUndewriting");
+                            GlobalCC.RedirectPage("/" + ScreenName);
+                        }
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-					  } catch (FileNotFoundException e) {
-                e.printStackTrace();
-					  } catch (IOException e) {
-                e.printStackTrace();
-						}
-				} else {
-						GlobalCC.errorValueNotEntered("DMS is not enabled. Please check your settings and try again!");
-				}      
-                 
+                } else {
+                    GlobalCC.errorValueNotEntered("DMS is not enabled. Please check your settings and try again!");
+                }
+
             } else if (Cursta.equalsIgnoreCase("C")) {
 
                 String auth =
@@ -768,10 +789,10 @@ public class workflowProcessing extends LOVCC {
                 map.put("Credit", session.getAttribute("Credit"));
                 map.put("NextTrans", session.getAttribute("NextTransition"));
                 map.put("performRein", session.getAttribute("performRein"));
-                if(session.getAttribute("riMedicals")==null){
-                  map.put("riMedicals","N");
-                }else{
-                  map.put("riMedicals", session.getAttribute("riMedicals"));
+                if (session.getAttribute("riMedicals") == null) {
+                    map.put("riMedicals", "N");
+                } else {
+                    map.put("riMedicals", session.getAttribute("riMedicals"));
                 }
             } else if (Process.equalsIgnoreCase("CLMS")) {
                 map.put("DocsSubmitted", "Yes");
@@ -786,16 +807,17 @@ public class workflowProcessing extends LOVCC {
                 map.put("Credit", session.getAttribute("Credit"));
                 map.put("NextTrans", session.getAttribute("NextTransition"));
                 map.put("performRein", session.getAttribute("performRein"));
-              if(session.getAttribute("riMedicals")==null){
-                map.put("riMedicals","N");
-              }else{
-                map.put("riMedicals", session.getAttribute("riMedicals"));
-              }
+                if (session.getAttribute("riMedicals") == null) {
+                    map.put("riMedicals", "N");
+                } else {
+                    map.put("riMedicals", session.getAttribute("riMedicals"));
+                }
             }
             wf.updateTaskVariables((String)session.getAttribute("TaskID"),
                                    map);
-          
-          System.out.println("Order is here " +  String.valueOf(session.getAttribute("TaskAssignee")));
+
+            System.out.println("Order is here " +
+                               String.valueOf(session.getAttribute("TaskAssignee")));
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(null, e);
             e.printStackTrace();
@@ -944,36 +966,39 @@ public class workflowProcessing extends LOVCC {
     }
 
     public String Reassign2() {
-      CorrespondenceManipulation mail=new CorrespondenceManipulation();
+        CorrespondenceManipulation mail = new CorrespondenceManipulation();
         Connection conn = new DBConnector().getDatabaseConn();
         CallableStatement cst3 = null;
-
+        String priority = (String)session.getAttribute("priorityLevel");
         try {
             if (user.getValue() == null) {
                 GlobalCC.INFORMATIONREPORTING("Select an Assignee");
                 return null;
 
             }
-
             String Remarks = null;
             if (ticketRemarks.getValue() == null) {
 
             } else {
                 Remarks = ticketRemarks.getValue().toString();
             }
+            System.out.println("Priority Level is " + priority);
 
-            //wfEngine wf = new wfEngine();
-            //wf.AssignTask((String)session.getAttribute("TaskID"), user.getValue().toString());
-
-            String Complete = "BEGIN TQC_WEB_PKG.reassign_task(?,?,?);END;";
+            String Complete =
+                "BEGIN TQC_WEB_PKG.reassign_task(?,?,?,?,?);END;";
             cst3 = conn.prepareCall(Complete);
             cst3.setString(1, (String)session.getAttribute("TaskID"));
             cst3.setString(2, user.getValue().toString());
             cst3.setString(3, Remarks);
+            cst3.setString(4, null);
+            cst3.setString(5, priority);
             cst3.execute();
             cst3.close();
             conn.close();
-            mail.ticketAlert((String)session.getAttribute("Username"),user.getValue().toString(), (String)session.getAttribute("TaskActivityName"), Remarks);
+            mail.ticketAlert((String)session.getAttribute("Username"),
+                             user.getValue().toString(),
+                             (String)session.getAttribute("TaskActivityName"),
+                             Remarks);
 
             GlobalCC.RedirectPage("/lmsmain.jspx");
 
@@ -1077,10 +1102,11 @@ public class workflowProcessing extends LOVCC {
                 session.setAttribute("taskselID", r.getAttribute("TCKT_CDE"));
                 session.setAttribute("taskselCreateDate",
                                      r.getAttribute("TCKT_DATE"));
-                session.setAttribute("TaskActivityName",  r.getAttribute("TCKT_NAME"));
+                session.setAttribute("TaskActivityName",
+                                     r.getAttribute("TCKT_NAME"));
                 session.setAttribute("docId", r.getAttribute("TCKT_POL_NO"));
                 session.setAttribute("docName", r.getAttribute("TCKT_REF_NO"));
-              
+
                 GlobalCC.RedirectPage("/wfProcessing.jspx");
 
             }
@@ -1164,32 +1190,32 @@ public class workflowProcessing extends LOVCC {
         }
         return null;
     }
-    
-    public String saveDmsDocuments(String docID,String user,String docType,String documentName) {
 
-          DBConnector myConn = new DBConnector();
-          Connection conn = myConn.getDatabaseConn();
-          CallableStatement cst = null;
+    public String saveDmsDocuments(String docID, String user, String docType,
+                                   String documentName) {
 
-            try {        
+        DBConnector myConn = new DBConnector();
+        Connection conn = myConn.getDatabaseConn();
+        CallableStatement cst = null;
 
-                String Updatewkflw =
-                    "BEGIN LMS_WEB_PKG_SETUP.create_dms_documents(?,?,?,?);END;";
-                cst = conn.prepareCall(Updatewkflw);
-                cst.setString(1, docID);
-                cst.setString(2, user);
-                cst.setString(3, docType);
-                cst.setString(4, documentName);
-                cst.execute();
-                cst.close();
-                conn.close();
+        try {
 
-            }
-            catch (Exception e) {
-                       GlobalCC.EXCEPTIONREPORTING(conn, e);
-            }
-            return null;
+            String Updatewkflw =
+                "BEGIN LMS_WEB_PKG_SETUP.create_dms_documents(?,?,?,?);END;";
+            cst = conn.prepareCall(Updatewkflw);
+            cst.setString(1, docID);
+            cst.setString(2, user);
+            cst.setString(3, docType);
+            cst.setString(4, documentName);
+            cst.execute();
+            cst.close();
+            conn.close();
+
+        } catch (Exception e) {
+            GlobalCC.EXCEPTIONREPORTING(conn, e);
         }
+        return null;
+    }
 
     public String hideReassign() {
         reassignPanel.setRendered(false);
@@ -1328,7 +1354,22 @@ public class workflowProcessing extends LOVCC {
     public RichSelectOneChoice getProductCoverDropBox() {
         return productCoverDropBox;
     }
-   
 
-    
+
+    public void setPriorityLevel(RichSelectOneChoice priorityLevel) {
+        this.priorityLevel = priorityLevel;
+    }
+
+    public RichSelectOneChoice getPriorityLevel() {
+        return priorityLevel;
+    }
+
+    public void priorityLevelListener(ValueChangeEvent valueChangeEvent) {
+        if (valueChangeEvent.getNewValue() != valueChangeEvent.getOldValue()) {
+            if (priorityLevel.getValue() != null) {
+                session.setAttribute("priorityLevel",
+                                     priorityLevel.getValue());
+            }
+        }
+    }
 }

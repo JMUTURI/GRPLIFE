@@ -145,6 +145,26 @@
   <Attribute Name="PDED_EST_ACTUAL" Type="java.lang.String"/>
   <Attribute Name="PDED_RT_AMT_TYPE" Type="java.lang.String"/>
   <Attribute Name="PDED_NET_AMOUNT" Type="java.math.BigDecimal"/>
+  <Attribute Name="polmCode" Type="java.math.BigDecimal"/>
+  <Attribute Name="memNo" Type="java.lang.String"/>
+  <Attribute Name="memName" Type="java.lang.String"/>
+  <Attribute Name="memSex" Type="java.lang.String"/>
+  <Attribute Name="memDob" Type="java.util.Date"/>
+  <Attribute Name="memIdNo" Type="java.lang.String"/>
+  <Attribute Name="memPin" Type="java.lang.String"/>
+  <Attribute Name="memTelephone" Type="java.lang.String"/>
+  <Attribute Name="memEmail" Type="java.lang.String"/>
+  <Attribute Name="transDate" Type="java.util.Date"/>
+  <Attribute Name="transType" Type="java.lang.String"/>
+  <Attribute Name="receiptNo" Type="java.lang.String"/>
+  <Attribute Name="referenceNo" Type="java.lang.String"/>
+  <Attribute Name="empyeBalBf" Type="java.math.BigDecimal"/>
+  <Attribute Name="empyeRegBalBf" Type="java.math.BigDecimal"/>
+  <Attribute Name="empyeNonRegBalBf" Type="java.math.BigDecimal"/>
+  <Attribute Name="empyrBalBf" Type="java.math.BigDecimal"/>
+  <Attribute Name="empyrRegBalBf" Type="java.math.BigDecimal"/>
+  <Attribute Name="empyrNonRegBalBf" Type="java.math.BigDecimal"/>
+  <Attribute Name="total" Type="java.math.BigDecimal"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.Pensions.pension"
                      BeanClass="LMSG.view.Pensions.pension" id="pension"/>
 </JavaBean>

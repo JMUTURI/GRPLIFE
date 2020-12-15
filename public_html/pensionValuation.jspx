@@ -251,6 +251,10 @@
                                 <af:convertDateTime pattern="#{bindings.pension2.hints.PNBAL_AUTHORISED_DATE.format}"/>
                               </af:outputText>
                             </af:column>
+                            <af:column id="c82">
+                              <af:commandLink text="[Member Balances]" id="cl4"
+                                              action="#{pens.memberBalanceRedirect}"/>
+                            </af:column>
                           </af:table>
                           <h:panelGrid columns="6" id="pg7" rendered="false">
                             <h:panelGrid columns="2" id="pg15" rendered="false">
@@ -1893,7 +1897,7 @@
                                 </af:column>
                                 <af:column sortProperty="PNDP_TOT_AMT"
                                            sortable="true"
-                                           headerText="Total Contri" id="c37"
+                                           headerText="Net Payable" id="c37"
                                            width="70">
                                   <af:outputText value="#{row.PNDP_TOT_AMT}"
                                                  id="ot58"
@@ -2060,7 +2064,7 @@
                                                 id="rpt1463"
                                                 inlineStyle="font-weight:bold;"
                                                 actionListener="#{ReportsEngine.GetReportDetails}"/>
-                                <af:commandLink text="Scheme Account Summary"
+                                <af:commandLink text="Master Report"
                                                 id="rpt984"
                                                 inlineStyle="font-weight:bold;"
                                                 actionListener="#{ReportsEngine.GetReportDetails}"/>
@@ -2088,7 +2092,7 @@
                                                 id="rpt2153"
                                                 inlineStyle="font-weight:bold;"
                                                 actionListener="#{ReportsEngine.GetReportDetails}"/>
-                                <af:commandLink text="Admin Fee Debit Note"
+								<af:commandLink text="Policy Report"
                                                 id="rpt2173"
                                                 inlineStyle="font-weight:bold;"
                                                 actionListener="#{ReportsEngine.GetReportDetails}"/>

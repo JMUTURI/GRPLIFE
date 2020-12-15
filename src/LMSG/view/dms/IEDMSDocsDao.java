@@ -270,12 +270,17 @@ new URL(utils.findDmsUrl() + "/" + "getGroupNBDocsByPolicyEndoseNo?policyNo=" +
         ArrayList<String> medMetadata = new ArrayList();
         DocumentDTO[] documents = new DocumentDTO[0];
         String link = utils.findDmsUrl() + "/";
+        String facilitator="";
         try {
             BigDecimal facilitatorCode =
                 (BigDecimal)this.session.getAttribute("FacilitatorCode");
             // System.out.println("Facilitator Code " + facilitatorCode);
+            if(facilitatorCode!=null){
+              facilitator=facilitatorCode.toString(); 
+            }
+            
             URL url =
-                new URL(link + "getGroupMedicalDocsByTransNo?transNo=" + facilitatorCode.toString());
+                new URL(link + "getGroupMedicalDocsByTransNo?transNo=" +facilitator);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");
@@ -381,8 +386,10 @@ new URL(utils.findDmsUrl() + "/" + "getGroupNBDocsByPolicyEndoseNo?policyNo=" +
         String link = utils.findDmsUrl() + "/";
 
         try {
+          //System.out.println("Member Link=="+link + "getGroupNBDMemberDocsByNo?memberNo=" + utils.findMemberNo());
             URL url =
-                new URL(link + "getLMSGroupMemberDocByNo?memberNo=" + utils.findMemberNo());
+                new URL(link + "getGroupNBDMemberDocsByNo?memberNo=" + utils.findMemberNo());
+            
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");

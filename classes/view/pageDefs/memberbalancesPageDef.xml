@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="memberbalancesPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="findPensionMembers.result" DataControl="pensionsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Pensions.pension"
+                    id="findPensionMembersIterator"/>
+    <searchRegion Binds="findPensionMembersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="pensionQuery"/>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+    <methodIterator Binds="findPensionMembersDetails.result"
+                    DataControl="pensionsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Pensions.pension"
+                    id="findPensionMembersDetailsIterator"/>
+    <methodIterator Binds="findPensionMemberStatement.result"
+                    DataControl="pensionsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Pensions.pension"
+                    id="findPensionMemberStatementIterator"/>
+    <searchRegion Binds="findPensionMemberStatementIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="pension1Query"/>
+    <methodIterator Binds="findPensionMemberWithdrawal.result"
+                    DataControl="pensionsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Pensions.pension"
+                    id="findPensionMemberWithdrawalIterator"/>
+    <searchRegion Binds="findPensionMemberWithdrawalIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="pension2Query"/>
+    <methodIterator Binds="findRelationTypes.result"
+                    DataControl="relationTypesDAO" RangeSize="25"
+                    BeanClass="com.turnkey.setups.relationTypes"
+                    id="findRelationTypesIterator"/>
+    <searchRegion Binds="findRelationTypesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="relationTypesQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="findPensionMembers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionMembers"
+                  IsViewObjectMethod="false" DataControl="pensionsDAO"
+                  InstanceName="pensionsDAO.dataProvider"
+                  ReturnName="pensionsDAO.methodResults.findPensionMembers_pensionsDAO_dataProvider_findPensionMembers_result"/>
+    <tree IterBinding="findPensionMembersIterator" id="pension">
+      <nodeDefinition DefName="LMSG.view.Pensions.pension" Name="pension0">
+        <AttrNames>
+          <Item Value="polmCode"/>
+          <Item Value="memNo"/>
+          <Item Value="memName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <attributeValues IterBinding="FindPoliciesIterator" id="CLIENT_DISPLAY">
+      <AttrNames>
+        <Item Value="CLIENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_POLICY_NO">
+      <AttrNames>
+        <Item Value="POL_POLICY_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findPensionMembersDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionMembersDetails"
+                  IsViewObjectMethod="false" DataControl="pensionsDAO"
+                  InstanceName="pensionsDAO.dataProvider"
+                  ReturnName="pensionsDAO.methodResults.findPensionMembersDetails_pensionsDAO_dataProvider_findPensionMembersDetails_result"/>
+    <attributeValues IterBinding="findPensionMembersDetailsIterator" id="memNo">
+      <AttrNames>
+        <Item Value="memNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPensionMembersDetailsIterator"
+                     id="memName">
+      <AttrNames>
+        <Item Value="memName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPensionMembersDetailsIterator"
+                     id="memSex">
+      <AttrNames>
+        <Item Value="memSex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPensionMembersDetailsIterator"
+                     id="memDob">
+      <AttrNames>
+        <Item Value="memDob"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPensionMembersDetailsIterator"
+                     id="memIdNo">
+      <AttrNames>
+        <Item Value="memIdNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPensionMembersDetailsIterator"
+                     id="memPin">
+      <AttrNames>
+        <Item Value="memPin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPensionMembersDetailsIterator"
+                     id="memTelephone">
+      <AttrNames>
+        <Item Value="memTelephone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPensionMembersDetailsIterator"
+                     id="memEmail">
+      <AttrNames>
+        <Item Value="memEmail"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findPensionMemberStatement" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionMemberStatement"
+                  IsViewObjectMethod="false" DataControl="pensionsDAO"
+                  InstanceName="pensionsDAO.dataProvider"
+                  ReturnName="pensionsDAO.methodResults.findPensionMemberStatement_pensionsDAO_dataProvider_findPensionMemberStatement_result"/>
+    <tree IterBinding="findPensionMemberStatementIterator" id="pension1">
+      <nodeDefinition DefName="LMSG.view.Pensions.pension" Name="pension10">
+        <AttrNames>
+          <Item Value="transDate"/>
+          <Item Value="transType"/>
+          <Item Value="receiptNo"/>
+          <Item Value="referenceNo"/>
+          <Item Value="empyeBalBf"/>
+          <Item Value="empyeRegBalBf"/>
+          <Item Value="empyeNonRegBalBf"/>
+          <Item Value="empyrBalBf"/>
+          <Item Value="empyrRegBalBf"/>
+          <Item Value="empyrNonRegBalBf"/>
+          <Item Value="total"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPensionMemberWithdrawal" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionMemberWithdrawal"
+                  IsViewObjectMethod="false" DataControl="pensionsDAO"
+                  InstanceName="pensionsDAO.dataProvider"
+                  ReturnName="pensionsDAO.methodResults.findPensionMemberWithdrawal_pensionsDAO_dataProvider_findPensionMemberWithdrawal_result"/>
+    <tree IterBinding="findPensionMemberWithdrawalIterator" id="pension2">
+      <nodeDefinition DefName="LMSG.view.Pensions.pension" Name="pension20">
+        <AttrNames>
+          <Item Value="transDate"/>
+          <Item Value="transType"/>
+          <Item Value="receiptNo"/>
+          <Item Value="referenceNo"/>
+          <Item Value="empyeBalBf"/>
+          <Item Value="empyeRegBalBf"/>
+          <Item Value="empyeNonRegBalBf"/>
+          <Item Value="empyrBalBf"/>
+          <Item Value="empyrRegBalBf"/>
+          <Item Value="empyrNonRegBalBf"/>
+          <Item Value="total"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findRelationTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findRelationTypes"
+                  IsViewObjectMethod="false" DataControl="relationTypesDAO"
+                  InstanceName="relationTypesDAO.dataProvider"
+                  ReturnName="relationTypesDAO.methodResults.findRelationTypes_relationTypesDAO_dataProvider_findRelationTypes_result"/>
+    <tree IterBinding="findRelationTypesIterator" id="relationTypes">
+      <nodeDefinition DefName="com.turnkey.setups.relationTypes"
+                      Name="relationTypes0">
+        <AttrNames>
+          <Item Value="retCode"/>
+          <Item Value="retDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

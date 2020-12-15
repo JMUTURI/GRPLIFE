@@ -1,0 +1,877 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="TurnQuest Group Life | Claim Opening" id="d8">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="pt1">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl2">
+              <af:panelBox text="Book Claim" showHeader="never" id="pb1">
+                <f:facet name="toolbar"/>
+                <af:outputLabel value="Claim Opening"
+                                inlineStyle="width:inherit; font-weight:bold;"
+                                id="ol1"/>
+                <af:separator inlineStyle="width:inherit;" id="s1"/>
+                <h:panelGrid columns="2" id="pg1">
+                  <h:panelGrid columns="1" id="pg2">
+                    <af:outputLabel value="Transaction Date" id="ol2"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg3">
+                    <af:inputDate label="Label 1" disabled="true" simple="true"
+                                  value="#{bindings.sysDate.inputValue}"
+                                  id="id1">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg4">
+                    <af:outputLabel value="Transaction Type." id="ol3"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg5">
+                    <af:selectOneChoice label="Label 1" simple="true"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{claim.transactionListener}"
+                                        binding="#{claim.transType}" id="trans"
+                                        unselectedLabel="Transaction Type"
+                                        value="LO"
+                                        disabled="true">
+                      <af:selectItem label="Claim Opening" value="LO" id="si1"/>
+                      <af:selectItem label="Claim Opening (Retirement Fund)"
+                                     value="LORF" id="si2"/>
+                      <af:selectItem label="Re-open Claim" value="RO" id="si3"/>
+                      <af:selectItem label="Contra Payment" value="CO"
+                                     id="si4"/>
+                    </af:selectOneChoice>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg6">
+                    <af:outputLabel value="Product ID." id="ol4"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg7">
+                    <af:inputText label="Label 1" simple="true" disabled="true"
+                                  binding="#{claim.productDesc}" id="it1"/>
+                    <af:commandButton icon="/images/dropdown.gif" id="cb28">
+                      <af:showPopupBehavior popupId="prod"/>
+                    </af:commandButton>
+                    <af:popup id="prod">
+                      <af:dialog type="none" title="Products" id="d1">
+                        <af:panelBox text="PanelBox1" id="pb3"
+                                     showHeader="never">
+                          <f:facet name="toolbar"/>
+                          <af:table value="#{bindings.productDetails.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.productDetails.rangeSize}"
+                                    emptyText="#{bindings.productDetails.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.productDetails.rangeSize}"
+                                    rowBandingInterval="0"
+                                    filterModel="#{bindings.productDetailsQuery.queryDescriptor}"
+                                    queryListener="#{bindings.productDetailsQuery.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.productDetails.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.productDetails.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t10" width="420"
+                                    binding="#{claim.productsLOV}">
+                            <af:column sortProperty="prodshtDesc"
+                                       filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true" headerText="Short Desc"
+                                       id="c31">
+                              <af:outputText value="#{row.prodshtDesc}"
+                                             id="ot32"/>
+                            </af:column>
+                            <af:column sortProperty="prodDesc" filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true" headerText="Product"
+                                       id="c33" width="200">
+                              <af:outputText value="#{row.prodDesc}" id="ot33"/>
+                            </af:column>
+                            <af:column sortProperty="prodType" filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true" headerText="Product Type"
+                                       id="c32">
+                              <af:outputText value="#{row.prodType}" id="ot31"/>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                        <h:panelGrid columns="2" id="pg8">
+                          <af:commandButton text="OK"
+                                            action="#{claim.findProductSelected}"
+                                            id="cb2"/>
+                          <af:commandButton text="Cancel" id="cb3"/>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl3">
+                    <af:outputLabel value="Policy No."
+                                    binding="#{claim.enPolicyLabel}" id="ol5"/>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl4">
+                    <h:panelGrid columns="2" binding="#{claim.policyPanel}"
+                                 id="pg9">
+                      <af:inputText label="Label 2" simple="true"
+                                    disabled="true"
+                                    binding="#{claim.policiesDesc}" id="it2"/>
+                      <af:commandButton icon="/images/dropdown.gif"
+                                        binding="#{claim.enPolicyButton}"
+                                        id="cb4">
+                        <af:showPopupBehavior popupId="policy"/>
+                      </af:commandButton>
+                      <af:popup id="policy">
+                        <af:dialog type="none" title="Policies" id="d2">
+                          <af:panelBox text="PanelBox2" id="pb4"
+                                       showHeader="never">
+                            <f:facet name="toolbar"/>
+                            <af:table value="#{bindings.policies.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.policies.rangeSize}"
+                                      emptyText="#{bindings.policies.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.policies.rangeSize}"
+                                      filterModel="#{bindings.policiesQuery.queryDescriptor}"
+                                      queryListener="#{bindings.policiesQuery.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.policies.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.policies.collectionModel.makeCurrent}"
+                                      rowSelection="single"
+                                      binding="#{claim.policiesLOV}" id="t2"
+                                      inlineStyle="width:100%">
+                              <af:column sortProperty="POL_POLICY_NO"
+                                         filterable="true"
+                                         filterFeatures="caseInsensitive"
+                                         sortable="true"
+                                         headerText="Policy Number" width="100"
+                                         id="c3">
+                                <af:outputText value="#{row.POL_POLICY_NO}"
+                                               id="ot4"/>
+                              </af:column>
+                              <af:column sortProperty="CLIENT_DISPLAY"
+                                         sortable="true" headerText="Client"
+                                         width="200" id="c4" filterable="true"
+                                         filterFeatures="caseInsensitive">
+                                <af:outputText value="#{row.CLIENT_DISPLAY}"
+                                               id="ot5"/>
+                              </af:column>
+                              <af:column sortProperty="AGN_NAME" sortable="true"
+                                         headerText="Agent/Broker" width="200"
+                                         id="c19" filterable="true"
+                                         filterFeatures="caseInsensitive">
+                                <af:outputText value="#{row.AGN_NAME}"
+                                               id="ot19"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelBox>
+                          <h:panelGrid columns="2" id="pg10">
+                            <af:commandButton text="OK"
+                                              action="#{claim.findPoliciesSelected}"
+                                              id="cb5"/>
+                            <af:commandButton text="Cancel" id="cb6"/>
+                          </h:panelGrid>
+                        </af:dialog>
+                      </af:popup>
+                    </h:panelGrid>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl5">
+                    <af:outputLabel value="Claim No." rendered="false"
+                                    binding="#{claim.enClaimLabel}" id="ol6"/>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl6">
+                    <h:panelGrid columns="2" rendered="false"
+                                 binding="#{claim.claimPanel}" id="pg11">
+                      <af:inputText label="Label 2" simple="true"
+                                    disabled="true"
+                                    binding="#{claim.enClaimDesc}"
+                                    rendered="false" id="it3"/>
+                      <af:commandButton icon="/images/dropdown.gif"
+                                        rendered="false"
+                                        binding="#{claim.enClaimButton}"
+                                        id="cb7">
+                        <af:showPopupBehavior popupId="enclaim"/>
+                      </af:commandButton>
+                      <af:popup id="enclaim">
+                        <af:dialog type="none" title="Claims" id="d3">
+                          <af:panelBox text="PanelBox3" id="pb5"
+                                       showHeader="never">
+                            <f:facet name="toolbar"/>
+                            <af:table value="#{bindings.Claim4.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.Claim4.rangeSize}"
+                                      emptyText="#{bindings.Claim4.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.Claim4.rangeSize}"
+                                      filterModel="#{bindings.Claim4Query.queryDescriptor}"
+                                      queryListener="#{bindings.Claim4Query.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.Claim4.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.Claim4.collectionModel.makeCurrent}"
+                                      rowSelection="single"
+                                      binding="#{claim.rcClaimsLOV}" id="t3">
+                              <af:column sortProperty="RC_CLM_NO"
+                                         filterable="true"
+                                         filterFeatures="caseInsensitive"
+                                         sortable="true" headerText="Claim No."
+                                         id="c5">
+                                <af:outputText value="#{row.RC_CLM_NO}"
+                                               id="ot6"/>
+                              </af:column>
+                              <af:column sortProperty="RC_MEM_DISPL"
+                                         filterable="true"
+                                         filterFeatures="caseInsensitive"
+                                         sortable="true" headerText="Member"
+                                         width="200" id="c6">
+                                <af:outputText value="#{row.RC_MEM_DISPL}"
+                                               id="ot7"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelBox>
+                          <h:panelGrid columns="2" id="pg12">
+                            <af:commandButton text="OK"
+                                              action="#{claim.findClaimReopenSelected}"
+                                              id="cb8"/>
+                            <af:commandButton text="Cancel" id="cb9"/>
+                          </h:panelGrid>
+                        </af:dialog>
+                      </af:popup>
+                    </h:panelGrid>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl7">
+                    <af:outputLabel value="Transaction." rendered="false"
+                                    binding="#{claim.enTransLabel}" id="ol7"/>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl8">
+                    <h:panelGrid columns="2" binding="#{claim.transPanel}"
+                                 rendered="false" id="pg13">
+                      <af:inputText label="Label 2" simple="true"
+                                    disabled="true"
+                                    binding="#{claim.enTransDesc}"
+                                    rendered="false" id="it4"/>
+                      <af:commandButton icon="/images/dropdown.gif"
+                                        rendered="false"
+                                        binding="#{claim.enTransButton}"
+                                        id="cb10">
+                        <af:showPopupBehavior popupId="enTran"/>
+                      </af:commandButton>
+                      <af:popup id="enTran">
+                        <af:dialog type="none" title="Claim Transactions"
+                                   id="d4">
+                          <af:table value="#{bindings.Claim3.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.Claim3.rangeSize}"
+                                    emptyText="#{bindings.Claim3.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.Claim3.rangeSize}"
+                                    filterModel="#{bindings.Claim3Query.queryDescriptor}"
+                                    queryListener="#{bindings.Claim3Query.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.Claim3.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.Claim3.collectionModel.makeCurrent}"
+                                    rowSelection="single"
+                                    binding="#{claim.rcClaimTransLOV}" id="t4">
+                            <af:column sortProperty="CPV_VOUCHER_NO"
+                                       filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true" headerText="Voucher No"
+                                       id="c7">
+                              <af:outputText value="#{row.CPV_VOUCHER_NO}"
+                                             id="ot8"/>
+                            </af:column>
+                            <af:column sortProperty="CPV_AMOUNT"
+                                       filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true"
+                                       headerText="Voucher Amount" id="c8">
+                              <af:outputText value="#{row.CPV_AMOUNT}"
+                                             id="ot9"/>
+                            </af:column>
+                            <af:column sortProperty="CPV_PAYEE"
+                                       filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true" headerText="Payee"
+                                       id="c9">
+                              <af:outputText value="#{row.CPV_PAYEE}"
+                                             id="ot10"/>
+                            </af:column>
+                          </af:table>
+                          <h:panelGrid columns="2" id="pg14">
+                            <af:commandButton text="OK"
+                                              action="#{claim.findClaimTransReopenSelected}"
+                                              id="cb11"/>
+                            <af:commandButton text="Cancel" id="cb12"/>
+                          </h:panelGrid>
+                        </af:dialog>
+                      </af:popup>
+                    </h:panelGrid>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl9">
+                    <af:outputLabel value="Cancel FMS Requisition"
+                                    binding="#{claim.fmSLabel}" rendered="false"
+                                    id="ol8"/>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl10">
+                    <af:selectBooleanCheckbox simple="true"
+                                              binding="#{claim.fmSCheck}"
+                                              rendered="false" id="sbc1"/>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl11">
+                    <af:outputLabel value="Member No."
+                                    binding="#{claim.enMemberNo}" id="ol9"/>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout partialTriggers="trans" id="pgl12">
+                    <h:panelGrid columns="4" binding="#{claim.memberPanel}"
+                                 id="pg15">
+                      <af:inputText label="Label 3" simple="true"
+                                    disabled="true"
+                                    binding="#{claim.membersDesc}" id="it5"/>
+                      <af:commandButton icon="/images/dropdown.gif"
+                                        binding="#{claim.enMemberButton}"
+                                        id="cb13"
+                                        action="#{claim.MemberLOVSelection}"/>
+                      <h:panelGrid columns="1" id="pg30">
+                        <af:selectBooleanCheckbox text="Exgratia Claim?"
+                                                  label="Label 1" id="sbc2"
+                                                  simple="true"
+                                                  autoSubmit="true"
+                                                  valueChangeListener="#{claim.xGratiaClaimListener}"
+                                                  binding="#{claim.xgratiaTransaction}"
+                                                  rendered="#{Rendering.exGratiaClaim}"/>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout id="pgl1" partialTriggers="sbc2">
+                    <af:outputLabel value="Exgratia Comments"
+                                    binding="#{claim.exgratiaCommLbl}"
+                                    id="outputLabel1" rendered="false"/>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout id="pgl13" partialTriggers="sbc2">
+                    <af:inputText label="Label 16" id="it18" rows="5"
+                                  rendered="false"
+                                  binding="#{claim.exgratiaRemarks}"
+                                  simple="true"/>
+                  </af:panelGroupLayout>
+                  <h:panelGrid columns="1" id="pg17">
+                    <af:outputLabel value="Claim Type." id="ol10"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg18">
+                    <af:inputText label="Label 4" simple="true" disabled="true"
+                                  binding="#{claim.causationDesc}" id="it6"/>
+                    <af:commandButton icon="/images/dropdown.gif" id="cb16">
+                      <af:showPopupBehavior popupId="causation"/>
+                    </af:commandButton>
+                    <af:popup id="causation">
+                      <af:dialog type="none" title="Causations" id="d6">
+                        <af:panelBox text="PanelBox5" id="pb7"
+                                     showHeader="never">
+                          <f:facet name="toolbar"/>
+                          <af:table value="#{bindings.Claim1.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.Claim1.rangeSize}"
+                                    emptyText="#{bindings.Claim1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.Claim1.rangeSize}"
+                                    filterModel="#{bindings.Claim1Query.queryDescriptor}"
+                                    queryListener="#{bindings.Claim1Query.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.Claim1.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.Claim1.collectionModel.makeCurrent}"
+                                    rowSelection="single"
+                                    binding="#{claim.causationsLOV}" id="t6">
+                            <af:column sortProperty="CAUS_SHT_DESC"
+                                       filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true" headerText="Short Desc"
+                                       id="c12">
+                              <af:outputText value="#{row.CAUS_SHT_DESC}"
+                                             id="ot13"/>
+                            </af:column>
+                            <af:column sortProperty="CAUS_DESC"
+                                       filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true" headerText="Description"
+                                       width="200" id="c13">
+                              <af:outputText value="#{row.CAUS_DESC}"
+                                             id="ot14"/>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                        <h:panelGrid columns="2" id="pg19">
+                          <af:commandButton text="OK"
+                                            action="#{claim.findCausationsSelected}"
+                                            id="cb17"/>
+                          <af:commandButton text="Cancel" id="cb18"/>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg27"
+                               rendered="#{!Rendering.expressVisible}">
+                    <af:outputLabel value="Minimal Information Provided?"
+                                    rendered="#{!Rendering.expressVisible}"
+                                    id="ol14"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg28"
+                               rendered="#{!Rendering.expressVisible}">
+                    <af:selectOneChoice label="Label 2" id="soc1"
+                                        autoSubmit="true" simple="true"
+                                        binding="#{claim.minimumInformationProvided}"
+                                        valueChangeListener="#{claim.minimalInforListener}"
+                                        value="N">
+                      <af:selectItem label="Yes" value="Y" id="si5"/>
+                      <af:selectItem label="No" value="N" id="si6"/>
+                    </af:selectOneChoice>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg20">
+                    <af:outputLabel value="Claim Type Cause" id="ol11"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="2" id="pg21">
+                    <af:inputText label="Label 5" simple="true" disabled="true"
+                                  binding="#{claim.causeCodeDesc}" id="it7"/>
+                    <af:commandButton icon="/images/dropdown.gif" id="cb19">
+                      <af:showPopupBehavior popupId="causationcauz"/>
+                    </af:commandButton>
+                    <af:popup id="causationcauz">
+                      <af:dialog type="none" title="Causation Cause" id="d7">
+                        <af:panelBox text="PanelBox6" id="pb8"
+                                     showHeader="never">
+                          <f:facet name="toolbar"/>
+                          <af:table value="#{bindings.Claim2.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.Claim2.rangeSize}"
+                                    emptyText="#{bindings.Claim2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.Claim2.rangeSize}"
+                                    filterModel="#{bindings.Claim2Query.queryDescriptor}"
+                                    queryListener="#{bindings.Claim2Query.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.Claim2.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.Claim2.collectionModel.makeCurrent}"
+                                    rowSelection="single"
+                                    binding="#{claim.causeCodeLOV}" id="t7">
+                            <af:column sortProperty="DDC_SHT_DESC"
+                                       filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true" headerText="Short Desc"
+                                       id="c14">
+                              <af:outputText value="#{row.DDC_SHT_DESC}"
+                                             id="ot15"/>
+                            </af:column>
+                            <af:column sortProperty="DDC_DESC" filterable="true"
+                                       filterFeatures="caseInsensitive"
+                                       sortable="true" headerText="Description"
+                                       width="200" id="c15">
+                              <af:outputText value="#{row.DDC_DESC}" id="ot16"/>
+                            </af:column>
+                          </af:table>
+                        </af:panelBox>
+                        <h:panelGrid columns="2" id="pg22">
+                          <af:commandButton text="OK"
+                                            action="#{claim.findCausationCodeSelected}"
+                                            id="cb20"/>
+                          <af:commandButton text="Cancel" id="cb21"/>
+                        </h:panelGrid>
+                      </af:dialog>
+                    </af:popup>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg23">
+                    <af:outputLabel value="Death/Disability Location"
+                                    id="ol29"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" id="pg33">
+                    <af:inputText label="Label 17" id="it19" columns="35"
+                                  binding="#{claim.deathLocation}"
+                                  simple="true"/>
+                  </h:panelGrid>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="pg25">
+                  <af:spacer width="10" height="10" id="s5"/>
+                </h:panelGrid>
+                <h:panelGrid columns="4" id="pg26">
+                  <af:outputLabel value="Claim Loss Date" id="ol12"/>
+                  <af:inputDate label="Label 2" simple="true"
+                                binding="#{claim.lossDate}" id="id2">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:inputDate>
+                  <af:outputLabel value="Claim Report Date" id="ol13"/>
+                  <af:inputDate label="Label 2" simple="true"
+                                binding="#{claim.reportDate}" id="id3">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:inputDate>
+                </h:panelGrid>
+                <af:spacer width="10" height="30" id="s2"/>
+                <h:panelGrid columns="2" id="pg35">
+                  <af:commandButton text="Next" action="#{claim.claimOpening}"
+                                    id="cb22" inlineStyle="width:100.0px;"
+                                    binding="#{claim.nextButton}"/>
+                  <af:commandButton text="Cancel" id="cb34"
+                                    inlineStyle="width:100.0px;"/>
+                </h:panelGrid>
+              </af:panelBox>
+              <af:panelBox text="Pending Transactions" id="pb9" rendered="false"
+                           binding="#{claim.myPendingTrans}">
+                <f:facet name="toolbar"/>
+                <af:table value="#{bindings.Claim7.collectionModel}" var="row"
+                          rows="#{bindings.Claim7.rangeSize}"
+                          emptyText="#{bindings.Claim7.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.Claim7.rangeSize}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.Claim7.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.Claim7.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t1"
+                          inlineStyle="width:100%; height:100.0px; border-style:none;"
+                          binding="#{claim.pendingTransactions}">
+                  <af:column sortProperty="LTR_CLM_NO" sortable="true"
+                             headerText="Claim No." id="c1" width="150">
+                    <af:outputText value="#{row.LTR_CLM_NO}" id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="LTR_TRANS_NO" sortable="true"
+                             headerText="Trans No." id="c36" displayIndex="-1">
+                    <af:outputText value="#{row.LTR_TRANS_NO}" id="ot36"/>
+                  </af:column>
+                  <af:column sortProperty="MEMBERNAME" sortable="true"
+                             headerText="Member Name" id="c34" width="200">
+                    <af:outputText value="#{row.MEMBERNAME}" id="ot35"/>
+                  </af:column>
+                  <af:column sortProperty="LTR_BTR_TRANS_CODE" sortable="true"
+                             headerText="Type" id="c2">
+                    <af:outputText value="#{row.LTR_BTR_TRANS_CODE}" id="ot2"/>
+                  </af:column>
+                  <af:column sortProperty="LTR_EFFECTIVE_DATE" sortable="true"
+                             headerText="Effective Date" id="c35">
+                    <af:outputText value="#{row.LTR_EFFECTIVE_DATE}" id="ot34">
+                      <af:convertDateTime pattern="#{bindings.Claim7.hints.LTR_EFFECTIVE_DATE.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="POLM_CODE" sortable="false"
+                             id="c212">
+                    <af:commandLink text="Select" id="cl1"
+                                    action="#{claim.ShowPolicyTickets}"/>
+                  </af:column>
+                  <af:column sortProperty="polm_mem_no" sortable="false"
+                             id="c223">
+                    <af:commandLink text="Delete" id="cl2"
+                                    action="#{claim.DeletePendingClaimSelected}"/>
+                  </af:column>
+                </af:table>
+                <af:commandButton text="Cancel" id="cb35"
+                                  action="#{claim.CancelClaimTransaction}"/>
+              </af:panelBox>
+              <af:popup id="claims">
+                <af:dialog type="none" title="Policy Members" id="d5">
+                  <af:panelGroupLayout id="pgl14">
+                    <af:panelBox text="Search Criteria" id="pb29"
+                                 showDisclosure="false">
+                      <f:facet name="toolbar"/>
+                      <af:outputLabel value="[Note: More Member Records Exist. Please Use the Search Criteria to Limit Your Search]"
+                                      id="ol155"
+                                      inlineStyle="font-weight:bold; color:Red;"
+                                      rendered="#{sessionScope['limitExceeded']=='Y'}"/>
+                      <af:separator id="s18"/>
+                      <h:panelGrid columns="2" id="pg98">
+                        <af:outputLabel value="Member Number:" id="ol156"/>
+                        <af:inputText label="Label 412" id="it115" simple="true"
+                                      binding="#{claim.srchMemNo}"/>
+                        <af:outputLabel value="Member Name:"
+                                        id="outputLabel146"/>
+                        <af:inputText label="Label 412" id="inputText9"
+                                      simple="true"
+                                      binding="#{claim.srchMemName}"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg99">
+                        <af:commandButton text="Search Members" id="cb135"
+                                          action="#{claim.SearchMembers}"
+                                          partialSubmit="true"/>
+                        <af:commandButton text="Clear Search" id="cb136"
+                                          action="#{claim.ClearSearchMembers}"
+                                          partialSubmit="true"/>
+                      </h:panelGrid>
+                    </af:panelBox>
+                    <af:panelBox text="PanelBox4" id="pb6" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <af:table value="#{bindings.Claim.collectionModel}"
+                                var="row" rows="#{bindings.Claim.rangeSize}"
+                                emptyText="#{bindings.Claim.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.Claim.rangeSize}"
+                                filterModel="#{bindings.ClaimQuery.queryDescriptor}"
+                                queryListener="#{bindings.ClaimQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.Claim.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.Claim.collectionModel.makeCurrent}"
+                                rowSelection="single"
+                                binding="#{claim.membersLOV}" id="t5"
+                                width="325">
+                        <af:column sortProperty="polm_mem_no" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Member Number"
+                                   id="c10">
+                          <af:outputText value="#{row.polm_mem_no}" id="ot11"/>
+                        </af:column>
+                        <af:column sortProperty="client" filterable="true"
+                                   filterFeatures="caseInsensitive"
+                                   sortable="true" headerText="Member Name"
+                                   width="200" id="c11">
+                          <af:outputText value="#{row.client}" id="ot12"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelBox>
+                    <h:panelGrid columns="2" id="pg16">
+                      <af:commandButton text="OK"
+                                        action="#{claim.findMembersSelected}"
+                                        id="cb14"/>
+                      <af:commandButton text="Cancel" id="cb15"/>
+                    </h:panelGrid>
+                  </af:panelGroupLayout>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="ExgratiaPopup">
+                <af:dialog id="d9" type="none" title="Exgratia Member Details">
+                  <af:panelBox id="pb2" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="3" id="pg24">
+                      <af:outputLabel value="Add New Member" id="ol28"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio label="Label 1" id="sbr1"
+                                             simple="true" selected="true"
+                                             group="exgr"
+                                             binding="#{claim.addExMem}"
+                                             autoSubmit="true"
+                                             valueChangeListener="#{claim.xGratiaMembersListener}"/>
+                      <af:spacer width="10" height="10" id="s3"/>
+                      <af:outputLabel value="Edit Member" id="outputLabel2"
+                                      inlineStyle="font-weight:bold;"/>
+                      <af:selectBooleanRadio label="Label 1"
+                                             id="selectBooleanRadio1"
+                                             simple="true" group="exgr"
+                                             autoSubmit="true"
+                                             valueChangeListener="#{claim.xGratiaMembersListener}"
+                                             binding="#{claim.editExMem}"/>
+                      <af:commandButton id="cb25" icon="/images/dropdown.gif"
+                                        binding="#{claim.xgratiaButton}"
+                                        disabled="true">
+                        <af:showPopupBehavior popupId="p2"/>
+                      </af:commandButton>
+                    </h:panelGrid>
+                    <af:spacer width="20" height="10" id="s4"/>
+                    <h:panelGrid columns="2" id="pg29">
+                      <af:outputLabel value="Member Number" id="ol15"/>
+                      <af:inputText label="Label 6" id="it8" simple="true"
+                                    binding="#{claim.exGratiaMemNo}"/>
+                      <af:outputLabel value="Surname" id="ol16"/>
+                      <af:inputText label="Label 7" id="it9" simple="true"
+                                    binding="#{claim.exgratiaSurname}"/>
+                      <af:outputLabel value="Other Names" id="ol17"/>
+                      <af:inputText label="Label 8" id="it10" simple="true"
+                                    binding="#{claim.exgratiaOtherNames}"/>
+                      <af:outputLabel value="ID" id="ol18"/>
+                      <af:inputText label="Label 9" id="it11" simple="true"
+                                    binding="#{claim.xgratiaMemberID}"/>
+                      <af:outputLabel value="Date Of Birth" id="ol19"/>
+                      <af:inputDate label="Label 3" id="id4" simple="true"
+                                    binding="#{claim.exgratiaDateOfBirth}">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:inputDate>
+                      <af:outputLabel value="Sex" id="ol20"/>
+                      <af:selectOneChoice label="Label 3" id="soc2"
+                                          simple="true" autoSubmit="true"
+                                          binding="#{claim.exgratiaGender}">
+                        <af:selectItem label="Male" value="M" id="si7"/>
+                        <af:selectItem label="Female" value="F" id="si8"/>
+                      </af:selectOneChoice>
+                      <af:outputLabel id="ol21" value="Earnings"
+                                      rendered="false"/>
+                      <af:inputText label="Label 10" id="it12" simple="true"
+                                    binding="#{claim.exgratiaEarnings}"
+                                    rendered="false"/>
+                      <af:outputLabel value="Multiple Of Earnings Period"
+                                      id="ol22" rendered="false"/>
+                      <af:inputText label="Label 11" id="it13" simple="true"
+                                    binding="#{claim.exgratiaPeriod}"
+                                    rendered="false"/>
+                      <af:outputLabel value="Employer Contribution" id="ol23"
+                                      rendered="#{Rendering.pensionproduct}"/>
+                      <af:inputText label="Label 12" id="it14" simple="true"
+                                    binding="#{claim.exGratiaEmpyerContr}"
+                                    rendered="#{Rendering.pensionproduct}"/>
+                      <af:outputLabel value="Employee Contribution" id="ol24"
+                                      rendered="#{Rendering.pensionproduct}"/>
+                      <af:inputText label="Label 13" id="it15" simple="true"
+                                    binding="#{claim.exGratiaEmpyeeContirbution}"
+                                    rendered="#{Rendering.pensionproduct}"/>
+                      <af:outputLabel value="Voluntary Employer Contribution"
+                                      id="ol25"
+                                      rendered="#{Rendering.pensionproduct}"/>
+                      <af:inputText label="Label 14" id="it16" simple="true"
+                                    binding="#{claim.exGratiaVolEmpyerContr}"
+                                    rendered="#{Rendering.pensionproduct}"/>
+                      <af:outputLabel value="Voluntary Employee Contribution"
+                                      id="ol26"
+                                      rendered="#{Rendering.pensionproduct}"/>
+                      <af:inputText label="Label 15" id="it17" simple="true"
+                                    binding="#{claim.exGratiaVolEmpyeeContr}"
+                                    rendered="#{Rendering.pensionproduct}"/>
+                      <af:outputLabel value="Date Of Joining Scheme" id="ol27"/>
+                      <af:inputDate label="Label 4" id="id5" simple="true"
+                                    binding="#{claim.dateOfJoining}">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:inputDate>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="pg31">
+                      <af:commandButton text="Save" id="cb23"
+                                        action="#{claim.CreateXgratiaMember}"
+                                        partialSubmit="true"/>
+                      <af:commandButton text="Cancel" id="cb24"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="p2">
+                <af:dialog id="d10" type="none" title="Ex-Gratia Members.">
+                  <af:panelBox id="pb11" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <af:table value="#{bindings.Claim5.collectionModel}"
+                              var="row" rows="#{bindings.Claim5.rangeSize}"
+                              emptyText="#{bindings.Claim5.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.Claim5.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.Claim5Query.queryDescriptor}"
+                              queryListener="#{bindings.Claim5Query.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectedRowKeys="#{bindings.Claim5.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.Claim5.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t8"
+                              binding="#{claim.exgratiaMembers}">
+                      <af:column sortProperty="polm_mem_no" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Member No."
+                                 id="c16">
+                        <af:outputText value="#{row.polm_mem_no}" id="ot18"/>
+                      </af:column>
+                      <af:column sortProperty="MEM_SURNAME" filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Surname" id="c18">
+                        <af:outputText value="#{row.MEM_SURNAME}" id="ot17"/>
+                      </af:column>
+                      <af:column sortProperty="MEM_OTHER_NAMES"
+                                 filterable="true"
+                                 filterFeatures="caseInsensitive"
+                                 sortable="true" headerText="Other Names"
+                                 id="c17">
+                        <af:outputText value="#{row.MEM_OTHER_NAMES}" id="ot1"/>
+                      </af:column>
+                    </af:table>
+                    <h:panelGrid columns="2" id="pg32">
+                      <af:commandButton text="OK" id="cb26" partialSubmit="true"
+                                        action="#{claim.ExgratiaMemberSelected}"/>
+                      <af:commandButton text="Cancel" id="commandButton1"
+                                        partialSubmit="true"
+                                        action="#{claim.CancelExgratiaSelection}"/>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="users">
+                <af:dialog id="dialog4" type="none"
+                           title="Users To Assign the Task">
+                  <af:table value="#{bindings.workflow.collectionModel}"
+                            var="row" rows="#{bindings.workflow.rangeSize}"
+                            emptyText="#{bindings.workflow.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.workflow.rangeSize}"
+                            rowBandingInterval="0"
+                            queryListener="#{bindings.workflowQuery.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.workflow.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.workflow.collectionModel.makeCurrent}"
+                            rowSelection="single" id="table2" width="310"
+                            binding="#{claim.usersLOV}">
+                    <af:column sortProperty="taskUserID" filterable="true"
+                               filterFeatures="caseInsensitive" sortable="true"
+                               headerText="ID" id="column2" visible="false">
+                      <af:outputText value="#{row.taskUserID}"
+                                     id="outputText43"/>
+                    </af:column>
+                    <af:column sortProperty="taskUserShtDesc" filterable="true"
+                               filterFeatures="caseInsensitive" sortable="true"
+                               headerText="User Short Desc" id="column3">
+                      <af:outputText value="#{row.taskUserShtDesc}"
+                                     id="outputText44"/>
+                    </af:column>
+                    <af:column sortProperty="taskUserDesc" filterable="true"
+                               filterFeatures="caseInsensitive" sortable="true"
+                               headerText="User Name" id="column4" width="200">
+                      <af:outputText value="#{row.taskUserDesc}"
+                                     id="outputText45"/>
+                    </af:column>
+                  </af:table>
+                  <af:inputText label="Remarks" id="inputText8" rows="3"
+                                columns="36" simple="true" value="Add Remark..."
+                                binding="#{claim.ticketRemarks}"/>
+                  <h:panelGrid columns="2" id="panelGrid7">
+                    <af:commandButton text="OK" id="commandButton11"
+                                      action="#{claim.AssignTask}"/>
+                    <af:commandButton text="Cancel" id="commandButton22"
+                                      action="#{claim.GetAssignee}"/>
+                  </h:panelGrid>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="p1">
+                <af:dialog id="d12" type="none" title="Claim Tickets">
+                  <af:panelBox text="My Tickets" id="pb10">
+                    <f:facet name="toolbar"/>
+                    <af:table value="#{bindings.workflow1.collectionModel}"
+                              var="row" rows="#{bindings.workflow1.rangeSize}"
+                              emptyText="#{bindings.workflow1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.workflow1.rangeSize}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.workflow1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.workflow1.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t11"
+                              binding="#{claim.resultsLOV}"
+                              inlineStyle="width:100.0%; height:180px; border-style:none;">
+                      <af:column sortProperty="TCKT_CODE" sortable="true"
+                                 headerText="Ticket Id." id="column1">
+                        <af:outputText value="#{row.TCKT_CODE}"
+                                       id="outputText2"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_NAME" sortable="true"
+                                 headerText="Ticket Name" id="column5"
+                                 width="200">
+                        <af:outputText value="#{row.TCKT_NAME}"
+                                       id="outputText3"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_TO" sortable="true"
+                                 headerText="Ticket Assignee" id="column6"
+                                 width="140">
+                        <af:outputText value="#{row.TCKT_TO}" id="outputText4"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_BY" sortable="true"
+                                 headerText="Ticket From." id="column7">
+                        <af:outputText value="#{row.TCKT_BY}" id="outputText5"/>
+                      </af:column>
+                      <af:column sortProperty="TCKT_DATE" sortable="true"
+                                 headerText="Ticket Created On." id="column8">
+                        <af:outputText value="#{row.TCKT_DATE}"
+                                       id="outputText6">
+                          <af:convertDateTime pattern="#{bindings.workflow1.hints.TCKT_DATE.format}"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="TCKT_REMARKS" sortable="true"
+                                 headerText="Ticket Remarks." id="column9"
+                                 width="200">
+                        <af:outputText value="#{row.TCKT_REMARKS}"
+                                       id="outputText7"/>
+                      </af:column>
+                      <af:column sortProperty="taskID" sortable="false"
+                                 id="column10">
+                        <af:commandLink text="Process" id="commandLink2"
+                                        action="#{claim.findTicket2Selected}"
+                                        rendered="#{row.TCKT_TO == currUser.username}"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelBox>
+                </af:dialog>
+              </af:popup>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

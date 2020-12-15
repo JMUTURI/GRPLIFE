@@ -169,7 +169,31 @@ public class pension {
     private String PPV_CHEQUE_NO;
     private Date PPV_CHEQUE_DATE;
     
-
+    private BigDecimal polmCode;
+    private String memNo;
+    private String memName;   
+    private String memSex;
+    private Date memDob;
+    private String memIdNo;
+    private String memPin;
+    private String memTelephone;
+    private String memEmail;
+    
+    private Date transDate;
+    private String transType;
+    private String receiptNo;
+    private String referenceNo;
+    private BigDecimal empyeBalBf;
+    private BigDecimal empyeRegBalBf;
+    private BigDecimal empyeNonRegBalBf;
+    
+    private BigDecimal empyrBalBf;
+    private BigDecimal empyrRegBalBf;
+    private BigDecimal empyrNonRegBalBf;
+    private BigDecimal total;
+    
+    
+    
     
     public void setPOL_POLICY_NO(String POL_POLICY_NO) {
         this.POL_POLICY_NO = POL_POLICY_NO;
@@ -1321,5 +1345,165 @@ public class pension {
 
     public BigDecimal getPDED_NET_AMOUNT() {
         return PDED_NET_AMOUNT;
+    }
+
+    public void setPolmCode(BigDecimal polmCode) {
+        this.polmCode = polmCode;
+    }
+
+    public BigDecimal getPolmCode() {
+        return polmCode;
+    }
+
+    public void setMemNo(String memNo) {
+        this.memNo = memNo;
+    }
+
+    public String getMemNo() {
+        return memNo;
+    }
+
+    public void setMemName(String memName) {
+        this.memName = memName;
+    }
+
+    public String getMemName() {
+        return memName;
+    }
+
+    public void setMemSex(String memSex) {
+        this.memSex = memSex;
+    }
+
+    public String getMemSex() {
+        return memSex;
+    }
+
+    public void setMemDob(Date memDob) {
+        this.memDob = memDob;
+    }
+
+    public Date getMemDob() {
+        return memDob;
+    }
+
+    public void setMemIdNo(String memIdNo) {
+        this.memIdNo = memIdNo;
+    }
+
+    public String getMemIdNo() {
+        return memIdNo;
+    }
+
+    public void setMemPin(String memPin) {
+        this.memPin = memPin;
+    }
+
+    public String getMemPin() {
+        return memPin;
+    }
+
+    public void setMemTelephone(String memTelephone) {
+        this.memTelephone = memTelephone;
+    }
+
+    public String getMemTelephone() {
+        return memTelephone;
+    }
+
+    public void setMemEmail(String memEmail) {
+        this.memEmail = memEmail;
+    }
+
+    public String getMemEmail() {
+        return memEmail;
+    }
+
+    public void setTransDate(Date transDate) {
+        this.transDate = transDate;
+    }
+
+    public Date getTransDate() {
+        return transDate;
+    }
+
+    public void setTransType(String transType) {
+        this.transType = transType;
+    }
+
+    public String getTransType() {
+        return transType;
+    }
+
+    public void setReceiptNo(String receiptNo) {
+        this.receiptNo = receiptNo;
+    }
+
+    public String getReceiptNo() {
+        return receiptNo;
+    }
+
+    public void setReferenceNo(String referenceNo) {
+        this.referenceNo = referenceNo;
+    }
+
+    public String getReferenceNo() {
+        return referenceNo;
+    }
+
+    public void setEmpyeBalBf(BigDecimal empyeBalBf) {
+        this.empyeBalBf = empyeBalBf;
+    }
+
+    public BigDecimal getEmpyeBalBf() {
+        return empyeBalBf;
+    }
+
+    public void setEmpyeRegBalBf(BigDecimal empyeRegBalBf) {
+        this.empyeRegBalBf = empyeRegBalBf;
+    }
+
+    public BigDecimal getEmpyeRegBalBf() {
+        return empyeRegBalBf;
+    }
+
+    public void setEmpyeNonRegBalBf(BigDecimal empyeNonRegBalBf) {
+        this.empyeNonRegBalBf = empyeNonRegBalBf;
+    }
+
+    public BigDecimal getEmpyeNonRegBalBf() {
+        return empyeNonRegBalBf;
+    }
+
+    public void setEmpyrBalBf(BigDecimal empyrBalBf) {
+        this.empyrBalBf = empyrBalBf;
+    }
+
+    public BigDecimal getEmpyrBalBf() {
+        return empyrBalBf;
+    }
+
+    public void setEmpyrRegBalBf(BigDecimal empyrRegBalBf) {
+        this.empyrRegBalBf = empyrRegBalBf;
+    }
+
+    public BigDecimal getEmpyrRegBalBf() {
+        return empyrRegBalBf;
+    }
+
+    public void setEmpyrNonRegBalBf(BigDecimal empyrNonRegBalBf) {
+        this.empyrNonRegBalBf = empyrNonRegBalBf;
+    }
+
+    public BigDecimal getEmpyrNonRegBalBf() {
+        return empyrNonRegBalBf;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
     }
 }

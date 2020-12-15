@@ -193,6 +193,12 @@
                                                 id="pt_cl9"
                                                 action="#{Links.goToClaimsBooking}"
                                                 inlineStyle="text-decoration:underline;"/>
+                                
+                               <af:spacer width="10" height="10" id="pt_s17"/>                 
+                                <af:commandLink text="Claims Opening"
+                                                id="pt_cl26"
+                                                action="#{Links.goToClaimOpening}"
+                                                inlineStyle="text-decoration:underline;"/>             
                                  <af:spacer width="10" height="10" id="pt_s16" 
                                  rendered="#{Rendering.aiicoVisible}"/>
                                  <af:commandLink text="Multiple Claims Booking"
@@ -204,7 +210,7 @@
                                 <af:commandLink text="Claim Tracking" id="pt_cl10"
                                                 action="#{Links.goToClaimsEnquiry}"
                                                 inlineStyle="text-decoration:underline;"/>
-                                <af:spacer width="10" height="10" id="pt_s17"/>
+                                <af:spacer width="10" height="10" id="pt_s44"/>
                                 
                                
                               <!--<af:commandLink text="Claims Enquiry"
@@ -221,6 +227,11 @@
                                                 id="pt_cl26R"                                               
                                                 inlineStyle="text-decoration:underline;"
                                                 action="#{Links.getToChequeTracking}"/>
+                  <af:spacer width="10" height="10" id="pt_s17x"/>                              
+                   <af:commandLink text="Member Balance Enquiry"
+                                                id="pt_cl27x"
+                                                inlineStyle="text-decoration:underline;"
+                                             action="#{Links.memBalEnquiry}"/>                              
                               </h:panelGrid>
                             </af:panelBox>
                           </h:panelGrid>
@@ -362,6 +373,11 @@
                                                 inlineStyle="text-decoration:underline;"
                                                 action="#{Links.showManagementReports}"/>
                                 <af:spacer width="10" height="10" id="pt_s41m"/>
+                                <af:commandLink text="Pension Reports"
+                                                id="pt_cl18"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.goToPensionsReport}"/>
+                                <af:spacer width="10" height="10" id="pt_s26"/>
                                 <af:commandLink text="Other Reports"
                                                 id="pt_cl33"
                                                 action="#{Links.ShowProductionReports}"

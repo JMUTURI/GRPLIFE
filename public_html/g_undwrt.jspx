@@ -6817,8 +6817,6 @@ true);
                          <af:commandLink text="Schedules" id="rpt1005"
                                         actionListener="#{ReportsEngine.GetReportDetails}"
                                         rendered="#{Rendering.pensionproduct &amp;&amp; !Rendering.mickVisible}"/>
-                        <af:commandLink text="Decision Schedule" id="rpt25057"
-                                        actionListener="#{ReportsEngine.getReinReportParams}"/>
                         <af:commandLink text="Premium Account Statement"
                                         id="rpt1022"
                                         actionListener="#{ReportsEngine.GetReportDetails}"/>
@@ -6937,6 +6935,8 @@ true);
                                         id="rpt25059"
                                         actionListener="#{ReportsEngine.GetReportDetails}"/>
                         <af:commandLink text="Forwarding letter" id="rpt25123"
+                                        actionListener="#{ReportsEngine.GetReportDetails}"/>
+						<af:commandLink text="Refund voucher" id="rpt25057"
                                         actionListener="#{ReportsEngine.GetReportDetails}"/>
                         <af:commandLink text="PCEA Certificate" id="rpt25444"
                                         actionListener="#{ReportsEngine.GetReportDetails}"

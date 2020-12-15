@@ -52,48 +52,48 @@
                       <af:column sortProperty="TCKT_CODE" filterable="true"
                                  filterFeatures="caseInsensitive"
                                  sortable="true" headerText="Ticket ID." id="c8"
-                                 width="70">
+                                 width="70" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.TCKT_CODE}" id="ot8"/>
                       </af:column>
                       <af:column sortProperty="TCKT_NAME" filterable="true"
                                  filterFeatures="caseInsensitive"
                                  sortable="true" headerText="Ticket Name"
-                                 id="c3" width="120">
+                                 id="c3" width="120" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.TCKT_NAME}" id="ot7"/>
                       </af:column>
                       <af:column sortProperty="TCKT_REF_NO" filterable="true"
                                  filterFeatures="caseInsensitive"
                                  sortable="true" headerText="Reference No."
-                                 id="c9">
+                                 id="c9" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.TCKT_REF_NO}" id="ot9"/>
                       </af:column>
                       <af:column sortProperty="SYSMODULE" filterable="true"
                                  filterFeatures="caseInsensitive"
                                  sortable="true" headerText="Ticket Module."
-                                 id="c11">
+                                 id="c11" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.SYSMODULE}" id="ot5"/>
                       </af:column>
                       <af:column sortProperty="CLIENT" filterable="true"
                                  filterFeatures="caseInsensitive"
                                  sortable="true" headerText="Client" id="c7"
-                                 width="140">
+                                 width="140" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.CLIENT}" id="ot12"/>
                       </af:column>
                       <af:column sortProperty="TCKT_BY" filterable="true"
                                  filterFeatures="caseInsensitive"
                                  sortable="true" headerText="Ticket From"
-                                 id="c5">
+                                 id="c5" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.TCKT_BY}" id="ot13"/>
                       </af:column>
                       <af:column sortProperty="TCKT_TO" filterable="true"
                                  filterFeatures="caseInsensitive"
                                  sortable="true" headerText="Ticket Assignee"
-                                 id="c6">
+                                 id="c6" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.TCKT_TO}" id="ot3"/>
                       </af:column>
                       <af:column sortProperty="TCKT_DATE" filterable="false"
                                  sortable="true" headerText="Created On."
-                                 id="c1">
+                                 id="c1" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <f:facet name="filter">
                           <af:inputDate value="#{vs.filterCriteria.TCKT_DATE}"
                                         id="id2"/>
@@ -105,17 +105,17 @@
                       <af:column sortProperty="TCKT_REMARKS" filterable="true"
                                  filterFeatures="caseInsensitive"
                                  sortable="true" headerText="Ticket Remarks"
-                                 id="c12">
+                                 id="c12" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.TCKT_REMARKS}" id="ot2"/>
                       </af:column>
                       <af:column sortProperty="TCKT_POL_NO" filterable="true"
                                  filterFeatures="caseInsensitive"
-                                 sortable="true" rendered="false" id="c4">
+                                 sortable="true" rendered="false" id="c4" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.TCKT_POL_NO}" id="ot1"/>
                       </af:column>
                       <af:column sortProperty="TCKT_REF_NO" filterable="true"
                                  filterFeatures="caseInsensitive"
-                                 sortable="true" rendered="false" id="c10">
+                                 sortable="true" rendered="false" id="c10" inlineStyle="background-color:#{(row.TCKT_PRIORITY_LEVEL eq &quot;H&quot;?'red':'')}">
                         <af:outputText value="#{row.TCKT_REF_NO}" id="ot4"/>
                       </af:column>
                       <af:column sortProperty="taskID" sortable="false" id="c2"

@@ -6,7 +6,8 @@
   <jsp:directive.page contentType="text/html;charset=windows-1252"/>
   <f:view>
     <af:document title="Medical Payments" id="d2">
-    <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx"
                      id="lmsgroup">
       <f:attribute name="documentTitle" value="TurnQuest GIS"/>
       <f:attribute name="mode" value="index"/>
@@ -109,7 +110,8 @@
                   <af:outputText value="#{row.MP_CML_RAISED_BY}" id="ot7"/>
                 </af:column>
                 <af:column sortProperty="MP_CML_ID_NO" sortable="true"
-                           headerText="Id No." id="c9" width="70">
+                           headerText="Id No." id="c9" width="70"
+                           filterable="true">
                   <af:outputText value="#{row.MP_CML_ID_NO}" id="ot11"/>
                 </af:column>
                 <af:column sortProperty="MP_PROPOSAL_NO" sortable="true"
@@ -160,7 +162,17 @@
                              id="c21" visible="false">
                     <af:outputText value="#{row.SPR_CODE}" id="ot21"/>
                   </af:column>
+                  <af:column sortProperty="MP_CML_INVCE_NO" sortable="true"
+                           headerText="Invoice Number" id="c38" width="30">
+                  <af:outputText value="#{row.MP_CML_INVCE_NO}" id="ot37"/>
+                </af:column>
+                <af:column sortProperty="MP_CML_INVCE_DATE" sortable="true"
+                           headerText="Invoice Date" id="c39" width="200">
+                  <af:outputText value="#{row.MP_CML_INVCE_DATE}"
+                                 id="ot38"/>
+                </af:column>
                 </af:table>
+                
               <af:commandButton text="Prepare Payments" id="cb4"
                                 action="#{med.PreparePayments}"/>
             </af:panelBox>
@@ -212,6 +224,17 @@
                                        headerText="VAT Amt" id="c13">
                               <af:outputText value="#{row.FP_fpmt_vat_amt}" id="ot12"/>
                             </af:column>
+                            <af:column sortProperty="FPMT_WTHX_RATE" sortable="true"
+                                       headerText="WHTX rate(%)" id="c27"
+                                       shortDesc="Witholding tax rate">
+                              <af:outputText value="#{row.FPMT_WTHX_RATE}"
+                                             id="ot28"/>
+                            </af:column>
+                            <af:column sortProperty="FPMT_WTHX_AMT" sortable="true"
+                                       headerText="Witholding Tax" id="c29">
+                              <af:outputText value="#{row.FPMT_WTHX_AMT}"
+                                             id="ot31"/>
+                            </af:column>
                             <af:column sortProperty="FP_fpmt_net_amount" sortable="true"
                                        headerText="Net Amt" id="c17">
                               <af:outputText value="#{row.FP_fpmt_net_amount}" id="ot18"/>
@@ -220,7 +243,117 @@
                                        headerText="Pay Method" id="c15">
                               <af:outputText value="#{row.FP_fpmt_pymt_type}" id="ot16"/>
                           </af:column>
+                           <af:column  sortable="false" id="c37" headerText="">
+                            <af:commandButton text="Delete" id="cb6"
+                                              action="#{med.deletePendingPayment}"/>
+                          </af:column>
                         </af:table>
+                      </af:panelBox>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Approved Medical Payments" id="sdi3">
+                    <af:panelGroupLayout id="pgl6">
+                      <af:panelBox text="PanelBox3" id="pb6" showHeader="never">
+                        <af:table value="#{bindings.medical3.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.medical3.rangeSize}"
+                                  emptyText="#{bindings.medical3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.medical3.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.medical3Query.queryDescriptor}"
+                                  queryListener="#{bindings.medical3Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  rowSelection="single" id="t4"
+                                  inlineStyle="width:100%"
+                                  selectionListener="#{med.approvedMedicalListener}"
+                                  binding="#{med.approvedMedicalLOV}">
+                          <af:column sortProperty="FP_facilitator_display"
+                                     filterable="true" sortable="true"
+                                     headerText="Medical Institution"
+                                     id="c25"
+                                     width="200">
+                            <af:outputText value="#{row.FP_facilitator_display}"
+                                           id="ot33"/>
+                          </af:column>
+                          <af:column sortProperty="FP_branch_display"
+                                     filterable="true" sortable="true"
+                                     headerText="Branch"
+                                     id="c33">
+                            <af:outputText value="#{row.FP_branch_display}"
+                                           id="ot26"/>
+                          </af:column>
+                          <af:column sortProperty="FP_fpmt_amount"
+                                     filterable="true" sortable="true"
+                                     headerText="Gross Amount"
+                                     id="c34">
+                            <af:outputText value="#{row.FP_fpmt_amount}"
+                                           id="ot24"/>
+                          </af:column>
+                          <af:column sortProperty="FP_fpmt_net_amount"
+                                     filterable="true" sortable="true"
+                                     headerText="Net Amount"
+                                     id="c32">
+                            <af:outputText value="#{row.FP_fpmt_net_amount}"
+                                           id="ot27"/>
+                          </af:column>
+                          <af:column sortProperty="FPMT_WTHX_RATE"
+                                     filterable="true" sortable="true"
+                                     headerText="WTHX Rate(%)"
+                                     id="c35">
+                            <af:outputText value="#{row.FPMT_WTHX_RATE}"
+                                           id="ot35"/>
+                          </af:column>
+                          <af:column sortProperty="FPMT_WTHX_AMT"
+                                     filterable="true" sortable="true"
+                                     headerText="Witholding Tax"
+                                     id="c36">
+                            <af:outputText value="#{row.FPMT_WTHX_AMT}"
+                                           id="ot36"/>
+                          </af:column>
+                          <af:column sortProperty="FP_fpmt_pymt_type"
+                                     filterable="true" sortable="true"
+                                     headerText="Payment Mode"
+                                     id="c26">
+                            <af:outputText value="#{row.FP_fpmt_pymt_type}"
+                                           id="ot25"/>
+                          </af:column>
+                          <af:column sortProperty="FPMT_CODE" filterable="true"
+                                     sortable="true"
+                                     headerText="#{bindings.medical3.hints.FPMT_CODE.label}"
+                                     id="c24"
+                                     visible="false">
+                            <af:outputText value="#{row.FPMT_CODE}" id="ot30"/>
+                          </af:column>
+                          <af:column sortProperty="FPMT_AUTHORISED_DATE"
+                                     filterable="true" sortable="true"
+                                     headerText="Date Authorized"
+                                     id="c28">
+                            <af:outputText value="#{row.FPMT_AUTHORISED_DATE}"
+                                           id="ot34"/>
+                          </af:column>
+                          <af:column sortProperty="FPMT_PYMT_VCHR_NO"
+                                     filterable="true" sortable="true"
+                                     headerText="Voucher Number"
+                                     id="c30">
+                            <af:outputText value="#{row.FPMT_PYMT_VCHR_NO}"
+                                           id="ot32"/>
+                          </af:column>
+                          <af:column sortProperty="FPMT_CHQ_DATE"
+                                     filterable="true" sortable="true"
+                                     headerText="Payment Date"
+                                     id="c22">
+                            <af:outputText value="#{row.FPMT_CHQ_DATE}"
+                                           id="ot29"/>
+                          </af:column>
+                          <af:column sortProperty="FPMT_CHQ_NO"
+                                     filterable="true" sortable="true"
+                                     headerText="Payment Reference"
+                                     id="c31">
+                            <af:outputText value="#{row.FPMT_CHQ_NO}"
+                                           id="ot22"/>
+                          </af:column>
+                        </af:table>
+                        <f:facet name="toolbar"/>
                       </af:panelBox>
                     </af:panelGroupLayout>
                   </af:showDetailItem>

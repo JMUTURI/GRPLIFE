@@ -188,6 +188,9 @@
   <methodIterator Binds="FindClientMedicals.result" DataControl="medicalsDAO"
                     RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
                     id="FindClientMedicalsIterator"/>
+    <methodIterator Binds="findPartialWithdrawal.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="findPartialWithdrawalIterator"/>
   </executables>
   <bindings>
     <methodAction id="FindPolicies" RequiresUpdateModel="true"
@@ -200,6 +203,11 @@
                   IsViewObjectMethod="false" DataControl="ClaimsDAO"
                   InstanceName="ClaimsDAO.dataProvider"
                   ReturnName="ClaimsDAO.methodResults.FindClaims_ClaimsDAO_dataProvider_FindClaims_result"/>
+       <methodAction id="findPartialWithdrawal" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPartialWithdrawal"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findPartialWithdrawal_ClaimsDAO_dataProvider_findPartialWithdrawal_result"/>             
     <methodAction id="FindClaimCoverTypes" RequiresUpdateModel="true"
                   Action="invokeMethod" MethodName="FindClaimCoverTypes"
                   IsViewObjectMethod="false" DataControl="ClaimsDAO"
@@ -1354,6 +1362,163 @@
       <AttrNames>
         <Item Value="PMPNS_OVERRIDE_TAX_EXEMPT"/>
       </AttrNames>      
+    </attributeValues>  
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_BAL_BF">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+      <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_AMT"/>
+      </AttrNames>
+    </attributeValues>
+       <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_INT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_INT"/>
+      </AttrNames>
+    </attributeValues>
+          <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_CF">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_CF"/>
+      </AttrNames>
+    </attributeValues>
+          <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_WITHDRAWABLE_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_WITHDRAWABLE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+              <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_BAL_BF">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+      <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_INT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_INT"/>
+      </AttrNames>
+    </attributeValues>
+          <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_CF">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_CF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_WITHDRAWABLE_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_WITHDRAWABLE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+        <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="TOTAL_BAL_BF">
+      <AttrNames>
+        <Item Value="TOTAL_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="TOTAL_AMOUNT">
+      <AttrNames>
+        <Item Value="TOTAL_AMOUNT"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="TOTAL_INT">
+      <AttrNames>
+        <Item Value="TOTAL_INT"/>
+      </AttrNames>
+    </attributeValues>
+         <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="TOTAL_BAL_CF">
+      <AttrNames>
+        <Item Value="TOTAL_BAL_CF"/>
+      </AttrNames>
+    </attributeValues>
+             <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="TOTAL_WITHDRAWABLE_AMT">
+      <AttrNames>
+        <Item Value="TOTAL_WITHDRAWABLE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_WITH_APPLIED_ON">
+      <AttrNames>
+        <Item Value="GPW_WITH_APPLIED_ON"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_TAX_EXEMP_AMT">
+      <AttrNames>
+        <Item Value="GPW_TAX_EXEMP_AMT"/>
+      </AttrNames>
+    </attributeValues>
+        <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_AMT_APPLIED">
+      <AttrNames>
+        <Item Value="GPW_AMT_APPLIED"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_YRS_OF_SERV">
+      <AttrNames>
+        <Item Value="GPW_YRS_OF_SERV"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_TAX_AMOUNT">
+      <AttrNames>
+        <Item Value="GPW_TAX_AMOUNT"/>
+      </AttrNames>
+    </attributeValues>
+       <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_OVERRIDE_TAX_AMT">
+      <AttrNames>
+        <Item Value="GPW_OVERRIDE_TAX_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_REG_WITH_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_REG_WITH_AMT"/>
+      </AttrNames>
+    </attributeValues>
+	<attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_UNREG_WITH_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_UNREG_WITH_AMT"/>
+      </AttrNames>
+    </attributeValues>
+	<attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_REG_WITH_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_REG_WITH_AMT"/>
+      </AttrNames>
+    </attributeValues>
+	<attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_UNREG_WITH_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_UNREG_WITH_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    
+  <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="NET_PAYABLE">
+      <AttrNames>
+        <Item Value="NET_PAYABLE"/>
+      </AttrNames>
     </attributeValues>
   </bindings>
 </pageDefinition>

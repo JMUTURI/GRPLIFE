@@ -12,25 +12,25 @@ public class medical {
     private String MTG_SHT_DESC;
     private String MTG_DESC;
     private BigDecimal POLM_MED_TOT_SA;
-    
+
     private BigDecimal SPR_CODE;
     private boolean selected;
     private String Client;
-    
-   private String MedicalTestDescription;
-   private BigDecimal MTLCode;
-   private BigDecimal MTLFees;
-    
+
+    private String MedicalTestDescription;
+    private BigDecimal MTLCode;
+    private BigDecimal MTLFees;
+
     private BigDecimal POLM_CODE;
     private BigDecimal MEM_CODE;
     private String MEM_NO;
     private String MEM_NAME;
-    
+
     //Existing Policies
     private String PROPOSAL_NO;
     private String POLICY_NO;
     private BigDecimal TOT_SA;
-    
+
     //Client Medicals
     private BigDecimal CML_CODE;
     private BigDecimal CML_LIMIT_AMT;
@@ -49,27 +49,27 @@ public class medical {
     private String POL_PROPOSAL_NO;
     private String CML_REMARKS;
     private String MTL_DESC;
-    
+
     //Facilitators View
-    
+
     private String FC_SPR_NAME;
     private String FC_LIMIT_AMT;
     private String FC_CLAIM_AMT;
     private String FC_PAYABLE_AMT;
-    
+
     //UW Decisions
     private BigDecimal PUD_CODE;
     private String UD_DESC;
-    
+
     //Member UW Decisions
     private BigDecimal MEM_PUD_CODE;
     private String MEM_UD_DESC;
-    
+
     //Payments Query
-    
+
     private BigDecimal SearchCode;
     private String SearchDesc;
-    
+
     //Medical Payments
     private BigDecimal MP_CML_CODE;
     private String MP_CML_ID_NO;
@@ -81,7 +81,9 @@ public class medical {
     private String MP_FACILITATOR_DISPLAY;
     private String MP_CML_RAISED_BY;
     private String MP_CLIENT;
-    
+    private String MP_CML_INVCE_NO;
+    private Date MP_CML_INVCE_DATE;
+
     //Facilitator Payments
     private String FP_facilitator_display;
     private String FP_branch_display;
@@ -90,22 +92,29 @@ public class medical {
     private String FP_fpmt_vat_amt;
     private String FP_fpmt_net_amount;
     private String FP_fpmt_pymt_type;
-    
-    private BigDecimal pol_code; 
-    private String pol_policy_no; 
+
+    private BigDecimal pol_code;
+    private String pol_policy_no;
     private BigDecimal pol_current_endr_code;
     private String prodDesc;
     private String curSymbol;
     private BigDecimal curCode;
-    
+
     private String medDetails;
     private String memName;
     private BigDecimal FPMT_CODE;
-    
+
     //med report vars
     private BigDecimal medqCode;
     private String medqDesc;
-    
+
+    private String FPMT_AUTHORISED_DATE;
+    private String FPMT_PYMT_VCHR_NO;
+    private String FPMT_CHQ_DATE;
+    private String FPMT_CHQ_NO;
+    private BigDecimal FPMT_WTHX_RATE;
+    private BigDecimal FPMT_WTHX_AMT;
+
 
     public void setCMI_CODE(String CMI_CODE) {
         this.CMI_CODE = CMI_CODE;
@@ -667,6 +676,7 @@ public class medical {
     public String getMemName() {
         return memName;
     }
+
     public void setProdDesc(String prodDesc) {
         this.prodDesc = prodDesc;
     }
@@ -699,4 +709,69 @@ public class medical {
     public BigDecimal getFPMT_CODE() {
         return FPMT_CODE;
     }
+
+    public void setFPMT_AUTHORISED_DATE(String FPMT_AUTHORISED_DATE) {
+        this.FPMT_AUTHORISED_DATE = FPMT_AUTHORISED_DATE;
+    }
+
+    public String getFPMT_AUTHORISED_DATE() {
+        return FPMT_AUTHORISED_DATE;
+    }
+
+    public void setFPMT_PYMT_VCHR_NO(String FPMT_PYMT_VCHR_NO) {
+        this.FPMT_PYMT_VCHR_NO = FPMT_PYMT_VCHR_NO;
+    }
+
+    public String getFPMT_PYMT_VCHR_NO() {
+        return FPMT_PYMT_VCHR_NO;
+    }
+
+    public void setFPMT_CHQ_DATE(String FPMT_CHQ_DATE) {
+        this.FPMT_CHQ_DATE = FPMT_CHQ_DATE;
+    }
+
+    public String getFPMT_CHQ_DATE() {
+        return FPMT_CHQ_DATE;
+    }
+
+    public void setFPMT_CHQ_NO(String FPMT_CHQ_NO) {
+        this.FPMT_CHQ_NO = FPMT_CHQ_NO;
+    }
+
+    public String getFPMT_CHQ_NO() {
+        return FPMT_CHQ_NO;
+    }
+
+    public void setFPMT_WTHX_RATE(BigDecimal FPMT_WTHX_RATE) {
+        this.FPMT_WTHX_RATE = FPMT_WTHX_RATE;
+    }
+
+    public BigDecimal getFPMT_WTHX_RATE() {
+        return FPMT_WTHX_RATE;
+    }
+
+    public void setFPMT_WTHX_AMT(BigDecimal FPMT_WTHX_AMT) {
+        this.FPMT_WTHX_AMT = FPMT_WTHX_AMT;
+    }
+
+    public BigDecimal getFPMT_WTHX_AMT() {
+        return FPMT_WTHX_AMT;
+    }
+
+    public void setMP_CML_INVCE_NO(String MP_CML_INVCE_NO) {
+        this.MP_CML_INVCE_NO = MP_CML_INVCE_NO;
+    }
+
+    public String getMP_CML_INVCE_NO() {
+        return MP_CML_INVCE_NO;
+    }
+
+    public void setMP_CML_INVCE_DATE(Date MP_CML_INVCE_DATE) {
+        this.MP_CML_INVCE_DATE = MP_CML_INVCE_DATE;
+    }
+
+    public Date getMP_CML_INVCE_DATE() {
+        return MP_CML_INVCE_DATE;
+    }
+
 }

@@ -69,6 +69,19 @@
                     <af:inputText label="Remarks" id="it801" rows="6"
                                   value="Add Remarks" simple="true"
                                   binding="#{claim.tcktAsignee}" columns="50"></af:inputText>
+                    <h:panelGrid columns="2" id="pg3v">
+                      <af:outputLabel value="Priority Level" id="ol4v"
+                                      inlineStyle="font-weight:bold"/>
+                      <af:selectOneChoice label="Label 1" id="soc1v"
+                                          simple="true"
+                                          binding="#{workflowBean.priorityLevel}"
+                                          autoSubmit="true"
+                                          valueChangeListener="#{workflowBean.priorityLevelListener}">
+                        <af:selectItem label="High" value="H" id="si1v"/>
+                        <af:selectItem label="Medium" value="M" id="si2v"/>
+                        <af:selectItem label="Low" value="L" id="si3v"/>
+                      </af:selectOneChoice>
+                    </h:panelGrid>
                     <af:separator id="s201"/>
                     <h:panelGrid columns="3">
                       <af:spacer width="30" height="10" id="s191"/>
@@ -542,7 +555,7 @@
                                   value="#{bindings.CLM_HOSP_DAYS.inputValue}"/>
                   </h:panelGrid>
                 </af:panelBox>
-                <af:panelTabbed inlineStyle="width:100%; height:245.0px;"
+                <af:panelTabbed inlineStyle="width:100%; height:400.0px;"
                                 id="pt1">
                   <af:showDetailItem text="Pension Details" id="showDetailItem1"
                                      rendered="#{Rendering.pensionproduct}">
@@ -721,9 +734,229 @@
                       </af:panelBox>
                     </af:panelGroupLayout>
                   </af:showDetailItem>
+                  <af:showDetailItem text="Partial Withdrawal" id="sdi8"
+                                     rendered="#{Rendering.pensionproduct &amp;&amp; Rendering.partialWithdrawal}">
+                    <af:panelGroupLayout id="pgl18">
+                      <af:panelBox text="Fund Value Summary">
+                        <af:spacer width="10" height="10" id="s37"/>
+                        <h:panelGrid columns="1" id="pg12">
+                          <h:panelGrid columns="10" id="pg13">
+                            <af:spacer width="10" height="10" id="s16"/>
+                            <af:outputLabel value="Balance B/F" id="ol63"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:spacer width="10" height="10" id="s18"/>
+                            <af:outputLabel value="Total Contribution" id="ol64"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:spacer width="10" height="10" id="s19"/>
+                            <af:outputLabel value="Total Interest" id="ol65"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:spacer width="10" height="10" id="s20"/>
+                            <af:outputLabel value="Balance C/F" id="ol66"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:spacer width="10" height="10" id="s21"/>
+                            <af:outputLabel value="Withdrawable Amount"
+                                            id="ol66xp"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:outputLabel value="Employer Account" id="ol64x"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:inputText value="#{bindings.GPW_EMPYR_BAL_BF.inputValue}"
+                                          label="#{bindings.GPW_EMPYR_BAL_BF.hints.label}"
+                                          required="#{bindings.GPW_EMPYR_BAL_BF.hints.mandatory}"
+                                          columns="#{bindings.GPW_EMPYR_BAL_BF.hints.displayWidth}"
+                                          maximumLength="#{bindings.GPW_EMPYR_BAL_BF.hints.precision}"
+                                          shortDesc="#{bindings.GPW_EMPYR_BAL_BF.hints.tooltip}"
+                                          id="it51" simple="true"
+                                          readOnly="true"
+                                          converter="javax.faces.Number">
+                              <f:validator binding="#{bindings.GPW_EMPYR_BAL_BF.validator}"/>
+                            </af:inputText>
+                            <af:spacer width="10" height="10" id="s22"/>
+                            <af:inputText label="Label 78" id="it52"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.GPW_EMPYR_AMT.inputValue}"
+                                          converter="javax.faces.Number"/>
+                            <af:spacer width="10" height="10" id="s23"/>
+                            <af:inputText label="Label 79" id="it53"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.GPW_EMPYR_INT.inputValue}"
+                                          converter="javax.faces.Number"/>
+                            <af:spacer width="10" height="10" id="s24"/>
+                            <af:inputText label="Label 80" id="it54"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.GPW_EMPYR_CF.inputValue}"
+                                          converter="javax.faces.Number"/>
+                            <af:spacer width="10" height="10" id="s25"/>
+                            <af:inputText label="Label 81" id="it55"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.GPW_EMPYR_WITHDRAWABLE_AMT.inputValue}"
+                                          converter="javax.faces.Number"/>
+                            <af:outputLabel value="Employee Account" id="ol64xr"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:inputText label="Label 72" id="it52r"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.GPW_EMPYE_BAL_BF.inputValue}"
+                                          converter="javax.faces.Number"/>
+                            <af:spacer width="10" height="10" id="s30"/>
+                            <af:inputText label="Label 73" id="it53r"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.GPW_EMPYE_AMT.inputValue}"
+                                          converter="javax.faces.Number"/>
+                            <af:spacer width="10" height="10" id="s26"/>
+                            <af:inputText label="Label 74" id="it54r"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.GPW_EMPYE_INT.inputValue}"
+                                          converter="javax.faces.Number"/>
+                            <af:spacer width="10" height="10" id="s27"/>
+                            <af:inputText label="Label 75" id="it55r"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.GPW_EMPYE_CF.inputValue}"
+                                          converter="javax.faces.Number"/>
+                            <af:spacer width="10" height="10" id="s28"/>
+                            <af:inputText label="Label 75" id="it60"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.GPW_EMPYE_WITHDRAWABLE_AMT.inputValue}"
+                                          converter="javax.faces.Number" inlineStyle="font-weight: normal;"/>
+                            <af:outputLabel value="Fund Value" id="ol64t"
+                                            inlineStyle="font-weight:bold;"/>
+                            <af:inputText label="Label 72" id="it61"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.TOTAL_BAL_BF.inputValue}"
+                                          converter="javax.faces.Number"
+                                          inlineStyle="text-decoration: underline;text-decoration: overline;"/>
+                            <af:spacer width="10" height="10" id="s29"/>
+                            <af:inputText label="Label 73" id="it62"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.TOTAL_AMOUNT.inputValue}"
+                                          converter="javax.faces.Number"
+                                          inlineStyle="text-decoration: underline;text-decoration: overline;"/>
+                            <af:spacer width="10" height="10" id="s31"/>
+                            <af:inputText label="Label 74" id="it63"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.TOTAL_INT.inputValue}"
+                                          converter="javax.faces.Number"
+                                          inlineStyle="text-decoration: underline;text-decoration: overline;"/>
+                            <af:spacer width="10" height="10" id="s32"/>
+                            <af:inputText label="Label 75" id="it64"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.TOTAL_BAL_CF.inputValue}"
+                                          converter="javax.faces.Number"
+                                          inlineStyle="text-decoration: underline;text-decoration: overline;"/>
+                            <af:spacer width="10" height="10" id="s33"/>
+                            <af:inputText label="Label 75" id="it65"
+                                          simple="true" readOnly="true"
+                                          value="#{bindings.TOTAL_WITHDRAWABLE_AMT.inputValue}"
+                                          converter="javax.faces.Number"
+                                          inlineStyle="text-decoration: underline;text-decoration: overline;"/>
+                          </h:panelGrid>
+                        </h:panelGrid>
+                      </af:panelBox>
+                      <af:separator id="s17"/>
+                      <af:panelBox text="Withdrawal Summary" id="pb23"
+                                   inlineStyle="height:400px">
+                        <f:facet name="toolbar"/>
+                        <h:panelGrid columns="3">
+                          <h:panelGrid columns="2" id="pg14"  style="border-style:dotted; border-color:Black; border-width:thin;">
+                            <af:outputLabel value="Withdrawal Applied on"
+                                            id="ol68"/>
+                            <af:selectOneChoice label="Label 11" id="soc14"
+                                                simple="true"
+                                                binding="#{claim.withAppliedOn}"
+                                                value="#{bindings.GPW_WITH_APPLIED_ON.inputValue}">
+                              <af:selectItem label="Registered Fund" value="R"
+                                             id="si34"/>
+                              <af:selectItem label="Unregistered Fund" value="U"
+                                             id="si36"/>
+                              <af:selectItem label="Registered and Unreg Fund"
+                                             value="B" id="si35"/>
+                              <af:selectItem label="Employer Registered Fund Only"
+                                             value="RR" id="si37"/>
+                              <af:selectItem label="Employer UnRegistered Fund Only"
+                                             value="RU" id="si38"/>  
+                               <af:selectItem label="Employee Registered Fund Only"
+                                             value="ER" id="si39"/>
+                              <af:selectItem label="Employee UnRegistered Fund Only"
+                                             value="EU" id="si40"/>               
+                            </af:selectOneChoice>
+                            <af:outputLabel value="Withdrawal Amount"
+                                            id="ol67"/>
+                            <h:panelGrid columns="2" id="pg27">
+                              <af:inputText label="Label 76" id="it56"
+                                            simple="true"
+                                            binding="#{claim.withdrawalAmt}"
+                                            value="#{bindings.GPW_AMT_APPLIED.inputValue}"/>
+                              <af:commandButton text="Compute" id="cb9"
+                                                binding="#{claim.computeWithdrawalAmt}"
+                                                action="#{claim.calculateWithdrawalAmt}"/>
+                            </h:panelGrid>
+                            <af:outputLabel value="Years of service"
+                                            id="ol67p"/>
+                            <af:inputText label="Label 76" id="it56p"
+                                          simple="true" disabled="true"
+                                          value="#{bindings.GPW_YRS_OF_SERV.inputValue}"/>
+                            <af:outputLabel value="Tax Exempt Amount"
+                                            id="ol69"/>
+                            <af:inputText label="Label 76" id="it57"
+                                          simple="true" disabled="true"
+                                          value="#{bindings.GPW_TAX_EXEMP_AMT.inputValue}"
+                                          binding="#{claim.withdrawalTaxExemptAmt}"/>
+                            <af:outputLabel value="Computed Tax Amount"
+                                            id="ol70"/>
+                            <af:inputText label="Label 76" id="it58"
+                                          simple="true" disabled="true"
+                                          value="#{bindings.GPW_TAX_AMOUNT.inputValue}"
+                                          binding="#{claim.withdrawalTaxAmt}"/>
+                            <af:outputLabel value="Override Tax Amount"
+                                            id="ol71"/>
+                            <af:inputText label="Label 76" id="it59"
+                                          simple="true"
+                                          binding="#{claim.withOverrideTaxAmt}"
+                                          value="#{bindings.GPW_OVERRIDE_TAX_AMT.inputValue}"/>
+                            <af:outputLabel value="Net Amount Payable"
+                                            id="ol71x"/>
+                            <af:inputText label="Label 76" id="it59x"
+                                          simple="true" disabled="true"
+                                          binding="#{claim.withdrawalNetPayable}"
+                                          value="#{bindings.NET_PAYABLE.inputValue}"/>
+                          </h:panelGrid>
+                          <h:panelGrid columns="2" id="pg44">
+                            <af:spacer width="10" height="10" id="s34"/>
+                            <af:outputText value="Allocation Summary" id="ot24" inlineStyle="font-weight:bold;text-decoration:underline"/>
+                            <af:outputLabel value="Employer Registered Alloc." id="ol72"/>
+                            <af:inputText label="Label 82" id="it66" simple="true" disabled="true"
+                            value="#{bindings.GPW_EMPYR_REG_WITH_AMT.inputValue}"
+                            binding="#{claim.withEmpyrRegAmt}"/>
+                             <af:outputLabel value="Employer UnRegistered Alloc."
+                                             id="ol73"/>
+                            <af:inputText label="Label 82" id="it70" simple="true" disabled="true"
+                            value="#{bindings.GPW_EMPYR_UNREG_WITH_AMT.inputValue}"
+                            binding="#{claim.withEmplyrUnregAmt}"/>
+                             <af:outputLabel value="Employee Registered Alloc."
+                                             id="ol74"/>
+                            <af:inputText label="Label 82" id="it68" simple="true" disabled="true"
+                             value="#{bindings.GPW_EMPYE_REG_WITH_AMT.inputValue}"
+                                          binding="#{claim.withEmpyeRegAmt}"/>
+                             <af:outputLabel value="Employee UnRegistered Alloc."
+                                             id="ol75"/>
+                            <af:inputText label="Label 82" id="it69" simple="true" disabled="true"
+                            value="#{bindings.GPW_EMPYE_UNREG_WITH_AMT.inputValue}"
+                                          binding="#{claim.withEmpyeUnregAmt}"/>
+                             <af:spacer width="10" height="50" id="s35x"/>             
+                            <af:commandButton text="Raise Voucher" id="cb12"
+                                              action="#{claim.CreatePensionWithdrawalVoucher}"/>
+                            <af:spacer width="10" height="50" id="s35"/>
+                            <af:spacer width="10" height="50" id="s36"/>
+                          </h:panelGrid>
+                          <h:panelGrid columns="1" id="pg45">                          
+                          <af:commandLink text="[Payment Vouchers]" id="cl2x"
+                                          action="#{claim.ViewPaymentVouchers}"/>
+                          </h:panelGrid>
+                        </h:panelGrid>
+                      </af:panelBox>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
                   <af:showDetailItem text="Pension Claim Dtls"
                                      id="showDetailItem2"
-                                     rendered="#{Rendering.pensionproduct}">
+                                     rendered="#{Rendering.pensionproduct &amp;&amp; !Rendering.partialWithdrawal}">
                     <af:panelGroupLayout id="pgl13">
                       <af:panelBox id="pb15" showHeader="never">
                         <f:facet name="toolbar"/>
@@ -996,11 +1229,12 @@
                         </h:panelGrid>
                         <af:panelGroupLayout id="pgl14" partialTriggers="soc3">
                           <h:panelGrid columns="8" id="pg22">
-                          
-                          <af:outputLabel value="Override Tax Exempt Amt" id="ol43"/>
-                          <af:inputText label="Label 69" id="it22" simple="true"
-                                        binding="#{claim.overrideTax}"
-                                        value="#{bindings.PMPNS_OVERRIDE_TAX_EXEMPT.inputValue}"/>
+                            <af:outputLabel value="Override Tax Exempt Amt"
+                                            id="ol43"/>
+                            <af:inputText label="Label 69" id="it22"
+                                          simple="true"
+                                          binding="#{claim.overrideTax}"
+                                          value="#{bindings.PMPNS_OVERRIDE_TAX_EXEMPT.inputValue}"/>
                             <af:outputLabel value="Payee" id="outputLabel66"/>
                             <af:inputText label="Label 20" id="it29"
                                           simple="true"
@@ -1014,8 +1248,10 @@
                                           binding="#{claim.pensPayeePIN}"
                                           disabled="#{sessionScope['pensionPayee']=='N'}"
                                           value="#{bindings.PMPNS_PAYEE_PIN.inputValue}"/>
-                            <af:outputLabel value="Transfer Locked in Benefit" id="ol61"/>
-                            <af:selectOneChoice label="Label 10" id="soc13" value="N" simple="true"
+                            <af:outputLabel value="Transfer Locked in Benefit"
+                                            id="ol61"/>
+                            <af:selectOneChoice label="Label 10" id="soc13"
+                                                value="N" simple="true"
                                                 binding="#{claim.transferLockedBen}"
                                                 valueChangeListener="#{claim.transferListener}"
                                                 autoSubmit="true">
@@ -1023,8 +1259,10 @@
                               <af:selectItem label="No" value="N" id="si32"/>
                             </af:selectOneChoice>
                             <af:outputLabel value="Tranfer To" id="ol62"
-                                            binding="#{claim.transferToLB}" visible="false"/>
-                            <af:inputText label="Label 70" id="it23" simple="true" visible="false"
+                                            binding="#{claim.transferToLB}"
+                                            visible="false"/>
+                            <af:inputText label="Label 70" id="it23"
+                                          simple="true" visible="false"
                                           binding="#{claim.transferToTF}"/>
                           </h:panelGrid>
                         </af:panelGroupLayout>
@@ -1385,8 +1623,10 @@
                                                  id="selectItem4"/>
                                 </af:selectOneChoice>
                                 <af:outputLabel value="Fund Administrator"
-                                                id="outputLabel54" rendered="#{Rendering.pensionproduct}"/>
-                                <h:panelGrid columns="2" id="pg40" rendered="#{Rendering.pensionproduct}">
+                                                id="outputLabel54"
+                                                rendered="#{Rendering.pensionproduct}"/>
+                                <h:panelGrid columns="2" id="pg40"
+                                             rendered="#{Rendering.pensionproduct}">
                                   <af:inputText label="Label 23" id="it34"
                                                 simple="true" disabled="true"
                                                 binding="#{claim.agencyDesc}"/>
@@ -2956,6 +3196,9 @@
                           <af:commandLink text="Discharge Form Letter"
                                           id="rpt1228"
                                           actionListener="#{ReportsEngine.GetReportDetails}"/>
+                          <af:commandLink text="Discharge Form Letter(With Letter head)"
+                                          id="rpt25571"
+                                          actionListener="#{ReportsEngine.GetReportDetails}"/>                
                           <af:commandLink text="Claims Analysis" id="rpt1231"
                                           actionListener="#{ReportsEngine.GetReportDetails}"
                                           rendered="#{Rendering.earningsproduct &amp;&amp; !Rendering.mickVisible}"/>
@@ -2993,10 +3236,6 @@
                                           actionListener="#{ReportsEngine.GetReportDetails}"/>
                           <af:commandLink text="Claim Discharge Voucher"
                                           id="rpt25570"
-                                          rendered="#{Rendering.loansProduct}"
-                                          actionListener="#{ReportsEngine.GetReportDetails}"/>
-                          <af:commandLink text="FE Claim Discharge Voucher"
-                                          id="rpt25571"
                                           rendered="#{Rendering.loansProduct}"
                                           actionListener="#{ReportsEngine.GetReportDetails}"/>
                           <af:commandLink text="Claim Discharge Voucher (Corp)"
@@ -3084,27 +3323,32 @@
                                 binding="#{claim.deathDate}">
                     <af:convertDateTime pattern="dd-MMM-yyyy"/>
                   </af:inputDate>
-                  <af:outputLabel value="Date of Employment" id="ol35" rendered="#{Rendering.pensionproduct}"/>
-                  <af:inputDate label="Label 6" id="id4" simple="true" rendered="#{Rendering.pensionproduct}"
+                  <af:outputLabel value="Date of Employment" id="ol35"
+                                  rendered="#{Rendering.pensionproduct}"/>
+                  <af:inputDate label="Label 6" id="id4" simple="true"
+                                rendered="#{Rendering.pensionproduct}"
                                 value="#{bindings.PMPNS_DATE_EMPLOYED.inputValue}"
                                 binding="#{claim.employmentDate}">
                     <af:convertDateTime pattern="dd-MMM-yyyy"/>
                   </af:inputDate>
-                  
-                  <af:outputLabel value="Scheme Join Date" id="ol40" rendered="#{Rendering.pensionproduct}"/>
-                  <af:inputDate label="Label 6" id="id14" simple="true" rendered="#{Rendering.pensionproduct}"
+                  <af:outputLabel value="Scheme Join Date" id="ol40"
+                                  rendered="#{Rendering.pensionproduct}"/>
+                  <af:inputDate label="Label 6" id="id14" simple="true"
+                                rendered="#{Rendering.pensionproduct}"
                                 value="#{bindings.POLM_DATE_JOINED.inputValue}"
                                 binding="#{claim.schemeJoinDate}">
                     <af:convertDateTime pattern="dd-MMM-yyyy"/>
                   </af:inputDate>
-              
-                  <af:outputLabel value="Date of Birth" id="ol41" rendered="#{Rendering.pensionproduct}"/>
-                  <af:inputDate label="Label 6" id="id15" simple="true" rendered="#{Rendering.pensionproduct}"
+                  <af:outputLabel value="Date of Birth" id="ol41"
+                                  rendered="#{Rendering.pensionproduct}"/>
+                  <af:inputDate label="Label 6" id="id15" simple="true"
+                                rendered="#{Rendering.pensionproduct}"
                                 value="#{bindings.DOB.inputValue}"
                                 binding="#{claim.dateOfBirth}">
                     <af:convertDateTime pattern="dd-MMM-yyyy"/>
                   </af:inputDate>
-                  <af:outputLabel value="KRA Pin Number" id="ol42" rendered="#{Rendering.pensionproduct}"/>
+                  <af:outputLabel value="KRA Pin Number" id="ol42"
+                                  rendered="#{Rendering.pensionproduct}"/>
                   <af:inputText label="Label 68" id="it20" simple="true"
                                 binding="#{claim.kraPinNo}"
                                 value="#{bindings.KRAPIN.inputValue}"

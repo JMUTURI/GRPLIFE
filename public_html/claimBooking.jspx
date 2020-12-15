@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Group Life | Claims" id="d8">
+      <af:showPopupBehavior popupId="msgConfirm2" triggerType="load"/>
+      <af:popup id="msgConfirm2" rendered="#{Rendering.showClaim}">
+        <af:dialog id="d42" title="Confirm DMS Doc Attachment" type="none">
+          <af:outputText value="Attach Document to this Claim?" id="oot2233"/>
+          <h:panelGrid columns="2" id="pg1104">
+            <af:commandButton text="Yes" id="cb1104"
+                              action="#{claim.updateClaimDocDms}"/>
+          </h:panelGrid>
+        </af:dialog>
+      </af:popup>
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelBox text="Policy Details" id="pb1">
+                  <f:facet name="toolbar"/>
+                  <af:separator inlineStyle="width:inherit;" id="separator1"/>
+                  <h:panelGrid columns="11" style="font-weight:bold;" id="pg1">
+                    <af:outputLabel value="Policy No." id="ol2"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.POL_POLICY_NO.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot2"/>
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:outputLabel value="Client." id="ol3"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.CLIENT_DISPLAY.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot3"/>
+                    <af:spacer width="10" height="10" id="s4"/>
+                    <af:outputLabel value="Product ID." id="ol4"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.POL_PROD_SHT_DESC.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot4"/>
+                    <af:spacer width="10" height="10" id="s7"/>
+                    <af:outputLabel value="Branch." id="ol5"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.BRANCH_DISPLAY.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot5"/>
+                    <af:outputLabel value="Inception Date." id="ol6"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.POL_INCEPTION_DATE.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot6">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:outputText>
+                    <af:spacer width="10" height="10" id="s8"/>
+                    <af:outputLabel value="U/W Year." id="ol7"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.UW_YEAR.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot7"/>
+                    <af:spacer width="10" height="10" id="s9"/>
+                    <af:outputLabel value="Effective Date" id="ol8"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.POL_EFFECTIVE_DATE.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot8">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:outputText>
+                    <af:spacer width="10" height="10" id="s10"/>
+                    <af:outputLabel value="Expiry Date" id="ol9"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.EXPIRY_DATE_DISPLAY.inputValue}"
+                                   inlineStyle="font-weight:bold;" id="ot9">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:outputText>
+                    <af:outputLabel value="Agent" id="outputLabel59"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.AGN_NAME.inputValue}"
+                                   id="ot52" inlineStyle="font-weight:bold;"/>
+                    <af:spacer width="10" height="10" id="s100"/>
+                    <af:outputLabel value="Currency" id="outputLabel591"
+                                    inlineStyle="text-decoration:underline;"/>
+                    <af:outputText value="#{bindings.pol_cur_symbol.inputValue}"
+                                   id="ot521" inlineStyle="font-weight:bold;"/>
+                  </h:panelGrid>
+                </af:panelBox>
+              <af:panelBox text="Claim Booking Details" id="pb2">
+                <af:separator id="s2"/>
+                <f:facet name="toolbar"/>
+                <h:panelGrid columns="9" id="pg2">
+                  <af:outputLabel value="Member Number" id="ol1" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.MEM_NO_DISP.inputValue}"
+                                 id="ot16"  inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="s3"/>
+                  <af:outputLabel value="Member Name" id="ol10" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.MEM_NAME_DISP.inputValue}"
+                                 id="ot19" inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="s5"/>
+                  <af:outputLabel value="Date Of Birth" id="ol11" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.MEM_DOB.inputValue}"
+                                 id="ot20" inlineStyle="font-weight:bold;">
+                   <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:outputText>
+                  <af:spacer width="10" height="10" id="s6"/>
+                  <af:outputLabel value="Death/Disability Age" id="ol12" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CMB_DEATH_DISABILITY_AGE.inputValue}"
+                                 id="ot21" inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="s11"/>
+                  <af:outputLabel value="ID number" id="ol13" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.MEM_IDENTITY_NO.inputValue}"
+                                 id="ot22" inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="s12"/>
+                  <af:outputLabel value="Transaction Date" id="ol14" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CMB_DATE.inputValue}"
+                                 id="ot23" inlineStyle="font-weight:bold;">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:outputText>
+                  <af:spacer width="10" height="10" id="s13"/>
+                  <af:outputLabel value="Death/Disability Date" id="ol15" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CMB_DATE_DEATH_ACCIDENT.inputValue}"
+                                 id="ot24"
+                                 inlineStyle="font-weight:bold;">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:outputText>
+                  <af:spacer width="10" height="10" id="s14"/>
+                  <af:outputLabel value="Date Reported" id="ol16" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CMB_DATE_CLAIM_REPORTED.inputValue}"
+                                 id="ot25" inlineStyle="font-weight:bold;">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:outputText>
+                  <af:spacer width="10" height="10" id="s15"/>
+                  <af:outputLabel value="Causation" id="ol17" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CAUS_DESC.inputValue}"
+                                 id="ot27"
+                                 inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="s17"/>
+                  <af:outputLabel value="Causation Causes" id="ol18" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.DDC_DESC.inputValue}"
+                                 id="ot26"
+                                 inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="s18"/>
+                  <af:outputLabel value="Reserve Amount" id="ol19" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CMB_RESERVE_AMT.inputValue}" id="ot29" inlineStyle="font-weight:bold;">
+                    <af:convertNumber groupingUsed="true" type="number" messageDetailConvertNumber="#,###,##"/>
+                  </af:outputText>
+                  <af:spacer width="10" height="10" id="s19"/>
+                  <af:outputLabel value="Retention Share" id="ol20" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CMB_RETENTION_SHARE.inputValue}" id="ot30" inlineStyle="font-weight:bold;"/>
+                  <af:spacer width="10" height="10" id="s20"/>
+                  <af:outputLabel value="Retention Amount" id="ol21" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CMB_RETENTION_AMT.inputValue}" id="ot31" inlineStyle="font-weight:bold;">
+                    <af:convertNumber groupingUsed="true" type="number" messageDetailConvertNumber="#,###,##"/>
+                  </af:outputText>
+                  <af:spacer width="10" height="10" id="s21"/>
+                  <af:outputLabel value="Reinsurance Share" id="ol22" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CMB_REINSURANCE_SHARE.inputValue}" id="ot32" inlineStyle="font-weight:bold;"/>
+                   <af:spacer width="10" height="10" id="s22"/>
+                  <af:outputLabel value="Reinsurance Amount" id="ol23" inlineStyle="text-decoration:underline;"/>
+                  <af:outputText value="#{bindings.CMB_TOT_REINSURANCE_AMT.inputValue}" id="ot33" inlineStyle="font-weight:bold;">
+                    <af:convertNumber groupingUsed="true" type="number" messageDetailConvertNumber="#,###,##"/>
+                  </af:outputText>
+                </h:panelGrid>
+                <af:separator id="s16"/>
+              </af:panelBox>
+            </af:panelGroupLayout>
+            <af:panelTabbed id="pt1" inlineStyle="width:100%">
+              <af:showDetailItem text="Cover Details" id="sdi1">
+                 <h:panelGrid columns="2" id="pg3">
+                    <af:commandButton text="Process" id="cb1"
+                                      action="#{claim.processClaimBooking}"/>
+                    <af:commandButton text="Authorize" id="cb2"/>
+                  </h:panelGrid>
+                <af:panelBox text="PanelBox1" id="pb3" showHeader="never">
+                <af:table value="#{bindings.claimBookingCovers.collectionModel}"
+                            var="row"
+                            rows="#{bindings.claimBookingCovers.rangeSize}"
+                            emptyText="#{bindings.claimBookingCovers.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.claimBookingCovers.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.claimBookingCoversQuery.queryDescriptor}"
+                            queryListener="#{bindings.claimBookingCoversQuery.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.claimBookingCovers.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.claimBookingCovers.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t1" inlineStyle="width:100%"
+                          binding="#{claim.bookingCoverTypeLOV}">                      
+                    <af:column sortProperty="selectedCover" filterable="false"
+                               sortable="false"
+                               headerText=""
+                               id="c2">
+                      <af:selectBooleanCheckbox text=""
+                                                label="Label 1" id="sbc1" simple="true" value="row.bindings.bookCoverCheck.inputValue"
+                                                selected="true"
+                                                autoSubmit="true"/>
+                    </af:column>
+                      <af:column sortProperty="CVT_DESC" filterable="true"
+                               sortable="true"
+                               headerText="Cover"
+                               id="c4">
+                      <af:outputText value="#{row.CVT_DESC}" id="ot12"/>
+                    </af:column>
+                    <af:column sortProperty="CBVT_SA" filterable="true"
+                               sortable="true"
+                               headerText="Sum Assured"
+                               id="c11">
+                      <af:outputText value="#{row.CBVT_SA}" id="ot28"/>
+                    </af:column>
+                    <af:column sortProperty="CBVT_RESERVE_AMT" filterable="true"
+                               sortable="true"
+                               headerText="Reserve Amount"
+                               id="c5">
+                      <af:inputText label="Label 1" id="it1" value="#{row.CBVT_RESERVE_AMT}" simple="true"/>
+                    </af:column>
+                    <af:column sortProperty="CBVT_EARNINGS" filterable="true"
+                               sortable="true"
+                               headerText="Earnings"
+                               id="c10">
+                      <af:outputText value="#{row.CBVT_EARNINGS}" id="ot10"/>
+                    </af:column>
+                    <af:column sortProperty="CBVT_MULT_EARNINGS_PRD"
+                               filterable="true" sortable="true"
+                               headerText="Multiplier"
+                               id="c6">
+                      <af:outputText value="#{row.CBVT_MULT_EARNINGS_PRD}"
+                                     id="ot15"/>
+                    </af:column>
+                    <af:column sortProperty="CBVT_ACCELERATOR" filterable="true"
+                               sortable="true"
+                               headerText="Accelerated Benefit"
+                               id="c8">
+                      <af:outputText value="#{row.CBVT_ACCELERATOR}" id="ot18"/>
+                    </af:column>
+                    <af:column sortProperty="CBVT_ORIGINAL_LOAN_AMT"
+                               filterable="true" sortable="true"
+                               headerText="Original Loan Amount"
+                               id="c7">
+                      <af:outputText value="#{row.CBVT_ORIGINAL_LOAN_AMT}"
+                                     id="ot17"/>
+                    </af:column>
+                    <af:column sortProperty="CBVT_ORIG_LOAN_REPAYMENT_PRD"
+                               filterable="true" sortable="true"
+                               headerText="Original Repayment Period"
+                               id="c9">
+                      <af:outputText value="#{row.CBVT_ORIG_LOAN_REPAYMENT_PRD}"
+                                     id="ot13"/>
+                    </af:column>
+                    <af:column sortProperty="CBVT_SAVING_AMT" filterable="true"
+                               sortable="true"
+                               headerText="Saving Amount"
+                               id="c1">
+                      <af:outputText value="#{row.CBVT_SAVING_AMT}" id="ot11"/>
+                    </af:column>
+                    <af:column sortProperty="CBVT_CODE" filterable="true"
+                               sortable="true"
+                               headerText="Code"
+                               id="c3"
+                               visible="false">
+                      <af:outputText value="#{row.bindings.CBVT_CODE.inputValue}" id="ot14"/>
+                    </af:column>
+                  </af:table>
+                  <f:facet name="toolbar"/>
+                </af:panelBox>
+              </af:showDetailItem>
+              <af:showDetailItem text="Reinsurance Details" id="sdi2">
+                <af:panelBox text="PanelBox2" id="pb4" showHeader="never">
+                  <af:table value="#{bindings.riRecoverableAmt.collectionModel}"
+                            var="row"
+                            rows="#{bindings.riRecoverableAmt.rangeSize}"
+                            emptyText="#{bindings.riRecoverableAmt.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.riRecoverableAmt.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.riRecoverableAmtQuery.queryDescriptor}"
+                            queryListener="#{bindings.riRecoverableAmtQuery.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.riRecoverableAmt.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.riRecoverableAmt.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t2"
+                            binding="#{claim.reinsuranceBookingLOV}">
+                    <af:column sortProperty="agnName" filterable="true"
+                               sortable="true"
+                               headerText="Treaty Participants"
+                               id="c13">
+                      <af:outputText value="#{row.agnName}" id="ot36"/>
+                    </af:column>
+                    <af:column sortProperty="riGlAccount" filterable="true"
+                               sortable="true"
+                               headerText="Gl Account"
+                               id="c12">
+                      <af:outputText value="#{row.riGlAccount}" id="ot35"/>
+                    </af:column>
+                    <af:column sortProperty="recoverableAmt" filterable="true"
+                               sortable="true"
+                               headerText="Recoverable Amount"
+                               id="c14">
+                      <af:outputText value="#{row.recoverableAmt}" id="ot34">
+                       <af:convertNumber groupingUsed="true" type="number" messageDetailConvertNumber="#,###,##"/>
+                      </af:outputText>
+                    </af:column>
+                  </af:table>
+                </af:panelBox>
+              </af:showDetailItem>
+              <af:showDetailItem text="Co-insurance Detail" id="sdi3"/>
+            </af:panelTabbed>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

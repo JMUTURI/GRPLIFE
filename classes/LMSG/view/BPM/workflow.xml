@@ -35,6 +35,7 @@
   <Attribute Name="TCKT_CDE" Type="java.lang.String"/>
   <Attribute Name="TCKT_ENDORSEMENT" Type="java.lang.String"/>
   <Attribute Name="TCKT_REF_NO" Type="java.lang.String"/>
+  <Attribute Name="TCKT_PRIORITY_LEVEL" Type="java.lang.String"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.BPM.workflow"
                      BeanClass="LMSG.view.BPM.workflow" id="workflow"/>
 </JavaBean>

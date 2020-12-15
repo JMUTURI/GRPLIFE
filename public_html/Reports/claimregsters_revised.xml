@@ -1,0 +1,232 @@
+<dataTemplate dataSourceRef="AIICOLIVE" name="claimregsters" defaultPackage="reports_parameters">
+<properties>
+<property name="xml_tag_case" value="upper"/>
+</properties>
+<parameters>
+<parameter name="V_DATE_FROM" dataType="date"/>
+<parameter name="V_DATE_TO" dataType="date"/>
+<parameter name="V_PROD_CODE" dataType="number"/>
+<parameter name="V_POL_CODE" dataType="number"/>
+</parameters>
+<lexicals>
+</lexicals>
+<dataQuery>
+<sqlStatement name="Q_1">
+<![CDATA[	
+SELECT ORG_NAME,ORG_PHY_ADDRS||' '||ORG_ADDRS POSTALADDRESS , 
+        'TELEPHONE'||':'||ORG_TEL1||DECODE(ORG_TEL2 ,NULL,NULL,' /'||ORG_TEL2) TELEPHONE,  
+        'FAX'||':'||ORG_FAX FAX, 
+        'E-MAIL'||':'||LOWER(ORG_EMAIL_ADDRS) EMAIL,ORG_RPT_LOGO LOGO
+        FROM TQC_ORGANIZATIONS, TQC_COUNTRIES, TQC_TOWNS, TQC_SYSTEMS
+        WHERE ORG_TWN_CODE = TWN_CODE
+        AND ORG_COU_CODE = COU_CODE
+        AND SYS_ORG_CODE = ORG_CODE
+        AND SYS_SHT_DESC = 'LMS'
+]]>
+</sqlStatement>
+<sqlStatement name="Q_2">
+<![CDATA[ 
+SELECT DISTINCT MEM_NO,PROD_DESC,MEMBER,DTY_DESCRIPTION,POLICY_NO,CLIENTNAME,CLM_NO,CPV_CHEQUE_DATE,CLM_STATUS,
+CLM_DATE,DATE_INTIMATED,CVT_DESC,clm_payable_amt,DATE_AUTHORISED,DATE_PAID,CLM_CAUS_TYPE,DATEOFDEATH,COMMENSMENT,AMT_PAID,
+CLM_DEATH_LOCATION,EARNING_LOAN,CAUS_OF_DEATH,AGE_AT_DEATH,MEM_CAT,PERIOD_FROM,PERIOD_TO,CPV_CHEQUE_NO,CLM_EXGRATIA
+FROM (SELECT   POLM_MEM_NO MEM_NO, PROD_DESC,
+         UPPER (MEM_SURNAME || '' || MEM_OTHER_NAMES) MEMBER, DTY_DESCRIPTION,
+         POL_POLICY_NO POLICY_NO,
+         PRP_SURNAME || ' ' || PRP_OTHER_NAMES CLIENTNAME, CLM_NO,
+         TO_CHAR(CPV_CHEQUE_DATE,'DD-MON-RRRR')CPV_CHEQUE_DATE,
+          CASE
+                WHEN clm_status = 'CN'
+                   THEN 'Rejected'
+                ELSE CASE
+                WHEN cpv_cheque_date IS NULL AND NVL(CPV_AUTHORISED,'X') IN('Y','N')
+                   THEN 'Processing'
+                WHEN cpv_cheque_date IS NULL AND NVL(CPV_AUTHORISED,'X')='X'
+                THEN
+                'Pending'
+                WHEN cpv_cheque_date IS NOT NULL AND NVL(CPV_AUTHORISED,'N')='C'
+                THEN
+                'Reversed'
+                ELSE 'Paid'
+
+             END
+         END CLM_STATUS,
+         TO_CHAR (CLM_DATE_CLAIM_REPORTED, 'DD-MON-RRRR') CLM_DATE,
+         TO_CHAR (CLM_DATE, 'DD-MON-RRRR') DATE_INTIMATED,
+         DECODE (INSTR (CVT_DESC, 'EXPENSE'),
+                 0, CVT_DESC,
+                 'LAST EXPENSE'
+                ) CVT_DESC,
+         CASE
+            WHEN NVL (ccvt_vchr_raised, 'N') = 'N'
+            AND clm_status != 'CN'
+               THEN NVL (ccvt_reserve_amt, 0)
+            WHEN NVL (ccvt_paid_amt, 0) != 0
+            AND clm_status != 'CN'
+            AND NVL (ccvt_vchr_raised, 'N') = 'Y'
+               THEN NVL (ccvt_paid_amt, ccvt_actual_being_paid_amt)
+            WHEN NVL (ccvt_payable_amt, 0) != 0
+            AND NVL (ccvt_actual_being_paid_amt, 0) = 0
+            AND clm_status != 'CN'
+            AND NVL (ccvt_vchr_raised, 'N') = 'Y'
+               THEN DECODE (NVL (clm_exgratia, 'N'),
+                            'Y', clm_reserve_amt,
+                            NVL (ccvt_payable_amt, 0)
+                           )
+            WHEN clm_status = 'CN'
+               THEN NVL (ccvt_reserve_amt, 0)
+            ELSE NVL(ccvt_actual_being_paid_amt,ccvt_sa)
+         END clm_payable_amt,
+         TO_CHAR (CPV_AUTHORISED_DT, 'DD-MON-RRRR') DATE_AUTHORISED,
+         TO_CHAR (CPV_CHEQUE_DATE, 'DD-MON-RRRR') DATE_PAID,
+         DECODE (CAUS_TYPE,
+                 'DIS', 'DISABILITY',
+                 'DTH', 'DEATH',
+                 'WIT', 'WITHDRAWAL',
+                 'RTE', 'RETIREMENT',
+                 'ILL', 'ILL HEALTH',
+                 'IMG', 'IMMIGRATION'
+                ) CLM_CAUS_TYPE,
+         TO_CHAR (CLM_DATE_DEATH_ACCIDENT, 'DD-MON-RRRR') DATEOFDEATH,
+         CAUS_DESC, TO_CHAR (PCM_COVER_WEF_DATE, 'DD-MON-RRRR') COMMENSMENT,
+         CASE
+            WHEN CPV_CHEQUE_DATE IS NULL
+               THEN NULL
+            ELSE CPV_AMOUNT
+         END AMT_PAID, CLM_DEATH_LOCATION,
+         DECODE (POL_PROD_TYPE,
+                 'EARN', CCVT_EARNINGS,
+                 'LOAN', CCVT_ORIGINAL_LOAN_AMT,
+                 0
+                ) EARNING_LOAN,
+         DDC_DESC CAUS_OF_DEATH, CLM_DEATH_DISABILITY_AGE AGE_AT_DEATH,
+         (SELECT PCA_CATEG_DESC
+            FROM LMS_POLICY_CATEGORIES
+           WHERE PCA_CODE = PCM_PCA_CODE) MEM_CAT,
+         TO_CHAR (TO_DATE (:V_DATE_FROM, 'DD-MON-RRRR'),
+                  'DD-MON-RRRR'
+                 ) PERIOD_FROM,
+         TO_CHAR (TO_DATE (:V_DATE_TO, 'DD-MON-RRRR'),
+                  'DD-MON-RRRR') PERIOD_TO, CPV_CHEQUE_NO,
+         DECODE (NVL (CLM_EXGRATIA, 'N'), 'N', 'NO', 'YES') CLM_EXGRATIA
+    FROM LMS_CLAIM_COVER_TYPES,
+         LMS_CLAIMS,
+         LMS_COVER_TYPES,
+         LMS_POLICIES,
+         LMS_PROPOSERS,
+         LMS_POLICY_MEMBER_COVERS,
+         LMS_POLICY_MEMBERS,
+         LMS_MEMBERS,
+         LMS_DEPENDENT_TYPES,
+         LMS_PRODUCTS,
+         LMS_CAUSATIONS,
+         LMS_DEATH_DISABILITY_CAUSES,
+         LMS_TRANSACTIONS,
+         FMS_VOUGL,fms_trngl,
+          (SELECT CPVD_CCVT_CODE,SUM(CPVD_AMOUNT)CPV_AMOUNT,CPV_AUTHORISED_DT,
+                DECODE(CPV_LTR_BTR_TRANS_CODE,'CO',CPV_DATE,NVL(CPV_CHEQUE_DATE,CPV_CHQ_UPDATE_DATE))CPV_CHEQUE_DATE,
+                  SUM(CPV_CHQ_AMT)CPV_CHQ_AMT,CPV_CHEQUE_NO,
+                  DECODE(CPV_LTR_BTR_TRANS_CODE,'CO','C',CPV_AUTHORISED)CPV_AUTHORISED
+              FROM LMS_CLM_PAYMENT_VOUCHER_DTLS,LMS_CLM_PAYMENT_VOUCHERS
+              WHERE CPVD_VOUCHER_NO=CPV_VOUCHER_NO
+              AND NVL(CPV_AUTHORISED,'N')!='R'
+              AND NVL(CPV_DISCHARGE_STATUS,'ACC')!='REJ'
+              GROUP BY CPVD_CCVT_CODE,CPV_AUTHORISED_DT,NVL(CPV_CHEQUE_DATE,CPV_CHQ_UPDATE_DATE),CPV_CHEQUE_NO,CPV_AUTHORISED,CPV_LTR_BTR_TRANS_CODE,CPV_DATE)
+   WHERE CCVT_CLM_NO = CLM_NO
+     AND CCVT_CVT_CODE = CVT_CODE
+     AND CLM_POL_CODE = POL_CODE
+     AND CPVD_CCVT_CODE(+) = CCVT_CODE
+     AND POL_PRP_CODE = PRP_CODE
+     AND CCVT_PCM_CODE = PCM_CODE(+)
+     AND CLM_POLM_CODE = POLM_CODE
+     AND POLM_DTY_CODE = DTY_CODE
+     AND POLM_MEM_CODE = MEM_CODE
+     AND POL_PROD_CODE = PROD_CODE
+     AND CLM_CAUS_CODE = CAUS_CODE
+     AND CLM_DDC_CODE = DDC_CODE
+     AND LTR_CLM_NO=CLM_NO
+     AND TO_CHAR(LTR_TRANS_NO)=VGL_REF
+     AND VGL_NO=TGL_VGL_NO
+     AND TGL_CRT_ACC_NUMBER='200-01-014'
+  AND NVL(CPV_CHEQUE_DATE,VGL_DT) BETWEEN :V_DATE_FROM AND :V_DATE_TO
+    AND TRUNC(VGL_DT) BETWEEN :V_DATE_FROM AND :V_DATE_TO
+ORDER BY CLM_DATE_CLAIM_REPORTED
+)
+]]>
+</sqlStatement>
+
+</dataQuery>
+<dataStructure>
+
+<group name="G_ORGANIZATION" dataType="varchar2" source="Q_1">
+	 <element name="ORG_NAME" dataType="varchar2" value="ORG_NAME"/>
+	 <element name="ORG_PHY_ADDRS" dataType="varchar2" value="ORG_PHY_ADDRS"/>
+	 <element name="POSTALADDRESS" dataType="varchar2" value="POSTALADDRESS"/>
+	 <element name="TELEPHONE" dataType="varchar2" value="TELEPHONE"/>
+	 <element name="FAX" dataType="varchar2" value="FAX"/>
+	 <element name="EMAIL" dataType="varchar2" value="EMAIL"/>
+	 <element name="LOGO" dataType="longRaw" value="LOGO"/>
+</group>
+		<group name="G_CLAIMDAT" dataType="varchar2" source="Q_2">
+			<element name="CLM_DATE" dataType="varchar2" value="CLM_DATE"/>
+			<element name="PROD_DESC" dataType="varchar2" value="PROD_DESC"/>
+			<element name="PRP_POSTAL_ADDRESS" dataType="varchar2" value="PRP_POSTAL_ADDRESS"/>
+			<element name="PRP_PHYSICAL_ADDR" dataType="varchar2" value="PRP_PHYSICAL_ADDR"/>
+			<element name="PRP_TOWN" dataType="varchar2" value="PRP_TOWN"/>
+			<element name="SN" dataType="varchar2" value="SN"/>
+			<element name="PRODUCT" dataType="varchar2" value="PRODUCT"/>
+			<element name="CLM_CAUS_TYPE" dataType="varchar2" value="CLM_CAUS_TYPE"/>
+			<element name="MEMBER" dataType="varchar2" value="MEMBER"/>
+			<element name="MEM_SEX" dataType="varchar2" value="MEM_SEX"/>
+			<element name="CLM_NO" dataType="varchar2" value="CLM_NO"/>
+			<element name="CLM_DATE_CLAIM_REPORTED" dataType="date" value="CLM_DATE_CLAIM_REPORTED"/>
+			<element name="MEM_NO" dataType="varchar2" value="MEM_NO"/>
+			<element name="TODAY" dataType="varchar2" value="TODAY"/>
+			<element name="POLICY_NO" dataType="varchar2" value="POLICY_NO"/>
+			<element name="PCM_COVER_WEF_DATE" dataType="varchar2" value="PCM_COVER_WEF_DATE"/>
+			<element name="PCM_COVER_WET_DATE" dataType="varchar2" value="PCM_COVER_WET_DATE"/>
+			<element name="GLIFESA" dataType="varchar2" value="GLIFESA"/>
+			<element name="GFUNSA" dataType="varchar2" value="GFUNSA"/>
+			<element name="DATEOFDEATH" dataType="varchar2" value="DATEOFDEATH"/>
+			<element name="AGEATDEATH" dataType="varchar2" value="AGEATDEATH"/>
+			<element name="PCM_EARNINGS" dataType="varchar2" value="PCM_EARNINGS"/>
+			<element name="CAUS_DESC" dataType="varchar2" value="CAUS_DESC"/>
+			<element name="CLM_PREPARED_BY" dataType="varchar2" value="CLM_PREPARED_BY"/>
+			<element name="MEM_IDENTITY_NO" dataType="varchar2" value="MEM_IDENTITY_NO"/>
+			<element name="RIRECOVER" dataType="number" value="RIRECOVER"/>
+			<element name="CLM_STATUS" dataType="varchar2" value="CLM_STATUS"/>
+			<element name="FUNCASH" dataType="number" value="FUNCASH"/>
+			<element name="OUTPREM" dataType="number" value="OUTPREM"/>
+			<element name="CLM_PAID_AMT" dataType="number" value="CLM_PAID_AMT"/>
+			<element name="CLIENTNAME" dataType="varchar2" value="CLIENTNAME"/>
+			<element name="POL_YEAR" dataType="varchar2" value="POL_YEAR"/>
+			<element name="CVT_DESC" dataType="varchar2" value="CVT_DESC"/>
+			<element name="CLM_PAYABLE_AMT" dataType="varchar2" value="CLM_PAYABLE_AMT"/>
+			<element name="CLM_RI_TOT_AMT" dataType="varchar2" value="CLM_RI_TOT_AMT"/>
+			<element name="DATE_PAID" dataType="varchar2" value="DATE_PAID"/>
+			<element name="AMT_PAID" dataType="varchar2" value="AMT_PAID"/>
+			<element name="DATE_AUTHORISED" dataType="varchar2" value="DATE_AUTHORISED"/>
+			<element name="PRP_SURNAME" dataType="varchar2" value="PRP_SURNAME"/>
+			<element name="COMMENSMENT" dataType="varchar2" value="COMMENSMENT"/>
+			<element name="CLAIM_TYPE" dataType="varchar2" value="CLAIM_TYPE"/>
+			<element name="CLAIMONTH" dataType="varchar2" value="CLAIMONTH"/>
+			<element name="DTY_DESCRIPTION" dataType="varchar2" value="DTY_DESCRIPTION"/>
+			<element name="CVT_DESC" dataType="varchar2" value="CVT_DESC"/>
+			<element name="CLM_DATE_CLAIM_REPORTED" dataType="varchar2" value="CLM_DATE_CLAIM_REPORTED"/>
+			<element name="CLM_DEATH_LOCATION" dataType="varchar2" value="CLM_DEATH_LOCATION"/>
+			<element name="EARNING_LOAN" dataType="varchar2" value="EARNING_LOAN"/>
+			<element name="CAUS_OF_DEATH" dataType="varchar2" value="CAUS_OF_DEATH"/>
+			<element name="AGE_AT_DEATH" dataType="varchar2" value="AGE_AT_DEATH"/>
+			<element name="MEM_CAT" dataType="varchar2" value="MEM_CAT"/>
+		    <element name="PERIOD_FROM" dataType="varchar2" value="PERIOD_FROM"/>
+		    <element name="PERIOD_TO" dataType="varchar2" value="PERIOD_TO"/>
+			<element name="CHQ_NO" dataType="varchar2" value="CPV_CHEQUE_NO"/>
+			<element name="CLM_EXGRATIA" dataType="varchar2" value="CLM_EXGRATIA"/>
+			<element name="OBSERVATION" dataType="varchar2" value="OBSERVATION"/>
+			<element name="RECOMMENDATION" dataType="varchar2" value="RECOMMENDATION"/>
+			<element name="DATE_INTIMATED" dataType="varchar2" value="DATE_INTIMATED"/>
+		</group>
+    <element name="SUMCLM_PAYABLE_AMT" function="sum" dataType="number" value="G_CLAIMDAT.CLM_PAYABLE_AMT"/>
+	<element name="SUMAMT_PAID" function="sum" dataType="number" value="G_CLAIMDAT.AMT_PAID"/>
+	
+</dataStructure>
+</dataTemplate>

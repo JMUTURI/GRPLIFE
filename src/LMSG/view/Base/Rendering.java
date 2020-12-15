@@ -37,7 +37,7 @@ public class Rendering
     String prodTy = (String)this.session.getAttribute("productType");
     if (prodTy == null) {
       return false;
-    }
+    }    
     if (prodTy.equalsIgnoreCase("PENS")) {
       return true;
     }
@@ -1301,5 +1301,17 @@ public class Rendering
       return false;
     }
     return true;
+  }
+  public boolean isPartialWithdrawal()
+  {
+    String partialWithdrawal = (String)this.session.getAttribute("CausationType");
+    if (this.session.getAttribute("CausationType") == null) {
+      return false;
+    }
+    //System.out.println("The causation type is ====="+partialWithdrawal);
+    if (partialWithdrawal.equalsIgnoreCase("PWIT")) {
+      return true;
+    }
+    return false;
   }
 }

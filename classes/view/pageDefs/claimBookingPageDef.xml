@@ -1,0 +1,1669 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="claimBookingPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <methodIterator Binds="FindClaimCoverTypes.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimCoverTypesIterator"/>
+    <methodIterator Binds="FindClaims.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimsIterator"/>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+    <searchRegion Binds="FindFacilitatorsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SettingsQuery"/>
+    <methodIterator Binds="FindSysDate.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSysDateIterator"/>
+    <methodIterator Binds="FindFacilitators.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindFacilitatorsIterator"/>
+    <methodIterator Binds="FindClaimFacilitators.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimFacilitatorsIterator"/>
+    <methodIterator Binds="FindActivities.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindActivitiesIterator"/>
+    <searchRegion Binds="FindActivitiesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings1Query"/>
+    <methodIterator Binds="FindClaimDocuments.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimDocumentsIterator"/>
+    <methodIterator Binds="FindClaimTreatyCessions.result"
+                    DataControl="ClaimsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimTreatyCessionsIterator"/>
+    <methodIterator Binds="FindClaimRITreatyCessions.result"
+                    DataControl="ClaimsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimRITreatyCessionsIterator"/>
+    <methodIterator Binds="FindClaimPensionDetails.result"
+                    DataControl="ClaimsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimPensionDetailsIterator"/>
+    <methodIterator Binds="FindPayees.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindPayeesIterator"/>
+    <searchRegion Binds="FindPayeesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings2Query"/>
+    <methodIterator Binds="findTicketAssignee.result" DataControl="workflowDAO"
+                    RangeSize="25" BeanClass="LMSG.view.BPM.workflow"
+                    id="findTicketAssigneeIterator"/>
+    <searchRegion Binds="findTicketAssigneeIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="workflowQuery"/>
+    <searchRegion Binds="findClaimExceptionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Claim5Query"/>
+    <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="FindCausationCauses.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindCausationCausesIterator"/>
+    <methodIterator Binds="findMemberDisabilityLosses.result"
+                    DataControl="ClaimsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Claims.Claim"
+                    id="findMemberDisabilityLossesIterator"/>
+    <methodIterator Binds="findClaimBeneficaryPayments.result"
+                    DataControl="ClaimsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Claims.Claim"
+                    id="findClaimBeneficaryPaymentsIterator"/>
+    <searchRegion Binds="findMemberDisabilityLossesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Claim9Query"/>
+    <iterator Binds="root" RangeSize="25" DataControl="ClaimsDAO"
+              id="ClaimsDAOIterator"/>
+    <methodIterator Binds="findClaimDisabilityLosses.result"
+                    DataControl="ClaimsDAO" RangeSize="-1"
+                    BeanClass="LMSG.view.Claims.Claim"
+                    id="findClaimDisabilityLossesIter"/>
+    <methodIterator Binds="FindMembersBeneficiaries.result"
+                    DataControl="membersDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Members.members1"
+                    id="FindMembersBeneficiariesIterator"/>
+    <methodIterator Binds="findClaimExceptions.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="findClaimExceptionsIterator"/>
+    <methodIterator Binds="FindPensionMaturities.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindPensionMaturitiesIterator"/>
+    <searchRegion Binds="FindPensionMaturitiesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Claim10Query"/>
+    <methodIterator Binds="findClaimVouchers.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="findClaimVouchersIterator"/>
+    <methodIterator Binds="FindMaturityDocuments.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindMaturityDocumentsIterator"/>
+    <searchRegion Binds="FindMaturityDocumentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Claim12Query"/>
+    <methodIterator Binds="findPensionTaxes.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="findPensionTaxesIterator"/>
+    <methodIterator Binds="findProductTaxes.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="findProductTaxesIterator"/>
+    <searchRegion Binds="findProductTaxesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Claim14Query"/>
+    <methodIterator Binds="FindGovtAgents.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindGovtAgentsIterator"/>
+    <searchRegion Binds="FindGovtAgentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings3Query"/>
+    <methodIterator Binds="findClaimAnnBeneficaryPayments.result"
+                    DataControl="ClaimsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Claims.Claim"
+                    id="findClaimAnnBeneficaryPaymentsIterator"/>
+    <searchRegion Binds="findClaimAnnBeneficaryPaymentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Claim15Query"/>
+    <methodIterator Binds="FindClaimCoinsuranceRecoveries.result"
+                    DataControl="ClaimsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimCoinsuranceRecoveriesIterator"/>
+    <iterator Binds="root" RangeSize="25" DataControl="policyCoverTypesDAO"
+              id="policyCoverTypesDAOIterator"/>
+    <methodIterator Binds="FindCoverTypes.result"
+                    DataControl="policyCoverTypesDAO" RangeSize="10"
+                    BeanClass="LMSG.view.Policy.policyCoverTypes"
+                    id="FindCoverTypesIter"/>
+    <methodIterator Binds="FindProductCovers.result"
+                    DataControl="policyCoverTypesDAO" RangeSize="-1"
+                    BeanClass="LMSG.view.Policy.ProdCovers"
+                    id="FindProductCoversIter"/>
+    <methodIterator Binds="FindClaimInstDetails.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimInstDetailsIterator"/>
+    <searchRegion Binds="FindClaimInstDetailsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Claim17Query"/>
+    <methodIterator Binds="FindClaimRequiredDoc.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimRequiredDocIterator"/>
+    <searchRegion Binds="FindClaimRequiredDocIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Claim18Query"/>
+    <methodIterator Binds="findClaimDocs.result" DataControl="EcmUtilDAO"
+                    RangeSize="25" BeanClass="LMSG.view.ecm.EcmBean"
+                    id="findClaimDocsIterator"/>
+    <searchRegion Binds="findClaimDocsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="EcmBeanQuery"/>
+    <methodIterator Binds="FindOccupation.result" DataControl="documentsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.documents"
+                    id="FindOccupationIterator"/>
+    <methodIterator Binds="FindClaimRemarks.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimRemarksIterator"/>
+    <searchRegion Binds="FindClaimDocumentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Claim20Query"/>
+    <methodIterator Binds="FindSystemUsers.result" DataControl="SettingsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Base.Settings"
+                    id="FindSystemUsersIterator"/>
+    <searchRegion Binds="FindSystemUsersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Settings16Query"/>
+    <methodIterator Binds="FindCausations.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindCausationsIterator"/>
+    <searchRegion Binds="FindCausationsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ClaimxQuery"/>
+    <methodIterator Binds="findMedTest.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="findMedTestIterator"/>
+    <searchRegion Binds="findMedTestIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="medical5Query"/>
+    <methodIterator Binds="FindClientMedicals.result" DataControl="medicalsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Medicals.medical"
+                    id="FindClientMedicalsIterator"/>
+    <methodIterator Binds="findPartialWithdrawal.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="findPartialWithdrawalIterator"/>
+    <accessorIterator MasterBinding="ClaimsDAOIterator"
+                      Binds="claimBookingCovers" RangeSize="25"
+                      DataControl="ClaimsDAO" BeanClass="LMSG.view.Claims.Claim"
+                      id="claimBookingCoversIterator"/>
+    <searchRegion Binds="claimBookingCoversIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="claimBookingCoversQuery"/>
+    <accessorIterator MasterBinding="ClaimsDAOIterator"
+                      Binds="pendingClaimBookingDtls" RangeSize="25"
+                      DataControl="ClaimsDAO" BeanClass="LMSG.view.Claims.Claim"
+                      id="pendingClaimBookingDtlsIterator"/>
+    <accessorIterator MasterBinding="ClaimsDAOIterator" Binds="riRecoverableAmt"
+                      RangeSize="25" DataControl="ClaimsDAO"
+                      BeanClass="LMSG.view.Claims.Claim"
+                      id="riRecoverableAmtIterator"/>
+    <searchRegion Binds="riRecoverableAmtIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="riRecoverableAmtQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <methodAction id="FindClaims" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaims"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaims_ClaimsDAO_dataProvider_FindClaims_result"/>
+    <methodAction id="findPartialWithdrawal" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPartialWithdrawal"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findPartialWithdrawal_ClaimsDAO_dataProvider_findPartialWithdrawal_result"/>
+    <methodAction id="FindClaimCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimCoverTypes"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimCoverTypes_ClaimsDAO_dataProvider_FindClaimCoverTypes_result"/>
+    <tree IterBinding="FindClaimCoverTypesIterator" id="Claim">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim0">
+        <AttrNames>
+          <Item Value="CVT_DESC"/>
+          <Item Value="CCVT_MULT_EARNINGS_PRD"/>
+          <Item Value="CCVT_EARNINGS"/>
+          <Item Value="CCVT_SA"/>
+          <Item Value="CCVT_PAYABLE_AMT"/>
+          <Item Value="CCVT_AMT_CLAIMED"/>
+          <Item Value="CCVT_AMT_TO_BE_PAID"/>
+          <Item Value="CCVT_BUT_PAY_AMT"/>
+          <Item Value="CCVT_PAID_AMT"/>
+          <Item Value="CCVT_REMARKS"/>
+          <Item Value="CCVT_PAID"/>
+          <Item Value="CCVT_PAYEE"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="CCVT_CODE"/>
+          <Item Value="CCVT_PAY_ORGANIZATION"/>
+          <Item Value="selected"/>
+          <Item Value="polm_mem_no"/>
+          <Item Value="CLM_PAY_TOT_COINS_AMT"/>
+          <Item Value="CLM_PAY_TOT_COINS_DISP"/>
+          <Item Value="ccvt_saving_amt"/>
+          <Item Value="ccvt_original_loan_amt"/>
+          <Item Value="client"/>
+          <Item Value="ccvt_orig_loan_repayment_prd"/>
+          <Item Value="CCVT_PAY_INST"/>
+          <Item Value="CCVT_INT_SAVING_AMT"/>
+          <Item Value="CCVT_CVT_OCC_BEN"/>
+          <Item Value="CCVT_OCC_BEN_RATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_MEM_NO">
+      <AttrNames>
+        <Item Value="CLM_MEM_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_NO">
+      <AttrNames>
+        <Item Value="CLM_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_STATUS">
+      <AttrNames>
+        <Item Value="CLM_STATUS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_POLICY_NO">
+      <AttrNames>
+        <Item Value="POL_POLICY_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="CLIENT_DISPLAY">
+      <AttrNames>
+        <Item Value="CLIENT_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_PROD_SHT_DESC">
+      <AttrNames>
+        <Item Value="POL_PROD_SHT_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="BRANCH_DISPLAY">
+      <AttrNames>
+        <Item Value="BRANCH_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_INCEPTION_DATE">
+      <AttrNames>
+        <Item Value="POL_INCEPTION_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="UW_YEAR">
+      <AttrNames>
+        <Item Value="UW_YEAR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="POL_EFFECTIVE_DATE">
+      <AttrNames>
+        <Item Value="POL_EFFECTIVE_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator"
+                     id="EXPIRY_DATE_DISPLAY">
+      <AttrNames>
+        <Item Value="EXPIRY_DATE_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_MEMBER_DISPLAY">
+      <AttrNames>
+        <Item Value="CLM_MEMBER_DISPLAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator"
+                     id="CLM_DEATH_DISABILITY_AGE">
+      <AttrNames>
+        <Item Value="CLM_DEATH_DISABILITY_AGE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator"
+                     id="CLM_DATE_CLAIM_REPORTED">
+      <AttrNames>
+        <Item Value="CLM_DATE_CLAIM_REPORTED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator"
+                     id="CLM_DATE_DEATH_ACCIDENT">
+      <AttrNames>
+        <Item Value="CLM_DATE_DEATH_ACCIDENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_LOAN_ISSUE_DATE">
+      <AttrNames>
+        <Item Value="CLM_LOAN_ISSUE_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_LOAN_INST_AMT">
+      <AttrNames>
+        <Item Value="CLM_LOAN_INST_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_CAUS_DESC">
+      <AttrNames>
+        <Item Value="CLM_CAUS_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_DDC_DESC">
+      <AttrNames>
+        <Item Value="CLM_DDC_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_RESERVE_AMT">
+      <AttrNames>
+        <Item Value="CLM_RESERVE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_RETENTION_PCT">
+      <AttrNames>
+        <Item Value="CLM_RETENTION_PCT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_REMARKS">
+      <AttrNames>
+        <Item Value="CLM_REMARKS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_AMT_CLAIMED">
+      <AttrNames>
+        <Item Value="CLM_AMT_CLAIMED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_AMT_TO_PAY">
+      <AttrNames>
+        <Item Value="CLM_AMT_TO_PAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_PAID_AMT">
+      <AttrNames>
+        <Item Value="CLM_PAID_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_RI_TOT_AMT">
+      <AttrNames>
+        <Item Value="CLM_RI_TOT_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_PENS_AMT_TO_PAY">
+      <AttrNames>
+        <Item Value="CLM_PENS_AMT_TO_PAY"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_PENS_PAID_AMT">
+      <AttrNames>
+        <Item Value="CLM_PENS_PAID_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_WITHIN_SYSTEM">
+      <AttrNames>
+        <Item Value="CLM_WITHIN_SYSTEM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_PAY_INSTALMNTS">
+      <AttrNames>
+        <Item Value="CLM_PAY_INSTALMNTS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_NOF_INST">
+      <AttrNames>
+        <Item Value="CLM_NOF_INST"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_INST_PAY_FREQ">
+      <AttrNames>
+        <Item Value="CLM_INST_PAY_FREQ"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_HOSP_DAYS">
+      <AttrNames>
+        <Item Value="CLM_HOSP_DAYS"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindFacilitators" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindFacilitators"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindFacilitators_SettingsDAO_dataProvider_FindFacilitators_result"/>
+    <tree IterBinding="FindFacilitatorsIterator" id="Settings">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings0">
+        <AttrNames>
+          <Item Value="FAC_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindSysDate" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSysDate"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSysDate_SettingsDAO_dataProvider_FindSysDate_result"/>
+    <attributeValues IterBinding="FindSysDateIterator" id="sysDate">
+      <AttrNames>
+        <Item Value="sysDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindClaimFacilitators" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimFacilitators"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimFacilitators_ClaimsDAO_dataProvider_FindClaimFacilitators_result"/>
+    <tree IterBinding="FindClaimFacilitatorsIterator" id="Claim1">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim10">
+        <AttrNames>
+          <Item Value="ACT_ACTIVITY"/>
+          <Item Value="CFA_FEE"/>
+          <Item Value="CFA_PAY_DATE"/>
+          <Item Value="CFA_REMARKS"/>
+          <Item Value="CFA_PAID"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindActivities" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindActivities"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindActivities_SettingsDAO_dataProvider_FindActivities_result"/>
+    <tree IterBinding="FindActivitiesIterator" id="Settings1">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings10">
+        <AttrNames>
+          <Item Value="ACT_ACTIVITY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClaimDocuments" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimDocuments"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimDocuments_ClaimsDAO_dataProvider_FindClaimDocuments_result"/>
+    <tree IterBinding="FindClaimDocumentsIterator" id="Claim2">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim20">
+        <AttrNames>
+          <Item Value="MCD_RD_SHT_DESC"/>
+          <Item Value="RD_DESC"/>
+          <Item Value="MCD_IS_DOC_SUBMITTED"/>
+          <Item Value="MCD_DATE_GIVEN"/>
+          <Item Value="MCD_DOC_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClaimTreatyCessions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimTreatyCessions"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimTreatyCessions_ClaimsDAO_dataProvider_FindClaimTreatyCessions_result"/>
+    <tree IterBinding="FindClaimTreatyCessionsIterator" id="Claim3">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim30">
+        <AttrNames>
+          <Item Value="REI_TRT_SHT_DESC"/>
+          <Item Value="CTRTC_RATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClaimRITreatyCessions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimRITreatyCessions"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimRITreatyCessions_ClaimsDAO_dataProvider_FindClaimRITreatyCessions_result"/>
+    <tree IterBinding="FindClaimRITreatyCessionsIterator" id="Claim4">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim40">
+        <AttrNames>
+          <Item Value="CTRCC_AGN_NAME"/>
+          <Item Value="CTRCC_REI_TRT_SHT_DESC"/>
+          <Item Value="CTRCC_CEDE_RATE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_OUTSTAND_PREM">
+      <AttrNames>
+        <Item Value="CLM_OUTSTAND_PREM"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindClaimPensionDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimPensionDetails"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimPensionDetails_ClaimsDAO_dataProvider_FindClaimPensionDetails_result"/>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_WEF_DATE">
+      <AttrNames>
+        <Item Value="PMPNS_WEF_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYR_PENS_BF">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYR_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EARNINGS">
+      <AttrNames>
+        <Item Value="PMPNS_EARNINGS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_NET_ANNUAL_FUND">
+      <AttrNames>
+        <Item Value="PMPNS_NET_ANNUAL_FUND"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYE_PENS_BF">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYE_PENS_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPLOYEE_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_EMPLOYEE_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_COMP_INT_RATE">
+      <AttrNames>
+        <Item Value="PMPNS_COMP_INT_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_DATE_JOINED">
+      <AttrNames>
+        <Item Value="PMPNS_DATE_JOINED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPLOYER_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_EMPLOYER_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPLYE_VOLU_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_EMPLYE_VOLU_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_PENS_ANNUM">
+      <AttrNames>
+        <Item Value="PMPNS_PENS_ANNUM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_TOTAL_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_TOTAL_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EST_MAT_VAL">
+      <AttrNames>
+        <Item Value="PMPNS_EST_MAT_VAL"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYR_BAL_BF">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYR_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYR_YR_TOT_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYR_YR_TOT_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_VESTING_PCT">
+      <AttrNames>
+        <Item Value="PMPNS_VESTING_PCT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_TAXABLE_AMT">
+      <AttrNames>
+        <Item Value="PMPNS_TAXABLE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_RFUND_AMOUNT">
+      <AttrNames>
+        <Item Value="PMPNS_RFUND_AMOUNT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYE_BAL_BF">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYE_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYE_YR_TOT_CONTR">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYE_YR_TOT_CONTR"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYR_PENS_FUND">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYR_PENS_FUND"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_TAX_PAYABLE">
+      <AttrNames>
+        <Item Value="PMPNS_TAX_PAYABLE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_RFUND_INTERST_RATE">
+      <AttrNames>
+        <Item Value="PMPNS_RFUND_INTERST_RATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_VOL_BF">
+      <AttrNames>
+        <Item Value="PMPNS_VOL_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_PENS_INTEREST_PCT">
+      <AttrNames>
+        <Item Value="PMPNS_PENS_INTEREST_PCT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_GROSS_PAYABLE">
+      <AttrNames>
+        <Item Value="PMPNS_GROSS_PAYABLE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_NET_PAYABLE">
+      <AttrNames>
+        <Item Value="PMPNS_NET_PAYABLE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_RFUND_INTERST_AMT">
+      <AttrNames>
+        <Item Value="PMPNS_RFUND_INTERST_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_WET_DATE">
+      <AttrNames>
+        <Item Value="PMPNS_WET_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYR_CUR_YR_INCOME">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYR_CUR_YR_INCOME"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYR_RETIRE_HELD">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYR_RETIRE_HELD"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_RFUND_TAX_EXEMPT">
+      <AttrNames>
+        <Item Value="PMPNS_RFUND_TAX_EXEMPT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_SERVICE_YRS">
+      <AttrNames>
+        <Item Value="PMPNS_SERVICE_YRS"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYE_CUR_YR_INCOME">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYE_CUR_YR_INCOME"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_TAX_EXEMPT">
+      <AttrNames>
+        <Item Value="PMPNS_TAX_EXEMPT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_RFUND_TAXABLE_AMT">
+      <AttrNames>
+        <Item Value="PMPNS_RFUND_TAXABLE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_RFUND_NET_PAYABLE">
+      <AttrNames>
+        <Item Value="PMPNS_RFUND_NET_PAYABLE"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindPayees" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPayees"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindPayees_SettingsDAO_dataProvider_FindPayees_result"/>
+    <tree IterBinding="FindPayeesIterator" id="Settings2">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings20">
+        <AttrNames>
+          <Item Value="PAYEE_SPR_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findTicketAssignee" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findTicketAssignee"
+                  IsViewObjectMethod="false" DataControl="workflowDAO"
+                  InstanceName="workflowDAO.dataProvider"
+                  ReturnName="workflowDAO.methodResults.findTicketAssignee_workflowDAO_dataProvider_findTicketAssignee_result"/>
+    <tree IterBinding="findTicketAssigneeIterator" id="workflow">
+      <nodeDefinition DefName="LMSG.view.BPM.workflow" Name="workflow0">
+        <AttrNames>
+          <Item Value="taskID"/>
+          <Item Value="taskActivityName"/>
+          <Item Value="taskAssignee"/>
+          <Item Value="taskDuedate"/>
+          <Item Value="taskCreateDate"/>
+          <Item Value="TCKT_CODE"/>
+          <Item Value="USRSYSTEM"/>
+          <Item Value="SYSMODULE"/>
+          <Item Value="TCKT_CLNT_CODE"/>
+          <Item Value="CLIENT"/>
+          <Item Value="TCKT_AGN_CODE"/>
+          <Item Value="AGENT"/>
+          <Item Value="TCKT_POL_CODE"/>
+          <Item Value="TCKT_POL_NO"/>
+          <Item Value="TCKT_CLM_NO"/>
+          <Item Value="TCKT_QUOT_CODE"/>
+          <Item Value="QUO_NO"/>
+          <Item Value="TCKT_DATE"/>
+          <Item Value="TCKT_BY"/>
+          <Item Value="TCKT_PROCESS_ID"/>
+          <Item Value="TCKT_SYS_MODULE_CODE"/>
+          <Item Value="TCKT_ENDR_CODE"/>
+          <Item Value="taskUserID"/>
+          <Item Value="taskUserShtDesc"/>
+          <Item Value="taskUserDesc"/>
+          <Item Value="TCKT_PROD_TYPE"/>
+          <Item Value="TCKT_TO"/>
+          <Item Value="TCKT_REMARKS"/>
+          <Item Value="TCKT_NAME"/>
+          <Item Value="TCKT_DUE_DATE"/>
+          <Item Value="TCKT_CDE"/>
+          <Item Value="TCKT_ENDORSEMENT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findClaimExceptions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClaimExceptions"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findClaimExceptions_ClaimsDAO_dataProvider_findClaimExceptions_result"/>
+    <tree IterBinding="findClaimExceptionsIterator" id="Claim5">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim50">
+        <AttrNames>
+          <Item Value="QEXC_DESC"/>
+          <Item Value="QEXC_AUTHORISED"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="CCVT_DESC"/>
+          <Item Value="polm_mem_no"/>
+          <Item Value="AGN_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="Authenticate"
+                  InstanceName="sessionAuthenticator.dataProvider"
+                  DataControl="sessionAuthenticator" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Authenticate"
+                  IsViewObjectMethod="false"
+                  ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="FindCausationCauses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCausationCauses"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindCausationCauses_ClaimsDAO_dataProvider_FindCausationCauses_result"/>
+    <tree IterBinding="FindCausationCausesIterator" id="Claim6">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim60">
+        <AttrNames>
+          <Item Value="DDC_SHT_DESC"/>
+          <Item Value="DDC_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findMemberDisabilityLosses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMemberDisabilityLosses"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findMemberDisabilityLosses_ClaimsDAO_dataProvider_findMemberDisabilityLosses_result"/>
+    <tree IterBinding="findMemberDisabilityLossesIterator" id="Claim7">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim70">
+        <AttrNames>
+          <Item Value="ldldesc"/>
+          <Item Value="CDL_PERC_PAYABLE"/>
+          <Item Value="CDL_NOF_LOSS_DAYS"/>
+          <Item Value="cdlClmAmt"/>
+          <Item Value="cdlCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindPoliciesIterator" id="AGN_NAME">
+      <AttrNames>
+        <Item Value="AGN_NAME"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindPoliciesIterator" id="pol_cur_symbol">
+      <AttrNames>
+        <Item Value="pol_cur_symbol"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findClaimBeneficaryPayments" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClaimBeneficaryPayments"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findClaimBeneficaryPayments_ClaimsDAO_dataProvider_findClaimBeneficaryPayments_result"/>
+    <tree IterBinding="findClaimBeneficaryPaymentsIterator" id="Claim8">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim80">
+        <AttrNames>
+          <Item Value="BPY_NAME"/>
+          <Item Value="BPY_AMOUNT"/>
+          <Item Value="BPY_PAY_DATE"/>
+          <Item Value="BPY_PAID_DISPLAY"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="BPY_PAY_TERM"/>
+          <Item Value="polm_mem_no"/>
+          <Item Value="BPY_CLASS"/>
+          <Item Value="BPY_PAID"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findMemberDisabilityLossesIterator" id="Claim9">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim90">
+        <AttrNames>
+          <Item Value="cdlCode"/>
+          <Item Value="ldldesc"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="CDL_PERC_PAYABLE"/>
+          <Item Value="polm_mem_no"/>
+          <Item Value="CDL_NOF_LOSS_DAYS"/>
+          <Item Value="cdlClmAmt"/>
+          <Item Value="CDL_LDL_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findClaimDisabilityLosses" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClaimDisabilityLosses"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findClaimDisabilityLosses_ClaimsDAO_dataProvider_findClaimDisabilityLosses_result"/>
+    <list IterBinding="ClaimsDAOIterator" id="deathDisabilityCode"
+          DTSupportsMRU="true" StaticList="false"
+          ListIter="findClaimDisabilityLossesIter">
+      <AttrNames>
+        <Item Value="deathDisabilityCode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="ldlCode"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="ldlDesc"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="FindMembersBeneficiaries" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMembersBeneficiaries"
+                  IsViewObjectMethod="false" DataControl="membersDAO"
+                  InstanceName="membersDAO.dataProvider"
+                  ReturnName="membersDAO.methodResults.FindMembersBeneficiaries_membersDAO_dataProvider_FindMembersBeneficiaries_result"/>
+    <tree IterBinding="FindMembersBeneficiariesIterator" id="members1">
+      <nodeDefinition DefName="LMSG.view.Members.members1" Name="members10">
+        <AttrNames>
+          <Item Value="qmemBenMemNo"/>
+          <Item Value="qmemBenSurname"/>
+          <Item Value="qmemBenOtherNames"/>
+          <Item Value="qmemBenClass"/>
+          <Item Value="qmemBenTerm"/>
+          <Item Value="feeDisplay"/>
+          <Item Value="qmemBenCode"/>
+          <Item Value="qmemBenMainMemCode"/>
+          <Item Value="classDisplay"/>
+          <Item Value="qmem_ben_sex"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="pmem_share_pct"/>
+          <Item Value="spr_code"/>
+          <Item Value="MEM_SURNAME"/>
+          <Item Value="spr_name"/>
+          <Item Value="MEM_OTHER_NAMES"/>
+          <Item Value="pmem_rsa_pin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_PAYEE">
+      <AttrNames>
+        <Item Value="PMPNS_PAYEE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_PAYEE_NAME">
+      <AttrNames>
+        <Item Value="PMPNS_PAYEE_NAME"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_PAYEE_PIN">
+      <AttrNames>
+        <Item Value="PMPNS_PAYEE_PIN"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindPensionMaturities" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPensionMaturities"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindPensionMaturities_ClaimsDAO_dataProvider_FindPensionMaturities_result"/>
+    <tree IterBinding="FindPensionMaturitiesIterator" id="Claim10">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim100">
+        <AttrNames>
+          <Item Value="PCY_CODE"/>
+          <Item Value="MEMBERNAME"/>
+          <Item Value="PCY_PAY_DATE"/>
+          <Item Value="PCY_AMOUNT"/>
+          <Item Value="PCY_PAYEE"/>
+          <Item Value="PCY_PAID"/>
+          <Item Value="PCY_VOUCHER_NO"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="selected"/>
+          <Item Value="PCY_POL_CODE"/>
+          <Item Value="polm_mem_no"/>
+          <Item Value="PCY_CLM_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_ANN_PAY_FREQ">
+      <AttrNames>
+        <Item Value="PMPNS_ANN_PAY_FREQ"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findClaimVouchers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClaimVouchers"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findClaimVouchers_ClaimsDAO_dataProvider_findClaimVouchers_result"/>
+    <tree IterBinding="findClaimVouchersIterator" id="Claim11">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim110">
+        <AttrNames>
+          <Item Value="cpvVouvherNo"/>
+          <Item Value="cpvDate"/>
+          <Item Value="cpvAmount"/>
+          <Item Value="cpvPayee"/>
+          <Item Value="CPV_DISP_STATUS_DISP"/>
+          <Item Value="cpvStatus"/>
+          <Item Value="cpvLoanAmt"/>
+          <Item Value="cpvTransType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindMaturityDocuments" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindMaturityDocuments"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindMaturityDocuments_ClaimsDAO_dataProvider_FindMaturityDocuments_result"/>
+    <tree IterBinding="FindMaturityDocumentsIterator" id="Claim12">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim120">
+        <AttrNames>
+          <Item Value="MCD_RD_SHT_DESC"/>
+          <Item Value="RD_DESC"/>
+          <Item Value="MCD_IS_DOC_SUBMITTED"/>
+          <Item Value="MCD_DATE_GIVEN"/>
+          <Item Value="MCD_DOC_NO"/>
+          <Item Value="MCD_CODE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findPensionTaxes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findPensionTaxes"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findPensionTaxes_ClaimsDAO_dataProvider_findPensionTaxes_result"/>
+    <tree IterBinding="findPensionTaxesIterator" id="Claim13">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim130">
+        <AttrNames>
+          <Item Value="TT_DESC"/>
+          <Item Value="PPTX_RATE"/>
+          <Item Value="PPTX_TAX_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findProductTaxes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findProductTaxes"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findProductTaxes_ClaimsDAO_dataProvider_findProductTaxes_result"/>
+    <tree IterBinding="findProductTaxesIterator" id="Claim14">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim140">
+        <AttrNames>
+          <Item Value="TT_CODE"/>
+          <Item Value="TT_SHT_DESC"/>
+          <Item Value="TT_DESC"/>
+          <Item Value="TRT_RATE_TYPE"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindGovtAgents" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindGovtAgents"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindGovtAgents_SettingsDAO_dataProvider_FindGovtAgents_result"/>
+    <tree IterBinding="FindGovtAgentsIterator" id="Settings3">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings30">
+        <AttrNames>
+          <Item Value="SPR_CODE"/>
+          <Item Value="SPR_SHT_DESC"/>
+          <Item Value="SPR_NAME"/>
+          <Item Value="SPT_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findClaimAnnBeneficaryPayments" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="findClaimAnnBeneficaryPayments"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.findClaimAnnBeneficaryPayments_ClaimsDAO_dataProvider_findClaimAnnBeneficaryPayments_result"/>
+    <tree IterBinding="findClaimAnnBeneficaryPaymentsIterator" id="Claim15">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim150">
+        <AttrNames>
+          <Item Value="PABP_CODE"/>
+          <Item Value="PABP_NO"/>
+          <Item Value="PAB_SURNAME"/>
+          <Item Value="PAB_OTHERNAMES"/>
+          <Item Value="PABP_DATE_DUE"/>
+          <Item Value="PABP_AMOUNT"/>
+          <Item Value="PABP_PAID"/>
+          <Item Value="PABP_PAID_DATE"/>
+          <Item Value="PABP_VOUCHER_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClaimCoinsuranceRecoveries" RequiresUpdateModel="true"
+                  Action="invokeMethod"
+                  MethodName="FindClaimCoinsuranceRecoveries"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="data.ClaimsDAO.methodResults.FindClaimCoinsuranceRecoveries_ClaimsDAO_dataProvider_FindClaimCoinsuranceRecoveries_result"/>
+    <tree IterBinding="FindClaimCoinsuranceRecoveriesIterator" id="Claim16">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim160">
+        <AttrNames>
+          <Item Value="AGN_NAME"/>
+          <Item Value="CCR_PCOIN_SHARE_PCT"/>
+          <Item Value="CCR_CLM_AMT_TO_PAY"/>
+          <Item Value="CCR_CODE"/>
+          <Item Value="CCR_POLM_CODE"/>
+          <Item Value="CCR_PCOIN_AGN_CODE"/>
+          <Item Value="POLM_CODE"/>
+          <Item Value="CCR_AMT_PAID"/>
+          <Item Value="polm_mem_no"/>
+          <Item Value="CCR_BALANCE"/>
+          <Item Value="client"/>
+          <Item Value="CCR_PAID"/>
+          <Item Value="MEM_CODE"/>
+          <Item Value="CCR_PREPARED_BY"/>
+          <Item Value="CAUS_CODE"/>
+          <Item Value="CCR_AUTHORISED"/>
+          <Item Value="CAUS_SHT_DESC"/>
+          <Item Value="CCR_AUTHORISED_BY"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction IterBinding="FindClaimsIterator" id="isCLM_PAY_TOT_COINS_AMT"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="isCLM_PAY_TOT_COINS_AMT"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="bindings.FindClaimsIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.ClaimsDAO.methodResults.isCLM_PAY_TOT_COINS_AMT_isCLM_PAY_TOT_COINS_AMT_isCLM_PAY_TOT_COINS_AMT_result"/>
+    <attributeValues IterBinding="FindClaimsIterator" id="CLM_EXGRATIA">
+      <AttrNames>
+        <Item Value="CLM_EXGRATIA"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="policyCoverTypesDAOIterator" id="productCoverType"
+          DTSupportsMRU="true" StaticList="false"
+          ListIter="FindProductCoversIter">
+      <AttrNames>
+        <Item Value="productCoverType"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="pct_code"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="cvt_desc"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="FindCoverTypes" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCoverTypes"
+                  IsViewObjectMethod="false" DataControl="policyCoverTypesDAO"
+                  InstanceName="policyCoverTypesDAO.dataProvider"
+                  ReturnName="data.policyCoverTypesDAO.methodResults.FindCoverTypes_policyCoverTypesDAO_dataProvider_FindCoverTypes_result"/>
+    <methodAction id="FindProductCovers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindProductCovers"
+                  IsViewObjectMethod="false" DataControl="policyCoverTypesDAO"
+                  InstanceName="policyCoverTypesDAO.dataProvider"
+                  ReturnName="data.policyCoverTypesDAO.methodResults.FindProductCovers_policyCoverTypesDAO_dataProvider_FindProductCovers_result"/>
+    <attributeValues IterBinding="FindClaimsIterator" id="clm_death_location">
+      <AttrNames>
+        <Item Value="clm_death_location"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimPensionDetailsIterator"
+                     id="PMPNS_EMPYR_RETIRE_HELD_PCT">
+      <AttrNames>
+        <Item Value="PMPNS_EMPYR_RETIRE_HELD_PCT"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FindClaimInstDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimInstDetails"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimInstDetails_ClaimsDAO_dataProvider_FindClaimInstDetails_result"/>
+    <tree IterBinding="FindClaimInstDetailsIterator" id="Claim17">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim170">
+        <AttrNames>
+          <Item Value="cipgCode"/>
+          <Item Value="cipgAmount"/>
+          <Item Value="cipgVoucherNo"/>
+          <Item Value="cipgPaid"/>
+          <Item Value="cipgPayDate"/>
+          <Item Value="cipgInstPayFreq"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClaimRequiredDoc" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimRequiredDoc"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimRequiredDoc_ClaimsDAO_dataProvider_FindClaimRequiredDoc_result"/>
+    <tree IterBinding="FindClaimRequiredDocIterator" id="Claim18">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim180">
+        <AttrNames>
+          <Item Value="rdCode"/>
+          <Item Value="rdShtDesc"/>
+          <Item Value="rdDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findClaimDocs" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findClaimDocs"
+                  IsViewObjectMethod="false" DataControl="EcmUtilDAO"
+                  InstanceName="EcmUtilDAO.dataProvider"
+                  ReturnName="data.EcmUtilDAO.methodResults.findClaimDocs_EcmUtilDAO_dataProvider_findClaimDocs_result"/>
+    <tree IterBinding="findClaimDocsIterator" id="EcmBean">
+      <nodeDefinition DefName="LMSG.view.ecm.EcmBean" Name="EcmBean0">
+        <AttrNames>
+          <Item Value="actualName"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="versionLabel"/>
+          <Item Value="id"/>
+          <Item Value="mimeType"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindOccupation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindOccupation"
+                  IsViewObjectMethod="false" DataControl="documentsDAO"
+                  InstanceName="documentsDAO.dataProvider"
+                  ReturnName="data.documentsDAO.methodResults.FindOccupation_documentsDAO_dataProvider_FindOccupation_result"/>
+    <list IterBinding="FindOccupationIterator" ListOperMode="navigation"
+          ListIter="FindOccupationIterator" id="documents" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="RD_DESC"/>
+      </AttrNames>
+    </list>
+    <methodAction id="FindClaimRemarks" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimRemarks"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="data.ClaimsDAO.methodResults.FindClaimRemarks_ClaimsDAO_dataProvider_FindClaimRemarks_result"/>
+    <tree IterBinding="FindClaimRemarksIterator" id="Claim19">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim190">
+        <AttrNames>
+          <Item Value="CRM_CODE"/>
+          <Item Value="CRM_REMARKS"/>
+          <Item Value="CRM_REMARK_TYPE"/>
+          <Item Value="CRM_REMARKS_BY"/>
+          <Item Value="CRM_REMARKS_DATE"/>
+          <Item Value="REMARKS_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="FindClaimDocumentsIterator" id="Claim20">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim200">
+        <AttrNames>
+          <Item Value="MCD_RD_SHT_DESC"/>
+          <Item Value="MCD_IS_DOC_SUBMITTED"/>
+          <Item Value="MCD_DATE_GIVEN"/>
+          <Item Value="MCD_DOC_NO"/>
+          <Item Value="MCD_CODE"/>
+          <Item Value="MCD_DATE_GIVEN1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="FindClaimDocumentsIterator" id="Claim21">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim210">
+        <AttrNames>
+          <Item Value="MCD_CODE"/>
+          <Item Value="MCD_RD_SHT_DESC"/>
+          <Item Value="RD_DESC"/>
+          <Item Value="MCD_DATE_GIVEN1"/>
+          <Item Value="MCD_DOC_NO"/>
+          <Item Value="MCD_IS_DOC_SUBMITTED"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindSystemUsers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindSystemUsers"
+                  IsViewObjectMethod="false" DataControl="SettingsDAO"
+                  InstanceName="SettingsDAO.dataProvider"
+                  ReturnName="SettingsDAO.methodResults.FindSystemUsers_SettingsDAO_dataProvider_FindSystemUsers_result"/>
+    <tree IterBinding="FindSystemUsersIterator" id="Settings16">
+      <nodeDefinition DefName="LMSG.view.Base.Settings" Name="Settings160">
+        <AttrNames>
+          <Item Value="USR_CODE"/>
+          <Item Value="USR_NAME"/>
+          <Item Value="USR_USERNAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="findClaimExceptionsIterator" id="Claim22">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim220">
+        <AttrNames>
+          <Item Value="QEXC_DESC"/>
+          <Item Value="CCVT_DESC"/>
+          <Item Value="AGN_NAME"/>
+          <Item Value="QEXC_AUTHORISED"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindCausations" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindCausations"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindCausations_ClaimsDAO_dataProvider_FindCausations_result"/>
+    <tree IterBinding="FindCausationsIterator" id="Claimx">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claimx0">
+        <AttrNames>
+          <Item Value="CAUS_SHT_DESC"/>
+          <Item Value="CAUS_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findMedTest" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findMedTest"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="data.medicalsDAO.methodResults.findMedTest_medicalsDAO_dataProvider_findMedTest_result"/>
+    <tree IterBinding="findMedTestIterator" id="medical5">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical50">
+        <AttrNames>
+          <Item Value="medicalTestDescription"/>
+          <Item Value="MTLFees"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClientMedicals" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClientMedicals"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindClientMedicals_medicalsDAO_dataProvider_FindClientMedicals_result"/>
+    <tree IterBinding="FindClientMedicalsIterator" id="medical1">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical10">
+        <AttrNames>
+          <Item Value="MTL_DESC"/>
+          <Item Value="CML_LIMIT_AMT"/>
+          <Item Value="CML_REQUEST_DATE"/>
+          <Item Value="SPR_NAME"/>
+          <Item Value="CML_CLAIM_AMT"/>
+          <Item Value="CML_PAYABLE_AMT"/>
+          <Item Value="CML_RECEIVED"/>
+          <Item Value="CML_DATE_RECEIVED"/>
+          <Item Value="CML_INVCE_DATE"/>
+          <Item Value="CML_INVCE_NO"/>
+          <Item Value="CML_CHEQUE_NO"/>
+          <Item Value="CML_CHEQUE_DATE"/>
+          <Item Value="CML_MED_LOADING"/>
+          <Item Value="POL_PROPOSAL_NO"/>
+          <Item Value="CML_REMARKS"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FindClaimsIterator" id="DOB">
+      <AttrNames>
+        <Item Value="DOB"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="POLM_DATE_JOINED">
+      <AttrNames>
+        <Item Value="POLM_DATE_JOINED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="PMPNS_DATE_EMPLOYED">
+      <AttrNames>
+        <Item Value="PMPNS_DATE_EMPLOYED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator" id="KRAPIN">
+      <AttrNames>
+        <Item Value="KRAPIN"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindClaimsIterator"
+                     id="PMPNS_OVERRIDE_TAX_EXEMPT">
+      <AttrNames>
+        <Item Value="PMPNS_OVERRIDE_TAX_EXEMPT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_BAL_BF">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_INT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_INT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_CF">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_CF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_WITHDRAWABLE_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_WITHDRAWABLE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_BAL_BF">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_INT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_INT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_CF">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_CF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_WITHDRAWABLE_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_WITHDRAWABLE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="TOTAL_BAL_BF">
+      <AttrNames>
+        <Item Value="TOTAL_BAL_BF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="TOTAL_AMOUNT">
+      <AttrNames>
+        <Item Value="TOTAL_AMOUNT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator" id="TOTAL_INT">
+      <AttrNames>
+        <Item Value="TOTAL_INT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="TOTAL_BAL_CF">
+      <AttrNames>
+        <Item Value="TOTAL_BAL_CF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="TOTAL_WITHDRAWABLE_AMT">
+      <AttrNames>
+        <Item Value="TOTAL_WITHDRAWABLE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_WITH_APPLIED_ON">
+      <AttrNames>
+        <Item Value="GPW_WITH_APPLIED_ON"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_TAX_EXEMP_AMT">
+      <AttrNames>
+        <Item Value="GPW_TAX_EXEMP_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_AMT_APPLIED">
+      <AttrNames>
+        <Item Value="GPW_AMT_APPLIED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_YRS_OF_SERV">
+      <AttrNames>
+        <Item Value="GPW_YRS_OF_SERV"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_TAX_AMOUNT">
+      <AttrNames>
+        <Item Value="GPW_TAX_AMOUNT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_OVERRIDE_TAX_AMT">
+      <AttrNames>
+        <Item Value="GPW_OVERRIDE_TAX_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_REG_WITH_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_REG_WITH_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYE_UNREG_WITH_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYE_UNREG_WITH_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_REG_WITH_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_REG_WITH_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="GPW_EMPYR_UNREG_WITH_AMT">
+      <AttrNames>
+        <Item Value="GPW_EMPYR_UNREG_WITH_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="findPartialWithdrawalIterator"
+                     id="NET_PAYABLE">
+      <AttrNames>
+        <Item Value="NET_PAYABLE"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="claimBookingCoversIterator" id="claimBookingCovers">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim"
+                      Name="claimBookingCovers0">
+        <AttrNames>
+          <Item Value="CBVT_SA"/>
+          <Item Value="CBVT_RESERVE_AMT"/>
+          <Item Value="CBVT_EARNINGS"/>
+          <Item Value="CBVT_MULT_EARNINGS_PRD"/>
+          <Item Value="CBVT_ACCELERATOR"/>
+          <Item Value="CBVT_ORIGINAL_LOAN_AMT"/>
+          <Item Value="CBVT_ORIG_LOAN_REPAYMENT_PRD"/>
+          <Item Value="CBVT_SAVING_AMT"/>
+          <Item Value="bookCoverCheck"/>
+          <Item Value="CBVT_CODE"/>
+          <Item Value="CVT_DESC"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="MEM_NO_DISP">
+      <AttrNames>
+        <Item Value="MEM_NO_DISP"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="MEM_NAME_DISP">
+      <AttrNames>
+        <Item Value="MEM_NAME_DISP"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator" id="MEM_DOB">
+      <AttrNames>
+        <Item Value="MEM_DOB"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_DEATH_DISABILITY_AGE">
+      <AttrNames>
+        <Item Value="CMB_DEATH_DISABILITY_AGE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="MEM_IDENTITY_NO">
+      <AttrNames>
+        <Item Value="MEM_IDENTITY_NO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_DATE">
+      <AttrNames>
+        <Item Value="CMB_DATE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_DATE_DEATH_ACCIDENT">
+      <AttrNames>
+        <Item Value="CMB_DATE_DEATH_ACCIDENT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_DATE_CLAIM_REPORTED">
+      <AttrNames>
+        <Item Value="CMB_DATE_CLAIM_REPORTED"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="DDC_DESC">
+      <AttrNames>
+        <Item Value="DDC_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CAUS_DESC">
+      <AttrNames>
+        <Item Value="CAUS_DESC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_REINSURANCE_SHARE">
+      <AttrNames>
+        <Item Value="CMB_REINSURANCE_SHARE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_COINSURANCE_SHARE">
+      <AttrNames>
+        <Item Value="CMB_COINSURANCE_SHARE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_RETENTION_SHARE">
+      <AttrNames>
+        <Item Value="CMB_RETENTION_SHARE"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_TOT_REINSURANCE_AMT">
+      <AttrNames>
+        <Item Value="CMB_TOT_REINSURANCE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_TOT_COINSURANCE_AMT">
+      <AttrNames>
+        <Item Value="CMB_TOT_COINSURANCE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_RETENTION_AMT">
+      <AttrNames>
+        <Item Value="CMB_RETENTION_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="pendingClaimBookingDtlsIterator"
+                     id="CMB_RESERVE_AMT">
+      <AttrNames>
+        <Item Value="CMB_RESERVE_AMT"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="riRecoverableAmtIterator" id="riRecoverableAmt">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="riRecoverableAmt0">
+        <AttrNames>
+          <Item Value="agnName"/>
+          <Item Value="riGlAccount"/>
+          <Item Value="recoverableAmt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

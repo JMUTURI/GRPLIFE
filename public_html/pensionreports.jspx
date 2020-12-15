@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life |Reinsurance Reports">
+      <af:resource type="css">.topAligned { vertical-align: top; }</af:resource>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="height:296px; width:100.0%;">
+              <af:showDetailItem text="System Reports" id="sdi1">
+                <f:facet name="toolbar">
+                  <af:group id="g1">
+                    <h:panelGrid columns="2" id="pg23">
+                      <af:inputText id="inputText2" columns="13"
+                                    helpTopicId="GISReports" shortDesc="Help"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si1"/>
+                    </h:panelGrid>
+                  </af:group>
+                </f:facet>
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                  <af:panelBox text="Select Report" id="pb1"
+                               inlineStyle="width:98.0%;" showDisclosure="false"
+                               showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="3" id="pg1" columnClasses="topAligned">
+                      <h:panelGrid columns="1" id="pg7">
+                        <af:separator id="separator8"/>
+                        <af:outputLabel value="Valuation Reports"
+                                        id="outputLabel4"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator9"/>
+                              <af:commandLink text="Membership Summary Per Scheme"
+                                            id="rpt1062"
+                                            actionListener="#{reportParameterBean.paramReport}"
+                                            rendered="#{Rendering.apolloVisible}"/>
+                            <af:commandLink text="Pension Schemes Portfolio"
+                                            id="rpt1073"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
+                            <af:commandLink text="Contribution Schedule Report"
+                                            id="rpt1074"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
+                            <af:commandLink text="Certificate of Participation"
+                                            id="rpt975"
+                                            actionListener="#{reportParameterBean.paramReport}"
+                                            rendered="#{Rendering.apolloVisible}"/>
+                            <af:commandLink text="Members Pension Allocation"
+                                            id="rpt1070"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
+                            <af:commandLink text="Scheme Value Report"
+                                            id="rpt1075"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
+                            <af:commandLink text="Insured Pension Business"
+                                            id="rpt1912"
+                                            actionListener="#{reportParameterBean.paramReport}"
+                                            rendered="#{Rendering.apolloVisible}"/>
+                            <af:commandLink text="Pension Reserve Report"
+                                            id="rpt1983"
+                                            actionListener="#{reportParameterBean.paramReport}"
+                                            rendered="#{Rendering.apolloVisible}"/>
+                            <af:commandLink text="Retiree Schedule" id="rpt1986"
+                                            actionListener="#{reportParameterBean.paramReport}"
+                                            rendered="#{Rendering.apolloVisible}"/>
+                            <af:commandLink text="Pension Valuation Report"
+                                            id="rpt2017"
+                                            rendered="#{!Rendering.mickVisible}"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
+                             <af:commandLink text="Pension Quartely Return"
+                                            id="rpt327590"
+                                            rendered="#{Rendering.mickVisible}"
+                                            actionListener="#{reportParameterBean.paramReport}"/>                
+                            <af:commandLink text="Pension Valuation Report"
+                                            id="rpt25381"
+                                            rendered="#{Rendering.mickVisible}"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
+                            <af:commandLink text="Monthly Contribution Payment Summary"
+                                            id="rpt2149"
+                                            actionListener="#{reportParameterBean.paramReport}"
+                                            rendered="#{Rendering.apolloVisible}"/>
+                            <af:commandLink text="Fund Management Report"
+                                            id="rpt2200"
+                                            actionListener="#{reportParameterBean.paramReport}"
+                                            rendered="#{Rendering.apolloVisible or Rendering.mickVisible}"/>
+							<af:commandLink text="Fund Movement Report"
+                                            id="rpt25520"
+                                            actionListener="#{reportParameterBean.paramReport}"
+                                            rendered="#{Rendering.mickVisible}"/>
+                        <af:spacer width="50" height="50" id="s4"/>
+                      </h:panelGrid>
+                      <h:panelGrid id="pg4" columns="2">
+                        <af:spacer width="10" height="10" id="s3"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="1" id="pg2">
+                        <af:separator id="s1"/>
+                        <af:outputLabel value="Withdrawal Reports" id="ol1"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="s2"/>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+            <af:popup id="paramReport">
+              <af:dialog id="d13" title="Report Parameters" type="none"
+                         closeIconVisible="false">
+                <af:panelGroupLayout id="pgl4" layout="scroll"
+                                     binding="#{reportParameterBean.dtls}">
+                  <h:panelGrid id="pg2541"
+                               binding="#{reportParameterBean.mainParent}"/>
+                  <af:selectOneRadio label="Label 1" id="selectOneRadio1"
+                                     binding="#{reportParameterBean.reportType}"
+                                     simple="true" layout="horizontal"
+                                     autoSubmit="true"
+                                     valueChangeListener="#{reportParameterBean.changeReportType}"
+                                     value="pdf">
+                    <af:selectItem label="Html" value="html" id="si51"/>
+                    <af:selectItem label="Pdf" value="pdf" id="si21"/>
+                    <af:selectItem label="Excel" value="xls" id="si41"/>
+                    <af:selectItem label="Word Document (rtf)" value="rtf"
+                                   id="si31"/>
+                  </af:selectOneRadio>
+                  <h:panelGrid columns="2" id="pg3">
+                    <af:commandButton text="Print" id="cb1"
+                                      action="#{reportParameterBean.genRpt}"/>
+                    <af:commandButton text="Cancel" id="cb40"
+                                      action="#{reportParameterBean.RemoveReportComponents}"/>
+                    <af:inputDate label="Label 1" id="id1"
+                                  binding="#{reportParameterBean.myTest}"
+                                  visible="false">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </af:dialog>
+            </af:popup>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

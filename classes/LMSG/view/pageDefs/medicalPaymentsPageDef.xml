@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
-                version="11.1.1.54.7" id="medicalPaymentsPageDef"
+                version="11.1.1.56.60" id="medicalPaymentsPageDef"
                 Package="LMSG.view.pageDefs">
   <parameters/>
   <executables>
@@ -20,6 +20,13 @@
                     BeanClass="LMSG.view.Medicals.medical"
                     id="FindFacilitatorPaymentsIterator"/>
     <invokeAction id="Auth" Binds="Authenticate" Refresh="always"/>
+    <methodIterator Binds="FindAuthorizedFacilitatorPayments.result"
+                    DataControl="medicalsDAO" RangeSize="25"
+                    BeanClass="LMSG.view.Medicals.medical"
+                    id="FindAuthorizedFacilitatorPaymentsIterator"/>
+    <searchRegion Binds="FindAuthorizedFacilitatorPaymentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="medical3Query"/>
   </executables>
   <bindings>
     <methodAction id="FindMedicalPaymentsQuery" RequiresUpdateModel="true"
@@ -57,6 +64,8 @@
           <Item Value="selected"/>
           <Item Value="SPR_CODE"/>
           <Item Value="curSymbol"/>
+          <Item Value="MP_CML_INVCE_NO"/>
+          <Item Value="MP_CML_INVCE_DATE"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -75,7 +84,9 @@
           <Item Value="FP_fpmt_vat_amt"/>
           <Item Value="FP_fpmt_net_amount"/>
           <Item Value="FP_fpmt_pymt_type"/>
-	  <Item Value="FPMT_CODE"/>
+          <Item Value="FPMT_CODE"/>
+          <Item Value="FPMT_WTHX_RATE"/>
+          <Item Value="FPMT_WTHX_AMT"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -85,5 +96,31 @@
                   Action="invokeMethod" MethodName="Authenticate"
                   IsViewObjectMethod="false"
                   ReturnName="sessionAuthenticator.methodResults.Authenticate_sessionAuthenticator_dataProvider_Authenticate_result"/>
+    <methodAction id="FindAuthorizedFacilitatorPayments"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="FindAuthorizedFacilitatorPayments"
+                  IsViewObjectMethod="false" DataControl="medicalsDAO"
+                  InstanceName="medicalsDAO.dataProvider"
+                  ReturnName="medicalsDAO.methodResults.FindAuthorizedFacilitatorPayments_medicalsDAO_dataProvider_FindAuthorizedFacilitatorPayments_result"/>
+    <tree IterBinding="FindAuthorizedFacilitatorPaymentsIterator" id="medical3">
+      <nodeDefinition DefName="LMSG.view.Medicals.medical" Name="medical30">
+        <AttrNames>
+          <Item Value="FP_facilitator_display"/>
+          <Item Value="FP_branch_display"/>
+          <Item Value="FP_fpmt_amount"/>
+          <Item Value="FP_fpmt_vat_rate"/>
+          <Item Value="FP_fpmt_vat_amt"/>
+          <Item Value="FP_fpmt_net_amount"/>
+          <Item Value="FP_fpmt_pymt_type"/>
+          <Item Value="FPMT_CODE"/>
+          <Item Value="FPMT_AUTHORISED_DATE"/>
+          <Item Value="FPMT_PYMT_VCHR_NO"/>
+          <Item Value="FPMT_CHQ_DATE"/>
+          <Item Value="FPMT_CHQ_NO"/>
+          <Item Value="FPMT_WTHX_RATE"/>
+          <Item Value="FPMT_WTHX_AMT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
   </bindings>
 </pageDefinition>

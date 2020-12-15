@@ -1,0 +1,523 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document title="Group Life | Pensions Member Valuation" id="d5">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest GIS"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="center">
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl2" layout="scroll">
+              <af:panelSplitter id="ps1"
+                                inlineStyle="width:100%; height:600.0px;"
+                                splitterPosition="250" orientation="horizontal"
+                                positionedFromEnd="false">
+                <f:facet name="first">
+                  <af:panelBox text="PanelBox1" id="pb1" showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid id="pg3" columns="2">
+                      <af:outputLabel value="Member Name" id="ol17"/>
+                      <af:inputText label="Label 7" id="it4" simple="true"
+                                    binding="#{pens.memNameSearch}"/>
+                      <af:outputLabel value="Member Number" id="ol20"/>
+                      <af:inputText label="Label 7" id="it16" simple="true"
+                                    binding="#{pens.memNoSearch}"/>
+                      <af:outputLabel value="ID. Number" id="ol18"/>
+                      <af:inputText label="Label 7" id="it6" simple="true"
+                                    binding="#{pens.memIdNoSearch}"/>
+                      <af:outputLabel value="Telephone" id="ol19"/>
+                      <af:inputText label="Label 7" id="it15" simple="true"
+                                    binding="#{pens.memTelePhoneSearch}"/>
+                      <af:spacer width="10" height="10" id="s2"/>
+                      <af:commandButton text="Search" id="cb1"
+                                        action="#{pens.searchPensionMember}"/>
+                    </h:panelGrid>
+                    <af:separator id="s3"/>
+                    <af:table value="#{bindings.pension.collectionModel}"
+                              var="row" rows="#{bindings.pension.rangeSize}"
+                              emptyText="#{bindings.pension.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.pension.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.pensionQuery.queryDescriptor}"
+                              queryListener="#{bindings.pensionQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectionListener="#{pens.pensionMemListener}"
+                              rowSelection="single" id="t1"
+                              inlineStyle="border:none"
+                              binding="#{pens.pensionMemberDAO}">
+                      <af:column sortProperty="polmCode" filterable="true"
+                                 sortable="true"
+                                 headerText="#{bindings.pension.hints.polmCode.label}"
+                                 id="c3" visible="false">
+                        <af:outputText value="#{row.polmCode}" id="ot1"/>
+                      </af:column>
+                      <af:column sortProperty="memName" filterable="false"
+                                 sortable="false" headerText="Member Number"
+                                 id="c2" width="210">
+                        <af:outputText value="#{row.memName}" id="ot4"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelBox>
+                </f:facet>
+                <f:facet name="second">
+                  <af:panelGroupLayout layout="scroll"
+                                       xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                       id="pgl1">
+                    <af:panelBox text="PanelBox2" id="pb2" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <af:outputLabel value="Member Details" id="ol1"
+                                      inlineStyle="font-weight:bold;text-decoration:underline"/>
+                      <h:panelGrid columns="6" id="pg2">
+                        <af:outputLabel value="Policy No" id="outputLabel56"/>
+                        <af:outputText value="#{bindings.POL_POLICY_NO.inputValue}"
+                                       inlineStyle="font-weight:bold;"
+                                       id="outputText2"/>
+                        <af:outputLabel value="Client" id="outputLabel58"/>
+                        <af:outputText value="#{bindings.CLIENT_DISPLAY.inputValue}"
+                                       inlineStyle="font-weight:bold;"
+                                       id="of1"/>
+                        <af:outputLabel value="Valuation Year" id="ol4"/>
+                        <af:outputText value="#{sessionScope['UWYear']}"
+                                       id="ot233"
+                                       inlineStyle="font-weight:bold;"/>
+                      </h:panelGrid>
+                      <af:separator id="s1"/>
+                      <h:panelGrid id="pg1" columns="6">
+                        <af:outputLabel value="Member Number" id="ol5"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText value="#{bindings.memNo.inputValue}"
+                                      simple="true"
+                                      required="#{bindings.memNo.hints.mandatory}"
+                                      columns="#{bindings.memNo.hints.displayWidth}"
+                                      maximumLength="#{bindings.memNo.hints.precision}"
+                                      shortDesc="#{bindings.memNo.hints.tooltip}"
+                                      id="it1" readOnly="true"
+                                      binding="#{pens.pensionMemNo}">
+                          <f:validator binding="#{bindings.memNo.validator}"/>
+                        </af:inputText>
+                        <af:outputLabel value="Member Name" id="ol6"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText value="#{bindings.memName.inputValue}"
+                                      label="Label 2" id="it5" simple="true"
+                                      binding="#{pens.pensionMemName}"
+                                      readOnly="true"/>
+                        <af:outputLabel value="Gender" id="ol7"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:selectOneChoice value="#{bindings.memSex.inputValue}"
+                                            label="Label 1" id="soc1"
+                                            simple="true"
+                                            binding="#{pens.pensionMemSex}"
+                                            readOnly="true">
+                          <af:selectItem label="Male" value="M" id="si2"/>
+                          <af:selectItem label="Female" value="F" id="si1"/>
+                        </af:selectOneChoice>
+                        <af:outputLabel value="Date Of Birth" id="ol8"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputDate value="#{bindings.memDob.inputValue}"
+                                      label="Label 1" id="id1" simple="true"
+                                      binding="#{pens.pensionMemDob}"
+                                      readOnly="true">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:inputDate>
+                        <af:outputLabel value="Age Next Birthday" id="ol9"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 2" id="it7" simple="true"/>
+                        <af:outputLabel value="ID/Passport Number" id="ol10"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 3" id="it8" simple="true"
+                                      value="#{bindings.memIdNo.inputValue}"
+                                      readOnly="true"
+                                      binding="#{pens.pensionMemIdNo}"/>
+                        <af:outputLabel value="KRA Pin Number" id="ol11"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 4" id="it9" simple="true"
+                                      value="#{bindings.memPin.inputValue}"
+                                      readOnly="true"
+                                      binding="#{pens.pensionMemPinNo}"/>
+                        <af:outputLabel value="Phone No." id="ol2"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 5" id="it2" simple="true"
+                                      value="#{bindings.memTelephone.inputValue}"
+                                      binding="#{pens.pensionPhoneNumber}"
+                                      readOnly="true"/>
+                        <af:outputLabel value="Email Address" id="ol3"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 6" id="it3" simple="true"
+                                      value="#{bindings.memEmail.inputValue}"
+                                      binding="#{pens.pensionEmailAddress}"
+                                      readOnly="true"/>
+                        <af:outputLabel value="Scheme Join Date" id="ol12"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 4" id="it10" simple="true"/>
+                        <af:outputLabel value="Scheme Withdrawal Date" id="ol13"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 4" id="it11" simple="true"/>
+                        <af:outputLabel value="Preserved Tax Break BF" id="ol14"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 4" id="it12" simple="true"/>
+                        <af:outputLabel value="Utilized Tax" id="ol15"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 4" id="it13" simple="true"/>
+                        <af:outputLabel value="Preserved Tax Break CF" id="ol16"
+                                        inlineStyle="text-decoration: underline;"/>
+                        <af:inputText label="Label 4" id="it14" simple="true"/>
+                      </h:panelGrid>
+                    </af:panelBox>
+                    <af:panelTabbed id="pt1"
+                                    inlineStyle="width:100%;height:400px">
+                      <af:showDetailItem text="Transactions" id="sdi1">
+                        <af:table value="#{bindings.pension1.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.pension1.rangeSize}"
+                                  emptyText="#{bindings.pension1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.pension1.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.pension1Query.queryDescriptor}"
+                                  queryListener="#{bindings.pension1Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  rowSelection="single" id="t2"
+                                  inlineStyle="width:100%;height:100%"
+                                  binding="#{pens.pensionTransactionsDAO}">
+                          <af:column sortProperty="transDate" filterable="true"
+                                     sortable="true"
+                                     headerText="Transaction Date" id="c13">
+                            <f:facet name="filter">
+                              <af:inputDate value="#{vs.filterCriteria.transDate}"
+                                            id="id2"/>
+                            </f:facet>
+                            <af:outputText value="#{row.transDate}" id="ot2">
+                              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="transType" filterable="true"
+                                     sortable="true"
+                                     headerText="Transaction Type" id="c10">
+                            <af:outputText value="#{row.transType}" id="ot11"/>
+                          </af:column>
+                          <af:column sortProperty="receiptNo" filterable="true"
+                                     sortable="true" headerText="Receipt Number"
+                                     id="c1">
+                            <af:outputText value="#{row.receiptNo}" id="ot8"/>
+                          </af:column>
+                          <af:column sortProperty="referenceNo"
+                                     filterable="true" sortable="true"
+                                     headerText="Payment Reference" id="c4">
+                            <af:outputText value="#{row.referenceNo}" id="ot5"/>
+                          </af:column>
+                          <af:column sortProperty="empyeBalBf" filterable="true"
+                                     sortable="true"
+                                     headerText="Empye Total Amt" id="c6">
+                            <af:outputText value="#{row.empyeBalBf}" id="ot13">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyeRegBalBf"
+                                     filterable="true" sortable="true"
+                                     headerText="Employee Registered Amt."
+                                     id="c11">
+                            <af:outputText value="#{row.empyeRegBalBf}"
+                                           id="ot7">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyeNonRegBalBf"
+                                     filterable="true" sortable="true"
+                                     headerText="Employee Unregistered Amt."
+                                     id="c5">
+                            <af:outputText value="#{row.empyeNonRegBalBf}"
+                                           id="ot10">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyrBalBf" filterable="true"
+                                     sortable="true"
+                                     headerText="Employer Tot Amt" id="c7">
+                            <af:outputText value="#{row.empyrBalBf}" id="ot6">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyrRegBalBf"
+                                     filterable="true" sortable="true"
+                                     headerText="Employer Reg. Amt" id="c8">
+                            <af:outputText value="#{row.empyrRegBalBf}"
+                                           id="ot3">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyrNonRegBalBf"
+                                     filterable="true" sortable="true"
+                                     headerText="Employer Unregistered Amt"
+                                     id="c12">
+                            <af:outputText value="#{row.empyrNonRegBalBf}"
+                                           id="ot9">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="total" filterable="true"
+                                     sortable="true" headerText="Total Amt"
+                                     id="c9">
+                            <af:outputText value="#{row.total}" id="ot12"
+                                           inlineStyle="font-weight:bold">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Withdrawal Details" id="sdi3">
+                        <af:table value="#{bindings.pension2.collectionModel}"
+                                  var="row"
+                                  rows="#{bindings.pension2.rangeSize}"
+                                  emptyText="#{bindings.pension2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.pension2.rangeSize}"
+                                  rowBandingInterval="0"
+                                  filterModel="#{bindings.pension2Query.queryDescriptor}"
+                                  queryListener="#{bindings.pension2Query.processQuery}"
+                                  filterVisible="true" varStatus="vs"
+                                  rowSelection="single" id="t3"
+                                  binding="#{pens.memWithdrawalDAO}"
+                                  inlineStyle="width:100%;height:100%">
+                          <af:column sortProperty="transDate" filterable="true"
+                                     sortable="true"
+                                     headerText="Transaction Date" id="c14">
+                            <f:facet name="filter">
+                              <af:inputDate value="#{vs.filterCriteria.transDate}"
+                                            id="id3"/>
+                            </f:facet>
+                            <af:outputText value="#{row.transDate}" id="ot14">
+                              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="transType" filterable="true"
+                                     sortable="true"
+                                     headerText="Transaction Type" id="c15">
+                            <af:outputText value="#{row.transType}" id="ot15"/>
+                          </af:column>
+                          <af:column sortProperty="receiptNo" filterable="true"
+                                     sortable="true" headerText="Receipt Number"
+                                     id="c16">
+                            <af:outputText value="#{row.receiptNo}" id="ot16"/>
+                          </af:column>
+                          <af:column sortProperty="referenceNo"
+                                     filterable="true" sortable="true"
+                                     headerText="Payment Reference" id="c17">
+                            <af:outputText value="#{row.referenceNo}"
+                                           id="ot17"/>
+                          </af:column>
+                          <af:column sortProperty="empyeBalBf" filterable="true"
+                                     sortable="true"
+                                     headerText="Empye Total Amt" id="c18">
+                            <af:outputText value="#{row.empyeBalBf}" id="ot18">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyeRegBalBf"
+                                     filterable="true" sortable="true"
+                                     headerText="Employee Registered Amt."
+                                     id="c19">
+                            <af:outputText value="#{row.empyeRegBalBf}"
+                                           id="ot19">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyeNonRegBalBf"
+                                     filterable="true" sortable="true"
+                                     headerText="Employee Unregistered Amt."
+                                     id="c20">
+                            <af:outputText value="#{row.empyeNonRegBalBf}"
+                                           id="ot20">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyrBalBf" filterable="true"
+                                     sortable="true"
+                                     headerText="Employer Tot Amt" id="c21">
+                            <af:outputText value="#{row.empyrBalBf}" id="ot21">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyrRegBalBf"
+                                     filterable="true" sortable="true"
+                                     headerText="Employer Reg. Amt" id="c22">
+                            <af:outputText value="#{row.empyrRegBalBf}"
+                                           id="ot22">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="empyrNonRegBalBf"
+                                     filterable="true" sortable="true"
+                                     headerText="Employer Unregistered Amt"
+                                     id="c23">
+                            <af:outputText value="#{row.empyrNonRegBalBf}"
+                                           id="ot23">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="total" filterable="true"
+                                     sortable="true" headerText="Total Amt"
+                                     id="c24">
+                            <af:outputText value="#{row.total}" id="ot24"
+                                           inlineStyle="font-weight:bold">
+                              <af:convertNumber groupingUsed="true"
+                                                type="number"
+                                                messageDetailConvertNumber="#,###,##"/>
+                            </af:outputText>
+                          </af:column>
+                        </af:table>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Beneficiary Details" id="sdi4">
+                        <af:panelBox text="PanelBox3" id="pb3"
+                                     showHeader="never">
+                          <h:panelGrid id="pg4" columns="3">
+                            <af:commandButton id="cb2"
+                                              action="#{pens.showBeneficiaryPopup}"
+                                              icon="/images/field_group_plus_ena.png"/>
+                            <af:commandButton id="cb3"
+                                              icon="/images/update_ena.png"/>
+                            <af:commandButton id="cb4"
+                                              icon="/images/delete_ena.png"/>
+                            <af:popup id="p1">
+                              <af:dialog id="d1">
+                                <af:panelBox text="Beneficiaries" id="pb4">
+                                  <f:facet name="toolbar"/>
+                                  <h:panelGrid columns="2" id="pg5">
+                                    <af:outputLabel value="Surname" id="ol21"/>
+                                    <af:inputText label="Label 8" id="it17"
+                                                  simple="true"
+                                                  binding="#{pens.memSurnameTF}"/>
+                                    <af:outputLabel value="Other Names"
+                                                    id="ol22"/>
+                                    <af:inputText label="Label 9" id="it18"
+                                                  simple="true"
+                                                  binding="#{pens.memOtherNameTF}"/>
+                                    <af:outputLabel value="Date of Birth"
+                                                    id="ol23"/>
+                                    <af:inputDate label="Label 2" id="id4" simple="true"
+                                                  binding="#{pens.memDobTF}"/>
+                                    <af:outputLabel value="Sex"
+                                                    id="ol24"/>
+                                    <af:selectOneChoice label="Label 2"
+                                                        id="soc2" simple="true"
+                                                        binding="#{pens.memGender}">
+                                      <af:selectItem label="Male" value="M"
+                                                     id="si4"/>
+                                      <af:selectItem label="Female" value="F"
+                                                     id="si3"/>
+                                    </af:selectOneChoice>
+                                    <af:outputLabel value="ID Number"
+                                                    id="ol25"/>
+                                    <af:inputText label="Label 10" id="it19" simple="true"
+                                                  binding="#{pens.memIdNumberTF}"/>
+                                    <af:outputLabel value="Share Pct"
+                                                    id="ol26"/>
+                                    <af:inputText label="Label 11" id="it20" simple="true"
+                                                  binding="#{pens.memShareTF}"/>
+                                    <af:outputLabel value="Relation Type"
+                                                    id="ol27"/>
+                                    <h:panelGrid columns="2" id="pg6">
+                                      <af:inputText label="Label 12" id="it21" simple="true" disabled="true"
+                                                    binding="#{pens.relationTypeTF}"/>
+                                      <af:commandButton id="cb5" icon="/dropdown.gif">
+                                      <af:showPopupBehavior popupId="p2"/>                  
+                                      </af:commandButton>                  
+                                    </h:panelGrid>
+                                    <af:popup id="p2">
+                                      <af:dialog id="d2">
+                                        <af:table value="#{bindings.relationTypes.collectionModel}"
+                                                  var="row"
+                                                  rows="#{bindings.relationTypes.rangeSize}"
+                                                  emptyText="#{bindings.relationTypes.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.relationTypes.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  filterModel="#{bindings.relationTypesQuery.queryDescriptor}"
+                                                  queryListener="#{bindings.relationTypesQuery.processQuery}"
+                                                  filterVisible="true"
+                                                  varStatus="vs"
+                                                  rowSelection="single" id="t4"
+                                                  inlineStyle="width:100%;height:300px"
+                                                  binding="#{pens.relationDAO}">
+                                          <af:column sortProperty="retCode"
+                                                     filterable="true"
+                                                     sortable="true"
+                                                     headerText="#{bindings.relationTypes.hints.retCode.label}"
+                                                     id="c25"
+                                                     visible="false">
+                                            <af:outputText value="#{row.retCode}"
+                                                           id="ot25"/>
+                                          </af:column>
+                                          <af:column sortProperty="retDesc"
+                                                     filterable="true"
+                                                     sortable="true"
+                                                     headerText="Relation Type"
+                                                     id="c26"
+                                                     width="200">
+                                            <af:outputText value="#{row.retDesc}"
+                                                           id="ot26"/>
+                                          </af:column>
+                                        </af:table>
+                                        <h:panelGrid columns="2" id="pg7">
+                                          <af:commandButton text="OK"
+                                                            id="cb6"
+                                                            action="#{pens.selectRelationType}" 
+                                                            partialSubmit="true"/>
+                                          <af:commandButton text="Cancel"
+                                                            id="cb7"/>
+                                        </h:panelGrid>
+                                      </af:dialog>
+                                    </af:popup>
+                                    <h:panelGrid id="pg8">
+                                      <af:commandButton text="Save"
+                                                        id="cb8"
+                                                        action="#{pens.saveRelationType}"/>
+                                      <af:commandButton text="Cancel"
+                                                        id="cb9"/>
+                                    </h:panelGrid>
+                                  </h:panelGrid>
+                                </af:panelBox>
+                              </af:dialog>
+                            </af:popup>
+                          </h:panelGrid>
+                        </af:panelBox>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Reports" id="sdi5"></af:showDetailItem>
+                    </af:panelTabbed>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelSplitter>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

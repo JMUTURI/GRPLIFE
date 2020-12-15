@@ -288,6 +288,7 @@ public class workflowDAO extends LOVCC {
                 newTasks.setTCKT_ENDORSEMENT(rs.getString(23));
                 session.setAttribute("ModuleTickets", "Y");
                 newTasks.setTCKT_REF_NO(rs.getString(25));
+                newTasks.setTCKT_PRIORITY_LEVEL(rs.getString(34));
                 msgTemplates.add(newTasks);
                 
               

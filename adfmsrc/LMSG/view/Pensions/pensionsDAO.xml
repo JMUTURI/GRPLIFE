@@ -24,6 +24,9 @@
   <Attribute Name="loanCalcType" Type="java.lang.String"/>
   <Attribute Name="dependantNo" Type="java.lang.String"/>
   <Attribute Name="beneficiaryNo" Type="java.lang.String"/>
+  <Attribute Name="coverageArea" Type="java.lang.String"/>
+  <Attribute Name="locName" Type="java.lang.String"/>
+  <Attribute Name="jointMemberNo" Type="java.lang.String"/>
   <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
                   BeanClass="LMSG.view.Pensions.pension"
                   id="FindPensionTransactions" ReturnNodeName="pension"
@@ -84,6 +87,22 @@
                   id="findPolMemberNo" ReturnNodeName="Return">
     <ParameterInfo id="type" Type="java.lang.String" isStructured="false"/>
   </MethodAccessor>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension" id="findPensionMembers"
+                  ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="findPensionMembersDetails" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="findPensionMemberStatement" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.Pensions.pension"
+                  BeanClass="LMSG.view.Pensions.pension"
+                  id="findPensionMemberWithdrawal" ReturnNodeName="pension"
+                  CollectionBeanClass="UpdateableCollection"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.Pensions.pensionsDAO"
                      BeanClass="LMSG.view.Pensions.pensionsDAO"
                      id="pensionsDAO"/>

@@ -13,6 +13,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import oracle.jdbc.OracleTypes;
+
 public class pensionsDAO
   extends LOVCC
 {
@@ -673,5 +675,158 @@ public class pensionsDAO
       e.printStackTrace();
     }
     return RefundList;
+  }
+  public List<pension> findPensionMembers()
+  {
+    List<pension> memList = new ArrayList<pension>();
+    Connection conn = null;
+    try
+    {
+      String revaluationRefund = "BEGIN LMS_API_PKG.getpensionmembers(?,?,?,?,?,?,?);END;";
+      
+      conn = new DBConnector().getDatabaseConn();
+      
+      CallableStatement cstmt = conn.prepareCall(revaluationRefund);
+      cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+      cstmt.setBigDecimal(2, (BigDecimal)this.session.getAttribute("policyCode"));
+      cstmt.setString(3, (String)this.session.getAttribute("UWYear"));
+      cstmt.setString(4,(String)session.getAttribute("memNameSearch"));
+      cstmt.setString(5, (String)session.getAttribute("memNoSearch"));
+      cstmt.setString(6, (String)session.getAttribute("memTelePhoneSearch"));
+      cstmt.setString(7, (String)session.getAttribute("memIdNoSearch"));
+      
+      cstmt.execute();
+      ResultSet rs = (ResultSet)cstmt.getObject(1);
+      while (rs.next())
+      {
+        pension pension = new pension();
+        pension.setPolmCode(rs.getBigDecimal(1));  
+        pension.setMemNo(rs.getString(2));
+        pension.setMemName(rs.getString(3));
+          
+        memList.add(pension);
+      }
+    }
+    catch (Exception e)
+    {
+      GlobalCC.EXCEPTIONREPORTING(conn, e);
+      e.printStackTrace();
+    }
+    return memList;
+  }
+  public List<pension> findPensionMembersDetails()
+  {
+    List<pension> memList = new ArrayList<pension>();
+    Connection conn = null;
+    try
+    {
+      String revaluationRefund = "BEGIN LMS_API_PKG.findpensionmembers(?,?);END;";
+      
+      conn = new DBConnector().getDatabaseConn();
+      
+      CallableStatement cstmt = conn.prepareCall(revaluationRefund);
+      cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+      cstmt.setBigDecimal(2, (BigDecimal)this.session.getAttribute("PolmCode"));
+      cstmt.execute();
+      ResultSet rs = (ResultSet)cstmt.getObject(1);
+      while (rs.next())
+      {
+        pension pension = new pension();
+        pension.setMemNo(rs.getString(1));
+        pension.setMemName(rs.getString(2));
+        pension.setMemSex(rs.getString(3));  
+        pension.setMemDob(rs.getDate(4));  
+        pension.setMemIdNo(rs.getString(5));  
+        pension.setMemPin(rs.getString(6));
+        pension.setMemTelephone(rs.getString(7));
+        pension.setMemEmail(rs.getString(8));  
+        memList.add(pension);
+      }
+    }
+    catch (Exception e)
+    {
+      GlobalCC.EXCEPTIONREPORTING(conn, e);
+      e.printStackTrace();
+    }
+    return memList;
+  }
+  public List<pension> findPensionMemberStatement()
+  {
+    List<pension> memStatementList = new ArrayList<pension>();
+    Connection conn = null;
+    try
+    {
+      String revaluationRefund = "BEGIN LMS_API_PKG.findmembalancetrans(?,?,?);END;";
+      
+      conn = new DBConnector().getDatabaseConn();
+      
+      CallableStatement cstmt = conn.prepareCall(revaluationRefund);
+      cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+      cstmt.setBigDecimal(2, (BigDecimal)this.session.getAttribute("PolmCode"));
+      cstmt.setString(3,(String)session.getAttribute("UWYear"));
+      cstmt.execute();
+      ResultSet rs = (ResultSet)cstmt.getObject(1);
+      while (rs.next())
+      {
+        pension pension = new pension();
+        pension.setTransDate(rs.getDate(1));
+        pension.setTransType(rs.getString(2));
+        pension.setReceiptNo(rs.getString(3));  
+        pension.setReferenceNo(rs.getString(4)); 
+        pension.setEmpyeBalBf(rs.getBigDecimal(5));  
+        pension.setEmpyeRegBalBf(rs.getBigDecimal(6));  
+        pension.setEmpyeNonRegBalBf(rs.getBigDecimal(7));
+        pension.setEmpyrBalBf(rs.getBigDecimal(8));
+        pension.setEmpyrRegBalBf(rs.getBigDecimal(9));  
+        pension.setEmpyrNonRegBalBf(rs.getBigDecimal(10));  
+        pension.setTotal(rs.getBigDecimal(11));  
+        memStatementList.add(pension);
+      }
+    }
+    catch (Exception e)
+    {
+      GlobalCC.EXCEPTIONREPORTING(conn, e);
+      e.printStackTrace();
+    }
+    return memStatementList;
+  }
+  public List<pension> findPensionMemberWithdrawal()
+  {
+    List<pension> memWithdrawalList = new ArrayList<pension>();
+    Connection conn = null;
+    try
+    {
+      String revaluationRefund = "BEGIN LMS_API_PKG.findmemwithdrawals(?,?);END;";
+      
+      conn = new DBConnector().getDatabaseConn();
+      
+      CallableStatement cstmt = conn.prepareCall(revaluationRefund);
+      cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+      cstmt.setBigDecimal(2, (BigDecimal)this.session.getAttribute("PolmCode"));
+      cstmt.execute();
+      ResultSet rs = (ResultSet)cstmt.getObject(1);
+      while (rs.next())
+      {
+        pension pension = new pension();
+        pension.setTransDate(rs.getDate(1));
+        pension.setTransType(rs.getString(2));
+        pension.setReceiptNo(rs.getString(3));  
+        pension.setReferenceNo(rs.getString(4)); 
+        pension.setEmpyeBalBf(rs.getBigDecimal(5));  
+        pension.setEmpyeRegBalBf(rs.getBigDecimal(6));  
+        pension.setEmpyeNonRegBalBf(rs.getBigDecimal(7));
+        pension.setEmpyrBalBf(rs.getBigDecimal(8));
+        pension.setEmpyrRegBalBf(rs.getBigDecimal(9));  
+        pension.setEmpyrNonRegBalBf(rs.getBigDecimal(10));  
+        pension.setTotal(rs.getBigDecimal(11));  
+        memWithdrawalList.add(pension);
+      }
+    }
+    catch (Exception e)
+    {
+      GlobalCC.EXCEPTIONREPORTING(conn, e);
+      e.printStackTrace();
+    }
+    return memWithdrawalList;
   }
 }

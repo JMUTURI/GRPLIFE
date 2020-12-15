@@ -2276,7 +2276,7 @@ public class Links extends LOVCC{
         Reset.ReinitializeVariables();
         this.session.setAttribute("TaskID", null);
         this.session.setAttribute("productCode", null);
-        GlobalCC.RedirectPage("/portfolioTrans.jspx");
+        GlobalCC.RedirectPage("/recoveryTrans.jspx");
       } catch (Exception e) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
       }
@@ -2296,4 +2296,33 @@ public class Links extends LOVCC{
       }
       return null;
   }
+
+
+    public String goToPensionsReport() {
+        // Add event code here...
+        try {
+          ReinitializeVar Reset = new ReinitializeVar();
+          Reset.ReinitializeVariables();
+          this.session.setAttribute("TaskID", null);
+          this.session.setAttribute("productCode", null);
+          GlobalCC.RedirectPage("/pensionreports.jspx");
+        } catch (Exception e) {
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+        }
+        return null;
+    }
+  public String goToClaimOpening() {
+      try {
+        ReinitializeVar Reset = new ReinitializeVar();
+        Reset.ReinitializeVariables();
+          session.setAttribute("TaskID", null);
+        GlobalCC.RedirectPage("/clmBookingTransactions.jspx");
+      } catch (Exception e) {
+        FacesContext.getCurrentInstance().addMessage(null, 
+                                                     new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                                                                      e.getMessage(), 
+                                                                      e.getMessage()));
+      }
+      return null;
+    }
 }

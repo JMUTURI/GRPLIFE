@@ -728,7 +728,7 @@ public class CSVtoADFTableProcessor
           {
             FinalStatement = "INSERT INTO LMS_MEMBER_IMPORT_DETAILS(" + FullParameters + ") VALUES (" + FullParamValues + ")";
           }
-          System.out.println("Final Statement " + FinalStatement);
+          System.out.println( i+" Final Statement " + FinalStatement);
           
           MembersImportation pn = new MembersImportation();
           pn.setLMID_LMIT_CODE((Integer)this.session.getAttribute("templateTranSeq"));

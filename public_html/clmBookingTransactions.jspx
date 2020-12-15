@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life | Claims Book Transactions">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="height:480px; width:100.0%;">
+              <af:showDetailItem text="Claim Booking Transactions" id="sdi1">
+                <f:facet name="toolbar">
+                  <af:group id="g1">
+                    <h:panelGrid columns="2" id="pg23">
+                      <af:inputText id="inputText2" columns="13"
+                                    helpTopicId="GISReports" shortDesc="Help"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si1"/>
+                    </h:panelGrid>
+                  </af:group>
+                </f:facet>
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                  <af:panelBox text="" id="pb1" inlineStyle="height:480px;">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="3">
+                      <af:commandButton text="New Booking" id="cb1" icon="/images/save.gif"
+                                        action="#{claim.goToBookingTransPage}"/>
+                      <af:commandButton text="Edit Booking" id="cb2" icon="/images/update_ena.png"/>
+                      <af:commandButton text="Delete Booking" id="cb3" icon="/images/delete_ena.png"
+                                        action="#{claim.deleteClaimBooking}"/>
+                    </h:panelGrid>
+                    <af:separator id="s1"/>
+                    <af:table value="#{bindings.pendingClaimBooking.collectionModel}"
+                              var="row"
+                              rows="#{bindings.pendingClaimBooking.rangeSize}"
+                              emptyText="#{bindings.pendingClaimBooking.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.pendingClaimBooking.rangeSize}"
+                              rowBandingInterval="0"
+                              filterModel="#{bindings.pendingClaimBookingQuery.queryDescriptor}"
+                              queryListener="#{bindings.pendingClaimBookingQuery.processQuery}"
+                              filterVisible="true" varStatus="vs"
+                              selectionListener="#{claim.selectClaimBookingRecord}"
+                              rowSelection="single" id="t1"
+                              inlineStyle="width:100%;height:450px"
+                              binding="#{claim.claimBookingLOV}">
+                        <af:column sortProperty="" filterable="true"
+                                 sortable="true"
+                                 headerText=""
+                                 id="c4"
+                                 width="120">
+                        <af:commandLink text="[View Booking Details]" id="cl1"
+                                        action="#{claim.goToBookingDetails}"/>
+                      </af:column>
+                      <af:column sortProperty="cmb_code" filterable="true"
+                                 sortable="true"
+                                 headerText="Booking Reference"
+                                 id="c9"
+                                 visible="true">
+                        <af:outputText value="#{row.cmb_code}" id="ot10"/>
+                      </af:column>
+                      <af:column sortProperty="POL_CODE" filterable="true"
+                                 sortable="true"
+                                 headerText="Booking Reference"
+                                 id="c10"
+                                 visible="true">
+                        <af:outputText value="#{row.POL_CODE}" id="ot3"/>
+                      </af:column>
+                      <af:column sortProperty="cmb_date" filterable="false"
+                                 sortable="false"
+                                 headerText="Transaction Date"
+                                 id="c5">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.cmb_date}"
+                                        id="id1"/>
+                        </f:facet>
+                        <af:outputText value="#{row.cmb_date}" id="ot9">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="cmb_date_death_accident"
+                                 filterable="false" sortable="false"
+                                 headerText="Death / Disability Date"
+                                 id="c8">
+                        <af:outputText value="#{row.cmb_date_death_accident}"
+                                       id="ot4">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="cmb_date_claim_reported"
+                                 filterable="false" sortable="false"
+                                 headerText="Date Reported"
+                                 id="c7">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.cmb_date_claim_reported}"
+                                        id="id3"/>
+                        </f:facet>
+                        <af:outputText value="#{row.cmb_date_claim_reported}"
+                                       id="ot2">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column sortProperty="pol_policy_no" filterable="true"
+                                 sortable="true"
+                                 headerText="Policy Number"
+                                 id="c1">
+                        <af:outputText value="#{row.pol_policy_no}" id="ot5"/>
+                      </af:column>
+                      <af:column sortProperty="prp_surname" filterable="true"
+                                 sortable="true"
+                                 headerText="Scheme Name"
+                                 id="c2">
+                        <af:outputText value="#{row.prp_surname}" id="ot7"/>
+                      </af:column>
+                      <af:column sortProperty="mem_surname" filterable="true"
+                                 sortable="true"
+                                 headerText="Member Name"
+                                 id="c3">
+                        <af:outputText value="#{row.mem_surname}" id="ot6"/>
+                      </af:column>
+                      <af:column sortProperty="cmb_booked_by" filterable="true"
+                                 sortable="true"
+                                 headerText="Initiated By"
+                                 id="c6">
+                        <af:outputText value="#{row.cmb_booked_by}" id="ot8"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

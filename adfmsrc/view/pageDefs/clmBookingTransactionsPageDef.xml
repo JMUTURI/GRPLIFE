@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.56.60" id="clmBookingTransactionsPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="root" RangeSize="25" DataControl="ClaimsDAO"
+              id="ClaimsDAOIterator"/>
+    <accessorIterator MasterBinding="ClaimsDAOIterator"
+                      Binds="pendingClaimBooking" RangeSize="25"
+                      DataControl="ClaimsDAO" BeanClass="LMSG.view.Claims.Claim"
+                      id="pendingClaimBookingIterator"/>
+    <searchRegion Binds="pendingClaimBookingIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="pendingClaimBookingQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="pendingClaimBookingIterator" id="pendingClaimBooking">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim"
+                      Name="pendingClaimBooking0">
+        <AttrNames>
+          <Item Value="cmb_code"/>
+          <Item Value="cmb_date"/>
+          <Item Value="cmb_date_death_accident"/>
+          <Item Value="cmb_date_claim_reported"/>
+          <Item Value="pol_policy_no"/>
+          <Item Value="prp_surname"/>
+          <Item Value="mem_surname"/>
+          <Item Value="cmb_booked_by"/>
+          <Item Value="POL_CODE"/>
+          <Item Value="cmb_processed"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

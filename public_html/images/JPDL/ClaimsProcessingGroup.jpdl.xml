@@ -6,11 +6,6 @@
       <transition g="-76,-19" name="claim access" to="claims Access"/>
    </start>
    <decision g="115,65,48,48" name="claims Access">
-      <handler class="LMSG.view.BPM.AccessEvaluation" />
-      <handler class="LMSG.view.BPM.AccessEvaluation"/>
-      <handler class="LMSG.view.BPM.AccessEvaluation"/>
-      <handler class="LMSG.view.BPM.AccessEvaluation"/>
-      <handler class="LMSG.view.BPM.AccessEvaluation"/>
 	<handler class="LMSG.view.BPM.AccessEvaluation"/>
       <transition g="-22,-19" name="No" to="end1"/>
       <transition g="-111,-1" name="Yes" to="Input Claim Data"/>

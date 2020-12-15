@@ -139,7 +139,17 @@
                     <af:inputText label="Remarks" id="it4" rows="3" columns="45"
                                   simple="true" value="Add Remark..."
                                   binding="#{workflowBean.ticketRemarks}"/>
-                    <h:panelGrid columns="2" id="pg8">
+                      <h:panelGrid columns="2" id="pg3">            
+                      <af:outputLabel value="Priority Level" id="ol4" inlineStyle="font-weight:bold"/>
+                      <af:selectOneChoice label="Label 1" id="soc1" simple="true"
+                                          binding="#{workflowBean.priorityLevel}" autoSubmit="true"
+                                          valueChangeListener="#{workflowBean.priorityLevelListener}">
+                        <af:selectItem label="High" value="H" id="si1"/>
+                        <af:selectItem label="Medium" value="M" id="si2"/>
+                        <af:selectItem label="Low" value="L" id="si3"/>
+                      </af:selectOneChoice>
+                      </h:panelGrid>
+                      <h:panelGrid columns="2" id="pg8">
                       <af:commandButton text="OK" id="cb6"
                                         action="#{workflowBean.findReAssignee2Selected}"/>
                       <af:commandButton text="Cancel" id="commandButton8"/>

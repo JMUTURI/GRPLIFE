@@ -1568,7 +1568,7 @@
     </Source>
   </AdapterDataControl>
   <AdapterDataControl id="IEDMSDocsDao"
-                      FactoryClass="oracle.adf.model.adapter.bean.BeanDCFactoryImpl"
+                      FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
                       ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
                       SupportsTransactions="false" SupportsSortCollection="true"
                       SupportsResetState="false" SupportsRangesize="false"

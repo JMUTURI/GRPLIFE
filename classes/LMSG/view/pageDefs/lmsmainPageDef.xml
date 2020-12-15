@@ -51,7 +51,7 @@
           <Item Value="TCKT_POL_NO"/>
           <Item Value="TCKT_REF_NO"/>
           <Item Value="SYSMODULE"/>          
-          
+          <Item Value="TCKT_PRIORITY_LEVEL"/>  
         </AttrNames>
       </nodeDefinition>
     </tree>

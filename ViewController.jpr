@@ -967,6 +967,10 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
+            <value n="id" v="Antlr.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
             <value n="id" v="Axis-ant.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
@@ -1055,6 +1059,10 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
+            <value n="id" v="Itextpdf-5.4.1.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
             <value n="id" v="Jackson-core-asl-1.9.13.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
@@ -1071,6 +1079,10 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
+            <value n="id" v="Jasperreports-4.0.0.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
             <value n="id" v="Javassist.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
@@ -1084,6 +1096,10 @@
          </hash>
          <hash>
             <value n="id" v="Jewt4.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Jodconverter-2.2.1.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
@@ -1162,14 +1178,6 @@
             <value n="id" v="Xmlparserv2.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
-         <hash>
-            <value n="id" v="Itextpdf-5.4.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Jodconverter-2.2.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
       </list>
       <hash n="internalDefinitions">
          <list n="jdkDefinitions">
@@ -1237,6 +1245,15 @@
                <value n="deployedByDefault" v="true"/>
                <value n="description" v="Alfresco-opencmis-extension-0.3.jar"/>
                <value n="id" v="Alfresco-opencmis-extension-0.3.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="lmslibs/antlr.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Antlr.jar"/>
+               <value n="id" v="Antlr.jar"/>
                <value n="locked" v="true"/>
             </hash>
             <hash>
@@ -1439,6 +1456,15 @@
             </hash>
             <hash>
                <list n="classPath">
+                  <url path="lmslibs/itextpdf-5.4.1.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Itextpdf-5.4.1.jar"/>
+               <value n="id" v="Itextpdf-5.4.1.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
                   <url path="lmslibs/jackson-core-asl-1.9.13.jar" jar-entry=""/>
                </list>
                <value n="deployedByDefault" v="true"/>
@@ -1475,6 +1501,15 @@
             </hash>
             <hash>
                <list n="classPath">
+                  <url path="lmslibs/jasperreports-4.0.0.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Jasperreports-4.0.0.jar"/>
+               <value n="id" v="Jasperreports-4.0.0.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
                   <url path="lmslibs/javassist.jar" jar-entry=""/>
                </list>
                <value n="deployedByDefault" v="true"/>
@@ -1507,6 +1542,15 @@
                <value n="deployedByDefault" v="true"/>
                <value n="description" v="Jewt4.jar"/>
                <value n="id" v="Jewt4.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="lmslibs/jodconverter-2.2.1.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Jodconverter-2.2.1.jar"/>
+               <value n="id" v="Jodconverter-2.2.1.jar"/>
                <value n="locked" v="true"/>
             </hash>
             <hash>
@@ -1680,24 +1724,6 @@
                <value n="id" v="Xmlparserv2.jar"/>
                <value n="locked" v="true"/>
             </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="lmslibs/itextpdf-5.4.1.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Itextpdf-5.4.1.jar"/>
-               <value n="id" v="Itextpdf-5.4.1.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="lmslibs/jodconverter-2.2.1.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Jodconverter-2.2.1.jar"/>
-               <value n="id" v="Jodconverter-2.2.1.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
          </list>
       </hash>
       <list n="libraryReferences">
@@ -1838,6 +1864,10 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
+            <value n="id" v="Antlr.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
             <value n="id" v="Axis-ant.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
@@ -1926,6 +1956,10 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
+            <value n="id" v="Itextpdf-5.4.1.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
             <value n="id" v="Jackson-core-asl-1.9.13.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
@@ -1942,6 +1976,10 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
+            <value n="id" v="Jasperreports-4.0.0.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
             <value n="id" v="Javassist.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
@@ -1955,6 +1993,10 @@
          </hash>
          <hash>
             <value n="id" v="Jewt4.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Jodconverter-2.2.1.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
@@ -2031,14 +2073,6 @@
          </hash>
          <hash>
             <value n="id" v="Xmlparserv2.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Itextpdf-5.4.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Jodconverter-2.2.1.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

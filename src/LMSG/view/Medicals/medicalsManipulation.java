@@ -119,8 +119,9 @@ public class medicalsManipulation
   private RichShowDetailItem dmsDocTab;
   private RichTable dmsDocTable;
   private RichInlineFrame medViewer;
-  
-  public String findPoliciesSelected()
+    private RichTable approvedMedicalLOV;
+
+    public String findPoliciesSelected()
   {
     DCIteratorBinding dciter = ADFUtils.findIterator("FindMedicalPoliciesIterator");
     RowKeySet set = this.policiesLOV.getSelectedRowKeys();
@@ -2001,4 +2002,59 @@ public class medicalsManipulation
     this.session.setAttribute("fmptCode", r.getAttribute("FPMT_CODE"));
     this.session.setAttribute("FacilitatorCode", utils.findFacilitatorCode()); 
   }
+
+    public void approvedMedicalListener(SelectionEvent selectionEvent) {
+        // Add event code here...
+        DMSUtils utils = new DMSUtils();
+        Object key2 = this.approvedMedicalLOV.getSelectedRowData();
+        if (key2 == null) {
+         GlobalCC.errorValueNotEntered("No Record Selected");
+        }
+        JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
+        if (r == null) {
+         GlobalCC.errorValueNotEntered("No Record Selected");
+        }
+        this.session.setAttribute("fmptCode", r.getAttribute("FPMT_CODE"));
+        this.session.setAttribute("FacilitatorCode", utils.findFacilitatorCode());
+        System.out.println("Facilitator Code is ====="+utils.findFacilitatorCode());
+    }
+
+    public void setApprovedMedicalLOV(RichTable approvedMedicalLOV) {
+        this.approvedMedicalLOV = approvedMedicalLOV;
+    }
+
+    public RichTable getApprovedMedicalLOV() {
+        return approvedMedicalLOV;
+    }
+
+    public String deletePendingPayment() {
+      Connection conn=null;
+      DBConnector datahandler = null;
+      datahandler = new DBConnector();
+      CallableStatement cstmt=null;
+      String sql="begin lms_web_pkg_grp.deletependingmedpayment(?);end;";
+      try{
+       conn = datahandler.getDatabaseConn();
+       cstmt=conn.prepareCall(sql);
+         cstmt.setBigDecimal(1,(BigDecimal)session.getAttribute("fmptCode"));
+         cstmt.execute();
+        GlobalCC.CloseConnections(null, cstmt, conn);
+        GlobalCC.INFORMATIONREPORTING("Record deleted successfully...");
+        
+         ADFUtils.findIterator("FindMedicalPaymentsIterator").executeQuery();
+         AdfFacesContext.getCurrentInstance().addPartialTarget(this.allPaymentsLOV);         
+         ADFUtils.findIterator("FindFacilitatorPaymentsIterator").executeQuery();
+         AdfFacesContext.getCurrentInstance().addPartialTarget(this.facPayLOV);
+        
+       }catch(Exception ex){       
+         ex.printStackTrace();
+         GlobalCC.EXCEPTIONREPORTING(conn, ex);
+         GlobalCC.CloseConnections(null, cstmt, conn);
+         
+       }finally{
+         GlobalCC.CloseConnections(null, cstmt, conn);
+       }
+        // Add event code here...
+        return null;
+    }
 }

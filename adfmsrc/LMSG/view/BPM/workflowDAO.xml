@@ -21,6 +21,12 @@
   <Attribute Name="brnName" Type="java.lang.String"/>
   <Attribute Name="agnName" Type="java.lang.String"/>
   <Attribute Name="taskActivityName" Type="java.lang.String"/>
+  <Attribute Name="loanCalcType" Type="java.lang.String"/>
+  <Attribute Name="dependantNo" Type="java.lang.String"/>
+  <Attribute Name="beneficiaryNo" Type="java.lang.String"/>
+  <Attribute Name="coverageArea" Type="java.lang.String"/>
+  <Attribute Name="locName" Type="java.lang.String"/>
+  <Attribute Name="jointMemberNo" Type="java.lang.String"/>
   <MethodAccessor IsCollection="true" Type="LMSG.view.BPM.workflow"
                   BeanClass="LMSG.view.BPM.workflow" id="findTickets"
                   ReturnNodeName="workflow"
@@ -41,6 +47,10 @@
                   BeanClass="LMSG.view.BPM.workflow"
                   id="findTicketDetailsByUser" ReturnNodeName="workflow"
                   CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false" Type="java.lang.String"
+                  id="findPolMemberNo" ReturnNodeName="Return">
+    <ParameterInfo id="type" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.BPM.workflowDAO"
                      BeanClass="LMSG.view.BPM.workflowDAO" id="workflowDAO"/>
 </JavaBean>

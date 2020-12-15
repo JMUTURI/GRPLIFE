@@ -61,6 +61,16 @@
                     <af:inputText label="Remarks" id="it801" rows="6" columns="50"
                                   value="Add Remarks" simple="true"
                                   binding="#{claim.tcktAsignee}"></af:inputText>
+                   <h:panelGrid columns="2" id="pg3v">            
+                      <af:outputLabel value="Priority Level" id="ol4v" inlineStyle="font-weight:bold"/>
+                      <af:selectOneChoice label="Label 1" id="soc1v" simple="true"
+                                          binding="#{workflowBean.priorityLevel}" autoSubmit="true"
+                                          valueChangeListener="#{workflowBean.priorityLevelListener}">
+                        <af:selectItem label="High" value="H" id="si1v"/>
+                        <af:selectItem label="Medium" value="M" id="si2v"/>
+                        <af:selectItem label="Low" value="L" id="si3v"/>
+                      </af:selectOneChoice>
+                      </h:panelGrid>             
                     <af:separator id="s201"/>
                     <h:panelGrid columns="3">
                       <af:spacer width="30" height="10" id="s191"/>
@@ -272,9 +282,8 @@
                                            inlineStyle="font-weight:bold;"
                                            binding="#{claim.voucherLabel}"/>
                             <af:outputLabel value="Payee" id="outputLabel10"/>
-                            <af:outputText value="outputText1" id="outputText3"
-                                           inlineStyle="font-weight:bold;"
-                                           binding="#{claim.payeeLabel}"/>
+                            <af:inputText label="Label 9" id="it19" simple="true"
+                                          binding="#{claim.payeeTF}"/>
                             <af:outputLabel value="Dispatch Status"
                                             id="outputLabel11"/>
                             <af:selectOneChoice label="Label 2" id="soc2"

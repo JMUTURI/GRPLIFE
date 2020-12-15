@@ -60,6 +60,8 @@ public class MemCoverClaim {
     private RichPanelTabbed tabbedPanel;
     private RichTable studentsLOV;
     private RichTable memberCovers;
+    private RichInputText srchMemNo;
+    private RichInputText srchMemName;
 
     public MemCoverClaim() {
     }
@@ -409,5 +411,58 @@ public class MemCoverClaim {
       ADFUtils.findIterator("FindMemberCoverDetailsIterator").executeQuery();
       AdfFacesContext.getCurrentInstance().addPartialTarget(coverLOV);
      
+    }
+  public String SearchMembers() {
+      try {
+          if (this.srchMemName.getValue() == null) {
+              this.session.setAttribute("srchMemName", null);
+          } else {
+              this.session.setAttribute("srchMemName",
+                                        this.srchMemName.getValue().toString());
+          }
+          if (this.srchMemNo.getValue() == null) {
+              this.session.setAttribute("srchMemNo", null);
+          } else {
+              this.session.setAttribute("srchMemNo",
+                                        this.srchMemNo.getValue().toString());
+          }
+          ADFUtils.findIterator("FindPolicyMemIterator").executeQuery();
+          AdfFacesContext.getCurrentInstance().addPartialTarget(this.memLOV);
+      } catch (Exception e) {
+          GlobalCC.EXCEPTIONREPORTING(null, e);
+      }
+      return null;
+  }
+  public String ClearSearchMembers() {
+      try {
+          this.session.setAttribute("srchMemName", null);
+          this.session.setAttribute("srchMemNo", null);
+          this.srchMemNo.setValue(null);
+          this.srchMemName.setValue(null);
+          AdfFacesContext.getCurrentInstance().addPartialTarget(this.srchMemNo);
+          AdfFacesContext.getCurrentInstance().addPartialTarget(this.srchMemName);
+
+          ADFUtils.findIterator("FindPolicyMemIterator").executeQuery();
+          AdfFacesContext.getCurrentInstance().addPartialTarget(this.memLOV);
+      } catch (Exception e) {
+          GlobalCC.EXCEPTIONREPORTING(null, e);
+      }
+      return null;
+  }
+
+    public void setSrchMemNo(RichInputText srchMemNo) {
+        this.srchMemNo = srchMemNo;
+    }
+
+    public RichInputText getSrchMemNo() {
+        return srchMemNo;
+    }
+
+    public void setSrchMemName(RichInputText srchMemName) {
+        this.srchMemName = srchMemName;
+    }
+
+    public RichInputText getSrchMemName() {
+        return srchMemName;
     }
 }

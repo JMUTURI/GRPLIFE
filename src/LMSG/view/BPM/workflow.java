@@ -45,6 +45,8 @@ public class workflow {
  private String TaskUserShtDesc;
  private String TaskUserDesc;
  
+ private String TCKT_PRIORITY_LEVEL;
+ 
 
     public void setTaskID(String taskID) {
         this.taskID = taskID;
@@ -308,5 +310,13 @@ public class workflow {
 
     public String getTCKT_REF_NO() {
         return TCKT_REF_NO;
+    }
+
+    public void setTCKT_PRIORITY_LEVEL(String TCKT_PRIORITY_LEVEL) {
+        this.TCKT_PRIORITY_LEVEL = TCKT_PRIORITY_LEVEL;
+    }
+
+    public String getTCKT_PRIORITY_LEVEL() {
+        return TCKT_PRIORITY_LEVEL;
     }
 }

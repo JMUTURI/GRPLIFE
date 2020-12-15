@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
-                version="11.1.1.59.23" id="createTicketsPageDef"
+                version="11.1.1.56.60" id="createTicketsPageDef"
                 Package="view.pageDefs">
   <parameters/>
   <executables>
@@ -37,6 +37,18 @@
     <searchRegion Binds="FindSystemUsersIterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="SettingsQuery"/>
+    <methodIterator Binds="FindClaimTransactions.result" DataControl="ClaimsDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Claims.Claim"
+                    id="FindClaimTransactionsIterator"/>
+    <searchRegion Binds="FindClaimTransactionsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ClaimQuery"/>
+    <methodIterator Binds="FindPolicies.result" DataControl="policiesDAO"
+                    RangeSize="25" BeanClass="LMSG.view.Policy.policies"
+                    id="FindPoliciesIterator"/>
+    <searchRegion Binds="FindPoliciesIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="policiesQuery"/>
   </executables>
   <bindings>
     <methodAction id="findProducts" RequiresUpdateModel="true"
@@ -103,6 +115,36 @@
         <AttrNames>
           <Item Value="USR_NAME"/>
           <Item Value="USR_USERNAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindClaimTransactions" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindClaimTransactions"
+                  IsViewObjectMethod="false" DataControl="ClaimsDAO"
+                  InstanceName="ClaimsDAO.dataProvider"
+                  ReturnName="ClaimsDAO.methodResults.FindClaimTransactions_ClaimsDAO_dataProvider_FindClaimTransactions_result"/>
+    <tree IterBinding="FindClaimTransactionsIterator" id="Claim">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="Claim0">
+        <AttrNames>
+          <Item Value="LTR_CLM_NO"/>
+          <Item Value="LTR_CLIENT"/>
+          <Item Value="LTR_POL_POLICY_NO"/>
+          <Item Value="LTR_MEMBER_DISP"/>
+          <Item Value="LTR_MEM_NO"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="FindPolicies" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="FindPolicies"
+                  IsViewObjectMethod="false" DataControl="policiesDAO"
+                  InstanceName="policiesDAO.dataProvider"
+                  ReturnName="policiesDAO.methodResults.FindPolicies_policiesDAO_dataProvider_FindPolicies_result"/>
+    <tree IterBinding="FindPoliciesIterator" id="policies">
+      <nodeDefinition DefName="LMSG.view.Policy.policies" Name="policies0">
+        <AttrNames>
+          <Item Value="POL_POLICY_NO"/>
+          <Item Value="CLIENT_DISPLAY"/>
+          <Item Value="AGN_NAME"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

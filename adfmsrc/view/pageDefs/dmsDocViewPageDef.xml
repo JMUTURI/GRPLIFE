@@ -1,20 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
-                version="11.1.1.59.23" id="dmsDocViewPageDef"
-                Package="view.pageDefs"
-                ControllerClass="LMSG.view.dms.MedicalDocsRefresh">
+                version="11.1.1.56.60" id="dmsDocViewPageDef"
+                Package="view.pageDefs">
   <parameters/>
   <executables>
+    <variableIterator id="variables"/>
     <iterator Binds="root" RangeSize="25" DataControl="IEDMSDocsDao"
-              id="IEDMSDocsDaoIterator" ChangeEventPolicy="ppr"/>
+              id="IEDMSDocsDaoIterator"/>
+    <accessorIterator MasterBinding="IEDMSDocsDaoIterator" Binds="claimsDocs"
+                      RangeSize="25" DataControl="IEDMSDocsDao"
+                      BeanClass="LMSG.view.dms.DocumentDTO"
+                      id="claimsDocsIterator"/>
+    <searchRegion Binds="claimsDocsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="claimsDocsQuery"/>
     <accessorIterator MasterBinding="IEDMSDocsDaoIterator"
                       Binds="policyDocuments" RangeSize="25"
                       DataControl="IEDMSDocsDao"
                       BeanClass="LMSG.view.dms.DocumentDTO"
-                      id="policyDocumentsIterator" ChangeEventPolicy="ppr"/>
+                      id="policyDocumentsIterator"/>
     <searchRegion Binds="policyDocumentsIterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="policyDocumentsQuery"/>
+    <accessorIterator MasterBinding="IEDMSDocsDaoIterator" Binds="quotationDocs"
+                      RangeSize="25" DataControl="IEDMSDocsDao"
+                      BeanClass="LMSG.view.dms.DocumentDTO"
+                      id="quotationDocsIterator"/>
+    <searchRegion Binds="quotationDocsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="quotationDocsQuery"/>
+    <accessorIterator MasterBinding="IEDMSDocsDaoIterator"
+                      Binds="commissionDocs" RangeSize="25"
+                      DataControl="IEDMSDocsDao"
+                      BeanClass="LMSG.view.dms.DocumentDTO"
+                      id="commissionDocsIterator"/>
+    <searchRegion Binds="commissionDocsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="commissionDocsQuery"/>
+    <accessorIterator MasterBinding="IEDMSDocsDaoIterator" Binds="medicalDocs"
+                      RangeSize="25" DataControl="IEDMSDocsDao"
+                      BeanClass="LMSG.view.dms.DocumentDTO"
+                      id="medicalDocsIterator"/>
+    <searchRegion Binds="medicalDocsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="medicalDocsQuery"/>
+    <accessorIterator MasterBinding="IEDMSDocsDaoIterator" Binds="companyDocs"
+                      RangeSize="25" DataControl="IEDMSDocsDao"
+                      BeanClass="LMSG.view.dms.DocumentDTO"
+                      id="companyDocsIterator"/>
+    <searchRegion Binds="companyDocsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="companyDocsQuery"/>
+    <accessorIterator MasterBinding="IEDMSDocsDaoIterator"
+                      Binds="valuationDocuments" RangeSize="25"
+                      DataControl="IEDMSDocsDao"
+                      BeanClass="LMSG.view.dms.DocumentDTO"
+                      id="valuationDocumentsIterator"/>
+    <searchRegion Binds="valuationDocumentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="valuationDocumentsQuery"/>
     <accessorIterator MasterBinding="IEDMSDocsDaoIterator"
                       Binds="documentComments" RangeSize="25"
                       DataControl="IEDMSDocsDao"
@@ -23,54 +67,10 @@
     <searchRegion Binds="documentCommentsIterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="documentCommentsQuery"/>
-    <accessorIterator MasterBinding="IEDMSDocsDaoIterator" Binds="claimsDocs"
-                      RangeSize="25" DataControl="IEDMSDocsDao"
-                      BeanClass="LMSG.view.dms.DocumentDTO"
-                      id="claimsDocsIterator" ChangeEventPolicy="ppr"/>
-    <searchRegion Binds="claimsDocsIterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  id="claimsDocsQuery"/>
-    <accessorIterator MasterBinding="IEDMSDocsDaoIterator" Binds="quotationDocs"
-                      RangeSize="25" DataControl="IEDMSDocsDao"
-                      BeanClass="LMSG.view.dms.DocumentDTO"
-                      id="quotationDocsIterator" ChangeEventPolicy="ppr"/>
-    <searchRegion Binds="quotationDocsIterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  id="quotationDocsQuery"/>
-    <accessorIterator MasterBinding="IEDMSDocsDaoIterator"
-                      Binds="commissionDocs" RangeSize="25"
-                      DataControl="IEDMSDocsDao"
-                      BeanClass="LMSG.view.dms.DocumentDTO"
-                      id="commissionDocsIterator" ChangeEventPolicy="ppr"/>
-    <searchRegion Binds="commissionDocsIterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  id="commissionDocsQuery"/>
-    <accessorIterator MasterBinding="IEDMSDocsDaoIterator" Binds="medicalDocs"
-                      RangeSize="25" DataControl="IEDMSDocsDao"
-                      BeanClass="LMSG.view.dms.DocumentDTO"
-                      id="medicalDocsIterator" ChangeEventPolicy="ppr"/>
-    <searchRegion Binds="medicalDocsIterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  id="medicalDocsQuery"/>
-    <accessorIterator MasterBinding="IEDMSDocsDaoIterator" Binds="companyDocs"
-                      RangeSize="25" DataControl="IEDMSDocsDao"
-                      BeanClass="LMSG.view.dms.DocumentDTO"
-                      id="companyDocsIterator" ChangeEventPolicy="ppr"/>
-    <searchRegion Binds="companyDocsIterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  id="companyDocsQuery"/>
-    <accessorIterator MasterBinding="IEDMSDocsDaoIterator"
-                      Binds="valuationDocuments" RangeSize="25"
-                      DataControl="IEDMSDocsDao"
-                      BeanClass="LMSG.view.dms.DocumentDTO"
-                      id="valuationDocumentsIterator" ChangeEventPolicy="ppr"/>
-    <searchRegion Binds="valuationDocumentsIterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  id="valuationDocumentsQuery"/>
     <accessorIterator MasterBinding="IEDMSDocsDaoIterator"
                       Binds="memberDocuments" RangeSize="25"
                       DataControl="IEDMSDocsDao"
-                      BeanClass="LMSG.view.dms.DocumentDTO"
+                      BeanClass="LMSG.view.dms.AlfrescoCommentItem"
                       id="memberDocumentsIterator" ChangeEventPolicy="ppr"/>
     <searchRegion Binds="memberDocumentsIterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
@@ -85,28 +85,90 @@
                   id="paymentDocumentsQuery"/>
   </executables>
   <bindings>
+    <tree IterBinding="claimsDocsIterator" id="claimsDocs">
+      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO" Name="claimsDocs0">
+        <AttrNames>
+          <Item Value="docType"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="actualName"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+          <Item Value="id"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
     <tree IterBinding="policyDocumentsIterator" id="policyDocuments">
       <nodeDefinition DefName="LMSG.view.dms.DocumentDTO"
                       Name="policyDocuments0">
         <AttrNames>
-          <Item Value="versionLabel"/>
           <Item Value="docType"/>
           <Item Value="modifiedBy"/>
-          <Item Value="docComments"/>
-          <Item Value="data"/>
-          <Item Value="docAuditUser"/>
-          <Item Value="folders"/>
-          <Item Value="dateReceived"/>
-          <Item Value="docCommentDate"/>
           <Item Value="actualName"/>
-          <Item Value="id"/>
-          <Item Value="errMessage"/>
-          <Item Value="clientName"/>
           <Item Value="name"/>
           <Item Value="dateCreated"/>
-          <Item Value="policyNo"/>
-          <Item Value="claimNo"/>
-          <Item Value="mimeType"/>
+          <Item Value="id"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="quotationDocsIterator" id="quotationDocs">
+      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO" Name="quotationDocs0">
+        <AttrNames>
+          <Item Value="docType"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="actualName"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+          <Item Value="id"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="commissionDocsIterator" id="commissionDocs">
+      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO"
+                      Name="commissionDocs0">
+        <AttrNames>
+          <Item Value="docType"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="actualName"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+          <Item Value="id"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="medicalDocsIterator" id="medicalDocs">
+      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO" Name="medicalDocs0">
+        <AttrNames>
+          <Item Value="docType"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="actualName"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+          <Item Value="id"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="companyDocsIterator" id="companyDocs">
+      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO" Name="companyDocs0">
+        <AttrNames>
+          <Item Value="docType"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="actualName"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+          <Item Value="id"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="valuationDocumentsIterator" id="valuationDocuments">
+      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO"
+                      Name="valuationDocuments0">
+        <AttrNames>
+          <Item Value="docType"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="actualName"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+          <Item Value="id"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -131,149 +193,15 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <tree IterBinding="claimsDocsIterator" id="claimsDocs">
-      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO" Name="claimsDocs0">
-        <AttrNames>
-          <Item Value="versionLabel"/>
-          <Item Value="docType"/>
-          <Item Value="modifiedBy"/>
-          <Item Value="docComments"/>
-          <Item Value="data"/>
-          <Item Value="docAuditUser"/>
-          <Item Value="folders"/>
-          <Item Value="dateReceived"/>
-          <Item Value="docCommentDate"/>
-          <Item Value="actualName"/>
-          <Item Value="id"/>
-          <Item Value="errMessage"/>
-          <Item Value="clientName"/>
-          <Item Value="name"/>
-          <Item Value="dateCreated"/>
-          <Item Value="policyNo"/>
-          <Item Value="claimNo"/>
-          <Item Value="mimeType"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="quotationDocsIterator" id="quotationDocs">
-      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO" Name="quotationDocs0">
-        <AttrNames>
-          <Item Value="versionLabel"/>
-          <Item Value="docType"/>
-          <Item Value="modifiedBy"/>
-          <Item Value="docComments"/>
-          <Item Value="data"/>
-          <Item Value="docAuditUser"/>
-          <Item Value="folders"/>
-          <Item Value="dateReceived"/>
-          <Item Value="docCommentDate"/>
-          <Item Value="actualName"/>
-          <Item Value="id"/>
-          <Item Value="errMessage"/>
-          <Item Value="clientName"/>
-          <Item Value="name"/>
-          <Item Value="dateCreated"/>
-          <Item Value="policyNo"/>
-          <Item Value="claimNo"/>
-          <Item Value="mimeType"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="commissionDocsIterator" id="commissionDocs">
-      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO"
-                      Name="commissionDocs0">
-        <AttrNames>
-         <Item Value="versionLabel"/>
-          <Item Value="docType"/>
-          <Item Value="modifiedBy"/>
-          <Item Value="docComments"/>
-          <Item Value="data"/>
-          <Item Value="docAuditUser"/>
-          <Item Value="folders"/>
-          <Item Value="dateReceived"/>
-          <Item Value="docCommentDate"/>
-          <Item Value="actualName"/>
-          <Item Value="id"/>
-          <Item Value="errMessage"/>
-          <Item Value="clientName"/>
-          <Item Value="name"/>
-          <Item Value="dateCreated"/>
-          <Item Value="policyNo"/>
-          <Item Value="claimNo"/>
-          <Item Value="mimeType"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="medicalDocsIterator" id="medicalDocs">
-      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO" Name="medicalDocs0">
-        <AttrNames>
-          <Item Value="versionLabel"/>
-          <Item Value="docType"/>
-          <Item Value="modifiedBy"/>
-          <Item Value="docComments"/>
-          <Item Value="data"/>
-          <Item Value="docAuditUser"/>
-          <Item Value="folders"/>
-          <Item Value="dateReceived"/>
-          <Item Value="docCommentDate"/>
-          <Item Value="actualName"/>
-          <Item Value="id"/>
-          <Item Value="errMessage"/>
-          <Item Value="clientName"/>
-          <Item Value="name"/>
-          <Item Value="dateCreated"/>
-          <Item Value="policyNo"/>
-          <Item Value="claimNo"/>
-          <Item Value="mimeType"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="companyDocsIterator" id="companyDocs">
-      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO" Name="companyDocs0">
-        <AttrNames>
-          <Item Value="versionLabel"/>
-          <Item Value="docType"/>
-          <Item Value="modifiedBy"/>
-          <Item Value="docComments"/>
-          <Item Value="data"/>
-          <Item Value="docAuditUser"/>
-          <Item Value="folders"/>
-          <Item Value="dateReceived"/>
-          <Item Value="docCommentDate"/>
-          <Item Value="actualName"/>
-          <Item Value="id"/>
-          <Item Value="errMessage"/>
-          <Item Value="clientName"/>
-          <Item Value="name"/>
-          <Item Value="dateCreated"/>
-          <Item Value="mimeType"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="valuationDocumentsIterator" id="valuationDocuments">
-      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO"
-                      Name="valuationDocuments0">
-        <AttrNames>
-          <Item Value="docType"/>
-          <Item Value="modifiedBy"/>
-          <Item Value="actualName"/>
-          <Item Value="id"/>
-          <Item Value="dateCreated"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="documentCommentsIterator" id="documentComments1">
-      <nodeDefinition DefName="LMSG.view.dms.AlfrescoCommentItem"
-                      Name="documentComments10">
-        <AttrNames>
-          <Item Value="content"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
     <tree IterBinding="memberDocumentsIterator" id="memberDocuments">
       <nodeDefinition DefName="LMSG.view.dms.DocumentDTO"
                       Name="memberDocuments0">
         <AttrNames>
+          <Item Value="docType"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="actualName"/>
+          <Item Value="id"/>
+          <Item Value="dateCreated"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

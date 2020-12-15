@@ -795,6 +795,8 @@ public class AgentsManipulation {
           JUCtrlValueBinding nodeBinding = (JUCtrlValueBinding)this.agentsTree.getRowData();
           this.session.setAttribute("AGN_CODE", nodeBinding.getAttribute("agn_code"));
           this.session.setAttribute("agnCode", nodeBinding.getAttribute("agn_code"));
+          this.session.setAttribute("agnShtDesc", nodeBinding.getAttribute("agn_sht_desc"));
+          this.session.setAttribute("agnName", nodeBinding.getAttribute("agn_name"));
           this.session.setAttribute("action", "E");
           this.agentID.setValue(nodeBinding.getAttribute("agn_sht_desc"));
           this.agentName.setValue(nodeBinding.getAttribute("agn_name"));
