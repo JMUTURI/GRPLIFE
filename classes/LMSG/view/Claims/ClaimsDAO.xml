@@ -40,6 +40,9 @@
   <AccessorAttribute id="riRecoverableAmt" IsCollection="true"
                      BeanClass="LMSG.view.Claims.Claim"
                      CollectionBeanClass="UpdateableCollection"/>
+  <AccessorAttribute id="coinRecoverableAmt" IsCollection="true"
+                     BeanClass="LMSG.view.Claims.Claim"
+                     CollectionBeanClass="UpdateableCollection"/>
   <MethodAccessor IsCollection="true" Type="LMSG.view.Claims.Claim"
                   BeanClass="LMSG.view.Claims.Claim"
                   id="FindMembersByTransactions" ReturnNodeName="Claim"

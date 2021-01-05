@@ -30,44 +30,40 @@ import LMSG.view.connect.DBConnector;
 public class workflowDAO extends LOVCC {
     HttpSession session =
         (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-    
-    public List<workflow> findTickets() 
-    {
-        List<Task> Tasks=new ArrayList<Task>();
-        List<workflow> wflow =new ArrayList<workflow>();
-      try 
-      { 
-          wfEngine wf = new wfEngine();
-          Tasks = wf.getTaskList((String)session.getAttribute("Username"));
-          
-          int i = 0;
-          for (Iterator iter = Tasks.iterator(); iter.hasNext();) {
-              Task task = Tasks.get(i);
-              workflow newTasks = new workflow();
- 
-              newTasks.setTaskID(task.getId());
-              newTasks.setTaskActivityName(task.getActivityName());
-              newTasks.setTaskAssignee(task.getAssignee());
-              newTasks.setTaskDuedate(task.getDuedate());
-              newTasks.setTaskCreateDate(task.getCreateTime());
-     
-              wflow.add(newTasks);
 
-              iter.next();
-              i++;
-          }
+    public List<workflow> findTickets() {
+        List<Task> Tasks = new ArrayList<Task>();
+        List<workflow> wflow = new ArrayList<workflow>();
+        try {
+            wfEngine wf = new wfEngine();
+            Tasks = wf.getTaskList((String)session.getAttribute("Username"));
+
+            int i = 0;
+            for (Iterator iter = Tasks.iterator(); iter.hasNext(); ) {
+                Task task = Tasks.get(i);
+                workflow newTasks = new workflow();
+
+                newTasks.setTaskID(task.getId());
+                newTasks.setTaskActivityName(task.getActivityName());
+                newTasks.setTaskAssignee(task.getAssignee());
+                newTasks.setTaskDuedate(task.getDuedate());
+                newTasks.setTaskCreateDate(task.getCreateTime());
+
+                wflow.add(newTasks);
+
+                iter.next();
+                i++;
+            }
 
 
-      }
-      catch(Exception e) 
-      {
-            GlobalCC.EXCEPTIONREPORTING(null,e);
-      }
-      return wflow;
+        } catch (Exception e) {
+            GlobalCC.EXCEPTIONREPORTING(null, e);
+        }
+        return wflow;
     }
-    
+
     public List<workflow> findTicketDetails() {
-        
+
         DBConnector datahandler = new DBConnector();
         Connection conn;
         conn = datahandler.getDatabaseConn();
@@ -76,14 +72,12 @@ public class workflowDAO extends LOVCC {
         List<workflow> msgTemplates = new ArrayList<workflow>();
         ResultSet rs = null;
         try {
-           
-            String msgQuery = 
-            "begin ? := TQC_WEB_PKG.get_tckt_dtls(?); end;";
+
+            String msgQuery = "begin ? := TQC_WEB_PKG.get_tckt_dtls(?); end;";
             cst = conn.prepareCall(msgQuery);
-                      
-            cst.registerOutParameter(1, 
-                                     OracleTypes.CURSOR);
-            cst.setString(2,(String)session.getAttribute("TaskID"));
+
+            cst.registerOutParameter(1, OracleTypes.CURSOR);
+            cst.setString(2, (String)session.getAttribute("TaskID"));
             cst.execute();
             rs = (ResultSet)cst.getObject(1);
             while (rs.next()) {
@@ -98,7 +92,8 @@ public class workflowDAO extends LOVCC {
                 session.setAttribute("ClientCode", rs.getBigDecimal(4));
                 newTasks.setCLIENT(rs.getString(5));
                 newTasks.setTCKT_AGN_CODE(rs.getBigDecimal(6));
-                session.setAttribute("agnCode", rs.getBigDecimal(6)); //LOVCC.agnCode = rs.getBigDecimal(6);
+                session.setAttribute("agnCode",
+                                     rs.getBigDecimal(6)); //LOVCC.agnCode = rs.getBigDecimal(6);
                 newTasks.setAGENT(rs.getString(7));
                 newTasks.setTCKT_POL_CODE(rs.getBigDecimal(8));
                 //LOVCC.policyCode = rs.getBigDecimal(8);
@@ -135,12 +130,13 @@ public class workflowDAO extends LOVCC {
                 newTasks.setTCKT_ENDORSEMENT(rs.getString(23));
                 //LOVCC.Endorsement = rs.getString(23);
                 session.setAttribute("Endorsement", rs.getString(23));
-                session.setAttribute("transactionNumber", rs.getBigDecimal(24));
+                session.setAttribute("transactionNumber",
+                                     rs.getBigDecimal(24));
                 System.out.println(session.getAttribute("transactionNumber"));
                 newTasks.setTCKT_REF_NO(rs.getString(25));
                 session.setAttribute("prpCode", rs.getBigDecimal(26));
 
-                
+
                 msgTemplates.add(newTasks);
             }
             rs.close();
@@ -149,16 +145,16 @@ public class workflowDAO extends LOVCC {
 
 
         } catch (Exception e) {
-            GlobalCC.EXCEPTIONREPORTING(conn,e);
-        }finally{
-        GlobalCC.CloseConnections(rs, cst, conn);
-        }             
-      
+            GlobalCC.EXCEPTIONREPORTING(conn, e);
+        } finally {
+            GlobalCC.CloseConnections(rs, cst, conn);
+        }
+
         return msgTemplates;
     }
-    
+
     public List<workflow> findTicketAssignee() {
-        
+
         DBConnector datahandler = new DBConnector();
         Connection conn;
         conn = datahandler.getDatabaseConn();
@@ -166,60 +162,61 @@ public class workflowDAO extends LOVCC {
         CallableStatement cst = null;
         List<workflow> msgTemplates = new ArrayList<workflow>();
         ResultSet rs = null;
-        
+
         try {
-           
-            String msgQuery = 
-            "begin ? := Tqc_Interfaces_Pkg.get_task_assignee(?,?,?,?,?,?,?,?); end;";
+
+            String msgQuery =
+                "begin ? := Tqc_Interfaces_Pkg.get_task_assignee(?,?,?,?,?,?,?,?); end;";
             cst = conn.prepareCall(msgQuery);
-                      
-            cst.registerOutParameter(1, 
-                                     OracleTypes.CURSOR);
+
+            cst.registerOutParameter(1, OracleTypes.CURSOR);
             cst.setInt(2, (Integer)session.getAttribute("sysCode"));
             cst.setString(3, (String)session.getAttribute("ProcessShtDesc"));
-            cst.setString(4, (String)session.getAttribute("ProcessAreaShtDesc"));
-            cst.setString(5, (String)session.getAttribute("ProcessSubAShtDesc"));
+            cst.setString(4,
+                          (String)session.getAttribute("ProcessAreaShtDesc"));
+            cst.setString(5,
+                          (String)session.getAttribute("ProcessSubAShtDesc"));
             cst.setString(6, (String)session.getAttribute("SumAssured"));
             cst.setString(7, (String)session.getAttribute("DebitCredit"));
-            cst.registerOutParameter(8, 
-                                     OracleTypes.NUMBER);
-            cst.registerOutParameter(9, 
-                                     OracleTypes.VARCHAR);
+            cst.registerOutParameter(8, OracleTypes.NUMBER);
+            cst.registerOutParameter(9, OracleTypes.VARCHAR);
             cst.execute();
+         
             //TaskAssigneeID = cst.getBigDecimal(8);
             //TaskAssignee = cst.getString(9);
             session.setAttribute("TaskAssigneeID", cst.getBigDecimal(8));
             session.setAttribute("TaskAssignee", cst.getString(9));
-            
-            BigDecimal TaskAssID = (BigDecimal)session.getAttribute("TaskAssigneeID");
-        if (TaskAssID == null){
-            rs = (ResultSet)cst.getObject(1);
-            while (rs.next()) {
-                workflow newTasks = new workflow();
-                newTasks.setTaskUserID(rs.getBigDecimal(1));
-                newTasks.setTaskUserShtDesc(rs.getString(2));
-                newTasks.setTaskUserDesc(rs.getString(3));
-                session.setAttribute("NextTaskAssignee", "Y");
 
-                msgTemplates.add(newTasks);
-            }
-            rs.close();
+            BigDecimal TaskAssID =
+                (BigDecimal)session.getAttribute("TaskAssigneeID");
+            if (TaskAssID == null) {
+                rs = (ResultSet)cst.getObject(1);
+                while (rs.next()) {
+                    workflow newTasks = new workflow();
+                    newTasks.setTaskUserID(rs.getBigDecimal(1));
+                    newTasks.setTaskUserShtDesc(rs.getString(2));
+                    newTasks.setTaskUserDesc(rs.getString(3));
+                    session.setAttribute("NextTaskAssignee", "Y");
+
+                    msgTemplates.add(newTasks);
+                }
+                rs.close();
             }
             cst.close();
             conn.close();
 
 
         } catch (Exception e) {
-            GlobalCC.EXCEPTIONREPORTING(conn,e);
-        }finally{
-          GlobalCC.CloseConnections(rs, cst, conn);
-        }             
-      
+            GlobalCC.EXCEPTIONREPORTING(conn, e);
+        } finally {
+            GlobalCC.CloseConnections(rs, cst, conn);
+        }
+
         return msgTemplates;
     }
-    
+
     public List<workflow> findTicketDetailsByUser() {
-        
+
         DBConnector datahandler = new DBConnector();
         Connection conn;
         conn = datahandler.getDatabaseConn();
@@ -227,30 +224,31 @@ public class workflowDAO extends LOVCC {
         List<workflow> msgTemplates = new ArrayList<workflow>();
         ResultSet rs = null;
         try {
-           
-            String msgQuery = 
-            "begin ? := TQC_WEB_PKG.get_tckt_dtls_by_usr_life(?,?,?,?,?); end;";
+
+            String msgQuery =
+                "begin ? := TQC_WEB_PKG.get_tckt_dtls_by_usr_life(?,?,?,?,?); end;";
             cst = conn.prepareCall(msgQuery);
-                      
-            cst.registerOutParameter(1, 
-                                     OracleTypes.CURSOR);
+
+            cst.registerOutParameter(1, OracleTypes.CURSOR);
             String Assig = (String)session.getAttribute("UserSelected");
-            if(Assig == null){
-            cst.setString(2,(String)session.getAttribute("Username"));   
-            }else{
-            cst.setString(2,(String)session.getAttribute("UserSelected"));
+            if (Assig == null) {
+                cst.setString(2, (String)session.getAttribute("Username"));
+            } else {
+                cst.setString(2, (String)session.getAttribute("UserSelected"));
             }
-            cst.setBigDecimal(3,(BigDecimal)session.getAttribute("QuoteCode"));
-            cst.setBigDecimal(4,(BigDecimal)session.getAttribute("policyCode"));
-            cst.setString(5,(String)session.getAttribute("ClaimNo"));
+            cst.setBigDecimal(3,
+                              (BigDecimal)session.getAttribute("QuoteCode"));
+            cst.setBigDecimal(4,
+                              (BigDecimal)session.getAttribute("policyCode"));
+            cst.setString(5, (String)session.getAttribute("ClaimNo"));
             cst.setInt(6, (Integer)session.getAttribute("sysCode"));
-           //System.out.println("policyCode="+session.getAttribute("policyCode")+"\n"+"SysCode"+session.getAttribute("sysCode"));
+            //System.out.println("policyCode="+session.getAttribute("policyCode")+"\n"+"SysCode"+session.getAttribute("sysCode"));
             cst.execute();
-             rs = (ResultSet)cst.getObject(1);                     
+            rs = (ResultSet)cst.getObject(1);
             while (rs.next()) {
                 //System.out.println("here...");
-                workflow newTasks = new workflow();                
-                newTasks.setTCKT_CODE(rs.getBigDecimal(1));                
+                workflow newTasks = new workflow();
+                newTasks.setTCKT_CODE(rs.getBigDecimal(1));
                 newTasks.setTCKT_CDE(rs.getString(1));
                 newTasks.setUSRSYSTEM(rs.getString(2));
                 newTasks.setSYSMODULE(rs.getString(3));
@@ -290,8 +288,8 @@ public class workflowDAO extends LOVCC {
                 newTasks.setTCKT_REF_NO(rs.getString(25));
                 newTasks.setTCKT_PRIORITY_LEVEL(rs.getString(34));
                 msgTemplates.add(newTasks);
-                
-              
+
+
             } // close connection to db,resultset and callable statement
             rs.close();
             cst.close();
@@ -299,13 +297,13 @@ public class workflowDAO extends LOVCC {
 
 
         } catch (Exception e) {
-            GlobalCC.EXCEPTIONREPORTING(conn,e);
+            GlobalCC.EXCEPTIONREPORTING(conn, e);
             e.printStackTrace();
-        }finally{
-        GlobalCC.CloseConnections(rs, cst, conn);
-        }            
-      
+        } finally {
+            GlobalCC.CloseConnections(rs, cst, conn);
+        }
+
         return msgTemplates;
     }
-    
+
 }

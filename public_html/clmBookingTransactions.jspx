@@ -36,7 +36,7 @@
                     <h:panelGrid columns="3">
                       <af:commandButton text="New Booking" id="cb1" icon="/images/save.gif"
                                         action="#{claim.goToBookingTransPage}"/>
-                      <af:commandButton text="Edit Booking" id="cb2" icon="/images/update_ena.png"/>
+                      <af:commandButton text="Edit Booking" id="cb2" icon="/images/update_ena.png" visible="false"/>
                       <af:commandButton text="Delete Booking" id="cb3" icon="/images/delete_ena.png"
                                         action="#{claim.deleteClaimBooking}"/>
                     </h:panelGrid>

@@ -48,6 +48,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
 import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichColumn;
 import oracle.adf.view.rich.component.rich.data.RichTable;
@@ -56,6 +57,7 @@ import oracle.adf.view.rich.component.rich.input.RichInputFile;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
 import oracle.adf.view.rich.component.rich.input.RichSelectBooleanCheckbox;
 import oracle.adf.view.rich.component.rich.input.RichSelectBooleanRadio;
+import oracle.adf.view.rich.component.rich.input.RichSelectItem;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneRadio;
 import oracle.adf.view.rich.component.rich.layout.RichPanelBox;
@@ -355,6 +357,13 @@ public class ClaimManipulation extends LOVCC {
     private RichTable claimBookingLOV;
     private RichTable bookingCoverTypeLOV;
     private RichTable reinsuranceBookingLOV;
+    private RichInputText bookingReserveAmt;
+    private RichInputText bookingRetentionShare;
+    private RichInputText bookingRetentionAmt;
+    private RichInputText bookingReinsuranceShare;
+    private RichInputText bookingReinsuranceAmt;
+    private RichTable bookingCointRecoverableLOV;
+    private RichSelectItem claimOpeningSelect;
 
     public String findProductSelected() {
         DCIteratorBinding dciter =
@@ -384,6 +393,10 @@ public class ClaimManipulation extends LOVCC {
             this.session.setAttribute("policyCode", null);
             String TransType =
                 (String)this.session.getAttribute("ClaimTransactionType");
+            if(TransType == "CO" && r.getAttribute("prodType").equals("PENS")){
+            
+            }
+            
             if (TransType == "RO") {
                 this.enClaimDesc.setValue(null);
 
@@ -10911,7 +10924,7 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
 
     public void selectClaimBookingRecord(SelectionEvent selectionEvent) {
         // Add event code here...
-       Object key2 = this.claimBookingLOV.getSelectedRowData();
+        Object key2 = this.claimBookingLOV.getSelectedRowData();
         if (key2 == null) {
             GlobalCC.errorValueNotEntered("No Record Selected");
         }
@@ -10965,15 +10978,35 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
                                  (BigDecimal)row.getAttribute("CBVT_RESERVE_AMT"));
         }
         this.totalReserveAmt();
-
-        ADFUtils.findIterator("claimBookingCoversIterator").executeQuery();
-        AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingCoverTypeLOV);
         
-        ADFUtils.findIterator("riRecoverableAmtIterator").executeQuery();
-        AdfFacesContext.getCurrentInstance().addPartialTarget(this.reinsuranceBookingLOV);
+      //ADFUtils.findIterator("claimBookingCoversIterator").executeQuery();
+      //AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingCoverTypeLOV);
 
-        GlobalCC.INFORMATIONREPORTING("Cover processing successfull");
+      ADFUtils.findIterator("riRecoverableAmtIterator").executeQuery();
+      AdfFacesContext.getCurrentInstance().addPartialTarget(this.reinsuranceBookingLOV);
+
+      ADFUtils.findIterator("coinRecoverableAmtIterator").executeQuery();
+      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingCointRecoverableLOV);
+      
+     // System.out.println("JOSPHAT TESTING REFRESH");
+      //ADFUtils.findIterator("pendingClaimBookingDtlsIterator").executeQuery();
+      refreshBookingComponents();
+      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingReserveAmt);
+      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingRetentionShare);
+      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingRetentionAmt);
+      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingReinsuranceShare);
+      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingReinsuranceAmt);
+
+      GlobalCC.INFORMATIONREPORTING("Cover processing successfull");
         return null;
+    }
+  private void refreshBookingComponents() {
+  //        ADFUtils.findIterator("EducateOrgDictionaryView2Iterator").executeQuery();
+  //        ADFUtils.findIterator("EducateOrgAvailDictionaryView1Iterator").executeQuery();
+  DCIteratorBinding availIter = ADFUtils.findIterator("pendingClaimBookingDtlsIterator");
+  // availIter.executeQuery(); // doesn't work
+  availIter.getViewObject().executeQuery(); 
+  
     }
 
     public void processBookingCovers(BigDecimal cbvtCode,
@@ -11017,17 +11050,18 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
         } finally {
             GlobalCC.CloseConnections(null, cst, conn);
         }
+    
     }
 
     public String deleteClaimBooking() {
-      Connection conn = null;
-      CallableStatement cst = null;
-      DBConnector connection = new DBConnector();
+        Connection conn = null;
+        CallableStatement cst = null;
+        DBConnector connection = new DBConnector();
         try {
             String sql = "begin lms_claim_booking.deleteclaimbooking(?);end;";
             conn = connection.getDatabaseConn();
             cst = conn.prepareCall(sql);
-            cst.setBigDecimal(1,(BigDecimal)session.getAttribute("cmbCode"));
+            cst.setBigDecimal(1, (BigDecimal)session.getAttribute("cmbCode"));
             cst.execute();
             GlobalCC.CloseConnections(null, cst, conn);
             GlobalCC.INFORMATIONREPORTING("Record deleted successfully");
@@ -11036,8 +11070,8 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
         } finally {
             GlobalCC.CloseConnections(null, cst, conn);
         }
-      ADFUtils.findIterator("pendingClaimBookingIterator").executeQuery();
-      AdfFacesContext.getCurrentInstance().addPartialTarget(this.claimBookingLOV);
+        ADFUtils.findIterator("pendingClaimBookingIterator").executeQuery();
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.claimBookingLOV);
         return null;
     }
 
@@ -11047,5 +11081,223 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
 
     public RichTable getReinsuranceBookingLOV() {
         return reinsuranceBookingLOV;
+    }
+
+    public String authorizeClaimBooking() {
+        // Add event code here...
+        DBConnector myConn = new DBConnector();
+        Connection conn = myConn.getDatabaseConn();
+        CallableStatement cst = null;
+        try {
+            String Rights = null;
+            this.session.setAttribute("ProcessShtDesc", "CLMS");
+            this.session.setAttribute("ProcessAreaShtDesc", "ACCS");
+            this.session.setAttribute("ProcessSubAShtDesc", "ACCS");
+            this.session.setAttribute("ClaimProcessTrans", "Other");
+            this.session.setAttribute("CoverTypeCode", null);
+            this.session.setAttribute("sysCode", 27);
+            this.session.setAttribute("CurrentStatus", "C");
+
+            workflowProcessing wf = new workflowProcessing();
+            wf.FindProcessDetails();
+            Rights = wf.CheckUserRights();
+            if (Rights.equalsIgnoreCase("N")) {
+                String Message =
+                    "You do not have rights to Perform this Task.";
+
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                              Message,
+                                                                              Message));
+
+
+                return null;
+            }
+            String NextUser = null;
+            this.session.setAttribute("ProcessShtDesc", "CLMS");
+            this.session.setAttribute("ProcessAreaShtDesc", "ACCS");
+            this.session.setAttribute("ProcessSubAShtDesc", "ACCS");
+            this.session.setAttribute("TaskAssignee", null);
+            this.session.setAttribute("NextTaskAssignee", "N");
+            ADFUtils.findIterator("findTicketAssigneeIterator").executeQuery();
+            NextUser = (String)this.session.getAttribute("NextTaskAssignee");
+            String TaskAss = (String)this.session.getAttribute("TaskAssignee");
+            if ((TaskAss == null) && (NextUser.equalsIgnoreCase("N"))) {
+                String Message =
+                    "There is no User to Assign the Next Task. Consult the Administrator.";
+
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                              Message,
+                                                                              Message));
+
+
+                return null;
+            }
+            wf.StartNewWorkflowInstance();
+            String Taske = (String)this.session.getAttribute("TaskID");
+            if (Taske == null) {
+                String Message = "No Task Selected";
+                FacesContext.getCurrentInstance().addMessage(null,
+                                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                              Message,
+                                                                              Message));
+
+
+                return null;
+            }
+            Taske = (String)this.session.getAttribute("TaskID");
+            String Complete;
+            if (Taske != null) {
+                String MyTask = null;
+                CallableStatement cst3 = null;
+                Complete =
+                        "BEGIN TQC_WEB_PKG.check_task_completion(?,?,?,?);END;";
+
+
+                cst3 = conn.prepareCall(Complete);
+                cst3.setString(1, "CLMINPUT");
+                cst3.setString(2, (String)this.session.getAttribute("TaskID"));
+                cst3.setInt(3,
+                            ((Integer)this.session.getAttribute("sysCode")).intValue());
+
+                cst3.registerOutParameter(4, 12);
+                cst3.execute();
+                MyTask = cst3.getString(4);
+                cst3.close();
+                if (MyTask.equalsIgnoreCase("N")) {
+                    String Message =
+                        "the Task Selected Does not Correspond to the Activity being Performed. Cannot Complete please " +
+                        this.session.getAttribute("TaskActivityName");
+
+
+                    FacesContext.getCurrentInstance().addMessage(null,
+                                                                 new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                                                  Message,
+                                                                                  Message));
+
+
+                    return null;
+                }
+            }
+            String authorizeBooking =
+                "begin LMS_CLAIM_BOOKING.createclaimtransaction(?,?,?,?);end;";
+
+
+            cst = conn.prepareCall(authorizeBooking);
+            cst.setBigDecimal(1, (BigDecimal)session.getAttribute("cmbCode"));
+            cst.setString(2, (String)this.session.getAttribute("Username"));
+            cst.registerOutParameter(3, OracleTypes.VARCHAR);
+            cst.registerOutParameter(4, OracleTypes.NUMBER);
+            cst.execute();
+            this.session.setAttribute("ClaimNo", cst.getString(3));
+            this.session.setAttribute("ClaimTransNo", cst.getBigDecimal(4));
+            cst.close();
+            conn.close();
+            this.session.setAttribute("ProcessShtDesc", "CLMS");
+            this.session.setAttribute("ProcessAreaShtDesc", "ACCS");
+            this.session.setAttribute("ProcessSubAShtDesc", "ACCS");
+            this.session.setAttribute("sysCode", 27);
+            Rights = wf.CheckUserRights();
+            if (Rights.equalsIgnoreCase("N")) {
+                this.session.setAttribute("TaskAssignee", null);
+                ADFUtils.findIterator("findTicketAssigneeIterator").executeQuery();
+                TaskAss = (String)this.session.getAttribute("TaskAssignee");
+                if (TaskAss == null) {
+                    GetAssignee();
+                    return null;
+                }
+                this.session.setAttribute("TicketRemarks", null);
+                wf.CompleteTask();
+                GlobalCC.INFORMATIONREPORTING("Current Task Complete. The Next Task " +
+                                              (String)this.session.getAttribute("TaskActivityName") +
+                                              " has been Successfully assigned to " +
+                                              (String)this.session.getAttribute("TaskAssignee"));
+
+
+                this.session.setAttribute("TaskID", null);
+                return null;
+            }
+            wf.UpdateWorkflowAttributes();
+            wf.CompleteTask();
+            GlobalCC.RedirectPage("/g_claims.jspx");
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            GlobalCC.EXCEPTIONREPORTING(conn, e);
+        } finally {
+            GlobalCC.CloseConnections(null, cst, conn);
+        }
+        return null;
+    }
+
+    public void setBookingReserveAmt(RichInputText bookingReserveAmt) {
+        this.bookingReserveAmt = bookingReserveAmt;
+    }
+
+    public RichInputText getBookingReserveAmt() {
+        return bookingReserveAmt;
+    }
+
+    public void setBookingRetentionShare(RichInputText bookingRetentionShare) {
+        this.bookingRetentionShare = bookingRetentionShare;
+    }
+
+    public RichInputText getBookingRetentionShare() {
+        return bookingRetentionShare;
+    }
+
+    public void setBookingRetentionAmt(RichInputText bookingRetentionAmt) {
+        this.bookingRetentionAmt = bookingRetentionAmt;
+    }
+
+    public RichInputText getBookingRetentionAmt() {
+        return bookingRetentionAmt;
+    }
+
+    public void setBookingReinsuranceShare(RichInputText bookingReinsuranceShare) {
+        this.bookingReinsuranceShare = bookingReinsuranceShare;
+    }
+
+    public RichInputText getBookingReinsuranceShare() {
+        return bookingReinsuranceShare;
+    }
+
+    public void setBookingReinsuranceAmt(RichInputText bookingReinsuranceAmt) {
+        this.bookingReinsuranceAmt = bookingReinsuranceAmt;
+    }
+
+    public RichInputText getBookingReinsuranceAmt() {
+        return bookingReinsuranceAmt;
+    }
+
+    public void setBookingCointRecoverableLOV(RichTable bookingCointRecoverableLOV) {
+        this.bookingCointRecoverableLOV = bookingCointRecoverableLOV;
+    }
+
+    public RichTable getBookingCointRecoverableLOV() {
+        return bookingCointRecoverableLOV;
+    }
+
+    public void setClaimOpeningSelect(RichSelectItem claimOpeningSelect) {
+        this.claimOpeningSelect = claimOpeningSelect;
+    }
+
+    public RichSelectItem getClaimOpeningSelect() {
+        return claimOpeningSelect;
+    }
+
+    public String showConfirmAuthPopup() {
+        // Add event code here...
+      GlobalCC.showPopup("lmsgroup:confirmAuthorization");
+        return null;
+    }
+
+    public String hideAuthPopup() {
+        // Add event code here...
+        GlobalCC.hidePopup("lmsgroup:confirmAuthorization");
+        return null;
     }
 }

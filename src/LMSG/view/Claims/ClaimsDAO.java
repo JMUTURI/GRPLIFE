@@ -2162,6 +2162,8 @@ public class ClaimsDAO extends LOVCC {
           cst.setBigDecimal(2, (BigDecimal)session.getAttribute("cmbCode"));
           cst.execute();
           rs = (ResultSet)cst.getObject(1);
+          System.out.println("Query Claim Details");
+          
           while (rs.next()) {
               Claim claim = new Claim();
              claim.setMEM_NO_DISP(rs.getString(1));
@@ -2276,5 +2278,40 @@ public class ClaimsDAO extends LOVCC {
       }
 
       return riRecoverableList;
+  }
+  public List<Claim> getCoinRecoverableAmt() {
+      DBConnector myConn = new DBConnector();
+      Connection conn = myConn.getDatabaseConn();
+
+      CallableStatement cst = null;
+      List<Claim> coinRecoverableList = new ArrayList<Claim>();
+      ResultSet rs = null;
+      try {
+          String query =
+              "begin LMS_CLAIM_BOOKING.getcoinrecoverableamt(?,?); end;";
+
+          cst = conn.prepareCall(query);
+          cst.registerOutParameter(1, OracleTypes.CURSOR);
+          cst.setBigDecimal(2,(BigDecimal)session.getAttribute("cmbCode"));
+          cst.execute();
+          rs = (ResultSet)cst.getObject(1);
+          while (rs.next()) {
+              Claim claim = new Claim();
+              claim.setAgnName(rs.getString(1));
+              claim.setRiGlAccount(rs.getString(2));
+              claim.setRecoverableAmt(rs.getBigDecimal(3));
+              coinRecoverableList.add(claim);
+          }
+          rs.close();
+          cst.close();
+          conn.close();
+      } catch (Exception e) {
+      e.printStackTrace();
+          GlobalCC.EXCEPTIONREPORTING(conn, e);
+      } finally {
+          GlobalCC.CloseConnections(rs, cst, conn);
+      }
+
+      return coinRecoverableList;
   }
 }

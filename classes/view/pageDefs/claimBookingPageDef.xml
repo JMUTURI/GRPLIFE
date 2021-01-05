@@ -209,6 +209,13 @@
     <searchRegion Binds="riRecoverableAmtIterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="riRecoverableAmtQuery"/>
+    <accessorIterator MasterBinding="ClaimsDAOIterator"
+                      Binds="coinRecoverableAmt" RangeSize="25"
+                      DataControl="ClaimsDAO" BeanClass="LMSG.view.Claims.Claim"
+                      id="coinRecoverableAmtIterator"/>
+    <searchRegion Binds="coinRecoverableAmtIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="coinRecoverableAmtQuery"/>
   </executables>
   <bindings>
     <methodAction id="FindPolicies" RequiresUpdateModel="true"
@@ -1658,6 +1665,16 @@
     </attributeValues>
     <tree IterBinding="riRecoverableAmtIterator" id="riRecoverableAmt">
       <nodeDefinition DefName="LMSG.view.Claims.Claim" Name="riRecoverableAmt0">
+        <AttrNames>
+          <Item Value="agnName"/>
+          <Item Value="riGlAccount"/>
+          <Item Value="recoverableAmt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="coinRecoverableAmtIterator" id="coinRecoverableAmt">
+      <nodeDefinition DefName="LMSG.view.Claims.Claim"
+                      Name="coinRecoverableAmt0">
         <AttrNames>
           <Item Value="agnName"/>
           <Item Value="riGlAccount"/>

@@ -143,25 +143,30 @@
                                  inlineStyle="font-weight:bold;"/>
                   <af:spacer width="10" height="10" id="s18"/>
                   <af:outputLabel value="Reserve Amount" id="ol19" inlineStyle="text-decoration:underline;"/>
-                  <af:outputText value="#{bindings.CMB_RESERVE_AMT.inputValue}" id="ot29" inlineStyle="font-weight:bold;">
+                  <af:inputText value="#{bindings.CMB_RESERVE_AMT.inputValue}" id="ot29" inlineStyle="font-weight:bold;"
+                                 binding="#{claim.bookingReserveAmt}" readOnly="true">
                     <af:convertNumber groupingUsed="true" type="number" messageDetailConvertNumber="#,###,##"/>
-                  </af:outputText>
+                  </af:inputText>
                   <af:spacer width="10" height="10" id="s19"/>
                   <af:outputLabel value="Retention Share" id="ol20" inlineStyle="text-decoration:underline;"/>
-                  <af:outputText value="#{bindings.CMB_RETENTION_SHARE.inputValue}" id="ot30" inlineStyle="font-weight:bold;"/>
+                  <af:inputText value="#{bindings.CMB_RETENTION_SHARE.inputValue}" id="ot30" inlineStyle="font-weight:bold;"
+                                 binding="#{claim.bookingRetentionShare}" readOnly="true"/>
                   <af:spacer width="10" height="10" id="s20"/>
                   <af:outputLabel value="Retention Amount" id="ol21" inlineStyle="text-decoration:underline;"/>
-                  <af:outputText value="#{bindings.CMB_RETENTION_AMT.inputValue}" id="ot31" inlineStyle="font-weight:bold;">
+                  <af:inputText value="#{bindings.CMB_RETENTION_AMT.inputValue}" id="ot31" inlineStyle="font-weight:bold;"
+                                 binding="#{claim.bookingRetentionAmt}" readOnly="true">
                     <af:convertNumber groupingUsed="true" type="number" messageDetailConvertNumber="#,###,##"/>
-                  </af:outputText>
+                  </af:inputText>
                   <af:spacer width="10" height="10" id="s21"/>
                   <af:outputLabel value="Reinsurance Share" id="ol22" inlineStyle="text-decoration:underline;"/>
-                  <af:outputText value="#{bindings.CMB_REINSURANCE_SHARE.inputValue}" id="ot32" inlineStyle="font-weight:bold;"/>
+                  <af:inputText value="#{bindings.CMB_REINSURANCE_SHARE.inputValue}" id="ot32" inlineStyle="font-weight:bold;"
+                                 binding="#{claim.bookingReinsuranceShare}" readOnly="true"/>
                    <af:spacer width="10" height="10" id="s22"/>
                   <af:outputLabel value="Reinsurance Amount" id="ol23" inlineStyle="text-decoration:underline;"/>
-                  <af:outputText value="#{bindings.CMB_TOT_REINSURANCE_AMT.inputValue}" id="ot33" inlineStyle="font-weight:bold;">
+                  <af:inputText value="#{bindings.CMB_TOT_REINSURANCE_AMT.inputValue}" id="ot33" inlineStyle="font-weight:bold;"
+                                 binding="#{claim.bookingReinsuranceAmt}" readOnly="true">
                     <af:convertNumber groupingUsed="true" type="number" messageDetailConvertNumber="#,###,##"/>
-                  </af:outputText>
+                  </af:inputText>
                 </h:panelGrid>
                 <af:separator id="s16"/>
               </af:panelBox>
@@ -171,8 +176,22 @@
                  <h:panelGrid columns="2" id="pg3">
                     <af:commandButton text="Process" id="cb1"
                                       action="#{claim.processClaimBooking}"/>
-                    <af:commandButton text="Authorize" id="cb2"/>
+                    <af:commandButton text="Authorize" id="cb2"
+                                      action="#{claim.showConfirmAuthPopup}"/>                                      
                   </h:panelGrid>
+                <af:popup id="confirmAuthorization">
+                  <af:dialog id="d1" type="none">
+                    <af:panelBox text="PanelBox4" id="pb6" showHeader="never">
+                      <f:facet name="toolbar"/>
+                      <af:outputLabel value="Are you sure you want to book this claim ? Click Ok to proceed." id="ol24"/>
+                      <h:panelGrid columns="2">
+                        <af:commandButton text="OK" id="cb3" action="#{claim.authorizeClaimBooking}"/>
+                        <af:commandButton text="CANCEL" id="cb4"
+                                          action="#{claim.hideAuthPopup}"/>
+                      </h:panelGrid>
+                    </af:panelBox>
+                  </af:dialog>
+                </af:popup>
                 <af:panelBox text="PanelBox1" id="pb3" showHeader="never">
                 <af:table value="#{bindings.claimBookingCovers.collectionModel}"
                             var="row"
@@ -302,7 +321,43 @@
                   </af:table>
                 </af:panelBox>
               </af:showDetailItem>
-              <af:showDetailItem text="Co-insurance Detail" id="sdi3"/>
+              <af:showDetailItem text="Co-insurance Detail" id="sdi3">
+                <af:panelBox text="PanelBox3" id="pb5" showHeader="never">
+                  <f:facet name="toolbar"/>
+                  <af:table value="#{bindings.coinRecoverableAmt.collectionModel}"
+                            var="row"
+                            rows="#{bindings.coinRecoverableAmt.rangeSize}"
+                            emptyText="#{bindings.coinRecoverableAmt.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            fetchSize="#{bindings.coinRecoverableAmt.rangeSize}"
+                            rowBandingInterval="0"
+                            filterModel="#{bindings.coinRecoverableAmtQuery.queryDescriptor}"
+                            queryListener="#{bindings.coinRecoverableAmtQuery.processQuery}"
+                            filterVisible="true" varStatus="vs"
+                            selectedRowKeys="#{bindings.coinRecoverableAmt.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.coinRecoverableAmt.collectionModel.makeCurrent}"
+                            rowSelection="single" id="t3"
+                            binding="#{claim.bookingCointRecoverableLOV}">
+                    <af:column sortProperty="agnName" filterable="true"
+                               sortable="true"
+                               headerText="Insurance Company"
+                               id="c15">
+                      <af:outputText value="#{row.agnName}" id="ot39"/>
+                    </af:column>
+                    <af:column sortProperty="riGlAccount" filterable="true"
+                               sortable="true"
+                               headerText="Gl Account"
+                               id="c17">
+                      <af:outputText value="#{row.riGlAccount}" id="ot38"/>
+                    </af:column>
+                    <af:column sortProperty="recoverableAmt" filterable="true"
+                               sortable="true"
+                               headerText="Recoverable Amt"
+                               id="c16">
+                      <af:outputText value="#{row.recoverableAmt}" id="ot37"/>
+                    </af:column>
+                  </af:table>
+                </af:panelBox>
+              </af:showDetailItem>
             </af:panelTabbed>
           </af:group>
         </f:facet>

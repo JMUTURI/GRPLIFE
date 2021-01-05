@@ -188,17 +188,17 @@
                                          inlineStyle="width:163.0px;">
                               <f:facet name="toolbar"/>
                               <h:panelGrid columns="2" id="pt_pg10">
-                                <af:spacer width="10" height="10" id="pt_s15"/>
+                                <af:spacer width="10" height="10" id="pt_s15"/>                                               
+                                          
                                 <af:commandLink text="Claims Booking"
+                                                id="pt_cl26"
+                                                action="#{Links.goToClaimOpening}"
+                                                inlineStyle="text-decoration:underline;"/> 
+                               <af:spacer width="10" height="10" id="pt_s17"/>                                
+                                <af:commandLink text="Claims Transactions"
                                                 id="pt_cl9"
                                                 action="#{Links.goToClaimsBooking}"
                                                 inlineStyle="text-decoration:underline;"/>
-                                
-                               <af:spacer width="10" height="10" id="pt_s17"/>                 
-                                <af:commandLink text="Claims Opening"
-                                                id="pt_cl26"
-                                                action="#{Links.goToClaimOpening}"
-                                                inlineStyle="text-decoration:underline;"/>             
                                  <af:spacer width="10" height="10" id="pt_s16" 
                                  rendered="#{Rendering.aiicoVisible}"/>
                                  <af:commandLink text="Multiple Claims Booking"
