@@ -699,6 +699,8 @@ public class workflowProcessing extends LOVCC {
 
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        } finally {
+            GlobalCC.CloseConnections(null, cst, conn);
         }
         return postUndReinsStat;
     }
@@ -1213,6 +1215,9 @@ public class workflowProcessing extends LOVCC {
 
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }
+        finally{
+        GlobalCC.CloseConnections(null, cst, conn);
         }
         return null;
     }

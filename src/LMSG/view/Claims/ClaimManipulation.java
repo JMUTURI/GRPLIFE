@@ -364,6 +364,11 @@ public class ClaimManipulation extends LOVCC {
     private RichInputText bookingReinsuranceAmt;
     private RichTable bookingCointRecoverableLOV;
     private RichSelectItem claimOpeningSelect;
+    private RichInputText studentPhone;
+    private RichInputText studentEmail;
+    private RichInputText payeePhoneNo;
+    private RichInputText payeeEmail;
+    private RichInputText studentIDNumber;
 
     public String findProductSelected() {
         DCIteratorBinding dciter =
@@ -393,10 +398,11 @@ public class ClaimManipulation extends LOVCC {
             this.session.setAttribute("policyCode", null);
             String TransType =
                 (String)this.session.getAttribute("ClaimTransactionType");
-            if(TransType == "CO" && r.getAttribute("prodType").equals("PENS")){
-            
+            if (TransType == "CO" &&
+                r.getAttribute("prodType").equals("PENS")) {
+
             }
-            
+
             if (TransType == "RO") {
                 this.enClaimDesc.setValue(null);
 
@@ -1303,6 +1309,7 @@ public class ClaimManipulation extends LOVCC {
             }
         } catch (Exception ex) {
             GlobalCC.EXCEPTIONREPORTING(conn, ex);
+          GlobalCC.CloseConnections(null, cst3, conn);
         } finally {
             GlobalCC.CloseConnections(null, cst3, conn);
         }
@@ -1846,6 +1853,10 @@ public class ClaimManipulation extends LOVCC {
         this.studentSex.setValue(null);
         this.rsaPin.setValue(null);
         this.agencyDesc.setValue(null);
+        this.studentSharePct.setValue(null);
+        this.studentIDNumber.setValue(null);
+        this.studentPhone.setValue(null);
+        this.studentEmail.setValue(null);
         this.session.setAttribute("gagnCode", null);
         this.session.setAttribute("action", "A");
         GlobalCC.showPopup("lmsgroup:studentDetails");
@@ -1932,13 +1943,23 @@ public class ClaimManipulation extends LOVCC {
                 GlobalCC.INFORMATIONREPORTING("Enter a Share Percentage");
                 return null;
             }
+            if (this.studentPhone.getValue() == null) {
+                GlobalCC.INFORMATIONREPORTING("Phone number is mandatory for all beneficiaries !!!");
+                return null;
+            }
+            if(this.studentEmail.getValue()!=null){
+              if(!GlobalCC.validateEmailAddress(this.studentEmail.getValue().toString())){
+              GlobalCC.INFORMATIONREPORTING("Invalid Email Address");
+              return null;
+              }
+            }
             DBConnector datahandler = null;
             datahandler = new DBConnector();
 
             conn = datahandler.getDatabaseConn();
 
             String reinQuery =
-                "begin LMS_WEB_PKG_GRP_UW.save_beneficiary_dtls(?,?,?,?,?,?,?,?,?,?,?,?); end;";
+                "begin LMS_WEB_PKG_GRP_UW.save_beneficiary_dtls(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); end;";
 
 
             cst = conn.prepareCall(reinQuery);
@@ -1984,6 +2005,21 @@ public class ClaimManipulation extends LOVCC {
                 cst.setString(12, null);
             } else {
                 cst.setString(12, this.rsaPin.getValue().toString());
+            }
+            if (this.studentPhone.getValue() == null) {
+                cst.setString(13, null);
+            } else {
+                cst.setString(13, this.studentPhone.getValue().toString());
+            }
+            if (this.studentEmail.getValue() == null) {
+                cst.setString(14, null);
+            } else {
+                cst.setString(14, this.studentEmail.getValue().toString());
+            }
+            if(this.studentIDNumber.getValue()==null){
+            cst.setString(15, null);
+            }else{
+              cst.setString(15, this.studentIDNumber.getValue().toString());
             }
             cst.execute();
             cst.close();
@@ -3434,8 +3470,13 @@ conn.prepareCall("BEGIN LMS_WEB_CLAIMS_PKG.PROCESS_ANN_PAY_INSTLMNT(?);end;");
                 System.out.println("Dispatch Status is " +
                                    r.getAttribute("CPV_DISCHARGE_STATUS"));
                 this.vchrAccNo.setValue(r.getAttribute("cpv_bbr_acc_no"));
+                this.payeePhoneNo.setValue(r.getAttribute("CPV_PAYEE_TEL"));
+                this.payeeEmail.setValue(r.getAttribute("cpv_email_address"));
+                this.studentIDNumber.setValue(r.getAttribute("cpv_clnt_id_passport_no"));
+                
                 this.session.setAttribute("payMode",
                                           r.getAttribute("cpv_payment_mode"));
+                                          
             }
             ExtendedRenderKitService erkService =
                 (ExtendedRenderKitService)Service.getService(FacesContext.getCurrentInstance().getRenderKit(),
@@ -3678,7 +3719,7 @@ conn.prepareCall("BEGIN LMS_WEB_CLAIMS_PKG.PROCESS_ANN_PAY_INSTLMNT(?);end;");
 
 
                 String AddClaim =
-                    "begin LMS_WEB_CLAIMS_PKG.update_voucher_status(?,?,?);end;";
+                    "begin LMS_WEB_CLAIMS_PKG.update_voucher_status(?,?,?,?,?,?);end;";
 
 
                 cst = conn.prepareCall(AddClaim);
@@ -3688,6 +3729,9 @@ conn.prepareCall("BEGIN LMS_WEB_CLAIMS_PKG.PROCESS_ANN_PAY_INSTLMNT(?);end;");
 
                 cst.setString(2, this.dispStatus.getValue().toString());
                 cst.setString(3, (String)payeeTF.getValue());
+                cst.setString(4, (String)payeePhoneNo.getValue());
+                cst.setString(5, (String)payeeEmail.getValue());
+                cst.setString(6, (String)studentIDNumber.getValue());
 
                 if (this.vchrAccNo.getValue() != null) {
                     this.session.setAttribute("clientAccNo",
@@ -4950,6 +4994,12 @@ conn.prepareCall("BEGIN LMS_WEB_CLAIMS_PKG.PROCESS_ANN_PAY_INSTLMNT(?);end;");
                     GlobalCC.sysInformation("Enter A Payee Name");
                     return null;
                 }
+                if (this.payeeEmail.getValue() != null) {
+                    if (!GlobalCC.validateEmailAddress(this.payeeEmail.getValue().toString())) {
+                        GlobalCC.INFORMATIONREPORTING("Invalid Email address");
+                        return null;
+                    }
+                }
                 SPR_NAME = this.payeeDesc.getValue().toString();
             } else {
                 DCIteratorBinding dciter =
@@ -4968,7 +5018,7 @@ conn.prepareCall("BEGIN LMS_WEB_CLAIMS_PKG.PROCESS_ANN_PAY_INSTLMNT(?);end;");
                 }
             }
             String UpdateClaim =
-                "begin LMS_WEB_PKG_GRP.update_claim_cvr_details(?,?,?,?,?,?,?,?);end;";
+                "begin LMS_WEB_PKG_GRP.update_claim_cvr_details(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);end;";
 
 
             cst = conn.prepareCall(UpdateClaim);
@@ -5002,6 +5052,25 @@ conn.prepareCall("BEGIN LMS_WEB_CLAIMS_PKG.PROCESS_ANN_PAY_INSTLMNT(?);end;");
                 cst.setString(7, "N");
             }
             cst.setString(8, (String)this.session.getAttribute("ClaimNo"));
+            cst.setBigDecimal(9, null);
+            cst.setBigDecimal(10, null);
+            cst.setBigDecimal(11, null);
+            cst.setBigDecimal(12, null);
+            cst.setBigDecimal(13, null);
+            cst.setBigDecimal(14, null);
+            cst.setBigDecimal(15, null);
+            cst.setString(16, "Y");
+            
+            if (this.payeePhoneNo.getValue() == null) {
+                cst.setString(17, null);
+            } else {
+                cst.setString(17, this.payeePhoneNo.getValue().toString());
+            }
+            if (this.payeeEmail.getValue() == null) {
+                cst.setString(18, null);
+            } else {
+                cst.setString(18, this.payeeEmail.getValue().toString());
+            }
             cst.execute();
             cst.close();
 
@@ -8641,12 +8710,12 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
                 AdfFacesContext.getCurrentInstance().addPartialTarget(this.multipleMemLOV);
                 GlobalCC.INFORMATIONREPORTING("member removed successfully ");
             }
-        } catch (Exception e) {
-            e = e;
-            e = e;
+        } catch (Exception e) {           
             GlobalCC.EXCEPTIONREPORTING(null, e);
             e.printStackTrace();
+            GlobalCC.CloseConnections(null, cst, conn);
         } finally {
+          GlobalCC.CloseConnections(null, cst, conn);
         }
         return null;
     }
@@ -9509,6 +9578,7 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
 
         RowKeySet set = this.remarksLOV.getSelectedRowKeys();
         Iterator rowKeySetIter = set.iterator();
+        CallableStatement cst=null;
         try {
             DBConnector MyDB = new DBConnector();
             conn = MyDB.getDatabaseConn();
@@ -9521,7 +9591,7 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
                 Key key = (Key)l.get(0);
                 dciter.setCurrentRowWithKey(key.toStringFormat(true));
                 Row r = dciter.getCurrentRow();
-                CallableStatement cst =
+                cst =
                     conn.prepareCall("BEGIN lms_web_pkg_grp.deleteClmremarks(?);END;");
 
                 cst.setBigDecimal(1, (BigDecimal)r.getAttribute("CRM_CODE"));
@@ -9534,7 +9604,10 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
             }
         } catch (Exception Ex) {
             GlobalCC.EXCEPTIONREPORTING(conn, Ex);
+            GlobalCC.CloseConnections(null, cst, conn);
             Ex.printStackTrace();
+        }finally{
+        
         }
         return null;
     }
@@ -9609,6 +9682,9 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
                 conn.close();
             } catch (Exception e) {
                 GlobalCC.EXCEPTIONREPORTING(conn, e);
+                GlobalCC.CloseConnections(null, lgcallStmt, conn);
+            }finally{
+              GlobalCC.CloseConnections(null, lgcallStmt, conn);
             }
         }
     }
@@ -9715,6 +9791,9 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
                              Remarks);
         } catch (Exception ex) {
             GlobalCC.EXCEPTIONREPORTING(conn, ex);
+            GlobalCC.CloseConnections(null, cst3, conn);
+        }finally{
+          GlobalCC.CloseConnections(null, cst3, conn);
         }
         return null;
     }
@@ -9759,6 +9838,9 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
                 conn.close();
             } catch (Exception e) {
                 GlobalCC.EXCEPTIONREPORTING(conn, e);
+                GlobalCC.CloseConnections(null, lgcallStmt, conn);
+            }finally{
+              GlobalCC.CloseConnections(null, lgcallStmt, conn);
             }
         }
     }
@@ -9791,10 +9873,11 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
             cst.execute();
             cst.close();
         } catch (Exception e) {
-            e = e;
             GlobalCC.EXCEPTIONREPORTING(conn, e);
             e.printStackTrace();
+            GlobalCC.CloseConnections(null, cst, conn);
         } finally {
+          GlobalCC.CloseConnections(null, cst, conn);
         }
         return null;
     }
@@ -9925,10 +10008,11 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
             AdfFacesContext.getCurrentInstance().addPartialTarget(this.claimVouchers);
             AdfFacesContext.getCurrentInstance().addPartialTarget(this.vchrAccNo);
         } catch (Exception e) {
-            e = e;
             GlobalCC.EXCEPTIONREPORTING(conn, e);
             e.printStackTrace();
+          GlobalCC.CloseConnections(null, cst, conn);
         } finally {
+          GlobalCC.CloseConnections(null, cst, conn);
         }
         return null;
     }
@@ -10174,6 +10258,9 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
                 AdfFacesContext.getCurrentInstance().addPartialTarget(this.medReqLOV);
             } catch (Exception e) {
                 GlobalCC.EXCEPTIONREPORTING(conn, e);
+                GlobalCC.CloseConnections(null, cst, conn);
+            }finally{
+              GlobalCC.CloseConnections(null, cst, conn);
             }
         }
         return null;
@@ -10311,6 +10398,9 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
             e.printStackTrace();
+          GlobalCC.CloseConnections(null, cst, conn);
+        }finally{
+          GlobalCC.CloseConnections(null, cst, conn);
         }
         return null;
     }
@@ -10574,6 +10664,9 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
         } catch (Exception ex) {
             ex.printStackTrace();
             GlobalCC.EXCEPTIONREPORTING(conn, ex);
+           GlobalCC.CloseConnections(null, cst, conn);
+        }finally{
+          GlobalCC.CloseConnections(null, cst, conn);
         }
 
         return null;
@@ -10978,35 +11071,37 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
                                  (BigDecimal)row.getAttribute("CBVT_RESERVE_AMT"));
         }
         this.totalReserveAmt();
-        
-      //ADFUtils.findIterator("claimBookingCoversIterator").executeQuery();
-      //AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingCoverTypeLOV);
 
-      ADFUtils.findIterator("riRecoverableAmtIterator").executeQuery();
-      AdfFacesContext.getCurrentInstance().addPartialTarget(this.reinsuranceBookingLOV);
+        //ADFUtils.findIterator("claimBookingCoversIterator").executeQuery();
+        //AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingCoverTypeLOV);
 
-      ADFUtils.findIterator("coinRecoverableAmtIterator").executeQuery();
-      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingCointRecoverableLOV);
-      
-     // System.out.println("JOSPHAT TESTING REFRESH");
-      //ADFUtils.findIterator("pendingClaimBookingDtlsIterator").executeQuery();
-      refreshBookingComponents();
-      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingReserveAmt);
-      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingRetentionShare);
-      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingRetentionAmt);
-      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingReinsuranceShare);
-      AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingReinsuranceAmt);
+        ADFUtils.findIterator("riRecoverableAmtIterator").executeQuery();
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.reinsuranceBookingLOV);
 
-      GlobalCC.INFORMATIONREPORTING("Cover processing successfull");
+        ADFUtils.findIterator("coinRecoverableAmtIterator").executeQuery();
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingCointRecoverableLOV);
+
+        // System.out.println("JOSPHAT TESTING REFRESH");
+        //ADFUtils.findIterator("pendingClaimBookingDtlsIterator").executeQuery();
+        refreshBookingComponents();
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingReserveAmt);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingRetentionShare);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingRetentionAmt);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingReinsuranceShare);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.bookingReinsuranceAmt);
+
+        GlobalCC.INFORMATIONREPORTING("Cover processing successfull");
         return null;
     }
-  private void refreshBookingComponents() {
-  //        ADFUtils.findIterator("EducateOrgDictionaryView2Iterator").executeQuery();
-  //        ADFUtils.findIterator("EducateOrgAvailDictionaryView1Iterator").executeQuery();
-  DCIteratorBinding availIter = ADFUtils.findIterator("pendingClaimBookingDtlsIterator");
-  // availIter.executeQuery(); // doesn't work
-  availIter.getViewObject().executeQuery(); 
-  
+
+    private void refreshBookingComponents() {
+        //        ADFUtils.findIterator("EducateOrgDictionaryView2Iterator").executeQuery();
+        //        ADFUtils.findIterator("EducateOrgAvailDictionaryView1Iterator").executeQuery();
+        DCIteratorBinding availIter =
+            ADFUtils.findIterator("pendingClaimBookingDtlsIterator");
+        // availIter.executeQuery(); // doesn't work
+        availIter.getViewObject().executeQuery();
+
     }
 
     public void processBookingCovers(BigDecimal cbvtCode,
@@ -11050,7 +11145,7 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
         } finally {
             GlobalCC.CloseConnections(null, cst, conn);
         }
-    
+
     }
 
     public String deleteClaimBooking() {
@@ -11291,7 +11386,7 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
 
     public String showConfirmAuthPopup() {
         // Add event code here...
-      GlobalCC.showPopup("lmsgroup:confirmAuthorization");
+        GlobalCC.showPopup("lmsgroup:confirmAuthorization");
         return null;
     }
 
@@ -11300,4 +11395,45 @@ conn.prepareCall("begin LMS_WEB_CLAIMS_PKG.PROCESS_MULTIPLE_CLAIM(?,?);end;");
         GlobalCC.hidePopup("lmsgroup:confirmAuthorization");
         return null;
     }
+
+    public void setStudentPhone(RichInputText studentPhone) {
+        this.studentPhone = studentPhone;
+    }
+
+    public RichInputText getStudentPhone() {
+        return studentPhone;
+    }
+
+    public void setStudentEmail(RichInputText studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+
+    public RichInputText getStudentEmail() {
+        return studentEmail;
+    }
+
+    public void setPayeePhoneNo(RichInputText payeePhoneNo) {
+        this.payeePhoneNo = payeePhoneNo;
+    }
+
+    public RichInputText getPayeePhoneNo() {
+        return payeePhoneNo;
+    }
+
+    public void setPayeeEmail(RichInputText payeeEmail) {
+        this.payeeEmail = payeeEmail;
+    }
+
+    public RichInputText getPayeeEmail() {
+        return payeeEmail;
+    }
+
+    public void setStudentIDNumber(RichInputText studentIDNumber) {
+        this.studentIDNumber = studentIDNumber;
+    }
+
+    public RichInputText getStudentIDNumber() {
+        return studentIDNumber;
+    }
+  
 }

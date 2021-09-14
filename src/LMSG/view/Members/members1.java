@@ -212,6 +212,8 @@ public class members1 {
     private BigDecimal orig_loan_repayment_prd;
     private Date loan_issue_date;
     
+    private String pmem_phone_no,pmem_email_address;
+    
     public void setPOLM_CODE(BigDecimal POLM_CODE) {
         this.POLM_CODE = POLM_CODE;
     }
@@ -1747,5 +1749,21 @@ public class members1 {
 
     public Date getLoan_issue_date() {
         return loan_issue_date;
+    }
+
+    public void setPmem_phone_no(String pmem_phone_no) {
+        this.pmem_phone_no = pmem_phone_no;
+    }
+
+    public String getPmem_phone_no() {
+        return pmem_phone_no;
+    }
+
+    public void setPmem_email_address(String pmem_email_address) {
+        this.pmem_email_address = pmem_email_address;
+    }
+
+    public String getPmem_email_address() {
+        return pmem_email_address;
     }
 }

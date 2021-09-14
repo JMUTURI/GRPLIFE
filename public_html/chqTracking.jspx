@@ -24,9 +24,11 @@
                 <af:selectItem label="Policy Transactions" value="POL"
                                id="si2"/>
                 <af:selectItem label="Service Providers" value="SPR" id="si1"/>
-				<af:selectItem label="Coinsurance Payments" value="COIN" id="sicoin"/>
-				<af:selectItem label="Reinsurance Payments" value="REIN" id="sirein"/>
-				<af:selectItem label="Commission Payments" value="COMM" id="sicomm"/>
+                <af:selectItem label="Coinsurance Payments" value="COIN" id="sicoin"/>
+                <af:selectItem label="Reinsurance Payments" value="REIN" id="sirein"/>
+                <af:selectItem label="Commission Payments" value="COMM" id="sicomm"/>
+                <af:selectItem label="Premium Refund" value="PREF"
+                               id="si4"/>
               </af:selectOneChoice>
 			  <af:outputLabel value="Select Policy" id="outputLabel1X"
                              binding="#{transAlloc.polSelectionLab}"/>

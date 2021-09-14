@@ -1916,7 +1916,7 @@ public class AccountDAO
   public List<Account> findRecoveryPrdSumm()
   {
     DBConnector myConn = new DBConnector();
-    String query = "begin LMS_WEB_CURSOR_GRP.getClaimRIRecoveries(?,?,?,?);end;";
+    String query = "begin LMS_WEB_CURSOR_GRP.getClaimRIRecoveries(?,?,?,?,?,?);end;";
     
     CallableStatement cst = null;
     Connection conn = null;
@@ -1931,6 +1931,8 @@ public class AccountDAO
       cst.setBigDecimal(2, (BigDecimal)this.session.getAttribute("ta_code"));
       cst.setString(3, (String)this.session.getAttribute("DateFrom"));
       cst.setString(4, (String)this.session.getAttribute("DateTo"));
+      cst.setString(5, (String)this.session.getAttribute("periodFrom"));
+      cst.setString(6, (String)this.session.getAttribute("periodTo"));
       cst.execute();
       rst = (ResultSet)cst.getObject(1);
       while (rst.next())
@@ -1947,6 +1949,7 @@ public class AccountDAO
         recovery.setCoverDesc(rst.getString(9));
         recovery.setAgnName(rst.getString(10));
         recovery.setRiPeriod(rst.getString(11));
+        recovery.setCcvtCode(rst.getBigDecimal(13));
         recovery.setRiSelect(false);
         recoveryList.add(recovery);
       }
@@ -1969,7 +1972,7 @@ public class AccountDAO
   public List<Account> findCoinsurancePrdSumm()
   {
     DBConnector myConn = new DBConnector();
-    String query = "begin LMS_WEB_CURSOR_GRP.getClaimCoinRecoveries(?,?,?);end;";
+    String query = "begin LMS_WEB_CURSOR_GRP.getClaimCoinRecoveries(?,?,?,?,?);end;";
     
     CallableStatement cst = null;
     Connection conn = null;
@@ -1983,6 +1986,8 @@ public class AccountDAO
       
       cst.setString(2, (String)this.session.getAttribute("DateFrom"));
       cst.setString(3, (String)this.session.getAttribute("DateTo"));
+      cst.setString(4, (String)this.session.getAttribute("periodFrom"));
+      cst.setString(5, (String)this.session.getAttribute("periodTo"));
       cst.execute();
       rst = (ResultSet)cst.getObject(1);
       while (rst.next())
@@ -1999,7 +2004,8 @@ public class AccountDAO
         coinsurance.setCoinCoverDesc(rst.getString(9));
         coinsurance.setCoinAgnName(rst.getString(10));
         coinsurance.setCoinPeriod(rst.getString(11));
-        coinsurance.setCoinSelect(false);
+        coinsurance.setCcvtCode(rst.getBigDecimal(13));
+        coinsurance.setCoinSelect(false);        
         coinRecoveryList.add(coinsurance);
       }
       rst.close();

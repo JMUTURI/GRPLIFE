@@ -315,6 +315,9 @@ public class XMLPublisher {
                     System.out.println("The receipt code " +
                                        session.getAttribute("GrctCode"));
                 }
+              if (p.getName().equals("V_DRCR_NO")) {
+                  p.setValue(session.getAttribute("drcrNo"));
+              }
 
             }
 

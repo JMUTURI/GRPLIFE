@@ -1,0 +1,114 @@
+<dataTemplate dataSourceRef="AICO_V4" name="debtorsAging" defaultPackage="reports_parameters">
+<properties>
+    <property name="xml_tag_case" value="upper"/>
+</properties>
+<parameters>
+	<parameter name="V_VOUCHER_NO" dataType="varchar2"/>
+</parameters>
+<lexicals>
+</lexicals>
+<dataQuery>
+
+<sqlStatement name="Q_1"> --ORGANIZATION DETAILS.
+    
+SELECT ORG_NAME,ORG_PHY_ADDRS,
+      ORG_ADDRS||' , '||ORG_ZIP||' - '||TWN_NAME||' , '||COU_NAME POSTALADDRESS , 
+      'Telephone'||':'||ORG_TEL1||DECODE(ORG_TEL2 ,NULL,NULL,' /'||ORG_TEL2) TELEPHONE,  
+      'Fax'||':'||ORG_FAX FAX, 
+      'E-mail'||':'||LOWER(ORG_EMAIL_ADDRS) EMAIL,ORG_RPT_LOGO LOGO
+FROM TQC_ORGANIZATIONS, TQC_COUNTRIES, TQC_TOWNS, TQC_SYSTEMS
+WHERE ORG_TWN_CODE = TWN_CODE
+ AND ORG_COU_CODE = COU_CODE
+ AND SYS_ORG_CODE = ORG_CODE
+ AND SYS_SHT_DESC = 'LMS'
+ 
+</sqlStatement>
+<sqlStatement name="RIPAYMENT_QUERY"> 
+SELECT TS_CUMM_CEDED_PREMIUM,TS_CUMM_REIN_COMM,TS_WITHDRAWAL_PROFIT_LOSS,
+       TS_VOUCHER_NO,
+       (SELECT AGN_NAME FROM LMS_AGENCIES WHERE AGN_CODE=NVL(TS_BROKER_AGN_CODE,TS_AGN_CODE))PAYEE,
+        AGN_NAME,TRPA_COMP_RATE ,RPP_AMT_PAYABLE,
+       TA_DESC,TS_UW_YEAR,
+       (SELECT BNK_BANK_NAME||' '||BBR_BRANCH_NAME
+       FROM  TQC_AGENCIES,TQC_BANK_BRANCHES,TQC_BANKS 
+       WHERE AGN_CODE=NVL(TS_BROKER_AGN_CODE,TS_AGN_CODE)
+       AND AGN_BBR_CODE=BBR_CODE
+       AND BBR_BNK_CODE=BNK_CODE)PAYEE_BANK,
+         (SELECT AGN_BANK_ACC_NO
+       FROM  TQC_AGENCIES
+       WHERE AGN_CODE=NVL(TS_BROKER_AGN_CODE,TS_AGN_CODE))ACCOUNT_NO,
+       TS_PREPARED_BY,TO_CHAR(TS_TRAN_DATE,'DD-MON-RRRR')DATE_PREPARED,
+       TS_AUTHORIZED_BY,TO_CHAR(TS_DATE_AUTHORIZED,'DD-MON-RRRR')DATE_AUTHORIZED,
+       TS_CUMM_CLAIMS_PAID,NVL(TS_CUMM_CEDED_PREMIUM,0)-NVL(TS_CUMM_REIN_COMM,0)NET_RI_PREMIUM    
+FROM LMS_TREATY_SUMMARIES,LMS_TREATY_SETUPS,LMS_RI_PARTICIPANT_PAYMENT,LMS_TREATY_PARTICIPANTS,
+     LMS_AGENCIES,LMS_TREATY_ARRANGEMENTS
+WHERE RPP_VOUCHER_NO=TS_VOUCHER_NO
+AND REI_TA_CODE=TS_TA_CODE
+AND REI_UW_YEAR=TS_UW_YEAR
+AND TRPA_AGEN_CODE=RPP_AGN_CODE
+AND TRPA_REI_CODE=REI_CODE
+AND TRPA_AGEN_CODE=AGN_CODE
+AND TS_TA_CODE=TA_CODE
+AND TS_VOUCHER_NO=:V_VOUCHER_NO
+UNION
+SELECT TS_CUMM_CEDED_PREMIUM,TS_CUMM_REIN_COMM,TS_WITHDRAWAL_PROFIT_LOSS,
+       TS_VOUCHER_NO,
+       (SELECT AGN_NAME FROM LMS_AGENCIES WHERE AGN_CODE=NVL(TS_BROKER_AGN_CODE,TS_AGN_CODE))PAYEE,
+        AGN_NAME,NULL TRPA_COMP_RATE ,RPP_AMT_PAYABLE,
+       'NPS COINSURANCE ARRANGEMENT' TA_DESC,TS_UW_YEAR,
+       (SELECT BNK_BANK_NAME||' '||BBR_BRANCH_NAME
+       FROM  TQC_AGENCIES,TQC_BANK_BRANCHES,TQC_BANKS 
+       WHERE AGN_CODE=NVL(TS_BROKER_AGN_CODE,TS_AGN_CODE)
+       AND AGN_BBR_CODE=BBR_CODE
+       AND BBR_BNK_CODE=BNK_CODE)PAYEE_BANK,
+         (SELECT AGN_BANK_ACC_NO
+       FROM  TQC_AGENCIES
+       WHERE AGN_CODE=NVL(TS_BROKER_AGN_CODE,TS_AGN_CODE))ACCOUNT_NO,
+       TS_PREPARED_BY,TO_CHAR(TS_TRAN_DATE,'DD-MON-RRRR')DATE_PREPARED,
+       TS_AUTHORIZED_BY,TO_CHAR(TS_DATE_AUTHORIZED,'DD-MON-RRRR')DATE_AUTHORIZED,
+       TS_CUMM_CLAIMS_PAID,NVL(TS_CUMM_CEDED_PREMIUM,0)-NVL(TS_CUMM_REIN_COMM,0)NET_RI_PREMIUM    
+FROM LMS_TREATY_SUMMARIES,LMS_RI_PARTICIPANT_PAYMENT, LMS_AGENCIES
+WHERE RPP_VOUCHER_NO=TS_VOUCHER_NO
+AND TS_TA_CODE=10000
+AND RPP_AGN_CODE=AGN_CODE
+AND TS_VOUCHER_NO=:V_VOUCHER_NO
+ORDER BY TRPA_COMP_RATE DESC
+</sqlStatement>      
+</dataQuery>
+<dataStructure>
+    
+    <group name="G_ORGANIZATION" dataType="varchar2" source="Q_1">
+     
+         <element name="ORG_NAME" dataType="varchar2" value="ORG_NAME"/>
+         <element name="ORG_PHY_ADDRS" dataType="varchar2" value="ORG_PHY_ADDRS"/>
+         <element name="POSTALADDRESS" dataType="varchar2" value="POSTALADDRESS"/>
+         <element name="TELEPHONE" dataType="varchar2" value="TELEPHONE"/>
+         <element name="FAX" dataType="varchar2" value="FAX"/>
+         <element name="EMAIL" dataType="varchar2" value="EMAIL"/>
+         <element name="LOGO" dataType="longRaw" value="LOGO"/>
+    
+    </group>
+    
+     <group name="G_RIPAYMENT_QUERY" dataType="varchar2" source="RIPAYMENT_QUERY">        
+        <element name="TS_CUMM_CEDED_PREMIUM" dataType="varchar2" value="TS_CUMM_CEDED_PREMIUM"/>
+        <element name="TS_CUMM_REIN_COMM" dataType="varchar2" value="TS_CUMM_REIN_COMM"/>
+        <element name="TS_WITHDRAWAL_PROFIT_LOSS" dataType="varchar2" value="TS_WITHDRAWAL_PROFIT_LOSS"/>
+        <element name="TS_VOUCHER_NO" dataType="varchar2" value="TS_VOUCHER_NO"/>
+        <element name="PAYEE" dataType="varchar2" value="PAYEE"/>
+        <element name="AGN_NAME" dataType="varchar2" value="AGN_NAME"/>
+		<element name="TRPA_COMP_RATE" dataType="varchar2" value="TRPA_COMP_RATE"/>
+		<element name="RPP_AMT_PAYABLE" dataType="varchar2" value="RPP_AMT_PAYABLE"/>
+		<element name="TA_DESC" dataType="varchar2" value="TA_DESC"/>
+		<element name="TS_UW_YEAR" dataType="varchar2" value="TS_UW_YEAR"/>
+		<element name="PAYEE_BANK" dataType="varchar2" value="PAYEE_BANK"/>
+		<element name="ACCOUNT_NO" dataType="varchar2" value="ACCOUNT_NO"/>
+		<element name="TS_PREPARED_BY" dataType="varchar2" value="TS_PREPARED_BY"/>
+		<element name="DATE_PREPARED" dataType="varchar2" value="DATE_PREPARED"/>
+		<element name="DATE_AUTHORIZED" dataType="varchar2" value="DATE_AUTHORIZED"/>
+		<element name="TS_AUTHORIZED_BY" dataType="varchar2" value="TS_AUTHORIZED_BY"/>
+		<element name="TS_CUMM_CLAIMS_PAID" dataType="varchar2" value="TS_CUMM_CLAIMS_PAID"/>
+		<element name="NET_RI_PREMIUM" dataType="varchar2" value="NET_RI_PREMIUM"/>
+		</group>
+       
+</dataStructure>  
+</dataTemplate>

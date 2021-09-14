@@ -74,7 +74,7 @@
     <searchRegion Binds="findArrangementSetups1Iterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="treatyProductsQuery"/>
-<methodIterator Binds="findTreatyLayers.result" DataControl="SetupsDAO"
+    <methodIterator Binds="findTreatyLayers.result" DataControl="SetupsDAO"
                     RangeSize="25" BeanClass="com.turnkey.setups.Setup"
                     id="findTreatyLayersIterator"/>
     <searchRegion Binds="findTreatyLayersIterator" Criteria=""
@@ -91,6 +91,12 @@
     <searchRegion Binds="findOrgCurrenciesIterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="Setup4Query"/>
+    <methodIterator Binds="findReinBrokers.result" DataControl="treatySetupDAO"
+                    RangeSize="25" BeanClass="LMSG.view.setups.treatySetups"
+                    id="findReinBrokersIterator"/>
+    <searchRegion Binds="findReinBrokersIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="treatySetups1Query"/>
   </executables>
   <bindings>
     <methodAction id="findTreatyArrangements" RequiresUpdateModel="true"
@@ -356,6 +362,8 @@
           <Item Value="REI_UW_YEAR"/>
           <Item Value="REI_CEDE_RATE"/>
           <Item Value="REI_ACCOUNTS"/>
+          <Item Value="REI_AGN_CODE"/>
+          <Item Value="AGN_NAME"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -441,17 +449,31 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-        <methodAction id="findOrgCurrencies" RequiresUpdateModel="true"
+    <methodAction id="findOrgCurrencies" RequiresUpdateModel="true"
                   Action="invokeMethod" MethodName="findOrgCurrencies"
                   IsViewObjectMethod="false" DataControl="SetupsDAO"
                   InstanceName="SetupsDAO.dataProvider"
                   ReturnName="SetupsDAO.methodResults.findOrgCurrencies_SetupsDAO_dataProvider_findOrgCurrencies_result"/>
-     <tree IterBinding="findOrgCurrenciesIterator" id="Setup4">
+    <tree IterBinding="findOrgCurrenciesIterator" id="Setup4">
       <nodeDefinition DefName="com.turnkey.setups.Setup" Name="Setup40">
         <AttrNames>
           <Item Value="cur_code"/>
           <Item Value="cur_desc"/>
           <Item Value="cur_symbol"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findReinBrokers" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="findReinBrokers"
+                  IsViewObjectMethod="false" DataControl="treatySetupDAO"
+                  InstanceName="treatySetupDAO.dataProvider"
+                  ReturnName="treatySetupDAO.methodResults.findReinBrokers_treatySetupDAO_dataProvider_findReinBrokers_result"/>
+    <tree IterBinding="findReinBrokersIterator" id="treatySetups1">
+      <nodeDefinition DefName="LMSG.view.setups.treatySetups"
+                      Name="treatySetups10">
+        <AttrNames>
+          <Item Value="AGN_NAME"/>
+          <Item Value="AGN_CODE"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

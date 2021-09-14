@@ -1069,6 +1069,8 @@ public class ClaimsDAO extends LOVCC {
 
                 claim.setCPV_PAYEE_TEL(rs.getString(18));
                 claim.setBBR_BRANCH_NAME(rs.getString(19));
+                claim.setCpv_clnt_id_passport_no(rs.getString(20));   
+                claim.setCpv_email_address(rs.getString(21));
                 claims.add(claim);
             }
             rs.close();

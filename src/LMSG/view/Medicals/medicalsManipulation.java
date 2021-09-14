@@ -1243,6 +1243,7 @@ public class medicalsManipulation
       this.session.setAttribute("PolmMemCode", r.getAttribute("POLM_MEM_CODE"));
       this.session.setAttribute("dmsMemNo", r.getAttribute("POLM_MEM_NO"));
       this.session.setAttribute("dmsMemName", r.getAttribute("MEMBER_DISPLAY"));
+      this.session.setAttribute("MemberSel", r.getAttribute("POLM_CODE"));
       
       ADFUtils.findIterator("FindExistingPoliciesViewIterator").executeQuery();
       AdfFacesContext.getCurrentInstance().addPartialTarget(this.existPolLOV);

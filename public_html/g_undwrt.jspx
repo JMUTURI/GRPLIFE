@@ -4970,6 +4970,12 @@ true);
                                         actionListener="#{ReportsEngine.GetReportDetails}"/>
                         <af:commandLink text="Medical Form" id="rpt3926"
                                         actionListener="#{ReportsEngine.GetReportDetails}"/>
+                       <af:commandLink text="Underwriting Medical Decisions(Standard rates)" id="rpt2250133880"
+                                        actionListener="#{ReportsEngine.GetReportDetails}"/>
+                       <af:commandLink text="Underwriting Medical Decisions(FCL)" id="rpt2250133879"
+                                        actionListener="#{ReportsEngine.GetReportDetails}"/>
+                        <af:commandLink text="Underwriting Medical Decisions(Extra Mortality)" id="rpt2250133878"
+                                        actionListener="#{ReportsEngine.GetReportDetails}"/>               
                       </h:panelGrid>
                       <h:panelGrid columns="2" id="pg43">
                         <af:inputText label="Consultant" id="it33"

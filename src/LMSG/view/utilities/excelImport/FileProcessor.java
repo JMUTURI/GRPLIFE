@@ -33,6 +33,7 @@ public class FileProcessor
   private String filetype;
   private RichInputFile upFile;
   private RichSelectOneRadio templateOption;
+  private RichInputFile reinsuranceFileUpload;
   
   public void setUploadedFile(UploadedFile uploadedFile)
   {
@@ -492,5 +493,33 @@ public class FileProcessor
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, e.getMessage()));
       }
     }
+  }
+  public void fileChangeForReinsuranceRecovery(ValueChangeEvent valueChangeEvent)
+  {
+    PortfolioBean portfolio = new PortfolioBean();
+    if (valueChangeEvent.getNewValue() != valueChangeEvent.getOldValue())
+    {
+      UploadedFile _file = (UploadedFile)valueChangeEvent.getNewValue();
+      this.uploadedFile = _file;
+      this.filename = _file.getFilename();
+      this.filesize = _file.getLength();
+      this.filetype = _file.getContentType();
+      System.out.println("File type =====" + this.filetype);
+      try
+      {
+        portfolio.importReinsuranceData(this.uploadedFile.getInputStream());
+      }
+      catch (Exception e)
+      {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null, e.getMessage()));
+      }
+    }
+  }
+  public void setReinsuranceFileUpload(RichInputFile reinsuranceFileUpload) {
+      this.reinsuranceFileUpload = reinsuranceFileUpload;
+  }
+
+  public RichInputFile getReinsuranceFileUpload() {
+      return reinsuranceFileUpload;
   }
 }

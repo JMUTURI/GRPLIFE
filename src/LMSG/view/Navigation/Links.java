@@ -2325,4 +2325,17 @@ public class Links extends LOVCC{
       }
       return null;
     }
+  public String goToActurialReport() {
+      // Add event code here...
+      try {
+        ReinitializeVar Reset = new ReinitializeVar();
+        Reset.ReinitializeVariables();
+        this.session.setAttribute("TaskID", null);
+        this.session.setAttribute("productCode", null);
+        GlobalCC.RedirectPage("/acturialreport.jspx");
+      } catch (Exception e) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage()));
+      }
+      return null;
+  }
 }

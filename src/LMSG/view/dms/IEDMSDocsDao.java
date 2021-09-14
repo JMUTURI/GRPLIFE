@@ -159,32 +159,35 @@ new URL(utils.findDmsUrl() + "/" + "getGroupNBDocsByPolicyEndoseNo?policyNo=" +
         DMSUtils utils = new DMSUtils();
         ArrayList<String> claimMetadata = new ArrayList<String>();
         claimMetadata = utils.getClaimMetadata();
-        try {
-            URL url =
-                new URL(utils.findDmsUrl() + "/" + "getGroupClaimDocsByClaimNo?claimNo=" +
-                        claimNo);
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Content-Type", "application/json");
-            if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : " +
-                                           conn.getResponseCode());
-            }
-            BufferedReader br =
-                new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        if (claimNo != null) {
+            try {
+                URL url =
+                    new URL(utils.findDmsUrl() + "/" + "getGroupClaimDocsByClaimNo?claimNo=" +
+                            claimNo);
+                HttpURLConnection conn =
+                    (HttpURLConnection)url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Content-Type", "application/json");
+                if (conn.getResponseCode() != 200) {
+                    throw new RuntimeException("Failed : HTTP error code : " +
+                                               conn.getResponseCode());
+                }
+                BufferedReader br =
+                    new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
 
-            //System.out.println("Output from Server .... \n");
-            String output;
-            while ((output = br.readLine()) != null) {
-                // System.out.println(output);
-                Gson gson = new GsonBuilder().create();
-                documents =
-                        gson.fromJson((output).toString(), DocumentDTO[].class);
+                //System.out.println("Output from Server .... \n");
+                String output;
+                while ((output = br.readLine()) != null) {
+                    System.out.println(output);
+                    Gson gson = new GsonBuilder().create();
+                    documents =
+                            gson.fromJson((output).toString(), DocumentDTO[].class);
+                }
+                conn.disconnect();
+            } catch (Exception e) {
+                GlobalCC.EXCEPTIONREPORTING(null, e);
             }
-            conn.disconnect();
-        } catch (Exception e) {
-            GlobalCC.EXCEPTIONREPORTING(null, e);
         }
         return documents;
     }
@@ -270,17 +273,17 @@ new URL(utils.findDmsUrl() + "/" + "getGroupNBDocsByPolicyEndoseNo?policyNo=" +
         ArrayList<String> medMetadata = new ArrayList();
         DocumentDTO[] documents = new DocumentDTO[0];
         String link = utils.findDmsUrl() + "/";
-        String facilitator="";
+        String facilitator = "";
         try {
             BigDecimal facilitatorCode =
                 (BigDecimal)this.session.getAttribute("FacilitatorCode");
             // System.out.println("Facilitator Code " + facilitatorCode);
-            if(facilitatorCode!=null){
-              facilitator=facilitatorCode.toString(); 
+            if (facilitatorCode != null) {
+                facilitator = facilitatorCode.toString();
             }
-            
+
             URL url =
-                new URL(link + "getGroupMedicalDocsByTransNo?transNo=" +facilitator);
+                new URL(link + "getGroupMedicalDocsByTransNo?transNo=" + facilitator);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");
@@ -386,10 +389,10 @@ new URL(utils.findDmsUrl() + "/" + "getGroupNBDocsByPolicyEndoseNo?policyNo=" +
         String link = utils.findDmsUrl() + "/";
 
         try {
-          //System.out.println("Member Link=="+link + "getGroupNBDMemberDocsByNo?memberNo=" + utils.findMemberNo());
+            //System.out.println("Member Link=="+link + "getGroupNBDMemberDocsByNo?memberNo=" + utils.findMemberNo());
             URL url =
                 new URL(link + "getGroupNBDMemberDocsByNo?memberNo=" + utils.findMemberNo());
-            
+
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");
@@ -418,13 +421,13 @@ new URL(utils.findDmsUrl() + "/" + "getGroupNBDocsByPolicyEndoseNo?policyNo=" +
     public DocumentDTO[] getPaymentDocuments() {
         DMSUtils utils = new DMSUtils();
         DocumentDTO[] documents = new DocumentDTO[0];
-        String link = utils.findDmsUrl() + "/getFMSPaymentDocs?chequeNo=" + utils.findCheques() +
-                        "&bankName=" + utils.findBanks();
-        System.out.println("Link "+link);
+        String link =
+            utils.findDmsUrl() + "/getFMSPaymentDocs?chequeNo=" + utils.findCheques() +
+            "&bankName=" + utils.findBanks();
+        System.out.println("Link " + link);
 
         try {
-            URL url =
-                new URL(link);
+            URL url = new URL(link);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");

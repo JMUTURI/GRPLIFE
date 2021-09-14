@@ -21,6 +21,19 @@
                          inlineStyle="padding:1%;" id="pb1">
               <af:outputLabel value="View Transactional Documents #{bindings.policyNumber.inputValue} "
                               inlineStyle="font-weight:bold;" id="ol10"/>
+              <af:panelBox text="PanelBox2" id="pb2" showHeader="never">
+                <f:facet name="toolbar"/>
+                <h:panelGrid id="pg6" columns="2">
+                  <af:commandButton text="Download Documents" id="cb5"
+                                    action="#{iedmsBacking.downClaimDocuments}"/>
+                  <h:panelGrid columns="3" id="pg405xp">
+                    <af:commandButton text="Select All" id="cb18p"
+                                      action="#{iedmsBacking.selectAllClaimDocs}"/>
+                    <af:commandButton text="Unselect All" id="cb19p"
+                                      action="#{iedmsBacking.unselectAllClaimDocs}"/>
+                  </h:panelGrid>
+                </h:panelGrid>
+              </af:panelBox>
               <af:panelTabbed id="pt1" inlineStyle="width:100%;">
                 <af:showDetailItem text="Claim Documents" id="sdi2"
                                    binding="#{transNavDocs.claimsDocTab}"
@@ -43,30 +56,47 @@
                                filterable="true" sortable="true"
                                headerText="#{bindings.claimsDocs.hints.docType.label}"
                                id="c18">
-                      <af:outputText value="#{row.docType}" id="ot2"/>
+                      <af:selectBooleanCheckbox text="" label="Label 1"
+                                                id="sbc1"                                                
+                                                binding="#{iedmsBacking.selectClaimDocsCB}"
+                                                simple="true"
+                                                value="#{row.selectDoc}"
+                                                autoSubmit="true"
+                                                valueChangeListener="#{iedmsBacking.selectClaimDocsListener}"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.claimsDocs.hints.docType.name}"
+                               filterable="true" sortable="true"
+                               headerText="#{bindings.claimsDocs.hints.docType.label}"
+                               id="c43">
+                      <af:outputText value="#{row.docType}"
+                                     id="ot35"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.claimsDocs.hints.modifiedBy.name}"
                                filterable="true" sortable="true"
                                headerText="#{bindings.claimsDocs.hints.modifiedBy.label}"
                                id="c5">
-                      <af:outputText value="#{row.modifiedBy}" id="ot23"/>
+                      <af:outputText value="#{row.modifiedBy}"
+                                     id="ot23"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.claimsDocs.hints.actualName.name}"
                                filterable="true" sortable="true"
                                headerText="#{bindings.claimsDocs.hints.actualName.label}"
                                id="c23">
-                      <af:outputText value="#{row.actualName}" id="ot24"/>
+                      <af:outputText value="#{row.actualName}"
+                                     id="ot24"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.claimsDocs.hints.id.name}"
                                filterable="true" sortable="true"
                                headerText="#{bindings.claimsDocs.hints.id.label}"
                                id="c14">
-                      <af:outputText value="#{row.id}" id="ot19"/>
+                      <af:outputText value="#{row.id}"
+                                     id="ot19"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.claimsDocs.hints.dateCreated.name}"
                                filterable="true" sortable="true"
                                headerText="Date Created" id="c21">
-                      <af:outputText value="#{row.dateCreated}" id="ot12"/>
+                      <af:outputText value="#{row.dateCreated}"
+                                     id="ot12"/>
                     </af:column>
                     <af:column id="c1">
                       <af:commandLink text="View" id="commandLink9092"
@@ -76,6 +106,11 @@
                     <af:column id="column3">
                       <af:commandLink text="Comments" id="commandLink4"
                                       action="#{iedmsBacking.viewClaimComments}"
+                                      rendered="true"/>
+                    </af:column>
+                    <af:column id="c42">
+                      <af:commandLink text="Download" id="cl10"
+                                      action="#{iedmsBacking.downloadClaimDocuments}"
                                       rendered="true"/>
                     </af:column>
                   </af:table>
@@ -142,6 +177,11 @@
                     <af:column id="column4">
                       <af:commandLink text="Comments" id="commandLink5"
                                       action="#{iedmsBacking.viewPolicyComments}"
+                                      rendered="true"/>
+                    </af:column>
+                    <af:column id="c45">
+                      <af:commandLink text="Download" id="cl11"
+                                      action="#{iedmsBacking.downloadUnderwitingDocuments}"
                                       rendered="true"/>
                     </af:column>
                   </af:table>
@@ -443,7 +483,7 @@
                   </af:table>
                 </af:showDetailItem>
                 <af:showDetailItem text="Member Documents" id="sdi6">
-                 <h:panelGrid columns="3" id="pg5">
+                  <h:panelGrid columns="3" id="pg5">
                     <af:commandButton text="Upload Document" id="cb4"
                                       action="#{iedmsBacking.addMemberDocument}"></af:commandButton>
                   </h:panelGrid>
@@ -461,7 +501,7 @@
                             rowSelection="single" id="t9"
                             inlineStyle="width:100%;"
                             binding="#{iedmsBacking.memDocTbl}">
-                            <af:column sortProperty="#{bindings.memberDocuments.hints.docType.name}"
+                    <af:column sortProperty="#{bindings.memberDocuments.hints.docType.name}"
                                filterable="true" sortable="true"
                                headerText="#{bindings.memberDocuments.hints.docType.label}"
                                id="c29">
@@ -501,9 +541,15 @@
                                       action="#{iedmsBacking.viewMemberComments}"
                                       rendered="true" partialTriggers="::t4"/>
                     </af:column>
-                    </af:table>
+                    <af:column id="c46">
+                      <af:commandLink text="Download" id="cl12"
+                                      action="#{iedmsBacking.downloadMemberDocuments}"
+                                      rendered="true" partialTriggers="::t4"/>
+                    </af:column>
+                  </af:table>
                 </af:showDetailItem>
-                <af:showDetailItem text="Payment Documents" id="sdi65" rendered="#{transNavDocs.claimVisible}">
+                <af:showDetailItem text="Payment Documents" id="sdi65"
+                                   rendered="#{transNavDocs.claimVisible}">
                   <af:table value="#{bindings.paymentDocuments1.collectionModel}"
                             var="row"
                             rows="#{bindings.paymentDocuments1.rangeSize}"
@@ -513,40 +559,51 @@
                             filterModel="#{bindings.paymentDocumentsQuery.queryDescriptor}"
                             queryListener="#{bindings.paymentDocumentsQuery.processQuery}"
                             filterVisible="true" varStatus="vs"
-                            selectedRowKeys="#{bindings.paymentDocuments1.collectionModel.selectedRow}"
-                            selectionListener="#{bindings.paymentDocuments1.collectionModel.makeCurrent}"
                             rowSelection="single" id="t10"
                             inlineStyle="width:100%;"
                             binding="#{iedmsBacking.paymentDocTbl}">
+                    <af:column headerText="" id="c35">
+                      <af:selectBooleanCheckbox text="" label="Label 1"
+                                                id="sbc2"
+                                                value="#{row.selectFinanceDoc}"
+                                                simple="true"
+                                                autoSubmit="true"
+                                                valueChangeListener="#{iedmsBacking.selectFinanceDocuments}"/>
+                    </af:column>
                     <af:column sortProperty="#{bindings.paymentDocuments1.hints.docType.name}"
                                filterable="true" sortable="true"
                                headerText="#{bindings.paymentDocuments1.hints.docType.label}"
-                               id="c35">
-                      <af:outputText value="#{row.docType}" id="ot29"/>
+                               id="c44">
+                      <af:outputText value="#{row.docType}"
+                                     id="ot2"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.paymentDocuments1.hints.modifiedBy.name}"
                                filterable="true" sortable="true"
                                headerText="#{bindings.paymentDocuments1.hints.modifiedBy.label}"
                                id="c36">
-                      <af:outputText value="#{row.modifiedBy}" id="ot30"/>
+                      <af:outputText value="#{row.modifiedBy}"
+                                     id="ot30"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.paymentDocuments1.hints.actualName.name}"
                                filterable="true" sortable="true"
                                headerText="#{bindings.paymentDocuments1.hints.actualName.label}"
                                id="c37">
-                      <af:outputText value="#{row.actualName}" id="ot31"/>
+                      <af:outputText value="#{row.actualName}"
+                                     id="ot31"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.paymentDocuments1.hints.id.name}"
                                filterable="true" sortable="true"
                                headerText="#{bindings.paymentDocuments1.hints.id.label}"
                                id="c38">
-                      <af:outputText value="#{row.id}" id="ot32"/>
+                      <af:outputText value="#{row.id}"
+                                     id="ot32"/>
                     </af:column>
                     <af:column sortProperty="#{bindings.paymentDocuments1.hints.dateCreated.name}"
                                filterable="true" sortable="true"
                                headerText="#{bindings.paymentDocuments1.hints.dateCreated.label}"
                                id="c39">
-                      <af:outputText value="#{row.dateCreated}" id="ot33"/>
+                      <af:outputText value="#{row.dateCreated}"
+                                     id="ot33"/>
                     </af:column>
                     <af:column id="c40">
                       <af:commandLink text="View" id="cl8"
@@ -556,6 +613,11 @@
                     <af:column id="c41">
                       <af:commandLink text="Comments" id="cl9"
                                       action="#{iedmsBacking.viewPaymentComments}"
+                                      rendered="true" partialTriggers="::t4"/>
+                    </af:column>
+                    <af:column id="c47">
+                      <af:commandLink text="Download" id="cl13"
+                                      action="#{iedmsBacking.downloadPaymentDocuments}"
                                       rendered="true" partialTriggers="::t4"/>
                     </af:column>
                   </af:table>
@@ -572,9 +634,11 @@
                     <f:selectItems value="#{iedmsBacking.docTypes}" id="si80"/>
                   </af:selectOneChoice>
                   <af:outputLabel value="Claim Type" id="ol2"
-                                  binding="#{iedmsBacking.claimTypeLB}" visible="false"/>
+                                  binding="#{iedmsBacking.claimTypeLB}"
+                                  visible="false"/>
                   <af:selectOneChoice label="Label 51" id="soc1" simple="true"
-                                      binding="#{iedmsBacking.claimTypeSelect}" visible="false">
+                                      binding="#{iedmsBacking.claimTypeSelect}"
+                                      visible="false">
                     <af:selectItem label="LAST EXPENSE" value="LAST EXPENSE"
                                    id="si8"/>
                     <af:selectItem label="MAIN COVER" value="MAIN COVER"
@@ -589,8 +653,8 @@
                                    value="PARTIAL WITHDRAWAL" id="si6"/>
                     <af:selectItem label="WITHDRAWAL" value="WITHDRAWAL"
                                    id="si4"/>
-                    <af:selectItem label="LOSS OF INCOME"
-                                   value="LOSS OF INCOME" id="si3"/>
+                    <af:selectItem label="LOSS OF INCOME" value="LOSS OF INCOME"
+                                   id="si3"/>
                   </af:selectOneChoice>
                   <af:outputLabel value="Upload A Document" id="ol168"/>
                   <af:inputFile label="Label 1" id="if4"
@@ -629,16 +693,19 @@
                     <af:commandButton text="Add Comment" id="cb3"
                                       action="#{iedmsBacking.showCommentPanel}"
                                       binding="#{iedmsBacking.addComment}"
-                                    partialSubmit="true"/>
-                   <af:separator id="s4"/>
+                                      partialSubmit="true"/>
+                    <af:separator id="s4"/>
                     <af:richTextEditor id="commentRTE"
-                                       binding="#{iedmsBacking.commentRTF}" visible="false"/>
+                                       binding="#{iedmsBacking.commentRTF}"
+                                       visible="false"/>
                     <h:panelGrid columns="2" id="pg3">
                       <af:commandButton text="Add Comment" id="ac1"
-                                        binding="#{iedmsBacking.saveCommentBtn}" visible="false" partialSubmit="true"
+                                        binding="#{iedmsBacking.saveCommentBtn}"
+                                        visible="false" partialSubmit="true"
                                         action="#{iedmsBacking.saveDocumentRemarks}"/>
                       <af:commandButton text="Cancel" id="ac2"
-                                        binding="#{iedmsBacking.cancelCommentBtn}" visible="false" partialSubmit="true"
+                                        binding="#{iedmsBacking.cancelCommentBtn}"
+                                        visible="false" partialSubmit="true"
                                         action="#{iedmsBacking.cancelRemarks}"/>
                     </h:panelGrid>
                   </h:panelGrid>

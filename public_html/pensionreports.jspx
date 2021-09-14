@@ -93,10 +93,15 @@
                                             id="rpt2200"
                                             actionListener="#{reportParameterBean.paramReport}"
                                             rendered="#{Rendering.apolloVisible or Rendering.mickVisible}"/>
-							<af:commandLink text="Fund Movement Report"
-                                            id="rpt25520"
-                                            actionListener="#{reportParameterBean.paramReport}"
-                                            rendered="#{Rendering.mickVisible}"/>
+                          <af:commandLink text="Fund Movement Report"
+                                                        id="rpt25520"
+                                                        actionListener="#{reportParameterBean.paramReport}"
+                                                        rendered="#{Rendering.mickVisible}"/>
+                          <af:commandLink text="KILELE Plan Report" 
+                                  id="rpt2250133860"
+                                                        actionListener="#{reportParameterBean.paramReport}"/>
+                         	<af:commandLink text="Pension Receipts" 
+                          id="rpt2250133874" actionListener="#{reportParameterBean.paramReport}"/>                   
                         <af:spacer width="50" height="50" id="s4"/>
                       </h:panelGrid>
                       <h:panelGrid id="pg4" columns="2">
@@ -107,6 +112,9 @@
                         <af:outputLabel value="Withdrawal Reports" id="ol1"
                                         inlineStyle="font-weight:bold;"/>
                         <af:separator id="s2"/>
+						<af:commandLink text="Pension Withdrawal Report" 
+											id="rpt2250133866"
+                                            actionListener="#{reportParameterBean.paramReport}"/>
                       </h:panelGrid>
                     </h:panelGrid>
                   </af:panelBox>

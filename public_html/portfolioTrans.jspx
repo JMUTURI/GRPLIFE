@@ -17,139 +17,143 @@
         </f:facet>
         <f:facet name="center">
           <af:panelGroupLayout id="pgl2">
-            <af:panelAccordion id="pa1" inlineStyle="width:100%;height:600px">
+            <af:panelAccordion id="pa1" inlineStyle="width:100%;height:800px">
               <af:showDetailItem id="sdi1" text="Reinsurance Portfolio">
                 <af:panelBox text="Treaty Arrangements" id="pb1"
                              showDisclosure="false">
                   <f:facet name="toolbar"/>
                   <af:panelBox id="riPanel" showHeader="never"
-                               rendered="#{Rendering.coinsuranceVisible}" inlineStyle="width:100%">
-                  <h:panelGrid columns="6" id="pg1">
-                    <af:outputLabel value="ID" id="ol1"/>
-                    <af:inputText label="Label 16" id="it1" simple="true"
-                                  disabled="true"
-                                  binding="#{portfolio.arrangementId}"
-                                  inlineStyle="font-weight:bold"/>
-                    <af:outputLabel value="Description" id="ol2"/>
-                    <h:panelGrid id="pg2" columns="2">
-                      <af:inputText label="Label 18" id="it3" simple="true"
+                               rendered="#{Rendering.coinsuranceVisible}"
+                               inlineStyle="width:100%">
+                    <h:panelGrid columns="6" id="pg1">
+                      <af:outputLabel value="ID" id="ol1"/>
+                      <af:inputText label="Label 16" id="it1" simple="true"
                                     disabled="true"
-                                    binding="#{portfolio.arrangementDescription}"/>
-                      <af:commandButton id="cb1" icon="/dropdown.gif">
-                        <af:showPopupBehavior popupId="p1"/>
-                      </af:commandButton>
-                      <af:popup id="p1">
-                        <af:dialog id="d2" type="none"
-                                   title="Treaty Arrangements">
-                          <af:table value="#{bindings.treatyArrangements.collectionModel}"
+                                    binding="#{portfolio.arrangementId}"
+                                    inlineStyle="font-weight:bold"/>
+                      <af:outputLabel value="Description" id="ol2"/>
+                      <h:panelGrid id="pg2" columns="2">
+                        <af:inputText label="Label 18" id="it3" simple="true"
+                                      disabled="true"
+                                      binding="#{portfolio.arrangementDescription}"/>
+                        <af:commandButton id="cb1" icon="/dropdown.gif">
+                          <af:showPopupBehavior popupId="p1"/>
+                        </af:commandButton>
+                        <af:popup id="p1">
+                          <af:dialog id="d2" type="none"
+                                     title="Treaty Arrangements">
+                            <af:table value="#{bindings.treatyArrangements.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.treatyArrangements.rangeSize}"
+                                      emptyText="#{bindings.treatyArrangements.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.treatyArrangements.rangeSize}"
+                                      rowBandingInterval="0"
+                                      filterModel="#{bindings.treatyArrangementsQuery.queryDescriptor}"
+                                      queryListener="#{bindings.treatyArrangementsQuery.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectionListener="#{bindings.treatyArrangements.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t1"
+                                      inlineStyle="width:100%;height:180px"
+                                      binding="#{portfolio.treatyArrangementLOV}">
+                              <af:column sortProperty="ta_code"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.treatyArrangements.hints.ta_code.label}"
+                                         id="c7" visible="false">
+                                <af:outputText value="#{row.ta_code}" id="ot4"/>
+                              </af:column>
+                              <af:column sortProperty="TA_SHT_DESC"
+                                         filterable="true" sortable="true"
+                                         headerText="Id" id="c2">
+                                <af:outputText value="#{row.TA_SHT_DESC}"
+                                               id="ot6"/>
+                              </af:column>
+                              <af:column sortProperty="TA_DESC"
+                                         filterable="true" sortable="true"
+                                         headerText="Description" id="c8">
+                                <af:outputText value="#{row.TA_DESC}" id="ot7"/>
+                              </af:column>
+                              <af:column sortProperty="TA_TYPE"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.treatyArrangements.hints.TA_TYPE.label}"
+                                         id="c4" visible="false">
+                                <af:outputText value="#{row.TA_TYPE}" id="ot5"/>
+                              </af:column>
+                            </af:table>
+                            <h:panelGrid id="pg3" columns="2">
+                              <af:commandButton text="OK" id="cb2"
+                                                action="#{portfolio.selectTreatyArrangement}"/>
+                              <af:commandButton text="CANCEL" id="cb3"/>
+                            </h:panelGrid>
+                          </af:dialog>
+                        </af:popup>
+                      </h:panelGrid>
+                      <af:outputLabel value="Type" id="ol3"/>
+                      <af:inputText label="Label 17" id="it2" simple="true"
+                                    disabled="true"
+                                    binding="#{portfolio.arrangementType}"/>
+                      <af:outputLabel value="UW Year" id="ol4"
+                                      rendered="false"/>
+                      <h:panelGrid columns="2" id="pg4" rendered="false">
+                        <af:inputText label="Label 19" id="it4" simple="true"
+                                      columns="4" disabled="true"
+                                      binding="#{portfolio.yearTF}"/>
+                        <af:commandButton id="cb4" icon="/dropdown.gif">
+                          <af:showPopupBehavior popupId="p2"/>
+                        </af:commandButton>
+                      </h:panelGrid>
+                      <af:popup id="p2">
+                        <af:dialog id="d3" title="Underwriting Year"
+                                   type="none">
+                          <af:table value="#{bindings.arrangementSetups.collectionModel}"
                                     var="row"
-                                    rows="#{bindings.treatyArrangements.rangeSize}"
-                                    emptyText="#{bindings.treatyArrangements.viewable ? 'No data to display.' : 'Access Denied.'}"
-                                    fetchSize="#{bindings.treatyArrangements.rangeSize}"
+                                    rows="#{bindings.arrangementSetups.rangeSize}"
+                                    emptyText="#{bindings.arrangementSetups.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.arrangementSetups.rangeSize}"
                                     rowBandingInterval="0"
-                                    filterModel="#{bindings.treatyArrangementsQuery.queryDescriptor}"
-                                    queryListener="#{bindings.treatyArrangementsQuery.processQuery}"
+                                    filterModel="#{bindings.arrangementSetupsQuery.queryDescriptor}"
+                                    queryListener="#{bindings.arrangementSetupsQuery.processQuery}"
                                     filterVisible="true" varStatus="vs"
-                                    selectionListener="#{bindings.treatyArrangements.collectionModel.makeCurrent}"
-                                    rowSelection="single" id="t1"
-                                    inlineStyle="width:100%;height:180px"
-                                    binding="#{portfolio.treatyArrangementLOV}">
-                            <af:column sortProperty="ta_code" filterable="true"
-                                       sortable="true"
-                                       headerText="#{bindings.treatyArrangements.hints.ta_code.label}"
-                                       id="c7" visible="false">
-                              <af:outputText value="#{row.ta_code}" id="ot4"/>
+                                    selectionListener="#{bindings.arrangementSetups.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t2"
+                                    binding="#{portfolio.arrangementYearLOV}"
+                                    inlineStyle="width:100%;height:150px">
+                            <af:column sortProperty="AS_UWYR" filterable="true"
+                                       sortable="true" headerText="U/W Year"
+                                       id="c3">
+                              <af:outputText value="#{row.AS_UWYR}" id="ot2"/>
                             </af:column>
-                            <af:column sortProperty="TA_SHT_DESC"
+                            <af:column sortProperty="AS_CODE" filterable="true"
+                                       sortable="true"
+                                       headerText="#{bindings.arrangementSetups.hints.AS_CODE.label}"
+                                       visible="false" id="c6">
+                              <af:outputText value="#{row.AS_CODE}" id="ot9"/>
+                            </af:column>
+                            <af:column sortProperty="AS_TA_CODE"
                                        filterable="true" sortable="true"
-                                       headerText="Id" id="c2">
-                              <af:outputText value="#{row.TA_SHT_DESC}"
-                                             id="ot6"/>
+                                       headerText="#{bindings.arrangementSetups.hints.AS_TA_CODE.label}"
+                                       visible="false" id="c1">
+                              <af:outputText value="#{row.AS_TA_CODE}"
+                                             id="ot8"/>
                             </af:column>
-                            <af:column sortProperty="TA_DESC" filterable="true"
-                                       sortable="true" headerText="Description"
-                                       id="c8">
-                              <af:outputText value="#{row.TA_DESC}" id="ot7"/>
-                            </af:column>
-                            <af:column sortProperty="TA_TYPE" filterable="true"
-                                       sortable="true"
-                                       headerText="#{bindings.treatyArrangements.hints.TA_TYPE.label}"
-                                       id="c4" visible="false">
-                              <af:outputText value="#{row.TA_TYPE}" id="ot5"/>
+                            <af:column sortProperty="AS_RETENTION_LIMIT"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.arrangementSetups.hints.AS_RETENTION_LIMIT.label}"
+                                       id="c5" visible="false">
+                              <af:outputText value="#{row.AS_RETENTION_LIMIT}"
+                                             id="ot3"/>
                             </af:column>
                           </af:table>
-                          <h:panelGrid id="pg3" columns="2">
-                            <af:commandButton text="OK" id="cb2"
-                                              action="#{portfolio.selectTreatyArrangement}"/>
-                            <af:commandButton text="CANCEL" id="cb3"/>
+                          <h:panelGrid id="pg5" columns="2">
+                            <af:commandButton text="OK" id="cb5"
+                                              action="#{portfolio.findSelectedYear}"/>
+                            <af:commandButton text="CANCEL" id="cb6"/>
                           </h:panelGrid>
                         </af:dialog>
                       </af:popup>
                     </h:panelGrid>
-                    <af:outputLabel value="Type" id="ol3"/>
-                    <af:inputText label="Label 17" id="it2" simple="true"
-                                  disabled="true"
-                                  binding="#{portfolio.arrangementType}"/>
-                    <af:outputLabel value="UW Year" id="ol4" rendered="false"/>
-                    <h:panelGrid columns="2" id="pg4" rendered="false">
-                      <af:inputText label="Label 19" id="it4" simple="true"
-                                    columns="4" disabled="true"
-                                    binding="#{portfolio.yearTF}"/>
-                      <af:commandButton id="cb4" icon="/dropdown.gif">
-                        <af:showPopupBehavior popupId="p2"/>
-                      </af:commandButton>
-                    </h:panelGrid>
-                    <af:popup id="p2">
-                      <af:dialog id="d3" title="Underwriting Year" type="none">
-                        <af:table value="#{bindings.arrangementSetups.collectionModel}"
-                                  var="row"
-                                  rows="#{bindings.arrangementSetups.rangeSize}"
-                                  emptyText="#{bindings.arrangementSetups.viewable ? 'No data to display.' : 'Access Denied.'}"
-                                  fetchSize="#{bindings.arrangementSetups.rangeSize}"
-                                  rowBandingInterval="0"
-                                  filterModel="#{bindings.arrangementSetupsQuery.queryDescriptor}"
-                                  queryListener="#{bindings.arrangementSetupsQuery.processQuery}"
-                                  filterVisible="true" varStatus="vs"
-                                  selectionListener="#{bindings.arrangementSetups.collectionModel.makeCurrent}"
-                                  rowSelection="single" id="t2"
-                                  binding="#{portfolio.arrangementYearLOV}"
-                                  inlineStyle="width:100%;height:150px">
-                          <af:column sortProperty="AS_UWYR" filterable="true"
-                                     sortable="true" headerText="U/W Year"
-                                     id="c3">
-                            <af:outputText value="#{row.AS_UWYR}" id="ot2"/>
-                          </af:column>
-                          <af:column sortProperty="AS_CODE" filterable="true"
-                                     sortable="true"
-                                     headerText="#{bindings.arrangementSetups.hints.AS_CODE.label}"
-                                     visible="false" id="c6">
-                            <af:outputText value="#{row.AS_CODE}" id="ot9"/>
-                          </af:column>
-                          <af:column sortProperty="AS_TA_CODE" filterable="true"
-                                     sortable="true"
-                                     headerText="#{bindings.arrangementSetups.hints.AS_TA_CODE.label}"
-                                     visible="false" id="c1">
-                            <af:outputText value="#{row.AS_TA_CODE}" id="ot8"/>
-                          </af:column>
-                          <af:column sortProperty="AS_RETENTION_LIMIT"
-                                     filterable="true" sortable="true"
-                                     headerText="#{bindings.arrangementSetups.hints.AS_RETENTION_LIMIT.label}"
-                                     id="c5" visible="false">
-                            <af:outputText value="#{row.AS_RETENTION_LIMIT}"
-                                           id="ot3"/>
-                          </af:column>
-                        </af:table>
-                        <h:panelGrid id="pg5" columns="2">
-                          <af:commandButton text="OK" id="cb5"
-                                            action="#{portfolio.findSelectedYear}"/>
-                          <af:commandButton text="CANCEL" id="cb6"/>
-                        </h:panelGrid>
-                      </af:dialog>
-                    </af:popup>
-                  </h:panelGrid>
-                  </af:panelBox>                  
+                  </af:panelBox>
                   <af:panelBox text="Select Period" id="pb2"
-                               inlineStyle="width:100%;" showDisclosure="false" >
+                               inlineStyle="width:100%;" showDisclosure="false">
                     <f:facet name="toolbar"/>
                     <af:inputText label="Label 14" id="it14"
                                   binding="#{portfolio.txtPremPortfolio}"
@@ -171,8 +175,7 @@
                                 rowSelection="single" id="t3"
                                 binding="#{portfolio.treatiesLOV}"
                                 inlineStyle="width:100%;height:100px"
-                                visible="false"
-                                >
+                                visible="false">
                         <af:column sortProperty="REI_TRS_SHT_DESC"
                                    filterable="true" sortable="true"
                                    headerText="Treaty" id="c11">
@@ -209,26 +212,44 @@
                                          id="ot25"/>
                         </af:column>
                       </af:table>
-                      <af:spacer width="20" height="10" id="s1"/>
-                      <h:panelGrid columns="2">
-                        <af:outputLabel value="Date From" id="ol25"/>
-                        <af:inputDate label="Label 1" id="id1" simple="true"
-                                      binding="#{portfolio.dateFrom}">
-                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
-                        </af:inputDate>
-                        <af:outputLabel value="Date To" id="ol26"/>
-                        <af:inputDate label="Label 2" id="id2" simple="true"
-                                      binding="#{portfolio.dateTo}">
-                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
-                        </af:inputDate>
+                      <!--<af:spacer width="20" height="10" id="s1"/>-->
+                      <h:panelGrid columns="3" id="pg10">
+                        <h:panelGrid columns="2" id="pg11" style="border-style:dotted; border-color:Black; border-width:thin;">
+                          <af:outputLabel value="Payment Date From" id="ol25" rendered="#{!Rendering.riCedingVisible}"/>
+                          <af:outputLabel value="Date From" id="ol9" rendered="#{Rendering.riCedingVisible}"/>
+                          <af:inputDate label="Label 1" id="id1" simple="true"
+                                        binding="#{portfolio.dateFrom}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                          </af:inputDate>
+                          <af:outputLabel value="Payment Date To" id="ol26" rendered="#{!Rendering.riCedingVisible}"/>
+                          <af:outputLabel value="Date To" id="ol10" rendered="#{Rendering.riCedingVisible}"/>
+                          <af:inputDate label="Label 2" id="id2" simple="true"
+                                        binding="#{portfolio.dateTo}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                          </af:inputDate>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">                      
                         <af:commandButton text="Search" id="cb8"
-                                          action="#{portfolio.searchPortfolioRecords}"/>
+                                          action="#{portfolio.searchPortfolioRecords}" icon="/images/done.png"/>
                       </h:panelGrid>
+                        <h:panelGrid columns="2" style="border-style:dotted; border-color:Black; border-width:thin;"  rendered="#{!Rendering.riCedingVisible}">
+                          <af:outputLabel value="Period From" id="ol7"/>
+                          <af:inputDate label="Label 1" id="id3" simple="true" binding="#{portfolio.periodDateFrom}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                          </af:inputDate>
+                          <af:outputLabel value="Period To" id="ol8"/>
+                          <af:inputDate label="Label 2" id="id5" simple="true" binding="#{portfolio.periodDateTo}">
+                            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                          </af:inputDate>
+                        </h:panelGrid>
+                      </h:panelGrid>
+                      
                     </h:panelGrid>
                   </af:panelBox>
                 </af:panelBox>
                 <af:panelTabbed id="pt2" inlineStyle="width:100%;">
-                  <af:showDetailItem text="Treaty Period Summaries" id="sdi2" rendered="#{Rendering.riCedingVisible}">
+                  <af:showDetailItem text="Treaty Period Summaries" id="sdi2"
+                                     rendered="#{Rendering.riCedingVisible}">
                     <af:inputText label="Label 9" id="it9"
                                   binding="#{portfolio.txtPrtsFiscalYear}"
                                   visible="false"/>
@@ -296,35 +317,49 @@
                       <af:column sortProperty="prtsCededPremium"
                                  filterable="true" sortable="true"
                                  headerText="Ri Prem" id="c20">
-                        <af:outputText value="#{row.prtsCededPremium}"
-                                       id="ot12" converter="javax.faces.Number" />
-                      </af:column>                      
+                        <af:outputText value="#{row.prtsCededPremium}" id="ot12"
+                                       converter="javax.faces.Number"/>
+                      </af:column>
                       <af:column sortProperty="prtsReinPRemTax"
                                  filterable="true" sortable="true"
                                  headerText="RI Prem Tax" id="c15">
                         <af:outputText value="#{row.prtsReinPRemTax}"
                                        id="ot18"/>
                       </af:column>
-                      
                       <af:column sortProperty="prtsReinComm" filterable="true"
                                  sortable="true" headerText="Comm" id="c21">
-                        <af:outputText value="#{row.prtsReinComm}" id="ot22" converter="javax.faces.Number"/>
+                        <af:outputText value="#{row.prtsReinComm}" id="ot22"
+                                       converter="javax.faces.Number"/>
                       </af:column>
                       <af:column sortProperty="prtsClaimsPaid" filterable="true"
                                  sortable="true" headerText="Claims Recoveries"
                                  id="c16">
-                        <af:outputText value="#{row.prtsClaimsPaid}" id="ot19" converter="javax.faces.Number"/>
+                        <af:outputText value="#{row.prtsClaimsPaid}" id="ot19"
+                                       converter="javax.faces.Number"/>
                       </af:column>
-                      
                     </af:table>
                     <h:panelGrid columns="2" id="pg6">
                       <af:commandButton text="Process" id="cb7"
                                         action="#{portfolio.processTreatySummaries}"/>
                     </h:panelGrid>
                   </af:showDetailItem>
-                  
-                  <af:showDetailItem text="Reinsurance Recovery Period Summary" id="sdii33x" rendered="#{Rendering.riRecoveryVisible}">
-                  
+                  <af:showDetailItem text="Reinsurance Recovery Period Summary"
+                                     id="sdii33x"
+                                     rendered="#{Rendering.riRecoveryVisible}">
+                    <!--<h:panelGrid columns="2">
+                      <af:commandButton text="Select All" id="cb16"
+                                        action="#{portfolio.selectAllRIRecovery}"/>
+                      <af:commandButton text="Unselect All" id="cb17"
+                                        action="#{portfolio.unselectAllRIRecoveries}"/>
+                    </h:panelGrid>-->
+                    <h:panelGrid columns="2" id="pg12">
+                       <af:inputFile label="File To Upload" autoSubmit="true"
+                                      valueChangeListener="#{portfolio.fileChangeForReinsuranceRecovery}"
+                                      immediate="true" id="if1x"
+                                     binding="#{FileProcessor.reinsuranceFileUpload}"/>
+                      <af:commandLink text="[Export Reinsurance Recovery Data]" id="cl2"
+                                      action="#{portfolio.exportRIData}" inlineStyle="font-weight:bold"/>
+                    </h:panelGrid>
                     <af:table value="#{bindings.Account4.collectionModel}"
                               var="row" rows="#{bindings.Account4.rangeSize}"
                               emptyText="#{bindings.Account4.viewable ? 'No data to display.' : 'Access Denied.'}"
@@ -332,94 +367,101 @@
                               rowBandingInterval="0"
                               filterModel="#{bindings.Account4Query.queryDescriptor}"
                               queryListener="#{bindings.Account4Query.processQuery}"
-                              filterVisible="true" varStatus="vs" rowSelection="single" id="t9"
+                              filterVisible="true" varStatus="vs"
+                              rowSelection="single" id="t9"
                               binding="#{portfolio.riRecoveryDAO}"
-                              inlineStyle="width:100%; height:210px;">
-                     <af:column sortProperty="crctdCode" filterable="true"
+                              inlineStyle="width:100%; height:210px;"
+                              selectionListener="#{portfolio.recoverySelectionListener}">
+                      <af:column sortProperty="crctdCode" filterable="true"
                                  sortable="true"
                                  headerText="#{bindings.Account4.hints.crctdCode.label}"
-                                 id="c47"
-                                 visible="false">
+                                 id="c47" visible="false">
                         <af:outputText value="#{row.crctdCode}" id="ot49"/>
                       </af:column>
                       <af:column sortProperty="crctdCode" filterable="false"
-                                 sortable="true"
-                                 id="c47x"
-                                 width="20">
-                        <af:selectBooleanCheckbox label="Label 2" id="sbc2" simple="true"
-                        value="#{row.riSelect}"/>
+                                 sortable="false" id="c47x" width="20">
+                        <af:selectBooleanCheckbox label="Label 2" id="sbc2"
+                                                  simple="true"
+                                                  value="#{row.riSelect}"
+                                                  autoSubmit="true"
+                                                  valueChangeListener="#{portfolio.selectRIRecord}"/>
+                        <f:facet name="header">
+                          <af:selectBooleanCheckbox text="" label="Label 3"
+                                                    id="sbc5" simple="true"
+                                                    binding="#{portfolio.riSelectChk}"
+                                                    valueChangeListener="#{portfolio.selectAllRiColumns}"
+                                                    autoSubmit="true"/>
+                        </f:facet>
                       </af:column>
                       <af:column sortProperty="refNo" filterable="true"
-                                 sortable="true"
-                                 headerText="Claim No"
+                                 sortable="true" headerText="Claim No"
                                  id="c54x">
                         <af:outputText value="#{row.refNo}" id="ot52p"/>
                       </af:column>
                       <af:column sortProperty="riPeriod" filterable="true"
-                                 sortable="true"
-                                 headerText="Period"
-                                 id="c54xP">
+                                 sortable="true" headerText="Period" id="c54xP">
                         <af:outputText value="#{row.riPeriod}" id="ot52pX"/>
                       </af:column>
                       <af:column sortProperty="memNo" filterable="true"
-                                 sortable="true"
-                                 headerText="Mem No"
-                                 id="c54">
+                                 sortable="true" headerText="Mem No" id="c54">
                         <af:outputText value="#{row.memNo}" id="ot52"/>
                       </af:column>
                       <af:column sortProperty="memName" filterable="true"
-                                 sortable="true"
-                                 headerText="Member Name"
-                                 id="c52"
-                                 width="150">
+                                 sortable="true" headerText="Member Name"
+                                 id="c52" width="150">
                         <af:outputText value="#{row.memName}" id="ot47"/>
                       </af:column>
                       <af:column sortProperty="clientName" filterable="true"
-                                 sortable="true"
-                                 headerText="Client Name"
-                                 id="c51"
-                                 width="150">
+                                 sortable="true" headerText="Client Name"
+                                 id="c51" width="150">
                         <af:outputText value="#{row.client}" id="ot46"/>
                       </af:column>
                       <af:column sortProperty="amtPaid" filterable="true"
-                                 sortable="true"
-                                 headerText="Amt Paid"
-                                 id="c53">
+                                 sortable="true" headerText="Amt Paid" id="c53">
                         <af:outputText value="#{row.amtPaid}" id="ot48"/>
                       </af:column>
                       <af:column sortProperty="amtPayable" filterable="true"
-                                 sortable="true"
-                                 headerText="Amt Recoverable"
+                                 sortable="true" headerText="Amt Recoverable"
                                  id="c50">
-                        <af:inputText label="Label 23" id="it8" simple="true" value="#{row.amtPayable}"
-                            converter="javax.faces.Number"
-							binding="#{portfolio.reinAmtTF}"
-                            autoSubmit="true"
-							valueChangeListener="#{portfolio.reinAmtSelection}"/>
+                        <af:inputText label="Label 23" id="it8" simple="true"
+                                      value="#{row.amtPayable}"
+                                      converter="javax.faces.Number"
+                                      binding="#{portfolio.reinAmtTF}"/>
                       </af:column>
                       <af:column sortProperty="causDesc" filterable="true"
-                                 sortable="true"
-                                 headerText="Causation"
+                                 sortable="true" headerText="Causation"
                                  id="c48">
                         <af:outputText value="#{row.causDesc}" id="ot53"/>
                       </af:column>
                       <af:column sortProperty="coverDesc" filterable="true"
-                                 sortable="true"
-                                 headerText="Cover Description"
+                                 sortable="true" headerText="Cover Description"
                                  id="c49">
                         <af:outputText value="#{row.coverDesc}" id="ot50"/>
                       </af:column>
-                       <af:column sortProperty="agnName" filterable="true"
-                                 sortable="true"
-                                 headerText="Participant"
+                      <af:column sortProperty="agnName" filterable="true"
+                                 sortable="true" headerText="Participant"
                                  id="c49p">
                         <af:outputText value="#{row.agnName}" id="ot50p"/>
+                      </af:column>
+                       <af:column sortProperty="ccvtCode" filterable="true"
+                                 sortable="true" headerText="code"
+                                 id="c82" visible="false">
+                        <af:outputText value="#{row.ccvtCode}" id="ot74"/>
                       </af:column>
                     </af:table>
                     <af:commandButton text="Process" id="cb14"
                                       action="#{portfolio.processReinRecovery}"/>
                   </af:showDetailItem>
-                  <af:showDetailItem text="Coinsurance Recovery" id="sdi4" rendered="#{!Rendering.coinsuranceVisible}">
+                  <af:showDetailItem text="Coinsurance Recovery" id="sdi4"
+                                     rendered="#{!Rendering.coinsuranceVisible}">
+                   <h:panelGrid columns="2" id="pg13">
+                      <af:inputFile label="File To Upload" autoSubmit="true"
+                                      valueChangeListener="#{portfolio.fileChangeForCoinsuranceRecovery}"
+                                      immediate="true" id="if2"/>
+                      <af:commandLink text="[Export Coinsurance Recovery Data]"
+                                      id="cl3"
+                                      action="#{portfolio.exportCoinData}" inlineStyle="font-weight:bold"/>
+                    </h:panelGrid>               
                     <af:table value="#{bindings.Account6.collectionModel}"
                               var="row" rows="#{bindings.Account6.rangeSize}"
                               emptyText="#{bindings.Account6.viewable ? 'No data to display.' : 'Access Denied.'}"
@@ -429,103 +471,105 @@
                               queryListener="#{bindings.Account5Query.processQuery}"
                               filterVisible="true" varStatus="vs"
                               selectedRowKeys="#{bindings.Account6.collectionModel.selectedRow}"
-                              selectionListener="#{bindings.Account6.collectionModel.makeCurrent}"
+                              selectionListener="#{portfolio.coinsuranceRecovery}"
                               rowSelection="single" id="t8"
                               inlineStyle="width:100%; height:210px;"
                               binding="#{portfolio.coinsuranceDAO}">
                       <af:column sortProperty="ccrCode" filterable="true"
                                  sortable="true"
                                  headerText="#{bindings.Account6.hints.ccrCode.label}"
-                                 id="c58"
-                                 visible="false">
+                                 id="c58" visible="false">
                         <af:outputText value="#{row.ccrCode}" id="ot62"/>
                       </af:column>
-                      <af:column filterable="false"
-                                 sortable="true"
-                                 id="c47P"
+                      <af:column filterable="false" sortable="true" id="c47P"
                                  width="20">
-                        <af:selectBooleanCheckbox label="Label 2" id="sbc2P" simple="true"
-                        value="#{row.coinSelect}" binding="#{portfolio.coinSelect}"/>
+                        <f:facet name="header">
+                          <af:selectBooleanCheckbox text="" label="Label 5"
+                                                    id="sbc7" simple="true"
+                                                    binding="#{portfolio.coinsuranceSelect}"
+                                                    valueChangeListener="#{portfolio.coinsuranceSelectListener}"
+                                                    autoSubmit="true"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox label="Label 2" id="sbc2P"
+                                                  simple="true"
+                                                  value="#{row.coinSelect}"
+                                                  binding="#{portfolio.coinSelect}"
+                                                  autoSubmit="true"
+                                                  valueChangeListener="#{portfolio.selectCoinRecord}"/>
                       </af:column>
                       <af:column sortProperty="coinRefNo" filterable="true"
-                                 sortable="true"
-                                 headerText="Claim No"
-                                 id="c55">
+                                 sortable="true" headerText="Claim No" id="c55">
                         <af:outputText value="#{row.coinRefNo}" id="ot61"/>
                       </af:column>
-                      <af:column sortProperty="coinMemNo" filterable="true"
-                                 sortable="true"
-                                 headerText="Mem No"
-                                 id="c61">
+                       <af:column sortProperty="coinMemNo" filterable="true"
+                                 sortable="true" headerText="Mem No" id="c61">
                         <af:outputText value="#{row.coinMemNo}" id="ot58"/>
                       </af:column>
+                      <af:column sortProperty="coinPeriod" filterable="true"
+                                 sortable="true" headerText="Period" id="c80">
+                        <af:outputText value="#{row.coinPeriod}" id="ot73"/>
+                      </af:column>
                       <af:column sortProperty="coinMemName" filterable="true"
-                                 sortable="true"
-                                 headerText="Mem Name"
-                                 id="c57">
+                                 sortable="true" headerText="Mem Name" id="c57">
                         <af:outputText value="#{row.coinMemName}" id="ot59"/>
-                      </af:column>                      
+                      </af:column>
                       <af:column sortProperty="coinClient" filterable="true"
-                                 sortable="true"
-                                 headerText="Client"
-                                 id="c60">
+                                 sortable="true" headerText="Client" id="c60">
                         <af:outputText value="#{row.coinClient}" id="ot55"/>
                       </af:column>
                       <af:column sortProperty="coinAmtPaid" filterable="true"
-                                 sortable="true"
-                                 headerText="Amt Paid"
-                                 id="c59">
+                                 sortable="true" headerText="Amt Paid" id="c59">
                         <af:outputText value="#{row.coinAmtPaid}" id="ot63"/>
                       </af:column>
                       <af:column sortProperty="coinAmtPayable" filterable="true"
-                                 sortable="true"
-                                 headerText="Amt Payable"
+                                 sortable="true" headerText="Amt Payable"
                                  id="c62">
-                        <af:inputText label="Label 21" id="it6" value="#{row.coinAmtPayable}" simple="true"
+                        <af:inputText label="Label 21" id="it6"
+                                      value="#{row.coinAmtPayable}"
+                                      simple="true"
                                       binding="#{portfolio.coinAmtTF}"
-                                      autoSubmit="true"
                                       converter="javax.faces.Number"
-                                      valueChangeListener="#{portfolio.coinAmtSelection}"/>
+                                      />
                       </af:column>
-                      
                       <af:column sortProperty="coinCausDesc" filterable="true"
-                                 sortable="true"
-                                 headerText="Causation"
+                                 sortable="true" headerText="Causation"
                                  id="c64">
                         <af:outputText value="#{row.coinCausDesc}" id="ot56"/>
                       </af:column>
                       <af:column sortProperty="coinCoverDesc" filterable="true"
-                                 sortable="true"
-                                 headerText="Cover Desc"
+                                 sortable="true" headerText="Cover Desc"
                                  id="c63">
                         <af:outputText value="#{row.coinCoverDesc}" id="ot54"/>
                       </af:column>
                       <af:column sortProperty="coinAgnName" filterable="true"
-                                 sortable="true"
-                                 headerText="Insurance Company"
-                                 id="c56"
-                                 width="200">
+                                 sortable="true" headerText="Insurance Company"
+                                 id="c56" width="200">
                         <af:outputText value="#{row.coinAgnName}" id="ot57"/>
                       </af:column>
+                      <af:column sortProperty="ccvtCode" filterable="true"
+                                 sortable="true" headerText="Code"
+                                 id="c84" width="200" visible="false">
+                        <af:outputText value="#{row.ccvtCode}" id="ot75"/>
+                      </af:column>
                     </af:table>
-                    <h:panelGrid columns="2" id="coinGrid">                    
-                    <af:commandButton text="Process" id="cb15" action="#{portfolio.processCoinRecovery}"/>
+                    <h:panelGrid columns="2" id="coinGrid">
+                      <af:commandButton text="Process" id="cb15"
+                                        action="#{portfolio.processCoinRecovery}"/>
                     </h:panelGrid>
                   </af:showDetailItem>
                   <af:showDetailItem text="Transaction Summary" id="sdi3">
-					<h:panelGrid columns="2" id="pg6x6x">
-				<h:panelGrid columns="6" id="pg6x">	
-							<af:inputFile label="File To Upload" autoSubmit="true"
-										  binding="#{FileProcessor.upFile}"
-										  valueChangeListener="#{FileProcessor.fileChangeForClaims}"
-										  immediate="true" id="if1"/>
-							
-					   <af:selectOneRadio label="Label 1" id="selectOneRadio1"
-							   binding="#{reportParameterBean.reportType}"
-							   simple="true" layout="horizontal"
-							   autoSubmit="true"
-							   valueChangeListener="#{reportParameterBean.changeReportType}"
-							   value="pdf">
+                    <h:panelGrid columns="2" id="pg6x6x">
+                      <h:panelGrid columns="6" id="pg6x">
+                        <af:inputFile label="File To Upload" autoSubmit="true"
+                                      binding="#{FileProcessor.upFile}"
+                                      valueChangeListener="#{FileProcessor.fileChangeForClaims}"
+                                      immediate="true" id="if1"/>
+                        <af:selectOneRadio label="Label 1" id="selectOneRadio1"
+                                           binding="#{reportParameterBean.reportType}"
+                                           simple="true" layout="horizontal"
+                                           autoSubmit="true"
+                                           valueChangeListener="#{reportParameterBean.changeReportType}"
+                                           value="pdf">
                           <af:selectItem label="Html" value="html"
                                          id="selectItem3"/>
                           <af:selectItem label="Pdf" value="pdf"
@@ -534,9 +578,9 @@
                                          id="selectItem39"/>
                           <af:selectItem label="Word Document (rtf)" value="rtf"
                                          id="selectItem40"/>
-                        </af:selectOneRadio>			  
-						</h:panelGrid>
-					</h:panelGrid>
+                        </af:selectOneRadio>
+                      </h:panelGrid>
+                    </h:panelGrid>
                     <af:table value="#{bindings.Account1.collectionModel}"
                               var="row" rows="#{bindings.Account1.rangeSize}"
                               emptyText="#{bindings.Account1.viewable ? 'No data to display.' : 'Access Denied.'}"
@@ -547,89 +591,89 @@
                               filterVisible="true" varStatus="vs"
                               rowSelection="single" id="t5"
                               inlineStyle="width:100%; height:150px;"
-                              binding="#{portfolio.treatySummaryLOV}" 
-                              selectionListener="#{portfolio.voucherSelection}"
-                              >
+                              binding="#{portfolio.treatySummaryLOV}"
+                              selectionListener="#{portfolio.voucherSelection}">
                       <af:column sortProperty="TS_CODE" filterable="true"
                                  sortable="true" headerText="Code"
                                  visible="false" id="c23">
                         <af:outputText value="#{row.TS_CODE}" id="ot26"/>
                       </af:column>
                       <af:column sortProperty="TS_CODE" filterable="false"
-                                 sortable="false" visible="true"
-                                 id="c34" width="15">
+                                 sortable="false" visible="true" id="c34"
+                                 width="15">
                         <af:selectBooleanCheckbox label="Label 1" id="sbc1"
                                                   simple="true"
                                                   binding="#{portfolio.selectParticipant}"
                                                   rendered="#{row.TS_DRCR=='Cr'}"
                                                   autoSubmit="true"/>
-                   
                       </af:column>
-                                                
-                            <af:column sortProperty="TS_TRAN_DATE"
-                                       filterable="true" sortable="true"
-                                       headerText="Transaction Date"
-                                       id="c14">
-                              <af:outputText value="#{row.TS_TRAN_DATE}"
-                                             id="ot43">
-                                <af:convertDateTime pattern="dd-MMM-yyyy"/>
-                              </af:outputText>
-                            </af:column>
-                       <af:column sortProperty="TS_DRCR" filterable="true"
-                                 sortable="true" headerText="Dr/Cr"
-                                 id="c32" width="50">
+                      <af:column sortProperty="TS_TRAN_DATE" filterable="true"
+                                 sortable="true" headerText="Transaction Date"
+                                 id="c14">
+                        <af:outputText value="#{row.TS_TRAN_DATE}" id="ot43">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:outputText>
+                      </af:column>
+                       <af:column sortProperty="TS_VOUCHER_NO" filterable="true"
+                                 sortable="true" headerText="Reference No" id="c41"
+                                 width="150">
+                        <af:outputText value="#{row.TS_VOUCHER_NO}" id="ot41"/>
+                      </af:column>
+                      <af:column sortProperty="TS_DRCR" filterable="true"
+                                 sortable="true" headerText="Dr/Cr" id="c32"
+                                 width="50">
                         <af:outputText value="#{row.TS_DRCR}" id="ot34"/>
                       </af:column>
                       <af:column sortProperty="TS_DRCR_NO" filterable="true"
-                                 sortable="true" headerText="Dr./Cr No"
-                                 id="c41" width="150">
-                        <af:outputText value="#{row.TS_DRCR_NO}" id="ot41"/>
+                                 sortable="true" headerText="Dr./Cr No" id="c83"
+                                 width="150">
+                        <af:outputText value="#{row.TS_DRCR_NO}" id="ot76"/>
                       </af:column>
                       <af:column sortProperty="AGN_NAME" filterable="true"
                                  sortable="true" headerText="Participant"
                                  id="c40" width="250">
                         <af:outputText value="#{row.AGN_NAME}" id="ot40"/>
                       </af:column>
-                      
                       <af:column sortProperty="INCOME" filterable="true"
-                                 sortable="true" headerText="Total Ri. Prem" id="c27">
-                        <af:outputText value="#{row.INCOME}" id="ot32" converter="javax.faces.Number"/>
-                      </af:column>                      
+                                 sortable="true" headerText="Total Ri. Prem"
+                                 id="c27">
+                        <af:outputText value="#{row.INCOME}" id="ot32"
+                                       converter="javax.faces.Number"/>
+                      </af:column>
                       <af:column sortProperty="TS_CUMM_CLAIMS_PAID"
                                  filterable="true" sortable="true"
                                  headerText="Total Claim Recoveries" id="c25">
                         <af:outputText value="#{row.TS_CUMM_CLAIMS_PAID}"
-                                       id="ot31" converter="javax.faces.Number" />
+                                       id="ot31"
+                                       converter="javax.faces.Number"/>
                       </af:column>
                       <af:column sortProperty="PROFIT_LOSS" filterable="true"
                                  sortable="true" headerText="Net Amount"
                                  id="c29">
-                        <af:outputText value="#{row.PROFIT_LOSS}" id="ot29" converter="javax.faces.Number"/>
+                        <af:outputText value="#{row.PROFIT_LOSS}" id="ot29"
+                                       converter="javax.faces.Number"/>
                       </af:column>
-                      
-                      <af:column sortProperty="TS_AMT_PAID"
+                      <af:column sortProperty="TS_AMT_PAID" filterable="true"
+                                 sortable="true" headerText="Amount Settled"
+                                 id="c31">
+                        <af:outputText value="#{row.TS_AMT_PAID}" id="ot27"/>
+                      </af:column>
+                      <af:column sortProperty="TS_ENTRY_CLAIM_AMT"
                                  filterable="true" sortable="true"
-                                 headerText="Amount Settled" id="c31">
-                        <af:outputText value="#{row.TS_AMT_PAID}"
-                                       id="ot27"/>
-                      </af:column>					  
-                      <af:column sortProperty="TS_ENTRY_CLAIM_AMT" filterable="true"
-                                 sortable="true" headerText="Amount Allocated" id="c28">
-                        <af:outputText value="#{row.TS_ENTRY_CLAIM_AMT}" id="ot28" converter="javax.faces.Number"/>
+                                 headerText="Amount Allocated" id="c28">
+                        <af:outputText value="#{row.TS_ENTRY_CLAIM_AMT}"
+                                       id="ot28"
+                                       converter="javax.faces.Number"/>
                       </af:column>
-                       <af:column sortProperty="status"
-                                 filterable="true" sortable="true"
-                                 headerText="Status" id="c26">
-                        <af:outputText value="#{row.status}"
-                                       id="ot33"/>
+                      <af:column sortProperty="status" filterable="true"
+                                 sortable="true" headerText="Status" id="c26">
+                        <af:outputText value="#{row.status}" id="ot33"/>
                       </af:column>
-                      <af:column sortProperty="status"
-                                 filterable="false" sortable="false"
-                                 id="c42">
-                      <af:commandLink text="Show Receipts" 
-                                      id="cl1"
-                                      action="#{portfolio.showReceiptPop}"
-                                      rendered="#{row.TS_DRCR=='Dr'}"/>
+                      <af:column sortProperty="status" filterable="false"
+                                 sortable="false" id="c42">
+                        <af:commandLink text="Show Receipts" id="cl1"
+                                        action="#{portfolio.showReceiptPop}"
+                                        rendered="#{row.TS_DRCR=='Dr'}"/>
                       </af:column>
                       <!--  <af:column sortProperty="PROFIT_LOSS"
                                  id="c34">
@@ -706,22 +750,19 @@
                                     binding="#{portfolio.receiptsDAO}">
                             <af:column sortProperty="gtopReceiptNo"
                                        filterable="true" sortable="true"
-                                       headerText="Receipt No"
-                                       id="c45">
+                                       headerText="Receipt No" id="c45">
                               <af:outputText value="#{row.gtopReceiptNo}"
                                              id="ot14"/>
-                            </af:column>                            
+                            </af:column>
                             <af:column sortProperty="gtopAmount"
                                        filterable="true" sortable="true"
-                                       headerText="Receipt Amount"
-                                       id="c44">
+                                       headerText="Receipt Amount" id="c44">
                               <af:outputText value="#{row.gtopAmount}"
                                              id="ot20"/>
-                            </af:column>                            
+                            </af:column>
                             <af:column sortProperty="gtopReceiptDate"
                                        filterable="true" sortable="true"
-                                       headerText="Receipt Date"
-                                       id="c46">
+                                       headerText="Receipt Date" id="c46">
                               <f:facet name="filter">
                                 <af:inputDate value="#{vs.filterCriteria.gtopReceiptDate}"
                                               id="id4"/>
@@ -733,14 +774,12 @@
                             </af:column>
                             <af:column sortProperty="gtopDoneBy"
                                        filterable="true" sortable="true"
-                                       headerText="Receipted By"
-                                       id="c19">
+                                       headerText="Receipted By" id="c19">
                               <af:outputText value="#{row.gtopDoneBy}"
                                              id="ot44"/>
                             </af:column>
                             <af:column sortProperty="gtopDrCr" filterable="true"
-                                       sortable="true"
-                                       headerText="Dr/Cr"
+                                       sortable="true" headerText="Dr/Cr"
                                        id="c43">
                               <af:outputText value="#{row.gtopDrCr}" id="ot42"/>
                             </af:column>
@@ -751,44 +790,278 @@
                           </h:panelGrid>
                         </af:dialog>
                       </af:popup>
-					 </h:panelGrid>
-					 <h:panelGrid columns="3">                      
-					 	<af:commandLink text="[Coinsurance Debit/ Credit Note]"
-								id="rpt25222"
-								inlineStyle="font-weight:bold;"
-								actionListener="#{ReportsEngine.GetReportDetails}"
-								rendered="#{!Rendering.coinsuranceVisible}"/>
-							<af:commandLink text="[Coinsurance Claims Statement]"
-										  id="rpt25390"
-										  inlineStyle="font-weight:bold;"
-										  actionListener="#{ReportsEngine.GetReportDetails}"
-										  rendered="#{!Rendering.coinsuranceVisible}"/>
-							<af:commandLink text="[Reinsurance Debit Note]"
-										  id="rpt25389"
-										  inlineStyle="font-weight:bold;"
-										  actionListener="#{ReportsEngine.GetReportDetails}"
-										  rendered="#{Rendering.riRecoveryVisible}"/>
-						   <af:commandLink text="[Reinsurance Claims Statement]"
-										  id="rpt25820"
-										  inlineStyle="font-weight:bold;"
-										  actionListener="#{ReportsEngine.GetReportDetails}"
-										  rendered="#{Rendering.riRecoveryVisible}"/>
-						    <af:commandLink text="[Reinsurance Payment voucher]"
-										  id="rpt82"
-										  inlineStyle="font-weight:bold;"
-										  actionListener="#{ReportsEngine.GetReportDetails}"/>
-				 </h:panelGrid>
-					
-                  </af:showDetailItem>
-                  <af:showDetailItem text="Reports" id="sdii33" rendered="false">
-                    <h:panelGrid columns="6" id="pgg77">
-                      
+                    </h:panelGrid>
+                    <h:panelGrid columns="6">
+                      <af:commandLink text="[Coinsurance Debit/ Credit Note]"
+                                      id="rpt25222"
+                                      inlineStyle="font-weight:bold;"
+                                      actionListener="#{ReportsEngine.GetReportDetails}"
+                                      rendered="#{!Rendering.coinsuranceVisible}"/>
+                      <af:commandLink text="[Coinsurance Submission Report]"
+                                      id="rpt25390"
+                                      inlineStyle="font-weight:bold;"
+                                      actionListener="#{ReportsEngine.GetReportDetails}"
+                                      rendered="#{!Rendering.coinsuranceVisible}"/>
+                      <af:commandLink text="[Reinsurance Debit Note]"
+                                      id="rpt25389"
+                                      inlineStyle="font-weight:bold;"
+                                      actionListener="#{ReportsEngine.GetReportDetails}"
+                                      rendered="#{Rendering.riRecoveryVisible}"/>
+                      <af:commandLink text="[submission Report]"
+                                      id="rpt2250133867"
+                                      inlineStyle="font-weight:bold;"
+                                      actionListener="#{ReportsEngine.GetReportDetails}"
+                                      rendered="#{Rendering.riRecoveryVisible}"/>           
+                      <af:commandLink text="[Combined RI submission Report]"
+                                      id="rpt25820"
+                                      inlineStyle="font-weight:bold;"
+                                      actionListener="#{ReportsEngine.GetReportDetails}"
+                                      rendered="#{Rendering.riRecoveryVisible}"/>
+                      <af:commandLink text="[Combined submission Report]"
+                                      id="rpt2250133870"
+                                      inlineStyle="font-weight:bold;"
+                                      actionListener="#{ReportsEngine.GetReportDetails}"
+                                      rendered="#{!Rendering.coinsuranceVisible}"/>                
+                      <af:commandLink text="[Reinsurance Payment voucher]"
+                                      id="rpt82" inlineStyle="font-weight:bold;"
+                                      actionListener="#{ReportsEngine.GetReportDetails}"/>
                     </h:panelGrid>
                   </af:showDetailItem>
+                  <af:showDetailItem text="Reports" id="sdii33"
+                                     rendered="false">
+                    <h:panelGrid columns="6" id="pgg77"></h:panelGrid>
+                  </af:showDetailItem>
                 </af:panelTabbed>
+                <af:panelBox text="Claim Documents" id="pb3"
+                             rendered="#{!Rendering.riCedingVisible}">
+                  <f:facet name="toolbar"/>
+                  <h:panelGrid id="pg6s" columns="2">
+                    <af:commandButton text="Download Documents" id="cb5y"
+                                      action="#{portfolio.downClaimDocuments}"/>
+                  </h:panelGrid>
+                  <h:panelGrid columns="3" id="pg405x">
+                    <af:commandButton text="Select All" id="cb18"
+                                      action="#{portfolio.selectAllClaimDocs}"/>
+                    <af:commandButton text="Unselect All" id="cb19"
+                                      action="#{portfolio.unselectAllClaimDocs}"/>
+                  </h:panelGrid>
+                  <af:panelTabbed id="pt1" inlineStyle="width:100%;">
+                    <af:showDetailItem text="Claim Documents" id="sdi5">
+                      <af:table value="#{bindings.claimsDocs.collectionModel}"
+                                var="row"
+                                rows="#{bindings.claimsDocs.rangeSize}"
+                                emptyText="#{bindings.claimsDocs.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.claimsDocs.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.claimsDocsQuery.queryDescriptor}"
+                                queryListener="#{bindings.claimsDocsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs" id="t10"
+                                binding="#{portfolio.policyClaimsDocsTbl}"
+                                rowSelection="single" inlineStyle="width:100%;"
+                                immediate="true">
+                        <af:column sortProperty="#{bindings.claimsDocs.hints.docType.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.claimsDocs.hints.docType.label}"
+                                   id="c65">
+                          <!-- <f:facet name="header">
+                            <af:selectBooleanCheckbox text=""
+                                                      label="Label 4"
+                                                      id="sbc6" simple="true"
+                                                      autoSubmit="true"
+                                                      binding="#{portfolio.claimDocumentsSelect}"
+                                                      valueChangeListener="#{portfolio.selectClaimDocListener}"/>
+                      </f:facet>-->
+                          <af:selectBooleanCheckbox text="" label="Label 1"
+                                                    id="sbc3"
+                                                    value="#{row.selectDoc}"
+                                                    simple="true"
+                                                    autoSubmit="true"
+                                                    valueChangeListener="#{portfolio.selectClaimDocsListener}"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.claimsDocs.hints.docType.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.claimsDocs.hints.docType.label}"
+                                   id="c66">
+                          <af:outputText value="#{row.docType}"
+                                         id="ot51"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.claimsDocs.hints.modifiedBy.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.claimsDocs.hints.modifiedBy.label}"
+                                   id="c72">
+                          <af:outputText value="#{row.modifiedBy}"
+                                         id="ot66"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.claimsDocs.hints.actualName.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.claimsDocs.hints.actualName.label}"
+                                   id="c67">
+                          <af:outputText value="#{row.actualName}"
+                                         id="ot60"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.claimsDocs.hints.id.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.claimsDocs.hints.id.label}"
+                                   id="c68">
+                          <af:outputText value="#{row.id}"
+                                         id="ot65"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.claimsDocs.hints.dateCreated.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="Date Created" id="c71">
+                          <af:outputText value="#{row.dateCreated}"
+                                         id="ot64"/>
+                        </af:column>
+                        <af:column id="c70">
+                          <af:commandLink text="View" id="commandLink9092"
+                                          action="#{portfolio.viewUwClaimDocs}"
+                                          rendered="true"/>
+                        </af:column>
+                        <af:column id="c69">
+                          <af:commandLink text="Download" id="cl10"
+                                          action="#{portfolio.downloadClaimDocuments}"
+                                          rendered="true"/>
+                        </af:column>
+                      </af:table>
+                    </af:showDetailItem>
+                    <af:showDetailItem text="Payment Documents" id="sdi65">
+                      <af:table value="#{bindings.paymentDocuments1.collectionModel}"
+                                var="row"
+                                rows="#{bindings.paymentDocuments1.rangeSize}"
+                                emptyText="#{bindings.paymentDocuments1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.paymentDocuments1.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.paymentDocumentsQuery.queryDescriptor}"
+                                queryListener="#{bindings.paymentDocumentsQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                rowSelection="single" id="t11"
+                                inlineStyle="width:100%;"
+                                binding="#{portfolio.paymentDocTbl}">
+                        <af:column headerText="" id="c73">
+                          <af:selectBooleanCheckbox text="" label="Label 1"
+                                                    id="sbc4"
+                                                    value="#{row.selectFinanceDoc}"
+                                                    simple="true"
+                                                    autoSubmit="true"
+                                                    valueChangeListener="#{portfolio.selectFinanceDocuments}"
+                                                    />
+                        </af:column>
+                        <af:column sortProperty="#{bindings.paymentDocuments1.hints.docType.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.paymentDocuments1.hints.docType.label}"
+                                   id="c74">
+                          <af:outputText value="#{row.docType}"
+                                         id="ot68"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.paymentDocuments1.hints.modifiedBy.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.paymentDocuments1.hints.modifiedBy.label}"
+                                   id="c75">
+                          <af:outputText value="#{row.modifiedBy}"
+                                         id="ot69"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.paymentDocuments1.hints.actualName.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.paymentDocuments1.hints.actualName.label}"
+                                   id="c76">
+                          <af:outputText value="#{row.actualName}"
+                                         id="ot70"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.paymentDocuments1.hints.id.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.paymentDocuments1.hints.id.label}"
+                                   id="c77">
+                          <af:outputText value="#{row.id}"
+                                         id="ot71"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.paymentDocuments1.hints.dateCreated.name}"
+                                   filterable="true" sortable="true"
+                                   headerText="#{bindings.paymentDocuments1.hints.dateCreated.label}"
+                                   id="c79">
+                          <af:outputText value="#{row.dateCreated}"
+                                         id="ot72"/>
+                        </af:column>
+                        <af:column id="c78">
+                          <af:commandLink text="View" id="cl8"
+                                          action="#{portfolio.viewPaymentDocs}"
+                                          rendered="true"/>
+                        </af:column>
+                        <af:column id="c81">
+                          <af:commandLink text="Download" id="cl13"
+                                          action="#{portfolio.downloadPaymentDocuments}"
+                                          rendered="true"
+                                          partialTriggers="::t4"/>
+                        </af:column>
+                      </af:table>
+                    </af:showDetailItem>
+                  </af:panelTabbed>
+                  <af:popup id="p300">
+                    <af:dialog id="dialog1" inlineStyle="width:100%;" type="ok">
+                      <h:panelGrid columns="2" id="panelGrid1">
+                        <!--<af:commandButton text="Next" id="commandButton1"
+                                    partialSubmit="true"
+                                    disabled="#{!bindings.Next.enabled}"
+                                    actionListener="#{bindings.Next.execute}"
+                                    action="#{iedmsBacking.nextPolicyDocument}"/>
+                  <af:commandButton text="Previous"
+                                    disabled="#{!bindings.Previous.enabled}"
+                                    partialSubmit="true" id="commandButton2"
+                                    actionListener="#{bindings.Previous.execute}"
+                                    action="#{iedmsBacking.nextPolicyDocument}"/>-->
+                        <af:commandLink text="Comments" id="cl5"
+                                        action="#{portfolio.viewClaimComments}"
+                                        rendered="true"/>
+                      </h:panelGrid>
+                      <af:inlineFrame id="inlineFrame1"
+                                      source="#{sessionScope['toPrint']}"
+                                      inlineStyle="width:950.0px; height:650px;"
+                                      binding="#{portfolio.docFrame2}"/>
+                      <af:panelBox id="commentPB">
+                        <af:separator id="s5"/>
+                        <af:outputLabel value="Comments" id="ol6"
+                                        inlineStyle="font-weight:bold"/>
+                        <h:panelGrid columns="1" id="pg7">
+                          <af:commandButton text="Add Comment" id="cb12"
+                                            action="#{portfolio.showCommentPanel}"
+                                            binding="#{iedmsBacking.addComment}"
+                                            partialSubmit="true"/>
+                          <af:separator id="s4"/>
+                          <af:richTextEditor id="commentRTE"
+                                             binding="#{iedmsBacking.commentRTF}"
+                                             visible="false"/>
+                          <h:panelGrid columns="2" id="pg9">
+                            <af:commandButton text="Add Comment" id="ac1"
+                                              binding="#{iedmsBacking.saveCommentBtn}"
+                                              visible="false"
+                                              partialSubmit="true"
+                                              action="#{iedmsBacking.saveDocumentRemarks}"/>
+                            <af:commandButton text="Cancel" id="ac2"
+                                              binding="#{iedmsBacking.cancelCommentBtn}"
+                                              visible="false"
+                                              partialSubmit="true"
+                                              action="#{iedmsBacking.cancelRemarks}"/>
+                          </h:panelGrid>
+                        </h:panelGrid>
+                        <af:iterator id="i2" var="row"
+                                     value="#{bindings.documentComments.collectionModel}">
+                          <af:panelFormLayout rows="1" labelWidth="75px"
+                                              fieldWidth="250px" id="pfl">
+                            <af:outputText value="#{row.author.username}"
+                                           id="ot67"
+                                           inlineStyle="font-weight:bold;color:black;"/>
+                            <af:richTextEditor value="#{row.content}" id="rte1"
+                                               inlineStyle="font-weight:bold;color:darkblue;"
+                                               readOnly="true"/>
+                          </af:panelFormLayout>
+                          <af:separator id="s3"/>
+                        </af:iterator>
+                        <af:separator id="s2"/>
+                      </af:panelBox>
+                    </af:dialog>
+                  </af:popup>
+                </af:panelBox>
               </af:showDetailItem>
             </af:panelAccordion>
-			
           </af:panelGroupLayout>
         </f:facet>
       </af:pageTemplate>

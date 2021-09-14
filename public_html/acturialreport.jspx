@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document id="d1" title="TurnQuest Group Life |Reinsurance Reports">
+      <af:resource type="css">.topAligned { vertical-align: top; }</af:resource>
+      <af:pageTemplate viewId="/templates/GroupTemplate2.jspx" id="lmsgroup">
+        <f:attribute name="documentTitle" value="TurnQuest LMS Group"/>
+        <f:attribute name="mode" value="index"/>
+        <f:facet name="auxiliaryGlobal">
+          <af:panelGroupLayout layout="scroll" id="pgl1">
+            <af:outputText value="Global Layer" id="ot1"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelGroupLayout layout="scroll" id="pgl2">
+            <af:panelAccordion id="pa1"
+                               inlineStyle="height:296px; width:100.0%;">
+              <af:showDetailItem text="System Reports" id="sdi1">
+                <f:facet name="toolbar">
+                  <af:group id="g1">
+                    <h:panelGrid columns="2" id="pg23">
+                      <af:inputText id="inputText2" columns="13"
+                                    helpTopicId="GISReports" shortDesc="Help"
+                                    readOnly="true"/>
+                      <af:statusIndicator id="si1"/>
+                    </h:panelGrid>
+                  </af:group>
+                </f:facet>
+                <af:panelGroupLayout id="pgl3" layout="scroll">
+                  <af:panelBox text="Select Report" id="pb1"
+                               inlineStyle="width:98.0%;" showDisclosure="false"
+                               showHeader="never">
+                    <f:facet name="toolbar"/>
+                    <h:panelGrid columns="3" id="pg1"
+                                 columnClasses="topAligned">
+                      <h:panelGrid columns="1" id="pg7">
+                        <af:separator id="separator8"/>
+                        <af:outputLabel value="Underwriting Reports"
+                                        id="outputLabel4"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="separator9"/>
+                        <af:commandLink text="Group Production Report"
+                                        id="rpt2250133877"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                        <af:spacer width="50" height="50" id="s4"/>
+                      </h:panelGrid>
+                      <h:panelGrid id="pg4" columns="2">
+                        <af:spacer width="10" height="10" id="s3"/>
+                      </h:panelGrid>
+                      <h:panelGrid columns="1" id="pg2">
+                        <af:separator id="s1"/>
+                        <af:outputLabel value="Claims Reports" id="ol1"
+                                        inlineStyle="font-weight:bold;"/>
+                        <af:separator id="s2"/>
+                        <af:commandLink text="Pension Withdrawal Report"
+                                        id="rpt2250133866"
+                                        actionListener="#{reportParameterBean.paramReport}"/>
+                      </h:panelGrid>
+                    </h:panelGrid>
+                  </af:panelBox>
+                </af:panelGroupLayout>
+              </af:showDetailItem>
+            </af:panelAccordion>
+            <af:popup id="paramReport">
+              <af:dialog id="d13" title="Report Parameters" type="none"
+                         closeIconVisible="false">
+                <af:panelGroupLayout id="pgl4" layout="scroll"
+                                     binding="#{reportParameterBean.dtls}">
+                  <h:panelGrid id="pg2541"
+                               binding="#{reportParameterBean.mainParent}"/>
+                  <af:selectOneRadio label="Label 1" id="selectOneRadio1"
+                                     binding="#{reportParameterBean.reportType}"
+                                     simple="true" layout="horizontal"
+                                     autoSubmit="true"
+                                     valueChangeListener="#{reportParameterBean.changeReportType}"
+                                     value="pdf">
+                    <af:selectItem label="Html" value="html" id="si51"/>
+                    <af:selectItem label="Pdf" value="pdf" id="si21"/>
+                    <af:selectItem label="Excel" value="xls" id="si41"/>
+                    <af:selectItem label="Word Document (rtf)" value="rtf"
+                                   id="si31"/>
+                  </af:selectOneRadio>
+                  <h:panelGrid columns="2" id="pg3">
+                    <af:commandButton text="Print" id="cb1"
+                                      action="#{reportParameterBean.genRpt}"/>
+                    <af:commandButton text="Cancel" id="cb40"
+                                      action="#{reportParameterBean.RemoveReportComponents}"/>
+                    <af:inputDate label="Label 1" id="id1"
+                                  binding="#{reportParameterBean.myTest}"
+                                  visible="false">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:inputDate>
+                  </h:panelGrid>
+                </af:panelGroupLayout>
+              </af:dialog>
+            </af:popup>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

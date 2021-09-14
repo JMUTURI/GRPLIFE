@@ -31,6 +31,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rst=null;
         List<endorsements> EnddorsementList = new ArrayList<endorsements>();
         try {
             String EndorsementQuery =
@@ -62,7 +63,7 @@ public class endorsementsDAO extends LOVCC {
             cst.setBigDecimal(2,
                               (BigDecimal)this.session.getAttribute("endorsementCode"));
             cst.execute();
-            ResultSet rst = (ResultSet)cst.getObject(1);
+            rst = (ResultSet)cst.getObject(1);
             while (rst.next()) {
                 endorsements myProd = new endorsements();
                 myProd.setENDR_NO(rst.getString(1));
@@ -225,6 +226,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rst, cst, conn);
         }
 
         return EnddorsementList;
@@ -234,6 +237,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rst=null;
         List<endorsements> EnddorsementList = new ArrayList<endorsements>();
         try {
             String EndorsementQuery =
@@ -243,7 +247,7 @@ public class endorsementsDAO extends LOVCC {
             cst.setBigDecimal(2,
                               (BigDecimal)this.session.getAttribute("policyCode"));
             cst.execute();
-            ResultSet rst = (ResultSet)cst.getObject(1);
+            rst = (ResultSet)cst.getObject(1);
             while (rst.next()) {
                 endorsements myProd = new endorsements();
 
@@ -262,6 +266,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rst, cst, conn);
         }
 
         return EnddorsementList;
@@ -271,6 +277,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rst=null;
         List<endorsements> EnddorsementList = new ArrayList<endorsements>();
         try {
             String EndorsementQuery =
@@ -280,7 +287,7 @@ public class endorsementsDAO extends LOVCC {
             cst.setBigDecimal(2,
                               (BigDecimal)this.session.getAttribute("policyCode"));
             cst.execute();
-            ResultSet rst = (ResultSet)cst.getObject(1);
+            rst = (ResultSet)cst.getObject(1);
             while (rst.next()) {
                 endorsements myProd = new endorsements();
 
@@ -302,6 +309,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rst, cst, conn);
         }
 
         return EnddorsementList;
@@ -311,6 +320,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rst=null;
         List<endorsements> EnddorsementList = new ArrayList<endorsements>();
         try {
             String EndorsementQuery =
@@ -320,7 +330,7 @@ public class endorsementsDAO extends LOVCC {
             cst.setBigDecimal(2,
                               (BigDecimal)this.session.getAttribute("ProductCode"));
             cst.execute();
-            ResultSet rst = (ResultSet)cst.getObject(1);
+            rst = (ResultSet)cst.getObject(1);
             while (rst.next()) {
                 endorsements myProd = new endorsements();
 
@@ -339,6 +349,9 @@ public class endorsementsDAO extends LOVCC {
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
         }
+        finally{
+        GlobalCC.CloseConnections(rst, cst, conn);
+        }
         return EnddorsementList;
     }
 
@@ -346,6 +359,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rst=null;
         List<endorsements> EnddorsementList = new ArrayList<endorsements>();
         try {
             String EndorsementQuery =
@@ -355,7 +369,7 @@ public class endorsementsDAO extends LOVCC {
             cst.setBigDecimal(2,
                               (BigDecimal)this.session.getAttribute("policyCode"));
             cst.execute();
-            ResultSet rst = (ResultSet)cst.getObject(1);
+            rst = (ResultSet)cst.getObject(1);
             while (rst.next()) {
                 endorsements myProd = new endorsements();
 
@@ -375,6 +389,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rst, cst, conn);
         }
         return EnddorsementList;
     }
@@ -383,6 +399,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rst=null;
         List<endorsements> EnddorsementList = new ArrayList<endorsements>();
         try {
             String EndorsementQuery =
@@ -392,7 +409,7 @@ public class endorsementsDAO extends LOVCC {
             cst.setBigDecimal(2,
                               (BigDecimal)this.session.getAttribute("endorsementCode"));
             cst.execute();
-            ResultSet rst = (ResultSet)cst.getObject(1);
+            rst = (ResultSet)cst.getObject(1);
             while (rst.next()) {
                 endorsements myProd = new endorsements();
 
@@ -411,6 +428,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rst, cst, conn);
         }
         return EnddorsementList;
     }
@@ -419,6 +438,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rst=null;
         List<endorsements> EnddorsementList = new ArrayList<endorsements>();
         try {
             String EndorsementQuery =
@@ -428,7 +448,7 @@ public class endorsementsDAO extends LOVCC {
             cst.setBigDecimal(2,
                               (BigDecimal)this.session.getAttribute("policyCode"));
             cst.execute();
-            ResultSet rst = (ResultSet)cst.getObject(1);
+            rst = (ResultSet)cst.getObject(1);
             while (rst.next()) {
                 endorsements myProd = new endorsements();
 
@@ -448,6 +468,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rst, cst, conn);
         }
         return EnddorsementList;
     }
@@ -456,6 +478,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rst=null;
         List<endorsements> EnddorsementList = new ArrayList<endorsements>();
         try {
             String EndorsementQuery =
@@ -465,7 +488,7 @@ public class endorsementsDAO extends LOVCC {
             cst.setBigDecimal(2,
                               (BigDecimal)this.session.getAttribute("endorsementCode"));
             cst.execute();
-            ResultSet rst = (ResultSet)cst.getObject(1);
+            rst = (ResultSet)cst.getObject(1);
             while (rst.next()) {
                 endorsements myProd = new endorsements();
 
@@ -482,6 +505,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rst, cst, conn);
         }
         return EnddorsementList;
     }
@@ -491,6 +516,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rs=null;
         List<endorsements> myendorsements = new ArrayList<endorsements>();
 
         try {
@@ -503,7 +529,7 @@ public class endorsementsDAO extends LOVCC {
                               (BigDecimal)session.getAttribute("endorsementCode"));
 
             cst.execute();
-            ResultSet rs = (ResultSet)cst.getObject(1);
+            rs = (ResultSet)cst.getObject(1);
             while (rs.next()) {
 
                 endorsements prov = new endorsements();
@@ -522,6 +548,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rs, cst, conn);
         }
         return myendorsements;
     }
@@ -531,6 +559,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rs=null;
         List<endorsements> myendorsements = new ArrayList<endorsements>();
 
         try {
@@ -545,7 +574,7 @@ public class endorsementsDAO extends LOVCC {
                               (BigDecimal)session.getAttribute("endorsementCode"));
 
             cst.execute();
-            ResultSet rs = (ResultSet)cst.getObject(1);
+            rs = (ResultSet)cst.getObject(1);
             while (rs.next()) {
 
                 endorsements prov = new endorsements();
@@ -566,6 +595,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rs, cst, conn);
         }
         return myendorsements;
     }
@@ -574,6 +605,7 @@ public class endorsementsDAO extends LOVCC {
         DBConnector myConn = new DBConnector();
         Connection conn = myConn.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rst=null;
         List<endorsements> EnddorsementList = new ArrayList<endorsements>();
         try {
             String EndorsementQuery =
@@ -583,7 +615,7 @@ public class endorsementsDAO extends LOVCC {
             cst.setBigDecimal(2,
                               (BigDecimal)session.getAttribute("endorsementCode"));
             cst.execute();
-            ResultSet rst = (ResultSet)cst.getObject(1);
+            rst = (ResultSet)cst.getObject(1);
             while (rst.next()) {
                 endorsements myProd = new endorsements();
 
@@ -616,6 +648,8 @@ public class endorsementsDAO extends LOVCC {
             conn.close();
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rst, cst, conn);
         }
 
         return EnddorsementList;
@@ -638,6 +672,8 @@ public class endorsementsDAO extends LOVCC {
 
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(null, cst, conn);
         }
         return postUndReinsStat;
     }
@@ -645,6 +681,7 @@ public class endorsementsDAO extends LOVCC {
       DBConnector myConn = new DBConnector();
       Connection conn = myConn.getDatabaseConn();
       CallableStatement cst = null;
+      ResultSet rst=null; 
       List<endorsements> polRemarks = new ArrayList<endorsements>();
       try {
           String policyRemarks =
@@ -654,7 +691,7 @@ public class endorsementsDAO extends LOVCC {
                             (BigDecimal)session.getAttribute("endorsementCode"));
          cst.registerOutParameter(2, OracleTypes.CURSOR);
           cst.execute();
-          ResultSet rst = (ResultSet)cst.getObject(2);
+          rst = (ResultSet)cst.getObject(2);
           while (rst.next()) {
               endorsements remarks= new endorsements();
               remarks.setPRM_CODE(rst.getBigDecimal(1));
@@ -677,6 +714,8 @@ public class endorsementsDAO extends LOVCC {
       } catch (Exception e) {
           GlobalCC.EXCEPTIONREPORTING(conn, e);
           e.printStackTrace();
+      }finally{
+      GlobalCC.CloseConnections(rst, cst, conn);
       }
 
       return polRemarks;

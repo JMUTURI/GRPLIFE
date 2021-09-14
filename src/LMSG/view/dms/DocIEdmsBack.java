@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,6 +52,7 @@ import oracle.adf.model.binding.DCIteratorBinding;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.input.RichInputFile;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
+import oracle.adf.view.rich.component.rich.input.RichSelectBooleanCheckbox;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
 import oracle.adf.view.rich.component.rich.input.RichTextEditor;
 import oracle.adf.view.rich.component.rich.layout.RichPanelFormLayout;
@@ -70,6 +72,21 @@ import org.apache.myfaces.trinidad.render.ExtendedRenderKitService;
 import org.apache.myfaces.trinidad.util.Service;
 
 import sun.misc.BASE64Decoder;
+
+import java.util.zip.ZipOutputStream;
+import java.util.zip.ZipEntry;
+
+import java.io.FileOutputStream;
+
+import javax.servlet.ServletOutputStream;
+
+import java.io.File;
+import java.io.FileInputStream;
+
+import oracle.jbo.Row;
+import oracle.jbo.ViewObject;
+
+import java.util.HashMap;
 
 public class DocIEdmsBack {
     HttpSession session =
@@ -116,6 +133,7 @@ public class DocIEdmsBack {
     private RichSelectOneChoice claimTypeSelect;
     private RichOutputLabel claimTypeLB;
     private RichTable paymentDocTbl;
+    private RichSelectBooleanCheckbox selectClaimDocsCB;
 
     static {
         mimeTypes = new HashMap<String, String>() {
@@ -549,8 +567,8 @@ public class DocIEdmsBack {
         uploadDocument.setClaimType(claimType);
         Gson gson = new Gson();
         String json = gson.toJson(uploadDocument);
-        System.out.println("json=="+json);
-        
+        System.out.println("json==" + json);
+
         URL url = new URL(query);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setConnectTimeout(5000);
@@ -684,8 +702,8 @@ public class DocIEdmsBack {
             byte[] bytes = IOUtils.toByteArray(inputStream);
             byte[] result = Base64.encodeBase64(bytes);
             ArrayList<String> medMetadata = new ArrayList();
-            medMetadata = utils.getMedicalMetadata();             
-            BigDecimal facilitatorCode =utils.findFacilitatorCode();
+            medMetadata = utils.getMedicalMetadata();
+            BigDecimal facilitatorCode = utils.findFacilitatorCode();
             UploadDocumentDTO uploadDocument = new UploadDocumentDTO();
             uploadDocument.setTransNo(facilitatorCode.toString());
             uploadDocument.setProviderNo(facilitatorCode.toString());
@@ -720,7 +738,7 @@ public class DocIEdmsBack {
             in.close();
             conn.disconnect();
             session.setAttribute("fmptCode", null);
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -2444,6 +2462,7 @@ conn.prepareCall("begin TQ_LMS.DMS_DOCUMENTS.get_doc_types(?,?);end;");
     public RichTable getPaymentDocTbl() {
         return paymentDocTbl;
     }
+
     public String viewPaymentDocs() {
         Object key2 = this.paymentDocTbl.getSelectedRowData();
         JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
@@ -2511,6 +2530,7 @@ conn.prepareCall("begin TQ_LMS.DMS_DOCUMENTS.get_doc_types(?,?);end;");
         }
         return null;
     }
+
     public String viewPaymentComments() {
         Object key2 = this.paymentDocTbl.getSelectedRowData();
         JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
@@ -2541,5 +2561,305 @@ conn.prepareCall("begin TQ_LMS.DMS_DOCUMENTS.get_doc_types(?,?);end;");
 
 
         return null;
+    }
+
+    /*downloads claim documents*/
+
+    public String downloadClaimDocuments() {
+        // Add event code here...
+        Object key2 = this.policyClaimsDocsTbl.getSelectedRowData();
+        JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
+        if (r == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+            return null;
+        }
+        try {
+            downloadDmsDocs((String)r.getAttribute("id"),
+                            (String)r.getAttribute("actualName"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    /*downloads claim documents*/
+
+    public String downloadUnderwitingDocuments() {
+        // Add event code here...
+        Object key2 = this.policyDocsTbl.getSelectedRowData();
+        JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
+        if (r == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+            return null;
+        }
+        try {
+            downloadDmsDocs((String)r.getAttribute("id"),
+                            (String)r.getAttribute("actualName"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public String downloadMemberDocuments() {
+        // Add event code here...
+        Object key2 = this.memDocTbl.getSelectedRowData();
+        JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
+        if (r == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+            return null;
+        }
+        try {
+            downloadDmsDocs((String)r.getAttribute("id"),
+                            (String)r.getAttribute("actualName"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public String downloadPaymentDocuments() {
+        // Add event code here...
+        Object key2 = this.paymentDocTbl.getSelectedRowData();
+        JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
+        if (r == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+            return null;
+        }
+        String id = (String)r.getAttribute("id");
+        String actualName = (String)r.getAttribute("actualName");
+        System.out.println(id + "===========" + actualName);
+        try {
+            downloadDmsDocs(id, actualName);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public String downloadDmsDocs(String id, String fileName) {
+        try {
+            ListDocByte docByte = getClientDocuments(id);
+            String mimeType = docByte.getDocMimetype();
+            byte[] decodeResult =
+                new BASE64Decoder().decodeBuffer(docByte.getByteData());
+            HttpServletResponse resp =
+                (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            System.out.println("MIME TYPE" + mimeType);
+            resp.setContentType(mimeType);
+            resp.setHeader("Content-Disposition",
+                           "attachment;filename=" + fileName);
+            resp.getOutputStream().write(decodeResult);
+            resp.getOutputStream().close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public String downClaimDocuments() {     
+        HashMap<String, String> map = new HashMap<String, String>();
+        FacesContext context = FacesContext.getCurrentInstance();
+        ServletContext sc =
+            (ServletContext)context.getExternalContext().getContext();
+        
+      int count = policyClaimsDocsTbl.getRowCount();
+      // System.out.println("count=====" + count);
+      for (int i = 0; i < count; i++) {
+          JUCtrlValueBinding nodeBinding =
+              (JUCtrlValueBinding)policyClaimsDocsTbl.getRowData(i);
+          if(nodeBinding.getAttribute("selectDoc").equals(true)){
+            map.put(nodeBinding.getAttribute("id").toString(),
+                    nodeBinding.getAttribute("actualName").toString());
+          }
+      }
+
+      int paymentCount = paymentDocTbl.getRowCount();
+      for (int i = 0; i < paymentCount; i++) {
+          JUCtrlValueBinding nodeBinding =
+              (JUCtrlValueBinding)paymentDocTbl.getRowData(i);
+              if(nodeBinding.getAttribute("selectFinanceDoc").equals(true)){
+                map.put(nodeBinding.getAttribute("id").toString(),
+                        nodeBinding.getAttribute("actualName").toString());
+              }
+      }
+
+        if (map.size() != 0) {
+            try {
+                DMSUtils utils = new DMSUtils();
+                ArrayList<String> claimMetadata = new ArrayList();
+                claimMetadata = utils.getClaimMetadata();
+                String claimNo =
+                    this.session.getAttribute("ClaimNo").toString().replaceAll("/",
+                                                                               "");
+                String policyId =
+                    (String)claimMetadata.get(0).toString().replaceAll("/",
+                                                                       "");
+                String memNo =
+                    (String)claimMetadata.get(1).trim().toString().replaceAll("/",
+                                                                              "").replaceAll("'",
+                                                                                             "");
+                String clientName =
+                    (String)claimMetadata.get(2).trim().toString().replaceAll("/",
+                                                                              "").replaceAll("'",
+                                                                                             "");
+                String memberName =
+                    (String)claimMetadata.get(3).trim().toString().replaceAll("/",
+                                                                              "").replaceAll("'",
+                                                                                             "");
+                String zipFolderName =
+                    memNo + "-" + claimNo + "-" + memberName + ".zip";
+                System.out.println("The folder name is " + zipFolderName);
+                //String zipFolderName = "testdownload.zip";
+                String outFilename =
+                    sc.getRealPath("/Reports/" + zipFolderName);
+                ZipOutputStream zout =
+                    new ZipOutputStream(new FileOutputStream(outFilename));
+                ZipEntry zipEntry = null;
+
+                for (Map.Entry m : map.entrySet()) {
+                    ListDocByte docByte =
+                        getClientDocuments(m.getKey().toString());
+                    String filename = m.getValue().toString();
+
+                    byte[] decodeResult =
+                        new BASE64Decoder().decodeBuffer(docByte.getByteData());
+                    zipEntry = new ZipEntry(filename);
+                    zout.putNextEntry(zipEntry);
+                    zout.write(decodeResult);
+                }
+                zout.closeEntry();
+                zout.flush();
+                zout.close();
+
+                HttpServletResponse response =
+                    (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+                File file = new File(outFilename);
+                if (!file.exists()) {
+                    System.out.println("file not found");
+                }
+                response.setContentType("APPLICATION/OCTET-STREAM");
+                response.setHeader("Content-Disposition",
+                                   "attachment; filename=\"" + zipFolderName +
+                                   "\"");
+
+                OutputStream out = response.getOutputStream();
+                FileInputStream in = new FileInputStream(file);
+                byte[] buffer = new byte[4096];
+                int length;
+                while ((length = in.read(buffer)) > 0) {
+                    out.write(buffer, 0, length);
+                }
+                in.close();
+                out.flush();
+                file.delete();
+                return null;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+
+            }
+        } else {
+            GlobalCC.INFORMATIONREPORTING("You have not selected any document .....kindly select to download...");
+        }
+
+        return null;
+    }
+
+    public String selectAllClaimDocs() {
+        int count = policyClaimsDocsTbl.getRowCount();
+       // System.out.println("count=====" + count);
+        for (int i = 0; i < count; i++) {
+            JUCtrlValueBinding nodeBinding =
+                (JUCtrlValueBinding)policyClaimsDocsTbl.getRowData(i);
+            nodeBinding.setAttribute("selectDoc", true);
+        }
+
+        int paymentCount = paymentDocTbl.getRowCount();
+        for (int i = 0; i < paymentCount; i++) {
+            JUCtrlValueBinding nodeBinding =
+                (JUCtrlValueBinding)paymentDocTbl.getRowData(i);
+            nodeBinding.setAttribute("selectFinanceDoc", true);
+        }
+
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.policyClaimsDocsTbl);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.paymentDocTbl);
+
+        return null;
+    }
+
+    public String unselectAllClaimDocs() {
+        // Add event code here...
+        int count = policyClaimsDocsTbl.getRowCount();
+        for (int i = 0; i <count; i++) {
+            JUCtrlValueBinding nodeBinding =
+                (JUCtrlValueBinding)policyClaimsDocsTbl.getRowData(i);
+            nodeBinding.setAttribute("selectDoc", false);
+        }
+
+        int paymentCount = paymentDocTbl.getRowCount();
+        for (int i = 0; i <paymentCount; i++) {
+            JUCtrlValueBinding nodeBinding =
+                (JUCtrlValueBinding)paymentDocTbl.getRowData(i);
+            nodeBinding.setAttribute("selectFinanceDoc", false);
+        }
+
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.policyClaimsDocsTbl);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(this.paymentDocTbl);
+        return null;
+    }
+
+    private void refreshDocumentComponents_claims(String selectAll) {
+        System.out.println("The select value is " + selectAll);
+        session.setAttribute("selectAllDocs", selectAll);
+
+        DCIteratorBinding availIter =
+            ADFUtils.findIterator("claimsDocsIterator");
+        // availIter.executeQuery(); // doesn't work
+        availIter.getViewObject().executeQuery();
+
+        DCIteratorBinding availIter1 =
+            ADFUtils.findIterator("paymentDocumentsIterator");
+
+        // availIter.executeQuery(); // doesn't work
+        availIter1.getViewObject().executeQuery();
+
+    }
+
+    public void setSelectClaimDocsCB(RichSelectBooleanCheckbox selectClaimDocsCB) {
+        this.selectClaimDocsCB = selectClaimDocsCB;
+    }
+
+    public RichSelectBooleanCheckbox getSelectClaimDocsCB() {
+        return selectClaimDocsCB;
+    }
+
+    public void selectClaimDocsListener(ValueChangeEvent valueChangeEvent) {
+        // Add event code here...
+        if (valueChangeEvent.getOldValue() != valueChangeEvent.getNewValue()) {
+            JUCtrlValueBinding nodeBinding =
+                (JUCtrlValueBinding)policyClaimsDocsTbl.getRowData();
+            System.out.println("HERE....." + valueChangeEvent.getNewValue());
+            if (valueChangeEvent.getNewValue().equals(true)) {
+                nodeBinding.setAttribute("selectDoc", true);
+            } else {
+                nodeBinding.setAttribute("selectDoc", false);
+            }
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.policyClaimsDocsTbl);
+        }
+    }
+
+    public void selectFinanceDocuments(ValueChangeEvent valueChangeEvent) {
+        // Add event code here...
+        if (valueChangeEvent.getOldValue() != valueChangeEvent.getNewValue()) {
+            JUCtrlValueBinding nodeBinding =
+                (JUCtrlValueBinding)paymentDocTbl.getRowData();
+            System.out.println("HERE....." + valueChangeEvent.getNewValue());
+            if (valueChangeEvent.getNewValue().equals(true)) {
+                nodeBinding.setAttribute("selectFinanceDoc", true);
+            } else {
+                nodeBinding.setAttribute("selectFinanceDoc", false);
+            }
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.paymentDocTbl);
+        }
     }
 }

@@ -20,6 +20,8 @@
   <Attribute Name="policyNo" Type="java.lang.String"/>
   <Attribute Name="claimNo" Type="java.lang.String"/>
   <Attribute Name="mimeType" Type="java.lang.String"/>
+  <Attribute Name="selectDoc" Type="boolean"/>
+  <Attribute Name="selectFinanceDoc" Type="boolean"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.dms.DocumentDTO"
                      BeanClass="LMSG.view.dms.DocumentDTO" id="DocumentDTO"/>
 </JavaBean>

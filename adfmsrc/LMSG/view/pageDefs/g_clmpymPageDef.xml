@@ -199,7 +199,10 @@
           <Item Value="CPV_DISCHARGE_STATUS"/>
           <Item Value="CPV_PAYEE_TEL"/>
           <Item Value="BBR_BRANCH_NAME"/>
-		  <Item Value="cpv_ltr_btr_trans_code"/>		  
+		      <Item Value="cpv_ltr_btr_trans_code"/>	
+          <Item Value="cpv_clnt_id_passport_no"/>
+          <Item Value="cpv_email_address"/>
+          
         </AttrNames>
       </nodeDefinition>
     </tree>

@@ -885,6 +885,68 @@
                                                     simple="true"
                                                     binding="#{otherSetups.warranty}"
                                                     shortDesc="Warranty"/>
+                                      <af:outputLabel value="Reinsurance Broker"
+                                                      id="ol60"/>
+                                                      
+                                      <h:panelGrid columns="2" id="pg45">
+                                        <af:inputText label="Broker"
+                                                      id="it45" simple="true" disabled="true"
+                                                      binding="#{otherSetups.brokerName}"/>
+                                        <af:commandButton text=""
+                                                          id="cb58" icon="/dropdown.gif">
+                                                          
+                                         <af:showPopupBehavior popupId="p3" />                 
+                                         </af:commandButton>
+                                        <af:popup id="p3">
+                                          <af:dialog id="d18" type="none">
+                                            <af:table value="#{bindings.treatySetups1.collectionModel}"
+                                                      var="row"
+                                                      rows="#{bindings.treatySetups1.rangeSize}"
+                                                      emptyText="#{bindings.treatySetups1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.treatySetups1.rangeSize}"
+                                                      rowBandingInterval="0"
+                                                      filterModel="#{bindings.treatySetups1Query.queryDescriptor}"
+                                                      queryListener="#{bindings.treatySetups1Query.processQuery}"
+                                                      filterVisible="true"
+                                                      varStatus="vs"
+                                                      selectedRowKeys="#{bindings.treatySetups1.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.treatySetups1.collectionModel.makeCurrent}"
+                                                      rowSelection="single"
+                                                      id="t11"
+                                                      inlineStyle="width:100%"
+                                                      binding="#{otherSetups.brokersLOV}">
+                                              <af:column sortProperty="AGN_NAME"
+                                                         filterable="true"
+                                                         sortable="true"
+                                                         headerText="#{bindings.treatySetups1.hints.AGN_NAME.label}"
+                                                         id="c49"
+                                                         width="250">
+                                                <af:outputText value="#{row.AGN_NAME}"
+                                                               id="ot125"/>
+                                              </af:column>
+                                                  <af:column sortProperty="AGN_CODE"
+                                                         filterable="true"
+                                                         sortable="true"
+                                                         headerText="#{bindings.treatySetups1.hints.AGN_CODE.label}"
+                                                         id="c122"
+                                                         visible="false">
+                                                <af:outputText value="#{row.AGN_CODE}"
+                                                               id="ot126"/>
+                                              </af:column>
+                                           </af:table>
+                                           <h:panelGrid columns="2" id="pg46">
+                                              <af:commandButton text="Ok"
+                                                                id="cb59"
+                                                                partialSubmit="true"
+                                                                action="#{otherSetups.selectBroker}"/>
+                                              <af:commandButton text="Cancel"
+                                                                id="cb60"                                                                
+                                                                action="#{otherSetups.cancelBrokerPopup}"
+                                                                partialSubmit="true"/>
+                                            </h:panelGrid>
+                                          </af:dialog>
+                                        </af:popup>
+                                      </h:panelGrid>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2" id="pg27">
                                       <af:commandButton text="OK" id="cb24"
@@ -1061,13 +1123,13 @@
                                 </af:column>
                                 <af:column sortProperty="REI_WORDING"
                                            sortable="true" headerText="Wording"
-                                           id="c35">
+                                           id="c35" visible="false">
                                   <af:outputText value="#{row.REI_WORDING}"
                                                  id="ot28"/>
                                 </af:column>
                                 <af:column sortProperty="REI_WARRANTY"
                                            sortable="true" headerText="Warranty"
-                                           id="c26">
+                                           id="c26" visible="false">
                                   <af:outputText value="#{row.REI_WARRANTY}"
                                                  id="ot25"/>
                                 </af:column>
@@ -1119,6 +1181,14 @@
                                            id="c32" visible="false">
                                   <af:outputText value="#{row.REI_ACCOUNTS}"
                                                  id="ot36"/>
+                                </af:column>
+                                <af:column sortProperty="AGN_NAME"
+                                           sortable="true"
+                                           headerText="Broker"
+                                           id="c48" visible="true"
+                                           width="200">
+                                  <af:outputText value="#{row.AGN_NAME}"
+                                                 id="ot124"/>
                                 </af:column>
                               </af:table>
                               <af:separator id="s3"/>

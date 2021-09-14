@@ -934,6 +934,9 @@
           <Item Value="spr_name"/>
           <Item Value="MEM_OTHER_NAMES"/>
           <Item Value="pmem_rsa_pin"/>
+          <Item Value="pmem_phone_no"/>
+          <Item Value="pmem_email_address"/>
+          <Item Value="pmem_id_no"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

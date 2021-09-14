@@ -3,7 +3,11 @@
           id="treatySetupDAO" Package="LMSG.view.setups"
           BeanClass="LMSG.view.setups.treatySetupDAO" isJavaBased="true">
   <MethodAccessor IsCollection="true" Type="LMSG.view.setups.treatySetups"
-                  BeanClass="LMSG.view.setups.treatySetups" id="findTreatySetups"
+                  BeanClass="LMSG.view.setups.treatySetups"
+                  id="findTreatySetups" ReturnNodeName="treatySetups"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="true" Type="LMSG.view.setups.treatySetups"
+                  BeanClass="LMSG.view.setups.treatySetups" id="findReinBrokers"
                   ReturnNodeName="treatySetups"
                   CollectionBeanClass="UpdateableCollection"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.setups.treatySetupDAO"

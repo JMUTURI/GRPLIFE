@@ -176,6 +176,8 @@ public class ReportEngine {
             session.setAttribute("reportformatprint",null);
             GlobalCC.EXCEPTIONREPORTING(conn, e);
             e.printStackTrace();
+        }finally{
+        GlobalCC.CloseConnections(null, cst, conn);
         }
         session.setAttribute("reportformatprint",null);
         return null;
@@ -276,6 +278,8 @@ public class ReportEngine {
       } catch (Exception e) {
           GlobalCC.EXCEPTIONREPORTING(conn, e);
           e.printStackTrace();
+      }finally{
+      GlobalCC.CloseConnections(null, cst, conn);
       }
 
       return null;
@@ -284,6 +288,7 @@ public class ReportEngine {
     public void GetProductSpecificReports(ActionEvent actionEvent){
         Connection conn = null;
         BigDecimal Value = null;
+       CallableStatement stmt = null;
         try{
           String reportId = actionEvent.getComponent().getId();
           reportId = reportId.replace("prpt", "");
@@ -304,7 +309,7 @@ public class ReportEngine {
             
           conn=new DBConnector().getDatabaseConn();
           String dobQuery = "begin ? := LMS_WEB_PKG_GRP_UW.product_rpt_sch(?,?,?); end;";
-          CallableStatement stmt = null;
+          
           stmt = conn.prepareCall(dobQuery);
           stmt.registerOutParameter(1, oracle.jdbc.internal.OracleTypes.VARCHAR);
           stmt.setBigDecimal(2, (BigDecimal)session.getAttribute("rptProductCode"));
@@ -322,12 +327,15 @@ public class ReportEngine {
           RunReport(Value);
         }catch(Exception e){
           GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(null, stmt, conn);
         }
     }
     
   public void GetProductSpecificSchedules(ActionEvent actionEvent){
       Connection conn = null;
       BigDecimal Value = null;
+      CallableStatement stmt = null;
       try{
         String reportId = actionEvent.getComponent().getId();
         reportId = reportId.replace("prpt", "");
@@ -348,7 +356,7 @@ public class ReportEngine {
           
         conn=new DBConnector().getDatabaseConn();
         String dobQuery = "begin ? := LMS_WEB_PKG_GRP_UW.product_rpt_sch(?,?,?); end;";
-        CallableStatement stmt = null;
+       
         stmt = conn.prepareCall(dobQuery);
         stmt.registerOutParameter(1, oracle.jdbc.internal.OracleTypes.VARCHAR);
         stmt.setBigDecimal(2, (BigDecimal)session.getAttribute("rptProductCode"));
@@ -375,6 +383,8 @@ public class ReportEngine {
         
       }catch(Exception e){
         GlobalCC.EXCEPTIONREPORTING(conn, e);
+      }finally{
+      GlobalCC.CloseConnections(null, stmt, conn);
       }
   }
     
@@ -396,6 +406,7 @@ public class ReportEngine {
   public void GetReportDetails(ActionEvent actionEvent) {
     Connection conn=null;    
     String rptCode = null;
+    CallableStatement cstmt=null;
     String reportId = actionEvent.getComponent().getId();
     reportId = reportId.replace("rpt", "");
     if(reportId.equalsIgnoreCase("0")){
@@ -412,7 +423,7 @@ public class ReportEngine {
     
     }
       
-      String Result = SetReportParameters(Integer.parseInt(rptCode));
+      String Result = SetReportParameters(new BigDecimal(rptCode));
       if(Result.equalsIgnoreCase("F")){
           return;
       }
@@ -421,13 +432,15 @@ public class ReportEngine {
         System.out.println("Endr_code"+session.getAttribute("endorsementCode"));
         try{
         conn=new DBConnector().getDatabaseConn();
-        CallableStatement cstmt=conn.prepareCall(printSEQ);
+        cstmt=conn.prepareCall(printSEQ);
         cstmt.setBigDecimal(1,(BigDecimal)session.getAttribute("endorsementCode"));        
         cstmt.execute();
         cstmt.close();
         conn.close();   
         }catch(Exception e){
           e.printStackTrace();
+        }finally{
+        GlobalCC.CloseConnections(null, cstmt, conn);
         }
         
       }
@@ -452,7 +465,7 @@ public class ReportEngine {
         rptCode = reportId;      
       }
         
-        String Result = SetReportParameters(Integer.parseInt(rptCode));
+        String Result = SetReportParameters(new BigDecimal(rptCode));
         if(Result.equalsIgnoreCase("F")){
             return;
         }
@@ -515,10 +528,11 @@ public class ReportEngine {
         }
     }
     
-    public String SetReportParameters(Integer ReportRender){
+    public String SetReportParameters(BigDecimal ReportRender){
         String Result = "F";
+        
         try{
-            switch(ReportRender){
+            switch(ReportRender.intValue()){
             
             case 1://Reports that recieve only date parameters...
             case 2:
@@ -667,7 +681,7 @@ public class ReportEngine {
         }
     }
       
-      String Result = SetReportParameters(Integer.parseInt(rptCode));
+      String Result = SetReportParameters(new BigDecimal(rptCode));
       
       if(Result.equalsIgnoreCase("F")){
           return;
@@ -732,7 +746,7 @@ public class ReportEngine {
             rptCode = reportId;      
           }
             
-            String Result = SetReportParameters(Integer.parseInt(rptCode));
+            String Result = SetReportParameters(new BigDecimal(rptCode));
             if(Result.equalsIgnoreCase("F")){
                 return;
             }

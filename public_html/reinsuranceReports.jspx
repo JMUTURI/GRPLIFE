@@ -17,7 +17,7 @@
         <f:facet name="center">
           <af:panelGroupLayout layout="scroll" id="pgl2">
             <af:panelAccordion id="pa1"
-                               inlineStyle="height:296px; width:100.0%;">
+                               inlineStyle="height:500px; width:100.0%;">
               <af:showDetailItem text="System Reports" id="sdi1">
                 <f:facet name="toolbar">
                   <af:group id="g1">
@@ -80,6 +80,18 @@
                                                 actionListener="#{reportParameterBean.paramReport}"/>
                       <af:commandLink text="Re-insurance member schedule" id="rpt2250133774"
                                                 actionListener="#{reportParameterBean.paramReport}"/>
+                       <af:commandLink text="Reinsurance Claim Register" id="rpt25330"
+                                                actionListener="#{reportParameterBean.paramReport}"/>      
+                      <af:commandLink text="Master Recovery Register" id="rpt2250133868"
+                                                actionListener="#{reportParameterBean.paramReport}"/> 
+                      <af:commandLink text="Reinsurance Submission Summary Report" id="rpt2250133869"
+                                                actionListener="#{reportParameterBean.paramReport}"/>  
+                      <af:commandLink text="Coinsurance Submission Summary Report" id="rpt2250133871"
+                                                actionListener="#{reportParameterBean.paramReport}"/>  
+                      <af:commandLink text="Paid Pending Recovery(Reinsurance)" id="rpt2250133872"
+                                                actionListener="#{reportParameterBean.paramReport}"/>     
+                      <af:commandLink text="Paid Pending Recovery(Coinsurance)" id="rpt2250133873"
+                                                actionListener="#{reportParameterBean.paramReport}"/>                           
                       <af:spacer width="50" height="50" id="s4"/>
                     </h:panelGrid>
                   </af:panelBox>

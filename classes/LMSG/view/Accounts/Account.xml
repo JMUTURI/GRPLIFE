@@ -376,6 +376,7 @@
   <Attribute Name="empye_reg_transfer" Type="java.math.BigDecimal"/>
   <Attribute Name="empye_unreg_transfer" Type="java.math.BigDecimal"/>
   <Attribute Name="totalChequeAmt" Type="java.math.BigDecimal"/>
+  <Attribute Name="ccvtCode" Type="java.math.BigDecimal"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.Accounts.Account"
                      BeanClass="LMSG.view.Accounts.Account" id="Account"/>
 </JavaBean>

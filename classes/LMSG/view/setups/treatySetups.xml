@@ -31,6 +31,10 @@
   <Attribute Name="REI_ACCOUNTS" Type="java.lang.String"/>
   <Attribute Name="REI_ACCOUNTS_DESC" Type="java.lang.String"/>
   <Attribute Name="REI_TRT_SHT_DESC" Type="java.lang.String"/>
+  <Attribute Name="REI_AGN_CODE" Type="java.math.BigDecimal"/>
+  <Attribute Name="AGN_NAME" Type="java.lang.String"/>
+  <Attribute Name="AGN_CODE" Type="java.math.BigDecimal"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.setups.treatySetups"
-                     BeanClass="LMSG.view.setups.treatySetups" id="treatySetups"/>
+                     BeanClass="LMSG.view.setups.treatySetups"
+                     id="treatySetups"/>
 </JavaBean>

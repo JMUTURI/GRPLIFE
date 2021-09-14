@@ -69,6 +69,23 @@
     <searchRegion Binds="findCoinsurancePrdSummIterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   id="Account5Query"/>
+    <iterator Binds="root" RangeSize="25" DataControl="IEDMSDocsDao"
+              id="IEDMSDocsDaoIterator"/>
+    <accessorIterator MasterBinding="IEDMSDocsDaoIterator" Binds="claimsDocs"
+                      RangeSize="25" DataControl="IEDMSDocsDao"
+                      BeanClass="LMSG.view.dms.DocumentDTO"
+                      id="claimsDocsIterator"/>
+    <searchRegion Binds="claimsDocsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="claimsDocsQuery"/>
+  <accessorIterator MasterBinding="IEDMSDocsDaoIterator"
+                      Binds="paymentDocuments" RangeSize="25"
+                      DataControl="IEDMSDocsDao"
+                      BeanClass="LMSG.view.dms.DocumentDTO"
+                      id="paymentDocumentsIterator" ChangeEventPolicy="ppr"/>
+  <searchRegion Binds="paymentDocumentsIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="paymentDocumentsQuery"/>
   </executables>
   <bindings>
     <methodAction id="findTreatyArrangements" RequiresUpdateModel="true"
@@ -406,6 +423,7 @@
           <Item Value="agnName"/>
           <Item Value="riSelect"/>
           <Item Value="riPeriod"/>
+          <Item Value="ccvtCode"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -429,6 +447,7 @@
           <Item Value="coinAgnName"/>
           <Item Value="coinSelect"/>
           <Item Value="coinPeriod"/>
+          <Item Value="ccvtCode"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -444,8 +463,36 @@
           <Item Value="coinCoverDesc"/>
           <Item Value="coinRefNo"/>
           <Item Value="coinAgnName"/>
+          <Item Value="coinPeriod"/>
           <Item Value="coinClient"/>
           <Item Value="coinSelect"/>
+          <Item Value="ccvtCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="claimsDocsIterator" id="claimsDocs">
+      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO" Name="claimsDocs0">
+        <AttrNames>
+          <Item Value="docType"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="actualName"/>
+          <Item Value="name"/>
+          <Item Value="dateCreated"/>
+          <Item Value="id"/>
+          <Item Value="selectDoc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+     <tree IterBinding="paymentDocumentsIterator" id="paymentDocuments1">
+      <nodeDefinition DefName="LMSG.view.dms.DocumentDTO"
+                      Name="paymentDocuments10">
+        <AttrNames>
+          <Item Value="docType"/>
+          <Item Value="modifiedBy"/>
+          <Item Value="actualName"/>
+          <Item Value="id"/>
+          <Item Value="dateCreated"/>
+          <Item Value="selectFinanceDoc"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

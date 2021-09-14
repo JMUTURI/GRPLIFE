@@ -269,14 +269,16 @@ public class policyEndorsements extends LOVCC {
         Row r = dciter.getCurrentRow();
         EndorsementCode = (BigDecimal)r.getAttribute("PT_ENDR_CODE");
         TransCode = (BigDecimal)r.getAttribute("PT_ENDR_LTR_TRANS_NO");
+      Connection conn=null;
+      CallableStatement cst1=null;
 
       try{
         
          DBConnector myConn=new DBConnector();
-        Connection conn=myConn.getDatabaseConn();
+         conn=myConn.getDatabaseConn();
 
         String PendingTrans = "begin LMS_GRP_TRANSACTIONS.DEL_GRP_POL_DTLS_PROC(?,?,?);end;";
-        CallableStatement cst1 = conn.prepareCall(PendingTrans);
+        cst1 = conn.prepareCall(PendingTrans);
         cst1.setBigDecimal(1, (BigDecimal)session.getAttribute("policyCode"));
         cst1.setBigDecimal(2, EndorsementCode);
         cst1.setBigDecimal(3, TransCode);
@@ -299,6 +301,8 @@ public class policyEndorsements extends LOVCC {
       }      
     catch(Exception e) {
       GlobalCC.EXCEPTIONREPORTING(null, e);
+    }finally{
+    GlobalCC.CloseConnections(null, cst1, conn);
     }
      
     }
@@ -641,7 +645,8 @@ public class policyEndorsements extends LOVCC {
   }
   
   public String EndorsementAction(){
-    
+    Connection conn=null;
+    CallableStatement cst1=null;
     if(transEffDate.getValue()==null){
       GlobalCC.INFORMATIONREPORTING("Enter a Transaction Effective Date");
       return null;
@@ -688,10 +693,10 @@ public class policyEndorsements extends LOVCC {
         int TotalTransactions = 0;
         
          DBConnector myConn=new DBConnector();
-         Connection conn=myConn.getDatabaseConn();
+         conn=myConn.getDatabaseConn();
   
         String PendingTrans = "begin LMS_WEB_CURSOR_GRP.getPendingTransactions(?,?);end;";
-        CallableStatement cst1 = conn.prepareCall(PendingTrans);
+        cst1 = conn.prepareCall(PendingTrans);
         cst1.setBigDecimal(1, (BigDecimal)session.getAttribute("policyCode"));
         System.out.println(session.getAttribute("policyCode"));
         cst1.registerOutParameter(2, OracleTypes.INTEGER);
@@ -715,6 +720,8 @@ public class policyEndorsements extends LOVCC {
       
       }catch (Exception e) {
         GlobalCC.EXCEPTIONREPORTING(null, e);
+      } finally{
+      GlobalCC.CloseConnections(null, cst1, conn);
       }
     
     transactions.setRendered(false);
@@ -861,13 +868,16 @@ public class policyEndorsements extends LOVCC {
        * This is to RollBack Created Tickets When the Procedure Fails
        */
       DBConnector MyDB = new DBConnector();
+    CallableStatement cst=null;
+    Connection conn =null;
+    
       try{
-          Connection conn = MyDB.getDatabaseConn();
+        conn = MyDB.getDatabaseConn();
           if(conn==null){
               GlobalCC.sysInformation("Unable to connect to database");
               return null;
           }
-          CallableStatement cst = conn.prepareCall("begin TQC_WEB_PKG.remove_tickets(?);end;");
+          cst = conn.prepareCall("begin TQC_WEB_PKG.remove_tickets(?);end;");
           cst.setString(1, (String)session.getAttribute("TaskID"));
           cst.execute();
           cst.close();
@@ -877,6 +887,8 @@ public class policyEndorsements extends LOVCC {
           
       }catch(Exception e){
           GlobalCC.EXCEPTIONREPORTING(null, e);
+      }finally{
+      GlobalCC.CloseConnections(null, cst, conn);
       }
       return null;
   }
@@ -1120,6 +1132,8 @@ public class policyEndorsements extends LOVCC {
     catch(Exception e) {
         RollBackTicketTransaction();
         GlobalCC.EXCEPTIONREPORTING(conn, e);
+    }finally{
+    GlobalCC.CloseConnections(null, cst, conn);
     }
     
     return null;
@@ -1308,6 +1322,8 @@ public class policyEndorsements extends LOVCC {
     catch(Exception e) {
         RollBackTicketTransaction();
         GlobalCC.EXCEPTIONREPORTING(conn, e);
+    }finally{
+    GlobalCC.CloseConnections(null, cst, conn);
     }
     
     return null;
@@ -1496,6 +1512,7 @@ public class policyEndorsements extends LOVCC {
   
   public String AuthoriseExceptions(){
       Connection conn=null;
+      CallableStatement cst3 = null;
       try{
           conn=new DBConnector().getDatabaseConn();
           
@@ -1550,7 +1567,6 @@ public class policyEndorsements extends LOVCC {
           
           workflowProcessing wf = new workflowProcessing();     
              String MyTask = null;
-             CallableStatement cst3 = null;
              String Complete = "BEGIN TQC_WEB_PKG.check_task_completion(?,?,?);END;";
              cst3 = conn.prepareCall(Complete);
              cst3.setString(1,"ENAE"); 
@@ -1596,6 +1612,8 @@ public class policyEndorsements extends LOVCC {
           conn.close();      
       }catch(Exception e){
             GlobalCC.EXCEPTIONREPORTING(conn,e);
+      }finally{
+      GlobalCC.CloseConnections(null, cst3, conn);
       }
       return null;
   }

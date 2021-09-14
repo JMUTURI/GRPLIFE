@@ -137,6 +137,8 @@ public class CorrespondenceManipulation extends LOVCC {
             smsTemplateMessage.setRendered(false);
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(null, cst, conn);
         }
 
         return null;
@@ -165,6 +167,8 @@ public class CorrespondenceManipulation extends LOVCC {
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
             e.printStackTrace();
+        }finally{
+        GlobalCC.CloseConnections(null, cst, conn);
         }
 
 
@@ -215,6 +219,8 @@ public class CorrespondenceManipulation extends LOVCC {
 
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(null, cst, conn);
         }
 
         return null;
@@ -260,6 +266,8 @@ public class CorrespondenceManipulation extends LOVCC {
             GlobalCC.sysInformation("Message Queued for Sending");
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(null, cst, conn);
         }
 
         return null;
@@ -275,13 +283,14 @@ public class CorrespondenceManipulation extends LOVCC {
 
         CallableStatement cst = null;
         CallableStatement cint = null;
+        ResultSet rs=null;
         String seqQuery = "SELECT TQC_SMS_CODE_SEQ.NEXTVAL FROM DUAL";
 
         String insertQuery =
             "INSERT INTO TQC_EMAIL_MESSAGES(EMAIL_CODE, EMAIL_SYS_CODE, EMAIL_SYS_MODULE, EMAIL_CLNT_CODE,EMAIL_AGN_CODE, EMAIL_POL_CODE, EMAIL_POL_NO,EMAIL_CLM_NO, EMAIL_QUOT_CODE,EMAIL_ADDRESS, EMAIL_SUBJ,EMAIL_MSG, EMAIL_STATUS,EMAIL_PREPARED_BY, EMAIL_PREPARED_DATE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             cint = conn.prepareCall(seqQuery);
-            ResultSet rs = cint.executeQuery();
+             rs = cint.executeQuery();
 
             while (rs.next()) {
                 LOVCC.emailCode = rs.getBigDecimal(1);
@@ -322,6 +331,8 @@ public class CorrespondenceManipulation extends LOVCC {
             emailTemplateMessage.setRendered(false);
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rs, cst, conn);
         }
 
         return null;
@@ -353,6 +364,9 @@ public class CorrespondenceManipulation extends LOVCC {
                 conn.close();
             } catch (Exception e) {
                 GlobalCC.EXCEPTIONREPORTING(conn, e);
+            }finally{
+            GlobalCC.CloseConnections(null, null, conn);
+            
             }
 
 
@@ -545,6 +559,9 @@ public class CorrespondenceManipulation extends LOVCC {
       } catch (Exception e) {
           e.printStackTrace();
           GlobalCC.EXCEPTIONREPORTING(conn, e);
+      }finally{
+      GlobalCC.CloseConnections(null, cst, conn);
+      
       }
         String[] sendtos = email.split(",");
         for (String sendto : sendtos) {
@@ -891,6 +908,8 @@ public class CorrespondenceManipulation extends LOVCC {
         } catch (Exception e) {
             e.printStackTrace();
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(null, cst, conn);
         }
         return new PasswordAuthentication(emailVal, passVal);
     }
@@ -920,6 +939,8 @@ public class CorrespondenceManipulation extends LOVCC {
       } catch (Exception e) {
           e.printStackTrace();
           GlobalCC.EXCEPTIONREPORTING(conn, e);
+      }finally{
+      GlobalCC.CloseConnections(null, cst, conn);
       }
      
       return mailType;
@@ -975,6 +996,7 @@ public class CorrespondenceManipulation extends LOVCC {
         Connection conn;
         conn = datahandler.getDatabaseConn();
         CallableStatement cst = null;
+        ResultSet rs=null;
         String jobquery = "begin ? := tqc_web_cursor.getRptDetails(?); end;";
 
         try {
@@ -982,7 +1004,7 @@ public class CorrespondenceManipulation extends LOVCC {
             cst.registerOutParameter(1, OracleTypes.CURSOR);
             cst.setBigDecimal(2, rptCode);
             cst.executeQuery();
-            ResultSet rs = (ResultSet)cst.getObject(1);
+           rs = (ResultSet)cst.getObject(1);
             while (rs.next()) {
                 templateFile = rs.getString(5);
                 styleFile = rs.getString(7);
@@ -1002,6 +1024,8 @@ public class CorrespondenceManipulation extends LOVCC {
             return file;
         } catch (Exception e) {
             GlobalCC.EXCEPTIONREPORTING(conn, e);
+        }finally{
+        GlobalCC.CloseConnections(rs, cst, conn);
         }
         return null;
 
@@ -1112,6 +1136,8 @@ public class CorrespondenceManipulation extends LOVCC {
          conn.close();
       }catch(Exception ex){
         ex.printStackTrace();
+      }finally{
+      GlobalCC.CloseConnections(rs, cst, conn);
       }
     }
   }
@@ -1307,6 +1333,8 @@ public class CorrespondenceManipulation extends LOVCC {
       } catch (Exception e) {
           e.printStackTrace();
           GlobalCC.EXCEPTIONREPORTING(conn, e);
+      }finally{
+      GlobalCC.CloseConnections(rs, cst, conn);
       }
     } 
   }

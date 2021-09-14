@@ -339,6 +339,12 @@ public class ReinitializeVar
     this.session.removeAttribute("sourcePage");
     this.session.removeAttribute("COP_CODE");
     this.session.removeAttribute("cmbCode");
+    this.session.removeAttribute("selectAll");
+    this.session.removeAttribute("selectAllDocs");
+    this.session.removeAttribute("DateFrom");
+    this.session.removeAttribute("DateTo");
+    this.session.removeAttribute("periodFrom");
+    this.session.removeAttribute("periodTo");
   }
   
   public String ReinitializeVar2()
@@ -669,6 +675,13 @@ public class ReinitializeVar
     this.session.removeAttribute("sourcePage");
     this.session.removeAttribute("COP_CODE");
     this.session.removeAttribute("cmbCode");
+    this.session.removeAttribute("selectAll");
+    this.session.removeAttribute("selectAllDocs");
+    this.session.removeAttribute("DateFrom");
+    this.session.removeAttribute("DateTo");
+    this.session.removeAttribute("periodFrom");
+    this.session.removeAttribute("periodTo");
+    
     return null;
   }
 }

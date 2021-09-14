@@ -318,6 +318,29 @@
                                         simple="true"
                                         binding="#{underwritingManipulation.memBPressLoading}"
                                         rendered="false"/>
+                            <af:outputLabel id="outputLabel21"
+                                          value="Cover Offered"/>
+                          <af:selectOneChoice label="Label 1"
+                                              id="selectOneChoice1"
+                                              binding="#{underwritingManipulation.covOffered}"
+                                              simple="true" autoSubmit="true"
+                                              valueChangeListener="#{underwritingManipulation.coverOfferedListener}">
+                            <af:selectItem label="Normal" value="N"
+                                           id="selectItem1"/>
+                            <af:selectItem label="Loaded" value="L"
+                                           id="selectItem2"/>                                           
+                             <af:selectItem label="Normal With Exclusion" value="NE"
+                                           id="si12"/>
+                            <af:selectItem label="Loaded With Exclusion" value="LE"
+                                           id="si13"/>
+                            <af:selectItem label="Loaded With Extra Mortality" id="si14" value="LM"/>
+                            <af:selectItem label="Free Cover Restricted"
+                                           value="F" id="selectItem3"/>
+                            <af:selectItem label="Postponed" value="P"
+                                           id="selectItem4"/>
+                            <af:selectItem label="Declined" value="D"
+                                           id="selectItem5"/>
+                          </af:selectOneChoice>             
                           <af:outputLabel id="outputLabel80" value="load Type"/>
                           <af:selectOneChoice label="Label 1"
                                               id="selectOneChoice3"
@@ -351,29 +374,7 @@
                           <af:inputText label="Label 30" id="it39" simple="true"
                                         binding="#{underwritingManipulation.postponePeriod}"
                                         visible="false" />
-                          <af:outputLabel id="outputLabel21"
-                                          value="Cover Offered"/>
-                          <af:selectOneChoice label="Label 1"
-                                              id="selectOneChoice1"
-                                              binding="#{underwritingManipulation.covOffered}"
-                                              simple="true" autoSubmit="true"
-                                              valueChangeListener="#{underwritingManipulation.coverOfferedListener}">
-                            <af:selectItem label="Normal" value="N"
-                                           id="selectItem1"/>
-                            <af:selectItem label="Loaded" value="L"
-                                           id="selectItem2"/>                                           
-                             <af:selectItem label="Normal With Exclusion" value="NE"
-                                           id="si12"/>
-                            <af:selectItem label="Loaded With Exclusion" value="LE"
-                                           id="si13"/>
-                            <af:selectItem label="Loaded With Extra Mortality" id="si14" value="LM"/>
-                            <af:selectItem label="Free Cover Restricted"
-                                           value="F" id="selectItem3"/>
-                            <af:selectItem label="Postponed" value="P"
-                                           id="selectItem4"/>
-                            <af:selectItem label="Declined" value="D"
-                                           id="selectItem5"/>
-                          </af:selectOneChoice>
+                         
                         </h:panelGrid>
                         <h:panelGrid columns="2" id="panelGrid12">
                           <af:commandButton text="OK" id="commandButton15"

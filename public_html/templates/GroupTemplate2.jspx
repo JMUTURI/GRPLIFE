@@ -378,6 +378,14 @@
                                                 inlineStyle="text-decoration:underline;"
                                                 action="#{Links.goToPensionsReport}"/>
                                 <af:spacer width="10" height="10" id="pt_s26"/>
+                                
+                                 <af:commandLink text="Acturial Reports"
+                                                id="pt_cl37"
+                                                inlineStyle="text-decoration:underline;"
+                                                action="#{Links.goToActurialReport}"/>
+                                                
+                                <af:spacer width="10" height="10" id="pt_s45"/>
+                                
                                 <af:commandLink text="Other Reports"
                                                 id="pt_cl33"
                                                 action="#{Links.ShowProductionReports}"

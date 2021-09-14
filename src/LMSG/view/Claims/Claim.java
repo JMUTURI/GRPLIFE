@@ -381,6 +381,9 @@ public class Claim {
     private String agnName;
     private String riGlAccount;
     private BigDecimal recoverableAmt;
+    
+    private String cpv_clnt_id_passport_no;
+    private String cpv_email_address;
 
 
     public void setPOLM_CODE(BigDecimal POLM_CODE) {
@@ -3309,5 +3312,21 @@ public class Claim {
 
     public BigDecimal getRecoverableAmt() {
         return recoverableAmt;
+    }
+
+    public void setCpv_clnt_id_passport_no(String cpv_clnt_id_passport_no) {
+        this.cpv_clnt_id_passport_no = cpv_clnt_id_passport_no;
+    }
+
+    public String getCpv_clnt_id_passport_no() {
+        return cpv_clnt_id_passport_no;
+    }
+
+    public void setCpv_email_address(String cpv_email_address) {
+        this.cpv_email_address = cpv_email_address;
+    }
+
+    public String getCpv_email_address() {
+        return cpv_email_address;
     }
 }

@@ -471,6 +471,8 @@ public class otherSetupsManip {
     private RichPopup commPopup;
     private RichTable currencyLOV;
     private RichInputText currencyTF;
+    private RichInputText brokerName;
+    private RichTable brokersLOV;
 
     public otherSetupsManip() {
         super();
@@ -12214,6 +12216,44 @@ public class otherSetupsManip {
 
     public RichInputText getCurrencyTF() {
         return currencyTF;
+    }
+
+    public void setBrokerName(RichInputText brokerName) {
+        this.brokerName = brokerName;
+    }
+
+    public RichInputText getBrokerName() {
+        return brokerName;
+    }
+
+    public void setBrokersLOV(RichTable brokersLOV) {
+        this.brokersLOV = brokersLOV;
+    }
+
+    public RichTable getBrokersLOV() {
+        return brokersLOV;
+    }
+
+    public String cancelBrokerPopup() {
+        // Add event code here...
+        GlobalCC.hidePopup("lmsgroup:p3");
+        return null;
+    }
+
+    public String selectBroker() {
+        // Add event code here...
+        Object key2 = brokersLOV.getSelectedRowData();
+        if (key2 == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+            return null;
+        }
+        JUCtrlValueBinding r = (JUCtrlValueBinding)key2;
+        if (r == null) {
+            GlobalCC.errorValueNotEntered("No Record Selected");
+            return null;
+        }
+        
+        return null;
     }
 }
 

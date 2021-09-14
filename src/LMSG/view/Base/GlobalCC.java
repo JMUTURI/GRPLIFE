@@ -45,6 +45,7 @@ import oracle.jdbc.OracleConnection;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisConstraintException;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisContentAlreadyExistsException;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisObjectNotFoundException;
+import java.util.regex.Pattern;
 
 public class GlobalCC {
     public GlobalCC() {
@@ -840,5 +841,8 @@ public class GlobalCC {
         }
 
         return null;
+    }
+    public static boolean validateEmailAddress(String email){
+       return Pattern.matches("[_a-zA-Z1-9]+(\\.[A-Za-z0-9]*)*@[A-Za-z0-9]+\\.[A-Za-z0-9]+(\\.[A-Za-z0-9]*)*", email);
     }
 }

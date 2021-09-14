@@ -379,6 +379,7 @@ public class Account
   private BigDecimal empye_reg_transfer;
   private BigDecimal empye_unreg_transfer;
   private BigDecimal totalChequeAmt;
+  private BigDecimal ccvtCode;
   
   public void setMTRAN_REF_NO(String MTRAN_REF_NO)
   {
@@ -4116,5 +4117,13 @@ public class Account
 
     public BigDecimal getTotalChequeAmt() {
         return totalChequeAmt;
+    }
+
+    public void setCcvtCode(BigDecimal ccvtCode) {
+        this.ccvtCode = ccvtCode;
+    }
+
+    public BigDecimal getCcvtCode() {
+        return ccvtCode;
     }
 }

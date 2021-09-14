@@ -1,0 +1,156 @@
+<dataTemplate dataSourceRef="LMS_MICK" name="paidClaimsSumm" defaultPackage="reports_parameters">
+<properties>
+<property name="xml_tag_case" value="upper"/>
+</properties>
+<parameters>
+<parameter name="V_DRCR_NO" dataType="varchar2"/>
+</parameters>
+<lexicals>
+</lexicals>
+
+<dataQuery>
+<sqlStatement name="Q_1"> --ORGANIZATION DETAILS.
+
+/* Formatted on 2015/03/18 17:08 (Formatter Plus v4.8.8) */
+SELECT org_name, org_phy_addrs,
+          org_addrs
+       || ' , '
+       || org_zip
+       || ' - '
+       || twn_name
+       || ' , '
+       || cou_name postaladdress,
+          'Telephone'
+       || ':'
+       || org_tel1
+       || DECODE (org_tel2, NULL, NULL, ' /' || org_tel2) telephone,
+       org_fax fax, LOWER (org_email_addrs) email, org_rpt_logo logo,
+       cur_symbol
+  FROM tqc_organizations,
+       tqc_countries,
+       tqc_towns,
+       tqc_systems,
+       tqc_currencies
+ WHERE org_twn_code = twn_code
+   AND org_cur_code = cur_code
+   AND org_cou_code = cou_code
+   AND sys_org_code = org_code
+   AND sys_sht_desc = 'LMS'
+ 
+</sqlStatement>
+<sqlStatement name="Q_RECOVERIES">
+SELECT   prp_surname || ' ' || prp_other_names scheme, clm_no, mem_no,
+         mem_surname || ' ' || mem_other_names member_name,
+         SUM (NVL (ROUND (crctd_amount, 2), 0)) recoverable_amt,
+         TO_CHAR (clm_date_death_accident, 'dd-mon-rrrr') date_died,
+         TO_CHAR (clm_date_claim_reported, 'dd-mon-rrrr') date_reported,
+         earnings,
+         le_paid last_expense_paid, cover_paid clm_paid_amt,
+           (le_paid + cover_paid)
+         - SUM (NVL (ROUND (crctd_amount, 2), 0)) pioneer_retention,
+         DECODE (clm_status,
+                 'CS', 'Settled',
+                 'OS', 'Outstanding',
+                 'No claim'
+                ) status,
+         caus_desc benefit_type, ta_desc,
+         agn_name       
+    FROM lms_claims_ri_co_trt_dtls,
+         lms_treaty_setups,
+         lms_treaty_participants,
+         lms_policies,
+         lms_proposers,
+         lms_claims,
+         lms_members,
+         lms_treaty_arrangements,
+         lms_causations,
+         lms_grp_trt_ri_co_cessions,
+         lms_agencies,
+         (SELECT   SUM (DECODE (pcvt_main_rider,
+                                'R', NVL (ccvt_paid_amt, 0),
+                                0
+                               )
+                       ) le_paid,
+                   SUM (DECODE (pcvt_main_rider,
+                                'R', 0,
+                                NVL (ccvt_paid_amt, 0)
+                               )
+                       ) cover_paid,
+                    SUM(NVL(ccvt_earnings,ccvt_original_loan_amt))EARNINGS,
+                   ccvt_cvt_code le_cvt_code,
+                   ccvt_clm_no   le_clm_no                  
+              FROM lms_claim_cover_types,
+                   lms_policy_member_covers,
+                   lms_policy_cover_types
+             WHERE ccvt_pcm_code = pcm_code
+               AND pcm_pcvt_code = pcvt_code
+               AND ccvt_paid = 'Y'
+          GROUP BY ccvt_cvt_code,ccvt_clm_no)
+   WHERE crctd_rei_code = rei_code
+     AND crctd_clm_no = clm_no
+     AND crctd_pol_code = pol_code
+     AND pol_prp_code = prp_code
+     AND clm_mem_code = mem_code
+     AND clm_caus_code = caus_code
+     AND le_cvt_code= gtric_cvt_code
+     AND le_clm_no=clm_no
+     AND gtric_code=crctd_gtric_code
+     AND trpa_rei_code = crctd_rei_code
+     AND crctd_agn_code = trpa_agen_code
+     AND crctd_agn_code=agn_code
+     AND rei_ta_code = ta_code
+     AND CRCTD_DR_NO=:V_DRCR_NO
+GROUP BY prp_surname || ' ' || prp_other_names,
+         clm_no,
+         mem_no,
+         mem_surname || ' ' || mem_other_names,
+         clm_date_death_accident,
+         clm_date_claim_reported,
+         earnings,
+         le_paid,
+         cover_paid,
+         clm_status,
+         clm_caus_type,
+         ta_desc,
+         caus_desc,
+         agn_name
+</sqlStatement>
+
+</dataQuery>
+<dataStructure>
+ <group name="G_ORGANIZATION" dataType="varchar2" source="Q_1">     
+         <element name="ORG_NAME" dataType="varchar2" value="ORG_NAME"/>
+         <element name="ORG_PHY_ADDRS" dataType="varchar2" value="ORG_PHY_ADDRS"/>
+         <element name="POSTALADDRESS" dataType="varchar2" value="POSTALADDRESS"/>
+         <element name="TELEPHONE" dataType="varchar2" value="TELEPHONE"/>
+         <element name="FAX" dataType="varchar2" value="FAX"/>
+         <element name="EMAIL" dataType="varchar2" value="EMAIL"/>
+         <element name="LOGO" dataType="longRaw" value="LOGO"/>
+         <element name="CURRENCY_SYMBOL" dataType="varchar2" value="CUR_SYMBOL"/>
+    
+</group>
+  <group name="G_RECOVERIES" dataType="varchar2" source="Q_RECOVERIES">
+        <element name="SCHEME" dataType="varchar2" value="SCHEME"/>
+        <element name="CLM_NO" dataType="varchar2" value="CLM_NO"/>
+        <element name="MEM_NO" dataType="varchar2" value="MEM_NO"/>
+        <element name="MEMBER_NAME" dataType="varchar2" value="MEMBER_NAME"/>
+        <element name="DATE_DIED" dataType="varchar2" value="DATE_DIED"/>
+        <element name="DATE_REPORTED" dataType="varchar2" value="DATE_REPORTED"/>
+        <element name="CLM_PAID_AMT" dataType="varchar2" value="CLM_PAID_AMT"/>
+        <element name="LAST_EXPENSE_PAID" dataType="varchar2" value="LAST_EXPENSE_PAID"/>
+        <element name="BENEFIT_TYPE" dataType="varchar2" value="BENEFIT_TYPE"/>
+		<element name="STATUS" dataType="varchar2" value="STATUS"/>
+        <element name="AFRICA_RE" dataType="varchar2" value="AFRICA_RE"/>
+        <element name="KENYA_RE" dataType="varchar2" value="KENYA_RE"/>
+        <element name="ZEP_RE" dataType="varchar2" value="ZEP_RE"/>
+        <element name="EAC_RE" dataType="varchar2" value="EAC_RE"/>
+        <element name="CRE" dataType="varchar2" value="CRE"/>
+        <element name="PIONEER_RETENTION" dataType="varchar2" value="PIONEER_RETENTION"/>
+		<element name="RECOVERABLE_AMT" dataType="varchar2" value="RECOVERABLE_AMT"/>
+		<element name="CLM_NO" dataType="varchar2" value="CLM_NO"/>
+		<element name="TA_DESC" dataType="varchar2" value="TA_DESC"/>
+		<element name="EARNINGS" dataType="varchar2" value="EARNINGS"/>
+		<element name="AGN_NAME" dataType="varchar2" value="AGN_NAME"/>
+  </group>
+</dataStructure>
+</dataTemplate>

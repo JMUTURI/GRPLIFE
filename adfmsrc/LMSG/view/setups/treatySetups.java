@@ -13,7 +13,11 @@ public class treatySetups {
     private BigDecimal  REI_MGT_FEE,REI_CASH_LOSS,REI_PREM_PORTFOLIO,REI_LOSS_PORTFOLIO,REI_COMM_RATE,REI_PRD_LOSSES_CARRIED_FRD;
     private BigDecimal  REI_QUAKE_LIMIT,REI_SI_START_FROM;
     private Date   REI_WEF_DT,REI_WET_DT;
-  private String REI_ACCOUNTS, REI_ACCOUNTS_DESC;
+    private String REI_ACCOUNTS, REI_ACCOUNTS_DESC;
+    private BigDecimal REI_AGN_CODE;
+    private String AGN_NAME;
+    private BigDecimal AGN_CODE;
+  
 
     public void setREI_TRS_SHT_DESC(String REI_TRS_SHT_DESC) {
         this.REI_TRS_SHT_DESC = REI_TRS_SHT_DESC;
@@ -245,5 +249,29 @@ public class treatySetups {
 
     public String getREI_TRT_SHT_DESC() {
         return REI_TRT_SHT_DESC;
+    }
+
+    public void setREI_AGN_CODE(BigDecimal REI_AGN_CODE) {
+        this.REI_AGN_CODE = REI_AGN_CODE;
+    }
+
+    public BigDecimal getREI_AGN_CODE() {
+        return REI_AGN_CODE;
+    }
+
+    public void setAGN_NAME(String AGN_NAME) {
+        this.AGN_NAME = AGN_NAME;
+    }
+
+    public String getAGN_NAME() {
+        return AGN_NAME;
+    }
+
+    public void setAGN_CODE(BigDecimal AGN_CODE) {
+        this.AGN_CODE = AGN_CODE;
+    }
+
+    public BigDecimal getAGN_CODE() {
+        return AGN_CODE;
     }
 }

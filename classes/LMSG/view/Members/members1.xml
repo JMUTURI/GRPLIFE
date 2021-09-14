@@ -194,6 +194,8 @@
   <Attribute Name="original_loan_amt" Type="java.math.BigDecimal"/>
   <Attribute Name="orig_loan_repayment_prd" Type="java.math.BigDecimal"/>
   <Attribute Name="loan_issue_date" Type="java.util.Date"/>
+  <Attribute Name="pmem_phone_no" Type="java.lang.String"/>
+  <Attribute Name="pmem_email_address" Type="java.lang.String"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.Members.members1"
                      BeanClass="LMSG.view.Members.members1" id="members1"/>
 </JavaBean>

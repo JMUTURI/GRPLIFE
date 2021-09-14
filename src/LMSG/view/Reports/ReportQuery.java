@@ -700,6 +700,10 @@ public class ReportQuery {
                 } else if (label.equalsIgnoreCase("V_GRCT_CODE")) {
                     RichSelectOneChoice value = (RichSelectOneChoice)mine;
                     this.session.setAttribute("GrctCode", value.getValue());
+                }else if(label.equalsIgnoreCase("V_DRCR_NO")){
+                  RichSelectOneChoice value = (RichSelectOneChoice)mine;
+                  this.session.setAttribute("drcrNo", value.getValue());
+                  
                 }
 
 

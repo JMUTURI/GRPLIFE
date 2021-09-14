@@ -298,7 +298,15 @@
                             </af:selectOneChoice>
                             <af:outputLabel value="Client Acc No." id="ol223"/>
                             <af:inputText id="it1675" binding="#{claim.vchrAccNo}" disabled="true"/>
-                                        
+                            <af:outputLabel value="Phone Number" id="ol20"/>
+                            <af:inputText label="Label 10" id="it20" simple="true"
+                                          binding="#{claim.payeePhoneNo}"/>
+                            <af:outputLabel value="Email Address" id="ol21"/>
+                            <af:inputText label="Label 11" id="it21" simple="true"
+                                          binding="#{claim.payeeEmail}"/>
+                            <af:outputLabel value="ID number" id="ol23"/>
+                            <af:inputText label="Label 12" id="it22" simple="true"
+                                          binding="#{claim.studentIDNumber}"/>
                           </h:panelGrid>
                           <h:panelGrid columns="2" id="pg6">
                             <af:commandButton text="Save" id="commandButton3"
@@ -550,6 +558,19 @@
                         <af:column sortProperty="cpv_authorised" sortable="false"
                                    id="c57" visible="true" headerText="Voucher Authorised" width="150">
                         <af:outputText value="#{row.cpv_authorised}" id="ot54"/>
+                        </af:column>
+                        <af:column sortProperty="CPV_PAYEE_TEL" sortable="false"
+                                   id="c70" visible="true" headerText="Phone Number" width="150">
+                        <af:outputText value="#{row.CPV_PAYEE_TEL}" id="ot66"/>
+                        </af:column>
+                        <af:column sortProperty="cpv_clnt_id_passport_no" sortable="false"
+                                   id="c71" visible="true" headerText="ID Number" width="150">
+                        <af:outputText value="#{row.cpv_clnt_id_passport_no}" id="ot67"/>
+                        </af:column>
+                        <af:column sortProperty="cpv_email_address" sortable="false"
+                                   id="c72" visible="true" headerText="Email Address" width="150">
+                        <af:outputText value="#{row.cpv_email_address}"
+                                       id="ot68"/>
                         </af:column>
                       </af:table>
                    

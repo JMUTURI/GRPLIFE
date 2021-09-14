@@ -368,6 +368,8 @@
   <Attribute Name="agnName" Type="java.lang.String"/>
   <Attribute Name="riGlAccount" Type="java.lang.String"/>
   <Attribute Name="recoverableAmt" Type="java.math.BigDecimal"/>
+  <Attribute Name="cpv_clnt_id_passport_no" Type="java.lang.String"/>
+  <Attribute Name="cpv_email_address" Type="java.lang.String"/>
   <ConstructorMethod IsCollection="true" Type="LMSG.view.Claims.Claim"
                      BeanClass="LMSG.view.Claims.Claim" id="Claim"/>
 </JavaBean>

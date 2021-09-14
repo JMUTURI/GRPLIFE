@@ -524,10 +524,7 @@
                     <af:panelBox id="pb4" showHeader="never">
                       <f:facet name="toolbar"/>
                       <h:panelGrid columns="1" id="pg1">
-                           <h:panelGrid columns="1" id="pgp303">                             
-                                <af:commandLink text="Medical UW letter" id="rpt1041"
-												rendered="#{!Rendering.expressVisible}"
-                                                actionListener="#{ReportsEngine.GetReportDetails}"/>
+                           <h:panelGrid columns="1" id="pgp303">                
 								<af:commandLink text="Medical Letter" id="rpt1048"
 										rendered="#{!Rendering.loansProduct &amp;&amp; Rendering.expressVisible || !Rendering.expressVisible}"
                                         actionListener="#{ReportsEngine.GetReportDetails}"/>

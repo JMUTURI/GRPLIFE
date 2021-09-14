@@ -34,7 +34,7 @@
                                inlineStyle="width:98.0%;" showDisclosure="false"
                                showHeader="never">
                     <f:facet name="toolbar"/>
-                    <h:panelGrid columns="3" id="pg1" columnClasses="UWWidth">
+                    <h:panelGrid columns="2" id="pg1" columnClasses="UWWidth">
                       <h:panelGrid columns="1" id="pg8">
                         <h:panelGrid columns="1" id="pg2">
                           <af:separator id="separator12"/>
@@ -54,7 +54,7 @@
                                         id="rpt1094"
                                         actionListener="#{reportParameterBean.paramReport}"
                          rendered="#{Rendering.mickVisible}"/>
-                        <af:commandLink text="Earnings Costing Schedule"
+                        <af:commandLink text="Member Costing Schedule" 
                                         id="rpt224"
                                         actionListener="#{reportParameterBean.paramReport}"/>
                         <af:commandLink text="EGL, FE Premium Schedule"
@@ -101,12 +101,8 @@
                                         actionListener="#{reportParameterBean.paramReport}"/>
                        <af:commandLink text="Activity Tracker" id="rpt4270"
                                         actionListener="#{reportParameterBean.paramReport}"
-										rendered="#{Rendering.expressVisible}"/>                
-                      </h:panelGrid>
-                      <h:panelGrid columns="1">
-                        <af:spacer id="spc2"/>
-                        <af:spacer id="spc3"/>
-                        <af:commandLink text="Outstanding Monthly Schedules"
+										rendered="#{Rendering.expressVisible}"/>  
+                         <af:commandLink text="Outstanding Monthly Schedules"
                                         id="rpt1125"
                                         actionListener="#{reportParameterBean.paramReport}"
 										rendered="#{Rendering.mickVisible}"/>
@@ -128,18 +124,15 @@
                                         actionListener="#{reportParameterBean.paramReport}"
 										rendered="#{Rendering.mickVisible}"/>
                         <af:commandLink text="Renewal Summary" id="rpt2161"
-                                        actionListener="#{reportParameterBean.paramReport}"
-										rendered="#{Rendering.mickVisible}"/>
+                                        actionListener="#{reportParameterBean.paramReport}"/>
                         <af:commandLink text="Savings/Share Schedule"
                                         id="rpt1123"
                                         actionListener="#{reportParameterBean.paramReport}"
 										rendered="#{Rendering.mickVisible}"/>
                         <af:commandLink text="Schedules due" id="rpt1116"
-                                        actionListener="#{reportParameterBean.paramReport}"
-										rendered="#{Rendering.mickVisible}"/>
+                                        actionListener="#{reportParameterBean.paramReport}"/>
                         <af:commandLink text="Scheme Register" id="rpt2032"
-                                        actionListener="#{reportParameterBean.paramReport}"
-										rendered="#{Rendering.mickVisible}"/>
+                                        actionListener="#{reportParameterBean.paramReport}"/>
                         <af:commandLink text="Submitted Schedule Position Report"
                                         id="rpt1115"
                                         actionListener="#{reportParameterBean.paramReport}"
@@ -157,18 +150,15 @@
 										rendered="#{Rendering.mickVisible}"/>
                         <af:commandLink text="Unutilised Premium Report"
                                         id="rpt2246"
-                                        actionListener="#{reportParameterBean.paramReport}"
-										rendered="#{Rendering.mickVisible}"/>
+                                        actionListener="#{reportParameterBean.paramReport}"/>
                         <af:commandLink text="Withdrawn Member Schedule"
                                         id="rpt2156"
                                         actionListener="#{reportParameterBean.paramReport}"
                         rendered="#{Rendering.mickVisible}"/>
                         <af:commandLink text="Medical Cheque Requisiton Form" id="rpt327603"
-                                        actionListener="#{reportParameterBean.paramReport}"
-                                        rendered="#{Rendering.mickVisible}"/>
+                                        actionListener="#{reportParameterBean.paramReport}"/>
                         <af:commandLink text="Medical Cheque Dispatch Letter" id="rpt327604"
-                                        actionListener="#{reportParameterBean.paramReport}"
-                                        rendered="#{Rendering.mickVisible}"/>
+                                        actionListener="#{reportParameterBean.paramReport}"/>
                          <af:commandLink text="Group Business Valuation Report" id="rpt25522"
                                         actionListener="#{reportParameterBean.paramReport}"
                                         rendered="#{Rendering.mickVisible}"/>
@@ -179,7 +169,25 @@
                                         actionListener="#{reportParameterBean.paramReport}"
                         rendered="#{Rendering.expressVisible}"/>    
                        <af:commandLink text="Current Loan Balances" id="rpt2250133496"
-                                        actionListener="#{reportParameterBean.paramReport}"/>               
+                                        actionListener="#{reportParameterBean.paramReport}"/> 
+						<af:commandLink text="Debit Register" id="rpt2250133786"
+                                        actionListener="#{reportParameterBean.paramReport}"/> 	
+					   <af:commandLink text="Credit Register" id="rpt2250133787"
+                                        actionListener="#{reportParameterBean.paramReport}"/> 				
+                       <af:commandLink text="Debtors Aging Report" id="rpt2250133783"
+                                        actionListener="#{reportParameterBean.paramReport}"/>  	
+                       <af:commandLink text="Debtors and creditors summary" id="rpt2250133785"
+                                        actionListener="#{reportParameterBean.paramReport}"/>  											
+                      </h:panelGrid>
+                      <h:panelGrid columns="1">
+                       <h:panelGrid columns="1" id="pg2x">
+                          <af:separator id="separator12x"/>
+                          <af:outputLabel value=""
+                                          id="outputLabel6x"
+                                          inlineStyle="font-weight:bold;"/>
+                          <af:separator id="separator13x"/>
+                        </h:panelGrid>						
+                                    
                       </h:panelGrid>
                       <!--<af:spacer width="20px" id="s1"/>
                      <h:panelGrid id="pg2" columns="1">

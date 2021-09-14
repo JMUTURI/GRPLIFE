@@ -875,7 +875,11 @@
                                <af:selectItem label="Employee Registered Fund Only"
                                              value="ER" id="si39"/>
                               <af:selectItem label="Employee UnRegistered Fund Only"
-                                             value="EU" id="si40"/>               
+                                             value="EU" id="si40"/>  
+                              <af:selectItem label="Employee Fund"
+                                             value="EF" id="si41"/>    
+                              <af:selectItem label="Employer Fund"
+                                             value="YF" id="si42"/>  
                             </af:selectOneChoice>
                             <af:outputLabel value="Withdrawal Amount"
                                             id="ol67"/>
@@ -1594,15 +1598,15 @@
                                               simple="true"
                                               binding="#{claim.studentNames}"/>
                                 <af:outputLabel value="Surname"
-                                                id="outputLabel63"/>
+                                                id="outputLabel63" visible="false"/>
                                 <af:inputText label="Label 7" id="inputText46"
                                               simple="true"
-                                              binding="#{claim.studentSurname}"/>
+                                              binding="#{claim.studentSurname}" visible="false"/>
                                 <af:outputLabel value="Member No."
-                                                id="outputLabel64"/>
+                                                id="outputLabel64" visible="false"/>
                                 <af:inputText label="Label 7" id="inputText47"
                                               simple="true"
-                                              binding="#{claim.studentMemNo}"/>
+                                              binding="#{claim.studentMemNo}" visible="false"/>
                                 <af:outputLabel value="Date of Birth"
                                                 id="outputLabel65"
                                                 rendered="false"/>
@@ -1636,15 +1640,24 @@
                                   </af:commandButton>
                                 </h:panelGrid>
                                 <af:outputLabel value="RSA Pin"
-                                                id="outputLabel71"/>
+                                                id="outputLabel71" visible="false"/>
                                 <af:inputText label="Label 19" id="inputText51"
                                               simple="true"
-                                              binding="#{claim.rsaPin}"/>
+                                              binding="#{claim.rsaPin}" visible="false"/>
                                 <af:outputLabel value="Share Pct"
                                                 id="outputLabel68"/>
                                 <af:inputText label="Label 19" id="inputText48"
                                               simple="true"
-                                              binding="#{claim.studentSharePct}"/>
+                                              binding="#{claim.studentSharePct}" />
+                                <af:outputLabel value="ID Number" id="ol81"/>
+                                <af:inputText label="Label 86" id="it73" simple="true"
+                                              binding="#{claim.studentIDNumber}"/>
+                                <af:outputLabel value="Telephone Number" id="ol76"/>
+                                <af:inputText label="Label 83" id="it67" simple="true"
+                                              binding="#{claim.studentPhone}"/>
+                                <af:outputLabel value="Email Address" id="ol77"/>
+                                <af:inputText label="Label 84" id="it71" simple="true"
+                                              binding="#{claim.studentEmail}"/>
                               </h:panelGrid>
                               <h:panelGrid columns="2" id="panelGrid5">
                                 <af:commandButton text="Save"
@@ -1691,41 +1704,47 @@
                                   <af:column sortProperty="spr_name"
                                              sortable="false"
                                              headerText="Administrator"
-                                             id="c102">
+                                             id="c102" visible="false">
                                     <af:outputText value="#{row.spr_name}"
                                                    id="ot108"/>
                                   </af:column>
                                   <af:column sortProperty="pmem_rsa_pin"
                                              sortable="false"
-                                             headerText="RSA Pin" id="c103">
+                                             headerText="RSA Pin" id="c103" visible="false">
                                     <af:outputText value="#{row.pmem_rsa_pin}"
                                                    id="ot109"/>
                                   </af:column>
                                   <af:column sortProperty="qmemBenMemNo"
                                              sortable="true"
-                                             headerText="Member No." id="c69">
+                                             headerText="Member No." id="c69" visible="false">
                                     <af:outputText value="#{row.qmemBenMemNo}"
-                                                   id="ot66"/>
+                                                   id="ot66" visible="false"/>
                                   </af:column>
                                   <af:column sortProperty="qmemBenSurname"
                                              sortable="true"
-                                             headerText="Surname" id="c68"
+                                             headerText="Name" id="c68"
                                              width="200">
                                     <af:outputText value="#{row.qmemBenSurname}"
                                                    id="ot67"/>
                                   </af:column>
                                   <af:column sortProperty="qmem_ben_sex"
                                              sortable="true" headerText="Sex"
-                                             id="c61">
+                                             id="c61" width="20">
                                     <af:outputText value="#{row.qmem_ben_sex}"
                                                    id="ot75"/>
+                                  </af:column>
+                                   <af:column sortProperty="pmem_id_no"
+                                             sortable="true" headerText="ID Number"
+                                             id="c17">
+                                    <af:outputText value="#{row.pmem_id_no}"
+                                                   id="ot27"/>
                                   </af:column>
                                   <af:column sortProperty="qmemBenOtherNames"
                                              sortable="true"
                                              headerText="Other Names" id="c70"
-                                             width="200">
+                                             width="200" visible="false">
                                     <af:outputText value="#{row.qmemBenOtherNames}"
-                                                   id="ot68"/>
+                                                   id="ot68" visible="false"/>
                                   </af:column>
                                   <af:column sortProperty="pmem_share_pct"
                                              sortable="false"
@@ -1770,6 +1789,18 @@
                                              visible="false">
                                     <af:outputText value="#{row.spr_code}"
                                                    id="ot107"/>
+                                  </af:column>
+                                   <af:column sortProperty="pmem_phone_no"
+                                             sortable="false"
+                                             headerText="Phone Number" id="c16">
+                                    <af:outputText value="#{row.pmem_phone_no}"
+                                                   id="ot26"/>
+                                  </af:column>
+                                  <af:column sortProperty="pmem_email_address"
+                                             sortable="false"
+                                             headerText="Email address" id="c15">
+                                    <af:outputText value="#{row.pmem_email_address}"
+                                                   id="ot25"/>
                                   </af:column>
                                 </af:table>
                                 <af:commandButton text="Close" id="cb27"/>
@@ -3821,8 +3852,17 @@
                     <af:panelBox text="Enter A Payee" id="pb8" rendered="false"
                                  binding="#{claim.entPayee}">
                       <f:facet name="toolbar"/>
+                      <h:panelGrid columns="2">
+                      <af:outputLabel value="Enter A Payee Name" id="ol78"/>
                       <af:inputText label="Enter A Payee" id="it28"
-                                    binding="#{claim.payeeDesc}"/>
+                                    binding="#{claim.payeeDesc}" simple="true"/>
+                        <af:outputLabel value="Enter Payee Phone Number" id="ol79"/>
+                        <af:inputText label="Payee Phone No" id="it28C" simple="true"
+                                      binding="#{claim.payeePhoneNo}"/>
+                        <af:outputLabel value="Enter Payee Email Address" id="ol80"/>
+                        <af:inputText label="Label 85" id="it72" simple="true"
+                                      binding="#{claim.payeeEmail}"/>
+                      </h:panelGrid>
                     </af:panelBox>
                     <af:panelBox text="Select A Payee" id="pb9"
                                  binding="#{claim.selPayee}">

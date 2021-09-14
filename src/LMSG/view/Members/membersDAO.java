@@ -569,7 +569,9 @@ public class membersDAO extends LOVCC {
               myMem.setSpr_code(rst.getBigDecimal(13));
               myMem.setSpr_name(rst.getString(14));
               myMem.setPmem_rsa_pin(rst.getString(15));
-          
+              myMem.setPmem_id_no(rst.getString(18));
+              myMem.setPmem_phone_no(rst.getString(21));
+              myMem.setPmem_email_address(rst.getString(22));
             MemberList.add(myMem);
            
           }

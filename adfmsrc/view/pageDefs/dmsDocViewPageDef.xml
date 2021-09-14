@@ -94,6 +94,7 @@
           <Item Value="name"/>
           <Item Value="dateCreated"/>
           <Item Value="id"/>
+          <Item Value="selectDoc"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -226,6 +227,7 @@
           <Item Value="actualName"/>
           <Item Value="id"/>
           <Item Value="dateCreated"/>
+          <Item Value="selectFinanceDoc"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
